@@ -143,6 +143,7 @@ return [
         'langs' => [
             'ar' => 'عربى (Arabic)',
             'en' => 'English',
+            'fr' => 'French',
         ],
     ],
 ];

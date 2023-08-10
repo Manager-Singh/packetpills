@@ -22,7 +22,7 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="table-responsive">
-                    <table id="blogs-table" class="table" data-ajax_url="{{ route("admin.blogs.get") }}">
+                    <table id="blogs-table" class="table" data-ajax_url="{{ route('admin.blogs.get') }}">
                         <thead>
                             <tr>
                                 <th>{{ trans('labels.backend.access.blogs.table.title') }}</th>
