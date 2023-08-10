@@ -1,17 +1,17 @@
 @extends('backend.layouts.app')
 
-@section('title', __('labels.backend.access.blogs.management') . ' | ' . __('labels.backend.access.blogs.create'))
+@section('title', __('labels.backend.access.drugs.management') . ' | ' . __('labels.backend.access.drugs.create'))
 
 @section('breadcrumb-links')
-    @include('backend.blogs.includes.breadcrumb-links')
+    @include('backend.drugs.includes.breadcrumb-links')
 @endsection
 
 @section('content')
-    {{ Form::open(['route' => 'admin.blogs.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'create-permission', 'files' => true]) }}
+    {{ Form::open(['route' => 'admin.drugs.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'id' => 'create-permission', 'files' => true]) }}
 
     <div class="card">
-        @include('backend.blogs.form')
-        @include('backend.components.footer-buttons', [ 'cancelRoute' => 'admin.blogs.index' ])
+        @include('backend.drugs.form')
+        @include('backend.components.footer-buttons', [ 'cancelRoute' => 'admin.drugs.index' ])
     </div><!--card-->
     {{ Form::close() }}
 @endsection

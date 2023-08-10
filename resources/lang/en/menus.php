@@ -68,6 +68,16 @@ return [
                 'main' => 'Blogs',
                 'view' => 'View Blog',
             ],
+            'drugs' => [
+                'all' => 'All Drugs',
+                'active' => 'Active Drugs',
+                'create' => 'Create Drug',
+                'deactivated' => 'Deactivated Drugs',
+                'deleted' => 'Deleted Drugs',
+                'edit' => 'Edit Drug',
+                'main' => 'Drugs',
+                'view' => 'View Drug',
+            ],
 
             'blog-categories' => [
                 'all' => 'All Blog Categories',
@@ -126,6 +136,7 @@ return [
             'history' => 'History',
             'system' => 'System',
             'blogs' => 'Blog Management',
+            'drugs' => 'Drug Management',
             'pages' => 'Pages Management',
             'faqs' => 'Faq Management',
             'email-templates' => 'Email Templates',

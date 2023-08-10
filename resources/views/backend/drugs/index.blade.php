@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('labels.backend.access.blogs.management'))
+@section('title', app_name() . ' | ' . __('labels.backend.access.drugs.management'))
 
 @section('breadcrumb-links')
 @include('backend.drugs.includes.breadcrumb-links')
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    {{ __('labels.backend.access.blogs.management') }} <small class="text-muted">{{ __('labels.backend.access.blogs.active') }}</small>
+                    {{ __('labels.backend.access.drugs.management') }} <small class="text-muted">{{ __('labels.backend.access.drugs.active') }}</small>
                 </h4>
             </div>
             <!--col-->
@@ -22,14 +22,14 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="table-responsive">
-                    <table id="blogs-table" class="table" data-ajax_url="{{ route('admin.blogs.get') }}">
+                    <table id="drugs-table" class="table" data-ajax_url="{{ route('admin.drugs.get') }}">
                         <thead>
                             <tr>
-                                <th>{{ trans('labels.backend.access.blogs.table.title') }}</th>
-                                <th>{{ trans('labels.backend.access.blogs.table.published') }}</th>
-                                <th>{{ trans('labels.backend.access.blogs.table.status') }}</th>
-                                <th>{{ trans('labels.backend.access.blogs.table.createdby') }}</th>
-                                <th>{{ trans('labels.backend.access.blogs.table.createdat') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.title') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.published') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.status') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.createdby') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.createdat') }}</th>
                                 <th>{{ trans('labels.general.actions') }}</th>
                             </tr>
                         </thead>
