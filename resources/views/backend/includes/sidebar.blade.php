@@ -63,6 +63,17 @@
                 </li>
 
                 <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/drugs'))
+                    }}" href="{{ route('admin.drugs.index') }}">
+                        
+                        <i class="nav-icon fas fa-pills"></i>
+                        <!-- @lang('labels.backend.access.blogs.management') -->
+                        Drugs Management
+                    </a>
+                </li>
+                <li class="divider"></li>
 
                 <li class="nav-item">
                     <a class="nav-link {{
@@ -94,6 +105,8 @@
                         @lang('menus.backend.sidebar.email-templates')
                     </a>
                 </li>
+
+                
 
                 <li class="divider"></li>
 
@@ -129,6 +142,7 @@
                                 @lang('labels.backend.access.blogs.management')
                             </a>
                         </li>
+                        
                     </ul>
                 </li>
 
