@@ -295,6 +295,7 @@ return [
             'register_box_title' => 'Register',
             'register_button' => 'Register',
             'remember_me' => 'Remember Me',
+            "get_started" => 'Get started',
         ],
 
         'contact' => [
