@@ -53,7 +53,7 @@ class DrugsController extends Controller
         $blogTags = BlogTag::getSelectData();
         $blogCategories = BlogCategory::getSelectData();
 
-        return new ViewResponse('backend.Drugs.create', ['status' => $drug->statuses, 'blogCategories' => $blogCategories, 'blogTags' => $blogTags]);
+        return new ViewResponse('backend.drugs.create', ['status' => $drug->statuses, 'blogCategories' => $blogCategories, 'blogTags' => $blogTags]);
     }
 
     /**
