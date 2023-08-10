@@ -56,6 +56,12 @@ return [
             'delete_error' => 'There was a problem deleting this Blog. Please try again.',
             'update_error' => 'There was a problem updating this Blog. Please try again.',
         ],
+        'drugs' => [
+            // 'already_exists' => 'That Blog already exists. Please choose a different name.',
+            'create_error' => 'There was a problem creating this Drug. Please try again.',
+            'delete_error' => 'There was a problem deleting this Drug. Please try again.',
+            'update_error' => 'There was a problem updating this Drug. Please try again.',
+        ],
 
         'blog-category' => [
             'already_exists' => 'That Blog Category already exists. Please choose a different name.',
