@@ -41,3 +41,20 @@ if (! function_exists('home_route')) {
         return 'frontend.auth.login';
     }
 }
+
+if (! function_exists('generateOTP')) {
+    function generateOTP($n = 6) {
+
+        // Take a generator string which consist of
+        // all numeric digits
+        $generator = "1357902468";
+
+        $result = "";
+
+        for ($i = 1; $i <= $n; $i++) {
+            $result .= substr($generator, (rand()%(strlen($generator))), 1);
+        }
+        // Return result
+        return $result;
+    }
+}

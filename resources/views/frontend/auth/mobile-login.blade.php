@@ -17,11 +17,27 @@
                                         ->required() }}
                                 </div><!--form-group-->
                             </div><!--col-->
-                        </div><!--row-->
+                            </div><!--row-->
+                            <div class="row">
+                            <div class="col otp-box hide" style="display:none;">
+                                <div class="form-group">
+                                    {{ html()->label(__('validation.attributes.frontend.otp'))->for('otp') }}
+
+                                    {{ html()->text('otp')
+                                        ->class('form-control')
+                                        ->placeholder(__('validation.attributes.frontend.otp'))
+                                        ->attribute('maxlength', 6)
+                                        ->attribute('minlength', 6)
+                                        ->required() }}
+                                </div><!--form-group-->
+                            </div><!--col-->
+                            </div><!--row-->
+                       
                         <div class="row">
                             <div class="col">
                                 <div class="form-group clearfix">
-                                    {{ form_submit(__('labels.frontend.auth.get_started')) }}
+                                    <!-- {{ form_submit(__('labels.frontend.auth.get_started')) }} -->
+                                    <button type="button" class="request-otp">{{__('labels.frontend.auth.get_started')}}</button>
                                 </div><!--form-group-->
                             </div><!--col-->
                         </div><!--row-->

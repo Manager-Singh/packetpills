@@ -5,6 +5,7 @@
 @section('content')
 <div class="registration-home">
     @include('frontend.auth.mobile-login')
+    {{generateOTP()}}
 </div>
   
 @endsection

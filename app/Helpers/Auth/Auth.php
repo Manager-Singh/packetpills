@@ -17,4 +17,5 @@ class Auth
         session()->forget('admin_user_name');
         session()->forget('temp_user_id');
     }
+    
 }
