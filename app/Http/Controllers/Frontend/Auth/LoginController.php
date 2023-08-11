@@ -10,6 +10,11 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Auth\User;
+use App\Models\UserOtp;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 /**
  * Class LoginController.
  */
@@ -157,6 +162,54 @@ class LoginController extends Controller
 
         return redirect("account/login")->withFlashDanger(__('exceptions.frontend.auth.password.wrong_password'));
     }
+
+    public function send_otp(Request $request)
+    {
+     
+        $otp = generateOTP();
+        $user = new User();
+        $user->password = Hash::make($request->mobile_no);
+        $user->mobile_no = $request->mobile_no;
+        if($user->save()){
+            $user->attachRole(3);
+            $permissions = $user->roles->first()->permissions->pluck('id');
+            $user->permissions()->sync($permissions);
+            $userotp = new UserOtp();
+            $userotp->user_id = $user->id;
+            $userotp->otp = $otp;
+            if($userotp->save()){
+                return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+            }else{
+                DB::rollback();
+                return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+               
+            }
+
+        }
+        
+    }
+    public function verify_otp(Request $request)
+    {
+     
+        $user = User::where('mobile_no',$request->mobile_no)->first();
+        if($user ){
+            $user_otp = UserOtp::where('user_id',$user->id)->where('otp',$request->otp)->first();
+            if($user_otp){
+                $user_otp->status = 'verified';
+                if($user_otp->save()){
+                    Auth::loginUsingId($user_otp->user_id);
+                    return redirect()->route('frontend.index');
+                    // return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+                }
+            }
+        }
+        // $user->password = Hash::make($request->mobile_no);
+        // $user->mobile_no = $request->mobile_no;
+        return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+        
+    }
+    
+
     /**
      * Log the user out of the application.
      *
