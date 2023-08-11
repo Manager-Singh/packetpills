@@ -34,6 +34,8 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         // Authentication Routes
         Route::get('account/login', [LoginController::class, 'showLoginForm'])->name('login');
         Route::post('account/login', [LoginController::class, 'login'])->name('login.post');
+        Route::post('account/send-otp', [LoginController::class, 'send_otp'])->name('send.otp');
+        Route::post('account/verify-otp', [LoginController::class, 'verify_otp'])->name('verify.otp');
 
         // Socialite Routes
         Route::get('account/login/{provider}', [SocialLoginController::class, 'login'])->name('social.login');

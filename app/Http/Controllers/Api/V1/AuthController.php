@@ -65,6 +65,25 @@ class AuthController extends APIController
         ]);
     }
 
+    
+    /**
+     * Get the authenticated User.
+     *
+     * @responseFile status=401 scenario="api_key not provided" responses/unauthenticated.json
+     * @responseFile responses/auth/genrate_otp.json
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function genrate_otp()
+    {
+        $otp = generateOTP();
+
+        return $this->respond([
+            'message' => trans('api.messages.login.success'),
+            'token' => $otp,
+        ]);
+    }
     /**
      * Get the authenticated User.
      *
