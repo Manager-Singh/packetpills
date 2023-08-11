@@ -7,11 +7,11 @@
 @endsection
 
 @section('content')
-    {{ Form::model($blog, ['route' => ['admin.drugs.update', $blog], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH', 'id' => 'edit-role', 'files' => true]) }}
+    {{ Form::model($drug, ['route' => ['admin.drugs.update', $drug], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH', 'id' => 'edit-role', 'files' => true]) }}
 
     <div class="card">
         @include('backend.drugs.form')
-        @include('backend.components.footer-buttons', [ 'cancelRoute' => 'admin.drugs.index', 'id' => $blog->id ])
+        @include('backend.components.footer-buttons', [ 'cancelRoute' => 'admin.drugs.index', 'id' => $drug->id ])
     </div><!--card-->
     {{ Form::close() }}
 @endsection

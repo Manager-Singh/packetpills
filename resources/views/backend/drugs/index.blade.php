@@ -25,10 +25,11 @@
                     <table id="drugs-table" class="table" data-ajax_url="{{ route('admin.drugs.get') }}">
                         <thead>
                             <tr>
-                                <th>{{ trans('labels.backend.access.drugs.table.title') }}</th>
-                                <th>{{ trans('labels.backend.access.drugs.table.published') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.name') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.available_form') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.strength') }}</th>
+                                <th>{{ trans('labels.backend.access.drugs.table.description') }}</th>
                                 <th>{{ trans('labels.backend.access.drugs.table.status') }}</th>
-                                <th>{{ trans('labels.backend.access.drugs.table.createdby') }}</th>
                                 <th>{{ trans('labels.backend.access.drugs.table.createdat') }}</th>
                                 <th>{{ trans('labels.general.actions') }}</th>
                             </tr>
@@ -51,6 +52,7 @@
 @section('pagescript')
 <script>
     FTX.Utils.documentReady(function() {
+        console.log(FTX.Drugs.list);
         FTX.Drugs.list.init();
     });
 </script>

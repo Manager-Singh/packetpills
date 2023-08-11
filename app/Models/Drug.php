@@ -16,20 +16,21 @@ class Drug extends BaseModel
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'slug',
-        'publish_datetime',
-        'content',
-        'meta_title',
-        'cannonical_link',
-        'meta_keywords',
-        'meta_description',
-        'status',
-        'featured_image',
-        'created_by',
-        'updated_by',
-    ];
+    protected $guarded = [];
+    // protected $fillable = [
+    //     'name',
+    //     'slug',
+    //     'publish_datetime',
+    //     'content',
+    //     'meta_title',
+    //     'cannonical_link',
+    //     'meta_keywords',
+    //     'meta_description',
+    //     'status',
+    //     'featured_image',
+    //     'created_by',
+    //     'updated_by',
+    // ];
 
     /**
      * Dates.
@@ -37,7 +38,6 @@ class Drug extends BaseModel
      * @var array
      */
     protected $dates = [
-        'publish_datetime',
         'created_at',
         'updated_at',
     ];

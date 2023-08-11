@@ -16,7 +16,7 @@ class ManageDrugsRequest extends FormRequest
      */
     public function authorize()
     {
-        return access()->allow('view-blog');
+        return access()->allow('view-drug');
     }
 
     /**

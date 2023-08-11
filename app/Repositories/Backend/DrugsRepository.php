@@ -6,7 +6,7 @@ use App\Events\Backend\Drugs\DrugCreated;
 use App\Events\Backend\Drugs\DrugDeleted;
 use App\Events\Backend\Drugs\DrugUpdated;
 use App\Exceptions\GeneralException;
-use App\Models\Blog;
+use App\Models\Drug;
 use App\Models\BlogCategory;
 use App\Models\BlogMapCategory;
 use App\Models\BlogMapTag;
@@ -22,7 +22,7 @@ class DrugsRepository extends BaseRepository
     /**
      * Associated Repository Model.
      */
-    const MODEL = Blog::class;
+    const MODEL = Drug::class;
 
     protected $upload_path;
 
@@ -34,10 +34,10 @@ class DrugsRepository extends BaseRepository
     private $sortable = [
         'id',
         'name',
-        'slug',
-        'publish_datetime',
-        'content',
-        'meta_title',
+        'available_form',
+        'manufacturer_name',
+        'generic_name',
+        'strength',
         'status',
         'created_at',
         'updated_at',
@@ -52,7 +52,7 @@ class DrugsRepository extends BaseRepository
 
     public function __construct()
     {
-        $this->upload_path = 'img'.DIRECTORY_SEPARATOR.'blog'.DIRECTORY_SEPARATOR;
+        $this->upload_path = 'img'.DIRECTORY_SEPARATOR.'drug'.DIRECTORY_SEPARATOR;
         $this->storage = Storage::disk('public');
     }
 
@@ -87,15 +87,23 @@ class DrugsRepository extends BaseRepository
     public function getForDataTable()
     {
         return $this->query()
-            ->leftjoin('users', 'users.id', '=', 'blogs.created_by')
             ->select([
-                'blogs.id',
-                'blogs.name',
-                'blogs.publish_datetime',
-                'blogs.status',
-                'blogs.created_by',
-                'blogs.created_at',
-                'users.first_name as user_name',
+                'drugs.id',
+                'drugs.name',
+                'drugs.available_form',
+                'drugs.manufacturer_name',
+                'drugs.strength',
+                'drugs.description',
+                'drugs.faq',
+                'drugs.how_to_take',
+                'drugs.dosage',
+                'drugs.side_effect',
+                'drugs.available_form_description',
+                'drugs.contraindications',
+                'drugs.precautions',
+                'drugs.warnings',
+                'drugs.status',
+                'drugs.created_at',
             ]);
     }
 
@@ -108,167 +116,63 @@ class DrugsRepository extends BaseRepository
      */
     public function create(array $input)
     {
-        $tagsArray = $this->createTags($input['tags']);
-        $categoriesArray = $this->createCategories($input['categories']);
+       
 
-        unset($input['tags'], $input['categories']);
+        return DB::transaction(function () use ($input) {
+            
+            
+            if ($drug = Drug::create($input)) {
+               
+                event(new DrugCreated($drug));
 
-        return DB::transaction(function () use ($input, $tagsArray, $categoriesArray) {
-            $input['slug'] = Str::slug($input['name']);
-            $input['publish_datetime'] = Carbon::parse($input['publish_datetime']);
-            $input['created_by'] = auth()->user()->id;
-
-            $input = $this->uploadImage($input);
-
-            if ($blog = Blog::create($input)) {
-                // Inserting associated category's id in mapper table
-                if (count($categoriesArray)) {
-                    $blog->categories()->sync($categoriesArray);
-                }
-
-                // Inserting associated tag's id in mapper table
-                if (count($tagsArray)) {
-                    $blog->tags()->sync($tagsArray);
-                }
-
-                event(new BlogCreated($blog));
-
-                return $blog;
+                return $drug;
             }
 
-            throw new GeneralException(__('exceptions.backend.blogs.create_error'));
+            throw new GeneralException(__('exceptions.backend.drugs.create_error'));
         });
     }
 
     /**
-     * @param \App\Models\Blog $blog
+     * @param \App\Models\Drug $drug
      * @param array $input
      */
-    public function update(Blog $blog, array $input)
+    public function update(Drug $drug, array $input)
     {
-        $tagsArray = $this->createTags($input['tags']);
-        $categoriesArray = $this->createCategories($input['categories']);
+      
 
-        unset($input['tags'], $input['categories']);
+        return DB::transaction(function () use ($drug, $input) {
+            if ($drug->update($input)) {
+                
 
-        $input['slug'] = Str::slug($input['name']);
-        $input['updated_by'] = auth()->user()->id;
-        $input['publish_datetime'] = Carbon::parse($input['publish_datetime']);
+                event(new DrugUpdated($drug));
 
-        // Uploading Image
-        if (array_key_exists('featured_image', $input)) {
-            $this->deleteOldFile($blog);
-            $input = $this->uploadImage($input);
-        }
-
-        return DB::transaction(function () use ($blog, $input, $tagsArray, $categoriesArray) {
-            if ($blog->update($input)) {
-                // Updateing associated category's id in mapper table
-                if (count($categoriesArray)) {
-                    $blog->categories()->sync($categoriesArray);
-                }
-
-                // Updating associated tag's id in mapper table
-                if (count($tagsArray)) {
-                    $blog->tags()->sync($tagsArray);
-                }
-
-                event(new BlogUpdated($blog));
-
-                return $blog->fresh();
+                return $drug->fresh();
             }
 
-            throw new GeneralException(__('exceptions.backend.blogs.update_error'));
+            throw new GeneralException(__('exceptions.backend.drugs.update_error'));
         });
     }
 
-    /**
-     * Creating Tags.
-     *
-     * @param array $tags
-     *
-     * @return array
-     */
-    public function createTags($tags)
-    {
-        //Creating a new array for tags (newly created)
-        $tags_array = [];
 
-        foreach ($tags as $tag) {
-            if (is_numeric($tag)) {
-                $tags_array[] = $tag;
-            } else {
-                $newTag = BlogTag::firstOrCreate(
-                    [
-                        'name' => $tag,
-                    ],
-                    [
-                        'name' => $tag,
-                        'status' => 1,
-                        'created_by' => auth()->user()->id,
-                    ]
-                );
-                $tags_array[] = $newTag->id;
-            }
-        }
-
-        return $tags_array;
-    }
 
     /**
-     * Creating Categories.
-     *
-     * @param array $categories
-     *
-     * @return array
-     */
-    public function createCategories($categories)
-    {
-        //Creating a new array for categories (newly created)
-        $categories_array = [];
-
-        foreach ($categories as $category) {
-            if (is_numeric($category)) {
-                $categories_array[] = $category;
-            } else {
-                $newCategory = BlogCategory::firstOrCreate(
-                    [
-                        'name' => $category,
-                    ],
-                    [
-                        'name' => $category,
-                        'status' => 1,
-                        'created_by' => auth()->user()->id,
-                    ]
-                );
-
-                $categories_array[] = $newCategory->id;
-            }
-        }
-
-        return $categories_array;
-    }
-
-    /**
-     * @param \App\Models\Blogs\Blog $blog
+     * @param \App\Models\Drugs\Drug $drug
      *
      * @throws GeneralException
      *
      * @return bool
      */
-    public function delete(Blog $blog)
+    public function delete(Drug $drug)
     {
-        DB::transaction(function () use ($blog) {
-            if ($blog->delete()) {
-                BlogMapCategory::where('blog_id', $blog->id)->delete();
-                BlogMapTag::where('blog_id', $blog->id)->delete();
-
-                event(new BlogDeleted($blog));
+        DB::transaction(function () use ($drug) {
+            if ($drug->delete()) {
+                
+                event(new DrugDeleted($drug));
 
                 return true;
             }
 
-            throw new GeneralException(__('exceptions.backend.blogs.delete_error'));
+            throw new GeneralException(__('exceptions.backend.drugs.delete_error'));
         });
     }
 

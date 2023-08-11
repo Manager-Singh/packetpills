@@ -15,127 +15,151 @@
     <div class="row mt-4 mb-4">
         <div class="col">
             <div class="form-group row">
-                {{ Form::label('name', trans('validation.attributes.backend.access.drugs.title'), ['class' => 'col-md-2 from-control-label required']) }}
+                {{ Form::label('name', trans('validation.attributes.backend.access.drugs.name'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.title'), 'required' => 'required']) }}
+                    {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.name') ]) }}
+                </div>
+                <!--col-->
+            </div>
+            <div class="form-group row">
+                {{ Form::label('available_form', trans('validation.attributes.backend.access.drugs.available_form'), ['class' => 'col-md-2 from-control-label']) }}
+
+                <div class="col-md-10">
+                    {{ Form::text('available_form', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.available_form')]) }}
+                </div>
+                <!--col-->
+            </div>
+            <!--form-group-->
+            <div class="form-group row">
+                {{ Form::label('generic_name', trans('validation.attributes.backend.access.drugs.generic_name'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::text('generic_name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.generic_name') ]) }}
+                </div>
+                <!--col-->
+            </div>
+            <!--form-group-->
+            <div class="form-group row">
+                {{ Form::label('manufacturer_name', trans('validation.attributes.backend.access.drugs.manufacturer_name'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::text('manufacturer_name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.manufacturer_name') ]) }}
+                </div>
+                <!--col-->
+            </div>
+
+            
+            <!--form-group-->
+            <div class="form-group row">
+                {{ Form::label('strength', trans('validation.attributes.backend.access.drugs.strength'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::text('strength', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.strength') ]) }}
+                </div>
+                <!--col-->
+            </div>
+
+            <!--form-group-->
+            <div class="form-group row">
+                {{ Form::label('description', trans('validation.attributes.backend.access.drugs.description'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.description')]) }}
+                </div>
+                <!--col-->
+            </div>
+            <!--form-group-->
+            <div class="form-group row">
+                {{ Form::label('faq', trans('validation.attributes.backend.access.drugs.faq'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::textarea('faq', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.faq')]) }}
+                </div>
+                <!--col-->
+            </div>
+            <!--form-group-->
+            <div class="form-group row">
+                {{ Form::label('how_to_take', trans('validation.attributes.backend.access.drugs.how_to_take'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::textarea('how_to_take', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.how_to_take')]) }}
+                </div>
+                <!--col-->
+            </div>
+            <!--form-group-->
+            <div class="form-group row">
+                {{ Form::label('dosage', trans('validation.attributes.backend.access.drugs.dosage'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::textarea('dosage', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.dosage')]) }}
+                </div>
+                <!--col-->
+            </div>
+            <!--form-group-->
+            <div class="form-group row">
+                {{ Form::label('side_effect', trans('validation.attributes.backend.access.drugs.side_effect'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::textarea('side_effect', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.side_effect')]) }}
+                </div>
+                <!--col-->
+            </div>
+
+            
+            
+            <!--form-group-->
+
+            <div class="form-group row">
+                {{ Form::label('available_form_description', trans('validation.attributes.backend.access.drugs.available_form_description'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::textarea('available_form_description', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.available_form_description')]) }}
                 </div>
                 <!--col-->
             </div>
             <!--form-group-->
 
-
             <div class="form-group row">
-                {{ Form::label('publish_datetime', trans('validation.attributes.backend.access.drugs.publish_date_time'), ['class' => 'col-md-2 from-control-label required']) }}
+                {{ Form::label('contraindications', trans('validation.attributes.backend.access.drugs.contraindications'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    @if(!empty($blog->publish_datetime))
-                    {{ Form::text('publish_datetime', \Carbon\Carbon::parse($blog->publish_datetime)->format('m/d/Y h:i a'), ['class' => 'form-control publish_datetime box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.publish_date_time'), 'required' => 'required', 'id' => 'publish_datetime']) }}
-                    @else
-                    {{ Form::text('publish_datetime', null, ['class' => 'form-control publish_datetime box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.publish_date_time'), 'required' => 'required', 'id' => 'publish_datetime']) }}
-                    @endif
+                    {{ Form::textarea('contraindications', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.contraindications')]) }}
+                </div>
+                <!--col-->
+            </div>
+            <!--form-group-->
+            <!--form-group-->
+
+            <div class="form-group row">
+                {{ Form::label('precautions', trans('validation.attributes.backend.access.drugs.precautions'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::textarea('precautions', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.precautions')]) }}
                 </div>
                 <!--col-->
             </div>
             <!--form-group-->
 
             <div class="form-group row">
-                {{ Form::label('featured_image', trans('validation.attributes.backend.access.drugs.featured_image'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                @if(!empty($blog->featured_image))
-                <div class="col-lg-1">
-                    <img src="{{ asset('storage/img/blog/'.$blog->featured_image) }}" height="80" width="80">
-                </div>
-                <div class="col-lg-5">
-                    {{ Form::file('featured_image', ['id' => 'featured_image']) }}
-                </div>
-                @else
-                <div class="col-lg-5">
-                    {{ Form::file('featured_image', ['id' => 'featured_image']) }}
-                </div>
-                @endif
-            </div>
-            <!--form-group-->
-
-            <div class="form-group row">
-                {{ Form::label('content', trans('validation.attributes.backend.access.drugs.content'), ['class' => 'col-md-2 from-control-label required']) }}
+                {{ Form::label('warnings', trans('validation.attributes.backend.access.drugs.warnings'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.content')]) }}
+                    {{ Form::textarea('warnings', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.warnings')]) }}
                 </div>
                 <!--col-->
             </div>
-            <!--form-group-->
-
-            <div class="form-group row">
-                {{ Form::label('tags', trans('validation.attributes.backend.access.drugs.tags'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                <div class="col-md-10">
-                    @if(!empty($selectedtags))
-                    {{ Form::select('tags[]', $blogTags, $selectedtags, ['class' => 'form-control tags', 'placeholder' => trans('validation.attributes.backend.access.drugs.tags'), 'required' => 'required', 'multiple' => 'multiple']) }}
-                    @else
-                    {{ Form::select('tags[]', $blogTags, null, ['class' => 'form-control tags', 'data-placeholder' => trans('validation.attributes.backend.access.drugs.tags'), 'required' => 'required', 'multiple' => 'multiple']) }}
-                    @endif
-                </div>
-                <!--col-->
-            </div>
-            <!--form-group-->
-
-            <div class="form-group row">
-                {{ Form::label('meta_title', trans('validation.attributes.backend.access.drugs.meta_title'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                <div class="col-md-10">
-                    {{ Form::text('meta_title', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.meta_title')]) }}
-                </div>
-                <!--col-->
-            </div>
-            <!--form-group-->
-
-            <div class="form-group row">
-                {{ Form::label('slug', trans('validation.attributes.backend.access.drugs.slug'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                <div class="col-md-10">
-                    {{ Form::text('slug', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.slug'), 'disabled' => 'disabled']) }}
-                </div>
-                <!--col-->
-            </div>
-            <!--form-group-->
-
-            <div class="form-group row">
-                {{ Form::label('cannonical_link', trans('validation.attributes.backend.access.drugs.cannonical_link'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                <div class="col-md-10">
-                    {{ Form::text('cannonical_link', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.cannonical_link')]) }}
-                </div>
-                <!--col-->
-            </div>
-            <!--form-group-->
-
-            <div class="form-group row">
-                {{ Form::label('meta_keywords', trans('validation.attributes.backend.access.drugs.meta_keywords'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                <div class="col-md-10">
-                    {{ Form::text('meta_keywords', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.meta_keywords')]) }}
-                </div>
-                <!--col-->
-            </div>
-            <!--form-group-->
-
-            <div class="form-group row">
-                {{ Form::label('meta_description', trans('validation.attributes.backend.access.drugs.meta_description'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                <div class="col-md-10">
-                    {{ Form::textarea('meta_description', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.meta_description')]) }}
-                </div>
-                <!--col-->
-            </div>
+            
+            
+            
+            
             <!--form-group-->
 
             <div class="form-group row">
                 {{ Form::label('status', trans('validation.attributes.backend.access.drugs.status'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::select('status', $status, null, ['class' => 'form-control select2 status box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.status'), 'required' => 'required']) }}
+                    {{ Form::select('status', $status, null, ['class' => 'form-control select2 status box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.status') ]) }}
                 </div>
                 <!--col-->
             </div>
@@ -150,7 +174,8 @@
 @section('pagescript')
 <script type="text/javascript">
     FTX.Utils.documentReady(function() {
-        FTX.drugs.edit.init("{{ config('locale.languages.' . app()->getLocale())[1] }}");
+        console.log(FTX);
+        FTX.Drugs.edit.init("{{ config('locale.languages.' . app()->getLocale())[1] }}");
     });
 </script>
 @stop

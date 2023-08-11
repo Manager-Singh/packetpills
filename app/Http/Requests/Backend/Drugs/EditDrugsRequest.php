@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Backend\Blogs;
+namespace App\Http\Requests\Backend\Drugs;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class EditBlogsRequest.
+ * Class EditDrugsRequest.
  */
-class EditBlogsRequest extends FormRequest
+class EditDrugsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class EditBlogsRequest extends FormRequest
      */
     public function authorize()
     {
-        return access()->allow('edit-blog');
+        return access()->allow('edit-drug');
     }
 
     /**

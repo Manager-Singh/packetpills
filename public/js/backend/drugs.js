@@ -5,26 +5,27 @@
         list: {
 
             selectors: {
-                blogs_table: $('#blogs-table'),
+                drugs_table: $('#drugs-table'),
             },
 
             init: function () {
 
-                this.selectors.blogs_table.dataTable({
+                this.selectors.drugs_table.dataTable({
 
                     processing: false,
                     serverSide: true,
                     ajax: {
-                        url: this.selectors.blogs_table.data('ajax_url'),
+                        url: this.selectors.drugs_table.data('ajax_url'),
                         type: 'post',
                     },
                     columns: [
 
-                        { data: 'name', name: 'blogs.name' },
-                        { data: 'publish_datetime', name: 'blogs.publish_datetime' },
-                        { data: 'display_status', name: 'blogs.status' },
-                        { data: 'created_by', name: 'blogs.created_by' },
-                        { data: 'created_at', name: 'blogs.created_at' },
+                        { data: 'name', name: 'drugs.name' },
+                        { data: 'available_form', name: 'drugs.available_form' },
+                        { data: 'strength', name: 'drugs.strength' },
+                        { data: 'description', name: 'drugs.description' },
+                        { data: 'display_status', name: 'drugs.status' },
+                        { data: 'created_at', name: 'drugs.created_at' },
                         { data: 'actions', name: 'actions', searchable: false, sortable: false }
 
                     ],
@@ -39,10 +40,8 @@
 
         edit: {
             selectors: {
-                tags: jQuery(".tags"),
-                categories: jQuery(".categories"),
+                
                 status: jQuery(".status"),
-                publish_datetime: jQuery("#publish_datetime"),
             },
 
             init: function (locale) {
@@ -52,24 +51,15 @@
 
             addHandlers: function (locale) {
 
-                this.selectors.tags.select2({
-                    tags: true,
-                    width: '100%',
-                });
+                
 
-                this.selectors.categories.select2({
-                    width: '100%',
-                    tags: true,
-                    placeholder: 'Select category'
-                });
+                
 
                 this.selectors.status.select2({
                     width: '100%'
                 });
 
-                this.selectors.publish_datetime.datetimepicker({
-                    locale: (locale === undefined ? 'en_US' : locale),
-                });
+                
             },
         },
     }

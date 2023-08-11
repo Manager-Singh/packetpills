@@ -22,6 +22,7 @@ trait DrugAttributes
      */
     public function getDisplayStatusAttribute(): string
     {
+       //dd($this->status);
         return $this->statuses[$this->status] ?? null;
     }
 

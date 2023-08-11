@@ -619,6 +619,59 @@ var Backend = {}; // common variable used in all the files of the backend
             }
         },
 
+        Drug: {
+            selectors: {
+                toDisplay: jQuery(".toDisplay"),
+                status: jQuery(".status"),
+                datetimepicker1: jQuery("#datetimepicker1"),
+                GenerateSlugUrl: "",
+                name: document.getElementById("name"),
+                SlugUrl: "",
+                slug: document.getElementById("slug"),
+            },
+
+            init: function (locale) {
+                this.addHandlers(locale);
+                Backend.tinyMCE.init(locale);
+            },
+
+            addHandlers: function (locale) {
+
+                this.selectors.toDisplay.select2();
+                this.selectors.status.select2();
+
+                //For Blog datetimepicker for publish_datetime
+                this.selectors.datetimepicker1.datetimepicker({
+                    // locale: locale,
+                    format: 'YYYY-MM-DD HH:mm',
+                    showTodayButton: true,
+                    showClear: true,
+                });
+
+                // For generating the Slug  //changing slug on blur event
+                this.selectors.name.onblur = function (event) {
+                    url = event.target.value;
+                    if (url !== '') {
+                        callback = {
+                            success: function (request) {
+                                if (request.status >= 200 && request.status < 400) {
+                                    // Success!
+                                    response = request.responseText;
+                                    Backend.Drug.selectors.slug.value = Backend.Drug.selectors.SlugUrl + '/' + response.trim();
+                                }
+                            },
+                            error: function (request) {
+
+                            }
+                        };
+                        Backend.Utils.ajaxrequest(Backend.Drug.selectors.GenerateSlugUrl, "post", {
+                            text: url
+                        }, Backend.Utils.csrf, callback);
+                    }
+                };
+
+            }
+        },
         Menu: {
             selectors: {
                 menuItemContainer: jQuery("#menu-items"),

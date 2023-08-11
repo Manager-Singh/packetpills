@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Backend\Drugs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Drugs\ManageDrugsRequest;
 use App\Http\Requests\Backend\Drugs\StoreDrugsRequest;
-use App\Http\Requests\Backend\Blogs\UpdateBlogsRequest;
-use App\Http\Responses\Backend\Blog\EditResponse;
+use App\Http\Requests\Backend\Drugs\UpdateDrugsRequest;
+use App\Http\Responses\Backend\Drug\EditResponse;
 use App\Http\Responses\RedirectResponse;
 use App\Http\Responses\ViewResponse;
 use App\Models\Drug;
@@ -29,7 +29,7 @@ class DrugsController extends Controller
     {
         
         $this->repository = $repository;
-        View::share('js', ['blogs']);
+        View::share('js', ['drugs']);
     }
 
     /**
@@ -50,11 +50,11 @@ class DrugsController extends Controller
      */
     public function create(ManageDrugsRequest $request, Drug $drug)
     {
-        $blogTags = BlogTag::getSelectData();
-        $blogCategories = BlogCategory::getSelectData();
-
-        return new ViewResponse('backend.drugs.create', ['status' => $drug->statuses, 'blogCategories' => $blogCategories, 'blogTags' => $blogTags]);
+        
+        return new ViewResponse('backend.drugs.create', ['status' => $drug->statuses]);
     }
+
+    
 
     /**
      * @param \App\Http\Requests\Backend\Drugs\StoreDrugsRequest $request
@@ -63,8 +63,8 @@ class DrugsController extends Controller
      */
     public function store(StoreDrugsRequest $request)
     {
-        $this->repository->create($request->except(['_token', '_method']));
-
+       $this->repository->create($request->except(['_token', '_method']));
+        
         return new RedirectResponse(route('admin.drugs.index'), ['flash_success' => __('alerts.backend.drugs.created')]);
     }
 
@@ -76,10 +76,9 @@ class DrugsController extends Controller
      */
     public function edit(Drug $drug, ManageDrugsRequest $request)
     {
-        $blogCategories = BlogCategory::getSelectData();
-        $blogTags = BlogTag::getSelectData();
+       
 
-        return new EditResponse($drug, $drug->statuses, $blogCategories, $blogTags);
+        return new EditResponse($drug, $drug->statuses);
     }
 
     /**

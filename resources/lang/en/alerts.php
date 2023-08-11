@@ -48,6 +48,12 @@ return [
             'deleted' => 'The blog was successfully deleted.',
         ],
 
+        'drugs' => [
+            'created' => 'The drug was successfully created.',
+            'updated' => 'The drug was successfully updated.',
+            'deleted' => 'The drug was successfully deleted.',
+        ],
+
         'blog-category' => [
             'created' => 'The blog category was successfully created.',
             'updated' => 'The blog category was successfully updated.',

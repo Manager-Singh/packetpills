@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend\Drugs;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Blogs\ManageDrugsRequest;
+use App\Http\Requests\Backend\Drugs\ManageDrugsRequest;
 use App\Repositories\Backend\DrugsRepository;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -13,41 +13,44 @@ use Yajra\DataTables\Facades\DataTables;
 class DrugsTableController extends Controller
 {
     /**
-     * @var \App\Repositories\Backend\BlogsRepository
+     * @var \App\Repositories\Backend\DrugsRepository
      */
     protected $repository;
 
     /**
-     * @param \App\Repositories\Backend\BlogsRepository $repository
+     * @param \App\Repositories\Backend\DrugsRepository $repository
      */
-    public function __construct(BlogsRepository $repository)
+    public function __construct(DrugsRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * @param \App\Http\Requests\Backend\Blogs\ManageBlogsRequest $request
+     * @param \App\Http\Requests\Backend\Drugs\ManageDrugsRequest $request
      *
      * @return mixed
      */
-    public function __invoke(ManageBlogsRequest $request)
+    public function __invoke(ManageDrugsRequest $request)
     {
         return Datatables::of($this->repository->getForDataTable())
             ->escapeColumns(['name'])
-            ->addColumn('status', function ($blogs) {
-                return $blogs->status;
+            ->addColumn('status', function ($drugs) {
+                return $drugs->status;
             })
-            ->addColumn('publish_datetime', function ($blogs) {
-                return $blogs->publish_datetime->format('d/m/Y h:i A');
+            ->addColumn('available_form', function ($drugs) {
+                return $drugs->available_form;
             })
-            ->addColumn('created_by', function ($blogs) {
-                return $blogs->user_name;
+            ->addColumn('strength', function ($drugs) {
+                return $drugs->strength;
             })
-            ->addColumn('created_at', function ($blogs) {
-                return $blogs->created_at->toDateString();
+            ->addColumn('description', function ($drugs) {
+                return $drugs->description;
             })
-            ->addColumn('actions', function ($blogs) {
-                return $blogs->action_buttons;
+            ->addColumn('created_at', function ($drugs) {
+                return $drugs->created_at->toDateString();
+            })
+            ->addColumn('actions', function ($drugs) {
+                return $drugs->action_buttons;
             })
             ->make(true);
     }

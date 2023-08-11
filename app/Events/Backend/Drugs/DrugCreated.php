@@ -17,7 +17,7 @@ class DrugCreated
     public $drugs;
 
     /**
-     * @param $blogs
+     * @param $drugs
      */
     public function __construct($drugs)
     {
