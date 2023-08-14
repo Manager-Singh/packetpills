@@ -116,17 +116,18 @@ class DrugsRepository extends BaseRepository
      */
     public function create(array $input)
     {
-       
+
 
         return DB::transaction(function () use ($input) {
-            
-            
-            if ($drug = Drug::create($input)) {
-               
-                event(new DrugCreated($drug));
 
-                return $drug;
-            }
+            $input['strength'] = serialize($input['strength']);
+            $input['price'] = serialize($input['price']);
+            if ($drug = Drug::create($input)) {
+
+                    event(new DrugCreated($drug));
+
+                    return $drug;
+                }
 
             throw new GeneralException(__('exceptions.backend.drugs.create_error'));
         });
@@ -138,11 +139,14 @@ class DrugsRepository extends BaseRepository
      */
     public function update(Drug $drug, array $input)
     {
-      
+
 
         return DB::transaction(function () use ($drug, $input) {
+
+            $input['strength'] = serialize($input['strength']);
+            $input['price'] = serialize($input['price']);
             if ($drug->update($input)) {
-                
+
 
                 event(new DrugUpdated($drug));
 
@@ -166,7 +170,7 @@ class DrugsRepository extends BaseRepository
     {
         DB::transaction(function () use ($drug) {
             if ($drug->delete()) {
-                
+
                 event(new DrugDeleted($drug));
 
                 return true;

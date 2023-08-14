@@ -41,7 +41,7 @@ class DrugsTableController extends Controller
                 return $drugs->available_form;
             })
             ->addColumn('strength', function ($drugs) {
-                return $drugs->strength;
+                return implode(', ',unserialize($drugs->strength));
             })
             ->addColumn('description', function ($drugs) {
                 return $drugs->description;
