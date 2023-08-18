@@ -69,7 +69,7 @@ class LoginController extends Controller
     //         'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
     //     ]);
     // }
-    
+
     /**
      * The user has been authenticated.
      *
@@ -165,8 +165,20 @@ class LoginController extends Controller
 
     public function send_otp(Request $request)
     {
-     
+        $isexist = User::where('mobile_no',$request->mobile_no)->first();
+
         $otp = generateOTP();
+        try{
+        if($isexist){
+            $serotp = UserOtp::where('user_id',$isexist->id)->first();
+            $serotp->user_id = $isexist->id;
+            $serotp->otp = $otp;
+            if($serotp->save()){
+                return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$serotp->otp]);
+            }else{
+                return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+            }
+            }else{
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
@@ -180,35 +192,43 @@ class LoginController extends Controller
             if($userotp->save()){
                 return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
             }else{
-                DB::rollback();
                 return json_encode(['error' => 1, 'message' => 'Something went wrong']);
-               
+
             }
 
+
         }
-        
+        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+        }
+    }catch(\Exception $e){
+        return json_encode(['error' => 1, 'message' => $e]);
+    }
     }
     public function verify_otp(Request $request)
     {
-     
+
         $user = User::where('mobile_no',$request->mobile_no)->first();
         if($user ){
             $user_otp = UserOtp::where('user_id',$user->id)->where('otp',$request->otp)->first();
             if($user_otp){
                 $user_otp->status = 'verified';
                 if($user_otp->save()){
+                    $user->confirmation_code=md5(rand(9,12));
+                    $user->save();
                     Auth::loginUsingId($user_otp->user_id);
-                    return redirect()->route('frontend.index');
-                    // return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+                    // return redirect()->route('frontend.index');
+                    return json_encode(['error' => 0, 'message' => 'Login Successfully','route'=>'dashboard']);
                 }
+            }else{
+                return json_encode(['error' => 1, 'message' => 'Otp not match']);
             }
         }
         // $user->password = Hash::make($request->mobile_no);
         // $user->mobile_no = $request->mobile_no;
-        return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
-        
+        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+
     }
-    
+
 
     /**
      * Log the user out of the application.

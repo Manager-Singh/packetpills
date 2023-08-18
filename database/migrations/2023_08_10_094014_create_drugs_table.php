@@ -20,7 +20,7 @@ class CreateDrugsTable extends Migration
             $table->string('available_form')->nullable();
             $table->string('manufacturer_name')->nullable();
             $table->string('generic_name')->nullable();
-            $table->string('strength')->nullable();
+            // $table->string('strength')->nullable();
             $table->text('description')->nullable();
             $table->longtext('faq')->nullable();
             $table->longtext('how_to_take')->nullable();
