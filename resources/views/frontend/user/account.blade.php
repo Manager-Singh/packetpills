@@ -1,7 +1,7 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.website')
 
 @section('content')
-    <div class="row justify-content-center align-items-center mb-3">
+    <div class="row justify-content-center align-items-center mb-3 main-top-c">
         <div class="col col-sm-10 align-self-center">
             <div class="card">
                 <div class="card-header">

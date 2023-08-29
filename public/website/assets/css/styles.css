@@ -1,3 +1,6 @@
+.main-top-c {
+    margin-top: 10rem;
+}
 body {
 transition: opacity ease-in 0.2s;
 }

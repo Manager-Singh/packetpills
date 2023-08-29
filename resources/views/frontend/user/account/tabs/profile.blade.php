@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <th>@lang('labels.frontend.user.profile.email')</th>
-            <td>{{ $logged_in_user->email }}</td>
+            
         </tr>
         <tr>
             <th>@lang('labels.frontend.user.profile.created_at')</th>

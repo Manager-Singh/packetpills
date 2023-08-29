@@ -15,8 +15,15 @@
                 <div class="hero__form margin-t-xl hero__form--vertical signup-form--desktop">
 
                     <div aria-label="Sign up with Pocketpills">
+                        @if(Auth::check())
+                            <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Hi, Alexandre</p>
+                            <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand"> Welcome back!</p><a href="{{route('frontend.user.account')}}"><button _ngcontent-serverapp-c48="" type="submit" class="btn btn--brand txt-defaultcase"><span _ngcontent-serverapp-c48="" translate="" class="button__label txt-defaultcase">Go to dashboard</span><i class="fa fa-angle-arrow-right" aria-hidden="true"></i></button></a>
+                        @else
+
                         <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Simply sign in to
                             join over 300,000 satisfied members:</p>
+
+                        @endif
 
 
 
@@ -26,6 +33,7 @@
                                     <div class="hero__form-row row row--nogutters row--grow-3">
                                         <div class="column column--xs full-width">
                                             <div class="hero__form-field">
+                                                @if(!Auth::check())
                                                 <form novalidate="" action="{{route('frontend.auth.login.post')}}" method="POST" class="ng-untouched ng-pristine ng-valid">
                                                 
 
@@ -71,7 +79,7 @@
 
                                                 <div class="margin-t-l">
                                                     <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset request-otp">{{ __('labels.frontend.auth.get_started') }}</button>
-                                                    <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset register-submit" style="display:none">{{ __('labels.frontend.auth.get_started') }}</button>
+                                                    <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset register-submit" style="display:none">{{ __('labels.frontend.auth.otp_verfied') }}</button>
                                                 </div>
 
 
@@ -90,6 +98,7 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                            @endif
                                             </div>
                                         </div>
 
