@@ -50,13 +50,11 @@
             </div>
             <?php
                 if(isset($drug)){
-                    
                     $strength = unserialize($drug->strength);
                     $price = unserialize($drug->price);
                 }
 
             ?>
-            
             <!--form-group-->
             <div class="form-group row">
                 {{ Form::label('strength', trans('validation.attributes.backend.access.drugs.strength'), ['class' => 'col-md-2 from-control-label required']) }}
@@ -76,10 +74,10 @@
                             </div>
                         </div>
                     @if(isset($drug) && isset($strength) && isset($price))
-                        @php 
+                        @php
                         unset($strength[0]);
                         unset($price[0]);
-                        
+
                         @endphp
                         @if(count($strength) > 0)
                         @foreach($strength as $key=>$steng)
@@ -151,8 +149,8 @@
                 <!--col-->
             </div>
 
-            
-            
+
+
             <!--form-group-->
 
             <div class="form-group row">
@@ -194,10 +192,10 @@
                 </div>
                 <!--col-->
             </div>
-            
-            
-            
-            
+
+
+
+
             <!--form-group-->
 
             <div class="form-group row">
@@ -227,12 +225,12 @@
                 e.preventDefault();
                 if (x < max_fields) { //max input box allowed
                   x++; //text box increment
-                  $(wrapper).append('<div class="form-group col-md-7 d-flex align-items-center"><div class="strength"><input type="text" name="strength[]" placeholder="Strength" value="" class="form-control"></div><div class="price"><input type="text" name="price[]" placeholder="Price" value="" class="form-control"></div><div class="remove"><div style="cursor:pointer;background-color:red;" class="remove_field btn btn-info">Remove</div></div></div>').fadeIn('slow'); 
+                  $(wrapper).append('<div class="form-group col-md-7 d-flex align-items-center"><div class="strength"><input type="text" name="strength[]" placeholder="Strength" value="" class="form-control"></div><div class="price"><input type="text" name="price[]" placeholder="Price" value="" class="form-control"></div><div class="remove"><div style="cursor:pointer;background-color:red;" class="remove_field btn btn-info">Remove</div></div></div>').fadeIn('slow');
                   }
                 }); $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
                 e.preventDefault();
                 $(this).parent().parent('div').fadeOut( "slow", function() {
-                    $(this).remove();  
+                    $(this).remove();
                 });
                 //$(this).parent().parent('div').remove();
                 x--;
@@ -245,6 +243,5 @@
         FTX.Drugs.edit.init("{{ config('locale.languages.' . app()->getLocale())[1] }}");
     });
 
-    
 </script>
 @stop

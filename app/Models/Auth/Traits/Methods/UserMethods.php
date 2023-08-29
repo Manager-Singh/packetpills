@@ -33,8 +33,13 @@ trait UserMethods
                 if (! $size) {
                     $size = config('gravatar.default.size');
                 }
+                // die($this->email);
+                if(isset($this->email)){
+                    return gravatar()->get($this->email, ['size' => $size]);
+                }else{
+                    return url('storage/'.$this->avatar_location);
+                }
 
-                return gravatar()->get($this->email, ['size' => $size]);
 
             case 'storage':
                 return url('storage/'.$this->avatar_location);

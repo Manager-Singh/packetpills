@@ -61,7 +61,7 @@
 <script>
                 $('.request-otp').click(function(e) {
                   e.preventDefault();
-  
+
                   // Get the phone number and OTP
                   var phone = $('#phone-number').val();
                 //   var otp = $('#otp').val();
@@ -70,26 +70,26 @@
                 //   console.log(phone);
                     $.ajax({
                       type: 'POST',
-                      url: "{{ route('frontend.auth.send.otp') }}", 
+                      url: "{{ route('frontend.auth.send.otp') }}",
                       data: {_token:"{{ csrf_token() }}",mobile_no:phone},
                       success: function(response) {
                         response = JSON.parse(response);
                               console.log(response.otp);
                               if (response.error) {
-                                
+
                               }
-                              $('.otp-box').show(); 
-                              
-                              $('.genrated-otp').text(response.otp); 
-                              $('.request-otp').hide(); 
-                              $('.register-submit').show(); 
-                                                         
+                              $('.otp-box').show();
+
+                              $('.genrated-otp').text(response.otp);
+                              $('.request-otp').hide();
+                              $('.register-submit').show();
+
                           }
                       });
                 });
                 $('.register-submit').click(function(e) {
                   e.preventDefault();
-  
+
                   // Get the phone number and OTP
                   var phone = $('#phone-number').val();
                   var otp = $('#otp').val();
@@ -98,28 +98,31 @@
                 //   console.log(phone);
                     $.ajax({
                       type: 'POST',
-                      url: "{{ route('frontend.auth.verify.otp') }}", 
+                      url: "{{ route('frontend.auth.verify.otp') }}",
                       data: {_token:"{{ csrf_token() }}",mobile_no:phone,otp:otp},
                       success: function(response) {
                         console.log(response);
                         console.log(response.link);
                         response = JSON.parse(response);
-                              console.log(response);
-                              if (response.error) {
-                                
+                              console.log(response.otp);
+                              if (response.error==0) {
+                                if(response.route=='dashboard'){
+                                    // window.location.replace('/'+response.route);
+                                    window.location = "/"+response.route;
+                                }
+                                // $('.otp-box').show();
                               }
-                              window.location.reload();
-                              $('.otp-box').show(); 
-                              
-                              $('.genrated-otp').text(response.otp); 
-                              $('.request-otp').hide(); 
-                              $('.register-submit').show(); 
-                                                         
+                            //   $('.otp-box').show();
+
+                            //   $('.genrated-otp').text(response.otp);
+                            //   $('.request-otp').hide();
+                            //   $('.register-submit').show();
+
                           }
                       });
                 });
 
-                
+
 </script>
     @if (config('access.captcha.registration'))
         @captchaScripts
