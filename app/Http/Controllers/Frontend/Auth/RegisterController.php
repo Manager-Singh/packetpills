@@ -47,7 +47,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        abort_unless(config('access.registration'), 404);
+        //abort_unless(config('access.registration'), 404);
 
         return view('frontend.auth.register');
     }

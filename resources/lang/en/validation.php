@@ -271,6 +271,7 @@ return [
             'timezone' => 'Timezone',
             'language' => 'Language',
             'mobileno' => 'Phone Number',
+            'otp' => 'OTP',
         ],
     ],
 ];

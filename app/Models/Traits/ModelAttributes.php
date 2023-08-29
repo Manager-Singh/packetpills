@@ -19,6 +19,18 @@ trait ModelAttributes
     /**
      * @return string
      */
+    public function getViewButtonAttribute($permission, $route)
+    {
+        if (access()->allow($permission)) {
+            return '<a href="'.route($route, $this).'" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.edit').'" class="btn btn-success btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>';
+        }
+    }
+
+    /**
+     * @return string
+     */
     public function getDeleteButtonAttribute($permission, $route)
     {
         if (access()->allow($permission)) {

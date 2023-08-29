@@ -14,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('frontend.user.dashboard');
+        return '<h2>You are logedin successfully!</h2>';
+        //return view('frontend.user.dashboard');
     }
 }

@@ -32,7 +32,8 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
     // These routes require no user to be logged in
     Route::group(['middleware' => 'guest'], function () {
         // Authentication Routes
-        Route::get('account/login', [LoginController::class, 'showLoginForm'])->name('login');
+        Route::get('account/login', [LoginController::class, 'showNewLoginForm'])->name('new.login');
+        Route::get('account/new-login', [LoginController::class, 'showLoginForm'])->name('login');
         Route::post('account/login', [LoginController::class, 'login'])->name('login.post');
         Route::post('account/send-otp', [LoginController::class, 'send_otp'])->name('send.otp');
         Route::post('account/verify-otp', [LoginController::class, 'verify_otp'])->name('verify.otp');

@@ -316,6 +316,41 @@ return [
                     'total' => 'email templates total|email templates total',
                 ],
             ],
+
+            'prescriptions' => [
+                'all' => 'All Prescriptions',
+                'active' => 'Prescriptions List',
+                'create' => 'Prescription Create',
+                'deactivated' => 'Deactivated Prescription',
+                'deleted' => 'Deleted Prescription',
+                'edit' => 'Edit Prescription',
+                'show' => 'Prescription Details',
+                'management' => 'Prescription Management',
+
+                'table' => [
+                    'created' => 'Created',
+                    'id' => 'ID',
+                    'last_updated' => 'Last Updated',
+                    'slug' => 'Slug',
+                    'name' => 'Name',
+                    'medications' => 'Medications',
+                    'type' => 'Type',
+                    'createdat' => 'Created At',
+                    'createdby' => 'Created By',
+                    'prescription_id' => 'Prescriptions ID',
+                ],
+                'tabs' => [
+                    'titles' => [
+                        'page' => 'Page',
+                    ],
+
+                    'content' => [
+                        'page' => [
+                            'avatar' => 'Avatar',
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
 

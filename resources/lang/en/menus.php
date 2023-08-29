@@ -122,6 +122,17 @@ return [
                 'main' => 'Blog Email Templates',
                 'view' => 'View Email Template',
             ],
+
+            'prescriptions' => [
+                'all' => 'All Prescriptions',
+                'active' => 'Active Prescriptions',
+                'create' => 'Create Prescriptions',
+                'deactivated' => 'Deactivated Prescriptions',
+                'deleted' => 'Deleted Prescriptions',
+                'edit' => 'Edit Prescriptions',
+                'main' => 'Blog Prescriptions',
+                'view' => 'View Prescriptions',
+            ],
         ],
 
         'log-viewer' => [
@@ -140,6 +151,7 @@ return [
             'pages' => 'Pages Management',
             'faqs' => 'Faq Management',
             'email-templates' => 'Email Templates',
+            'prescriptions' => 'Prescriptions',
         ],
     ],
 

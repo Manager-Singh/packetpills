@@ -15,6 +15,9 @@ use App\Models\UserOtp;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use Twilio\Jwt\ClientToken;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 /**
  * Class LoginController.
  */
@@ -38,6 +41,14 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('frontend.auth.login');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showNewLoginForm()
+    {
+        return view('frontend.auth.new-login');
     }
 
     /**
@@ -159,7 +170,7 @@ class LoginController extends Controller
 
         return redirect()->intended($this->redirectPath());
         }
-
+      
         return redirect("account/login")->withFlashDanger(__('exceptions.frontend.auth.password.wrong_password'));
     }
 
@@ -167,6 +178,9 @@ class LoginController extends Controller
     {
      
         $otp = generateOTP();
+
+        $request->code =  $otp;
+                $this->sendSms($request); // send otp to user
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
@@ -178,6 +192,7 @@ class LoginController extends Controller
             $userotp->user_id = $user->id;
             $userotp->otp = $otp;
             if($userotp->save()){
+                
                 return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
             }else{
                 DB::rollback();
@@ -187,6 +202,25 @@ class LoginController extends Controller
 
         }
         
+    }
+
+    public function sendSms($request){
+        $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
+        $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
+        try{
+            $client = new Client(['auth' => [$accountSid, $authToken]]);
+            
+            $result = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
+            ['form_params' => [
+            'Body' => 'CODE: '. $request->code, //set message body
+            'To' => $request->mobile_no,
+            'From' => '+16475034144' //we get this number from twilio
+            ]]);
+            return $result;
+        }
+        catch (Exception $e){
+        echo "Error: " . $e->getMessage();
+        }
     }
     public function verify_otp(Request $request)
     {
@@ -198,8 +232,8 @@ class LoginController extends Controller
                 $user_otp->status = 'verified';
                 if($user_otp->save()){
                     Auth::loginUsingId($user_otp->user_id);
-                    return redirect()->route('frontend.index');
-                    // return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+                    //return redirect()->route('frontend.index');
+                    return json_encode(['error' => 0, 'message' => 'Otp has been verifed.', ]);
                 }
             }
         }

@@ -48,15 +48,60 @@
                 </div>
                 <!--col-->
             </div>
+            <?php
+                if(isset($drug)){
+                    
+                    $strength = unserialize($drug->strength);
+                    $price = unserialize($drug->price);
+                }
 
+            ?>
             
             <!--form-group-->
             <div class="form-group row">
                 {{ Form::label('strength', trans('validation.attributes.backend.access.drugs.strength'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::text('strength', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.strength') ]) }}
+                    <!-- {{ Form::text('strength', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.strength') ]) }} -->
+                    <div class="form-row input_fields_wrap">
+                        <div class="form-group col-md-7 d-flex align-items-center">
+                            <div class="strength">
+                                <input type="text" name="strength[]" placeholder="Strength" value="{{(isset($strength)) ? $strength[0] : '' }}" class="form-control">
+                            </div>
+                            <div class="price">
+                                <input type="text" name="price[]" placeholder="Price" value="{{(isset($price)) ? $price[0] : '' }}" class="form-control">
+                            </div>
+                            <div class="remove">
+                                <button type="button" class="btn btn-info btn-sm pull-right add_field_button">Add</button>
+                            </div>
+                        </div>
+                    @if(isset($drug) && isset($strength) && isset($price))
+                        @php 
+                        unset($strength[0]);
+                        unset($price[0]);
+                        
+                        @endphp
+                        @if(count($strength) > 0)
+                        @foreach($strength as $key=>$steng)
+                        <div class="form-group col-md-7 d-flex align-items-center">
+                            <div class="strength">
+                                <input type="text" name="strength[]" placeholder="Strength" value="{{$steng}}" class="form-control">
+                            </div>
+                            <div class="price">
+                                <input type="text" name="price[]" placeholder="Price" value="{{$price[$key]}}" class="form-control">
+                            </div>
+                            <div class="remove">
+                                    <div style="cursor:pointer;background-color:red;" class="remove_field btn btn-info">Remove</div>
+                                </div>
+                            </div>
+                        @endforeach
+                        @endif
+
+                    @endif
+
+                    </div>
                 </div>
+
                 <!--col-->
             </div>
 
@@ -172,10 +217,34 @@
 <!--card-body-->
 
 @section('pagescript')
+<script>
+      $(document).ready(function() {
+            var max_fields = 5; //maximum input boxes allowed
+            var wrapper = $(".input_fields_wrap"); //Fields wrapper
+            var add_button = $(".add_field_button"); //Add button ID
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e) { //on add input button click
+                e.preventDefault();
+                if (x < max_fields) { //max input box allowed
+                  x++; //text box increment
+                  $(wrapper).append('<div class="form-group col-md-7 d-flex align-items-center"><div class="strength"><input type="text" name="strength[]" placeholder="Strength" value="" class="form-control"></div><div class="price"><input type="text" name="price[]" placeholder="Price" value="" class="form-control"></div><div class="remove"><div style="cursor:pointer;background-color:red;" class="remove_field btn btn-info">Remove</div></div></div>').fadeIn('slow'); 
+                  }
+                }); $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
+                e.preventDefault();
+                $(this).parent().parent('div').fadeOut( "slow", function() {
+                    $(this).remove();  
+                });
+                //$(this).parent().parent('div').remove();
+                x--;
+              })
+            });
+    </script>
 <script type="text/javascript">
     FTX.Utils.documentReady(function() {
         console.log(FTX);
         FTX.Drugs.edit.init("{{ config('locale.languages.' . app()->getLocale())[1] }}");
     });
+
+    
 </script>
 @stop

@@ -101,11 +101,14 @@
                       url: "{{ route('frontend.auth.verify.otp') }}", 
                       data: {_token:"{{ csrf_token() }}",mobile_no:phone,otp:otp},
                       success: function(response) {
+                        console.log(response);
+                        console.log(response.link);
                         response = JSON.parse(response);
-                              console.log(response.otp);
+                              console.log(response);
                               if (response.error) {
                                 
                               }
+                              window.location.reload();
                               $('.otp-box').show(); 
                               
                               $('.genrated-otp').text(response.otp); 

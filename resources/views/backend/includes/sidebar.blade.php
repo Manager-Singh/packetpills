@@ -74,7 +74,16 @@
                     </a>
                 </li>
                 <li class="divider"></li>
-
+                <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/prescriptions'))
+                    }}" href="{{ route('admin.prescriptions.index') }}">
+                        <i class="nav-icon fas fa-prescription"></i>
+                        @lang('menus.backend.sidebar.prescriptions')
+                    </a>
+                </li>
+                
+                <li class="divider"></li>
                 <li class="nav-item">
                     <a class="nav-link {{
                         active_class(Route::is('admin/pages'))
