@@ -53,6 +53,30 @@
         </div><!--col-->
     </div><!--row-->
 
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                {{ html()->label(__('validation.attributes.frontend.gender'))->for('gender') }}
+
+                {{ html()->select('gender')
+                    ->class('form-control')
+                    ->options(['male'=>'Male','female'=>'Female'])
+                    ->required() }}
+            </div><!--form-group-->
+        </div><!--col-->
+        <div class="col">
+            <div class="form-group">
+                {{ html()->label(__('validation.attributes.frontend.date_of_birth'))->for('date_of_birth') }}
+
+                {{ html()->date('date_of_birth')
+                    ->class('form-control')
+                    ->placeholder(__('validation.attributes.frontend.date_of_birth'))
+                    ->required() }}
+            </div><!--form-group-->
+        </div><!--col-->
+    </div><!--row-->
+
     @if ($logged_in_user->canChangeEmail())
         <div class="row">
             <div class="col">

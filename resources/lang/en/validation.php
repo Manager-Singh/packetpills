@@ -272,6 +272,8 @@ return [
             'language' => 'Language',
             'mobileno' => 'Phone Number',
             'otp' => 'OTP',
+            'gender' => 'Gender',
+            'date_of_birth' => 'Date of Birth',
         ],
     ],
 ];
