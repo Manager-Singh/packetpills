@@ -194,6 +194,8 @@ class LoginController extends Controller
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
+        $user->avatar_type = 'storage';
+        $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
         if($user->save()){
             
             $user->attachRole(3);
