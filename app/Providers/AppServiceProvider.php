@@ -103,7 +103,7 @@ class AppServiceProvider extends ServiceProvider
                 
                 $data['drugs'] = Drug::get();
                 
-                $view->with($data);  
+                $view->with($data);
         });  
     }
 }

@@ -231,7 +231,7 @@ class LoginController extends Controller
             'To' => $request->mobile_no,
             'From' => '+16475034144' //we get this number from twilio
             ]]);
-            return $result;
+            //return $result;
         }
         catch (Exception $e){
         echo "Error: " . $e->getMessage();
