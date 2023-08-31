@@ -28,17 +28,24 @@
               <li role="menuitem" class="hover-menu">
                 <div>
                   <button class="is-clickable button font-regular color-dark focus-visible-button" aria-label="Open drugs menu" aria-expanded="false">
-                    <span  class="font-regular">Drugs</span> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    <span  class="font-regular">Drugs</span> 
+                    <!-- <i class="fa fa-angle-down" aria-hidden="true"></i> -->
 
                   </button>
+                  
                   <ul  class="row re-subnav xsmall-5" aria-label="Read about the drug">
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Ozempic</a>
-                      </div>
-                   
-                    </li>
+                  @if($drugs)
+                    @foreach($drugs as $drug)
+                      <li  class="column">
+                    
+                        <div >
+                          <a  href="#">{{$drug->name}}</a>
+                        </div>
+                    
+                      </li>
+                    @endforeach
+                  @else
+                  @endif
                     <li  class="column">
                    
                       <div >
@@ -59,116 +66,13 @@
                         <a  href="#">Escitalopram</a>
                       </div>
                    
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Sertraline</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Trintellix</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Janumet</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Alysena</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Bupropion </a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Fluoxetine</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Alesse</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Duloxetine </a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Symbicort </a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Eliquis</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Pantoprazole</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Desvenlafaxine</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Dutasteride</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Synthroid</a>
-                      </div>
-                   
-                    </li>
-                    <li  class="column">
-                   
-                      <div >
-                        <a  href="#">Januvia</a>
-                      </div>
-                   
-                    </li>
-                 
-                    <li  class="column">
-                      <a  href="#">See More Drugs</a>
-                    </li>
+                    </li> 
+                    
+                    
+                    
+                    
+                    
+                    
 
                   </ul>
                 </div>
@@ -205,7 +109,7 @@
             @if(Auth::check())
                 <a keyname="landing.navbar.login" href="{{ route('frontend.auth.logout') }}">Log Out</a>
             @else
-                <a keyname="landing.navbar.login" href="{{ route('frontend.auth.login') }}">Log In</a>
+                <a keyname="landing.navbar.login" href="{{ route('frontend.auth.new.login') }}">Log In</a>
             @endif
         </div>
 

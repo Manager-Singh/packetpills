@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\Access;
+use App\Models\Drug;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -95,5 +96,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('access', function ($app) {
             return new Access();
         });
+
+
+        view()->composer('*', function ($view) 
+        {
+                
+                $data['drugs'] = Drug::get();
+                
+                $view->with($data);  
+        });  
     }
 }
