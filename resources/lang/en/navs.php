@@ -30,6 +30,14 @@ return [
             'change_password' => 'Change Password',
             'my_information' => 'My Information',
             'profile' => 'Profile',
+            'prescription' => [
+                'title_single'=>'Prescription',
+                'title_plural'=>'Prescriptions',
+                'take_a_picture_of_your' => 'Take a picture of your prescription',
+                'field_lable' => 'Upload or take a picture',
+
+            ],
+            
         ],
     ],
 ];

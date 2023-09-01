@@ -17,4 +17,5 @@ class DashboardController extends Controller
         //return '<h2>You are logedin successfully!</h2>';
         return view('frontend.user.dashboard');
     }
+    
 }

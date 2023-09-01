@@ -274,6 +274,9 @@ return [
             'otp' => 'OTP',
             'gender' => 'Gender',
             'date_of_birth' => 'Date of Birth',
+            'prescription' => [
+                'field_lable' => 'Upload or take a picture',
+            ],
         ],
     ],
 ];
