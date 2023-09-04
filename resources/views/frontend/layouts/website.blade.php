@@ -30,8 +30,8 @@
            
         @include('includes.partials.read-only')
        
-
-        @if(Route::currentRouteName() == 'frontend.auth.new.login' )
+    
+        @if(Route::currentRouteName() == 'frontend.auth.new.login'  || Route::currentRouteName() == 'frontend.index'  )
         
         @else
             @include('frontend.navbar.header')
@@ -39,7 +39,7 @@
        
         <main>
             @yield('content')
-            @if(Route::currentRouteName() == 'frontend.auth.new.login' )
+            @if(Route::currentRouteName() == 'frontend.auth.new.login' || Route::currentRouteName() == 'frontend.index' )
             @else
                 @include('frontend.navbar.footer')
             @endif 

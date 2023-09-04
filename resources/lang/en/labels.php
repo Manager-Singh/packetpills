@@ -364,6 +364,7 @@ return [
             'remember_me' => 'Remember Me',
             "get_started" => 'Get started',
             "otp_verfied" => 'OTP Verfied',
+            "next" => 'Next',
         ],
 
         'contact' => [
