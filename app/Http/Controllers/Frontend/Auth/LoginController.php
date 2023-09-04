@@ -246,7 +246,7 @@ class LoginController extends Controller
         }
         catch (Exception $e){
 
-        //    dd($e);
+           dd($e);
             return json_encode(['error' => 1, 'message' => $e]);
       //  echo "Error: " . $e->getMessage();
         }
