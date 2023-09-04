@@ -175,29 +175,29 @@ class LoginController extends Controller
 
     public function send_otp(Request $request)
     {
-        $isexist = User::where('mobile_no',$request->mobile_no)->where('status','verified')->first();
+        $isexist = User::where('mobile_no',$request->mobile_no)->first();
+        $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','verified')->first();
 
         $otp = generateOTP();
         try{
-        if($isexist){
+        if($isexist && $otp_verified){
             return json_encode(['error' => 0,'status'=>'exist', 'message' => 'User Already Exist','route'=>'/account/login']);
 
 
             }else{
-                $serotp = User::where('mobile_no',$request->mobile_no)->where('status','unverified')->first();
-
-                if($serotp){
-                     $serotp->user_id = $isexist->id;
-                    $serotp->otp = $otp;
-                    if($serotp->save()){
-                        $this->sendSms($request,$otp);
-                        return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$serotp->otp]);
-                    }else{
-                        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
-                    }
+                $serotp = User::where('mobile_no',$request->mobile_no)->first();
+                $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','unverified')->first();
+                if($serotp && $otp_verified){
+                    $otp_verified->user_id = $serotp->id;
+                $otp_verified->otp = $otp;
+                if($otp_verified->save()){
+                    $this->sendSms($request,$otp);
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$serotp->otp]);
+                }else{
+                    return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+                }
                 }
 
-               // return json_encode(['error' => 0, 'message' => 'Signup First','route'=>'signup','mobile_no'=>$request->mobile_no]);
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
