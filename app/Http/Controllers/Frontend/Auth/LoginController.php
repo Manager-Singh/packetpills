@@ -189,11 +189,12 @@ class LoginController extends Controller
                 if(!$otp_unverified){
                     $otp_unverified = new UserOtp();
                 }
-                $otp_verified->user_id = $isexist->id;
-                $otp_verified->otp = $otp;
-                if($otp_verified->save()){
+               // dd($isexist->id);
+                $otp_unverified->user_id = $isexist->id;
+                $otp_unverified->otp = $otp;
+                if($otp_unverified->save()){
                     $this->sendSms($request,$otp);
-                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_verified->otp]);
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
                 }else{
                     return json_encode(['error' => 1, 'message' => 'Something went wrong']);
                 }
