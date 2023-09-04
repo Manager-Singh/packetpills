@@ -169,14 +169,19 @@
                       success: function(response) {
                         response = JSON.parse(response);
                               console.log(response.otp);
-                              if (response.error) {
+                              if (response.error == 0 && response.status == 'exist' ) {
+                                location.href = response.route;
                                 
                               }
+                              if (response.error == 1  ) {
+                                
                               $('.otp-box').show(); 
                               
                               $('.genrated-otp').text(response.otp); 
                               $('.request-otp').hide(); 
                               $('.register-submit').show(); 
+                                
+                            }
                                                          
                           }
                       });
