@@ -1,7 +1,16 @@
 
 <div class="hero hero--desktop hero--exp-2"
     style="background-size: auto 140%;background-position: center center;padding-bottom: 0;min-height: 100vh;background-repeat: no-repeat; background-image: url({{asset('website/assets/images/bg-signup-modal.webp')}});">
+
     <div class="landing-wrapper margin-t-xl">
+    <div  class="row align-items-center">
+        <div class="col-md-2">1</div>
+        <div class="col-md-8 text-center"><a href="#">
+                    <img  alt="" height="90" class="pp-logo__default" src="{{asset('website/assets/images/logo-removebg.png')}}">
+                </a></div>
+        <div class="col-md-2">3</div>
+    </div>
+      
         <div class="content-exp2">
             <div>
                 <h1 class="hero__heading color-brand font-bold txt-c"> You're almost there! </h1>
@@ -18,7 +27,6 @@
                             <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Hi, Alexandre</p>
                             <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand"> Welcome back!</p><a href="{{route('frontend.user.account')}}"><button _ngcontent-serverapp-c48="" type="submit" class="btn btn--brand txt-defaultcase"><span _ngcontent-serverapp-c48="" translate="" class="button__label txt-defaultcase">Go to dashboard</span><i class="fa fa-angle-arrow-right" aria-hidden="true"></i></button></a>
                         @else
-
                         <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Simply sign in to
                             join over 300,000 satisfied members:</p>
 
@@ -112,6 +120,16 @@
 
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="text-center">
+                                        @include('frontend.auth.includes.socialite')
+                                        <p><b>Prefer to sign up over the phone?</b></p>
+                                        <p>Our care team can't wait to take your call!</p>
+                                        <button type="button" class="btn btn-outline-primary"><i class="fas fa-headset"></i> 1-855-774-0104</button>
+                                    </div>
+                                </div><!--col-->
+                            </div><!--row-->
                         </div>
                     </div>
 
