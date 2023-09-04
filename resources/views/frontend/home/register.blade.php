@@ -1,19 +1,22 @@
 
 <div class="hero hero--desktop hero--exp-2"
-    style="background-size: auto 140%;background-position: center center;padding-bottom: 0;min-height: 100vh;background-repeat: no-repeat; background-image: url({{asset('website/assets/images/bg-signup-modal.webp')}});">
+    style="background-size: auto 125%;background-position: center center;padding: 0;min-height: 100vh;background-repeat: no-repeat; background-image: url({{asset('website/assets/images/bg-signup-modal.webp')}});">
 
     <div class="landing-wrapper margin-t-xl">
-    <div  class="row align-items-center">
-        <div class="col-md-2">1</div>
-        <div class="col-md-8 text-center"><a href="#">
-                    <img  alt="" height="90" class="pp-logo__default" src="{{asset('website/assets/images/logo-removebg.png')}}">
-                </a></div>
-        <div class="col-md-2">3</div>
-    </div>
-       
+   
+        <div  class="row align-items-center">
+            <div class="col-md-2"><button type="button" class="btn btn-outline-primary"><i class="fas fa-chevron-left"></i></button></div>
+            <div class="col-md-7 text-center"><a href="#">
+                        <img  alt="" height="90" class="pp-logo__default" src="{{asset('website/assets/images/logo-removebg.png')}}">
+                    </a></div>
+            <div class="col-md-3" style="padding-left: 72px;">
+                <p class="paragraph color-white">Already a member?</p>
+                <a class="color-link h4 font-semibold is-clickable" href="#" bis_skin_checked="1">Sign In</a>
+            </div>
+        </div>    
         <div class="content-exp2">
             <div>
-                <h1 class="hero__heading color-brand font-bold txt-c"> You're almost there! </h1>
+                <h1 class="hero__heading color-brand font-bold txt-c"> You're almost<br> there! </h1>
                 
             </div>
 
@@ -28,10 +31,10 @@
                             <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand"> Welcome back!</p><a href="{{route('frontend.user.account')}}"><button _ngcontent-serverapp-c48="" type="submit" class="btn btn--brand txt-defaultcase"><span _ngcontent-serverapp-c48="" translate="" class="button__label txt-defaultcase">Go to dashboard</span><i class="fa fa-angle-arrow-right" aria-hidden="true"></i></button></a>
                         @else
                         <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Simply sign in to
-                            join over 300,000 satisfied members:</p>
+                            join <br> over 300,000 satisfied members:</p>
 
                         @endif
- 
+
 
 
                         <div class="row row--nogutters">
