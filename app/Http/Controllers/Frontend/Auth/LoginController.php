@@ -170,7 +170,7 @@ class LoginController extends Controller
 
         return redirect()->intended($this->redirectPath());
         }
-      
+
         return redirect("account/login")->withFlashDanger(__('exceptions.frontend.auth.password.wrong_password'));
     }
 
@@ -191,29 +191,30 @@ class LoginController extends Controller
                 return json_encode(['error' => 1, 'message' => 'Something went wrong']);
             }
             }else{
-        $user = new User();
-        $user->password = Hash::make($request->mobile_no);
-        $user->mobile_no = $request->mobile_no;
-        $user->avatar_type = 'storage';
-        $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
-        if($user->save()){
-            
-            $user->attachRole(3);
-            $permissions = $user->roles->first()->permissions->pluck('id');
-            $user->permissions()->sync($permissions);
-            $userotp = new UserOtp();
-            $userotp->user_id = $user->id;
-            $userotp->otp = $otp;
-            if($userotp->save()){
-                $this->sendSms($request,$otp);
-                return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
-            }else{
-                return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+                return json_encode(['error' => 0, 'message' => 'Signup First','route'=>'signup','mobile_no'=>$request->mobile_no]);
+        // $user = new User();
+        // $user->password = Hash::make($request->mobile_no);
+        // $user->mobile_no = $request->mobile_no;
+        // $user->avatar_type = 'storage';
+        // $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
+        // if($user->save()){
 
-            }
+        //     $user->attachRole(3);
+        //     $permissions = $user->roles->first()->permissions->pluck('id');
+        //     $user->permissions()->sync($permissions);
+        //     $userotp = new UserOtp();
+        //     $userotp->user_id = $user->id;
+        //     $userotp->otp = $otp;
+        //     if($userotp->save()){
+        //         $this->sendSms($request,$otp);
+        //         return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+        //     }else{
+        //         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+
+        //     }
 
 
-        }
+       // }
         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
         }
     }catch(\Exception $e){
@@ -226,7 +227,7 @@ class LoginController extends Controller
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         try{
             $client = new Client(['auth' => [$accountSid, $authToken]]);
-            
+
             $result = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
             ['form_params' => [
             'Body' => 'CODE: '. $otp, //set message body
