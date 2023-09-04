@@ -185,43 +185,43 @@ class LoginController extends Controller
 
             }else{
 
-                $serotp = UserOtp::where('user_id',$isexist->id)->first();
-                if(!$serotp){
-                    $serotp = new UserOtp();
-                }
-                $serotp->user_id = $isexist->id;
-                $serotp->otp = $otp;
-                if($serotp->save()){
-                    $this->sendSms($request,$otp);
-                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$serotp->otp]);
-                }else{
-                    return json_encode(['error' => 1, 'message' => 'Something went wrong']);
-                }
+                // $serotp = UserOtp::where('user_id',$isexist->id)->first();
+                // if(!$serotp){
+                //     $serotp = new UserOtp();
+                // }
+                // $serotp->user_id = $isexist->id;
+                // $serotp->otp = $otp;
+                // if($serotp->save()){
+                //     $this->sendSms($request,$otp);
+                //     return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$serotp->otp]);
+                // }else{
+                //     return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+                // }
                // return json_encode(['error' => 0, 'message' => 'Signup First','route'=>'signup','mobile_no'=>$request->mobile_no]);
-        // $user = new User();
-        // $user->password = Hash::make($request->mobile_no);
-        // $user->mobile_no = $request->mobile_no;
-        // $user->avatar_type = 'storage';
-        // $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
-        // if($user->save()){
+        $user = new User();
+        $user->password = Hash::make($request->mobile_no);
+        $user->mobile_no = $request->mobile_no;
+        $user->avatar_type = 'storage';
+        $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
+        if($user->save()){
 
-        //     $user->attachRole(3);
-        //     $permissions = $user->roles->first()->permissions->pluck('id');
-        //     $user->permissions()->sync($permissions);
-        //     $userotp = new UserOtp();
-        //     $userotp->user_id = $user->id;
-        //     $userotp->otp = $otp;
-        //     if($userotp->save()){
-        //         $this->sendSms($request,$otp);
-        //         return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
-        //     }else{
-        //         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+            $user->attachRole(3);
+            $permissions = $user->roles->first()->permissions->pluck('id');
+            $user->permissions()->sync($permissions);
+            $userotp = new UserOtp();
+            $userotp->user_id = $user->id;
+            $userotp->otp = $otp;
+            if($userotp->save()){
+                $this->sendSms($request,$otp);
+                return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+            }else{
+                return json_encode(['error' => 1, 'message' => 'Something went wrong']);
 
-        //     }
+            }
 
 
-       // }
-       // return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+       }
+        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
         }
     }catch(Exception $e){
         dd($e);
