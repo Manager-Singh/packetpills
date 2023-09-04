@@ -15,9 +15,8 @@ use App\Models\UserOtp;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
-use Twilio\Jwt\ClientToken;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Client;
+use Exception;
+use Twilio\Rest\Client;
 /**
  * Class LoginController.
  */
@@ -215,9 +214,10 @@ class LoginController extends Controller
 
 
        // }
-        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+       // return json_encode(['error' => 1, 'message' => 'Something went wrong']);
         }
-    }catch(\Exception $e){
+    }catch(Exception $e){
+        dd($e);
         return json_encode(['error' => 1, 'message' => $e]);
     }
     }
@@ -226,15 +226,20 @@ class LoginController extends Controller
         $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         try{
-            $client = new Client(['auth' => [$accountSid, $authToken]]);
+            // $client = new Client(['auth' => [$accountSid, $authToken]]);
 
-            $result = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
-            ['form_params' => [
-            'Body' => 'CODE: '. $otp, //set message body
-            'To' => $request->mobile_no,
-            'From' => '+16475034144' //we get this number from twilio
-            ]]);
+            // $result = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
+            // ['form_params' => [
+            // 'Body' => 'CODE: '. $otp, //set message body
+            // 'To' => $request->mobile_no,
+            // 'From' => '+16475034144' //we get this number from twilio
+            // ]]);
             //return $result;
+
+            $client = new Client($accountSid, $authToken);
+            $client->messages->create($request->mobile_no, [
+                'from' => +16475034144,
+                'body' => 'CODE: '. $otp]);
         }
         catch (Exception $e){
         echo "Error: " . $e->getMessage();
