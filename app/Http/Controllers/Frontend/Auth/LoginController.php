@@ -181,6 +181,9 @@ class LoginController extends Controller
         try{
         if($isexist){
             $serotp = UserOtp::where('user_id',$isexist->id)->first();
+            if(!$serotp){
+                $serotp = new UserOtp();
+            }
             $serotp->user_id = $isexist->id;
             $serotp->otp = $otp;
             if($serotp->save()){
