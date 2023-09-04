@@ -244,11 +244,11 @@ class LoginController extends Controller
                 'from' => +16475034144,
                 'body' => 'CODE: '. $otp]);
 
-                dd($message);
+                // dd($message);
         }
         catch (Exception $e){
 
-           dd($e);
+        //    dd($e);
             return json_encode(['error' => 1, 'message' => $e]);
       //  echo "Error: " . $e->getMessage();
         }
