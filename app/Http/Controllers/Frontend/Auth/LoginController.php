@@ -176,28 +176,32 @@ class LoginController extends Controller
     public function send_otp(Request $request)
     {
         $isexist = User::where('mobile_no',$request->mobile_no)->first();
-        $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','verified')->first();
+
 
         $otp = generateOTP();
         try{
-        if($isexist && $otp_verified){
-            return json_encode(['error' => 0,'status'=>'exist', 'message' => 'User Already Exist','route'=>'/account/login']);
-
-
+        if($isexist){
+            $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','verified')->first();
+            if($otp_verified){
+                return json_encode(['error' => 0,'status'=>'exist', 'message' => 'User Already Exist','route'=>'/account/login']);
             }else{
-                $serotp = User::where('mobile_no',$request->mobile_no)->first();
-                $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','unverified')->first();
-                if($serotp && $otp_verified){
-                    $otp_verified->user_id = $serotp->id;
+                $otp_unverified = UserOtp::where('user_id',$isexist->id)->where('status','unverified')->first();
+                if(!$otp_unverified){
+                    $otp_unverified = new UserOtp();
+                }
+                $otp_verified->user_id = $isexist->id;
                 $otp_verified->otp = $otp;
                 if($otp_verified->save()){
                     $this->sendSms($request,$otp);
-                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$serotp->otp]);
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_verified->otp]);
                 }else{
                     return json_encode(['error' => 1, 'message' => 'Something went wrong']);
                 }
-                }
 
+            }
+
+
+            }else{
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
