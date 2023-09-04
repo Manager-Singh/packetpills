@@ -240,13 +240,15 @@ class LoginController extends Controller
             //return $result;
 
             $client = new Client($accountSid, $authToken);
-            $client->messages->create($request->mobile_no, [
+           $message = $client->messages->create($request->mobile_no, [
                 'from' => +16475034144,
                 'body' => 'CODE: '. $otp]);
+
+                // dd($message);
         }
         catch (Exception $e){
 
-           dd($e);
+        //    dd($e);
             return json_encode(['error' => 1, 'message' => $e]);
       //  echo "Error: " . $e->getMessage();
         }
