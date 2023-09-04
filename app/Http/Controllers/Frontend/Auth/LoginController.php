@@ -245,7 +245,10 @@ class LoginController extends Controller
                 'body' => 'CODE: '. $otp]);
         }
         catch (Exception $e){
-        echo "Error: " . $e->getMessage();
+
+        //    dd($e);
+            return json_encode(['error' => 1, 'message' => $e]);
+      //  echo "Error: " . $e->getMessage();
         }
     }
     public function verify_otp(Request $request)
