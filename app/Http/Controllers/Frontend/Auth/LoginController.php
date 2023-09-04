@@ -180,20 +180,24 @@ class LoginController extends Controller
         $otp = generateOTP();
         try{
         if($isexist){
-            $serotp = UserOtp::where('user_id',$isexist->id)->first();
-            if(!$serotp){
-                $serotp = new UserOtp();
-            }
-            $serotp->user_id = $isexist->id;
-            $serotp->otp = $otp;
-            if($serotp->save()){
-                $this->sendSms($request,$otp);
-                return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$serotp->otp]);
+            return json_encode(['error' => 0,'status'=>'exist', 'message' => 'User Already Exist','route'=>'/account/login']);
+
+
             }else{
-                return json_encode(['error' => 1, 'message' => 'Something went wrong']);
-            }
-            }else{
-                return json_encode(['error' => 0, 'message' => 'Signup First','route'=>'signup','mobile_no'=>$request->mobile_no]);
+
+                $serotp = UserOtp::where('user_id',$isexist->id)->first();
+                if(!$serotp){
+                    $serotp = new UserOtp();
+                }
+                $serotp->user_id = $isexist->id;
+                $serotp->otp = $otp;
+                if($serotp->save()){
+                    $this->sendSms($request,$otp);
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$serotp->otp]);
+                }else{
+                    return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+                }
+               // return json_encode(['error' => 0, 'message' => 'Signup First','route'=>'signup','mobile_no'=>$request->mobile_no]);
         // $user = new User();
         // $user->password = Hash::make($request->mobile_no);
         // $user->mobile_no = $request->mobile_no;
