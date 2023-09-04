@@ -15,9 +15,8 @@ use App\Models\UserOtp;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
-use Twilio\Jwt\ClientToken;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Client;
+use Exception;
+use Twilio\Rest\Client;
 /**
  * Class LoginController.
  */
@@ -170,7 +169,7 @@ class LoginController extends Controller
 
         return redirect()->intended($this->redirectPath());
         }
-      
+
         return redirect("account/login")->withFlashDanger(__('exceptions.frontend.auth.password.wrong_password'));
     }
 
@@ -182,6 +181,9 @@ class LoginController extends Controller
         try{
         if($isexist){
             $serotp = UserOtp::where('user_id',$isexist->id)->first();
+            if(!$serotp){
+                $serotp = new UserOtp();
+            }
             $serotp->user_id = $isexist->id;
             $serotp->otp = $otp;
             if($serotp->save()){
@@ -191,32 +193,34 @@ class LoginController extends Controller
                 return json_encode(['error' => 1, 'message' => 'Something went wrong']);
             }
             }else{
-        $user = new User();
-        $user->password = Hash::make($request->mobile_no);
-        $user->mobile_no = $request->mobile_no;
-        $user->avatar_type = 'storage';
-        $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
-        if($user->save()){
-            
-            $user->attachRole(3);
-            $permissions = $user->roles->first()->permissions->pluck('id');
-            $user->permissions()->sync($permissions);
-            $userotp = new UserOtp();
-            $userotp->user_id = $user->id;
-            $userotp->otp = $otp;
-            if($userotp->save()){
-                $this->sendSms($request,$otp);
-                return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
-            }else{
-                return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+                return json_encode(['error' => 0, 'message' => 'Signup First','route'=>'signup','mobile_no'=>$request->mobile_no]);
+        // $user = new User();
+        // $user->password = Hash::make($request->mobile_no);
+        // $user->mobile_no = $request->mobile_no;
+        // $user->avatar_type = 'storage';
+        // $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
+        // if($user->save()){
 
-            }
+        //     $user->attachRole(3);
+        //     $permissions = $user->roles->first()->permissions->pluck('id');
+        //     $user->permissions()->sync($permissions);
+        //     $userotp = new UserOtp();
+        //     $userotp->user_id = $user->id;
+        //     $userotp->otp = $otp;
+        //     if($userotp->save()){
+        //         $this->sendSms($request,$otp);
+        //         return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+        //     }else{
+        //         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+
+        //     }
 
 
+       // }
+       // return json_encode(['error' => 1, 'message' => 'Something went wrong']);
         }
-        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
-        }
-    }catch(\Exception $e){
+    }catch(Exception $e){
+        dd($e);
         return json_encode(['error' => 1, 'message' => $e]);
     }
     }
@@ -225,18 +229,26 @@ class LoginController extends Controller
         $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         try{
-            $client = new Client(['auth' => [$accountSid, $authToken]]);
-            
-            $result = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
-            ['form_params' => [
-            'Body' => 'CODE: '. $otp, //set message body
-            'To' => $request->mobile_no,
-            'From' => '+16475034144' //we get this number from twilio
-            ]]);
+            // $client = new Client(['auth' => [$accountSid, $authToken]]);
+
+            // $result = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
+            // ['form_params' => [
+            // 'Body' => 'CODE: '. $otp, //set message body
+            // 'To' => $request->mobile_no,
+            // 'From' => '+16475034144' //we get this number from twilio
+            // ]]);
             //return $result;
+
+            $client = new Client($accountSid, $authToken);
+            $client->messages->create($request->mobile_no, [
+                'from' => +16475034144,
+                'body' => 'CODE: '. $otp]);
         }
         catch (Exception $e){
-        echo "Error: " . $e->getMessage();
+
+           dd($e);
+            return json_encode(['error' => 1, 'message' => $e]);
+      //  echo "Error: " . $e->getMessage();
         }
     }
     public function verify_otp(Request $request)
