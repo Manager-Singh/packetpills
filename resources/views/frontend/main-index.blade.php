@@ -6,7 +6,7 @@
 <div class="registration-home" style="background: #54c7da;">
 
     @include('frontend.home.register')
-    {{generateOTP()}}
-</div>
+    <!-- {{generateOTP()}} -->
+</div> 
   
 @endsection
