@@ -205,7 +205,7 @@
                               if (response.error) {
                                 
                               }
-                              window.location.reload();
+                             // window.location.reload();
                               $('.otp-box').show(); 
                               
                               $('.genrated-otp').text(response.otp); 
