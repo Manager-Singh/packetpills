@@ -275,7 +275,7 @@ class LoginController extends Controller
                     $user->save();
                     Auth::loginUsingId($user_otp->user_id);
                     // return redirect()->route('frontend.index');
-                    return json_encode(['error' => 0, 'message' => 'Login Successfully','route'=>'dashboard']);
+                    return json_encode(['error' => 0, 'message' => 'Login Successfully','profile_step'=>$user->profile_step]);
                 }
             }else{
                 return json_encode(['error' => 1, 'message' => 'Otp not match']);
