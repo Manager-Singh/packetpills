@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\Auth\RegisterController;
 use App\Http\Controllers\Frontend\Auth\ResetPasswordController;
 use App\Http\Controllers\Frontend\Auth\SocialLoginController;
 use App\Http\Controllers\Frontend\Auth\UpdatePasswordController;
+use App\Http\Controllers\Frontend\User\DashboardController;
 
 /*
  * Frontend Access Controllers
@@ -27,6 +28,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         // Password expired routes
         Route::get('account/password/expired', [PasswordExpiredController::class, 'expired'])->name('password.expired');
         Route::patch('account/password/expired', [PasswordExpiredController::class, 'update'])->name('password.expired.update');
+        Route::get('account/service-selection', [DashboardController::class, 'serviceSelection'])->name('service.selection');
     });
 
     // These routes require no user to be logged in
@@ -38,6 +40,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::post('account/send-otp', [LoginController::class, 'send_otp'])->name('send.otp');
         Route::post('account/verify-otp', [LoginController::class, 'verify_otp'])->name('verify.otp');
 
+        
         // Socialite Routes
         Route::get('account/login/{provider}', [SocialLoginController::class, 'login'])->name('social.login');
         Route::get('account/login/{provider}/callback', [SocialLoginController::class, 'login']);

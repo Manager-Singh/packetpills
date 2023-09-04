@@ -202,8 +202,8 @@
                         console.log(response.link);
                         response = JSON.parse(response);
                               console.log(response);
-                              if (response.error) {
-                                
+                              if (response.profile_step == 0) {
+                                location.href = "{{route('frontend.auth.service.selection')}}";
                               }
                              // window.location.reload();
                               $('.otp-box').show(); 

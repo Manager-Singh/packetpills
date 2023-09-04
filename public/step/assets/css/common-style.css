@@ -1,0 +1,161 @@
+body {
+transition: opacity ease-in 0.2s;
+}
+header {
+    text-align: center;
+    box-shadow: 0px 2px 4px 2px #ccc;
+    padding: 10px;
+}
+img.header-logo {
+    width: 200px;
+}
+img.header-icon {
+    position: absolute;
+    left: 100px;
+    top: 30px;
+}
+img.user-img {
+    width: 100px;
+    border: 5px solid #ccc;
+    border-radius: 50%;
+    margin-bottom: 25px;
+}
+p.bold-txt {
+    font-size: 22px;
+    color: #212843;
+    font-weight: 700;
+    margin-top: 30px;
+}
+p.txt {
+    font-size: 17px;
+    color: #62739c;
+}
+input, select {
+    width: 100%;
+    height: 50px;
+    border-radius: 6px;
+    border: 2px solid #212843 !important;
+}
+label {
+    margin: 30px 0px 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #212843;
+}
+p.info {
+    margin: 0px 0px 10px;
+    font-size: 15px;
+    color: #62739c;
+}
+span.dob input {
+    width: auto;
+    margin-right: 13px;
+    padding: 10px 20px;
+    text-align: center;
+}
+span.dob {
+    display: flex;
+}
+p.info-bold {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: #212843;
+}
+.next.button {
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    margin-top: 40px;
+    border-radius: 40px;
+    color: #fff;
+    background: #212843;
+    border-bottom: #212843;
+}
+select#province {
+    font-size: 22px;
+    padding-left: 15px;
+    font-weight: 600;
+}
+.gender-div {
+    display: flex;
+}
+span.gender {
+    width: auto;
+    display: flex;
+    border: 2px solid #212843;
+    margin-right: 20px;
+    border-radius: 6px;
+    padding: 0px 20px;
+    text-align: center;
+    align-items: center;
+}
+span.gender input {
+    width: 18px;
+}
+span.gender label {
+    margin: 0px 0px 0px 10px;
+}
+.card-body {
+    background: #dae2f7;
+}
+.icon.icon-primary {
+    margin-right: 25px;
+}
+.icon.icon-primary i {
+    font-size: 40px;
+    padding: 14px;
+    background: #c1cbe5;
+    color: #62739c;
+    border-radius: 8px;
+}
+.card-body p {
+    margin: 0px;
+}
+.card h5, .card p, .card a {
+    color: #212843;
+    text-decoration: none !important;
+    border: none !important;
+}
+p.reshare {
+    position: absolute;
+    top: 75px;
+    right: 22px;
+    color: #212843;
+}
+.verify {
+    position: relative;
+}
+p.reshare a {
+    color: #212843;
+    text-decoration: none;
+    font-size: 16px;
+}
+.upload {
+    border: 2px dotted #212843 !important;
+    height: 170px;
+    position: relative;
+}
+input#myFile {
+    opacity: 0;
+    height: 170px;
+    z-index: 999;
+    position: relative;
+}
+.upload label {
+    position: absolute;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    z-index: 0;
+}
+.user-info .fa {
+    font-size: 156px;
+    color: #212843;
+}
+.txt-large {
+    font-size: 37px;
+    font-weight: 700;
+    margin-top: 20px;
+    color: #212843;
+}
