@@ -11,7 +11,7 @@
                     </a></div>
             <div class="col-md-3" style="padding-left: 72px;">
                 <p class="paragraph color-white">Already a member?</p>
-                <a class="color-link h4 font-semibold is-clickable" href="#" bis_skin_checked="1">Sign In</a>
+                <a class="color-link h4 font-semibold is-clickable" href="{{route('frontend.auth.new.login')}}" bis_skin_checked="1">Sign In</a>
             </div>
         </div>    
         <div class="content-exp2">

@@ -131,7 +131,7 @@
                 <div class="col">
                     <div class="form-group margin-reset-t">
                         <button type="button" keyname="login.all.sign-up-instead"
-                            class="btn btn--small color-link txt-defaultcase"> Don't have an account? Sign up instead
+                            class="btn btn--small color-link txt-defaultcase"> Don't have an account? <a href="{{route('frontend.index')}}" >Sign up instead</a>
                         </button>
                     </div>
                 </div>
