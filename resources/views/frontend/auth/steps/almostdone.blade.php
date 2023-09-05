@@ -14,11 +14,12 @@
         </div>
         <div class="col-md-6">
 
-            <form name="myForm" action="/action_page.php" method="get">
+            <form name="myForm" action="{{route('frontend.auth.step.almostdone.submit')}}" method="post">
+                @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <label for="fname">Province</label>
-                        <select name="city" id="province">
+                        <select name="province" id="province">
                             <option value="">Ontario</option>
                             <option value="">Ontario2</option>
                             <option value="">Ontario3</option>
@@ -49,7 +50,7 @@
                         <p class="info">To send updates about your order.</p>
                     </div>
                 </div>
-                <a type="button" href="{{route('frontend.auth.step.create.password')}}" class="next button" onclick="" >Next</a>
+                <button type="submit" class="next button">Next</button>
             </form>
 
 

@@ -57,18 +57,42 @@ class UserRepository extends BaseRepository
      */
     public function update(User $user, array $input, $image = false)
     {
-        $user->first_name = $input['first_name'];
-        $user->last_name = $input['last_name'];
-        $user->avatar_type = $input['avatar_type'];
-        $user->date_of_birth = $input['date_of_birth'];
-        $user->gender = $input['gender'];
-        $user->is_profile_status ='completed';
+        // dd($input);
+
+        if(isset($input['first_name'])){
+            $user->first_name = $input['first_name'];
+        }
+        if(isset($input['last_name'])){
+            $user->last_name = $input['last_name'];
+        }
+        if(isset($input['avatar_type'])){
+            $user->avatar_type = $input['avatar_type'];
+        }
+        if(isset($input['date_of_birth'])){
+            $user->date_of_birth = $input['date_of_birth'];
+        }
+        if(isset($input['gender'])){
+            $user->gender = $input['gender'];
+        }
+        if(isset($input['is_profile_status'])){
+            $user->is_profile_status = $input['is_profile_status'];
+        }
+        if(isset($input['profile_step'])){
+            $user->profile_step = $input['profile_step'];
+        }
+        if(isset($input['email'])){
+            $user->email = $input['email'];
+        }
+
 
         // Upload profile image if necessary
         if ($image) {
             $user->avatar_location = $image->store('/avatars', 'public');
         } else {
             // No image being passed
+            if(isset($input['avatar_type'])){
+
+
             if ($input['avatar_type'] === 'storage') {
                 // If there is no existing image
                 if (auth()->user()->avatar_location === '') {
@@ -80,6 +104,9 @@ class UserRepository extends BaseRepository
                     Storage::disk('public')->delete(auth()->user()->avatar_location);
                 }
 
+                $user->avatar_location = null;
+            }
+            }else{
                 $user->avatar_location = null;
             }
         }

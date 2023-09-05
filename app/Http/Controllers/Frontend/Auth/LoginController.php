@@ -166,6 +166,9 @@ class LoginController extends Controller
         if (config('access.users.single_login')) {
             auth()->logoutOtherDevices($request->password);
         }
+        if($user->profile_step==0){
+            return redirect()->route('frontend.auth.service.selection');
+        }
 
         return redirect()->intended($this->redirectPath());
         }

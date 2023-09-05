@@ -33,7 +33,9 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::get('account/prescription', [DashboardController::class, 'prescription'])->name('step.prescription');
         Route::get('account/telehealth', [DashboardController::class, 'telehealth'])->name('step.telehealth');
         Route::get('account/personal', [DashboardController::class, 'personal'])->name('step.personal');
+        Route::post('account/personal', [DashboardController::class, 'personal_save'])->name('step.personal.submit');
         Route::get('account/almostdone', [DashboardController::class, 'almostdone'])->name('step.almostdone');
+        Route::post('account/almostdone', [DashboardController::class, 'almostdone_save'])->name('step.almostdone.submit');
         Route::get('account/create-password', [DashboardController::class, 'createPassword'])->name('step.create.password');
         Route::get('account/profile-completed', [DashboardController::class, 'profileCompleted'])->name('step.profile.completed');
     });
@@ -47,7 +49,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::post('account/send-otp', [LoginController::class, 'send_otp'])->name('send.otp');
         Route::post('account/verify-otp', [LoginController::class, 'verify_otp'])->name('verify.otp');
 
-        
+
         // Socialite Routes
         Route::get('account/login/{provider}', [SocialLoginController::class, 'login'])->name('social.login');
         Route::get('account/login/{provider}/callback', [SocialLoginController::class, 'login']);
