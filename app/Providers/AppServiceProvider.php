@@ -86,7 +86,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('langrtl', function ($session_identifier = 'lang-rtl') {
             return session()->has($session_identifier);
         });
-
         /*
          * Set the default string length for MySQL version below 5.7.7
          * @see https://laravel-news.com/laravel-5-4-key-too-long-error
@@ -98,12 +97,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-        view()->composer('*', function ($view) 
+        view()->composer('*', function ($view)
         {
-                
+
                 $data['drugs'] = Drug::get();
-                
+
                 $view->with($data);
-        });  
+        });
     }
 }
