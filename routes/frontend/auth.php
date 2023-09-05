@@ -29,6 +29,13 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::get('account/password/expired', [PasswordExpiredController::class, 'expired'])->name('password.expired');
         Route::patch('account/password/expired', [PasswordExpiredController::class, 'update'])->name('password.expired.update');
         Route::get('account/service-selection', [DashboardController::class, 'serviceSelection'])->name('service.selection');
+        Route::get('account/transfer', [DashboardController::class, 'stepTransfer'])->name('step.transfer');
+        Route::get('account/prescription', [DashboardController::class, 'prescription'])->name('step.prescription');
+        Route::get('account/telehealth', [DashboardController::class, 'telehealth'])->name('step.telehealth');
+        Route::get('account/personal', [DashboardController::class, 'personal'])->name('step.personal');
+        Route::get('account/almostdone', [DashboardController::class, 'almostdone'])->name('step.almostdone');
+        Route::get('account/create-password', [DashboardController::class, 'createPassword'])->name('step.create.password');
+        Route::get('account/profile-completed', [DashboardController::class, 'profileCompleted'])->name('step.profile.completed');
     });
 
     // These routes require no user to be logged in
