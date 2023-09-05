@@ -22,5 +22,26 @@ class DashboardController extends Controller
         //return '<h2>You are logedin successfully!</h2>';
         return view('frontend.auth.steps.service-selection');
     }
-    
+
+    public function stepTransfer(){
+        return view('frontend.auth.steps.transfer');
+    }
+    public function prescription(){
+        return view('frontend.auth.steps.prescription');
+    }
+    public function telehealth(){
+        return view('frontend.auth.steps.telehealth');
+    }
+    public function personal(){
+        return view('frontend.auth.steps.personal');
+    }
+    public function almostdone(){
+        return view('frontend.auth.steps.almostdone');
+    }
+    public function createPassword(){
+        return view('frontend.auth.steps.create-password');
+    }
+    public function profileCompleted(){
+        return view('frontend.auth.steps.profile-completed');
+    }
 }
