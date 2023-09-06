@@ -73,7 +73,7 @@ class DashboardController extends Controller
         // 'province'=>$request->province,
         $output = $this->userRepository->update(
             Auth::user(),
-            ['gender'=>$request->gender, 'email'=>$request->email,'profile_step'=>2],
+            ['gender'=>$request->gender, 'email'=>$request->email, 'province'=>$request->province,'profile_step'=>2],
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
@@ -87,6 +87,26 @@ class DashboardController extends Controller
     public function createPassword(){
         return view('frontend.auth.steps.create-password');
     }
+
+    public function createPassword_save(Request $request){
+
+        //dd($request->all());
+        // 'province'=>$request->province,
+        $output = $this->userRepository->update(
+            Auth::user(),
+            ['password'=>$request->password,'profile_step'=>3],
+            $request->has('avatar_location') ? $request->file('avatar_location') : false
+        );
+
+        if($output){
+            return redirect()->route('frontend.auth.step.profile.completed')->withFlashSuccess(__('Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+
+    }
+
+
     public function profileCompleted(){
         return view('frontend.auth.steps.profile-completed');
     }

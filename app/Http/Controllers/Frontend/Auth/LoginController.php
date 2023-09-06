@@ -39,6 +39,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        
         return view('frontend.auth.login');
     }
 
@@ -47,6 +48,25 @@ class LoginController extends Controller
      */
     public function showNewLoginForm()
     {
+    //     $otp = generateOTP();
+    //     $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
+    //     $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
+    //     try{
+            
+            
+    //         $client = new Client($accountSid, $authToken);
+    //        $message = $client->messages->create('4168170858', [
+    //             'from' => +16475034144,
+    //             'body' => 'CODE: '. $otp]);
+
+    //          dd($message);
+    //     }
+    //     catch (Exception $e){
+
+    //         dd($e);
+    //         return json_encode(['error' => 1, 'message' => $e]);
+    //   //  echo "Error: " . $e->getMessage();
+    //     }  
         return view('frontend.auth.new-login');
     }
 

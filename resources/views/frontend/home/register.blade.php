@@ -127,10 +127,7 @@
                                 <div class="col">
                                     <div class="text-center">
                                         @include('frontend.auth.includes.socialite')
-                                        <p><b>Prefer to sign up over the phone?</b></p>
-                                        <p>Our care team can't wait to take your call!</p>
-                                        <button type="button" class="btn btn-outline-primary"><i class="fas fa-headset"></i> 1-855-774-0104</button>
-                                    </div>
+                                      </div>
                                 </div><!--col-->
                             </div><!--row-->
                         </div>

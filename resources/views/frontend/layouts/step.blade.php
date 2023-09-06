@@ -38,12 +38,35 @@
       
            
         @include('includes.partials.read-only')
-       
+       @if(Route::currentRouteName() == 'frontend.user.dashboard')
+       <header class="header">
+      <div class="row dashboard" >
+        <div class="col-md-6">
+          <p class="user-ins">AM</p>
+          <p class="info">Viewing as</p>
+          <p class="user-name">Alexandre</p>
+        </div>
+        <div class="col-md-6 text-end">
+         <a href="#" class="profile-btn"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Member</a>
+        </div>
+      </div>  
+      <div class="row menu">
+        <ul>
+          <li><a href="#" class="active"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+          <li><a href="#"><i class="fa fa-medkit" aria-hidden="true"></i> Medication</a></li>
+          <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> Prescription</a></li>
+          <li><a href="#"><i class="fa fa-truck" aria-hidden="true"></i> Orders</a></li>
+        </ul>
+
+      </div>
+		  
+	  </header>
+      @else
         <header>
 		  <img class="header-icon" src="{{asset('step/assets/images/arrow.png')}}" />
 		  <img class="header-logo" src="{{asset('step/assets/images/logo-main.png')}}" />
 	  </header>
-        
+    @endif
        
         <main>
             @yield('content')

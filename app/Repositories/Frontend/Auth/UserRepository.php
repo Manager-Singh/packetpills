@@ -83,6 +83,12 @@ class UserRepository extends BaseRepository
         if(isset($input['email'])){
             $user->email = $input['email'];
         }
+        if(isset($input['password'])){
+            $user->password = $input['password'];
+        }
+        if(isset($input['province'])){
+            $user->province = $input['province'];
+        }
 
 
         // Upload profile image if necessary

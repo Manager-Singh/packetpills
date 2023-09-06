@@ -37,6 +37,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::get('account/almostdone', [DashboardController::class, 'almostdone'])->name('step.almostdone');
         Route::post('account/almostdone', [DashboardController::class, 'almostdone_save'])->name('step.almostdone.submit');
         Route::get('account/create-password', [DashboardController::class, 'createPassword'])->name('step.create.password');
+        Route::post('account/create-password/save', [DashboardController::class, 'createPassword_save'])->name('step.create.password.save');
         Route::get('account/profile-completed', [DashboardController::class, 'profileCompleted'])->name('step.profile.completed');
     });
 

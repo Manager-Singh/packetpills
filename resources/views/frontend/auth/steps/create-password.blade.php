@@ -16,23 +16,24 @@
         </div>
         <div class="col-md-6">
 
-            <form name="myForm" action="/action_page.php" method="get">
+            <form name="myForm" action="{{route('frontend.auth.step.create.password.save')}}" method="post">
                 <div class="row">
-                    
+                @csrf
                     <div class="col-md-12 verify">
                         <label for="lname">Choose a Password</label>
-                        <input type="number" name="password" placeholder="" />
+                        <input type="text" id="password" name="password" placeholder="" />
                         <p class="reshare"> <a href="">Show</a></p>
                         <p class="info">Please enter 8 or more characters</p>
                     </div>
                     <div class="col-md-12 verify">
                         <label for="lname">Confirm Password</label>
-                        <input type="number" name="confirm_password" placeholder="" />
+                        <input type="text" id="confirm_password" name="confirm_password" placeholder="" />
                         <p class="reshare"> <a href="">Show</a></p>
                         <p class="info">Please enter 8 or more characters</p>
+                        <p class="info"><span id='message'></span></p>
                     </div>
                 </div>
-                <a type="button" href="{{route('frontend.auth.step.profile.completed')}}" class="next button" onclick="" >Next</a>
+                <button type="submit" class="next button submit-passowrd">Next</button>
 
             </form>
 
@@ -45,6 +46,20 @@
 @endsection
 
 @push('after-scripts')
+<script>
+    $('#password, #confirm_password').on('keyup', function () {
+        
+        if ($('#password').val() == $('#confirm_password').val()) {
+            $('.submit-passowrd').prop('disabled', false);
+            $('#message').html('Matching').css('color', 'green');
+        } else {
+            $('.submit-passowrd').prop('disabled', true);
+            $('#message').html('Not Matching').css('color', 'red');
+
+        }
+    });
+</script>
+
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif

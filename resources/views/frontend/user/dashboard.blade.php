@@ -1,40 +1,106 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.step')
 
-@section('title', app_name() . ' | ' . __('navs.frontend.dashboard') )
+@section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 
 @section('content')
-    <div class="row mb-4">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <strong>
-                        <i class="fas fa-tachometer-alt"></i> @lang('navs.frontend.dashboard')
-                    </strong>
-                </div><!--card-header-->
+<div class="container mb-5 mt-5">
+		    	<div class="row bg-light">
+              <div class="col-md-8">
+                <div class="med-info">                    
+                    <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                    <p class="txt">Welcome latest design trends Designed </p>
+                  
+                </div>
+              </div>  
+              <div class="col-md-4 text-end">
+                    <a href="#" class="info-btn">Request Refill</a>
+            
+              </div> 
+          </div>
 
-                <div class="card-body">
-                    <div class="row">
-                        
+          <p class="bold-txt mt-5">What would you like to do?</p>
+          <div class="row">
+            
+            <div class="col-md-3">
+              <div class="med-info bg-light"> 
+                   <p><i class="fa fa-exchange" aria-hidden="true"></i></p>                   
+                  <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                  
+              </div>
+            </div>  
+            <div class="col-md-3">
+              <div class="med-info bg-light">
+                <p><i class="fa fa-list" aria-hidden="true"></i></p> 
+                <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+              </div>
+            </div> 
+            <div class="col-md-3">
+              <div class="med-info bg-light">  
+                <p><i class="fa fa-search" aria-hidden="true"></i></p>                   
+                  <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                  
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="med-info bg-light">   
+                <p><i class="fa fa-plus-square" aria-hidden="true"></i></p>                  
+                  <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                 
+              </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <div class="bg-light">
+                <div class="med-info">                    
+                    <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                    <p class="txt">Welcome latest design trends Designed </p>
+ 
+              </div>  
+          </div>
+            </div>
+            <div class="col-md-6">
+              <div class="bg-light">
+                <div class="med-info">                    
+                    <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                    <p class="txt">Welcome latest design trends Designed </p>
+ 
+              </div>  
+          </div>
+            </div>
+          </div>
 
-                        <div class="col-md-12 order-2 order-sm-1">
-                            <div class="row">
-                                <div class="col">
-                                    <nav class="navbar navbar-light bg-light">
-                                        <form class="form-inline">
-                                            <a href="http://127.0.0.1:8000/dashboard"><button class="btn  btn-outline-secondary" type="button">Prescriptions</button></a>
-                                            
-                                        </form>
-                                    </nav>
-                                </div><!--col-md-6-->
-                            </div><!--row-->
+          <p class="txt mt-5"><strong>OFFERS FOR YOU</strong></p>
+          <div class="row bg-light">
 
-                            
+                  <div class="med-info">                    
+                      <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                      <p class="txt">Welcome latest design trends Designed </p>
+   
 
-                            
-                        </div><!--col-md-8-->
-                    </div><!-- row -->
-                </div> <!-- card-body -->
-            </div><!-- card -->
-        </div><!-- row -->
-    </div><!-- row -->
+              </div>
+       
+            </div>
+
+            <p class="txt mt-5"><strong>RECENT MEDICATIONS</strong></p>
+          <div class="row">
+
+              <div class="bg-light">
+                  <div class="med-info">                    
+                      <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                      <p class="txt">Welcome latest design trends Designed </p>
+   
+                </div>  
+
+              </div>
+       
+            </div>
+			
+			</div>
 @endsection
+
+@push('after-scripts')
+@if(config('access.captcha.login'))
+@captchaScripts
+@endif
+@endpush

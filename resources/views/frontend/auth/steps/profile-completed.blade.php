@@ -47,19 +47,23 @@
                 </div>
             </div>
             <div class="card border-light text-left p-1 p-md-4 mb-4">
-                <div class="card-body">
-                    <div class="d-flex px-1 px-md-3">
-                        <div>
-                            <div class="icon icon-primary"><i class="fa fa-th-large" aria-hidden="true"></i></div>
-                        </div>
-                        <div class="pl-2 pl-md-3">
-                            <h5>Explore the dashboard</h5>
-                            <p>Designed with the latest design trends in mind. Our product feels modern, creative, and
-                                beautiful.</p>
+                <a href="{{route('frontend.user.dashboard')}}">
+                    <div class="card-body">
+                        <div class="d-flex px-1 px-md-3">
+                            <div>
+                                <div class="icon icon-primary"><i class="fa fa-th-large" aria-hidden="true"></i></div>
+                            </div>
+                            <div class="pl-2 pl-md-3">
+                                <h5>Explore the dashboard</h5>
+                                <p>Designed with the latest design trends in mind. Our product feels modern, creative,
+                                    and
+                                    beautiful.</p>
 
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
+
             </div>
 
         </div>
