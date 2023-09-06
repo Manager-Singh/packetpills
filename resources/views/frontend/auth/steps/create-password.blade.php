@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mt-5 mb-5 pt-5">
     <div class="row ">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="user-info">
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
                 <p class="txt">Designed with the latest design trends</p>
@@ -14,7 +14,10 @@
             </div>
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-2">
+</div>
+
+        <div class="col-md-8">
 
             <form name="myForm" action="{{route('frontend.auth.step.create.password.save')}}" method="post">
                 <div class="row">
@@ -39,7 +42,8 @@
 
 
         </div>
-
+        <div class="col-md-2">
+</div>
 
     </div>
 </div>

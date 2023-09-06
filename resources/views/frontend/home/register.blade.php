@@ -123,7 +123,7 @@
 
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row login-with mt-3">
                                 <div class="col">
                                     <div class="text-center">
                                         @include('frontend.auth.includes.socialite')

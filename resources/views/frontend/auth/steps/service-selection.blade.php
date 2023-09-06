@@ -48,7 +48,7 @@ button.btn.btn-secondary {
 @section('content')
 <div class="container mt-5 mb-5 pt-5">
 		    	<div class="row ">
-				    <div class="col-md-6">
+				    <div class="col-md-12">
               <div class="user-info">
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
                 <p class="txt">Designed with the latest design trends</p>
@@ -57,9 +57,11 @@ button.btn.btn-secondary {
               </div> 
 
 				    </div>
-				    <div class="col-md-6">
+				    <div class="col-md-12 mt-3">
+                        <div class="row">
+                        <div class="col-md-4">
 
-              <div class="card border-light text-left p-1 mb-4">
+              <div class="card blue border-light text-left p-1 mb-4">
                 <a href="{{route('frontend.auth.step.transfer')}}">
                   <div class="card-body">
                       <div class="d-flex px-1 px-md-3">
@@ -75,7 +77,9 @@ button.btn.btn-secondary {
                   </div>
                   </a>
                 </div>
-                 <div class="card border-light text-left p-1 mb-4">
+</div>
+<div class="col-md-4">
+                 <div class="card red border-light text-left p-1 mb-4">
                     <a href="{{route('frontend.auth.step.prescription')}}">
                   <div class="card-body">
                       <div class="d-flex px-1 px-md-3">
@@ -91,7 +95,9 @@ button.btn.btn-secondary {
                   </div>
                   </a>
                 </div>
-                 <div class="card border-light text-left p-1 mb-4">
+</div>
+<div class="col-md-4">
+                 <div class="card green border-light text-left p-1 mb-4">
                     <a href="{{route('frontend.auth.step.telehealth')}}">
                     <div class="card-body">
                         <div class="d-flex px-1 px-md-3">
@@ -106,7 +112,9 @@ button.btn.btn-secondary {
                         </div>
                     </div>
                   </a>
-                </div>
+</div>
+</div>
+</div>
                 <div class=" text-center p-1 ">
                     
                     

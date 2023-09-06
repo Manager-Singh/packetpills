@@ -5,7 +5,7 @@
 @section('content')
 <div class="container mt-5 mb-5 pt-5">
     <div class="row ">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="user-info">
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
                 <p class="bold-txt">Add members to MisterPharmacist</p>
@@ -15,9 +15,11 @@
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-12 mt-4">
+            <div class="row">
+                <div class="col-md-4">
 
-            <div class="card border-light text-left p-1 p-md-4 mb-4">
+            <div class="card border-light text-left p-1 mb-4">
                 <div class="card-body">
                     <div class="d-flex px-1 px-md-3">
                         <div>
@@ -25,14 +27,15 @@
                         </div>
                         <div class="pl-2 pl-md-3">
                             <h5>Add family member</h5>
-                            <p>Designed with the latest design trends in mind. Our product feels modern, creative, and
-                                beautiful.</p>
+                            <p>Designed with the latest design trends in mind. Our product feels modern, creative.</p>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card border-light text-left p-1 p-md-4 mb-4">
+</div>
+<div class="col-md-4">
+            <div class="card border-light text-left p-1 mb-4">
                 <div class="card-body">
                     <div class="d-flex px-1 px-md-3">
                         <div>
@@ -46,7 +49,10 @@
                     </div>
                 </div>
             </div>
-            <div class="card border-light text-left p-1 p-md-4 mb-4">
+</div>
+
+<div class="col-md-4">
+    <div class="card border-light text-left p-1 mb-4">
                 <a href="{{route('frontend.user.dashboard')}}">
                     <div class="card-body">
                         <div class="d-flex px-1 px-md-3">
@@ -55,9 +61,7 @@
                             </div>
                             <div class="pl-2 pl-md-3">
                                 <h5>Explore the dashboard</h5>
-                                <p>Designed with the latest design trends in mind. Our product feels modern, creative,
-                                    and
-                                    beautiful.</p>
+                                <p>Designed with the latest design trends in mind. Our product feels modern, creative.</p>
 
                             </div>
                         </div>
@@ -65,6 +69,8 @@
                 </a>
 
             </div>
+</div>
+</div>
 
         </div>
 

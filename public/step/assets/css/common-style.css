@@ -75,7 +75,7 @@ p.info-bold {
 }
 select#province {
     font-size: 22px;
-    padding-left: 15px;
+    padding: 6px 15px;
     font-weight: 600;
 }
 .gender-div {
@@ -160,26 +160,32 @@ input#myFile {
     margin-top: 20px;
     color: #212843;
 }
-.card:nth-child(1) .card-body {
+.card.blue .card-body {
     background: #eff3fe;
 }
-.card:nth-child(1) .card-body .icon.icon-primary .fa {
+.card.blue .card-body .icon.icon-primary .fa {
     background: #dfe7fc;
     color: #4e2a84;
 }
-.card:nth-child(2) .card-body {
+.card.red .card-body {
     background: #fff3ee;
 }
-.card:nth-child(2) .card-body .icon.icon-primary .fa {
+.card.red .card-body .icon.icon-primary .fa {
     background: #fde0d5;
     color: #dd6c45;
 }
-.card:nth-child(3) .card-body {
+.card.green .card-body {
     background: #def6e8;
 }
-.card:nth-child(3) .card-body .fa {
+.card.green .card-body .fa {
     background: #b1e0c4;
     color: #2f8050;
+}
+.card-body {
+    height: 235px;
+}
+.card {
+    height: 244px;
 }
 .card {
     padding: 0px !important;
