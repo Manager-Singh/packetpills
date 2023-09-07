@@ -24,24 +24,39 @@
 		padding-right: 0.8rem;
 		transition: top .2s ease;
 	}
+    p.big {
+    position: absolute;
+    font-size: 400px;
+    color: #212843;
+    text-align: center;
+    align-items: center;
+    left: 5%;
+    top: 33%;
+}
+h2.display-5.pt-5 {
+    font-weight: 900;
+}   
+img.partner-img {
+    width: -webkit-fill-available;
+}
 	</style>
 @endpush
 
 @section('content')
-    <div class="row justify-content-center" style="margin-top: 105px;">
-        <div class="col col-sm-8 align-self-center">
-            <div class="card">
-                <div class="card-header">
-                    <strong>
-                        @lang('labels.frontend.connect.box_title')
-                    </strong>
-                </div><!--card-header-->
-
-                <div class="card-body">
+<main style="margin-top:105px;">
+        <div class="container mt-5 mb-5">
+		    	<div class="row ">
+				    <div class="col-md-6 position-relative">
+                
+                <h2 class="display-5 pt-5"><strong>Learn how MisterPharmacist make team healthier</strong></h2>
+                <p class="txt pt-4">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
+                 <p class="big"><i class="fa fa-tachometer" aria-hidden="true"></i></p>
+				    </div>
+           
+				    <div class="col-md-6">
                     {{ html()->form('POST', route('frontend.enterprise.connect.submit'))->open() }}
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
+                    <div class="row">
+                            <div class="col-md-12">
                                     {{ html()->label(__('validation.attributes.frontend.name'))->for('full_name') }}
 
                                     {{ html()->text('full_name', optional(auth()->user())->name)
@@ -50,12 +65,7 @@
                                         ->attribute('maxlength', 191)
                                         ->required()
                                         ->autofocus() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
+                               
                                     {{ html()->label(__('validation.attributes.frontend.company'))->for('company') }}
 
                                     {{ html()->text('company')
@@ -63,12 +73,7 @@
                                         ->placeholder(__('validation.attributes.frontend.company'))
                                         ->attribute('maxlength', 191)
                                         ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
+                              
                                     {{ html()->label(__('validation.attributes.frontend.job_title'))->for('job_title') }}
 
                                     {{ html()->text('job_title')
@@ -76,13 +81,7 @@
                                         ->placeholder(__('validation.attributes.frontend.job_title'))
                                         ->attribute('maxlength', 191)
                                         ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
+                               
                                     {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
 
                                     {{ html()->email('email', optional(auth()->user())->email)
@@ -90,13 +89,8 @@
                                         ->placeholder(__('validation.attributes.frontend.email'))
                                         ->attribute('maxlength', 191)
                                         ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
+                           
+                     
                                     {{ html()->label(__('validation.attributes.frontend.phone'))->for('phone_no') }}
 
                                     {{ html()->text('phone_no')
@@ -104,31 +98,93 @@
                                         ->placeholder(__('validation.attributes.frontend.phone'))
                                         ->attribute('maxlength', 191)
                                         ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
+                       
 
                         @if(config('access.captcha.contact'))
-                            <div class="row">
-                                <div class="col">
+                          
                                     @captcha
                                     {{ html()->hidden('captcha_status', 'true') }}
-                                </div><!--col-->
-                            </div><!--row-->
+                            
                         @endif
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group mb-0 clearfix">
+                       
                                     {{ form_submit(__('labels.frontend.contact.button')) }}
-                                </div><!--form-group-->
+                               
                             </div><!--col-->
                         </div><!--row-->
                     {{ html()->form()->close() }}
-                </div><!--card-body-->
-            </div><!--card-->
-        </div><!--col-->
-    </div><!--row-->
+
+                      
+                 
+                </div>
+           
+			
+			</div>
+		</div>
+    <div class="row py-5 text-center" style="background-color: #e6e6e6;">
+      <div class="container py-5 w-75">
+      <h2><strong>Join our Partners across canada <br> priorotizing amployee health</strong></h2>
+       <div class="row py-4">
+         <div class="col-md-3">
+            <img src="https://picsum.photos/200" class="partner-img" />
+           </div>  
+         <div class="col-md-3">
+           <img src="https://picsum.photos/200" class="partner-img" />
+           </div> 
+         <div class="col-md-3">
+           <img src="https://picsum.photos/200" class="partner-img" />
+           </div> 
+         <div class="col-md-3">
+           <img src="https://picsum.photos/200" class="partner-img" />
+           </div>  
+       </div>
+       <div class="row py-4">
+        <div class="col-md-3">
+           <img src="https://picsum.photos/200" class="partner-img" />
+          </div>  
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div> 
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div> 
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div>  
+      </div>
+      <div class="row py-4">
+        <div class="col-md-3">
+           <img src="https://picsum.photos/200" class="partner-img" />
+          </div>  
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div> 
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div> 
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div>  
+      </div>
+      <div class="row py-4">
+        <div class="col-md-3">
+           <img src="https://picsum.photos/200" class="partner-img" />
+          </div>  
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div> 
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div> 
+        <div class="col-md-3">
+          <img src="https://picsum.photos/200" class="partner-img" />
+          </div>  
+      </div>
+      </div>
+     </div>
+
+  </main>
+ 
 @endsection
 
 @push('after-scripts')
