@@ -285,7 +285,7 @@ class LoginController extends Controller
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         try{
             $client = new Client($accountSid, $authToken);
-            $message = $client->messages->create('91'.$request->mobile_no, [
+            $message = $client->messages->create($dialing_code.$request->mobile_no, [
                 'from' => +16475034144,
                 'body' => 'CODE: '. $otp]);
                 return 1;
