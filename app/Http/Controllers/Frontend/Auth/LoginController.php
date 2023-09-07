@@ -234,7 +234,7 @@ class LoginController extends Controller
                         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
                     }
                 }else{
-                    return json_encode(['error' => 1, 'message' => 'Check your mobile number 2']);
+                    return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
                 }
               
 
@@ -270,7 +270,7 @@ class LoginController extends Controller
 
        }
     }else{
-        return json_encode(['error' => 1, 'message' => 'Check your mobile number 1']);
+        return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
     }
         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
         }
