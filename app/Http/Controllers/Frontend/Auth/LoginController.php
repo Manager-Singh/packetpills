@@ -156,13 +156,14 @@ class LoginController extends Controller
                 ], [
                     'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
                 ]);
-
+            
         $credentials = $request->only('mobile_no', 'password');
         if (Auth::attempt($credentials)) {
 
         $user = Auth::user();
         // Check to see if the users account is confirmed and active
         if (! $user->isConfirmed()) {
+            dd($user->isConfirmed());
             auth()->logout();
 
             // If the user is pending (account approval is on)
@@ -203,6 +204,16 @@ class LoginController extends Controller
 
         $otp = generateOTP();
         try{
+        //     $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
+        //     $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
+        //     $client = new Client($accountSid, $authToken);
+        //     $message = $client->messages->create('91'.$request->mobile_no, [
+        //          'from' => +16475034144,
+        //          'body' => 'CODE: '. $otp]);
+ 
+        //          // dd($message);
+      
+        //  dd($message);
         if($isexist){
             $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','verified')->first();
             if($otp_verified){
@@ -215,12 +226,17 @@ class LoginController extends Controller
                // dd($isexist->id);
                 $otp_unverified->user_id = $isexist->id;
                 $otp_unverified->otp = $otp;
-                if($otp_unverified->save()){
-                    $this->sendSms($request,$otp);
-                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
+                if($this->sendSms($request,$otp)){
+                    if($otp_unverified->save()){
+                        //$this->sendSms($request,$otp);
+                        return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
+                    }else{
+                        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+                    }
                 }else{
-                    return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+                    return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
                 }
+              
 
             }
 
@@ -231,7 +247,9 @@ class LoginController extends Controller
         $user->mobile_no = $request->mobile_no;
         $user->avatar_type = 'storage';
         $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
-        if($user->save()){
+        
+        if($this->sendSms($request,$otp)){
+            if($user->save()){
 
             $user->attachRole(3);
             $permissions = $user->roles->first()->permissions->pluck('id');
@@ -240,7 +258,7 @@ class LoginController extends Controller
             $userotp->user_id = $user->id;
             $userotp->otp = $otp;
             if($userotp->save()){
-                $this->sendSms($request,$otp);
+                
                 return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
             }else{
                 return json_encode(['error' => 1, 'message' => 'Something went wrong']);
@@ -249,11 +267,15 @@ class LoginController extends Controller
 
 
        }
+    }else{
+        return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
+    }
         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
         }
     }catch(Exception $e){
-        dd($e);
-        return json_encode(['error' => 1, 'message' => $e]);
+        //dd($e);
+        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+      //  return json_encode(['error' => 1, 'message' => $e]);
     }
     }
 
@@ -272,16 +294,17 @@ class LoginController extends Controller
             //return $result;
 
             $client = new Client($accountSid, $authToken);
-           $message = $client->messages->create($request->mobile_no, [
+            $message = $client->messages->create('91'.$request->mobile_no, [
                 'from' => +16475034144,
                 'body' => 'CODE: '. $otp]);
-
-                // dd($message);
+                return 1;
+                //dd($message);
         }
         catch (Exception $e){
-
-        //    dd($e);
-            return json_encode(['error' => 1, 'message' => $e]);
+           // dd($e->getMessage());
+            return 0;
+         
+            // return json_encode(['error' => 1, 'message' => $e]);
       //  echo "Error: " . $e->getMessage();
         }
     }
@@ -295,6 +318,7 @@ class LoginController extends Controller
                 $user_otp->status = 'verified';
                 if($user_otp->save()){
                     $user->confirmation_code=md5(rand(9,12));
+                    $user->confirmed=1;
                     $user->save();
                     Auth::loginUsingId($user_otp->user_id);
                     // return redirect()->route('frontend.index');

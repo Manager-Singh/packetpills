@@ -7012,6 +7012,7 @@
   "version" "2.2.0"
 
 "pace@github:HubSpot/pace#v1.0.2":
+  "integrity" "sha512-s3quPP0vqWpl+KlB21q4cSRPIVZS58hrLdx6TiSyCrYuV2fquluMTE2R61zlb2UzksNp30y2Tp74NeVoxWQSZw=="
   "resolved" "git+ssh://git@github.com/HubSpot/pace.git#c6846cbf6b928e9903b569269fa9fbf32f2554f4"
   "version" "1.0.2"
 
