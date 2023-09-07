@@ -16,30 +16,30 @@
 </div>
 				    <div class="col-md-8 mt-2">
 
-                        <form name="myForm" action="{{route('frontend.auth.step.personal.submit')}}" method="post">
+                        <form name="myForm" id="personal-step" action="{{route('frontend.auth.step.personal.submit')}}" method="post">
                             @csrf
                             <div class="row">
                             <div class="col-md-6">
                             <label for="fname">First name</label>
-                            <input type="text" id="fname" name="first_name">
+                            <input type="text" id="fname" name="first_name" required>
                             </div>
                             <div class="col-md-6">
                             <label for="lname">Last name</label>
-                            <input type="text" id="lname" name="last_name">
+                            <input type="text" id="lname" name="last_name" required>
                             </div>
                             <div class="col-md-12">
                             <label for="lname">Date Of Birth</label>
                             <p class="info">You must be at least 14 year old.</p>
                             <span class="dob">
-                                <input type="text" name="month" placeholder="MM" maxlength="2" size="2" />
+                                <input type="number" class="form-control" name="month" placeholder="MM" maxlength="2" size="2" required />
 
-                                <input type="text" name="date" placeholder="DD" maxlength="2" size="2" />
+                                <input type="number" class="form-control" name="date" placeholder="DD" maxlength="2" size="2" required />
 
-                                <input type="text" name="year" placeholder="YYYY" maxlength="4" size="4" />
+                                <input type="number" class="form-control"  name="year"  placeholder="YYYY" maxlength="4" size="4" required />
                             </span>
                             </div>
                             </div>
-                            <button type="submit" class="next button">Next</button>
+                            <input type="submit" class="next button" value="Next" />
                             <p class="info-bold">1 Day delivery in the Greater area</p>
                           </form>
 
@@ -54,6 +54,12 @@
 @endsection
 
 @push('after-scripts')
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#personal-step").parsley();
+    });
+</script>
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif

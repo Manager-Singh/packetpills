@@ -15,6 +15,7 @@
     <title>@yield('title')</title>
     <meta name="description" content="@yield('meta_description', 'Laravel Starter')">
     <meta name="author" content="@yield('meta_author', 'FasTrax Infotech')">
+    
     @yield('meta')
     @include('frontend.navbar.head')
     @stack('before-styles')
@@ -33,6 +34,7 @@
 	<link rel="stylesheet" href="{{asset('step/assets/css/common-style.css')}}">
 	<link rel="stylesheet" href="{{asset('step/assets/css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="{{asset('plugins/parsley/parsley.css')}}"> -->
     </head>
     <body>
       
@@ -63,7 +65,7 @@
 	  </header>
       @else
         <header>
-		  <img class="header-icon" src="{{asset('step/assets/images/arrow.png')}}" />
+		  <a href="{{url()->previous()}}"><img class="header-icon" src="{{asset('step/assets/images/arrow.png')}}" /></a>
 		  <img class="header-logo" src="{{asset('step/assets/images/logo-main.png')}}" />
 	  </header>
     @endif
@@ -88,6 +90,7 @@
         <script src="{{ asset('website/assets/js/polyfills.js')}}" type="module"></script>
         <script src="{{ asset('website/assets/js/vendor.js')}}" type="module"></script>
         <script src="{{ asset('website/assets/js/main.js')}}" type="module"></script>
+        <!-- <script src="{{asset('plugins/parsley/parsley.js')}}"></script> -->
         @include('includes.partials.ga')
     </body>
 </html>

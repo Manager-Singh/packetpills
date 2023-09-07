@@ -163,8 +163,9 @@
                   var dialing_code = $('#dialing-code').val();
                   
                 //   var otp = $('#otp').val();
-
-                  console.log(phone);
+                    if(phone.length < 10){
+                        $("#error-msg").text('Phone number should be a 10 digit.');
+                    }
                 //   console.log(phone);
                     $.ajax({
                       type: 'POST',
@@ -197,7 +198,9 @@
                   var phone = $('#phone-number').val();
                   var otp = $('#otp').val();
                   $("#error-msg").text('');
-                  console.log(phone);
+                    if(otp.length < 6){
+                        $("#error-msg").text('Otp should be a 6 digit.');
+                    }
                 //   console.log(phone);
                     $.ajax({
                       type: 'POST',

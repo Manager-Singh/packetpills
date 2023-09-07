@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="fname">Province</label>
-                        <select name="province" id="province">
+                        <select name="province" id="province" required>
                         <option  value="">Select a Province</option>
                         <option  value="Alberta">Alberta</option>
                         <option  value="British Columbia">British Columbia</option>
@@ -43,22 +43,22 @@
                         <label for="lname">Gender</label>
                         <div class="gender-div">
                             <span class="gender">
-                                <input type="radio" name="gender" value="Male">
+                                <input type="radio" name="gender" value="Male" required>
                                 <label>Male</label>
                             </span>
                             <span class="gender">
-                                <input type="radio" name="gender" value="Female">
+                                <input type="radio" name="gender" value="Female" required>
                                 <label>Female</label>
                             </span>
                             <span class="gender">
-                                <input type="radio" name="gender" value="Other">
+                                <input type="radio" name="gender" value="Other" required>
                                 <label>Other</label>
                             </span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <label for="lname">Email Address</label>
-                        <input type="email" name="email" placeholder="" />
+                        <input type="email" name="email" placeholder="" required />
                         <p class="info">To send updates about your order.</p>
                     </div>
                 </div>
