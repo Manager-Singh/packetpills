@@ -30,11 +30,11 @@
            
         @include('includes.partials.read-only')
        
-    
+        @include('frontend.navbar.header')
         @if(Route::currentRouteName() == 'frontend.auth.new.login'  || Route::currentRouteName() == 'frontend.index'  )
         
         @else
-            @include('frontend.navbar.header')
+            
         @endif
        
         <main>

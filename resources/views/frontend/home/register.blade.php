@@ -4,7 +4,7 @@
 
     <div class="landing-wrapper margin-t-xl">
    
-        <div  class="row align-items-center">
+        <!-- <div  class="row align-items-center">
             <div class="col-md-2"><button type="button" class="btn btn-outline-primary"><i class="fas fa-chevron-left"></i></button></div>
             <div class="col-md-7 text-center"><a href="#">
                         <img  alt="" height="90" class="pp-logo__default" src="{{asset('website/assets/images/logo-removebg.png')}}">
@@ -13,7 +13,7 @@
                 <p class="paragraph color-white">Already a member?</p>
                 <a class="color-link h4 font-semibold is-clickable" href="{{route('frontend.auth.new.login')}}" bis_skin_checked="1">Sign In</a>
             </div>
-        </div>    
+        </div>     -->
         <div class="content-exp2">
             <div>
                 <h1 class="hero__heading color-brand font-bold txt-c"> You're almost<br> there! </h1>
@@ -53,7 +53,11 @@
                                                             for="phone-number">Phone</label>
                                                         <div class="tel">
                                                             <div class="tel-prefix txt-c" aria-label="Country code +1">
-                                                                <p class="color-dark font-semibold">+1</p>
+                                                                
+                                                                <select class="form-control color-dark font-semibold" name="dialing_code">
+                                                                    <option value="1">+1</option>
+                                                                    <option value="91">+91</option>
+                                                                </select>
                                                             </div>
                                                             <div class="tel-input">
                                                                 <input autocomplete="off" type="tel"
