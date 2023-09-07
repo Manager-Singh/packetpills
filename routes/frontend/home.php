@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\ConnectController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\User\AccountController;
 use App\Http\Controllers\Frontend\User\DashboardController;
@@ -15,6 +16,9 @@ Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'mainIndex'])->name('index');
 Route::get('contact', [ContactController::class, 'index'])->name('contact');
 Route::post('contact/send', [ContactController::class, 'send'])->name('contact.send');
+Route::get('enterprise/connect', [ConnectController::class, 'index'])->name('enterprise.connect');
+Route::post('enterprise/connect/send', [ConnectController::class, 'store'])->name('enterprise.connect.submit');
+
 
 /*
  * These frontend controllers require the user to be logged in
