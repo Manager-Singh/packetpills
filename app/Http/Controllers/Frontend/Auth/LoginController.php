@@ -178,7 +178,7 @@ class LoginController extends Controller
 
         if (! $user->isActive()) {
             auth()->logout();
-
+           
             throw new GeneralException(__('exceptions.frontend.auth.deactivated'));
         }
 
@@ -186,6 +186,9 @@ class LoginController extends Controller
 
         if (config('access.users.single_login')) {
             auth()->logoutOtherDevices($request->password);
+        }
+        if( Auth::user()->hasRole('Administrator')){
+            return redirect()->route('admin.dashboard');
         }
         if($user->profile_step==0){
             return redirect()->route('frontend.auth.service.selection');
