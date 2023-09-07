@@ -291,7 +291,7 @@ class LoginController extends Controller
             $client = new Client($accountSid, $authToken);
             $message = $client->messages->create($dialing_code.$request->mobile_no, [
                 'from' => +16475034144,
-                'body' => 'CODE: '. $otp]);
+                'body' => $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.']);
                 return 1;
         }
         catch (Exception $e){

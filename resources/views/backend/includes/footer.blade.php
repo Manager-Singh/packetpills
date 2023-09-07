@@ -7,5 +7,5 @@
         </strong> @lang('strings.backend.general.all_rights_reserved')
     </div>
 
-    <div class="ml-auto">Theme by <a target="_blank" href="https://www.pankajkumar.org">JV</a></div>
+    <!-- <div class="ml-auto">Theme by <a target="_blank" href=""></a></div> -->
 </footer>
