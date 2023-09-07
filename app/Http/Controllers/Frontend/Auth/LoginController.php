@@ -242,7 +242,7 @@ class LoginController extends Controller
 
 
             }else{
-                dd($request->dialing_code);
+               
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
