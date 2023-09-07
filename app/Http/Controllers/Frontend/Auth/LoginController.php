@@ -245,7 +245,7 @@ class LoginController extends Controller
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
-        $user->mobile_no = ($request->dialing_code)?$request->dialing_code:'1';
+        $user->dialing_code = ($request->dialing_code)?$request->dialing_code:'1';
         $user->avatar_type = 'storage';
         $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
         
