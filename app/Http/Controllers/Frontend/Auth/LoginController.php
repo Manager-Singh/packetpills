@@ -226,7 +226,7 @@ class LoginController extends Controller
                // dd($isexist->id);
                 $otp_unverified->user_id = $isexist->id;
                 $otp_unverified->otp = $otp;
-                if($this->sendSms($request,$otp)){
+                if($this->sendSms($request,$otp,($isexist->dialing_code)?$isexist->dialing_code:'1')){
                     if($otp_unverified->save()){
                         //$this->sendSms($request,$otp);
                         return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
@@ -245,10 +245,11 @@ class LoginController extends Controller
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
+        $user->mobile_no = ($request->dialing_code)?$request->dialing_code:'1';
         $user->avatar_type = 'storage';
         $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
         
-        if($this->sendSms($request,$otp)){
+        if($this->sendSms($request,$otp,($request->dialing_code)?$request->dialing_code:'1')){
             if($user->save()){
 
             $user->attachRole(3);
@@ -279,35 +280,21 @@ class LoginController extends Controller
     }
     }
 
-    public function sendSms($request,$otp){
+    public function sendSms($request,$otp,$dialing_code='1'){
         $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         try{
-            // $client = new Client(['auth' => [$accountSid, $authToken]]);
-
-            // $result = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
-            // ['form_params' => [
-            // 'Body' => 'CODE: '. $otp, //set message body
-            // 'To' => $request->mobile_no,
-            // 'From' => '+16475034144' //we get this number from twilio
-            // ]]);
-            //return $result;
-
             $client = new Client($accountSid, $authToken);
             $message = $client->messages->create('91'.$request->mobile_no, [
                 'from' => +16475034144,
                 'body' => 'CODE: '. $otp]);
                 return 1;
-                //dd($message);
         }
         catch (Exception $e){
-           // dd($e->getMessage());
             return 0;
-         
-            // return json_encode(['error' => 1, 'message' => $e]);
-      //  echo "Error: " . $e->getMessage();
         }
     }
+    
     public function verify_otp(Request $request)
     {
 
