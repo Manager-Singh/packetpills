@@ -234,7 +234,7 @@ class LoginController extends Controller
                         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
                     }
                 }else{
-                    return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
+                    return json_encode(['error' => 1, 'message' => 'Check your mobile number 2']);
                 }
               
 
@@ -242,6 +242,7 @@ class LoginController extends Controller
 
 
             }else{
+                dd($request->dialing_code);
         $user = new User();
         $user->password = Hash::make($request->mobile_no);
         $user->mobile_no = $request->mobile_no;
@@ -269,7 +270,7 @@ class LoginController extends Controller
 
        }
     }else{
-        return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
+        return json_encode(['error' => 1, 'message' => 'Check your mobile number 1']);
     }
         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
         }
@@ -291,6 +292,7 @@ class LoginController extends Controller
                 return 1;
         }
         catch (Exception $e){
+            dd($e);
             return 0;
         }
     }
