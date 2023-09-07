@@ -28,7 +28,7 @@
 	</style>
 @endpush
 @section('content')
-<div class="registration-home" style="background: #54c7da;">
+<div class="registration-home" style="background: #54c7da; padding-top: 6.7rem;">
 
     @include('frontend.home.register')
     <!-- {{generateOTP()}} -->

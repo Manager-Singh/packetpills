@@ -54,7 +54,7 @@
                                                         <div class="tel">
                                                             <div class="tel-prefix txt-c" aria-label="Country code +1">
                                                                 
-                                                                <select class="form-control color-dark font-semibold" name="dialing_code">
+                                                                <select class="form-control color-dark font-semibold" id="dialing-code" name="dialing_code">
                                                                     <option value="1">+1</option>
                                                                     <option value="91">+91</option>
                                                                 </select>
@@ -77,11 +77,11 @@
                                                     <div class="form-inline__form">
                                                     <div class="row">
                                                         <div class="col otp-box hide" style="display:none;">
-                                                            <div class="form-group">
-                                                                {{ html()->label(__('validation.attributes.frontend.otp'))->for('otp') }}
+                                                            <div class="form-group mt-4">
+                                                                <!-- {{ html()->label(__('validation.attributes.frontend.otp'))->for('otp') }} -->
 
-                                                                {{ html()->text('otp')->class('form-control')->placeholder(__('validation.attributes.frontend.otp'))->attribute('id','otp')->attribute('maxlength', 6)->attribute('minlength', 6)->required() }}
-                                                                <span class="genrated-otp"></span>
+                                                                {{ html()->text('otp')->class('form-control w-100')->placeholder(__('validation.attributes.frontend.otp'))->attribute('id','otp')->attribute('maxlength', 6)->attribute('minlength', 6)->required() }}
+                                                                
                                                             </div><!--form-group-->
                                                         </div><!--col-->
                                                     </div><!--row-->
@@ -92,6 +92,7 @@
 
 
                                                 <div class="margin-t-l">
+                                                    <span id="error-msg" class="p-2 float-left"></span>
                                                     <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset request-otp">{{ __('labels.frontend.auth.get_started') }}</button>
                                                     <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset register-submit" style="display:none">{{ __('labels.frontend.auth.otp_verfied') }} & {{ __('labels.frontend.auth.next') }}</button>
                                                 </div>
@@ -156,9 +157,11 @@
         
                 $('.request-otp').click(function(e) {
                   e.preventDefault();
-  
+                  $("#error-msg").text('');
                   // Get the phone number and OTP
                   var phone = $('#phone-number').val();
+                  var dialing_code = $('#dialing-code').val();
+                  
                 //   var otp = $('#otp').val();
 
                   console.log(phone);
@@ -166,7 +169,7 @@
                     $.ajax({
                       type: 'POST',
                       url: "{{ route('frontend.auth.send.otp') }}", 
-                      data: {_token:"{{ csrf_token() }}",mobile_no:phone},
+                      data: {_token:"{{ csrf_token() }}",mobile_no:phone,dialing_code:dialing_code},
                       success: function(response) {
                         response = JSON.parse(response);
                               console.log(response.otp);
@@ -179,6 +182,8 @@
                                 $('.request-otp').hide(); 
                                 $('.register-submit').show(); 
                                 
+                              }else{
+                                $("#error-msg").text(response.message);
                               }
                             
                                                          
@@ -191,7 +196,7 @@
                   // Get the phone number and OTP
                   var phone = $('#phone-number').val();
                   var otp = $('#otp').val();
-
+                  $("#error-msg").text('');
                   console.log(phone);
                 //   console.log(phone);
                     $.ajax({
@@ -205,6 +210,8 @@
                               console.log(response);
                               if (response.profile_step == 0) {
                                 location.href = "{{route('frontend.auth.service.selection')}}";
+                              }else{
+                                $("#error-msg").text(response.message);
                               }
                              // window.location.reload();
                               $('.otp-box').show(); 
