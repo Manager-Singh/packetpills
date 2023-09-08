@@ -41,35 +41,14 @@
            
         @include('includes.partials.read-only')
        @if(Route::currentRouteName() == 'frontend.user.dashboard')
-       <header class="header">
-      <div class="row dashboard" >
-        <div class="col-md-6">
-          <p class="user-ins">AM</p>
-          <p class="info">Viewing as</p>
-          <p class="user-name">Alexandre</p>
-        </div>
-        <div class="col-md-6 text-end">
-         <a href="#" class="profile-btn"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Member</a>
-        </div>
-      </div>  
-      <div class="row menu">
-        <ul>
-          <li><a href="#" class="active"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-          <li><a href="#"><i class="fa fa-medkit" aria-hidden="true"></i> Medication</a></li>
-          <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> Prescription</a></li>
-          <li><a href="#"><i class="fa fa-truck" aria-hidden="true"></i> Orders</a></li>
-        </ul>
-
-      </div>
-		  
-	  </header>
+       @include('frontend.navbar.step.header')
       @else
         <header>
 		  <a href="{{url()->previous()}}"><img class="header-icon" src="{{asset('step/assets/images/arrow.png')}}" /></a>
-		  <img class="header-logo" src="{{asset('step/assets/images/logo-main.png')}}" />
+		  <img class="header-logo" src="{{asset('step/assets/images/logo-main.png')}}" /> 
 	  </header>
     @endif
-       
+        
         <main>
             @yield('content')
            
@@ -91,6 +70,27 @@
         <script src="{{ asset('website/assets/js/vendor.js')}}" type="module"></script>
         <script src="{{ asset('website/assets/js/main.js')}}" type="module"></script>
         <!-- <script src="{{asset('plugins/parsley/parsley.js')}}"></script> -->
+
+        <script>
+    $(document).ready(function(){       
+     
+      $('button.user-ins').click(function(){
+        $('.sidebar').toggle();
+        
+      });
+
+      $('button.user-ins').click(function(){
+        if ($('.dashboard .user-ins').hasClass("close")) {
+          $('.dashboard .user-ins').removeClass("close");
+      }
+      else{
+      $('.dashboard .user-ins').addClass("close");
+    }
+        
+      });   
+
+    });
+    </script> 
         @include('includes.partials.ga')
     </body>
 </html>

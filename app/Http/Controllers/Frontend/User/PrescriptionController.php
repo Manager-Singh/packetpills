@@ -44,7 +44,7 @@ class PrescriptionController extends Controller
     public function save(SavePrescriptionRequest $request)
     {
         $data = collect($request->all())->toArray();
-        $output = $this->prescriptionRepository->create($data);
+        $output = $this->prescriptionRepository->create($data); 
         
         // E-mail address was updated, user has to reconfirm
         if ($output) {

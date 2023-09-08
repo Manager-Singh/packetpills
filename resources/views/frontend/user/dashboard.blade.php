@@ -10,7 +10,7 @@
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
                     <p class="txt">Welcome latest design trends Designed </p>
                   
-                </div>
+                </div> 
               </div>  
               <div class="col-md-4 text-end">
                     <a href="#" class="info-btn">Request Refill</a>
