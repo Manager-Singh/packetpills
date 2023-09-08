@@ -82,8 +82,17 @@
                         @lang('menus.backend.sidebar.prescriptions')
                     </a>
                 </li>
-                
                 <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/enterpriseconnects'))
+                    }}" href="{{ route('admin.enterpriseconnects.index') }}">
+                        <i class="nav-icon fas fa-file"></i>
+                        @lang('menus.backend.sidebar.enterprise_connect')
+                    </a>
+                </li>
+                
+                <!-- <li class="divider"></li>
                 <li class="nav-item">
                     <a class="nav-link {{
                         active_class(Route::is('admin/pages'))
@@ -153,7 +162,7 @@
                         </li>
                         
                     </ul>
-                </li>
+                </li> -->
 
                 <li class="divider"></li>
 

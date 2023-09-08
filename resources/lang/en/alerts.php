@@ -83,6 +83,11 @@ return [
             'updated' => 'The email template was successfully updated.',
             'deleted' => 'The email template was successfully deleted.',
         ],
+        'enterpriseconnects'=> [
+            'created' => 'The enterprise connect was successfully created.',
+            'updated' => 'The enterprise connect was successfully updated.',
+            'deleted' => 'The enterprise connect was successfully deleted.',
+        ],
     ],
 
     'frontend' => [

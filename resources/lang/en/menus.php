@@ -152,6 +152,7 @@ return [
             'faqs' => 'Faq Management',
             'email-templates' => 'Email Templates',
             'prescriptions' => 'Prescriptions',
+            'enterprise_connect' => 'Enterprise Connect',
         ],
     ],
 
