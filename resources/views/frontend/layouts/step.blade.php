@@ -40,7 +40,7 @@
       
            
         @include('includes.partials.read-only')
-       @if(Route::currentRouteName() == 'frontend.user.dashboard')
+       @if(Route::currentRouteName() == 'frontend.user.dashboard' || (Auth::check() && Auth::user()->is_profile_status == "completed"))
        @include('frontend.navbar.step.header')
       @else
         <header>

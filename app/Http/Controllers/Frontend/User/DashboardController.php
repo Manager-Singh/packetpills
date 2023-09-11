@@ -16,7 +16,20 @@ class DashboardController extends Controller
     protected $userRepository;
     public function __construct(UserRepository $userRepository)
     {
+        
         $this->userRepository = $userRepository;
+        
+
+        // $this->middleware(function ($request, $next) {
+           
+        //     if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+        //         return redirect()->route('frontend.user.dashboard');
+        //     }else{
+        //         return $next($request);
+        //     }
+            
+        // });
+        
 
     }
     /**
@@ -30,6 +43,9 @@ class DashboardController extends Controller
 
     public function serviceSelection(){
         //return '<h2>You are logedin successfully!</h2>';
+        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+            return redirect()->route('frontend.user.dashboard');
+        }
         return view('frontend.auth.steps.service-selection');
     }
 
@@ -40,9 +56,16 @@ class DashboardController extends Controller
         return view('frontend.auth.steps.prescription');
     }
     public function telehealth(){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+            return redirect()->route('frontend.user.dashboard');
+        }
         return view('frontend.auth.steps.telehealth');
     }
     public function personal(){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+            return redirect()->route('frontend.user.dashboard');
+        }
+        
         return view('frontend.auth.steps.personal');
     }
 
@@ -65,6 +88,9 @@ class DashboardController extends Controller
 
     }
     public function almostdone(){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+            return redirect()->route('frontend.user.dashboard');
+        }
         return view('frontend.auth.steps.almostdone');
     }
     public function almostdone_save(Request $request){
@@ -85,6 +111,9 @@ class DashboardController extends Controller
 
     }
     public function createPassword(){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+            return redirect()->route('frontend.user.dashboard');
+        }
         return view('frontend.auth.steps.create-password');
     }
 
@@ -94,7 +123,7 @@ class DashboardController extends Controller
         // 'province'=>$request->province,
         $output = $this->userRepository->update(
             Auth::user(),
-            ['password'=>$request->password,'profile_step'=>3],
+            ['password'=>$request->password,'profile_step'=>3,'is_profile_status' =>'completed'],
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
@@ -109,5 +138,20 @@ class DashboardController extends Controller
 
     public function profileCompleted(){
         return view('frontend.auth.steps.profile-completed');
+    }
+
+
+    public function userPrescripiton()
+    {
+        return view('frontend.user.prescription'); 
+    }
+
+    public function medications()
+    {
+         return view('frontend.user.medication'); 
+    }
+    public function orders()
+    {
+         return view('frontend.user.order'); 
     }
 }

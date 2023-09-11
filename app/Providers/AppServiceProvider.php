@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class AppServiceProvider.
@@ -101,6 +102,9 @@ class AppServiceProvider extends ServiceProvider
         {
 
                 $data['drugs'] = Drug::get();
+                if(Auth::check()){
+                    $data['auth'] = Auth::user();
+                }
 
                 $view->with($data);
         });

@@ -79,10 +79,10 @@
      </div>
      <div class="row menu">
          <ul>
-             <li><a href="#" class="active"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-             <li><a href="#"><i class="fa fa-medkit" aria-hidden="true"></i> Medication</a></li>
-             <li><a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i> Prescription</a></li>
-             <li><a href="#"><i class="fa fa-truck" aria-hidden="true"></i> Orders</a></li>
+             <li><a href="{{route('frontend.user.dashboard')}}" class="{{ (Route::currentRouteName() == 'frontend.user.dashboard') ? 'active' : '' }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+             <li><a href="{{route('frontend.user.medications')}}" class="{{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}" ><i class="fa fa-medkit" aria-hidden="true"></i> Medication</a></li>
+             <li><a href="{{route('frontend.user.prescription')}}" class="{{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}"><i class="fa fa-list-alt" aria-hidden="true"></i> Prescription</a></li>
+             <li><a href="{{route('frontend.user.orders')}}" class="{{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}"><i class="fa fa-truck" aria-hidden="true"></i> Orders</a></li>
          </ul>
 
      </div>
