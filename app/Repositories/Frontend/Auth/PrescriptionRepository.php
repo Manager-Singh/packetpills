@@ -132,10 +132,9 @@ class PrescriptionRepository extends BaseRepository
             $prescription = new Prescription;
             $prescription->prescription_id =  time().rand(0,99999);
             $prescription->user_id = Auth::user()->id;
-
             if($images && $prescription->save()){
                 foreach($images as $key => $image){
-                    $image  = $image;
+                    $image  = $image; 
                     $fileName   = time() . '.' . $image->getClientOriginalExtension();
                     $destinationPath = public_path('img/frontend/prescription');
                     $image->move($destinationPath, $fileName);
@@ -144,6 +143,7 @@ class PrescriptionRepository extends BaseRepository
                     $prescriptionIteam->page_no = $key +1;
                     $prescriptionIteam->prescripiton_id = $prescription->id;
                     $prescriptionIteam->prescription_upload = $url;
+                    $prescriptionIteam->user_id = Auth::user()->id;
                     $prescriptionIteam->save();
                 }
 

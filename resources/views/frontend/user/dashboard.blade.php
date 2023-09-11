@@ -10,7 +10,7 @@
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
                     <p class="txt">Welcome latest design trends Designed </p>
                   
-                </div>
+                </div> 
               </div>  
               <div class="col-md-4 text-end">
                     <a href="#" class="info-btn">Request Refill</a>
@@ -22,31 +22,39 @@
           <div class="row">
             
             <div class="col-md-3">
-              <div class="med-info bg-light"> 
-                   <p><i class="fa fa-exchange" aria-hidden="true"></i></p>                   
-                  <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
-                  
-              </div>
+              <a href="#">
+                <div class="med-info bg-light"> 
+                    <p><i class="fa fa-exchange" aria-hidden="true"></i></p>                   
+                    <p class="txt"><strong> Transfer your refills </strong></p>
+                    
+                </div>
+              </a>
             </div>  
             <div class="col-md-3">
+            <a href="#">
               <div class="med-info bg-light">
                 <p><i class="fa fa-list" aria-hidden="true"></i></p> 
-                <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                <p class="txt"><strong> Have a new Prescription? </strong></p>
               </div>
+            </a>
             </div> 
             <div class="col-md-3">
+            <a href="#">
               <div class="med-info bg-light">  
                 <p><i class="fa fa-search" aria-hidden="true"></i></p>                   
-                  <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                  <p class="txt"><strong> Search prices </strong></p>
                   
               </div>
+            </a>
             </div>
             <div class="col-md-3">
+            <a href="#">
               <div class="med-info bg-light">   
                 <p><i class="fa fa-plus-square" aria-hidden="true"></i></p>                  
-                  <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
+                  <p class="txt"><strong> Build your vitamin pack </strong></p>
                  
               </div>
+            </a>
             </div>
         </div>
         <div class="row mt-5">

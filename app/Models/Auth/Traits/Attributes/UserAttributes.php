@@ -25,6 +25,24 @@ trait UserAttributes
         $this->attributes['password'] = $hash;
     }
 
+    public function dob($type)
+    {
+        if($this->date_of_birth){
+            
+            $date_of_birth = explode('-',$this->date_of_birth); 
+            if($type == 'month'){
+                return $date_of_birth[0];
+             }
+             if($type == 'day'){
+                return $date_of_birth[1];
+             }
+             if($type == 'year'){
+                return $date_of_birth[2];
+             }
+        }
+        
+    }
+
     /**
      * @return string
      */
