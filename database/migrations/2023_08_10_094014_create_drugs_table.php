@@ -16,17 +16,29 @@ class CreateDrugsTable extends Migration
     {
         Schema::create('drugs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('available_form')->nullable();
-            $table->string('manufacturer_name')->nullable();
+            $table->string('brand_name')->nullable();
             $table->string('generic_name')->nullable();
-            // $table->string('strength')->nullable();
-            $table->text('description')->nullable();
-            $table->longtext('faq')->nullable();
-            $table->longtext('how_to_take')->nullable();
-            $table->longtext('dosage')->nullable();
+            $table->string('main_therapeutic_use')->nullable();
+            $table->string('strength')->nullable();
+            $table->string('strength_unit')->nullable();
+            $table->string('format')->nullable();
+            $table->text('manufacturer')->nullable();
+            $table->string('pack_size')->nullable();
+            $table->string('pack_unit')->nullable();
+            $table->bigInteger('din')->nullable();
+            $table->string('presciption_required')->nullable();
+            $table->bigInteger('upc')->nullable();
+            $table->float('pharmacy_purchase_price', 8, 3)->nullable();
+            $table->float('percent_markup', 8, 3)->nullable();
+            $table->float('drug_cost', 8, 3)->nullable();
+            $table->float('dispensing_fee', 8, 3)->nullable();
+            $table->integer('insurance_coverage_in_percent')->nullable();
+            $table->float('insurance_coverage_calculation_in_percent', 8, 3)->nullable();
+            $table->integer('delivery_cost')->nullable();
+            $table->float('patient_pays', 8, 3)->nullable();
+            $table->longtext('drug_indication')->nullable();
+            $table->longtext('standard_dosage')->nullable();
             $table->longtext('side_effect')->nullable();
-            $table->longtext('available_form_description')->nullable();
             $table->longtext('contraindications')->nullable();
             $table->longtext('precautions')->nullable();
             $table->longtext('warnings')->nullable();

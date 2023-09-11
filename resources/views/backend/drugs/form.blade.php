@@ -15,18 +15,18 @@
     <div class="row mt-4 mb-4">
         <div class="col">
             <div class="form-group row">
-                {{ Form::label('name', trans('validation.attributes.backend.access.drugs.name'), ['class' => 'col-md-2 from-control-label required']) }}
+                {{ Form::label('brand_name', trans('validation.attributes.backend.access.drugs.brand_name'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.name') ]) }}
+                    {{ Form::text('brand_name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.brand_name') ]) }}
                 </div>
                 <!--col-->
             </div>
             <div class="form-group row">
-                {{ Form::label('available_form', trans('validation.attributes.backend.access.drugs.available_form'), ['class' => 'col-md-2 from-control-label']) }}
+                {{ Form::label('manufacturer', trans('validation.attributes.backend.access.drugs.manufacturer'), ['class' => 'col-md-2 from-control-label']) }}
 
                 <div class="col-md-10">
-                    {{ Form::text('available_form', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.available_form')]) }}
+                    {{ Form::text('manufacturer', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.manufacturer')]) }}
                 </div>
                 <!--col-->
             </div>
@@ -41,10 +41,10 @@
             </div>
             <!--form-group-->
             <div class="form-group row">
-                {{ Form::label('manufacturer_name', trans('validation.attributes.backend.access.drugs.manufacturer_name'), ['class' => 'col-md-2 from-control-label required']) }}
+                {{ Form::label('main_therapeutic_use', trans('validation.attributes.backend.access.drugs.main_therapeutic_use'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::text('manufacturer_name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.manufacturer_name') ]) }}
+                    {{ Form::text('main_therapeutic_use', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.main_therapeutic_use') ]) }}
                 </div>
                 <!--col-->
             </div>
@@ -77,7 +77,6 @@
                         @php
                         unset($strength[0]);
                         unset($price[0]);
-
                         @endphp
                         @if(count($strength) > 0)
                         @foreach($strength as $key=>$steng)
@@ -90,8 +89,8 @@
                             </div>
                             <div class="remove">
                                     <div style="cursor:pointer;background-color:red;" class="remove_field btn btn-info">Remove</div>
-                                </div>
                             </div>
+                        </div>
                         @endforeach
                         @endif
 

@@ -37,7 +37,6 @@ class UserEventListener
         }
 
         $event->user->save();
-        logger('Milan Soni');
         logger('User Logged In: '.$event->user->full_name);
     }
 
