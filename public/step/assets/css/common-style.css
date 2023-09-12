@@ -522,3 +522,25 @@ button.close:after {
     transform: rotate(45deg);
     color: #fff !important;
 }
+
+.upload-after {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.upload-after img#output {
+    width: 100% !important;
+    height: 166px !important;
+    object-fit: cover;
+}
+.upload-after button#delete {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    z-index: 999;
+}
+.upload-after {
+    display: none;
+}
