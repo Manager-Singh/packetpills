@@ -91,6 +91,16 @@
                         @lang('menus.backend.sidebar.enterprise_connect')
                     </a>
                 </li>
+                <li class="divider"></li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/preciption-types'))
+                    }}" href="{{ route('admin.preciption-types.index') }}">
+                        <i class="nav-icon fas fa-hand-holding-medical"></i>
+                        @lang('menus.backend.sidebar.preciption-types')
+                    </a>
+                </li>
                 
                 <!-- <li class="divider"></li>
                 <li class="nav-item">

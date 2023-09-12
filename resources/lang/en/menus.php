@@ -133,6 +133,16 @@ return [
                 'main' => 'Blog Prescriptions',
                 'view' => 'View Prescriptions',
             ],
+            'preciption-types' => [
+                'all' => 'All Preciption Type',
+                'active' => 'Active Preciption Type',
+                'create' => 'Create Preciption Type',
+                'deactivated' => 'Deactivated Preciption Type',
+                'deleted' => 'Deleted Preciption Type',
+                'edit' => 'Edit Preciption Type',
+                'main' => 'Blog Preciption Type',
+                'view' => 'View Preciption Type',
+            ],
         ],
 
         'log-viewer' => [
@@ -153,6 +163,7 @@ return [
             'email-templates' => 'Email Templates',
             'prescriptions' => 'Prescriptions',
             'enterprise_connect' => 'Enterprise Connect',
+            'preciption-types' => 'Preciption Types'
         ],
     ],
 

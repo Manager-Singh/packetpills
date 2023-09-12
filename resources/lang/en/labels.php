@@ -215,6 +215,23 @@ return [
                     'total' => 'drug total|drugs total',
                 ],
             ],
+            'preciption-types' => [
+                'all' => 'All Preciption Types',
+                'active' => 'Preciption Types List',
+                'create' => 'Create Preciption Types',
+                'deactivated' => 'Deactivated Preciption Types',
+                'deleted' => 'Deleted Preciption Types',
+                'edit' => 'Edit Preciption Types',
+                'management' => 'Preciption Types Management',
+
+                'table' => [
+                    'created' => 'Created',
+                    'id' => 'ID',
+                   'preciption_type'=>'Preciption Type',
+                    'status' => 'Status',
+                    'createdat' => 'Created At',
+                ],
+            ],
 
             'blog-category' => [
                 'all' => 'All Blog Categories',

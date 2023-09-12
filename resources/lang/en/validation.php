@@ -219,6 +219,11 @@ return [
                     'name' => 'Tag Name',
                     'status' => 'Status',
                 ],
+                'preciption-types' => [
+                    'preciption_type' => 'Preciption Type',
+                    'status' => 'Status',
+                    'slug' => 'Preciption Type Slug',
+                ],
 
                 'blogs' => [
                     'title' => 'Blog Title',

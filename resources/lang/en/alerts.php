@@ -88,6 +88,12 @@ return [
             'updated' => 'The enterprise connect was successfully updated.',
             'deleted' => 'The enterprise connect was successfully deleted.',
         ],
+        'preciption-types'=> [
+            'created' => 'The preciption types was successfully created.',
+            'updated' => 'The preciption types was successfully updated.',
+            'deleted' => 'The preciption types was successfully deleted.',
+        ],
+        
     ],
 
     'frontend' => [

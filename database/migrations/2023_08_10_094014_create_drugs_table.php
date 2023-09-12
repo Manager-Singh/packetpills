@@ -43,6 +43,7 @@ class CreateDrugsTable extends Migration
             $table->longtext('precautions')->nullable();
             $table->longtext('warnings')->nullable();
             $table->string('status')->default('active')->comment('active,inactive');
+            $table->integer('preciption_types_id')->unsigned()->index();
             $table->timestamps();
             $table->softDeletes();
         });
