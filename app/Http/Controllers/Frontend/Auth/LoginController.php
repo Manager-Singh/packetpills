@@ -67,7 +67,7 @@ class LoginController extends Controller
     //         return json_encode(['error' => 1, 'message' => $e]);
     //   //  echo "Error: " . $e->getMessage();
     //     }  
-        return view('frontend.auth.new-login');
+        return view('frontend.auth.new-login'); 
     }
 
     /**

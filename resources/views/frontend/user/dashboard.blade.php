@@ -31,7 +31,7 @@
               </a>
             </div>  
             <div class="col-md-3">
-            <a href="#">
+            <a href="{{route('frontend.user.prescription.upload')}}">
               <div class="med-info bg-light">
                 <p><i class="fa fa-list" aria-hidden="true"></i></p> 
                 <p class="txt"><strong> Have a new Prescription? </strong></p>

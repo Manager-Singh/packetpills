@@ -154,4 +154,8 @@ class DashboardController extends Controller
     {
          return view('frontend.user.order'); 
     }
+    public function healthCard()
+    {
+         return view('frontend.user.health-card'); 
+    }
 }

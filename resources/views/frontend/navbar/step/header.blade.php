@@ -2,13 +2,13 @@
      <nav id="sidebarMenu" class="collapse sidebar bg-white">
          <div class="position-sticky">
              <div class="list-group list-group-flush mt-4 main">
-                 <a href="#" class="list-group-item list-group-item-action py-2 active" aria-current="true">
+                 <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true">
                      <i class="fa fa-user" aria-hidden="true"></i><span>Personal</span>
                  </a>
                  <a href="#" class="list-group-item list-group-item-action py-2">
                      <i class="fa fa-heart" aria-hidden="true"></i><span>Health</span>
                  </a>
-                 <a href="#" class="list-group-item list-group-item-action py-2">
+                 <a href="{{route('frontend.user.health.card')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}">
                      <i class="fa fa-id-card-o" aria-hidden="true"></i><span>Health Card</span>
                  </a>
                  <a href="#" class="list-group-item list-group-item-action py-2">
@@ -23,13 +23,13 @@
              </div>
              <div class="list-group list-group-flush mt-4">
                  <p class="txt"><strong>Medications and Prescriptions</strong></p>
-                 <a href="#" class="list-group-item list-group-item-action py-2">
+                 <a href="{{route('frontend.user.medications')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}">
                      <i class="fa fa-medkit" aria-hidden="true"></i><span class="mx-3">Medications</span>
                  </a>
-                 <a href="#" class="list-group-item list-group-item-action py-2">
+                 <a href="{{route('frontend.user.orders')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}">
                      <i class="fa fa-ambulance" aria-hidden="true"></i><span class="mx-3">Orders</span>
                  </a>
-                 <a href="#" class="list-group-item list-group-item-action py-2">
+                 <a href="{{route('frontend.user.prescription')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}">
                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="mx-3">Prescriptions</span>
                  </a>
                  <div class="acc-info">
@@ -49,7 +49,7 @@
                  <div class="sidebar-footer">
                      <div class="left">
                          <a href="#">
-                             <img src="./assets/images/logo.png" alt="logo" />
+                             <img src="{{ asset('step/assets/images/logo.png') }}" alt="logo" />
                          </a>
                      </div>
                      <div class="right">
@@ -79,10 +79,10 @@
      </div>
      <div class="row menu">
          <ul>
-             <li><a href="{{route('frontend.user.dashboard')}}" class="{{ (Route::currentRouteName() == 'frontend.user.dashboard') ? 'active' : '' }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-             <li><a href="{{route('frontend.user.medications')}}" class="{{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}" ><i class="fa fa-medkit" aria-hidden="true"></i> Medication</a></li>
-             <li><a href="{{route('frontend.user.prescription')}}" class="{{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}"><i class="fa fa-list-alt" aria-hidden="true"></i> Prescription</a></li>
-             <li><a href="{{route('frontend.user.orders')}}" class="{{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}"><i class="fa fa-truck" aria-hidden="true"></i> Orders</a></li>
+             <li><a href="{{route('frontend.user.dashboard')}}" class="{{ (Route::currentRouteName() == 'frontend.user.dashboard') ? 'active' : '' }}"><i class="fa fa-home" aria-hidden="true"></i> @lang('Frontend/dashboard.header.home')</a></li>
+             <li><a href="{{route('frontend.user.medications')}}" class="{{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}" ><i class="fa fa-medkit" aria-hidden="true"></i> @lang('Frontend/dashboard.header.medication')</a></li>
+             <li><a href="{{route('frontend.user.prescription')}}" class="{{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}"><i class="fa fa-list-alt" aria-hidden="true"></i> @lang('Frontend/dashboard.header.prescription') </a></li>
+             <li><a href="{{route('frontend.user.orders')}}" class="{{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}"><i class="fa fa-truck" aria-hidden="true"></i> @lang('Frontend/dashboard.header.orders')</a></li>
          </ul>
 
      </div>
