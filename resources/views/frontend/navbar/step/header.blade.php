@@ -17,7 +17,7 @@
                  <a href="#" class="list-group-item list-group-item-action py-2">
                      <i class="fa fa-home" aria-hidden="true"></i><span>Address</span>
                  </a>
-                 <a href="#" class="list-group-item list-group-item-action py-2">
+                 <a href="{{route('frontend.user.insurance')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.insurance') ? 'active' : '' }}">
                      <i class="fa fa-shield" aria-hidden="true"></i><span>Insurance</span>
                  </a>
              </div>

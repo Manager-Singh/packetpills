@@ -8,6 +8,8 @@ use App\Exceptions\GeneralException;
 use App\Models\Auth\Role;
 use App\Models\Auth\SocialAccount;
 use App\Models\Auth\User;
+use App\Models\HealthCard;
+use App\Models\Insurance;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\UploadedFile;
@@ -378,5 +380,71 @@ class UserRepository extends BaseRepository
         }
 
         return $result;
+    }
+
+    public function createHealthCard(array $data){
+        
+        $healthCard = new HealthCard;
+
+        $front_img = $data['front_img'];
+        $back_img = $data['back_img'];
+        
+        $healthCard = new HealthCard;
+        $healthCard->user_id = auth()->user()->id;
+        if($front_img){
+            
+                $fileName   = time() . '.' . $front_img->getClientOriginalExtension();
+                $destinationPath = public_path('img/frontend/health-card');
+                $front_img->move($destinationPath, $fileName);
+                $front_url = 'img/frontend/health-card/'.$fileName;
+                $healthCard->front_img = $front_url;
+                
+        } 
+        if($back_img){
+            
+            $fileName   = time() . '.' . $back_img->getClientOriginalExtension();
+            $destinationPath = public_path('img/frontend/health-card');
+            $back_img->move($destinationPath, $fileName);
+            $back_url = 'img/frontend/health-card/'.$fileName;
+            $healthCard->back_img = $back_url;
+            
+        }         
+          //dd($healthCard);
+            $healthCard->save();
+            return $healthCard;
+        
+    }
+
+    public function createInsurance(array $data){
+        
+        
+        $front_img = $data['front_img'];
+        $back_img = $data['back_img'];
+        
+        $insurance = new Insurance;
+        $insurance->user_id = auth()->user()->id;
+        if($front_img){
+            
+                $fileName   = time() . '.' . $front_img->getClientOriginalExtension();
+                $destinationPath = public_path('img/frontend/insurance');
+                $front_img->move($destinationPath, $fileName);
+                $front_url = 'img/frontend/insurance/'.$fileName;
+                $insurance->front_img = $front_url;
+                
+        } 
+        if($back_img){
+            
+            $fileName   = time() . '.' . $back_img->getClientOriginalExtension();
+            $destinationPath = public_path('img/frontend/insurance');
+            $back_img->move($destinationPath, $fileName);
+            $back_url = 'img/frontend/insurance/'.$fileName;
+            $insurance->back_img = $back_url;
+            
+        }  
+        $insurance->type = 'primary ';       
+          //dd($healthCard);
+            $insurance->save();
+            return $insurance;
+        
     }
 }

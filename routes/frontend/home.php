@@ -41,5 +41,8 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         // User Profile Specific
         Route::patch('profile/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('health-card', [DashboardController::class, 'healthCard'])->name('health.card');
+        Route::post('health-card/save', [DashboardController::class, 'healthCardsave'])->name('health.card.save');
+        Route::get('insurance', [DashboardController::class, 'insurance'])->name('insurance');
+        Route::post('insurance/save', [DashboardController::class, 'insurancesave'])->name('insurance.save');
     });
 });

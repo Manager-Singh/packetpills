@@ -8,14 +8,14 @@
 				    <div class="col-md-6">
               <div class="user-info">
                 <i class="fa fa-address-card-o" aria-hidden="true"></i>
-                <p class="txt-large">Your provincial Health Card</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
+                <p class="txt-large">Your insurance details</p>
+                <p class="txt">We direct bill all insurances and provincial plans like Pharmacare, OHIP+ and ODB. </p>
               </div> 
 
 				    </div>
 				    <div class="col-md-6">
 
-                        <form name="myForm" method='post' action="{{route('frontend.user.health.card.save')}}" enctype='multipart/form-data'>
+                        <form name="myForm" method='post' action="{{route('frontend.user.insurance.save')}}" enctype='multipart/form-data'>
                         @csrf      
                         <div class="row">
                             <div class="col-md-6">
