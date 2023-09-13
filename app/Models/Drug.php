@@ -17,20 +17,6 @@ class Drug extends BaseModel
      * @var array
      */
     protected $guarded = [];
-    // protected $fillable = [
-    //     'name',
-    //     'slug',
-    //     'publish_datetime',
-    //     'content',
-    //     'meta_title',
-    //     'cannonical_link',
-    //     'meta_keywords',
-    //     'meta_description',
-    //     'status',
-    //     'featured_image',
-    //     'created_by',
-    //     'updated_by',
-    // ];
 
     /**
      * Dates.
@@ -49,9 +35,7 @@ class Drug extends BaseModel
      */
     protected $statuses = [
         0 => 'InActive',
-        1 => 'Published',
-        2 => 'Draft',
-        3 => 'Scheduled',
+        1 => 'Active',
     ];
 
     /**
@@ -61,5 +45,9 @@ class Drug extends BaseModel
      */
     protected $appends = [
         'display_status',
+        'drug_cost',
+        'patient_pays',
+        'drug_strength',
+        'drug_pack',
     ];
 }

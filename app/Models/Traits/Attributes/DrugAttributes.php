@@ -22,8 +22,36 @@ trait DrugAttributes
      */
     public function getDisplayStatusAttribute(): string
     {
-       //dd($this->status);
-        return $this->statuses[$this->status] ?? null;
+        if ($this->isActive()) {
+            return "<label class='label label-success'>".trans('labels.general.active').'</label>';
+        }
+
+        return "<label class='label label-danger'>".trans('labels.general.inactive').'</label>';
+    }
+
+    public function getDrugCostAttribute()
+    {
+       //dd($this->percent_markup);
+        return  round($this->pharmacy_purchase_price + (($this->percent_markup / 100) * $this->pharmacy_purchase_price), 2); 
+        
+    }
+    public function getPatientPaysAttribute()
+    {
+        
+        return round($this->dispensing_fee + $this->delivery_cost+ $this->getDrugCostAttribute(), 2); 
+        
+    }
+    public function getDrugStrengthAttribute()
+    {
+        
+        return $this->strength .' '. $this->strength_unit; 
+        
+    }
+    public function getDrugPackAttribute()
+    {
+        
+        return $this->pack_size .' '. $this->pack_unit; 
+        
     }
 
     /**
@@ -34,5 +62,10 @@ trait DrugAttributes
     public function getStatusesAttribute(): array
     {
         return $this->statuses;
+    }
+
+    public function isActive()
+    {
+        return $this->status == 1;
     }
 }
