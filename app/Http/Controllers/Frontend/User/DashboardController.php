@@ -158,4 +158,32 @@ class DashboardController extends Controller
     {
          return view('frontend.user.health-card'); 
     }
+
+    public function healthCardsave(Request $request){
+        
+
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->createHealthCard($data);
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('HealthCard Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
+    }
+    public function insurance(){
+         return view('frontend.user.insurance'); 
+    }
+    public function insuranceSave(Request $request){
+        
+
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->createInsurance($data);
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Insurance Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
+    }
 }
