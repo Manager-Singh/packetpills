@@ -186,4 +186,32 @@ class DashboardController extends Controller
         }
         
     }
+    public function address(){
+        return view('frontend.user.address'); 
+    }
+    public function addressSave(Request $request){
+        
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->saveAddress($data);
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Address Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
+    }
+    public function payment(){
+        return view('frontend.user.payment'); 
+    }
+    public function paymentSave(Request $request){
+        
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->savePayment($data);
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Payment Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
+    }
 }

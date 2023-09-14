@@ -10,6 +10,8 @@ use App\Models\Auth\SocialAccount;
 use App\Models\Auth\User;
 use App\Models\HealthCard;
 use App\Models\Insurance;
+use App\Models\Address;
+use App\Models\Card;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\UploadedFile;
@@ -447,4 +449,35 @@ class UserRepository extends BaseRepository
             return $insurance;
         
     }
+    public function saveAddress(array $data){
+      // dd($data);
+        $address = new Address;
+        $address->user_id = auth()->user()->id;
+        $address->address1 = $data['address1'];
+        $address->address2 = $data['address2'];
+        $address->city = $data['city'];
+        $address->postal_code = $data['postal_code'];
+        $address->province = $data['province'];
+        $address->address_type = $data['address_type'];
+        if(isset($data['mark_as'])){
+            $address->mark_as = 'default';
+        }
+             
+        $address->save();
+        return $address;
+        
+    }
+    public function savePayment(array $data){
+        // dd($data);
+          $card = new Card;
+          $card->user_id = auth()->user()->id;
+          $card->card_number = $data['card_number'];
+          $card->expiry_date = $data['expiry_date'];
+          $card->cvc = $data['cvc'];
+          
+           
+          $card->save();
+          return $card;
+          
+      }
 }
