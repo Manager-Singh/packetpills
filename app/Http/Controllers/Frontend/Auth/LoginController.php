@@ -295,7 +295,7 @@ class LoginController extends Controller
                 return 1;
         }
         catch (Exception $e){
-           
+         //  dd($e);
             return 0;
         }
     }

@@ -38,6 +38,37 @@ class Drug extends BaseModel
         1 => 'Active',
     ];
 
+    protected $drugs_formats = [
+        'lotion' => 'Lotion',
+        'tablets' => 'Tablets',
+        'syrup' => 'Syrup',
+        'cream' => 'Cream',
+        'spray' => 'Spray',
+        'shampoo' => 'Shampoo',
+    ];
+    protected $strength_units = [
+        '%' => 'Percent',
+        'mg' => 'Miligram',
+        'mg/ml' => 'Miligram Per Milliliter',  
+    ];
+    protected $pack_units = [
+        'ml' => 'Milliliter',
+        'g' => 'Grams',
+        'capsules' => 'Capsules',
+        'tablet' => 'Tablet',
+        'wafers' => 'Wafers',
+        'suppositiores' => 'Suppositiores',
+    ];
+    protected $insurance_coverage_in_percent = [
+        '0' => '0',
+        '50' => '50',
+        '80' => '80',
+        '90' => '90',
+        '100' => '100',
+    ];
+   
+    
+
     /**
      * Appends.
      *

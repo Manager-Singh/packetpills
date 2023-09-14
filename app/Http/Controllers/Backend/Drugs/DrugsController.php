@@ -10,7 +10,7 @@ use App\Http\Responses\Backend\Drug\EditResponse;
 use App\Http\Responses\RedirectResponse;
 use App\Http\Responses\ViewResponse;
 use App\Models\Drug;
-use App\Models\BlogCategory;
+use App\Models\PreciptionType;
 use App\Models\BlogTag;
 use App\Repositories\Backend\DrugsRepository;
 use Illuminate\Support\Facades\View;
@@ -50,8 +50,16 @@ class DrugsController extends Controller
      */
     public function create(ManageDrugsRequest $request, Drug $drug)
     {
-        
-        return new ViewResponse('backend.drugs.create', ['status' => $drug->statuses]);
+        $preciption_type = PreciptionType::get()->pluck('preciption_type','id')->toArray();
+       
+        return new ViewResponse('backend.drugs.create', [
+            'status' => $drug->statuses,
+            'formats'=>$drug->drugs_formats,
+            'strength_unit'=>$drug->strength_units,
+            'pack_unit'=>$drug->pack_units,
+            'insurance_coverage_in_percent'=>$drug->insurance_coverage,
+            'preciption_types_id'=>$preciption_type,
+        ]);
     }
 
     
@@ -63,6 +71,21 @@ class DrugsController extends Controller
      */
     public function store(StoreDrugsRequest $request)
     {
+
+       
+        if($request->insurance_coverage_in_percent==0){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 1]); 
+        }elseif($request->insurance_coverage_in_percent==50){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 0.5]); 
+        }elseif($request->insurance_coverage_in_percent==80){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 0.2]); 
+        }elseif($request->insurance_coverage_in_percent==90){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 0.1]); 
+        }elseif($request->insurance_coverage_in_percent==100){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 0]); 
+        }
+        // print_r($request->all());
+        // die;
        $this->repository->create($request->except(['_token', '_method']));
         
         return new RedirectResponse(route('admin.drugs.index'), ['flash_success' => __('alerts.backend.drugs.created')]);
@@ -76,9 +99,11 @@ class DrugsController extends Controller
      */
     public function edit(Drug $drug, ManageDrugsRequest $request)
     {
+        $preciption_type = PreciptionType::get()->pluck('preciption_type','id')->toArray();
+
        
 
-        return new EditResponse($drug, $drug->statuses);
+        return new EditResponse($drug, $drug->statuses,$drug->drugs_formats,$drug->strength_units,$drug->pack_units,$drug->insurance_coverage,$preciption_type);
     }
 
     /**
@@ -89,6 +114,17 @@ class DrugsController extends Controller
      */
     public function update(Drug $drug, UpdateDrugsRequest $request)
     {
+        if($request->insurance_coverage_in_percent==0){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 1]); 
+        }elseif($request->insurance_coverage_in_percent==50){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 0.5]); 
+        }elseif($request->insurance_coverage_in_percent==80){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 0.2]); 
+        }elseif($request->insurance_coverage_in_percent==90){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 0.1]); 
+        }elseif($request->insurance_coverage_in_percent==100){
+            $request->merge(['insurance_coverage_calculation_in_percent' => 0]); 
+        }
         $this->repository->update($drug, $request->except(['_token', '_method']));
 
         return new RedirectResponse(route('admin.drugs.index'), ['flash_success' => __('alerts.backend.drugs.updated')]);

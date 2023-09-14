@@ -263,7 +263,7 @@ return [
                     'patient_pays' => 'Patient Pays',
                     'drug_indication' => 'Drug Indication',
                     'standard_dosage' => 'Standard Dosage',
-                    'contraindications' => 'Contraindications',
+                    'contraindications_precautions_warnings' => 'Contraindications Precautions Warnings',
                     'precautions' => 'Precautions',
                     'warnings' => 'Warnings',
                     'status' => 'Status',

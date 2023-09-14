@@ -96,7 +96,6 @@ class DrugsRepository extends BaseRepository
                 'drugs.manufacturer',
                 'drugs.din',
                 'drugs.pack_size',
-                'drugs.presciption_required',
                 'drugs.upc',
                 'drugs.pharmacy_purchase_price',
                 'drugs.delivery_cost',
@@ -129,8 +128,8 @@ class DrugsRepository extends BaseRepository
 
         return DB::transaction(function () use ($input) {
 
-            $input['strength'] = serialize($input['strength']);
-            $input['price'] = serialize($input['price']);
+            // $input['strength'] = serialize($input['strength']);
+            // $input['price'] = serialize($input['price']);
             if ($drug = Drug::create($input)) {
 
                     event(new DrugCreated($drug));
@@ -151,8 +150,6 @@ class DrugsRepository extends BaseRepository
 
 
         return DB::transaction(function () use ($drug, $input) {
-            $input['strength'] = serialize($input['strength']);
-            $input['price'] = serialize($input['price']);
             if ($drug->update($input)) {
 
 

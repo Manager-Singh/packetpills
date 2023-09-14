@@ -63,6 +63,23 @@ trait DrugAttributes
     {
         return $this->statuses;
     }
+    public function getDrugsFormatsAttribute(): array
+    {
+        return $this->drugs_formats;
+    }
+    public function getStrengthUnitsAttribute(): array
+    {
+        return $this->strength_units;
+    }
+    public function getPackUnitsAttribute(): array
+    {
+        return $this->pack_units;
+    }
+    public function getInsuranceCoverageAttribute(): array
+    {
+        return $this->insurance_coverage_in_percent;
+    }
+
 
     public function isActive()
     {

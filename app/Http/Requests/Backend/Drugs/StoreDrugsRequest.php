@@ -27,12 +27,24 @@ class StoreDrugsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:191', 'unique:drugs,name'],
-            //'available_form' => ['required', 'string'],
-            'description' => ['required', 'string'],
+            'brand_name' => ['required', 'string'],
+            'generic_name' => ['required', 'string'],
+            'main_therapeutic_use' => ['required', 'string'],
+            'strength' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'strength_unit' => ['required'],
+            'format' => ['required'],
+            'pack_size' => ['required'],
+            'pack_unit' => ['required'],
+            'din' => ['required'],
+            'upc' => ['required'],
+            'pharmacy_purchase_price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'percent_markup' => ['required'],
+            'dispensing_fee' => ['required'],
+            'insurance_coverage_in_percent' => ['required'],
+            'status' => ['required'],
         ];
     }
-
+    
     /**
      * Get the validation message that apply to the request.
      *
@@ -41,9 +53,7 @@ class StoreDrugsRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Please insert Drug Name',
-            'name.max' => 'Drug Title may not be greater than 191 characters.',
-            'name.unique' => 'The drug name already taken. Please try with different name.',
+
         ];
     }
 }
