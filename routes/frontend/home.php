@@ -40,13 +40,17 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         
         // User Profile Specific
         Route::patch('profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('health-information', [DashboardController::class, 'healthInformation'])->name('health.information');
         Route::get('health-card', [DashboardController::class, 'healthCard'])->name('health.card');
         Route::post('health-card/save', [DashboardController::class, 'healthCardsave'])->name('health.card.save');
         Route::get('insurance', [DashboardController::class, 'insurance'])->name('insurance');
         Route::post('insurance/save', [DashboardController::class, 'insurancesave'])->name('insurance.save');
         Route::get('address', [DashboardController::class, 'address'])->name('address');
+        Route::get('address/add', [DashboardController::class, 'addressAdd'])->name('address.add');
         Route::post('address/save', [DashboardController::class, 'addressSave'])->name('address.save');
         Route::get('payment', [DashboardController::class, 'payment'])->name('payment');
+        Route::get('payment/add', [DashboardController::class, 'paymentAdd'])->name('payment.add');
         Route::post('payment/save', [DashboardController::class, 'paymentSave'])->name('payment.save');
+        Route::get('personal-details', [DashboardController::class, 'personalDetails'])->name('personal.details');
     });
 });

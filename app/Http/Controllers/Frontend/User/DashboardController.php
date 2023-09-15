@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Frontend\User;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Frontend\Auth\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Address;
 
 /**
  * Class DashboardController.
@@ -158,6 +158,10 @@ class DashboardController extends Controller
     {
          return view('frontend.user.health-card'); 
     }
+    public function healthInformation()
+    {
+         return view('frontend.user.health-information'); 
+    }
 
     public function healthCardsave(Request $request){
         
@@ -187,6 +191,12 @@ class DashboardController extends Controller
         
     }
     public function address(){
+        $user = Auth::user();
+        $data['address']= Address::where('user_id',$user->id)->get();
+       
+        return view('frontend.user.address-view',$data); 
+    }
+    public function addressAdd(){
         return view('frontend.user.address'); 
     }
     public function addressSave(Request $request){
@@ -201,6 +211,11 @@ class DashboardController extends Controller
         
     }
     public function payment(){
+        
+        return view('frontend.user.payment-view'); 
+    }
+    public function paymentAdd(){
+        
         return view('frontend.user.payment'); 
     }
     public function paymentSave(Request $request){
@@ -213,5 +228,9 @@ class DashboardController extends Controller
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }
         
+    }
+    public function personalDetails(){
+        $data['user'] = Auth::user();
+        return view('frontend.user.personal',$data); 
     }
 }
