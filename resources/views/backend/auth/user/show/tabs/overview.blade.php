@@ -7,8 +7,12 @@
             </tr>
 
             <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.name')</th>
-                <td>{{ $user->name }}</td>
+                <th>@lang('labels.backend.access.users.tabs.content.overview.first_name')</th>
+                <td>{{ $user->first_name }}</td>
+            </tr>
+            <tr>
+                <th>@lang('labels.backend.access.users.tabs.content.overview.last_name')</th>
+                <td>{{ $user->last_name }}</td>
             </tr>
 
             <tr>

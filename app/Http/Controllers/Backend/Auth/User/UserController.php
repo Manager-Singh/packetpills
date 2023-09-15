@@ -77,6 +77,7 @@ class UserController extends Controller
      */
     public function show(ManageUserRequest $request, User $user)
     {
+        // dd($user);
         return view('backend.auth.user.show')
             ->withUser($user);
     }

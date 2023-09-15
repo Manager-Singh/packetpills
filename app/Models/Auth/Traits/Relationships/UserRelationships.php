@@ -6,6 +6,11 @@ use App\Models\Auth\PasswordHistory;
 use App\Models\Auth\Permission;
 use App\Models\Auth\Role;
 use App\Models\Auth\SocialAccount;
+use App\Models\Address;
+use App\Models\HealthCard;
+use App\Models\Insurance;
+use App\Models\Card;
+
 
 trait UserRelationships
 {
@@ -52,5 +57,23 @@ trait UserRelationships
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);
+    }
+
+    public function address()
+    {
+        return $this->hasMany(Address::class);
+    }
+    
+    public function healthcard()
+    {
+        return $this->hasOne(HealthCard::class);
+    }
+    public function insurance()
+    {
+        return $this->hasMany(Insurance::class);
+    }
+    public function card()
+    {
+        return $this->hasMany(Card::class);
     }
 }
