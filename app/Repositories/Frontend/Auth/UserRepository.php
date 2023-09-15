@@ -11,7 +11,7 @@ use App\Models\Auth\User;
 use App\Models\HealthCard;
 use App\Models\Insurance;
 use App\Models\Address;
-use App\Models\Card;
+use App\Models\PaymentMethod;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\UploadedFile;
@@ -469,7 +469,7 @@ class UserRepository extends BaseRepository
     }
     public function savePayment(array $data){
         // dd($data);
-          $card = new Card;
+          $card = new PaymentMethod;
           $card->user_id = auth()->user()->id;
           $card->card_number = $data['card_number'];
           $card->expiry_date = $data['expiry_date'];

@@ -6,7 +6,7 @@ namespace App\Models;
 use App\Models\Traits\ModelAttributes;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Card extends BaseModel
+class PaymentMethod extends BaseModel
 {
     use ModelAttributes, SoftDeletes;
 
@@ -16,7 +16,6 @@ class Card extends BaseModel
      * @var array
      */
     protected $guarded = [];
-    protected $table = 'card';
 
     /**
      * Dates.
