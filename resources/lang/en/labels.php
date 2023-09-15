@@ -117,6 +117,8 @@ return [
                     'titles' => [
                         'overview' => 'Overview',
                         'history' => 'History',
+                        'address' => 'Address',
+                        'healthcard' => 'Health Card',
                     ],
 
                     'content' => [

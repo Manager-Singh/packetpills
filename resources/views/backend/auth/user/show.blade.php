@@ -24,12 +24,32 @@
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-expanded="true"><i class="fas fa-user"></i> @lang('labels.backend.access.users.tabs.titles.overview')</a>
                     </li>
+                    @if(count($user->address)>0)
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-expanded="true"><i class="fas fa-address-book"></i> @lang('labels.backend.access.users.tabs.titles.address')</a>
+                    </li>
+                    @endif
+                    @if(isset($user->healthcard) && !empty($user->healthcard))
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#healthcard" role="tab" aria-controls="address" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.healthcard')</a>
+                    </li>
+                    @endif
                 </ul>
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="overview" role="tabpanel" aria-expanded="true">
                         @include('backend.auth.user.show.tabs.overview')
                     </div><!--tab-->
+                    @if(count($user->address)>0)
+                    <div class="tab-pane" id="address" role="tabpanel" aria-expanded="true">
+                        @include('backend.auth.user.show.tabs.address')
+                    </div><!--tab-->
+                    @endif
+                    @if(isset($user->healthcard) && !empty($user->healthcard))
+                    <div class="tab-pane" id="healthcard" role="tabpanel" aria-expanded="true">
+                        @include('backend.auth.user.show.tabs.healthcard')
+                    </div><!--tab-->
+                    @endif
                 </div><!--tab-content-->
             </div><!--col-->
         </div><!--row-->
