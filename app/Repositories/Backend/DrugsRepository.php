@@ -7,6 +7,7 @@ use App\Events\Backend\Drugs\DrugDeleted;
 use App\Events\Backend\Drugs\DrugUpdated;
 use App\Exceptions\GeneralException;
 use App\Models\Drug;
+use App\Models\DrugImages;
 use App\Models\BlogCategory;
 use App\Models\BlogMapCategory;
 use App\Models\BlogMapTag;
@@ -16,6 +17,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class DrugsRepository extends BaseRepository
 {
@@ -122,18 +124,39 @@ class DrugsRepository extends BaseRepository
      *
      * @return bool
      */
-    public function create(array $input)
+    public function create(array $input,$files)
     {
+        // print_r($input);
+        // print_r('--------------------------------------------------------------');
+        // print_r($files);
+        // die();
 
-
-        return DB::transaction(function () use ($input) {
+        return DB::transaction(function () use ($input,$files) {
 
             // $input['strength'] = serialize($input['strength']);
             // $input['price'] = serialize($input['price']);
             if ($drug = Drug::create($input)) {
 
                     event(new DrugCreated($drug));
+                        // print_r($files);
+                        if(count($files)>0){
+                            foreach ($files as $key => $image) {
+                                $uuid = Uuid::uuid4()->toString();
+                                $drug_images = new DrugImages;
+                                $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                                $destinationPath = public_path('img/backend/drugs');
+                                $image->move($destinationPath, $fileName);
+                                $front_url = 'img/backend/drugs/'.$fileName;
+                                $drug_images->image = $front_url;
+                                $drug_images->drug_id = $drug->id;
+                                if($key==0){
+                                    $drug_images->type = 'default';
+                                }
+                                $drug_images->save();
+                            
 
+                            }
+                        }
                     return $drug;
                 }
 
@@ -145,15 +168,52 @@ class DrugsRepository extends BaseRepository
      * @param \App\Models\Drug $drug
      * @param array $input
      */
-    public function update(Drug $drug, array $input)
+    public function update(Drug $drug, array $input,$files)
     {
 
 
-        return DB::transaction(function () use ($drug, $input) {
+        return DB::transaction(function () use ($drug, $input,$files) {
+
             if ($drug->update($input)) {
 
 
                 event(new DrugUpdated($drug));
+                // print_r($files );
+                //         die;
+                if(isset($files)){
+                    if(count($files)>0){
+                    foreach ($files as $key => $image) {
+                        $uuid = Uuid::uuid4()->toString();
+                        $drug_images = new DrugImages;
+                        $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                        $destinationPath = public_path('img/backend/drugs');
+                        $image->move($destinationPath, $fileName);
+                        $front_url = 'img/backend/drugs/'.$fileName;
+                        $drug_images->image = $front_url;
+                        $drug_images->drug_id = $drug->id;
+                        if($key==0){
+                            $drug_images->type = 'default';
+                        }
+                        $drug_images->save();
+                    
+
+                    }
+                    $all_drug_images = DrugImages::where('drug_id',$drug->id)->get();
+                    if(count($all_drug_images)>0){
+                        DrugImages::where('drug_id',$drug->id)
+                        ->update(['type' => null]);
+                        $m = DrugImages::where('drug_id',$drug->id)->orderBy('id', 'ASC')->take(1)->first();
+                        $m->type = 'default';
+                        $m->save();
+                        // print_r($m );
+                        // die;
+                    }
+                  
+                    
+                    
+                   
+                }
+            }
 
                 return $drug->fresh();
             }
@@ -185,26 +245,7 @@ class DrugsRepository extends BaseRepository
         });
     }
 
-    /**
-     * Upload Image.
-     *
-     * @param array $input
-     *
-     * @return array $input
-     */
-    public function uploadImage($input)
-    {
-        if (isset($input['featured_image']) && ! empty($input['featured_image'])) {
-            $avatar = $input['featured_image'];
-            $fileName = time().$avatar->getClientOriginalName();
-
-            $this->storage->put($this->upload_path.$fileName, file_get_contents($avatar->getRealPath()));
-
-            $input = array_merge($input, ['featured_image' => $fileName]);
-        }
-
-        return $input;
-    }
+  
 
     /**
      * Destroy Old Image.
@@ -216,5 +257,23 @@ class DrugsRepository extends BaseRepository
         $fileName = $model->featured_image;
 
         return $this->storage->delete($this->upload_path.$fileName);
+    }
+
+    
+
+    public function delete_image($id)
+    {
+
+        $d_image = DrugImages::where('id',$id)->first();
+        
+
+        if ($d_image->forceDelete()) {
+           
+
+            return $id;
+        }
+        // $fileName = $model->featured_image;
+
+        // return $this->storage->delete($this->upload_path.$fileName);
     }
 }

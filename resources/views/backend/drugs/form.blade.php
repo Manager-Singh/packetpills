@@ -12,7 +12,7 @@
     <!--row-->
 
     <hr>
-
+    
     <div class="row mt-4 mb-4">
         <div class="col">
             <div class="form-group row">
@@ -21,6 +21,47 @@
                 <div class="col-md-10">
                     {{ Form::text('brand_name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.brand_name')]) }}
                 </div>
+                <!--col-->
+            </div>
+
+            <div class="form-group row">
+                {{ Form::label('brand_name', trans('validation.attributes.backend.access.drugs.brand_images'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                   
+                <div class="files-wrapper">
+                @if(isset($drug))
+                @if(isset($drug->images))
+              
+                @foreach($drug->images as $images)
+                <div class="file-upload img-thumb-wrapper-{{$images->id}}">
+                        <div class="file-select file-select-box">
+                            <div class="imagePreview" style="background-image: url({{asset($images->image)}});z-index:2"></div>
+                            <!-- <button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button> -->
+                            <!-- <input type="file" name="files[]" class="profileimg"> -->
+                            
+                        </div>
+                        <button class="file-close-custom-btn-edit" type="button" onclick="remove_image({{$images->id}})"><i class="fa fa-close"></i></button>
+                    </div>
+                    @endforeach
+                @endif  
+                @else
+                <div class="file-upload">
+                        <div class="file-select file-select-box">
+                            <div class="imagePreview"></div>
+                            <!-- <button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button> -->
+                            <input type="file" name="files[]" class="profileimg">
+                        </div>
+                    </div> 
+                @endif   
+                    
+                </div>
+                <button type="button" class="add-more btn btn-success" onclick="add_more()"> Add More</button>
+                
+                
+                
+              
+            </div>
                 <!--col-->
             </div>
             <div class="form-group row">
@@ -222,6 +263,65 @@
     <!--row-->
 </div>
 <!--card-body-->
+<style>
+.imagePreview{
+    width: 90px;
+    height: 90px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 0;
+    position: absolute;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+}
+.file-upload{
+    display: inline-block;
+}
+
+.file-select {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.file-select.file-select-box {
+    width: 90px;
+    height: 90px;
+    display: inline-block;
+    border-radius: 14px;
+}
+.file-upload-custom-btn {
+    width: 90px;
+    height: 90px;
+    border: none;
+    background-color: #ed192412;
+    color: #ed1924;
+    font-size: 30px;
+    z-index: 1;
+    position: relative;
+}
+.file-select-name{
+    margin-left: 15px;
+}
+.file-select input[type=file] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.file-select.file-select-box input[type=file]{
+    z-index: 2;
+}
+
+.file-upload + .file-upload{
+    margin-left: 10px;
+}
+    </style>
 
 @section('pagescript')
     <script>
@@ -254,5 +354,91 @@
             console.log(FTX);
             FTX.Drugs.edit.init("{{ config('locale.languages.' . app()->getLocale())[1] }}");
         });
+
+        $(document).ready(function() {
+            $(document).on('change', '.file-upload input[type="file"]', function() {
+				var filename = $(this).val();
+				if (/^\s*$/.test(filename)) {
+						$(this).parents(".file-upload").removeClass('active');
+						$(this).parents(".file-upload").find(".file-select-name").text("No file chosen...");
+				} else {
+						$(this).parents(".file-upload").addClass('active');
+						$(this).parents(".file-upload").find(".file-select-name").text(filename.substring(filename.lastIndexOf("\\") + 1, filename.length));
+				}
+				var uploadFile = $(this);
+				var files = !!this.files ? this.files : [];
+				if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+				if (/^image/.test(files[0].type)) { // only image file
+						var reader = new FileReader(); // instance of the FileReader
+						reader.readAsDataURL(files[0]); // read the local file
+
+						reader.onloadend = function() { // set image data as background of div
+								uploadFile.closest(".file-upload").find('.imagePreview').css({"background-image": "url(" + this.result + ")", "z-index": "2"});
+								uploadFile.closest(".file-upload").find('.file-select').append('<span class="close"><i class="fas fa-close"></i></span>');
+						}
+				}
+		});
+        });
+        function removeFileFromFileList(index) {
+            console.log(index);
+            const dt = new DataTransfer()
+            const input = document.getElementById('drugfilesUpload')
+            const { files } = input
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i]
+                if (index !== i)
+
+                dt.items.add(file) // here you exclude the file. thus removing it.
+            }
+            
+            input.files = dt.files // Assign the updates list
+            }
+        function remove_image(id)
+        {
+           // alert(id);
+           $("#overlay").fadeIn(300);
+            var ajaxurl = '{{route('admin.drugs.image.remove', ':id')}}';
+            ajaxurl = ajaxurl.replace(':id', id);
+            $.ajax({
+                url: ajaxurl,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $(".img-thumb-wrapper-"+id).remove();
+                    console.log(data);
+                }
+            }).done(function() {
+            setTimeout(function(){
+                $("#overlay").fadeOut(300);
+            },500);
+            });
+        }
+        
+        function add_more() {
+            // files-wrapper
+            var numItems = $('.file-upload').length;
+            console.log(numItems);
+            var html = '';
+            html += '<div class="file-upload '+numItems+'">';
+            html += '<div class="file-select file-select-box">';
+            html += '<div class="imagePreview"></div>';
+            html += '<button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button>';
+            html += '<input type="file" name="files[]" class="profileimg">';
+            html += '</div>';  
+            html += '<button class="file-close-custom-btn" type="button"><i class="fa fa-close"></i></button>';  
+            html += '</div>';
+            $(".files-wrapper").append(html);
+            }
+            function delete_file() {
+              
+                $(this).closest('.file-upload').remove();
+            }
+            $(document).on("click", ".file-close-custom-btn", function(e) {
+                e.preventdefault;
+                $(this).closest('.file-upload').remove();
+                });
+            
     </script>
 @stop

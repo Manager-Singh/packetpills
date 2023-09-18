@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Backend\Drugs\DrugsController;
 
 // Drugs Management
 Route::group(['namespace' => 'Drugs'], function () {
@@ -7,4 +8,5 @@ Route::group(['namespace' => 'Drugs'], function () {
     //For DataTables
     Route::post('drugs/get', 'DrugsTableController')
         ->name('drugs.get');
+    Route::get('drugs/image/{id}', [DrugsController::class, 'delete_image'])->name('drugs.image.remove');
 });

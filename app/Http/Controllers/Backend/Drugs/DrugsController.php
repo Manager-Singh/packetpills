@@ -84,9 +84,8 @@ class DrugsController extends Controller
         }elseif($request->insurance_coverage_in_percent==100){
             $request->merge(['insurance_coverage_calculation_in_percent' => 0]); 
         }
-        // print_r($request->all());
-        // die;
-       $this->repository->create($request->except(['_token', '_method']));
+       
+       $this->repository->create($request->except(['_token', '_method','files']),$request->file('files'));
         
         return new RedirectResponse(route('admin.drugs.index'), ['flash_success' => __('alerts.backend.drugs.created')]);
     }
@@ -125,7 +124,7 @@ class DrugsController extends Controller
         }elseif($request->insurance_coverage_in_percent==100){
             $request->merge(['insurance_coverage_calculation_in_percent' => 0]); 
         }
-        $this->repository->update($drug, $request->except(['_token', '_method']));
+        $this->repository->update($drug, $request->except(['_token', '_method','files']),$request->file('files'));
 
         return new RedirectResponse(route('admin.drugs.index'), ['flash_success' => __('alerts.backend.drugs.updated')]);
     }
@@ -141,5 +140,9 @@ class DrugsController extends Controller
         $this->repository->delete($drug);
 
         return new RedirectResponse(route('admin.drugs.index'), ['flash_success' => __('alerts.backend.drugs.deleted')]);
+    }
+    public function delete_image($id){
+        $d_data = $this->repository->delete_image($id);
+        return $d_data;
     }
 }

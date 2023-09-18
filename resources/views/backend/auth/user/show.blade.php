@@ -34,6 +34,11 @@
                         <a class="nav-link" data-toggle="tab" href="#healthcard" role="tab" aria-controls="address" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.healthcard')</a>
                     </li>
                     @endif
+                    @if(count($user->insurance)>0)
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#insurance" role="tab" aria-controls="address" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.healthcard')</a>
+                    </li>
+                    @endif
                 </ul>
 
                 <div class="tab-content">
@@ -48,6 +53,11 @@
                     @if(isset($user->healthcard) && !empty($user->healthcard))
                     <div class="tab-pane" id="healthcard" role="tabpanel" aria-expanded="true">
                         @include('backend.auth.user.show.tabs.healthcard')
+                    </div><!--tab-->
+                    @endif
+                    @if(count($user->insurance)>0)
+                    <div class="tab-pane" id="insurance" role="tabpanel" aria-expanded="true">
+                        @include('backend.auth.user.show.tabs.insurance')
                     </div><!--tab-->
                     @endif
                 </div><!--tab-content-->
