@@ -2,10 +2,10 @@
      <nav id="sidebarMenu" class="collapse sidebar bg-white">
          <div class="position-sticky">
              <div class="list-group list-group-flush mt-4 main">
-                 <a href="#" class="list-group-item list-group-item-action py-2" aria-current="true">
+                 <a href="{{route('frontend.user.personal.details')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.personal.details') ? 'active' : '' }}" aria-current="true">
                      <i class="fa fa-user" aria-hidden="true"></i><span>Personal</span>
                  </a>
-                 <a href="#" class="list-group-item list-group-item-action py-2">
+                 <a href="{{route('frontend.user.health.information')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}">
                      <i class="fa fa-heart" aria-hidden="true"></i><span>Health</span>
                  </a>
                  <a href="{{route('frontend.user.health.card')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}">
@@ -81,15 +81,19 @@
          @php 
             $profile_route =   [
                                 'frontend.user.health.card',
+                                'frontend.user.health.information',
                                 'frontend.user.insurance',
                                 'frontend.user.address',
                                 'frontend.user.payment',
+                                'frontend.user.payment.add',
+                                'frontend.user.personal.details',
+                                'frontend.user.address.add',
                                 ];
          @endphp
          @if(in_array(Route::getCurrentRoute()->getName(),$profile_route))
             <ul>
-            <li><a href="#" class=""><i class="fa fa-user-o" aria-hidden="true"></i> Personal details</a></li>
-            <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> Health details</a></li>
+            <li><a href="{{route('frontend.user.personal.details')}}" class="{{ (Route::currentRouteName() == 'frontend.user.personal.details') ? 'active' : '' }}"><i class="fa fa-user-o" aria-hidden="true"></i> Personal details</a></li>
+            <li><a href="{{route('frontend.user.health.information')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}"><i class="fa fa-heart-o" aria-hidden="true"></i> Health details</a></li>
             <li><a href="{{route('frontend.user.health.card')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}"><i class="fa fa-address-card-o" aria-hidden="true"></i> Health Card</a></li>
             <li><a href="{{route('frontend.user.insurance')}}" class="{{ (Route::currentRouteName() == 'frontend.user.insurance') ? 'active' : '' }}"><i class="fa fa-shield" aria-hidden="true"></i> Insurance</a></li>
             <li><a href="{{route('frontend.user.address')}}" class="{{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Address</a></li>

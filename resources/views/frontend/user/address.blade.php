@@ -60,7 +60,7 @@
                 <input type="checkbox" id="mark" name="mark_as" value="yes">
                 <label for="mark"> Mark this as a default address</label>
                 <div class="btn-div">
-                  <button type="button" class="save button" onclick="" > Cancel </button>
+                  <a href="{{route('frontend.user.address')}}"   > <button type="button" class="save button"> Cancel </button></a>
                   <button type="submit" class="next button" onclick="" >Save</button>
                  
                   </div>
