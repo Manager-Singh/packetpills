@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group row">
-                {{ Form::label('brand_name', trans('validation.attributes.backend.access.drugs.brand_images'), ['class' => 'col-md-2 from-control-label required']) }}
+                {{ Form::label('brand_name', trans('Drug Images'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
                    
@@ -119,14 +119,7 @@
             </div>
 
             <!--form-group-->
-            <div class="form-group row">
-                {{ Form::label('manufacturer', trans('validation.attributes.backend.access.drugs.manufacturer'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                <div class="col-md-10">
-                    {{ Form::text('manufacturer', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.drugs.manufacturer')]) }}
-                </div>
-                <!--col-->
-            </div>
+            
 
             <!--form-group-->
             <div class="form-group row">

@@ -138,8 +138,9 @@ class DrugsRepository extends BaseRepository
             if ($drug = Drug::create($input)) {
 
                     event(new DrugCreated($drug));
-                        // print_r($files);
-                        if(count($files)>0){
+                        print_r($files);
+                        if(isset($files)){
+                            if(count($files)>0){
                             foreach ($files as $key => $image) {
                                 $uuid = Uuid::uuid4()->toString();
                                 $drug_images = new DrugImages;
@@ -157,6 +158,7 @@ class DrugsRepository extends BaseRepository
 
                             }
                         }
+                    }
                     return $drug;
                 }
 
