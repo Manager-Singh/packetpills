@@ -68,9 +68,9 @@
      </nav>
      <div class="row dashboard">
          <div class="col-md-6">
-             <button class="user-ins">AM</button>
+             <button class="user-ins">{{authUserShortName()}}</button>
              <p class="info">Viewing as</p>
-             <p class="user-name">Alexandre <i class="fa fa-sort-desc" aria-hidden="true"></i></p>
+             <p class="user-name"> {{(auth()->check()) ? auth()->user()->full_name: 'Alexandre'}} <i class="fa fa-sort-desc" aria-hidden="true"></i></p>
          </div>
          <div class="col-md-6 text-end">
              
