@@ -60,6 +60,11 @@
                         @include('backend.auth.user.show.tabs.insurance')
                     </div><!--tab-->
                     @endif
+                    @if(count($user->address)>0)
+                    <div class="tab-pane" id="address" role="tabpanel" aria-expanded="true">
+                        @include('backend.auth.user.show.tabs.address')
+                    </div><!--tab-->
+                    @endif
                 </div><!--tab-content-->
             </div><!--col-->
         </div><!--row-->

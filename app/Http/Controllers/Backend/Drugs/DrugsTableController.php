@@ -37,6 +37,20 @@ class DrugsTableController extends Controller
             ->addColumn('display_status', function ($drugs) {
                 return $drugs->display_status;
             })
+            ->addColumn('drug_image', function ($drugs) {
+
+              $imgurl ='';
+                if(count($drugs->images)>0){
+                    foreach ($drugs->images as $image){
+                        if($image->type=='default'){
+                            $imgurl = '<img class="listing-image" src="/'.$image->image.'" width=90 height=90>';
+                        }
+                    }
+                    
+                    return $imgurl;
+                }
+               
+            })
             ->addColumn('generic_name', function ($drugs) {
                 return $drugs->generic_name;
             })

@@ -20,6 +20,7 @@
                     },
                     columns: [
 
+                        { data: 'drug_image', name: 'drugs.drug_image' },
                         { data: 'brand_name', name: 'drugs.brand_name' },
                         { data: 'generic_name', name: 'drugs.generic_name' },
                         { data: 'main_therapeutic_use', name: 'drugs.main_therapeutic_use' },

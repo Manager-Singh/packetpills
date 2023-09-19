@@ -25,6 +25,7 @@
                     <table id="drugs-table" class="table" data-ajax_url="{{ route('admin.drugs.get') }}">
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>{{ trans('labels.backend.access.drugs.table.brand_name') }}</th>
                                 <th>{{ trans('labels.backend.access.drugs.table.generic_name') }}</th>
                                 <th>{{ trans('labels.backend.access.drugs.table.main_therapeutic_use') }}</th>
@@ -53,6 +54,12 @@
     </div>
     <!--card-body-->
 </div>
+<style>
+    img.listing-image {
+    box-shadow: 0px 0px 5px 0px #000;
+    border-radius: 14px;
+}
+    </style>
 <!--card-->
 @endsection
 

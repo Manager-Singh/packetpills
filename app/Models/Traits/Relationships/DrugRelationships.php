@@ -18,7 +18,7 @@ trait DrugRelationships
     }
 
     public function default_image() {
-        return $this->images()->where('type','=', 'default');
+        return $this->images()->where('type', 'default');
     }
 
 }
