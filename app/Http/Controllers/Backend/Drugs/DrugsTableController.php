@@ -43,7 +43,7 @@ class DrugsTableController extends Controller
                 if(count($drugs->images)>0){
                     foreach ($drugs->images as $image){
                         if($image->type=='default'){
-                            $imgurl = '<img class="listing-image" src="/'.$image->image.'" width=90 height=90>';
+                            $imgurl = '<img class="listing-image" src="/public/'.$image->image.'" width=90 height=90>';
                         }
                     }
                     
