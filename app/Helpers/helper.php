@@ -198,3 +198,29 @@ if (! function_exists('checkDatabaseConnection')) {
         }
     }
 }
+
+if (! function_exists('authUserShortName')) {
+    /**
+     * @return string
+     */
+    function authUserShortName()
+    {
+        try {
+            if(auth()->check()){
+                $user = auth()->user();
+                if(!empty($user->first_name) && !empty($user->last_name)){
+                    return substr($user->first_name, 0, 1).''.substr($user->first_name, 0, 1);
+                }elseif(!empty($user->first_name) && empty($user->last_name)){
+                    return substr($user->first_name, 0, 2);
+                }else{
+                    return 'MP';
+                }
+
+            }
+
+            return true;
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
+}
