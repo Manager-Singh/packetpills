@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         
       if(Auth::check() && Auth::user()->is_profile_status == 'pending'){
-                return redirect()->route('frontend.user.account');
+                return redirect()->route('frontend.auth.step.personal');
       }  
         return view('frontend.main-index');
     }

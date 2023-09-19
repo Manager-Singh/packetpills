@@ -35,7 +35,8 @@
 	<link rel="stylesheet" href="{{asset('step/assets/css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="{{asset('plugins/parsley/parsley.css')}}"> -->
-    </head>
+    <link rel='stylesheet' href='//common.olemiss.edu/_js/sweet-alert/sweet-alert.css'></link>   
+  </head>
     <body>
       
            
@@ -70,7 +71,7 @@
         <script src="{{ asset('website/assets/js/vendor.js')}}" type="module"></script>
         <script src="{{ asset('website/assets/js/main.js')}}" type="module"></script>
         <!-- <script src="{{asset('plugins/parsley/parsley.js')}}"></script> -->
-
+        <script src="//common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
         <script>
     $(document).ready(function(){       
      

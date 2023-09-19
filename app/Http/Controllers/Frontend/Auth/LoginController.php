@@ -158,6 +158,7 @@ class LoginController extends Controller
                 ]);
             
         $credentials = $request->only('mobile_no', 'password');
+        //dd($credentials);
         if (Auth::attempt($credentials)) {
 
         $user = Auth::user();

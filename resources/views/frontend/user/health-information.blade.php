@@ -17,24 +17,24 @@
               </div>
 				    <div class="col-md-8">
 
-                        <form name="myForm" action="" method="get">
-                     
+                        <form name="myForm" method='post' action="{{route('frontend.user.health.information.save')}}" enctype='multipart/form-data'>
+                     @csrf
                             <label for="lname">Do you have allergies to any medications?</label>
-                            <div class="radio">
-                                <input type="radio" name="gender" value="Male">
-                                <label>Yes</label>
+                            <div class="radio1">
+                                <input type="radio" id="yes" name="allergie" value="1" {{ ($health_info && $health_info->allergies == 1) ? 'checked' : '' }}/>
+                                <label for="yes">Yes</label>
                             
                            
-                                <input type="radio" name="gender" value="Female">
-                                <label>No</label> 
+                                <input type="radio" id="no" name="allergie" value="0" {{ ($health_info && $health_info->allergies == 0) ? 'checked' : '' }}/>
+                                <label for="no">No</label> 
                            
                             </div>
                             <label for="lname">Enter any over the counter supplements and medications that you are taking</label>
-                            <textarea id="w3review" name="w3review" rows="6" cols="100"></textarea>
+                            <textarea id="w3review" name="supplement_medicaton" rows="6" cols="100" placeholder="(e.g. Vitamin A, etc)" required>{{ ($health_info) ? $health_info->supplements_medications : '' }}</textarea>
                             
-                            <button type="button" class="next button" onclick="" >Save</button>
+                            <button type="submit" class="next button" onclick="" >Save</button>
                             
-                   
+                                
                           </form>
                  
                  

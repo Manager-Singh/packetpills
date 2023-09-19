@@ -6,6 +6,7 @@ use App\Repositories\Frontend\Auth\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
+use App\Models\HealthInformation;
 
 /**
  * Class DashboardController.
@@ -160,9 +161,22 @@ class DashboardController extends Controller
     }
     public function healthInformation()
     {
-         return view('frontend.user.health-information'); 
+        $user = Auth::user();
+        $data['health_info']= HealthInformation::where('user_id',$user->id)->first();
+         return view('frontend.user.health-information',$data); 
     }
-
+    public function healthInformationsave(Request $request){
+        
+        
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->createHealthInformation($data);
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Health Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
+    }
     public function healthCardsave(Request $request){
         
 
@@ -193,11 +207,17 @@ class DashboardController extends Controller
     public function address(){
         $user = Auth::user();
         $data['address']= Address::where('user_id',$user->id)->get();
-       
+        $data['user'] = $user;
         return view('frontend.user.address-view',$data); 
     }
     public function addressAdd(){
-        return view('frontend.user.address'); 
+        $data=[];
+        $data['user'] = Auth::user();
+        if(isset($_GET['id'])){
+            
+            $data['address']= Address::find($_GET['id']);
+        }
+        return view('frontend.user.address',$data); 
     }
     public function addressSave(Request $request){
         
@@ -232,5 +252,17 @@ class DashboardController extends Controller
     public function personalDetails(){
         $data['user'] = Auth::user();
         return view('frontend.user.personal',$data); 
+    }
+    public function addressDelete(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->deleteAddress($data);
+        if($output){
+            $success = true;
+        }else{
+            $success = false;
+        }
+
+        return array('success'=>$success,'message'=>'');
+        
     }
 }

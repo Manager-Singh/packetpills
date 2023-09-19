@@ -17,4 +17,8 @@ trait DrugRelationships
         return $this->hasMany(DrugImages::class);
     }
 
+    public function default_image() {
+        return $this->images()->where('type','=', 'default');
+    }
+
 }

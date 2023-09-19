@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
 @endpush
 @section('content')
+
 <div class="container mt-5 mb-5 pt-5">
     <div class="row ">
         <div class="col-md-12">
@@ -22,7 +23,7 @@
             <div class="tab-pane" id="tabs-2" role="tabpanel" aria-labelledby="tab-2">
                @if($address)
                 @foreach($address as $addres)
-                  <div class="order">
+                  <div class="order address-{{$addres->id}}">
                     <div class="order-head">
                         <input type="radio" name="payment" {{ (isset($addres->mark_as) && $addres->mark_as == 'default') ? 'checked' : '' }} value="payment">
                         <p class="txt-b">{{$addres->address_type}}</p>
@@ -32,8 +33,8 @@
                             <div class="col-md-8">
                                 <p class="txt"> {{$addres->address1}}  {{$addres->address2}}</p>
                                 <p class="txt"> {{$addres->city}} {{$addres->province}}</p>
-                                <a class="txt-b" href="#"> Delete </a>
-                                <a class="txt-b" href="#"> Edit </a>
+                                <a class="txt-b" href="javascript:void(0)" onclick="removeAddress({{$addres->id}},{{$user->id}})"> Delete </a>
+                                <a class="txt-b" href="{{route('frontend.user.address.add')}}?id={{$addres->id}}"> Edit </a>
                             </div>
                         </div>
                     </div>
@@ -66,6 +67,44 @@ $(document).ready(function() {
 
 
 });
+
+function removeAddress(id,user_id) 
+    {
+        console.log(id);
+        
+       
+        swal({
+            title: "Are you sure you want to do this?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+            },
+            function(){
+                ajaxurl = "{{ route('frontend.user.address.delete') }}";
+                            _token = "{{ csrf_token() }}";
+                            $.ajax({
+                                url: ajaxurl,
+                                type: "POST",
+                                data: {_token:_token,id:id,user_id:user_id},
+                                success: function(data){
+                                    if(data.success)
+                                    {
+                                        $('.address-'+id).fadeOut('slow');
+                                        swal("Success!", 'Address Deleted.', "success");
+                                        //location.reload();
+                                    }
+                                }
+                            });
+            });
+
+return false;
+
+
+     
+    }
 </script>
 @if(config('access.captcha.login'))
 @captchaScripts

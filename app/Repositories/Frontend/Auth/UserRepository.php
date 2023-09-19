@@ -9,6 +9,7 @@ use App\Models\Auth\Role;
 use App\Models\Auth\SocialAccount;
 use App\Models\Auth\User;
 use App\Models\HealthCard;
+use App\Models\HealthInformation;
 use App\Models\Insurance;
 use App\Models\Address;
 use App\Models\PaymentMethod;
@@ -451,7 +452,12 @@ class UserRepository extends BaseRepository
     }
     public function saveAddress(array $data){
       // dd($data);
+      if(isset($data['id']) && Address::find($data['id'])){
+        $address = Address::find($data['id']);
+      }else{
         $address = new Address;
+      }
+        
         $address->user_id = auth()->user()->id;
         $address->address1 = $data['address1'];
         $address->address2 = $data['address2'];
@@ -461,8 +467,10 @@ class UserRepository extends BaseRepository
         $address->address_type = $data['address_type'];
         if(isset($data['mark_as'])){
             $address->mark_as = 'default';
+        }else{
+            $address->mark_as = 'undefault';
         }
-             
+                  
         $address->save();
         return $address;
         
@@ -480,4 +488,27 @@ class UserRepository extends BaseRepository
           return $card;
           
       }
+
+      public function createHealthInformation(array $data){
+        
+        $healthInformation = new HealthInformation;
+        $healthInformation->user_id = auth()->user()->id;
+        $healthInformation->allergies = $data['allergie'];
+        $healthInformation->supplements_medications = $data['supplement_medicaton'];
+                
+          
+        $healthInformation->save();
+        return $healthInformation;
+        
+    }
+    public function deleteAddress(array $data){
+        
+        $address = Address::find($data['id']);
+        if($address->delete()){
+            return true;
+        }
+        
+    }
+
 }
+                
