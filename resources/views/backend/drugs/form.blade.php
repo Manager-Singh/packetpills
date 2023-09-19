@@ -49,7 +49,7 @@
                 <div class="file-upload">
                         <div class="file-select file-select-box">
                             <div class="imagePreview"></div>
-                            <!-- <button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button> -->
+                            <button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button>
                             <input type="file" name="files[]" class="profileimg">
                         </div>
                     </div> 
@@ -291,13 +291,14 @@
     height: 90px;
     display: inline-block;
     border-radius: 14px;
+    box-shadow: 0px 0px 5px 0px #44434347;
 }
 .file-upload-custom-btn {
     width: 90px;
     height: 90px;
     border: none;
-    background-color: #ed192412;
-    color: #ed1924;
+    background-color: #5bc3272b;
+    color: #289b54;
     font-size: 30px;
     z-index: 1;
     position: relative;
@@ -320,6 +321,19 @@
 
 .file-upload + .file-upload{
     margin-left: 10px;
+}
+.file-upload {
+    position: relative;
+}
+button.file-close-custom-btn, button.file-close-custom-btn-edit {
+    position: absolute;
+    right: -6px;
+    top: -6px;
+    border: 1px;
+    border-radius: 100px;
+    color: red;
+    background: #ff00002b;
+    z-index: 2;
 }
     </style>
 
@@ -418,7 +432,13 @@
         
         function add_more() {
             // files-wrapper
+            $("#overlay").fadeIn(300);
             var numItems = $('.file-upload').length;
+            if(numItems>=4){
+                alert('You only add four Images');
+                $("#overlay").fadeOut(300);
+                return false;
+            }
             console.log(numItems);
             var html = '';
             html += '<div class="file-upload '+numItems+'">';
@@ -430,6 +450,8 @@
             html += '<button class="file-close-custom-btn" type="button"><i class="fa fa-close"></i></button>';  
             html += '</div>';
             $(".files-wrapper").append(html);
+            $("#overlay").fadeOut(300);
+           
             }
             function delete_file() {
               
