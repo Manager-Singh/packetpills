@@ -31,12 +31,12 @@
                     @endif
                     @if(isset($user->healthcard) && !empty($user->healthcard))
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#healthcard" role="tab" aria-controls="address" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.healthcard')</a>
+                        <a class="nav-link" data-toggle="tab" href="#healthcard" role="tab" aria-controls="healthcard" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.healthcard')</a>
                     </li>
                     @endif
                     @if(count($user->insurance)>0)
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#insurance" role="tab" aria-controls="address" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.healthcard')</a>
+                        <a class="nav-link" data-toggle="tab" href="#insurance" role="tab" aria-controls="insurance" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.insurance')</a>
                     </li>
                     @endif
                 </ul>

@@ -10,6 +10,7 @@ use App\Models\Address;
 use App\Models\HealthCard;
 use App\Models\Insurance;
 use App\Models\PaymentMethod;
+use App\Models\HealthInformation;
 
 
 trait UserRelationships
@@ -76,4 +77,9 @@ trait UserRelationships
     {
         return $this->hasMany(PaymentMethod::class);
     }
+    public function healthinformation()
+    {
+        return $this->hasOne(HealthInformation::class);
+    }
+    
 }

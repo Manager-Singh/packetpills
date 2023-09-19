@@ -119,6 +119,7 @@ return [
                         'history' => 'History',
                         'address' => 'Address',
                         'healthcard' => 'Health Card',
+                        'insurance' => 'Insurance',
                     ],
 
                     'content' => [
