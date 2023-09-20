@@ -127,10 +127,9 @@ class PrescriptionRepository extends BaseRepository
     public function create(array $data)
     {
         
-        
             $images = $data['prescription_upload'];
             $prescription = new Prescription;
-            $prescription->prescription_id =  time().rand(0,99999);
+            $prescription->prescription_number =  time().rand(0,99999);
             $prescription->user_id = Auth::user()->id;
             if($images && $prescription->save()){
                 foreach($images as $key => $image){

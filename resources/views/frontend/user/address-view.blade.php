@@ -25,7 +25,7 @@
                 @foreach($address as $addres)
                   <div class="order address-{{$addres->id}}">
                     <div class="order-head">
-                        <input type="radio" name="payment" {{ (isset($addres->mark_as) && $addres->mark_as == 'default') ? 'checked' : '' }} value="payment">
+                        <input type="radio" class="address-default" name="payment"  {{ (isset($addres->mark_as) && $addres->mark_as == 'default') ? 'checked' : '' }} value="{{$addres->id}}">
                         <p class="txt-b">{{$addres->address_type}}</p>
                     </div>
                     <div class="order-body">
@@ -64,6 +64,29 @@
 @push('after-scripts')
 <script>
 $(document).ready(function() {
+    $('.address-default').on('click',function(){
+        console.log($(this).val());
+        var id = $(this).val();
+        var user_id = "{{auth()->user()->id}}";
+        ajaxurl = "{{ route('frontend.user.address.default.change') }}";
+        _token = "{{ csrf_token() }}";
+        $.ajax({
+            url: ajaxurl,
+            type: "POST",
+            data: {_token:_token,id:id,user_id:user_id},
+            success: function(data){
+                if(data.success)
+                {
+                    //$('.address-'+id).fadeOut('slow');
+                    //swal("Success!", 'Address Default is set.', "success");
+                    //location.reload();
+                }
+            }
+        });
+
+        
+
+    })
 
 
 });
@@ -100,7 +123,7 @@ function removeAddress(id,user_id)
                             });
             });
 
-return false;
+        return false;
 
 
      

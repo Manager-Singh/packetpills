@@ -53,10 +53,13 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::get('address/add', [DashboardController::class, 'addressAdd'])->name('address.add');
         Route::post('address/save', [DashboardController::class, 'addressSave'])->name('address.save');
         Route::post('address/delete', [DashboardController::class, 'addressDelete'])->name('address.delete');
+        Route::post('address/defaultChange', [DashboardController::class, 'addressDefaultChange'])->name('address.default.change');
         Route::get('address/add', [DashboardController::class, 'addressAdd'])->name('address.add');
         Route::get('payment', [DashboardController::class, 'payment'])->name('payment');
         Route::get('payment/add', [DashboardController::class, 'paymentAdd'])->name('payment.add');
         Route::post('payment/save', [DashboardController::class, 'paymentSave'])->name('payment.save');
+        Route::post('payment/delete', [DashboardController::class, 'paymentDelete'])->name('payment.delete');
+        Route::post('payment/defaultChange', [DashboardController::class, 'paymentDefaultChange'])->name('payment.default.change');
         Route::get('personal-details', [DashboardController::class, 'personalDetails'])->name('personal.details');
     });
 });
