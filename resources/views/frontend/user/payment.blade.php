@@ -32,7 +32,7 @@
                 
 
                 <div class="btn-div">
-                  <button type="button" class="save button" onclick="" > Cancel </button>
+                  <a href="{{route('frontend.user.payment')}}"><button type="button" class="save button" onclick="" > Cancel </button></a>
                   <button type="submit" class="next button" onclick="" >Save</button>
                  
                   </div>

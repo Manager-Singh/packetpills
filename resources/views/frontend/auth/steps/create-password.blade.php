@@ -24,13 +24,13 @@
                 @csrf
                     <div class="col-md-12 verify">
                         <label for="lname">Choose a Password</label>
-                        <input type="text" id="password" name="password" placeholder="" />
+                        <input type="password" id="password" name="password" placeholder="" />
                         <p class="reshare"> <a href="">Show</a></p>
                         <p class="info">Please enter 8 or more characters</p>
                     </div>
                     <div class="col-md-12 verify">
                         <label for="lname">Confirm Password</label>
-                        <input type="text" id="confirm_password" name="confirm_password" placeholder="" />
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="" />
                         <p class="reshare"> <a href="">Show</a></p>
                         <p class="info">Please enter 8 or more characters</p>
                         <p class="info"><span id='message'></span></p>

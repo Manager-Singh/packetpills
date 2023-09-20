@@ -72,28 +72,40 @@
             
 
     //   });
-    $(document).ready(function(){       
+    $(document).ready(function(){   
+      var upload_count = 1;     
        
        $('#table').on('click', "#add", function(e) {
-      $('.add_row').append('<div class="col-md-6 mt-3"><div class="upload"><input class="file" id="myFile" name="prescription_upload[]" type="file" onchange="readURL(this);" multiple /><label for="myfile"><i class="fa fa-camera" aria-hidden="true"></i> <br>Upload or take a picture <br>(page 1)</label> <div class="upload-after" ><img id="output" src="#" width="100%" />	<button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button> </div></div></div>');
+        upload_count += 1;
+        if(upload_count <= 8 ){
+            $('.add_row').append('<div class="col-md-6 mt-3"><div class="upload"><input class="file" id="myFile" name="prescription_upload[]" type="file" onchange="readURL(this);" multiple /><label for="myfile"><i class="fa fa-camera" aria-hidden="true"></i> <br>Upload or take a picture <br>(page '+upload_count+')</label> <div class="upload-after" ><img id="output" src="#" width="100%" />	<button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button> </div></div></div>');
+          }
+          if(upload_count == 8){
+            $(this).fadeOut();
+          }
       e.preventDefault();
        });
           
        $('#table').on('click', "#delete", function(e) {
-      $(this).closest('.upload-after').remove();
+        
+        $(this).closest('.upload-after').find('#output').attr('src', '#').width(0).height(0);
+        //$(this).closest('.upload-after').remove();
+        $(this).closest('.upload-after').removeClass("d-block");
  
       });
     });
  
 
     function readURL(input) {
-      console.log($(input.target).closest('#output'));  
+      
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-          $('#output').attr('src', e.target.result).width(150).height(200);
-          $('.upload-after').addClass("d-block");
+          console.log($(input).parent());
+          
+          $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
+          $(input).parent().find('.upload-after').addClass("d-block");
         };
 
         reader.readAsDataURL(input.files[0]);

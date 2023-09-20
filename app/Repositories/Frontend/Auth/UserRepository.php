@@ -510,5 +510,34 @@ class UserRepository extends BaseRepository
         
     }
 
+    public function addressDefaultChange(array $data){
+        $addressdefaultIds = Address::where(['user_id'=> $data['user_id'],'mark_as'=>'default'])->update(['mark_as'=>'undefault']);
+        $address = Address::find($data['id']);
+        $address->mark_as = 'default';
+        if($address->update()){
+            //$address = Address::where('id',$data['id'])->update(['mark_as'=>'undefault']);
+            return true;
+        }
+        
+    }
+
+    public function deletePayment(array $data){
+        
+        $address = PaymentMethod::find($data['id']);
+        if($address->delete()){
+            return true;
+        }
+        
+    }
+    public function paymentDefaultChange(array $data){
+        $addressdefaultIds = PaymentMethod::where(['user_id'=> $data['user_id'],'default'=>'yes'])->update(['default'=>'no']);
+        $address = PaymentMethod::find($data['id']);
+        $address->default = 'yes';
+        if($address->update()){
+            return true;
+        }
+        
+    }
+
 }
                 

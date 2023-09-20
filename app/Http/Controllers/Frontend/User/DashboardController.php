@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
 use App\Models\HealthInformation;
+use App\Models\PaymentMethod;
 
 /**
  * Class DashboardController.
@@ -231,8 +232,10 @@ class DashboardController extends Controller
         
     }
     public function payment(){
-        
-        return view('frontend.user.payment-view'); 
+        $user = Auth::user();
+        $data['payments']= PaymentMethod::where('user_id',$user->id)->get();
+        $data['user'] = $user;
+        return view('frontend.user.payment-view',$data); 
     }
     public function paymentAdd(){
         
@@ -256,6 +259,40 @@ class DashboardController extends Controller
     public function addressDelete(Request $request){
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->deleteAddress($data);
+        if($output){
+            $success = true;
+        }else{
+            $success = false;
+        }
+
+        return array('success'=>$success,'message'=>'');
+        
+    }
+    public function addressDefaultChange(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->addressDefaultChange($data);
+        if($output){
+            $success = true;
+        }else{
+            $success = false;
+        }
+        return array('success'=>$success,'message'=>'');
+        
+    }
+    public function paymentDefaultChange(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->paymentDefaultChange($data);
+        if($output){
+            $success = true;
+        }else{
+            $success = false;
+        }
+        return array('success'=>$success,'message'=>'');
+        
+    }
+    public function paymentDelete(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->deletePayment($data);
         if($output){
             $success = true;
         }else{
