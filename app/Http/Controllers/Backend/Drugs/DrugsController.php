@@ -80,7 +80,20 @@ class DrugsController extends Controller
 
        
         if($request->insurance_coverage_in_percent){
-            $per = $request->insurance_coverage_in_percent/100;
+            $name = DrugAttribute::where('id',$request->insurance_coverage_in_percent)->first()->name;
+            $int = (int)$name;
+            $float = (float)$name;
+    
+            $val = ($int == $float) ? $int : $float;
+            if($val ==0){
+                $per =  1;
+            }elseif($val ==100){
+                $per =  0;
+            }else{
+                $per = (((100-$val)*100)/100)/100;
+            }
+             
+            
             $request->merge(['insurance_coverage_calculation_in_percent' => $per]); 
         }
        
@@ -115,7 +128,19 @@ class DrugsController extends Controller
     public function update(Drug $drug, UpdateDrugsRequest $request)
     {
         if($request->insurance_coverage_in_percent){
-            $per = $request->insurance_coverage_in_percent/100;
+            
+            $name = DrugAttribute::where('id',$request->insurance_coverage_in_percent)->first()->name;
+            $int = (int)$name;
+            $float = (float)$name;
+    
+            $val = ($int == $float) ? $int : $float;
+            if($val ==0){
+                $per =  1;
+            }elseif($val ==100){
+                $per =  0;
+            }else{
+                $per = (((100-$val)*100)/100)/100;
+            }
             $request->merge(['insurance_coverage_calculation_in_percent' => $per]); 
         }
         $this->repository->update($drug, $request->except(['_token', '_method','files']),$request->file('files'));

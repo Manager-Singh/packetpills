@@ -482,6 +482,12 @@ button.file-close-custom-btn, button.file-close-custom-btn-edit {
                                             this.$content.find('.optionName').val('');
                                             return false;    
                                         }
+                                        if(optionName>100){
+
+                                            $.alert('Insurance coverage not Greter than 100');
+                                            this.$content.find('.optionName').val('');
+                                            return false;    
+                                        }
                                         $.ajax({
                                             url:'{{route("admin.drugs.create.attribute")}}',
                                             method:"POST",
