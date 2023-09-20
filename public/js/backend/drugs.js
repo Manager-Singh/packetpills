@@ -69,6 +69,7 @@
                     width: '100%'
                 });
                 this.selectors.strengthunit.select2({
+                    width: '100%',
                     placeholder:'Select Strength Unit',
                     language: {
                         noResults: function() {
@@ -84,6 +85,7 @@
                   });
 
                   this.selectors.formats.select2({
+                    width: '100%',
                     placeholder:'Select Format',
                     language: {
                         noResults: function() {
@@ -98,6 +100,7 @@
                    },
                   });
                   this.selectors.pack_unit.select2({
+                    width: '100%',
                     placeholder:'Select Pack Unit',
                     language: {
                         noResults: function() {
@@ -112,6 +115,7 @@
                    },
                   });
                   this.selectors.insurance_coverage.select2({
+                    width: '100%',
                     placeholder:'Select insurance coverage in %',
                     language: {
                         noResults: function() {
