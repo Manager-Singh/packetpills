@@ -101,7 +101,7 @@
                             {{ Form::text('strength', null, ['class' => 'form-control ', 'placeholder' => trans('validation.attributes.backend.access.drugs.strength')]) }}
                         </div>
                         <div class="col-md-6">
-                            {{ Form::select('strength_unit', $strength_unit, null, ['class' => 'form-control select2 status box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.strength_unit')]) }}
+                            {{ Form::select('strength_unit_id', $strength_unit, null, ['class' => 'form-control select2 strength-unit box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.strength_unit')]) }}
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                 {{ Form::label('format', trans('validation.attributes.backend.access.drugs.format'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::select('format', $formats, null, ['class' => 'form-control select2 status box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.format')]) }}
+                    {{ Form::select('format_id', $formats, null, ['class' => 'form-control select2 format box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.format')]) }}
                 </div>
                 <!--col-->
             </div>
@@ -131,7 +131,7 @@
                             {{ Form::text('pack_size', null, ['class' => 'form-control ', 'placeholder' => trans('validation.attributes.backend.access.drugs.pack_size')]) }}
                         </div>
                         <div class="col-md-6">
-                            {{ Form::select('pack_unit', $pack_unit, null, ['class' => 'form-control select2 status box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.pack_unit')]) }}
+                            {{ Form::select('pack_unit_id', $pack_unit, null, ['class' => 'form-control select2 pack_unit box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.pack_unit')]) }}
                         </div>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
                 {{ Form::label('insurance_coverage_in_percent', trans('validation.attributes.backend.access.drugs.insurance_coverage_in_percent'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::select('insurance_coverage_in_percent', $insurance_coverage_in_percent, null, ['class' => 'form-control select2 status box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.insurance_coverage_in_percent')]) }}
+                    {{ Form::select('insurance_coverage_in_percent', $insurance_coverage_in_percent, null, ['class' => 'form-control select2 insurance_coverage box-size', 'placeholder' => trans('validation.attributes.backend.access.drugs.insurance_coverage_in_percent')]) }}
                 </div>
                 <!--col-->
             </div>
@@ -450,10 +450,68 @@ button.file-close-custom-btn, button.file-close-custom-btn-edit {
               
                 $(this).closest('.file-upload').remove();
             }
+            
             $(document).on("click", ".file-close-custom-btn", function(e) {
                 e.preventdefault;
                 $(this).closest('.file-upload').remove();
                 });
+                function newoption(type,label,selector){
+                    $.confirm({
+                            title: 'Add New '+label+'!',
+                            content: '' +
+                            '<div class="form-group">' +
+                            '<label>Enter '+label+'</label>' +
+                            '<input type="text" placeholder="'+label+'" class="optionName form-control" value="'+$('.'+selector).data("select2").dropdown.$search.val()+'" required />' +
+                            '</div>'
+                            
+                            ,
+                            buttons: {
+                                formSubmit: {
+                                    text: 'Add',
+                                    btnClass: 'btn-blue',
+                                    action: function () {
+                                        var optionName = this.$content.find('.optionName').val();
+                                        var float= /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
+
+                                        if(!optionName){
+                                            $.alert('provide a valid '+label);
+                                            return false;
+                                        }
+                                        if(type=='insurance_coverage' && !float.test(optionName)){
+                                                $.alert('Insurance coverage must be float or int');
+                                            this.$content.find('.optionName').val('');
+                                            return false;    
+                                        }
+                                        $.ajax({
+                                            url:'{{route("admin.drugs.create.attribute")}}',
+                                            method:"POST",
+                                            data:{name:optionName,type:type},
+                                            success:function(data)
+                                            {
+                                                var obj = JSON.parse(data);
+                                             console.log(obj);
+                                            if(obj.message == 'yes')
+                                            {
+                                                if ($('.'+selector).find("option[value='" + obj.id + "']").length) {
+                                                    $('.'+selector).val(obj.id).trigger("change");
+                                                } else { 
+                                                    // Create the DOM option that is pre-selected by default
+                                                    var newState = new Option(obj.name,obj.id, true, true);
+                                                    // Append it to the select
+                                                    $('.'+selector).append(newState).trigger('change');
+                                                } 
+                                            }
+                                            }
+                                        })
+                                        //$.alert('Your name is ' + name);
+                                    }
+                                },
+                                cancel: function () {
+                                    //close
+                                },
+                            }
+                        });
+            }
             
     </script>
 @stop

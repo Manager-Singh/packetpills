@@ -20,11 +20,11 @@ class CreateDrugsTable extends Migration
             $table->string('generic_name')->nullable();
             $table->string('main_therapeutic_use')->nullable();
             $table->string('strength')->nullable();
-            $table->string('strength_unit')->nullable();
-            $table->string('format')->nullable();
+            $table->bigInteger('strength_unit_id')->unsigned()->index();
+            $table->bigInteger('format_id')->unsigned()->index();
             $table->text('manufacturer')->nullable();
             $table->string('pack_size')->nullable();
-            $table->string('pack_unit')->nullable();
+            $table->bigInteger('pack_unit_id')->unsigned()->index();
             $table->bigInteger('din')->nullable();
           //  $table->string('presciption_required')->nullable();
             $table->bigInteger('upc')->nullable();
@@ -32,7 +32,7 @@ class CreateDrugsTable extends Migration
             $table->bigInteger('percent_markup')->nullable();
           //  $table->float('drug_cost', 8, 3)->nullable();
             $table->float('dispensing_fee', 8, 2)->nullable();
-            $table->integer('insurance_coverage_in_percent')->nullable();
+            $table->bigInteger('insurance_coverage_in_percent')->unsigned()->index();
             $table->float('insurance_coverage_calculation_in_percent', 8, 2)->nullable();
             $table->integer('delivery_cost')->nullable();
             //$table->float('patient_pays', 8, 3)->nullable();
@@ -41,7 +41,7 @@ class CreateDrugsTable extends Migration
             $table->longtext('side_effect')->nullable();
             $table->longtext('contraindications_precautions_warnings')->nullable();
             $table->boolean('status')->default(1);
-            $table->integer('preciption_types_id')->unsigned()->index();
+            $table->bigInteger('preciption_types_id')->unsigned()->index();
             $table->timestamps();
             $table->softDeletes();
         });

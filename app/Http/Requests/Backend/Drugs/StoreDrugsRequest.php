@@ -31,10 +31,10 @@ class StoreDrugsRequest extends FormRequest
             'generic_name' => ['required', 'string'],
             'main_therapeutic_use' => ['required', 'string'],
             'strength' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
-            'strength_unit' => ['required'],
-            'format' => ['required'],
+            'strength_unit_id' => ['required'],
+            'format_id' => ['required'],
             'pack_size' => ['required'],
-            'pack_unit' => ['required'],
+            'pack_unit_id' => ['required'],
             'din' => ['required'],
             'upc' => ['required'],
             'pharmacy_purchase_price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
@@ -53,7 +53,12 @@ class StoreDrugsRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'strength_unit_id.required' => 'Please select strength unit of drug',
+            'format_id.required' => 'Please select format of drug',
+            'pack_unit_id.required' => 'Please select pack unit of drug',
+            'insurance_coverage_in_percent.required' => 'Please select insurance coverage in percent of drug',
+            
+           
         ];
     }
 }

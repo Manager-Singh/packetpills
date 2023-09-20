@@ -12,8 +12,10 @@ use App\Http\Responses\ViewResponse;
 use App\Models\Drug;
 use App\Models\PreciptionType;
 use App\Models\BlogTag;
+use App\Models\DrugAttribute;
 use App\Repositories\Backend\DrugsRepository;
 use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 
 class DrugsController extends Controller
 {
@@ -51,13 +53,17 @@ class DrugsController extends Controller
     public function create(ManageDrugsRequest $request, Drug $drug)
     {
         $preciption_type = PreciptionType::get()->pluck('preciption_type','id')->toArray();
+        $formats = DrugAttribute::where('type','format')->pluck('name','id')->toArray();
+        $strength_units = DrugAttribute::where('type','strength_unit')->pluck('name','id')->toArray();
+        $pack_units = DrugAttribute::where('type','pack_unit')->pluck('name','id')->toArray();
+        $insurance_coverage = DrugAttribute::where('type','insurance_coverage')->pluck('name','id')->toArray();
        
         return new ViewResponse('backend.drugs.create', [
             'status' => $drug->statuses,
-            'formats'=>$drug->drugs_formats,
-            'strength_unit'=>$drug->strength_units,
-            'pack_unit'=>$drug->pack_units,
-            'insurance_coverage_in_percent'=>$drug->insurance_coverage,
+            'formats'=>$formats,
+            'strength_unit'=>$strength_units,
+            'pack_unit'=>$pack_units,
+            'insurance_coverage_in_percent'=>$insurance_coverage,
             'preciption_types_id'=>$preciption_type,
         ]);
     }
@@ -99,10 +105,12 @@ class DrugsController extends Controller
     public function edit(Drug $drug, ManageDrugsRequest $request)
     {
         $preciption_type = PreciptionType::get()->pluck('preciption_type','id')->toArray();
+        $formats = DrugAttribute::where('type','format')->pluck('name','id')->toArray();
+        $strength_units = DrugAttribute::where('type','strength_unit')->pluck('name','id')->toArray();
+        $pack_units = DrugAttribute::where('type','pack_unit')->pluck('name','id')->toArray();
+        $insurance_coverage = DrugAttribute::where('type','insurance_coverage')->pluck('name','id')->toArray();
 
-       
-
-        return new EditResponse($drug, $drug->statuses,$drug->drugs_formats,$drug->strength_units,$drug->pack_units,$drug->insurance_coverage,$preciption_type);
+        return new EditResponse($drug, $drug->statuses,$formats,$strength_units,$pack_units,$insurance_coverage,$preciption_type);
     }
 
     /**
@@ -145,4 +153,12 @@ class DrugsController extends Controller
         $d_data = $this->repository->delete_image($id);
         return $d_data;
     }
+    public function create_attribute(Request $request){
+        $d_data = $this->repository->create_attribute($request->all());
+        return $d_data;
+        // print_r($d_data);
+        // die;
+           
+    }
+    
 }

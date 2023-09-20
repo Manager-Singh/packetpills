@@ -43,7 +43,7 @@ class DrugsTableController extends Controller
                 if(count($drugs->images)>0){
                     foreach ($drugs->images as $image){
                         if($image->type=='default'){
-                            $imgurl = '<img class="listing-image" src="/public/'.$image->image.'" width=90 height=90>';
+                            $imgurl = '<img class="listing-image" src="'.asset($image->image).'" width=90 height=90>';
                         }
                     }
                     
@@ -58,16 +58,17 @@ class DrugsTableController extends Controller
                 return $drugs->main_therapeutic_use;
             })
             ->addColumn('drug_strength', function ($drugs) {
-               return $drugs->drug_strength;
+                
+               return $drugs->drug_strength.' '.$drugs->strenthUnit->name;
             })
-            ->addColumn('format', function ($drugs) {
-                return $drugs->format;
+            ->addColumn('format_id', function ($drugs) {
+                return $drugs->format->name;
             })
             ->addColumn('manufacturer', function ($drugs) {
                 return $drugs->manufacturer;
             })
             ->addColumn('drug_pack', function ($drugs) {
-                return $drugs->drug_pack;
+                return $drugs->drug_pack .' '.$drugs->packSize->name;
             })
             ->addColumn('din', function ($drugs) {
                 return $drugs->din;

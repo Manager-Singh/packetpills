@@ -8,6 +8,7 @@ use App\Events\Backend\Drugs\DrugUpdated;
 use App\Exceptions\GeneralException;
 use App\Models\Drug;
 use App\Models\DrugImages;
+use App\Models\DrugAttribute;
 use App\Models\BlogCategory;
 use App\Models\BlogMapCategory;
 use App\Models\BlogMapTag;
@@ -94,7 +95,7 @@ class DrugsRepository extends BaseRepository
                 'drugs.brand_name',
                 'drugs.generic_name',
                 'drugs.main_therapeutic_use',
-                'drugs.format',
+                'drugs.format_id',
                 'drugs.manufacturer',
                 'drugs.din',
                 'drugs.pack_size',
@@ -104,8 +105,8 @@ class DrugsRepository extends BaseRepository
                 'drugs.status',
                 'drugs.created_at',
                 'drugs.strength',
-                'drugs.strength_unit',
-                'drugs.pack_unit',
+                'drugs.strength_unit_id',
+                'drugs.pack_unit_id',
                 'drugs.preciption_types_id',
                 'drugs.insurance_coverage_in_percent',
                 'drugs.insurance_coverage_calculation_in_percent',
@@ -278,4 +279,32 @@ class DrugsRepository extends BaseRepository
 
         // return $this->storage->delete($this->upload_path.$fileName);
     }
+
+    public function create_attribute($input)
+    {
+        // print_r($input);
+        // die;
+        $drug_attribute =  DrugAttribute::where('name',$input['name'])->where('type',$input['type'])->first();
+        if ($drug_attribute === null) {
+         $new_attribule = new DrugAttribute();
+         $new_attribule->name = $input['name'];
+         $new_attribule->type = $input['type'];
+         $new_attribule->created_by = auth()->user()->id;
+         if($new_attribule->save()){
+            //$drug_data = DrugAttribute::where('id',$new_attribule->id)->pluck('name','id')->toArray();
+            // print_r($new_attribule);
+            // die;
+            
+           return json_encode([
+            'message'=>'yes',
+            'id'=>$new_attribule->id,
+            'name'=>$new_attribule->name,
+           ]);
+         }
+         return json_encode(['message'=>'no']);
+         }
+         return json_encode(['message'=>'no']);
+        
+    }
+    
 }
