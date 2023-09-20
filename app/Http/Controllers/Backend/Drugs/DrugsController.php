@@ -79,16 +79,9 @@ class DrugsController extends Controller
     {
 
        
-        if($request->insurance_coverage_in_percent==0){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 1]); 
-        }elseif($request->insurance_coverage_in_percent==50){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 0.5]); 
-        }elseif($request->insurance_coverage_in_percent==80){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 0.2]); 
-        }elseif($request->insurance_coverage_in_percent==90){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 0.1]); 
-        }elseif($request->insurance_coverage_in_percent==100){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 0]); 
+        if($request->insurance_coverage_in_percent){
+            $per = $request->insurance_coverage_in_percent/100;
+            $request->merge(['insurance_coverage_calculation_in_percent' => $per]); 
         }
        
        $this->repository->create($request->except(['_token', '_method','files']),$request->file('files'));
@@ -121,16 +114,9 @@ class DrugsController extends Controller
      */
     public function update(Drug $drug, UpdateDrugsRequest $request)
     {
-        if($request->insurance_coverage_in_percent==0){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 1]); 
-        }elseif($request->insurance_coverage_in_percent==50){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 0.5]); 
-        }elseif($request->insurance_coverage_in_percent==80){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 0.2]); 
-        }elseif($request->insurance_coverage_in_percent==90){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 0.1]); 
-        }elseif($request->insurance_coverage_in_percent==100){
-            $request->merge(['insurance_coverage_calculation_in_percent' => 0]); 
+        if($request->insurance_coverage_in_percent){
+            $per = $request->insurance_coverage_in_percent/100;
+            $request->merge(['insurance_coverage_calculation_in_percent' => $per]); 
         }
         $this->repository->update($drug, $request->except(['_token', '_method','files']),$request->file('files'));
 
