@@ -48,6 +48,9 @@ class DrugsTableController extends Controller
                     }
                     
                     return $imgurl;
+                }else{
+                    $imgurl = '<img class="listing-image" src="http://via.placeholder.com/640x360" width=90 height=90>';
+                    return $imgurl;
                 }
                
             })

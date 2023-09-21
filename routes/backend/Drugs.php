@@ -10,4 +10,5 @@ Route::group(['namespace' => 'Drugs'], function () {
         ->name('drugs.get');
     Route::get('drugs/image/{id}', [DrugsController::class, 'delete_image'])->name('drugs.image.remove');
     Route::post('drugs/attribute', [DrugsController::class, 'create_attribute'])->name('drugs.create.attribute');
+    Route::post('drugs/upload/csv', [DrugsController::class, 'upload_csv'])->name('drugs.upload.csv');
 });

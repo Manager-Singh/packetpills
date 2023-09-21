@@ -16,6 +16,7 @@ use App\Models\DrugAttribute;
 use App\Repositories\Backend\DrugsRepository;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
+use App\Jobs\DrugCSVUploadJob;
 
 class DrugsController extends Controller
 {
@@ -171,5 +172,30 @@ class DrugsController extends Controller
         // die;
            
     }
+    public function upload_csv(Request $request){
+        if( $request->hasFile('drug_csv') ) {
+
+            $csv    = file($request->drug_csv);
+            $chunks = array_chunk($csv,1000);
+            $header = [];
+
+            foreach ($chunks as $key => $chunk) {
+            $data = array_map('str_getcsv', $chunk);
+                if($key == 0){
+                    $header = $data[0];
+                    unset($data[0]);
+                }
+
+                // print_r($header);
+                // print_r($data);
+                // die;
+                DrugCSVUploadJob::dispatch($data, $header);                
+            }
+            return new RedirectResponse(route('admin.drugs.index'), ['flash_success' => __('Drug CSV upload added in queue all data updated shortly')]);
+            //return redirect()->route('admin.drugs.index');
+        }
+        return "please upload CSV file";
+    }
+    
     
 }

@@ -1,0 +1,20 @@
+brand_name,generic_name,main_therapeutic_use,strength,strength_unit_id,format_id,manufacturer,pack_size,pack_unit_id,din,upc,pharmacy_purchase_price,percent_markup,dispensing_fee,insurance_coverage_in_percent,delivery_cost,drug_indication,standard_dosage,side_effect,contraindications_precautions_warnings,preciption_types_id
+New Drug,Rahul,Physco,0.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 1,Rahul,Physco,0.2,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 2,Rahul,Physco,0.3,grams,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 3,Rahul,Physco,0.4,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 4,Rahul,Physco,0.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 5,Rahul,Physco,0.14,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 6,Rahul,Physco,1,mg,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 7,Rahul,Physco,0.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 8,Rahul,Physco,0.1,mg/ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 9,Rahul,Physco,0.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 10,Rahul,Physco,0.9,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 11,Rahul,Physco,0.34,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 12,Rahul,Physco,1.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 13,Rahul,Physco,0.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 14,Rahul,Physco,2,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 15,Rahul,Physco,0.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 16,Rahul,Physco,7.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 17,Rahul,Physco,500,mg,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
+New Drug 18,Rahul,Physco,0.1,ml,tablets,JV,33,capsule,45453453,67764656354,905,35,9.99,90,NULL,<p>dfgfdg</p>,<p>gfdgdfg</p>,<p>dgfdgdfg</p>,<p>dfgdfg</p>,Yes - Controlled Drug
