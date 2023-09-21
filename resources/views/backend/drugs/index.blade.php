@@ -23,7 +23,7 @@
                 <form action="{{route('admin.drugs.upload.csv')}}" method="post" enctype="multipart/form-data">
                 @csrf
                     <div class="modal-header">
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Drugs Upload</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         
                     </div>
