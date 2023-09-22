@@ -93,6 +93,11 @@ return [
             'updated' => 'The preciption types was successfully updated.',
             'deleted' => 'The preciption types was successfully deleted.',
         ],
+        'provinces'=> [
+            'created' => 'The province was successfully created.',
+            'updated' => 'The province was successfully updated.',
+            'deleted' => 'The province was successfully deleted.',
+        ],
         
     ],
 

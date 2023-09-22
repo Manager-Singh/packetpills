@@ -29,7 +29,7 @@ class PrescriptionsRepository extends BaseRepository
         return $this->query()
             ->select([
                 'prescriptions.id',
-                'prescriptions.prescription_id',
+                'prescriptions.prescription_number',
                 'prescriptions.name',
                 'prescriptions.type',
                 'prescriptions.medications',
@@ -47,7 +47,7 @@ class PrescriptionsRepository extends BaseRepository
         return $this->query()
             ->select([
                 'prescriptions.id',
-                'prescriptions.prescription_id',
+                'prescriptions.prescription_number',
                 'prescriptions.name',
                 'prescriptions.type',
                 'prescriptions.medications',

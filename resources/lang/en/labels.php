@@ -235,6 +235,23 @@ return [
                     'createdat' => 'Created At',
                 ],
             ],
+            'provinces' => [
+                'all' => 'All Provinces',
+                'active' => 'Province List',
+                'create' => 'Create Province',
+                'deactivated' => 'Deactivated Province',
+                'deleted' => 'Deleted Province',
+                'edit' => 'Edit Province',
+                'management' => 'Provinces Management',
+
+                'table' => [
+                    'created' => 'Created',
+                    'id' => 'ID',
+                   'name'=>'Name',
+                    'status' => 'Status',
+                    'createdat' => 'Created At',
+                ],
+            ],
 
             'blog-category' => [
                 'all' => 'All Blog Categories',

@@ -184,6 +184,13 @@ return [
                     'send_confirmation_email' => 'Send Confirmation E-mail',
                     'timezone' => 'Timezone',
                     'language' => 'Language',
+                    'mobile_no'=> 'Mobile Number',
+                    'gender'=> 'Gender',
+                    'male'=> 'Male',
+                    'female'=> 'Female',
+                    'other'=> 'Other',
+                    'd_o_b'=> 'Date of birth',
+                    'province'=> 'Province',
                 ],
 
                 'pages' => [
@@ -223,6 +230,11 @@ return [
                     'preciption_type' => 'Preciption Type',
                     'status' => 'Status',
                     'slug' => 'Preciption Type Slug',
+                ],
+                'provinces' => [
+                    'name' => 'Province Name',
+                    'status' => 'Status',
+                    'slug' => 'Province Slug',
                 ],
 
                 'blogs' => [

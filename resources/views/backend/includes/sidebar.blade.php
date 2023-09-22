@@ -101,6 +101,14 @@
                         @lang('menus.backend.sidebar.preciption-types')
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/provinces'))
+                    }}" href="{{ route('admin.provinces.index') }}">
+                        <i class="nav-icon fas fa-globe"></i>
+                        @lang('menus.backend.sidebar.provinces')
+                    </a>
+                </li>
                 
                 <!-- <li class="divider"></li>
                 <li class="nav-item">

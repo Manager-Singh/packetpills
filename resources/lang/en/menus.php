@@ -143,6 +143,16 @@ return [
                 'main' => 'Blog Preciption Type',
                 'view' => 'View Preciption Type',
             ],
+            'provinces' => [
+                'all' => 'All Provinces',
+                'active' => 'Active Province',
+                'create' => 'Create Province',
+                'deactivated' => 'Deactivated Province',
+                'deleted' => 'Deleted Province',
+                'edit' => 'Edit Province',
+                'main' => 'Blog Province',
+                'view' => 'View Province',
+            ],
         ],
 
         'log-viewer' => [
@@ -163,7 +173,8 @@ return [
             'email-templates' => 'Email Templates',
             'prescriptions' => 'Prescriptions',
             'enterprise_connect' => 'Enterprise Connect',
-            'preciption-types' => 'Preciption Types'
+            'preciption-types' => 'Preciption Types',
+            'provinces'=>'Province',
         ],
     ],
 

@@ -42,8 +42,8 @@ class PrescriptionsTableController extends Controller
             ->addColumn('medications', function ($prescriptions) {
                 return $prescriptions->medications;
             })
-            ->addColumn('prescription_id', function ($prescriptions) {
-                return $prescriptions->prescription_id;
+            ->addColumn('prescription_number', function ($prescriptions) {
+                return $prescriptions->prescription_number;
             })
             ->addColumn('created_at', function ($prescriptions) {
                 return $prescriptions->created_at->toDateString();

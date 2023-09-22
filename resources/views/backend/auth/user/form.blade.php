@@ -43,6 +43,15 @@
                 <!--col-->
             </div>
             <!--form-group-->
+            <div class="form-group row">
+                    {{ Form::label('mobile_no', alidation.attributes.backend.prescriptions.title, [ 'class'=>'col-md-2 form-control-label']) }}
+
+                    <div class="col-md-10">
+                        {{ Form::text('mobile_no', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.users.mobile_no'), 'required' => 'required']) }}
+                    </div>
+                    <!--col-->
+                </div>
+                <!--form-group-->
 
             @if ($user->id != 1)
 

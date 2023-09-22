@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
+    
     @stack('after-styles')
     <style>
         .hidden {
@@ -60,6 +61,12 @@
             }
             .is-hide{
             display:none;
+            }
+            i.glyphicon.glyphicon-calendar {
+                background: #e4e7ea;
+                color: #00000070;
+                font-size: 34px;
+                border-radius: 0px 4px 0px 4px;
             }
     </style>
 </head>
@@ -133,7 +140,9 @@
     {!! script(mix('js/vendor.js')) !!}
     {!! script(mix('js/backend.js')) !!}
     <script src="{{ asset('/js/tinymce/tinymce.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     {!! script(asset('js/backend/common.js')) !!}
 
     @isset($js)

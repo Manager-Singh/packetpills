@@ -17,3 +17,5 @@ require __DIR__.'/prescriptions/prescription.php';
 require __DIR__.'/auth/permission.php';
 require __DIR__.'/enterprise-connects/enterprise-connects.php';
 require __DIR__.'/preciption-types/preciption-types.php';
+require __DIR__.'/provinces/provinces.php';
+

@@ -8,7 +8,9 @@
 
 @section('content')
 {{ Form::open(['route' => 'admin.auth.user.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
-
+@php 
+print_r($provinces);
+@endphp
 <div class="card">
     <div class="card-body">
         <div class="row">
@@ -55,6 +57,15 @@
                     <!--col-->
                 </div>
                 <!--form-group-->
+                <div class="form-group row">
+                    {{ Form::label('mobile_no', __('validation.attributes.backend.access.users.mobile_no'), [ 'class'=>'col-md-2 form-control-label']) }}
+
+                    <div class="col-md-10">
+                        {{ Form::text('mobile_no', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.users.mobile_no'), 'required' => 'required']) }}
+                    </div>
+                    <!--col-->
+                </div>
+                <!--form-group-->
 
                 <div class="form-group row">
                     {{ Form::label('password', __('validation.attributes.backend.access.users.password'), [ 'class'=>'col-md-2 form-control-label']) }}
@@ -65,6 +76,7 @@
                     <!--col-->
                 </div>
                 <!--form-group-->
+                
 
                 <div class="form-group row">
                     {{ html()->label(__('validation.attributes.backend.access.users.password_confirmation'))->class('col-md-2 form-control-label')->for('password_confirmation') }}
@@ -77,6 +89,44 @@
                     </div>
                     <!--col-->
                 </div>
+                <!--form-group-->
+                <div class="form-group row">
+                    {{ Form::label('status', trans('validation.attributes.backend.access.users.gender'), ['class' => 'col-md-2 control-label']) }}
+                    <div class="col-md-8">
+                        
+                        <label for="gender-male" class="control">
+                            <input type="radio" value="male" name="gender" id="gender-male" class="gender" /> &nbsp;&nbsp;@lang('validation.attributes.backend.access.users.male')
+                        </label>
+                        <label for="gender-female" class="control">
+                            <input type="radio" value="female" name="gender" id="gender-female" class="gender" /> &nbsp;&nbsp;@lang('validation.attributes.backend.access.users.female')
+                        </label>
+                        <label for="gender-other" class="control">
+                            <input type="radio" value="other" name="gender" id="gender-other" class="gender" /> &nbsp;&nbsp;@lang('validation.attributes.backend.access.users.other')
+                        </label>
+                       
+                    
+                    </div>
+                </div>
+                <!--form-group-->
+                <div class="form-group row">
+                    {{ Form::label('date_of_birth', __('validation.attributes.backend.access.users.d_o_b'), [ 'class'=>'col-md-2 form-control-label']) }}
+
+                        <div class="col-md-10">
+                        <div class="input-group date">
+                            <input class="form-control" id="datepicker" name="date_of_birth" data-date-format="YYYY-MM-DD" value="YYYY-MM-DD" type="text" readonly />
+                           </div>
+                        </div>
+                    <!--col-->
+                </div>
+
+                <div class="form-group row">
+                {{ Form::label('province', trans('validation.attributes.backend.access.users.province'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::select('province', $provinces, null, ['class' => 'form-control box-size', 'placeholder' => trans('validation.attributes.backend.access.users.province')]) }}
+                </div>
+                <!--col-->
+            </div>
                 <!--form-group-->
 
                 <div class="form-group row">
@@ -159,5 +209,12 @@
         FTX.Users.edit.selectors.getPremissionURL = "{{ route('admin.get.permission') }}";
         FTX.Users.edit.init("create");
     });
+    $(function () {
+  $("#datepicker").datepicker({ 
+        autoclose: true, 
+        todayHighlight: true,
+        format: "yyyy-mm-dd",
+  });
+});
 </script>
 @endsection

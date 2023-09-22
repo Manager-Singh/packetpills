@@ -8,6 +8,7 @@ use App\Http\Requests\Backend\Auth\User\StoreUserRequest;
 use App\Http\Requests\Backend\Auth\User\UpdateUserRequest;
 use App\Http\Responses\ViewResponse;
 use App\Models\Auth\User;
+use App\Models\Province;
 use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;
@@ -52,7 +53,11 @@ class UserController extends Controller
      */
     public function create(ManageUserRequest $request)
     {
+        $province = Province::get()->pluck('name','name');
         return view('backend.auth.user.create')
+            ->with([
+                'provinces'=>$province,
+            ])
             ->withRoles($this->roleRepository->getAll());
     }
 
