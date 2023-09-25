@@ -95,7 +95,13 @@ class UserController extends Controller
      */
     public function edit(ManageUserRequest $request, User $user, PermissionRepository $permissionRepository)
     {
+
+        $province = Province::get()->pluck('name','name');
+            
         return view('backend.auth.user.edit')
+            ->with([
+                'provinces'=>$province,
+            ])
             ->withUser($user)
             ->withUserRoles($user->roles->pluck('id')->all())
             ->withRoles($this->roleRepository->getAll())

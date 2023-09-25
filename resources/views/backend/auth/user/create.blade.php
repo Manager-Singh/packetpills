@@ -91,7 +91,7 @@
                 </div>
                 <!--form-group-->
                 <div class="form-group row">
-                    {{ Form::label('status', trans('validation.attributes.backend.access.users.gender'), ['class' => 'col-md-2 control-label']) }}
+                    {{ Form::label('gender', trans('validation.attributes.backend.access.users.gender'), ['class' => 'col-md-2 control-label']) }}
                     <div class="col-md-8">
                         
                         <label for="gender-male" class="control">
@@ -305,12 +305,12 @@ button.file-close-custom-btn, button.file-close-custom-btn-edit {
         FTX.Users.edit.init("create");
     });
     $(function () {
-  $("#datepicker").datepicker({ 
-        autoclose: true, 
-        todayHighlight: true,
-        format: "yyyy-mm-dd",
-  });
-});
+        $("#datepicker").datepicker({ 
+                autoclose: true, 
+                todayHighlight: true,
+                format: "yyyy-mm-dd",
+        });
+    });
 
 
         $(document).ready(function() {

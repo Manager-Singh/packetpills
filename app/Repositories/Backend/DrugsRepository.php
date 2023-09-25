@@ -19,6 +19,7 @@ use DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
+use File;
 
 class DrugsRepository extends BaseRepository
 {
@@ -237,6 +238,16 @@ class DrugsRepository extends BaseRepository
     public function delete(Drug $drug)
     {
         DB::transaction(function () use ($drug) {
+            $d_images = DrugImages::where('drug_id',$drug->id)->get();
+            foreach($d_images as $d_image){
+                if ($d_image->forceDelete()) {
+               
+                    if(File::exists($d_image->image)) {
+                        File::delete($d_image->image);
+                    } 
+                }
+            }
+            
             if ($drug->delete()) {
 
                 event(new DrugDeleted($drug));
@@ -272,12 +283,14 @@ class DrugsRepository extends BaseRepository
 
         if ($d_image->forceDelete()) {
            
-
+            if(File::exists($d_image->image)) {
+                File::delete($d_image->image);
+            }
             return $id;
         }
         // $fileName = $model->featured_image;
 
-        // return $this->storage->delete($this->upload_path.$fileName);
+        
     }
 
     public function create_attribute($input)

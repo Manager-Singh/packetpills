@@ -20,7 +20,7 @@
                     },
                     columns: [
 
-                        { data: 'drug_image', name: 'drugs.drug_image' },
+                        { data: 'drug_image', name: 'drug_image', searchable: false, sortable: false  },
                         { data: 'brand_name', name: 'drugs.brand_name' },
                         { data: 'generic_name', name: 'drugs.generic_name' },
                         { data: 'main_therapeutic_use', name: 'drugs.main_therapeutic_use' },
@@ -29,9 +29,9 @@
                         { data: 'manufacturer', name: 'drugs.manufacturer' },
                         { data: 'drug_pack', name: 'drugs.pack_size' },
                         { data: 'pharmacy_purchase_price', name: 'drugs.pharmacy_purchase_price' },
-                        { data: 'drug_cost', name: 'drugs.drug_cost' },
+                        { data: 'drug_cost', name: 'drugs.drug_cost' , searchable: false, sortable: false  },
                         { data: 'dispensing_fee', name: 'drugs.dispensing_fee' },
-                        { data: 'patient_pays', name: 'drugs.patient_pays' },
+                        { data: 'patient_pays', name: 'drugs.patient_pays' , searchable: false, sortable: false  },
                         { data: 'display_status', name: 'drugs.status' },
                         { data: 'created_at', name: 'drugs.created_at' },
                         { data: 'actions', name: 'actions', searchable: false, sortable: false }

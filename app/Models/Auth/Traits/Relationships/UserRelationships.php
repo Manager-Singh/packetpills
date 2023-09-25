@@ -11,6 +11,7 @@ use App\Models\HealthCard;
 use App\Models\Insurance;
 use App\Models\PaymentMethod;
 use App\Models\HealthInformation;
+use App\Models\Prescription;
 
 
 trait UserRelationships
@@ -81,5 +82,10 @@ trait UserRelationships
     {
         return $this->hasOne(HealthInformation::class);
     }
+    public function prescriptions()
+    {
+        return $this->hasMany(Prescription::class);
+    }
+    
     
 }
