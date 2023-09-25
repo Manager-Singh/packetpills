@@ -1,143 +1,145 @@
 <div class="row">
-<div class="col-md-4">
-    <h4 class="text-center">Basic Details</h4>
-    <div class="table-responsive">
-        <table class="table table-hover" style="border: 1px solid #c8ced3;">
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.avatar')</th>
-                <td><img src="{{ $user->picture }}" class="user-profile-image" /></td>
-            </tr>
+    <div class="col-md-4">
+        <h4 class="text-center">Basic Details</h4>
+        <div class="table-responsive">
+            <table class="table table-hover" style="border: 1px solid #c8ced3;">
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.avatar')</th>
+                    <td><img src="{{ $user->picture }}" class="user-profile-image" /></td>
+                </tr>
 
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.first_name')</th>
-                <td>{{ $user->first_name }}</td>
-            </tr>
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.last_name')</th>
-                <td>{{ $user->last_name }}</td>
-            </tr>
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.first_name')</th>
+                    <td>{{ $user->first_name }}</td>
+                </tr>
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.last_name')</th>
+                    <td>{{ $user->last_name }}</td>
+                </tr>
 
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.email')</th>
-                <td>{{ $user->email }}</td>
-            </tr>
-            <tr>
-                <th>@lang('validation.attributes.backend.access.users.mobile_no')</th>
-                <td>	
-                    @if($user->mobile_no)
-                <a href="tel:{{ $user->mobile_no }}">+{{$user->dialing_code}}-{{ $user->mobile_no }}</a>
-                @endif
-                </td>
-            </tr>
-            <tr>
-                <th>@lang('validation.attributes.backend.access.users.gender')</th>
-                <td>	
-                {{ ucfirst($user->gender) }}
-                </td>
-            </tr>
-            <tr>
-                <th>@lang('validation.attributes.backend.access.users.d_o_b')</th>
-                <td>	
-                {{ ucfirst($user->date_of_birth) }}
-                </td>
-            </tr>
-            <tr>
-                <th>@lang('validation.attributes.backend.access.users.province')</th>
-                <td>	
-                {{ ucfirst($user->province) }}
-                </td>
-            </tr>
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.status')</th>
-                <td>@include('backend.auth.user.includes.status', ['user' => $user])</td>
-            </tr>
-
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.confirmed')</th>
-                <td>@include('backend.auth.user.includes.confirm', ['user' => $user])</td>
-            </tr>
-
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.timezone')</th>
-                <td>{{ $user->timezone }}</td>
-            </tr>
-
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.last_login_at')</th>
-                <td>
-                    @if($user->last_login_at)
-                        {{ timezone()->convertToLocal($user->last_login_at) }}
-                    @else
-                        N/A
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.email')</th>
+                    <td>{{ $user->email }}</td>
+                </tr>
+                <tr>
+                    <th>@lang('validation.attributes.backend.access.users.mobile_no')</th>
+                    <td>	
+                        @if($user->mobile_no)
+                    <a href="tel:{{ $user->mobile_no }}">+{{$user->dialing_code}}-{{ $user->mobile_no }}</a>
                     @endif
-                </td>
-            </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <th>@lang('validation.attributes.backend.access.users.gender')</th>
+                    <td>	
+                    {{ ucfirst($user->gender) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>@lang('validation.attributes.backend.access.users.d_o_b')</th>
+                    <td>	
+                    {{ ucfirst($user->date_of_birth) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>@lang('validation.attributes.backend.access.users.province')</th>
+                    <td>	
+                    {{ ucfirst($user->province) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.status')</th>
+                    <td>@include('backend.auth.user.includes.status', ['user' => $user])</td>
+                </tr>
 
-            <tr>
-                <th>@lang('labels.backend.access.users.tabs.content.overview.last_login_ip')</th>
-                <td>{{ $user->last_login_ip ?? 'N/A' }}</td>
-            </tr>
-        </table>
-    </div>
-</div><!--table-responsive-->
-<div class="col-md-8 blue-right-border">
-<h4 class="text-center">Prescriptions Details </h4><button class="btn btn-success create-prescription">Create Prescription</button>
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.confirmed')</th>
+                    <td>@include('backend.auth.user.includes.confirm', ['user' => $user])</td>
+                </tr>
 
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.timezone')</th>
+                    <td>{{ $user->timezone }}</td>
+                </tr>
 
-@if(count($user->prescriptions)>0)
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.last_login_at')</th>
+                    <td>
+                        @if($user->last_login_at)
+                            {{ timezone()->convertToLocal($user->last_login_at) }}
+                        @else
+                            N/A
+                        @endif
+                    </td>
+                </tr>
 
-<div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
-    @foreach($user->prescriptions as $key => $prescription)
-      <div class="panel">
-        <div class="panel-heading" role="tab" id="heading-{{$prescription->id}}">
-          <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$prescription->id}}" aria-expanded="true" aria-controls="collapse-{{$prescription->id}}">
-            {{$prescription->prescription_number}} Created At {{$prescription->created_at}}
-            </a>
-          </h4>
+                <tr>
+                    <th>@lang('labels.backend.access.users.tabs.content.overview.last_login_ip')</th>
+                    <td>{{ $user->last_login_ip ?? 'N/A' }}</td>
+                </tr>
+            </table>
         </div>
-        <div id="collapse-{{$prescription->id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{$prescription->id}}">
-          <div class="panel-body">
-          @if(count($prescription->prescription_iteams)>0)
-            <h5 class="prescription-heading">Prescription Images</h5>
-            <div class="gallery-wrapper">
-                @foreach($prescription->prescription_iteams as $iteam => $prescription_iteam)
-                    <div class="image-wrapper">
-                        <a href="#lightbox-image-{{$prescription_iteam->page_no}}">
-                        <img src="{{asset($prescription_iteam->prescription_upload)}}" alt="">
-                        <div class="image-title">Prescription page No. {{$prescription_iteam->page_no}}</div>
+    </div><!--table-responsive-->
+    <div class="col-md-8 blue-right-border">
+            <h4 class="text-center">Prescriptions Details </h4><button class="btn btn-success create-prescription">Create Prescription</button>
+
+
+            @if(count($user->prescriptions)>0)
+
+            <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+                @foreach($user->prescriptions as $key => $prescription)
+                <div class="panel">
+                    <div class="panel-heading" role="tab" id="heading-{{$prescription->id}}">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$prescription->id}}" aria-expanded="true" aria-controls="collapse-{{$prescription->id}}">
+                        {{$prescription->prescription_number}} Created At {{$prescription->created_at}}
                         </a>
+                    </h4>
                     </div>
-                @endforeach
-            </div>
-            <div class="gallery-lightboxes">
-                @foreach($prescription->prescription_iteams as $iteam => $prescription_iteam_for_modal)
-                    <div class="image-lightbox" id="lightbox-image-{{$prescription_iteam_for_modal->page_no}}">
-                        <div class="image-lightbox-wrapper">
-                        <a href="#" class="close"></a>
-                        <!-- <a href="#lightbox-image-{{$prescription_iteam_for_modal->page_no+1}}" class="arrow-left"></a>
-                        <a href="#lightbox-image-{{$prescription_iteam_for_modal->page_no-1}}" class="arrow-right"></a> -->
-                        <img src="{{asset($prescription_iteam->prescription_upload)}}" alt="">
-                        <div class="image-title">Prescription page No. {{$prescription_iteam_for_modal->page_no}}</div>
+                    <div id="collapse-{{$prescription->id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{$prescription->id}}">
+                    <div class="panel-body">
+                    @if(count($prescription->prescription_iteams)>0)
+                        <h5 class="prescription-heading">Prescription Images</h5>
+                        <div class="gallery-wrapper">
+                            @foreach($prescription->prescription_iteams as $iteam => $prescription_iteam)
+                                <div class="image-wrapper">
+                                    <a href="#lightbox-image-{{$prescription_iteam->page_no}}">
+                                    <img src="{{asset($prescription_iteam->prescription_upload)}}" alt="">
+                                    <div class="image-title">Prescription page No. {{$prescription_iteam->page_no}}</div>
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
+                        <div class="gallery-lightboxes">
+                            @foreach($prescription->prescription_iteams as $iteam => $prescription_iteam_for_modal)
+                                <div class="image-lightbox" id="lightbox-image-{{$prescription_iteam_for_modal->page_no}}">
+                                    <div class="image-lightbox-wrapper">
+                                    <a href="#" class="close"></a>
+                                    <!-- <a href="#lightbox-image-{{$prescription_iteam_for_modal->page_no+1}}" class="arrow-left"></a>
+                                    <a href="#lightbox-image-{{$prescription_iteam_for_modal->page_no-1}}" class="arrow-right"></a> -->
+                                    <img src="{{asset($prescription_iteam->prescription_upload)}}" alt="">
+                                    <div class="image-title">Prescription page No. {{$prescription_iteam_for_modal->page_no}}</div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                    <p>Prescription images not added!</p>
+                    @endif
                     </div>
+                    </div>
+                </div>
+                <!-- end of panel -->
                 @endforeach
-            </div>
-          @else
-          <p>Prescription images not added!</p>
-          @endif
-          </div>
-        </div>
-      </div>
-      <!-- end of panel -->
-      @endforeach
 
 
-    </div>
-        @else
-          <p>Prescriptions not added!</p>
-          @endif
-<div>
+                </div>
+                    @else
+                    <p>Prescriptions not added!</p>
+                    @endif
+            <div>
+        <div>
+    <div>
 <div>
 
 @push('after-styles')
