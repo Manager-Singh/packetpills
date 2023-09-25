@@ -27,41 +27,38 @@
             <div class="form-group row">
                 {{ Form::label('brand_name', trans('Drug Images'), ['class' => 'col-md-2 from-control-label required']) }}
 
-                <div class="col-md-10">
-                   
-                <div class="files-wrapper">
-                @if(isset($drug))
-                @if(isset($drug->images))
-              
-                @foreach($drug->images as $images)
-                <div class="file-upload img-thumb-wrapper-{{$images->id}}">
-                        <div class="file-select file-select-box">
-                            <div class="imagePreview" style="background-image: url({{asset($images->image)}});z-index:2"></div>
-                            <!-- <button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button> -->
-                            <!-- <input type="file" name="files[]" class="profileimg"> -->
+                    <div class="col-md-10">
+                    
+                        <div class="files-wrapper">
+                            @if(isset($drug))
+                            @if(isset($drug->images))
+                        
+                            @foreach($drug->images as $images)
+                                <div class="file-upload img-thumb-wrapper-{{$images->id}}">
+                                    <div class="file-select file-select-box">
+                                        <div class="imagePreview" style="background-image: url({{asset($images->image)}});z-index:2"></div>
+                                        <!-- <button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button> -->
+                                        <!-- <input type="file" name="files[]" class="profileimg"> -->
+                                        
+                                    </div>
+                                    <button class="file-close-custom-btn-edit" type="button" onclick="remove_image({{$images->id}})"><i class="fa fa-close"></i></button>
+                                </div>
+                                @endforeach
+                            @endif  
+                            @else
+                                <div class="file-upload">
+                                    <div class="file-select file-select-box">
+                                        <div class="imagePreview"></div>
+                                        <button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button>
+                                        <input type="file" name="files[]" class="profileimg">
+                                    </div>
+                                </div> 
+                            @endif   
                             
                         </div>
-                        <button class="file-close-custom-btn-edit" type="button" onclick="remove_image({{$images->id}})"><i class="fa fa-close"></i></button>
-                    </div>
-                    @endforeach
-                @endif  
-                @else
-                <div class="file-upload">
-                        <div class="file-select file-select-box">
-                            <div class="imagePreview"></div>
-                            <button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button>
-                            <input type="file" name="files[]" class="profileimg">
-                        </div>
-                    </div> 
-                @endif   
+                        <button type="button" class="add-more btn btn-success" onclick="add_more()"> Add More</button>
                     
                 </div>
-                <button type="button" class="add-more btn btn-success" onclick="add_more()"> Add More</button>
-                
-                
-                
-              
-            </div>
                 <!--col-->
             </div>
             <div class="form-group row">
@@ -256,6 +253,7 @@
     <!--row-->
 </div>
 <!--card-body-->
+@push('after-styles')
 <style>
 .imagePreview{
     width: 90px;
@@ -329,7 +327,7 @@ button.file-close-custom-btn, button.file-close-custom-btn-edit {
     z-index: 2;
 }
     </style>
-
+@endpush
 @section('pagescript')
     <script>
         $(document).ready(function() {
