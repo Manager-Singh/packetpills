@@ -379,7 +379,7 @@ button.file-close-custom-btn, button.file-close-custom-btn-edit {
             $("#overlay").fadeIn(300);
             var numItems = $('.file-upload').length;
             if(numItems>=8){
-                alert('You only add four Images');
+                alert('You only add eight Images');
                 $("#overlay").fadeOut(300);
                 return false;
             }
