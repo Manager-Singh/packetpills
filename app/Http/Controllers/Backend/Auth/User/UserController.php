@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $this->userRepository->create($request->all());
+        $this->userRepository->create($request->except(['_token', '_method','files']),$request->file('files'));
 
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.access.users.created'));
     }
@@ -95,7 +95,13 @@ class UserController extends Controller
      */
     public function edit(ManageUserRequest $request, User $user, PermissionRepository $permissionRepository)
     {
+
+        $province = Province::get()->pluck('name','name');
+            
         return view('backend.auth.user.edit')
+            ->with([
+                'provinces'=>$province,
+            ])
             ->withUser($user)
             ->withUserRoles($user->roles->pluck('id')->all())
             ->withRoles($this->roleRepository->getAll())

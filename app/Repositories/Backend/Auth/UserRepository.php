@@ -19,6 +19,11 @@ use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use App\Models\Prescription;
+use App\Models\PrescriptionIteam;
+use Ramsey\Uuid\Uuid;
+
+
 
 /**
  * Class UserRepository.
@@ -70,17 +75,20 @@ class UserRepository extends BaseRepository
      * @throws \Throwable
      * @return User
      */
-    public function create(array $data)
+    public function create(array $data,$files)
     {
+        // print_r($files);
+        // die;
         $roles = $data['assignees_roles'];
         $permissions = $data['permissions'];
+        // $permissions = $data['files'];
 
         unset($data['assignees_roles']);
         unset($data['permissions']);
 
         $user = $this->createUserStub($data);
 
-        return DB::transaction(function () use ($user, $data, $roles, $permissions) {
+        return DB::transaction(function () use ($user, $data, $roles, $permissions,$files) {
             if ($user->save()) {
                 //Attach new roles
                 $user->attachRoles($roles);
@@ -94,6 +102,35 @@ class UserRepository extends BaseRepository
                 }
 
                 event(new UserCreated($user));
+               
+                    if(isset($files)){
+                        if(count($files)>0){
+                            $prescription = new Prescription;
+                            $prescription->prescription_number = Prescription::generatePrescriptionNumber();
+                            $prescription->user_id = $user->id;
+                            // $prescription->prescription_type_id
+                            if($prescription->save()){
+                                // print_r($prescription);
+                                // die;
+                                $page_no = 1;
+                                foreach ($files as $key => $image) {
+                                    $uuid = Uuid::uuid4()->toString();
+                                    $prescriptionIteam = new PrescriptionIteam;
+                                    $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                                    $destinationPath = public_path('img/frontend/prescription');
+                                    $image->move($destinationPath, $fileName);
+                                    $front_url = 'img/frontend/prescription/'.$fileName;
+                                    $prescriptionIteam->page_no = $page_no;
+                                    $prescriptionIteam->prescription_upload = $front_url;
+                                    $prescriptionIteam->prescripiton_id = $prescription->id;
+                                    $prescriptionIteam->save();
+                                    $page_no++;
+                                }
+                            }
+                        
+                    }
+               
+        }
 
                 return $user;
             }
@@ -334,6 +371,10 @@ class UserRepository extends BaseRepository
         $user->first_name = $input['first_name'];
         $user->last_name = $input['last_name'];
         $user->email = $input['email'];
+        $user->mobile_no = $input['mobile_no'];
+        $user->gender = $input['gender'];
+        $user->province = $input['province'];
+        $user->date_of_birth = $input['date_of_birth'];
         $user->password = bcrypt($input['password']);
         $user->status = isset($input['status']) ? 1 : 0;
         $user->confirmation_code = md5(uniqid(mt_rand(), true));
