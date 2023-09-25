@@ -25,9 +25,9 @@ class CreateDrugsTable extends Migration
             $table->text('manufacturer')->nullable();
             $table->string('pack_size')->nullable();
             $table->bigInteger('pack_unit_id')->unsigned()->index();
-            $table->bigInteger('din')->nullable();
+            $table->string('din')->nullable();
           //  $table->string('presciption_required')->nullable();
-            $table->bigInteger('upc')->nullable();
+            $table->string('upc')->nullable();
             $table->float('pharmacy_purchase_price', 8, 2)->nullable();
             $table->bigInteger('percent_markup')->nullable();
           //  $table->float('drug_cost', 8, 3)->nullable();
