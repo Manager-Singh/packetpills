@@ -15,7 +15,7 @@ class PrescriptionsTable extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('prescription_number');
+            $table->string('prescription_number');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('prescription_type_id')->unsigned()->nullable();
             $table->string('status')->default('active')->comment('active,inactive');

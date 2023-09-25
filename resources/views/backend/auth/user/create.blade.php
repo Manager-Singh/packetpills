@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-{{ Form::open(['route' => 'admin.auth.user.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
+{{ Form::open(['route' => 'admin.auth.user.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post','files' => true]) }}
 @php 
 //print_r($provinces);
 @endphp

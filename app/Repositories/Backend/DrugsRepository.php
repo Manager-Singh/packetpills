@@ -139,7 +139,7 @@ class DrugsRepository extends BaseRepository
             if ($drug = Drug::create($input)) {
 
                     event(new DrugCreated($drug));
-                        print_r($files);
+                        //print_r($files);
                         if(isset($files)){
                             if(count($files)>0){
                             foreach ($files as $key => $image) {

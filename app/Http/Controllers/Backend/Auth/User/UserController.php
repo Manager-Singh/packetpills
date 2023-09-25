@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $this->userRepository->create($request->all());
+        $this->userRepository->create($request->except(['_token', '_method','files']),$request->file('files'));
 
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.access.users.created'));
     }

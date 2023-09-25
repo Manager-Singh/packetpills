@@ -68,6 +68,17 @@
                 font-size: 34px;
                 border-radius: 0px 4px 0px 4px;
             }
+            .header-fixed .app-header {
+                padding: 0px 6px;
+            }
+            .navbar-badge {
+                font-size: .6rem;
+                font-weight: 300;
+                padding: 2px 4px;
+                position: absolute;
+                right: 5px;
+                top: -4px;
+            }
     </style>
 </head>
 
