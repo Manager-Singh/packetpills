@@ -16,14 +16,9 @@ class PrescriptionIteamsTable extends Migration
         Schema::create('prescription_iteams', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('page_no');
-            $table->string('prescription');
-            $table->bigInteger('user_id');
-            $table->bigInteger('prescripiton_id');
-            $table->bigInteger('drug_id')->nullable();
-            $table->integer('drug_qty_filled')->nullable();
-            $table->integer('drug_qty_left')->nullable();
+            $table->bigInteger('prescripiton_id')->unsigned()->nullable();
+            $table->longText('prescription_upload')->nullable();
             $table->timestamps();
-            $table->string('status')->default('active')->comment('active,inactive');
             $table->softDeletes();
         });
     }
