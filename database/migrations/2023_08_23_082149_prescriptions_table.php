@@ -15,11 +15,10 @@ class PrescriptionsTable extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('prescription_id');
-            $table->string('name')->nullable();
-            $table->longText('medications')->nullable();
-            $table->string('type')->nullable();
-            $table->string('upload')->nullable();
+            $table->bigInteger('prescription_number');
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('prescription_type_id')->unsigned()->nullable();
+            $table->string('status')->default('active')->comment('active,inactive');
             $table->timestamps();
             $table->softDeletes();
         });
