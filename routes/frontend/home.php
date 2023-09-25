@@ -47,8 +47,10 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::post('health-information/save', [DashboardController::class, 'healthInformationsave'])->name('health.information.save');
         Route::get('health-card', [DashboardController::class, 'healthCard'])->name('health.card');
         Route::post('health-card/save', [DashboardController::class, 'healthCardsave'])->name('health.card.save');
+        Route::post('health-card/delete', [DashboardController::class, 'healthCardDelete'])->name('health.card.delete');
         Route::get('insurance', [DashboardController::class, 'insurance'])->name('insurance');
         Route::post('insurance/save', [DashboardController::class, 'insurancesave'])->name('insurance.save');
+        Route::post('insurance/delete', [DashboardController::class, 'insuranceDelete'])->name('insurance.delete');
         Route::get('address', [DashboardController::class, 'address'])->name('address');
         Route::get('address/add', [DashboardController::class, 'addressAdd'])->name('address.add');
         Route::post('address/save', [DashboardController::class, 'addressSave'])->name('address.save');
