@@ -102,7 +102,7 @@ class UserRepository extends BaseRepository
                 }
 
                 event(new UserCreated($user));
-                if($roles==3){
+               
                     if(isset($files)){
                         if(count($files)>0){
                             $prescription = new Prescription;
@@ -129,7 +129,7 @@ class UserRepository extends BaseRepository
                             }
                         
                     }
-                }
+               
         }
 
                 return $user;
