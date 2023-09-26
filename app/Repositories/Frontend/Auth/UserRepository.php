@@ -13,6 +13,7 @@ use App\Models\HealthInformation;
 use App\Models\Insurance;
 use App\Models\Address;
 use App\Models\PaymentMethod;
+use App\Models\Drug;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\UploadedFile;
@@ -598,6 +599,22 @@ class UserRepository extends BaseRepository
        }
        
    }
+
+   public function drugAjaxSearch(array $data){
+   // $drug = Drug::paginate(10);
+    $query = Drug::where('id','!=','')->paginate(10);
+
+    // if ($data['search']) {
+    //     $query->where('brand_name', 'like', '%' . $data['search'] . '%')
+    //     ->orWhere('generic_name', 'like', '%' . $data['search'] . '%')
+    //     ->orWhere('manufacturer', 'like', '%' . $data['search'] . '%');
+    // }
+   // $query->paginate(10);
+    
+    return $query;
+    
+   
+    }
 
 }
                 

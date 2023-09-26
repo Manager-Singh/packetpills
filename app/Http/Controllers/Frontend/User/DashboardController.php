@@ -342,5 +342,33 @@ class DashboardController extends Controller
     }
 
 
+    public function drugSearch()
+    {
+        return view('frontend.user.medications.search-medication'); 
+    }
+
+    public function drugAjaxSearch(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->drugAjaxSearch($data);
+        $html ='';
+        $html .='<ul class="drug-list-main">';
+        if($output){
+            foreach($output as $out){
+                $html .='<li class="drug-list-child"><a href="#">'.$out->brand_name.'</a></li>';
+            }
+
+        }
+        $html .='</ul>';
+
+       
+        if($output){
+            $success = true;
+        }else{
+            $success = false;
+        }
+
+        return array('success'=>$success,'html'=>$html);
+        
+    }
     
 }
