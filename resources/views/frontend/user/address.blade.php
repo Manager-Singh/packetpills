@@ -38,8 +38,14 @@
                 <label for="province">Province</label>
                 <select name="province" id="province">
                   <option value="">Select a Province</option>
-                  <option value="Alberta" {{ (isset($address) && $address->province == 'Alberta') ? 'selected' : ''}}>Alberta</option>
-                  <option value="British Columbia" {{ (isset($address) && $address->province == 'British Columbia') ? 'selected' : ''}}>British Columbia</option>
+                  @if($provinces)
+                    @foreach($provinces as $province)
+                    <option value="{{$province->slug}}" {{ (isset($address) && $address->province == $province->slug) ? 'selected' : ''}}>{{$province->name}}</option>
+                  
+                    @endforeach
+                  @else
+                  @endif
+                  <!-- <option value="British Columbia" {{ (isset($address) && $address->province == 'British Columbia') ? 'selected' : ''}}>British Columbia</option>
                   <option value="Manitoba" {{ (isset($address) && $address->province == 'Manitoba') ? 'selected' : ''}}>Manitoba</option>
                   <option value="New Brunswick" {{ (isset($address) && $address->province == 'New Brunswick') ? 'selected' : ''}}>New Brunswick</option>
                   <option value="Newfoundland and Labrador" {{ (isset($address) && $address->province == 'British Columbia') ? 'selected' : ''}}>Newfoundland and Labrador</option>
@@ -51,7 +57,8 @@
                   <option value="Quebec" {{ (isset($address) && $address->province == 'Quebec') ? 'selected' : ''}}>Quebec</option>
                   <option value="Saskatchewan" {{ (isset($address) && $address->province == 'Saskatchewan') ? 'selected' : ''}}>Saskatchewan</option>
                   <option value="Yukon" {{ (isset($address) && $address->province == 'Yukon') ? 'selected' : ''}}>Yukon</option>
-                </select>
+                 -->
+                 </select>
 
                 <label for="address">Address Type</label>
                 <select name="address_type" id="address">

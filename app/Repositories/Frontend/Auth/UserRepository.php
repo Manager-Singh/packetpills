@@ -13,13 +13,15 @@ use App\Models\HealthInformation;
 use App\Models\Insurance;
 use App\Models\Address;
 use App\Models\PaymentMethod;
+use App\Models\Drug;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-
+use Ramsey\Uuid\Uuid;
+use File;
 /**
  * Class UserRepository.
  */
@@ -388,15 +390,15 @@ class UserRepository extends BaseRepository
     public function createHealthCard(array $data){
         
         $healthCard = new HealthCard;
-
-        $front_img = $data['front_img'];
-        $back_img = $data['back_img'];
+        $uuid = Uuid::uuid4()->toString();
+        $front_img = (isset($data['front_img'])) ? $data['front_img'] : '' ;
+        $back_img = (isset($data['back_img'])) ? $data['back_img'] : '' ;
         
         $healthCard = new HealthCard;
         $healthCard->user_id = auth()->user()->id;
         if($front_img){
             
-                $fileName   = time() . '.' . $front_img->getClientOriginalExtension();
+                $fileName   = $uuid . '.' . $front_img->getClientOriginalExtension();
                 $destinationPath = public_path('img/frontend/health-card');
                 $front_img->move($destinationPath, $fileName);
                 $front_url = 'img/frontend/health-card/'.$fileName;
@@ -405,7 +407,7 @@ class UserRepository extends BaseRepository
         } 
         if($back_img){
             
-            $fileName   = time() . '.' . $back_img->getClientOriginalExtension();
+            $fileName   = $uuid. '.' . $back_img->getClientOriginalExtension();
             $destinationPath = public_path('img/frontend/health-card');
             $back_img->move($destinationPath, $fileName);
             $back_url = 'img/frontend/health-card/'.$fileName;
@@ -420,15 +422,47 @@ class UserRepository extends BaseRepository
 
     public function createInsurance(array $data){
         
+        if(isset($data['front_img']) || isset($data['back_img'])){
+            $front_img = (isset($data['front_img'])) ? $data['front_img'] : '' ;
+            $back_img = (isset($data['back_img'])) ? $data['back_img'] : '' ;
+    
+            $this->insuranceImageUpload($front_img,$back_img,'primary');
+
+        }
+
+        if(isset($data['secondary_front_img']) || isset($data['secondary_back_img'])){
+            $front_img = (isset($data['secondary_front_img'])) ? $data['secondary_front_img'] : '' ;
+            $back_img = (isset($data['secondary_back_img'])) ? $data['secondary_back_img'] : '' ;
+    
+            $this->insuranceImageUpload($front_img,$back_img,'secondary');
+
+        }
+
+        if(isset($data['tertiary_front_img']) || isset($data['tertiary_back_img'])){
+            $front_img = (isset($data['tertiary_front_img'])) ? $data['tertiary_front_img'] : '' ;
+            $back_img = (isset($data['tertiary_back_img'])) ? $data['tertiary_back_img'] : '' ;
+            
+            $this->insuranceImageUpload($front_img,$back_img,'tertiary');
+
+        }
+
+        if(isset($data['quaternary_front_img']) || isset($data['quaternary_back_img'])){
+            $front_img = (isset($data['quaternary_front_img'])) ? $data['quaternary_front_img'] : '' ;
+            $back_img = (isset($data['quaternary_back_img'])) ? $data['quaternary_back_img'] : '' ;
+            
+            $this->insuranceImageUpload($front_img,$back_img,'quaternary');
+
+        }
+        return true;
         
-        $front_img = $data['front_img'];
-        $back_img = $data['back_img'];
-        
+    }
+    public function insuranceImageUpload($front_img,$back_img,$insurance_type){
+        $uuid = Uuid::uuid4()->toString();
         $insurance = new Insurance;
         $insurance->user_id = auth()->user()->id;
         if($front_img){
             
-                $fileName   = time() . '.' . $front_img->getClientOriginalExtension();
+                $fileName   = $uuid . '.' . $front_img->getClientOriginalExtension();
                 $destinationPath = public_path('img/frontend/insurance');
                 $front_img->move($destinationPath, $fileName);
                 $front_url = 'img/frontend/insurance/'.$fileName;
@@ -437,18 +471,17 @@ class UserRepository extends BaseRepository
         } 
         if($back_img){
             
-            $fileName   = time() . '.' . $back_img->getClientOriginalExtension();
+            $fileName   = $uuid . '.' . $back_img->getClientOriginalExtension();
             $destinationPath = public_path('img/frontend/insurance');
             $back_img->move($destinationPath, $fileName);
             $back_url = 'img/frontend/insurance/'.$fileName;
             $insurance->back_img = $back_url;
             
         }  
-        $insurance->type = 'primary ';       
-          //dd($healthCard);
-            $insurance->save();
-            return $insurance;
+        $insurance->type = $insurance_type;       
+        $insurance->save();
         
+
     }
     public function saveAddress(array $data){
       // dd($data);
@@ -537,6 +570,50 @@ class UserRepository extends BaseRepository
             return true;
         }
         
+    }
+
+    public function insuranceDelete(array $data){
+         $insurance = Insurance::find($data['id']);
+         if(File::exists($insurance->back_img)) {
+            File::delete($insurance->back_img);
+        }
+        if(File::exists($insurance->front_img)) {
+            File::delete($insurance->front_img);
+        }
+        if($insurance->forceDelete()){
+            return true;
+        }
+        
+    }
+
+    public function healthCardDelete(array $data){
+        $healthCard = HealthCard::find($data['id']);
+        if(File::exists($healthCard->back_img)) {
+           File::delete($healthCard->back_img);
+       }
+       if(File::exists($healthCard->front_img)) {
+           File::delete($healthCard->front_img);
+       }
+       if($healthCard->forceDelete()){
+           return true;
+       }
+       
+   }
+
+   public function drugAjaxSearch(array $data){
+   // $drug = Drug::paginate(10);
+    $query = Drug::where('id','!=','')->paginate(10);
+
+    // if ($data['search']) {
+    //     $query->where('brand_name', 'like', '%' . $data['search'] . '%')
+    //     ->orWhere('generic_name', 'like', '%' . $data['search'] . '%')
+    //     ->orWhere('manufacturer', 'like', '%' . $data['search'] . '%');
+    // }
+   // $query->paginate(10);
+    
+    return $query;
+    
+   
     }
 
 }

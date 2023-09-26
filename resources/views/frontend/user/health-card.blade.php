@@ -23,9 +23,15 @@
                               <input type="file" id="myFile" name="front_img" onchange="readURL(this);">
                             
                               <label for="myfile"><i class="fa fa-camera" aria-hidden="true"></i> <br>Health Card <br>(front)</label>
-                              <div class="upload-after" >
-                                <img id="output" src="#" width="100%" onchange="readURL(this);"/>	
-                                <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                              <div class="upload-after" {{($healthCard && isset($healthCard->front_img)) ? 'style=display:block;' : ''}} >
+                              @if($healthCard && isset($healthCard->front_img))
+                            <img id="output" src="{{asset($healthCard->front_img)}}" width="100%" />
+                            <button type="button" class="btn-sm" onclick="removeInsurance({{$healthCard->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            @else
+                            <img id="output" src="#" width="100%" />
+                            <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            @endif	
+                                
                               </div>
                             </div>
                           </div>
@@ -34,9 +40,14 @@
                               <input type="file" id="myFile" name="back_img" onchange="readURL(this);"/>
                               
                               <label for="myfile"><i class="fa fa-camera" aria-hidden="true"></i> <br>Health Card <br>(back)</label>
-                              <div class="upload-after" >
-                                <img id="output" src="#" width="100%" onchange="readURL(this);"/>	
-                                <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                              <div class="upload-after" {{($healthCard && isset($healthCard->back_img)) ? 'style=display:block;' : ''}} >
+                              @if($healthCard && isset($healthCard->back_img))
+                            <img id="output" src="{{asset($healthCard->back_img)}}" width="100%" />
+                            <button type="button" class="btn-sm" onclick="removeInsurance({{$healthCard->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            @else
+                            <img id="output" src="#" width="100%" />
+                            <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            @endif	
                               </div>
                             </div>
                           </div>
@@ -90,7 +101,43 @@
       }
     }
  
+    function removeInsurance(id) 
+    {
+        console.log(id);
+        
+       
+        swal({
+            title: "Are you sure you want to do this?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+            },
+            function(){
+                ajaxurl = "{{ route('frontend.user.health.card.delete') }}";
+                            _token = "{{ csrf_token() }}";
+                            $.ajax({
+                                url: ajaxurl,
+                                type: "POST",
+                                data: {_token:_token,id:id},
+                                success: function(data){
+                                    if(data.success)
+                                    {
+                                        //$('.address-'+id).fadeOut('slow');
+                                        swal("Success!", 'Health Card Deleted.', "success");
+                                        location.reload();
+                                    }
+                                }
+                            });
+            });
 
+        return false;
+
+
+     
+  }
       </script>
 @if(config('access.captcha.login'))
 @captchaScripts

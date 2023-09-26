@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
 use App\Models\HealthInformation;
 use App\Models\PaymentMethod;
+use App\Models\Province;
+use App\Models\Insurance;
+use App\Models\HealthCard;
 
 /**
  * Class DashboardController.
@@ -158,7 +161,9 @@ class DashboardController extends Controller
     }
     public function healthCard()
     {
-         return view('frontend.user.health-card'); 
+        $user = Auth::user();
+        $data['healthCard']= HealthCard::where('user_id',$user->id)->first();
+        return view('frontend.user.health-card',$data); 
     }
     public function healthInformation()
     {
@@ -191,7 +196,12 @@ class DashboardController extends Controller
         
     }
     public function insurance(){
-         return view('frontend.user.insurance'); 
+        $user = Auth::user();
+        $data['primary_insurance']= Insurance::where('type','primary')->where('user_id',$user->id)->first();
+        $data['secondary_insurance']= Insurance::where('type','secondary')->where('user_id',$user->id)->first();
+        $data['tertiary_insurance']= Insurance::where('type','tertiary')->where('user_id',$user->id)->first();
+        $data['quaternary_insurance']= Insurance::where('type','quaternary')->where('user_id',$user->id)->first();
+        return view('frontend.user.insurance',$data); 
     }
     public function insuranceSave(Request $request){
         
@@ -208,6 +218,7 @@ class DashboardController extends Controller
     public function address(){
         $user = Auth::user();
         $data['address']= Address::where('user_id',$user->id)->get();
+       
         $data['user'] = $user;
         return view('frontend.user.address-view',$data); 
     }
@@ -218,6 +229,7 @@ class DashboardController extends Controller
             
             $data['address']= Address::find($_GET['id']);
         }
+        $data['provinces']= Province::get();
         return view('frontend.user.address',$data); 
     }
     public function addressSave(Request $request){
@@ -302,4 +314,61 @@ class DashboardController extends Controller
         return array('success'=>$success,'message'=>'');
         
     }
+
+    public function insuranceDelete(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->insuranceDelete($data);
+        if($output){
+            $success = true;
+        }else{
+            $success = false;
+        }
+
+        return array('success'=>$success,'message'=>'');
+        
+    }
+
+    public function healthCardDelete(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->healthCardDelete($data);
+        if($output){
+            $success = true;
+        }else{
+            $success = false;
+        }
+
+        return array('success'=>$success,'message'=>'');
+        
+    }
+
+
+    public function drugSearch()
+    {
+        return view('frontend.user.medications.search-medication'); 
+    }
+
+    public function drugAjaxSearch(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->drugAjaxSearch($data);
+        $html ='';
+        $html .='<ul class="drug-list-main">';
+        if($output){
+            foreach($output as $out){
+                $html .='<li class="drug-list-child"><a href="#">'.$out->brand_name.'</a></li>';
+            }
+
+        }
+        $html .='</ul>';
+
+       
+        if($output){
+            $success = true;
+        }else{
+            $success = false;
+        }
+
+        return array('success'=>$success,'html'=>$html);
+        
+    }
+    
 }

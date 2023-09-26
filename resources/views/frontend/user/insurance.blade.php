@@ -16,91 +16,164 @@
           <div class="col-md-8" id="table">
           <form name="myForm" method='post' action="{{route('frontend.user.insurance.save')}}" enctype='multipart/form-data'>
           @csrf 
-              <div class="row mt-3">
+              <div class="row mt-3 primary-insurance">
                 <label for="myfile">Primary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
                   <input type="file" id="myFile" name="front_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
-                      <br>Health Card <br>(front) </label>
-                      <div class="upload-after" >
-                        <img id="output" src="#" width="100%" />	
+                      <br>Upload <br>(front) </label>
+                      <div class="upload-after"  {{($primary_insurance && isset($primary_insurance->front_img)) ? 'style=display:block;' : ''}}>
+                        @if($primary_insurance && isset($primary_insurance->front_img))
+                        <img id="output" src="{{asset($primary_insurance->front_img)}}" width="100%" />
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @else
+                        <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @endif
+                        	
                       </div>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="upload">
+                  <div class="upload" >
                   <input type="file" id="myFile" name="back_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
-                      <br>Health Card <br>(back) </label>
-                      <div class="upload-after" >
-                        <img id="output" src="#" width="100%"/>	
+                      <br>Upload <br>(back) </label>
+                      <div class="upload-after" {{($primary_insurance && isset($primary_insurance->back_img)) ? 'style=display:block;' : ''}} >
+                      @if($primary_insurance && isset($primary_insurance->back_img))
+                        <img id="output" src="{{asset($primary_insurance->back_img)}}" width="100%" />
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @else
+                        <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @endif	
                       </div>
                   </div>
                 </div>
               </div>
-              <div class="row mt-3">
+              <div class="row mt-3 secondary-insurance" {{ (isset($secondary_insurance)) ? '' : 'style=display:none;' }}>
                 <label for="myfile">Secondary Insurance</label>
                 <div class="col-md-6">
-                  <div class="upload">
-                    <input type="file" id="myFile" name="filename">
+                  <div class="upload" >
+                    <input type="file" id="myFile" name="secondary_front_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
-                      <br>Health Card <br>(front) </label>
+                      <br>Upload <br>(front) </label>
+                      <div class="upload-after" {{($secondary_insurance && isset($secondary_insurance->front_img)) ? 'style=display:block;' : ''}} >
+                      @if($secondary_insurance && isset($secondary_insurance->front_img))
+                        <img id="output" src="{{asset($secondary_insurance->front_img)}}" width="100%" /><button type="button" class="btn-sm"  onclick="removeInsurance({{$secondary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @else
+                        <img id="output" src="#" width="100%" />
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @endif	
+                      </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="upload">
-                    <input type="file" id="myFile" name="filename">
+                    <input type="file" id="myFile" name="secondary_back_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
-                      <br>Health Card <br>(back) </label>
+                      <br>Upload <br>(back) </label>
+                      <div class="upload-after" {{($secondary_insurance && isset($secondary_insurance->back_img)) ? 'style=display:block;' : ''}} >
+                      @if($secondary_insurance && isset($secondary_insurance->back_img))
+                        <img id="output" src="{{asset($secondary_insurance->back_img)}}" width="100%" />
+                        <button type="button" class="btn-sm" onclick="removeInsurance({{$secondary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @else
+                        <img id="output" src="#" width="100%" />
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @endif	
+                      </div>
                   </div>
                 </div>
               </div>
-              <div class="row mt-3">
+              <div class="row mt-3 tertiary-insurance" {{ (isset($tertiary_insurance)) ? '' : 'style=display:none;' }}>
                 <label for="myfile">Tertiary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
-                    <input type="file" id="myFile" name="filename">
+                    <input type="file" id="myFile" name="tertiary_front_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
-                      <br>Health Card <br>(front) </label>
+                      <br>Upload <br>(front) </label>
+                      <div class="upload-after" {{($tertiary_insurance && isset($tertiary_insurance->front_img)) ? 'style=display:block;' : ''}} >
+                      @if($tertiary_insurance && isset($tertiary_insurance->front_img))
+                        <img id="output" src="{{asset($tertiary_insurance->front_img)}}" width="100%" />
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$tertiary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @else
+                        <img id="output" src="#" width="100%" />
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @endif		
+                      </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="upload">
-                    <input type="file" id="myFile" name="filename">
+                    <input type="file" id="myFile" name="tertiary_back_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
-                      <br>Health Card <br>(back) </label>
+                      <br>Upload <br>(back) </label>
+                      <div class="upload-after" {{($tertiary_insurance && isset($tertiary_insurance->back_img)) ? 'style=display:block;' : ''}} >
+                      @if($tertiary_insurance && isset($tertiary_insurance->back_img))
+                        <img id="output" src="{{asset($tertiary_insurance->back_img)}}" width="100%" />
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$tertiary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @else
+                        <img id="output" src="#" width="100%" />
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @endif	
+                      </div>
                   </div>
                 </div>
               </div>
-              <div class="row mt-3">
+              <div class="row mt-3 quaternary-insurance" {{ (isset($quaternary_insurance)) ? '' : 'style=display:none;' }}>
                 <label for="myfile">Quaternary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
-                    <input type="file" id="myFile" name="filename">
+                  <input type="file" id="myFile" name="quaternary_front_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
-                      <br>Health Card <br>(front) </label>
+                      <br>Upload <br>(front) </label>
+                      <div class="upload-after" {{($quaternary_insurance && isset($quaternary_insurance->front_img)) ? 'style=display:block;' : ''}} >
+                      @if($quaternary_insurance && isset($quaternary_insurance->front_img))
+                        <img id="output" src="{{asset($quaternary_insurance->front_img)}}" width="100%" />
+                        <button type="button" class="btn-sm" onclick="removeInsurance({{$quaternary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @else
+                        <img id="output" src="#" width="100%" />
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @endif	
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="upload">
-                    <input type="file" id="myFile" name="filename">
+                    <input type="file" id="myFile" name="quaternary_back_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
-                      <br>Health Card <br>(back) </label>
+                      <br>Upload <br>(back) </label>
+                      <div class="upload-after"  {{($quaternary_insurance && isset($quaternary_insurance->back_img)) ? 'style=display:block;' : ''}}>
+                      @if($quaternary_insurance && isset($quaternary_insurance->back_img))
+                        <img id="output" src="{{asset($quaternary_insurance->back_img)}}" width="100%" />
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$quaternary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @else
+                        <img id="output" src="#" width="100%" />
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @endif		
+                        
+                      </div>
                   </div>
                 </div>
               </div>
-              <button type="button" class="next button" onclick="">Save</button>
+                <div class="order-footer mt-5">
+              @if(isset($quaternary_insurance))
+              @else
+              <a class="btn-big add-more-insurance" href="javascript:void(0)">+ Add more insurance</a>
+              @endif
+                    
+                </div>
+              <button type="submit" class="next button" onclick="">Save</button>
             </form>
           </div>
           <div class="col-md-2"></div>
@@ -114,8 +187,35 @@
    
    $(document).ready(function(){   
       var upload_count = 1;     
-       
-       
+      var clicks = 0;
+       $('.add-more-insurance').on('click',function(){
+        clicks += 1;
+        
+          if(!$('.secondary-insurance').hasClass('active')){
+
+            $('.secondary-insurance').addClass('active');
+            $('.secondary-insurance').fadeIn();
+
+          }else{
+
+            if(!$('.tertiary-insurance').hasClass('active')){
+
+              $('.tertiary-insurance').addClass('active');
+              $('.tertiary-insurance').fadeIn();
+            }else{
+
+              if(!$('.quaternary-insurance').hasClass('active')){
+                $('.quaternary-insurance').addClass('active');
+                $('.quaternary-insurance').fadeIn();
+                $(this).fadeOut();
+              }
+
+
+            }
+          }
+
+
+       });
           
        $('#table').on('click', "#delete", function(e) {
         console.log($(this).closest('.upload-after').find('#output'));
@@ -142,6 +242,45 @@
 
         reader.readAsDataURL(input.files[0]);
       }
+    }
+
+
+    function removeInsurance(id) 
+    {
+        console.log(id);
+        
+       
+        swal({
+            title: "Are you sure you want to do this?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+            },
+            function(){
+                ajaxurl = "{{ route('frontend.user.insurance.delete') }}";
+                            _token = "{{ csrf_token() }}";
+                            $.ajax({
+                                url: ajaxurl,
+                                type: "POST",
+                                data: {_token:_token,id:id},
+                                success: function(data){
+                                    if(data.success)
+                                    {
+                                        //$('.address-'+id).fadeOut('slow');
+                                        swal("Success!", 'Insurance Deleted.', "success");
+                                        location.reload();
+                                    }
+                                }
+                            });
+            });
+
+        return false;
+
+
+     
     }
  
 
