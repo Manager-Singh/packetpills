@@ -28,6 +28,11 @@ Route::group([
         Route::get('user', [UserController::class, 'index'])->name('user.index');
         Route::get('user/create', [UserController::class, 'create'])->name('user.create');
         Route::post('user', [UserController::class, 'store'])->name('user.store');
+        Route::post('user/create/prescription', [UserController::class, 'create_prescription'])->name('user.create.prescription');
+        Route::post('user/create/healthcard', [UserController::class, 'create_healthcard'])->name('user.create.healthcard');
+        Route::post('user/create/address', [UserController::class, 'create_address'])->name('user.create.address');
+        Route::get('user/create/address/{id}', [UserController::class, 'delete_address'])->name('user.create.address.remove');
+
 
         // Specific User
         Route::group(['prefix' => 'user/{user}'], function () {

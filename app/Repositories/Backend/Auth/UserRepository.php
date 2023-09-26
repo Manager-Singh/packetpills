@@ -20,8 +20,11 @@ use App\Repositories\BaseRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Prescription;
+use App\Models\HealthCard;
 use App\Models\PrescriptionIteam;
+use App\Models\Address;
 use Ramsey\Uuid\Uuid;
+
 
 
 
@@ -75,6 +78,122 @@ class UserRepository extends BaseRepository
      * @throws \Throwable
      * @return User
      */
+    
+    public function delete_address($id)
+    {
+        return DB::transaction(function () use ($id) {
+            $address = Address::where('id',$id)->first();
+           
+                if ($address->forceDelete()) {
+               
+                    return $id;
+                }
+           
+            
+            throw new GeneralException(__('Problem With create Address.'));
+           });
+    }
+    public function create_address(array $data)
+    {
+        $user_id = $data['user_id'];
+       
+        return DB::transaction(function () use ($data,$user_id) {
+            Address::where('user_id',$user_id)->update(array('address_type' => 'normal'));
+            $address = new Address;
+            $address->user_id = $user_id;
+            $address->address1 = $data['address1'];
+            $address->address2 = $data['address2'];
+            $address->postal_code = $data['postal_code'];
+            $address->city = $data['city'];
+            $address->province = $data['province'];
+            $address->address_type = 'default';
+            $address->is_verify = 1;
+            if($address->save()){
+                return true;
+            }
+            
+            throw new GeneralException(__('Problem With create Address.'));
+           });
+    }
+    public function create_healthcard(array $data,$files)
+    {
+        $user_id = $data['user_id'];
+        $healthcard_number = $data['healthcard_number'];
+        return DB::transaction(function () use ($user_id,$healthcard_number,$files) {
+            $healthCardImages = [];
+            if(isset($files)){
+                if(count($files)>0){
+                   
+                        // die;
+                        $page_no = 1;
+                        foreach ($files as $key => $image) {
+                            $uuid = Uuid::uuid4()->toString();
+                            $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                            $destinationPath = public_path('img/frontend/health-card');
+                            $image->move($destinationPath, $fileName);
+                            $front_url = 'img/frontend/health-card/'.$fileName;
+                            array_push($healthCardImages,$front_url);
+                        }
+                    }
+                
+                }
+            $healthCard = HealthCard::where('user_id',$user_id)->first();
+            if ($healthCard === null) {
+                $healthCard  = new HealthCard;
+                $healthCard->user_id = $user_id;
+             
+             }
+            $healthCard->front_img = $healthCardImages[0];
+            $healthCard->back_img = $healthCardImages[1];
+            $healthCard->is_verify = 1;
+            $healthCard->card_number = $healthcard_number;
+            if($healthCard->save()){
+                return true;
+            }
+           
+          
+    
+            
+            throw new GeneralException(__('Problem With create Health Card.'));
+           });
+    }
+    public function create_prescription(array $data,$files)
+    {
+        $user_id = $data['user_id'];
+        return DB::transaction(function () use ($user_id,$files) {
+            if(isset($files)){
+                if(count($files)>0){
+                    $prescription = new Prescription;
+                    $prescription->prescription_number = Prescription::generatePrescriptionNumber();
+                    $prescription->user_id = $user_id;
+                    // $prescription->prescription_type_id
+                    if($prescription->save()){
+                        // print_r($prescription);
+                        // die;
+                        $page_no = 1;
+                        foreach ($files as $key => $image) {
+                            $uuid = Uuid::uuid4()->toString();
+                            $prescriptionIteam = new PrescriptionIteam;
+                            $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                            $destinationPath = public_path('img/frontend/prescription');
+                            $image->move($destinationPath, $fileName);
+                            $front_url = 'img/frontend/prescription/'.$fileName;
+                            $prescriptionIteam->page_no = $page_no;
+                            $prescriptionIteam->prescription_upload = $front_url;
+                            $prescriptionIteam->prescripiton_id = $prescription->id;
+                            $prescriptionIteam->save();
+                            $page_no++;
+                        }
+                    }
+                
+                }
+    
+            }
+            return true;
+            
+         throw new GeneralException(__('Problem With Create prescription.'));
+        });
+    }
     public function create(array $data,$files)
     {
         // print_r($files);

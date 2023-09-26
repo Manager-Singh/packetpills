@@ -185,10 +185,6 @@ class DrugsController extends Controller
                     $header = $data[0];
                     unset($data[0]);
                 }
-
-                // print_r($header);
-                // print_r($data);
-                // die;
                 DrugCSVUploadJob::dispatch($data, $header);                
             }
             return new RedirectResponse(route('admin.drugs.index'), ['flash_success' => __('Drug CSV upload added in queue all data updated shortly')]);

@@ -13,6 +13,7 @@ use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;
 use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -74,6 +75,40 @@ class UserController extends Controller
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.access.users.created'));
     }
 
+    public function create_prescription(Request $request)
+    {
+        $this->userRepository->create_prescription($request->except(['_token', '_method','files']),$request->file('files'));
+
+        return redirect()->back()->withFlashSuccess(__('Prescription Successfully Created.'));
+    }
+    public function create_healthcard(Request $request)
+    {
+        $this->userRepository->create_healthcard($request->except(['_token', '_method','files']),$request->file('files'));
+
+        return redirect()->back()->with('tab','healthcard')->withFlashSuccess(__('Health Card Successfully Created.'));
+    }
+
+    public function create_address(Request $request)
+    {
+        $this->userRepository->create_address($request->except(['_token', '_method']));
+
+        return redirect()->back()->with('tab','address')->withFlashSuccess(__('Address Successfully Created.'));
+    }
+
+    public function delete_address($id)
+    {
+        $datat = $this->userRepository->delete_address($id);
+
+        return $datat;
+    }
+
+    
+
+
+    
+
+    
+
     /**
      * @param \App\Http\Requests\Backend\Auth\User\ManageUserRequest $request
      * @param \App\Models\Auth\User $user
@@ -83,7 +118,11 @@ class UserController extends Controller
     public function show(ManageUserRequest $request, User $user)
     {
         // dd($user);
+        $province = Province::get()->pluck('name','name');
         return view('backend.auth.user.show')
+            ->with([
+                'provinces'=>$province,
+            ])
             ->withUser($user);
     }
 
