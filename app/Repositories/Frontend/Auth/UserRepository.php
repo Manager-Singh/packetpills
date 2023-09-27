@@ -601,20 +601,42 @@ class UserRepository extends BaseRepository
    }
 
    public function drugAjaxSearch(array $data){
-   // $drug = Drug::paginate(10);
-    $query = Drug::where('id','!=','')->paginate(10);
-
-    // if ($data['search']) {
-    //     $query->where('brand_name', 'like', '%' . $data['search'] . '%')
-    //     ->orWhere('generic_name', 'like', '%' . $data['search'] . '%')
-    //     ->orWhere('manufacturer', 'like', '%' . $data['search'] . '%');
-    // }
-   // $query->paginate(10);
+    $total = Drug::get()->count();
+    $limit =10;
+    $no_of_pages =$total/$limit;
+    $page_no =($data['page_no']) ? $data['page_no'] : 0;
+    $offset=$page_no*$limit;
     
-    return $query;
+    if ($data['search']) {
+        $search = $data['search'];
+        $drug   = Drug::where('brand_name', 'like', '%' . $search . '%')
+        ->orWhere('generic_name', 'like', '%' . $search . '%')
+        ->orWhere('manufacturer', 'like', '%' . $search . '%')->skip($offset)->take($limit)->get();
+    }else{
+        $drug = '';
+    }
+
+    $html ='';
+    
+    if($drug){
+        foreach($drug as $out){
+            $html .='<li class="drug-list-child"><a href="#">'.$out->brand_name.'('.$out->id.')</a></li>';
+        }
+
+    }else{
+        $html .='<li class="drug-list-child">Data not found.</li>';
+    }
+    
+
+
+    return array(
+      'total'=>$total,  
+      'no_of_pages'=>$no_of_pages,  
+      'page_no'=>$page_no,  
+      'html'=>$html,  
+    );
     
    
     }
 
 }
-                

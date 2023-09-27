@@ -8,7 +8,26 @@ ul.drug-list-main {
     list-style: none;
     text-align: left;
     background: #eee;
-    width: 50%;
+    /* width: 50%; */
+    padding: 0 0;
+}
+
+li.drug-list-child:hover {
+    background: #fff;
+    color: #000;
+}
+li.drug-list-child {
+    border: 1px solid #d1a7a7;
+    padding: 2px 7px;
+}
+
+.autocom-box.ajax-result {
+    height: 400px;
+    overflow-y: scroll;
+    z-index: 1000;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 3px 3px #eee;
+    border-radius: 3px;
 }
 
 </style>
@@ -23,8 +42,10 @@ ul.drug-list-main {
                    <div class="search-input">
         <a href="" target="_blank" hidden></a>
         <input type="text" class="input search" name="search" onkeyup="druglistView()" placeholder="Type to search..">
-        <div class="autocom-box ajax-result">
-         
+        <div class="autocom-box ajax-result" style="display:none">
+        <ul class="drug-list-main">
+        </ul>
+        <a class="drug-list-btn loard-more-drug" style="display:none" href="javascript:void(0)">load More Data</a>
         </div>
         
       </div>
@@ -40,107 +61,32 @@ ul.drug-list-main {
       <div class="result">
         <p class="txt-large text-center"> List of Medications</p>
           <div class="row">
+
+          @if($alldrugs)
+          @foreach($alldrugs as $drug)
              <div class="col-md-4 mb-3">
                 <div class="single-result">
-                  <img src="./assets/images/icon-rx.png" />
-                  <p>5-Aminosalicylic Acid </p>
+                  <img src="{{asset('website/assets/images/icon-rx.png')}}" />
+                  <p>{{$drug->brand_name}}</p>
                   <a href="">View</a>  
                 </div>
               </div>
 
-              <div class="col-md-4">
-                <div class="single-result">
-                  <img src="./assets/images/icon-rx.png" />
-                  <p>5-Aminosalicylic Acid </p>
-                  <a href="">View</a>  
-                </div>
-              </div>
+          @endforeach
+          @else
+          @endif
 
-              <div class="col-md-4">
-                <div class="single-result">
-                  <img src="./assets/images/icon-rx.png" />
-                  <p>5-Aminosalicylic Acid </p>
-                  <a href="">View</a>  
-                </div>
-              </div>
+              
+              
 
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-4">
-                   <div class="single-result">
-                     <img src="./assets/images/icon-rx.png" />
-                     <p>5-Aminosalicylic Acid </p>
-                     <a href="">View</a>  
-                   </div>
-                 </div>
+              
    
-                 <div class="col-md-4">
-                   <div class="single-result">
-                     <img src="./assets/images/icon-rx.png" />
-                     <p>5-Aminosalicylic Acid </p>
-                     <a href="">View</a>  
-                   </div>
-                 </div>
-   
-                 <div class="col-md-4">
-                   <div class="single-result">
-                     <img src="./assets/images/icon-rx.png" />
-                     <p>5-Aminosalicylic Acid </p>
-                     <a href="">View</a>  
-                   </div>
-                 </div>
-   
-                 </div>
-                 <div class="row mb-3">
-                  <div class="col-md-4">
-                     <div class="single-result">
-                       <img src="./assets/images/icon-rx.png" />
-                       <p>5-Aminosalicylic Acid </p>
-                       <a href="">View</a>  
-                     </div>
-                   </div>
+                
+          
      
-                   <div class="col-md-4">
-                     <div class="single-result">
-                       <img src="./assets/images/icon-rx.png" />
-                       <p>5-Aminosalicylic Acid </p>
-                       <a href="">View</a>  
-                     </div>
-                   </div>
-     
-                   <div class="col-md-4">
-                     <div class="single-result">
-                       <img src="./assets/images/icon-rx.png" />
-                       <p>5-Aminosalicylic Acid </p>
-                       <a href="">View</a>  
-                     </div>
-                   </div>
-     
-                   </div>
-                   <div class="row mb-3">
-                    <div class="col-md-4">
-                       <div class="single-result">
-                         <img src="./assets/images/icon-rx.png" />
-                         <p>5-Aminosalicylic Acid </p>
-                         <a href="">View</a>  
-                       </div>
-                     </div>
+                   
        
-                     <div class="col-md-4">
-                       <div class="single-result">
-                         <img src="./assets/images/icon-rx.png" />
-                         <p>5-Aminosalicylic Acid </p>
-                         <a href="">View</a>  
-                       </div>
-                     </div>
-       
-                     <div class="col-md-4">
-                       <div class="single-result">
-                         <img src="./assets/images/icon-rx.png" />
-                         <p>5-Aminosalicylic Acid </p>
-                         <a href="">View</a>  
-                       </div>
-                     </div>
+                     
        
                      </div>
                  
@@ -152,25 +98,51 @@ ul.drug-list-main {
 <script>
    
    $(document).ready(function(){   
+
    })
 
-   function druglistView(){
+var page_no=0;
+   function druglistView(page_no=0,type=''){
  var search = $('.search').val();
     ajaxurl = "{{ route('frontend.user.drug.ajax.search') }}";
         _token = "{{ csrf_token() }}";
         $.ajax({
             url: ajaxurl,
             type: "POST",
-            data: {_token:_token,search:search},
+            data: {_token:_token,search:search,page_no:page_no},
             success: function(data){
-                if(data.success){
+                if(data){
+                  $('.ajax-result').fadeIn();
                     console.log(data.html);  
-                    $('.ajax-result').html(data.html);
+                    console.log(data.no_of_pages);  
+                    console.log(page_no);  
+                    if(data.no_of_pages > page_no){
+                      console.log(data.html);
+                      if(type  == 'load'){
+                        $('.ajax-result ul').append(data.html);
+                      }else{
+                        $('.ajax-result ul').html(data.html);
+                      }
+                      
+                      $('.loard-more-drug').show();
+                    }else{
+                      $('.ajax-result ul').html('');
+                      $('.loard-more-drug').hide();
+                    }
+                    
+                    
                 }
             }
         });
 
    }
+
+   $(document).on('click','.loard-more-drug',function(){
+    
+    page_no = page_no+1;
+    console.log(page_no);
+    druglistView(page_no,'load');
+   });
 </script>
 
 

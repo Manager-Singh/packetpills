@@ -11,6 +11,7 @@ use App\Models\PaymentMethod;
 use App\Models\Province;
 use App\Models\Insurance;
 use App\Models\HealthCard;
+use App\Models\Drug;
 
 /**
  * Class DashboardController.
@@ -344,30 +345,23 @@ class DashboardController extends Controller
 
     public function drugSearch()
     {
-        return view('frontend.user.medications.search-medication'); 
+        $data['alldrugs'] = Drug::paginate(10); 
+        
+       return view('frontend.user.medications.search-medication',$data); 
+    }
+
+    public function drugSingleDetails()
+    {
+        $data['alldrugs'] = Drug::paginate(10); 
+        
+       return view('frontend.user.medications.single-medication',$data); 
     }
 
     public function drugAjaxSearch(Request $request){
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->drugAjaxSearch($data);
-        $html ='';
-        $html .='<ul class="drug-list-main">';
-        if($output){
-            foreach($output as $out){
-                $html .='<li class="drug-list-child"><a href="#">'.$out->brand_name.'</a></li>';
-            }
-
-        }
-        $html .='</ul>';
-
-       
-        if($output){
-            $success = true;
-        }else{
-            $success = false;
-        }
-
-        return array('success'=>$success,'html'=>$html);
+      
+        return $output;
         
     }
     
