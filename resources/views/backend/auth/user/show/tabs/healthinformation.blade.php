@@ -28,13 +28,13 @@
                             <div class="input-group ">
                                 <label for="allergies-yes" class="control">
                                     <input type="radio" value="1" name="allergies" id="allergies-yes"
-                                        class="allergies" {{ $user->healthinformation->allergies == 1 ? 'checked' : ''}}
+                                        class="allergies"
                                     />
                                     &nbsp;&nbsp;@lang('Yes')
                                 </label>&nbsp;&nbsp;
                                 <label for="allergies-no" class="control">
                                     <input type="radio" value="0" name="allergies" id="allergies-no"
-                                        class="allergies" {{ $user->healthinformation->allergies == 0 ? 'checked' : ''}} />
+                                        class="allergies"  />
                                     &nbsp;&nbsp;@lang('No')
                                 </label>
                             </div>
@@ -47,7 +47,7 @@
                         required']) }}
                         <div class="col-md-10">
                             <div class="input-group ">
-                                {{ Form::text('supplements_medications', $user->healthinformation->supplements_medications, ['class' => 'form-control',
+                                {{ Form::text('supplements_medications', null, ['class' => 'form-control',
                                 'placeholder' => trans(''),'data-role'=>'tagsinput' ]) }}
 
                             </div>
