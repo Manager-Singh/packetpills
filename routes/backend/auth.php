@@ -31,7 +31,12 @@ Route::group([
         Route::post('user/create/prescription', [UserController::class, 'create_prescription'])->name('user.create.prescription');
         Route::post('user/create/healthcard', [UserController::class, 'create_healthcard'])->name('user.create.healthcard');
         Route::post('user/create/address', [UserController::class, 'create_address'])->name('user.create.address');
-        Route::get('user/create/address/{id}', [UserController::class, 'delete_address'])->name('user.create.address.remove');
+        Route::post('user/create/healthinformation', [UserController::class, 'healthinformation'])->name('user.create.healthinformation');
+        Route::post('user/create/paymentmethod', [UserController::class, 'paymentmethod'])->name('user.create.paymentmethod');
+        Route::post('user/edit/paymentmethod', [UserController::class, 'edit_paymentmethod'])->name('user.edit.paymentmethod');
+        Route::get('user/delete/address/{id}', [UserController::class, 'delete_address'])->name('user.create.address.remove');
+        Route::get('user/delete/payment/method/{id}', [UserController::class, 'delete_payment_method'])->name('user.paymentmethod.remove');
+        Route::post('user/create/address/edit', [UserController::class, 'edit_address'])->name('user.edit.address');
 
 
         // Specific User

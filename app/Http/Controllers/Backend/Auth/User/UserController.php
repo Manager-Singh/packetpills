@@ -94,7 +94,39 @@ class UserController extends Controller
 
         return redirect()->back()->with('tab','address')->withFlashSuccess(__('Address Successfully Created.'));
     }
+    public function edit_address(Request $request)
+    {
+        $this->userRepository->edit_address($request->except(['_token', '_method']));
 
+        return redirect()->back()->with('tab','address')->withFlashSuccess(__('Address Successfully Edited.'));
+    }
+
+    public function healthinformation(Request $request)
+    {
+        $this->userRepository->healthinformation($request->except(['_token', '_method']));
+
+        return redirect()->back()->with('tab','healthinformation')->withFlashSuccess(__('Health Information Successfully Updated.'));
+    }
+    public function paymentmethod(Request $request)
+    {
+       $this->userRepository->paymentmethod($request->except(['_token', '_method']));
+
+        return redirect()->back()->with('tab','paymentmethod')->withFlashSuccess(__('Payment Method Successfully Created.'));
+    }
+    public function edit_paymentmethod(Request $request)
+    {
+       $this->userRepository->edit_paymentmethod($request->except(['_token', '_method']));
+
+        return redirect()->back()->with('tab','paymentmethod')->withFlashSuccess(__('Payment Method Successfully Updated.'));
+    }
+    
+    public function delete_payment_method($id)
+    {
+        $datat = $this->userRepository->delete_payment_method($id);
+
+        return $datat;
+    }
+    
     public function delete_address($id)
     {
         $datat = $this->userRepository->delete_address($id);

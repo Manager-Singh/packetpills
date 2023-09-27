@@ -32,42 +32,52 @@ $tab = session()->get('tab');
                     <li class="nav-item">
                         <a class="nav-link {{ ($tab == 'overview') ? 'active' : '' }}" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-expanded="true"><i class="fas fa-user"></i> @lang('labels.backend.access.users.tabs.titles.overview')</a>
                     </li>
-                    {{-- @if(count($user->address)>0) --}}
+                   
                     <li class="nav-item">
-                        <a class="nav-link {{ ($tab == 'address') ? 'active' : '' }}" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-expanded="true"><i class="fas fa-address-book"></i> @lang('labels.backend.access.users.tabs.titles.address')</a>
+                        <a class="nav-link {{ ($tab == 'address') ? 'active' : '' }}" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-expanded="true"><i class="fas fa-address-card"></i> @lang('labels.backend.access.users.tabs.titles.address')</a>
                     </li>
-                    {{-- @endif --}}
-                   {{-- @if(isset($user->healthcard) && !empty($user->healthcard)) --}}
+                   
                     <li class="nav-item">
                         <a class="nav-link {{ ($tab == 'healthcard') ? 'active' : '' }}" data-toggle="tab" href="#healthcard" role="tab" aria-controls="healthcard" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.healthcard')</a>
                    </li> 
-                   {{--  @endif --}}
-                    @if(count($user->insurance)>0)
+                 
+                 
                     <li class="nav-item">
-                        <a class="nav-link {{ ($tab == 'insurance') ? 'active' : '' }}" data-toggle="tab" href="#insurance" role="tab" aria-controls="insurance" aria-expanded="true"><i class="fas fa-heart"></i> @lang('labels.backend.access.users.tabs.titles.insurance')</a>
+                        <a class="nav-link {{ ($tab == 'insurance') ? 'active' : '' }}" data-toggle="tab" href="#insurance" role="tab" aria-controls="insurance" aria-expanded="true"><i class="fas fa-mortar-board"></i> @lang('labels.backend.access.users.tabs.titles.insurance')</a>
                     </li>
-                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link {{ ($tab == 'healthinformation') ? 'active' : '' }}" data-toggle="tab" href="#healthinformation" role="tab" aria-controls="healthinformation" aria-expanded="true"><i class="fas fa-info-circle"></i> @lang('Health Information')</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link {{ ($tab == 'paymentmethod') ? 'active' : '' }}" data-toggle="tab" href="#paymentmethod" role="tab" aria-controls="paymentmethod" aria-expanded="true"><i class="fas fa-credit-card"></i> @lang('Payment Method')</a>
+                    </li>
+                   
                 </ul>
 
                 <div class="tab-content">
                     <div class="tab-pane {{ ($tab == 'overview') ? 'active' : '' }}" id="overview" role="tabpanel" aria-expanded="true">
                         @include('backend.auth.user.show.tabs.overview')
                     </div><!--tab-->
-                    {{-- @if(count($user->address)>0)--}}
+                   
                     <div class="tab-pane {{ ($tab == 'address') ? 'active' : '' }}" id="address" role="tabpanel" aria-expanded="true">
                         @include('backend.auth.user.show.tabs.address')
                     </div><!--tab-->
-                   {{--  @endif--}}
-                    {{-- @if(isset($user->healthcard) && !empty($user->healthcard)) --}}
+                 
                     <div class="tab-pane {{ ($tab == 'healthcard') ? 'active' : '' }}" id="healthcard" role="tabpanel" aria-expanded="true">
                         @include('backend.auth.user.show.tabs.healthcard')
                     </div><!--tab-->
-                    {{-- @endif --}}
-                    @if(count($user->insurance)>0)
+                  
                     <div class="tab-pane {{ ($tab == 'insurance') ? 'active' : '' }}" id="insurance" role="tabpanel" aria-expanded="true">
                         @include('backend.auth.user.show.tabs.insurance')
                     </div><!--tab-->
-                    @endif
+
+                     <div class="tab-pane {{ ($tab == 'healthinformation') ? 'active' : '' }}" id="healthinformation" role="tabpanel" aria-expanded="true">
+                        @include('backend.auth.user.show.tabs.healthinformation')
+                    </div><!--tab-->
+                      <div class="tab-pane {{ ($tab == 'paymentmethod') ? 'active' : '' }}" id="paymentmethod" role="tabpanel" aria-expanded="true">
+                        @include('backend.auth.user.show.tabs.paymentmethod')
+                    </div><!--tab-->
+                  
                    
                 </div><!--tab-content-->
             </div><!--col-->

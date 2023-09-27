@@ -23,6 +23,9 @@ use App\Models\Prescription;
 use App\Models\HealthCard;
 use App\Models\PrescriptionIteam;
 use App\Models\Address;
+use App\Models\HealthInformation;
+use App\Models\PaymentMethod;
+
 use Ramsey\Uuid\Uuid;
 
 
@@ -90,7 +93,65 @@ class UserRepository extends BaseRepository
                 }
            
             
-            throw new GeneralException(__('Problem With create Address.'));
+            throw new GeneralException(__('Problem With Delete Address.'));
+           });
+    }
+    
+    public function delete_payment_method($id)
+    {
+        return DB::transaction(function () use ($id) {
+            $pmethod = PaymentMethod::where('id',$id)->first();
+           
+                if ($pmethod->forceDelete()) {
+               
+                    return $id;
+                }
+           
+            
+            throw new GeneralException(__('Problem With Delete Address.'));
+           });
+    }
+    
+
+    public function paymentmethod(array $data)
+    {
+        $user_id = $data['user_id'];
+       
+        return DB::transaction(function () use ($data,$user_id) {
+            PaymentMethod::where('user_id',$user_id)->update(array('default' => 'no'));
+            $payment_method = new PaymentMethod;
+            $payment_method->user_id = $user_id;
+            $payment_method->card_number = $data['card_number'];
+            $payment_method->cardholder_name = $data['cardholder_name'];
+            $payment_method->expiry_date = $data['expiry_date'];
+            $payment_method->cvc = $data['cvc'];
+            $payment_method->default = 'yes';
+            if($payment_method->save()){
+                return true;
+            }
+            
+            throw new GeneralException(__('Problem With Update Payment Method.'));
+           });
+    }
+    public function edit_paymentmethod(array $data)
+    {
+        $user_id = $data['user_id'];
+        $payment_method_id = $data['payment_method_id'];
+       
+        return DB::transaction(function () use ($data,$user_id,$payment_method_id) {
+            PaymentMethod::where('user_id',$user_id)->update(array('default' => 'no'));
+            $payment_method = PaymentMethod::where('id',$payment_method_id)->first();
+            $payment_method->user_id = $user_id;
+            $payment_method->card_number = $data['card_number'];
+            $payment_method->cardholder_name = $data['cardholder_name'];
+            $payment_method->expiry_date = $data['expiry_date'];
+            $payment_method->cvc = $data['cvc'];
+            $payment_method->default = 'yes';
+            if($payment_method->save()){
+                return true;
+            }
+            
+            throw new GeneralException(__('Problem With Update Payment Method.'));
            });
     }
     public function create_address(array $data)
@@ -115,6 +176,34 @@ class UserRepository extends BaseRepository
             throw new GeneralException(__('Problem With create Address.'));
            });
     }
+
+    public function edit_address(array $data)
+    {
+    //    print_r($data);
+    //    die;
+        $user_id = $data['user_id'];
+        $address_id = $data['address_id'];
+       
+        return DB::transaction(function () use ($data,$user_id,$address_id) {
+            Address::where('user_id',$user_id)->update(array('address_type' => 'normal'));
+           
+            $address =  Address::where('id',$address_id)->first();
+            $address->user_id = $user_id;
+            $address->address1 = $data['address1'];
+            $address->address2 = $data['address2'];
+            $address->postal_code = $data['postal_code'];
+            $address->city = $data['city'];
+            $address->province = $data['province'];
+            $address->address_type = 'default';
+            $address->is_verify = 1;
+            if($address->save()){
+                return true;
+            }
+            
+            throw new GeneralException(__('Problem With create Address.'));
+           });
+    }
+    
     public function create_healthcard(array $data,$files)
     {
         $user_id = $data['user_id'];
@@ -155,6 +244,33 @@ class UserRepository extends BaseRepository
     
             
             throw new GeneralException(__('Problem With create Health Card.'));
+           });
+    }
+
+    
+
+    public function healthinformation(array $data)
+    {
+        $user_id = $data['user_id'];
+        return DB::transaction(function () use ($user_id,$data) {
+         
+         
+            $HealthInformation = HealthInformation::where('user_id',$user_id)->first();
+            if ($HealthInformation === null) {
+                $HealthInformation  = new HealthInformation;
+                $HealthInformation->user_id = $user_id;
+             
+             }
+            $HealthInformation->allergies = $data['allergies'];
+            $HealthInformation->supplements_medications = $data['supplements_medications'];
+            if($HealthInformation->save()){
+                return true;
+            }
+           
+          
+    
+            
+            throw new GeneralException(__('Problem With Upadate Health Information.'));
            });
     }
     public function create_prescription(array $data,$files)

@@ -97,7 +97,7 @@
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                     <div class="panel-body">
                         {{ Form::open(['route' => 'admin.auth.user.create.prescription', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
-                        <input type="hidden" name="user_id" value="{{$user->id}}">
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <div class="form-group row">
                             {{ Form::label('prescription_images', trans('Prescription Images'), ['class' => 'col-md-2 from-control-label required']) }}
                             <div class="col-md-10">
@@ -115,17 +115,18 @@
                             <!--col-->
                         </div>
                         <div class="card-footer-prescription">
-                          <div class="row">
-                              <div class="col">
-                                <button type="button" class="add-more btn btn-info" onclick="add_more('prescription-wrapper','files-wrapper-inner')"> Add
-                                  More</button>
-                              </div><!--col-->
-                      
-                              <div class="col text-right">
-                                  {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success pull-right']) }}
-                              </div><!--row-->
-                          </div><!--row-->
-                      </div><!--card-footer-->
+                            <div class="row">
+                                <div class="col">
+                                    <button type="button" class="add-more btn btn-info"
+                                        onclick="add_more('prescription-wrapper','files-wrapper-inner')"> Add
+                                        More</button>
+                                </div><!--col-->
+
+                                <div class="col text-right">
+                                    {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success pull-right']) }}
+                                </div><!--row-->
+                            </div><!--row-->
+                        </div><!--card-footer-->
                         {{ Form::close() }}
                     </div>
                 </div>
@@ -156,7 +157,8 @@
                                     <div class="gallery-wrapper">
                                         @foreach ($prescription->prescription_iteams as $iteam => $prescription_iteam)
                                             <div class="image-wrapper">
-                                                <a href="#lightbox-image-{{ $prescription_iteam->prescripiton_id }}-{{ $prescription_iteam->page_no }}">
+                                                <a
+                                                    href="#lightbox-image-{{ $prescription_iteam->prescripiton_id }}-{{ $prescription_iteam->page_no }}">
                                                     <img src="{{ asset($prescription_iteam->prescription_upload) }}"
                                                         alt="">
                                                     <div class="image-title">Prescription page No.
@@ -246,7 +248,7 @@
             color: #fff;
             padding: 0;
         }
-      
+
         .panel-title a {
             display: block;
             color: #fff;
@@ -316,6 +318,8 @@
 
         #accordion .panel-heading a:before,
         #accordionHealthcard .panel-heading a:before,
+        #accordionHealthinformation .panel-heading a:before,
+        #accordionPaymentmethod .panel-heading a:before,
         #accordionAddress .panel-heading a:before,
         #accordion2 .panel-heading a:before {
             content: '\e316';
@@ -330,15 +334,19 @@
 
         #accordion .panel-heading.active a:before,
         #accordionHealthcard .panel-heading.active a:before,
+        #accordionHealthinformation .panel-heading.active a:before,
+        #accordionPaymentmethod .panel-heading.active a:before,
         #accordionAddress .panel-heading.active a:before,
         #accordion2 .panel-heading.active a:before {
             transform: rotate(0deg);
             transition: all 0.5s;
         }
 
-        #accordion2 .panel-heading, 
-        #accordionAddress .panel-heading, 
-        #accordionHealthcard .panel-heading{
+        #accordion2 .panel-heading,
+        #accordionAddress .panel-heading,
+        #accordionHealthinformation .panel-heading,
+        #accordionPaymentmethod .panel-heading,
+        #accordionHealthcard .panel-heading {
             background-color: #46a9d6;
             border-radius: 0;
             border: none;
@@ -517,6 +525,7 @@
             margin: 0 auto;
             max-height: 70vh;
         }
+
         /* Image privew */
         .imagePreview {
             width: 90px;
@@ -531,9 +540,8 @@
             left: 0;
         }
 
-        .file-upload, 
-        .file-upload-healthcard 
-        {
+        .file-upload,
+        .file-upload-healthcard {
             display: inline-block;
         }
 
@@ -579,16 +587,14 @@
         .file-select.file-select-box input[type=file] {
             z-index: 2;
         }
-        
+
         .file-upload+.file-upload,
-        .file-upload-healthcard+.file-upload-healthcard 
-        {
+        .file-upload-healthcard+.file-upload-healthcard {
             margin-left: 10px;
         }
 
         .file-upload,
-        .file-upload-healthcard
-         {
+        .file-upload-healthcard {
             position: relative;
         }
 
@@ -603,6 +609,7 @@
             background: #ff00002b;
             z-index: 2;
         }
+
         span.address-delete {
             position: absolute;
             right: 16px;
@@ -612,6 +619,26 @@
             cursor: pointer;
         }
 
+        span.address-edit {
+            position: absolute;
+            right: 47px;
+            top: 8px;
+            font-size: 22px;
+            color: #196e0c;
+            cursor: pointer;
+        }
+
+        p.card-text span {
+            width: 100%;
+            display: flex;
+        }
+
+        span.label.label-info {
+            color: #fff;
+            background: #099bdd;
+            border-radius: 4px;
+            padding: 2px 4px;
+        }
     </style>
 @endpush
 @section('pagescript')
@@ -641,7 +668,7 @@
                 var uploadFile = $(this);
                 var files = !!this.files ? this.files : [];
                 if (!files.length || !window.FileReader)
-            return; // no file selected, or no FileReader support
+                    return; // no file selected, or no FileReader support
 
                 if (/^image/.test(files[0].type)) { // only image file
                     var reader = new FileReader(); // instance of the FileReader
@@ -659,21 +686,21 @@
             });
         });
 
-        
-        
 
-        function add_more(wrapper, inner,number_of_image=8) {
+
+
+        function add_more(wrapper, inner, number_of_image = 8) {
             // files-wrapper
             $("#overlay").fadeIn(300);
-            var numItems = $('.'+inner).length;
+            var numItems = $('.' + inner).length;
             if (numItems >= number_of_image) {
-                alert('You only add '+number_of_image+' Images');
+                alert('You only add ' + number_of_image + ' Images');
                 $("#overlay").fadeOut(300);
                 return false;
             }
             console.log(numItems);
             var html = '';
-            html += '<div class="file-upload '+inner+' ' + numItems + '">';
+            html += '<div class="file-upload ' + inner + ' ' + numItems + '">';
             html += '<div class="file-select file-select-box">';
             html += '<div class="imagePreview"></div>';
             html += '<button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button>';
@@ -681,12 +708,12 @@
             html += '</div>';
             html += '<button class="file-close-custom-btn" type="button"><i class="fa fa-close"></i></button>';
             html += '</div>';
-            $("."+wrapper).append(html);
+            $("." + wrapper).append(html);
             $("#overlay").fadeOut(300);
 
         }
 
-       
+
         function delete_file() {
 
             $(this).closest('.file-upload').remove();
@@ -697,40 +724,74 @@
             $(this).closest('.file-upload').remove();
         });
 
-        function delete_address(id){
+        function delete_address(id) {
 
-          console.log(id);
-          $.confirm({
-            title: 'Confirm!',
-            content: 'Are you sure to delete this Address',
-            buttons: {
-                confirm: function () {
-                  $("#overlay").fadeIn(300);
-                  var ajaxurl = '{{route('admin.auth.user.create.address.remove', ':id')}}';
-                  ajaxurl = ajaxurl.replace(':id', id);
-                  $.ajax({
-                      url: ajaxurl,
-                      type: 'GET',
-                      dataType: 'json',
-                      success: function(data) {
-                         
-                          console.log('done');
-                      }
-                  }).done(function() {
-                  setTimeout(function(){
-                  $('.card-wrapper-'+id).remove();
-                      $("#overlay").fadeOut(300);
-                  },500);
-                  });
-                  
-                },
-                cancel: function () {
-                    
+            console.log(id);
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Are you sure to delete this Address',
+                buttons: {
+                    confirm: function() {
+                        $("#overlay").fadeIn(300);
+                        var ajaxurl = '{{ route('admin.auth.user.create.address.remove', ':id') }}';
+                        ajaxurl = ajaxurl.replace(':id', id);
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function(data) {
+
+                                console.log('done');
+                            }
+                        }).done(function() {
+                            setTimeout(function() {
+                                $('.card-wrapper-' + id).remove();
+                                $("#overlay").fadeOut(300);
+                            }, 500);
+                        });
+
+                    },
+                    cancel: function() {
+
+                    }
                 }
-            }
-        });
-        
+            });
+
         }
-      
+
+         function delete_pmethod(id) {
+
+            console.log(id);
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Are you sure to delete this Payment Method',
+                buttons: {
+                    confirm: function() {
+                        $("#overlay").fadeIn(300);
+                        var ajaxurl = '{{ route('admin.auth.user.paymentmethod.remove', ':id') }}';
+                        ajaxurl = ajaxurl.replace(':id', id);
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function(data) {
+
+                                console.log('done');
+                            }
+                        }).done(function() {
+                            setTimeout(function() {
+                                $('.card-wrapper-pmethod-' + id).remove();
+                                $("#overlay").fadeOut(300);
+                            }, 500);
+                        });
+
+                    },
+                    cancel: function() {
+
+                    }
+                }
+            });
+
+        }
     </script>
 @endsection

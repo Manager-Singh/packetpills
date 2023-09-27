@@ -14,6 +14,7 @@ use App\Models\HealthInformation;
 use App\Models\Prescription;
 
 
+
 trait UserRelationships
 {
     /**

@@ -1,4 +1,5 @@
 <div class="col">
+<p>We Are Working On It</p>
         @if($user->insurance)
             @foreach($user->insurance as $insurance)
               
@@ -22,13 +23,3 @@
             @endforeach
         @endif
 </div><!--table-responsive-->
-
-
-
-
-<style>
-    p.card-text span {
-    width: 100%;
-    display: flex;
-}
-    </style>
