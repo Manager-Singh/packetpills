@@ -20,13 +20,14 @@
                         'class' => 'form-horizontal',
                         'role' => 'form',
                         'method' => 'post',
+                        'files' => true,
                     ]) }}
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
 
                     <div class="form-group row">
                         {{ Form::label('card_number', trans('Card Number'), [
                             'class' => 'col-md-2 from-control-label
-                                                                                                required',
+                                                                                                                                                                                                                        required',
                         ]) }}
                         <div class="col-md-10">
                             <div class="input-group ">
@@ -42,7 +43,7 @@
                     <div class="form-group row">
                         {{ Form::label('cardholder_name', trans('Card Holder Name'), [
                             'class' => 'col-md-2 from-control-label
-                                                                                                required',
+                                                                                                                                                                                                                        required',
                         ]) }}
                         <div class="col-md-10">
                             <div class="input-group ">
@@ -58,7 +59,7 @@
                     <div class="form-group row">
                         {{ Form::label('expiry_date', trans('Expiry Date'), [
                             'class' => 'col-md-2 from-control-label
-                                                                                                required',
+                                                                                                                                                                                                                        required',
                         ]) }}
                         <div class="col-md-10">
                             <div class="input-group ">
@@ -74,7 +75,7 @@
                     <div class="form-group row">
                         {{ Form::label('cvc', trans('CVC'), [
                             'class' => 'col-md-2 from-control-label
-                                                                                                required',
+                                                                                                                                                                                                                        required',
                         ]) }}
                         <div class="col-md-10">
                             <div class="input-group ">
@@ -87,16 +88,35 @@
                         </div>
                         <!--col-->
                     </div>
-
+                    <div class="form-group row">
+                        {{ Form::label('creditcard_images', trans('Credit card Images'), ['class' => 'col-md-2 from-control-label required']) }}
+                        <div class="col-md-10">
+                            <div class="files-wrapper creditcard-wrapper">
+                                <div class="file-upload creditcard-wrapper-inner">
+                                    <div class="file-select file-select-box">
+                                        <div class="imagePreview"></div>
+                                        <button class="file-upload-custom-btn" type="button"><i
+                                                class="fa fa-plus"></i></button>
+                                        <input type="file" name="files[]" class="profileimg" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--col-->
+                    </div>
 
                     <div class="card-footer-address">
                         <div class="row">
 
-
+                            <div class="col">
+                                <button type="button" class="add-more btn btn-info"
+                                    onclick="add_more('creditcard-wrapper','creditcard-wrapper-inner',2)"> Add
+                                    More</button>
+                            </div><!--col-->
                             <div class="col text-right">
                                 {{ Form::submit(trans('buttons.general.crud.create'), [
                                     'class' => 'btn btn-success
-                                                                                                                                pull-right',
+                                                                                                                                                                                                                                                                                                pull-right',
                                 ]) }}
                             </div><!--row-->
                         </div><!--row-->
@@ -121,7 +141,7 @@
                         aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                {{ Form::open(['route' => 'admin.auth.user.edit.paymentmethod', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
+                                {{ Form::open(['route' => 'admin.auth.user.edit.paymentmethod', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post','files' => true]) }}
 
                                 <div class="modal-header">
                                     <h4 class="modal-title" id="modalLabel">Edit Address</h4>
@@ -138,7 +158,7 @@
                                     <div class="form-group row">
                                         {{ Form::label('card_number', trans('Card Number'), [
                                             'class' => 'col-md-2 from-control-label
-                                                                                                                required',
+                                                                                                                                                                                                                                                                                                                        required',
                                         ]) }}
                                         <div class="col-md-10">
                                             <div class="input-group ">
@@ -154,7 +174,7 @@
                                     <div class="form-group row">
                                         {{ Form::label('cardholder_name', trans('Card Holder Name'), [
                                             'class' => 'col-md-2 from-control-label
-                                                                                                                required',
+                                                                                                                                                                                                                                                                                                                        required',
                                         ]) }}
                                         <div class="col-md-10">
                                             <div class="input-group ">
@@ -170,7 +190,7 @@
                                     <div class="form-group row">
                                         {{ Form::label('expiry_date', trans('Expiry Date'), [
                                             'class' => 'col-md-2 from-control-label
-                                                                                                                required',
+                                                                                                                                                                                                                                                                                                                        required',
                                         ]) }}
                                         <div class="col-md-10">
                                             <div class="input-group ">
@@ -186,7 +206,7 @@
                                     <div class="form-group row">
                                         {{ Form::label('cvc', trans('CVC'), [
                                             'class' => 'col-md-2 from-control-label
-                                                                                                                required',
+                                                                                                                                                                                                                                                                                                                        required',
                                         ]) }}
                                         <div class="col-md-10">
                                             <div class="input-group ">
@@ -199,11 +219,33 @@
                                         </div>
                                         <!--col-->
                                     </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('creditcard_images', trans('Credit card Images'), ['class' => 'col-md-2 from-control-label required']) }}
+                                        <div class="col-md-10">
+                                            <div class="files-wrapper creditcard-wrapper-{{ $pmethod->id }}">
+                                                <div class="file-upload creditcard-wrapper-inner-{{ $pmethod->id }}">
+                                                    <div class="file-select file-select-box">
+                                                        <div class="imagePreview"></div>
+                                                        <button class="file-upload-custom-btn" type="button"><i
+                                                                class="fa fa-plus"></i></button>
+                                                        <input type="file" name="files_{{ $pmethod->id }}[]" class="profileimg"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--col-->
+                                    </div>
 
                                     <div class="card-footer-address">
                                         <div class="row">
 
-
+                                            <div class="col">
+                                                <button type="button" class="add-more btn btn-info"
+                                                    onclick="add_more('creditcard-wrapper-{{ $pmethod->id }}','creditcard-wrapper-inner-{{ $pmethod->id }}',2,{{ $pmethod->id }})">
+                                                    Add
+                                                    More</button>
+                                            </div><!--col-->
                                             <div class="col text-right">
                                                 {{ Form::submit(trans('buttons.general.crud.update'), ['class' => 'btn btn-success']) }}
                                                 <button type="button" class="btn btn-secondary"
@@ -229,6 +271,10 @@
                     <span><strong>Card Holder Name:</strong> {{ $pmethod->cardholder_name }}</span>
                     <span><strong>Expiry Date:</strong> {{ $pmethod->expiry_date }}</span>
                     <span><strong>CVC:</strong> {{ $pmethod->cvc }}</span>
+                    <span><strong>Front Image:</strong> <img class="card-img-credit"
+                            src="{{ asset('/') . $pmethod->front_img }}" alt="Bologna" height=300 width=400></span>
+                    <span><strong>Back Image:</strong><img class="card-img-credit"
+                            src="{{ asset('/') . $pmethod->back_img }}" alt="Bologna" height=300 width=400></span>
                 </p>
 
             </div>

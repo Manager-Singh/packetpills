@@ -87,6 +87,13 @@ class UserController extends Controller
 
         return redirect()->back()->with('tab','healthcard')->withFlashSuccess(__('Health Card Successfully Created.'));
     }
+    public function create_insurance(Request $request)
+    {
+        $this->userRepository->create_insurance($request->except(['_token', '_method','files']),$request->file('files'));
+
+        return redirect()->back()->with('tab','insurance')->withFlashSuccess(__(' Insurance Successfully Updated.'));
+    }
+    
 
     public function create_address(Request $request)
     {
@@ -109,13 +116,17 @@ class UserController extends Controller
     }
     public function paymentmethod(Request $request)
     {
-       $this->userRepository->paymentmethod($request->except(['_token', '_method']));
+       $this->userRepository->paymentmethod($request->except(['_token', '_method','files']),$request->file('files'));
 
         return redirect()->back()->with('tab','paymentmethod')->withFlashSuccess(__('Payment Method Successfully Created.'));
     }
     public function edit_paymentmethod(Request $request)
     {
-       $this->userRepository->edit_paymentmethod($request->except(['_token', '_method']));
+        $pfile = 'files_'.$request->payment_method_id;
+
+        // print_r($request->file($pfile));
+        // die;
+       $this->userRepository->edit_paymentmethod($request->except(['_token', '_method','files']),$request->file($pfile));
 
         return redirect()->back()->with('tab','paymentmethod')->withFlashSuccess(__('Payment Method Successfully Updated.'));
     }

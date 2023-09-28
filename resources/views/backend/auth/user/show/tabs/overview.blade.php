@@ -321,6 +321,10 @@
         #accordionHealthinformation .panel-heading a:before,
         #accordionPaymentmethod .panel-heading a:before,
         #accordionAddress .panel-heading a:before,
+        #accordionquandaryInsurance .panel-heading a:before,
+        #accordionternaryInsurance .panel-heading a:before,
+        #accordionsecondaryInsurance .panel-heading a:before,
+        #accordionprimaryInsurance .panel-heading a:before,
         #accordion2 .panel-heading a:before {
             content: '\e316';
             font-size: 24px;
@@ -337,6 +341,10 @@
         #accordionHealthinformation .panel-heading.active a:before,
         #accordionPaymentmethod .panel-heading.active a:before,
         #accordionAddress .panel-heading.active a:before,
+        #accordionquandaryInsurance .panel-heading.active a:before,
+        #accordionternaryInsurance .panel-heading.active a:before,
+        #accordionsecondaryInsurance .panel-heading.active a:before,
+        #accordionprimaryInsurance .panel-heading.active a:before,
         #accordion2 .panel-heading.active a:before {
             transform: rotate(0deg);
             transition: all 0.5s;
@@ -345,7 +353,12 @@
         #accordion2 .panel-heading,
         #accordionAddress .panel-heading,
         #accordionHealthinformation .panel-heading,
+        #accordionquandaryInsurance .panel-heading,
+        #accordionternaryInsurance .panel-heading,
+        #accordionsecondaryInsurance .panel-heading,
+        #accordionprimaryInsurance .panel-heading,
         #accordionPaymentmethod .panel-heading,
+        #accordionAddress .panel-heading,
         #accordionHealthcard .panel-heading {
             background-color: #46a9d6;
             border-radius: 0;
@@ -689,7 +702,7 @@
 
 
 
-        function add_more(wrapper, inner, number_of_image = 8) {
+        function add_more(wrapper, inner, number_of_image = 8,a_id=0) {
             // files-wrapper
             $("#overlay").fadeIn(300);
             var numItems = $('.' + inner).length;
@@ -704,7 +717,13 @@
             html += '<div class="file-select file-select-box">';
             html += '<div class="imagePreview"></div>';
             html += '<button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button>';
+            if(a_id!=0){
+            html += '<input type="file" name="files_'+a_id+'[]" class="profileimg" required>';
+
+            }else{
             html += '<input type="file" name="files[]" class="profileimg" required>';
+
+            }
             html += '</div>';
             html += '<button class="file-close-custom-btn" type="button"><i class="fa fa-close"></i></button>';
             html += '</div>';
