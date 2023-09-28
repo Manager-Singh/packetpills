@@ -39,7 +39,7 @@
             </a>
             </div> 
             <div class="col-md-3">
-            <a href="#">
+            <a href="{{route('frontend.user.drug.search')}}">
               <div class="med-info bg-light">  
                 <p><i class="fa fa-search" aria-hidden="true"></i></p>                   
                   <p class="txt"><strong> Search prices </strong></p>

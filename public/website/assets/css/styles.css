@@ -5778,3 +5778,112 @@ a.btn.btn-sm.btn-outline-info.m-1 {
 .registration-home {
   background: #c1cbe5 !important;
 }
+
+.prescription {
+  display: inline-flex;
+  margin-top: 35px;
+}
+input#prescription {
+  width: 22px;
+  margin-right: 10px;
+}
+.prescription label {
+  margin: 12px 0px;
+}
+p.bold {
+  font-weight: 600 !important;
+}
+p.bold span {
+  font-weight: 400;
+}
+img.single-drug {
+  width: 100%;
+}
+.carousel-indicators button {
+  margin: 0px 3px;
+}
+.price-calculator {
+  padding: 15px 40px;
+  margin-top: 80px;
+  background: #71737a0d;
+}
+p.related {
+  margin-top: 6px;
+}
+p.related span {
+  background: #212843;
+  color: #fff;
+  padding: 3px 14px;
+  margin: 0px 4px;
+  border-radius: 20px;
+  font-size: 14px;
+}   
+.price-detail .d-flex p, .price-detail .d-flex input.input, .price-detail .d-flex select, .price-detail .d-flex div#accordionExample {
+  width: 16%;
+  margin: 0px auto;
+  font-size: 15px;
+}
+.price-detail .d-flex p span {
+  display: block;
+}
+.price-detail .d-flex input.input, .price-detail .d-flex select {
+  width: 8%;
+}
+.price-detail .d-flex a {
+  background: #212843;
+  height: 55px;
+  margin-top: 20px;
+  margin-left: 35px;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 20px;
+  text-decoration: none;
+  color: #fff;
+}
+button.accordion-button {
+  background: none !important;
+  border: 0px !important;
+  box-shadow: none !important;
+}
+.accordion-item {
+  border: none !important;
+}
+
+.product-tab .nav-tabs {
+  display: flex;
+  list-style-type: none;
+  padding: 0px;
+  margin-top: 100px;
+  padding-bottom: 35px;
+}
+.product-tab .nav-tabs li.nav-item {
+  border: 3px solid #000;
+  padding: 10px 32px;
+  border-radius: 50px;
+  margin-right: 15px;
+}
+.product-tab .nav-tabs li.nav-item a {
+  text-decoration: none;
+  color: #212843;
+}
+.product-tab .nav-tabs li.nav-item.active, .product-tab .nav-tabs li.nav-item:hover {
+  background: #212843;
+}
+.product-tab .nav-tabs li.nav-item.active a, .product-tab .nav-tabs li.nav-item:hover a {
+  color: #fff;
+}
+.product-tab .tab {
+  margin-bottom: 40px;
+}
+.search-input .input {
+    padding: 0px 15px;
+}
+.price-calculator .accordion-item h2#headingOne {
+  font-size: 18px;
+}
+.price-calculator .accordion-item {
+  margin: 0px;
+  border: none !important;
+  background: #fff;
+}

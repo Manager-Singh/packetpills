@@ -21,13 +21,13 @@
               <div class="prescription"> <input type="checkbox" id="prescription" name="prescription" value="Prescription Required" checked  />
                 <label for="prescription">Prescription Required</label></div>
                 
-                    <p class="bold">Available Form: <span>tablet</span></p>
-                    <p class="bold">Manufacturer name: <span>viiv healthcare</span></p>
-                    <p class="bold">Strength: <span>100MG, 150MG, 300MG</span></p>
-                    <p class="bold">Brand Name: <span>Mister Pharma</span></p>
-                    <p class="bold">Generic Name: <span>100MG</span></p>
-                    <p class="bold">Manufacturer: <span>Mister Pharma</span></p>
-                    <p class="bold">Pack Size: <span>100MG</span></p>
+                    <p class="bold">Available Form: <span>{{$drug->format->name}}</span></p>
+                    <p class="bold">Manufacturer name: <span>{{$drug->manufacturer}}</span></p>
+                    <p class="bold">Strength: <span>{{$drug->drug_strength}} {{$drug->strenthUnit->name}}</span></p>
+                    <p class="bold">Brand Name: <span>{{$drug->brand_name}}</span></p>
+                    <p class="bold">Generic Name: <span>{{$drug->generic_name}}</span></p>
+                    <!-- <p class="bold">Manufacturer: <span>{{$drug->manufacturer}}</span></p> -->
+                    <p class="bold">Pack Size: <span>{{$drug->pack_size}}</span></p>
 
                     <p class="bold-txt">What is 3TC? </p>
                     <p>Lamivudine is used in combination with other medications to treat the infection caused by the human immunodeficiency virus (HIV).  HIV is the virus responsible for acquired immune deficiency syndrome (AIDS).</p>
@@ -41,11 +41,11 @@
                       <img src="{{asset('website/assets/images/home-banner-2.png')}}" class="d-block w-100" alt="..." />
                     </div>
                     <div class="carousel-item">
-                      <img src="./assets/images/home-banner-2.png" class="d-block w-100"
+                      <img src="{{asset('website/assets/images/home-banner-2.png')}}" class="d-block w-100"
                         alt="..." />
                     </div>
                     <div class="carousel-item">
-                      <img src="./assets/images/home-banner-2.png" class="d-block w-100" alt="..." />
+                      <img src="{{asset('website/assets/images/home-banner-2.png')}}" class="d-block w-100" alt="..." />
                     </div>
                   </div>
 
@@ -64,17 +64,17 @@
                     <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="0" class="active"
                       aria-current="true" aria-label="Slide 1" style="width: 100px;">
                       <img class="d-block w-100"
-                        src="./assets/images/home-banner-2.png" class="img-fluid" />
+                        src="{{asset('website/assets/images/home-banner-2.png')}}" class="img-fluid" />
                     </button>
                     <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="1"
                       aria-label="Slide 2" style="width: 100px;">
                       <img class="d-block w-100"
-                        src="./assets/images/home-banner-2.png" class="img-fluid" />
+                        src="{{asset('website/assets/images/home-banner-2.png')}}" class="img-fluid" />
                     </button>
                     <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="2"
                       aria-label="Slide 3" style="width: 100px;">
                       <img class="d-block w-100"
-                        src="./assets/images/home-banner-2.png" class="img-fluid" />
+                        src="{{asset('website/assets/images/home-banner-2.png')}}" class="img-fluid" />
                     </button>
                   </div>
                   <!-- Thumbnails -->
@@ -107,31 +107,31 @@
         <p class="bold-txt">Price and Cost Calculator</p>
         <div class="search-input">
           <a href="" target="_blank" hidden></a>
-          <input type="text" class="input" value="LAMIVUDINE 150MG" >
+          <input type="text" class="input" value="{{$drug->brand_name}} {{$drug->drug_strength}} {{$drug->strenthUnit->name}}" readonly >
           <div class="autocom-box">           
           </div>
-          <p class="related"><span>LAMIVUDINE 150MG</span><span>LAMIVUDINE 300MG</span></p>
+          <!-- <p class="related"><span>LAMIVUDINE 150MG</span><span>LAMIVUDINE 300MG</span></p> -->
           
           <div class="price-detail mt-5">
              <div class="d-flex">
             <p>Quantity
               <span>Total no. of TABLET(S)</span></p>
-            <input type="text" class="input" value="30"/>
+            <input type="number" class="input tablet-qty" value="30"/>
             <p>Quantity
               <span>Total no. of TABLET(S)</span></p>
-            <select>
-              <option value="">0%</option>
-              <option value="">50%</option>
-              <option value="">55%</option>
-              <option value="">60%</option>
-              <option value="">65%</option>
-              <option value="">70%</option>
-              <option value="">75%</option>
-              <option value="">80%</option>
-              <option value="">85%</option>
-              <option value="">90%</option>
-              <option value="">95%</option>
-              <option value="">100%</option>
+            <select class="insurance-coverage" name="insurance_coverage">
+              <option value="0">0%</option>
+              <option value="50">50%</option>
+              <option value="55">55%</option>
+              <option value="60">60%</option>
+              <option value="65">65%</option>
+              <option value="70">70%</option>
+              <option value="75">75%</option>
+              <option value="80">80%</option>
+              <option value="85">85%</option>
+              <option value="90">90%</option>
+              <option value="95">95%</option>
+              <option value="100">100%</option>
               </select>
 
               <p>Estimated copay</p>
@@ -139,7 +139,7 @@
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    $21.24
+                    $<span class="d-total" data-total="{{$drug->patient_pays}}">{{$drug->patient_pays}} </span>
                   </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -170,7 +170,7 @@
             </div>
             <div class="d-flex mt-5">
               
-              <a href="#">Become a member</a>
+              <!-- <a href="#">Become a member</a> -->
               
               </div>
             </div>
@@ -238,9 +238,30 @@
 @push('after-scripts')
 <script>
    
-   $(document).ready(function(){   
+   $(document).ready(function(){  
+    
+    $('.tablet-qty').on('blur',function(){
+
+      console.log($(this).val());
+      var total = $('.d-total').attr('data-total');
+
+      var sub_total = total * $(this).val() ;
+      console.log(sub_total);
+      $('.d-total').text(parseFloat(sub_total).toFixed(2))
+
+
+    })
 
    })
+
+
+  $(document).on("change keyup blur", ".insurance-coverage", function() {
+    var main = $('.d-total').attr('data-total');
+    var disc = $(this).val();
+    var discount = main * disc / 100;
+    var discountedTotal = main - discount;
+    $('.d-total').text(parseFloat(discountedTotal).toFixed(2));
+  });
 
 var page_no=0;
    function druglistView(page_no=0,type=''){

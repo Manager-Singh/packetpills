@@ -32,7 +32,7 @@
 	<link rel="stylesheet" href=".{{asset('step/assets/css/styles.css')}}">
 	<link rel="stylesheet" href="{{asset('step/assets/font/font.css')}}">
 	<link rel="stylesheet" href="{{asset('step/assets/css/common-style.css')}}">
-	<link rel="stylesheet" href="{{asset('step/assets/css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="{{asset('plugins/parsley/parsley.css')}}"> -->
     <link rel='stylesheet' href='//common.olemiss.edu/_js/sweet-alert/sweet-alert.css'></link>   

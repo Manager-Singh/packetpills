@@ -350,11 +350,10 @@ class DashboardController extends Controller
        return view('frontend.user.medications.search-medication',$data); 
     }
 
-    public function drugSingleDetails()
+    public function drugSingleDetails(Request $request,$id)
     {
-        $data['alldrugs'] = Drug::paginate(10); 
-        
-       return view('frontend.user.medications.single-medication',$data); 
+        $data['drug'] = Drug::find($id); 
+        return view('frontend.user.medications.single-medication',$data); 
     }
 
     public function drugAjaxSearch(Request $request){

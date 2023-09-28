@@ -620,7 +620,7 @@ class UserRepository extends BaseRepository
     
     if($drug){
         foreach($drug as $out){
-            $html .='<li class="drug-list-child"><a href="#">'.$out->brand_name.'('.$out->id.')</a></li>';
+            $html .='<li class="drug-list-child"><a href="'.route('frontend.user.drug.single',$out->id).'">'.$out->brand_name.'('.$out->id.')</a></li>';
         }
 
     }else{
