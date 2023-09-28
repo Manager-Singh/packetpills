@@ -1,5 +1,5 @@
 <div class="col">
-
+ <h4 class="text-center">Insurance Details</h4>
     @if ($user->insurance)
         <div class="panel-group wrap" id="accordionprimaryInsurance" role="tablist" aria-multiselectable="true">
             <div class="panel">
