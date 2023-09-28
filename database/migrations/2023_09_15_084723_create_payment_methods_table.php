@@ -20,6 +20,8 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('cardholder_name')->nullable();
             $table->date('expiry_date');
             $table->string('cvc');
+            $table->string('front_img')->nullable();
+            $table->string('back_img')->nullable();
             $table->string('default')->default('yes');
             $table->string('status')->default('active')->commemnt('active,inactive');
             $table->timestamps();

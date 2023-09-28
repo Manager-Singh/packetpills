@@ -25,7 +25,8 @@ use App\Models\PrescriptionIteam;
 use App\Models\Address;
 use App\Models\HealthInformation;
 use App\Models\PaymentMethod;
-
+use App\Models\Insurance;
+use File;
 use Ramsey\Uuid\Uuid;
 
 
@@ -113,18 +114,42 @@ class UserRepository extends BaseRepository
     }
     
 
-    public function paymentmethod(array $data)
+    public function paymentmethod(array $data,$files)
     {
         $user_id = $data['user_id'];
        
-        return DB::transaction(function () use ($data,$user_id) {
+        return DB::transaction(function () use ($data,$user_id,$files) {
             PaymentMethod::where('user_id',$user_id)->update(array('default' => 'no'));
+
+            $creditCardImages = [];
+            if(isset($files)){
+                if(count($files)>0){
+                   
+                        // die;
+                        $page_no = 1;
+                        foreach ($files as $key => $image) {
+                            $uuid = Uuid::uuid4()->toString();
+                            $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                            $destinationPath = public_path('img/frontend/credit-card');
+                            $image->move($destinationPath, $fileName);
+                            $front_url = 'img/frontend/credit-card/'.$fileName;
+                            array_push($creditCardImages,$front_url);
+                        }
+                    }
+                
+                }
             $payment_method = new PaymentMethod;
             $payment_method->user_id = $user_id;
             $payment_method->card_number = $data['card_number'];
             $payment_method->cardholder_name = $data['cardholder_name'];
             $payment_method->expiry_date = $data['expiry_date'];
             $payment_method->cvc = $data['cvc'];
+            if(isset($creditCardImages[0])){
+                $payment_method->front_img = $creditCardImages[0];
+            }
+            if(isset($creditCardImages[0])){
+                $payment_method->back_img = $creditCardImages[1];
+            }
             $payment_method->default = 'yes';
             if($payment_method->save()){
                 return true;
@@ -133,19 +158,60 @@ class UserRepository extends BaseRepository
             throw new GeneralException(__('Problem With Update Payment Method.'));
            });
     }
-    public function edit_paymentmethod(array $data)
+    public function edit_paymentmethod(array $data,$files)
     {
         $user_id = $data['user_id'];
         $payment_method_id = $data['payment_method_id'];
        
-        return DB::transaction(function () use ($data,$user_id,$payment_method_id) {
+        return DB::transaction(function () use ($data,$user_id,$payment_method_id,$files) {
             PaymentMethod::where('user_id',$user_id)->update(array('default' => 'no'));
             $payment_method = PaymentMethod::where('id',$payment_method_id)->first();
+
+            $creditCardImages = [];
+            if(isset($files)){
+
+                if(count($files)>0){
+                    if(count($files)==1){
+                        $front_img = $payment_method->front_img;
+                        if(File::exists($front_img)) {
+                            File::delete($front_img);
+                        }
+                    }else{
+                        $front_img = $payment_method->front_img;
+                        if(File::exists($front_img)) {
+                            File::delete($front_img);
+                        }
+                        $back_img = $payment_method->back_img;
+                        if(File::exists($back_img)) {
+                            File::delete($back_img);
+                        }
+
+                    }
+                   
+                        // die;
+                        $page_no = 1;
+                        foreach ($files as $key => $image) {
+                            $uuid = Uuid::uuid4()->toString();
+                            $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                            $destinationPath = public_path('img/frontend/credit-card');
+                            $image->move($destinationPath, $fileName);
+                            $front_url = 'img/frontend/credit-card/'.$fileName;
+                            array_push($creditCardImages,$front_url);
+                        }
+                    }
+                
+                }
             $payment_method->user_id = $user_id;
             $payment_method->card_number = $data['card_number'];
             $payment_method->cardholder_name = $data['cardholder_name'];
             $payment_method->expiry_date = $data['expiry_date'];
             $payment_method->cvc = $data['cvc'];
+            if(isset($creditCardImages[0])){
+                $payment_method->front_img = $creditCardImages[0];
+            }
+            if(isset($creditCardImages[0])){
+                $payment_method->back_img = $creditCardImages[1];
+            }
             $payment_method->default = 'yes';
             if($payment_method->save()){
                 return true;
@@ -247,6 +313,73 @@ class UserRepository extends BaseRepository
            });
     }
 
+    
+
+
+    public function create_insurance(array $data,$files)
+    {
+        $user_id = $data['user_id'];
+        $type = $data['type'];
+        return DB::transaction(function () use ($user_id,$type,$files) {
+            $insurance = Insurance::where('user_id',$user_id)->where('type',$type)->first();
+
+            $insuranceImages = [];
+            if(isset($files)){
+                if(count($files)>0){
+                    if($insurance){
+                    if(count($files)==1){
+                        $front_img = $insurance->front_img;
+                        if(File::exists($front_img)) {
+                            File::delete($front_img);
+                        }
+                    }else{
+                        $front_img = $insurance->front_img;
+                        if(File::exists($front_img)) {
+                            File::delete($front_img);
+                        }
+                        $back_img = $insurance->back_img;
+                        if(File::exists($back_img)) {
+                            File::delete($back_img);
+                        }
+
+                    }
+                }
+                        $page_no = 1;
+                        foreach ($files as $key => $image) {
+                            $uuid = Uuid::uuid4()->toString();
+                            $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                            $destinationPath = public_path('img/frontend/insurance');
+                            $image->move($destinationPath, $fileName);
+                            $front_url = 'img/frontend/insurance/'.$fileName;
+                            array_push($insuranceImages,$front_url);
+                        }
+                    }
+                
+                }
+            //$healthCard = HealthCard::where('user_id',$user_id)->first();
+            if ($insurance === null) {
+                $insurance  = new Insurance;
+                $insurance->user_id = $user_id;
+                $insurance->type = $type;
+             
+             }
+             if(isset($insuranceImages[0])){
+                $insurance->front_img = $insuranceImages[0];
+            }
+            if(isset($insuranceImages[0])){
+                $insurance->back_img = $insuranceImages[1];
+            }
+            $insurance->is_verify = 1;
+            if($insurance->save()){
+                return true;
+            }
+           
+          
+    
+            
+            throw new GeneralException(__('Problem With create Insurance.'));
+           });
+    }
     
 
     public function healthinformation(array $data)

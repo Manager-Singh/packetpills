@@ -30,6 +30,7 @@ Route::group([
         Route::post('user', [UserController::class, 'store'])->name('user.store');
         Route::post('user/create/prescription', [UserController::class, 'create_prescription'])->name('user.create.prescription');
         Route::post('user/create/healthcard', [UserController::class, 'create_healthcard'])->name('user.create.healthcard');
+        Route::post('user/create/insurance', [UserController::class, 'create_insurance'])->name('user.create.insurance');
         Route::post('user/create/address', [UserController::class, 'create_address'])->name('user.create.address');
         Route::post('user/create/healthinformation', [UserController::class, 'healthinformation'])->name('user.create.healthinformation');
         Route::post('user/create/paymentmethod', [UserController::class, 'paymentmethod'])->name('user.create.paymentmethod');

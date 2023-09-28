@@ -75,6 +75,26 @@ trait UserRelationships
     {
         return $this->hasMany(Insurance::class);
     }
+    public function primaryInsurance()
+    {
+        return $this->hasMany(Insurance::class)
+        ->where('type', 'primary');
+    }
+    public function secondaryInsurance()
+    {
+        return $this->hasMany(Insurance::class)
+        ->where('type','secondary');
+    }
+    public function ternaryInsurance()
+    {
+        return $this->hasMany(Insurance::class)
+        ->where('type','ternary');
+    }
+    public function quandaryInsurance()
+    {
+        return $this->hasMany(Insurance::class)
+        ->where('type','quandary');
+    }
     public function paymentmethod()
     {
         return $this->hasMany(PaymentMethod::class);
