@@ -10,6 +10,7 @@ use App\Models\Auth\SocialAccount;
 use App\Models\Auth\User;
 use App\Models\PrescriptionIteam;
 use App\Models\Prescription;
+use App\Models\PreciptionType;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\UploadedFile;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -129,24 +131,27 @@ class PrescriptionRepository extends BaseRepository
         
             $images = $data['prescription_upload'];
             $prescription = new Prescription;
-            $prescription->prescription_number =  time().rand(0,99999);
+            $prescription->prescription_number =  Prescription::generatePrescriptionNumber();
+            $prescription->prescription_type_id = PreciptionType::first()->id;
             $prescription->user_id = Auth::user()->id;
+            
             if($images && $prescription->save()){
                 foreach($images as $key => $image){
+                    $uuid = Uuid::uuid4()->toString();
                     $image  = $image; 
-                    $fileName   = time() . '.' . $image->getClientOriginalExtension();
+                    $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
                     $destinationPath = public_path('img/frontend/prescription');
                     $image->move($destinationPath, $fileName);
-                    $url = 'img/frontend/prescription/'.$fileName;
-                    $prescriptionIteam = new PrescriptionIteam;
-                    $prescriptionIteam->page_no = $key +1;
-                    $prescriptionIteam->prescripiton_id = $prescription->id;
-                    $prescriptionIteam->prescription_upload = $url;
-                    $prescriptionIteam->user_id = Auth::user()->id;
-                    $prescriptionIteam->save();
+                    $url = 'img/frontend/prescription/'.$fileName;  
+
+                    $prescription_iteams = new PrescriptionIteam;
+                    $prescription_iteams->page_no = $key +1;
+                    $prescription_iteams->prescripiton_id = $prescription->id;
+                    $prescription_iteams->prescription_upload = $url;
+                    $prescription_iteams->save();
                 }
 
-                return $prescriptionIteam;
+                return $prescription_iteams;
 
             }
 

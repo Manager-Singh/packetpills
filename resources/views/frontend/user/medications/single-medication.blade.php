@@ -275,9 +275,7 @@ var page_no=0;
             success: function(data){
                 if(data){
                   $('.ajax-result').fadeIn();
-                    console.log(data.html);  
-                    console.log(data.no_of_pages);  
-                    console.log(page_no);  
+                     
                     if(data.no_of_pages > page_no){
                       console.log(data.html);
                       if(type  == 'load'){
@@ -285,10 +283,10 @@ var page_no=0;
                       }else{
                         $('.ajax-result ul').html(data.html);
                       }
-                      
+                       
                       $('.loard-more-drug').show();
                     }else{
-                      $('.ajax-result ul').html('');
+                      $('.ajax-result ul').html(''); 
                       $('.loard-more-drug').hide();
                     }
                     

@@ -40,6 +40,7 @@ class Prescription extends BaseModel
         $nextNumber = '0000000001';
     }
 
-    return "PRE-$date-$nextNumber";
+    //return "PRE-$date-$nextNumber";
+    return "$date-$nextNumber";
 }
 }

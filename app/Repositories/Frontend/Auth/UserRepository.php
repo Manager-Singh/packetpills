@@ -600,43 +600,37 @@ class UserRepository extends BaseRepository
        
    }
 
-   public function drugAjaxSearch(array $data){
-    $total = Drug::get()->count();
-    $limit =10;
-    $no_of_pages =$total/$limit;
-    $page_no =($data['page_no']) ? $data['page_no'] : 0;
-    $offset=$page_no*$limit;
-    
-    if ($data['search']) {
-        $search = $data['search'];
-        $drug   = Drug::where('brand_name', 'like', '%' . $search . '%')
-        ->orWhere('generic_name', 'like', '%' . $search . '%')
-        ->orWhere('manufacturer', 'like', '%' . $search . '%')->skip($offset)->take($limit)->get();
-    }else{
-        $drug = '';
-    }
+   public function drugAjaxSearch(array $array){
+        $total          =   Drug::get()->count();
+        $limit          =   10;
+        $no_of_pages    =   $total/$limit;
+        $page_no        =   ($array['page_no']) ? $array['page_no'] : 0;
+        $offset         =   $page_no*$limit;
+        if ($array['search']) {
+            $search = $array['search'];
+            $drug   = Drug::where('brand_name', 'like', '%' . $search . '%')
+                        ->orWhere('generic_name', 'like', '%' . $search . '%')
+                        ->orWhere('manufacturer', 'like', '%' . $search . '%')->skip($offset)->take($limit)->get();
+        }else{
 
-    $html ='';
-    
-    if($drug){
-        foreach($drug as $out){
-            $html .='<li class="drug-list-child"><a href="'.route('frontend.user.drug.single',$out->id).'">'.$out->brand_name.'('.$out->id.')</a></li>';
+            $drug = '';
         }
 
-    }else{
-        $html .='<li class="drug-list-child">Data not found.</li>';
-    }
-    
+        $html ='';
+        if($drug){
+            foreach($drug as $out){
+                $html .='<li class="drug-list-child"><a href="'.route('frontend.user.drug.single',$out->id).'">'.$out->brand_name.'('.$out->id.')</a></li>';
+            }
+        }else{
+                $html .='<li class="drug-list-child">Data not found.</li>';
+        } 
+        return array(
+                    'total'         =>  $total,  
+                    'no_of_pages'   =>  $no_of_pages,  
+                    'page_no'       =>  $page_no,  
+                    'html'          =>  $html,  
+                );       
 
-
-    return array(
-      'total'=>$total,  
-      'no_of_pages'=>$no_of_pages,  
-      'page_no'=>$page_no,  
-      'html'=>$html,  
-    );
-    
-   
-    }
+   }
 
 }

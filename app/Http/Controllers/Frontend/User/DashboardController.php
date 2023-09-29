@@ -12,6 +12,7 @@ use App\Models\Province;
 use App\Models\Insurance;
 use App\Models\HealthCard;
 use App\Models\Drug;
+use App\Models\Prescription;
 
 /**
  * Class DashboardController.
@@ -149,7 +150,9 @@ class DashboardController extends Controller
 
     public function userPrescripiton()
     {
-        return view('frontend.user.prescription'); 
+        $user = Auth::user();
+       $data['prescriptions'] = Prescription::where('user_id',$user->id)->get();
+        return view('frontend.user.prescription',$data); 
     }
 
     public function medications()
