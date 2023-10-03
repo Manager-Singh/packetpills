@@ -5819,9 +5819,10 @@ p.related span {
   font-size: 14px;
 }   
 .price-detail .d-flex p, .price-detail .d-flex input.input, .price-detail .d-flex select, .price-detail .d-flex div#accordionExample {
-  width: 16%;
+  width: 25%;
   margin: 0px auto;
   font-size: 15px;
+  padding: 0px 0px 0px 9px;
 }
 .price-detail .d-flex p span {
   display: block;
