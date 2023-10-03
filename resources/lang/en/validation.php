@@ -232,7 +232,7 @@ return [
                     'slug' => 'Preciption Type Slug',
                 ],
                 'auto-messages' => [
-                    'messsage' => 'Message',
+                    'message' => 'Message',
                     'status' => 'Status',
                     //'slug' => 'Preciption Type Slug',
                 ],

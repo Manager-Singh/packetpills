@@ -15,7 +15,7 @@
     <div class="row mt-4 mb-4">
         <div class="col">
             <div class="form-group row">
-                {{ Form::label('messsage', trans('validation.attributes.backend.access.auto-messages.preciption_type'), ['class' => 'col-md-2 from-control-label required']) }}
+                {{ Form::label('messsage', trans('validation.attributes.backend.access.auto-messages.message'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
                     {{ Form::text('message', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.auto-messages.message'), 'required' => 'required']) }}
