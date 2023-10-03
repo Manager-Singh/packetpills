@@ -101,6 +101,16 @@
                         @lang('menus.backend.sidebar.preciption-types')
                     </a>
                 </li>
+                 <li class="divider"></li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/auto-messages'))
+                    }}" href="{{ route('admin.auto-messages.index') }}">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        @lang('menus.backend.sidebar.auto-messages')
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{
                         active_class(Route::is('admin/provinces'))

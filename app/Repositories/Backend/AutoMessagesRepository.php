@@ -2,20 +2,20 @@
 
 namespace App\Repositories\Backend;
 
-use App\Events\Backend\PreciptionTypes\PreciptionTypesCreated;
-use App\Events\Backend\PreciptionTypes\PreciptionTypesDeleted;
-use App\Events\Backend\PreciptionTypes\PreciptionTypesUpdated;
+use App\Events\Backend\AutoMessages\AutoMessagesCreated;
+use App\Events\Backend\AutoMessages\AutoMessagesDeleted;
+use App\Events\Backend\AutoMessages\AutoMessagesUpdated;
 use App\Exceptions\GeneralException;
-use App\Models\PreciptionType;
+use App\Models\AutoMessage;
 use App\Repositories\BaseRepository;
 use Str;
 
-class PreciptionTypesRepository extends BaseRepository
+class AutoMessagesRepository extends BaseRepository
 {
     /**
      * Associated Repository Model.
      */
-    const MODEL = PreciptionType::class;
+    const MODEL = AutoMessage::class;
 
     /**
      * @param int    $paged
@@ -28,11 +28,11 @@ class PreciptionTypesRepository extends BaseRepository
     {
         return $this->query()
             ->select([
-                'preciption_types.id',
-                'preciption_types.preciption_type',
-                'preciption_types.status',
-                'preciption_types.created_by',
-                'preciption_types.created_at',
+                'id',
+                'message',
+                'status',
+                'created_by',
+                'created_at',
             ])
             ->orderBy($orderBy, $sort)
             ->paginate($paged);
@@ -45,11 +45,11 @@ class PreciptionTypesRepository extends BaseRepository
     {
         return $this->query()
             ->select([
-                'preciption_types.id',
-                'preciption_types.preciption_type',
-                'preciption_types.status',
-                'preciption_types.created_by',
-                'preciption_types.created_at',
+                'id',
+                'message',
+                'status',
+                'created_by',
+                'created_at',
             ]);
     }
 
@@ -67,7 +67,7 @@ class PreciptionTypesRepository extends BaseRepository
         $input['status'] = isset($input['status']) ? 1 : 0;
 
         if ($prescription = PreciptionType::create($input)) {
-            event(new PreciptionTypesCreated($prescription));
+            event(new AutoMessagesCreated($prescription));
 
             return true;
         }
@@ -82,9 +82,9 @@ class PreciptionTypesRepository extends BaseRepository
     public function update(PreciptionType $preciptionType, array $input)
     {
         // dd($input);
-        $input['slug'] = Str::slug($input['preciption_type']);
+
         if ($preciptionType->update($input)) {
-            event(new PreciptionTypesUpdated($preciptionType));
+            event(new AutoMessagesUpdated($preciptionType));
 
             return true;
         }
@@ -103,7 +103,7 @@ class PreciptionTypesRepository extends BaseRepository
     {
        // dd($preciptionType);
         if ($preciptionType->delete()) {
-            event(new PreciptionTypesDeleted($preciptionType));
+            event(new AutoMessagesDeleted($preciptionType));
 
             return true;
         }

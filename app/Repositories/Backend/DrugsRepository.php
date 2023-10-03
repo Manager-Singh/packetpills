@@ -137,6 +137,7 @@ class DrugsRepository extends BaseRepository
 
             // $input['strength'] = serialize($input['strength']);
             // $input['price'] = serialize($input['price']);
+            $input['slug'] = Str::slug($input['brand_name']);
             if ($drug = Drug::create($input)) {
 
                     event(new DrugCreated($drug));
@@ -177,7 +178,7 @@ class DrugsRepository extends BaseRepository
 
 
         return DB::transaction(function () use ($drug, $input,$files) {
-
+            $input['slug'] = Str::slug($input['brand_name']);
             if ($drug->update($input)) {
 
 

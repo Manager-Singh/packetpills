@@ -108,7 +108,7 @@ class DrugCSVUploadJob implements ShouldQueue
 
             }
             $item_csv_data = array_combine($this->header,$item);
-
+            $item_csv_data['slug'] = Str::slug($item[0]);
             Drug::create($item_csv_data);
         }
     }
