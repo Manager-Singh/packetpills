@@ -3,7 +3,7 @@
 @section('title', app_name() . ' | ' . __('labels.backend.access.enterpriseconnects.management'))
 
 @section('breadcrumb-links')
-@include('backend.preciption-types.includes.breadcrumb-links')
+@include('backend.auto-messages.includes.breadcrumb-links')
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    {{ __('labels.backend.access.preciption-types.management') }} <small class="text-muted">{{ __('labels.backend.access.preciption-types.active') }}</small>
+                    {{ __('labels.backend.access.auto-messages.management') }} <small class="text-muted">{{ __('labels.backend.access.auto-messages.active') }}</small>
                 </h4>
             </div>
             <!--col-->
@@ -22,10 +22,10 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="table-responsive">
-                    <table id="auto-messages-table" class="table" data-ajax_url="{{ route('admin.preciptionTypes.get') }}">
+                    <table id="auto-messages-table" class="table" data-ajax_url="{{ route('admin.autoMessages.get') }}">
                         <thead>
                             <tr>
-                                <th>{{ trans('labels.backend.access.preciption-types.table.preciption_type') }}</th>
+                                <th>{{ trans('labels.backend.access.auto-messages.table.message') }}</th>
                                 <th>{{ trans('labels.backend.access.enterpriseconnects.table.status') }}</th>
                                 <th>{{ trans('labels.backend.access.enterpriseconnects.table.createdat') }}</th>
                                 <th>{{ trans('labels.general.actions') }}</th>

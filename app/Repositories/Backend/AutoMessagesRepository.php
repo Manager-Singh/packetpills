@@ -62,12 +62,12 @@ class AutoMessagesRepository extends BaseRepository
      */
     public function create(array $input)
     {
-        $input['slug'] = Str::slug($input['preciption_type']);
+      //  $input['slug'] = Str::slug($input['preciption_type']);
         $input['created_by'] = auth()->user()->id;
         $input['status'] = isset($input['status']) ? 1 : 0;
 
-        if ($prescription = PreciptionType::create($input)) {
-            event(new AutoMessagesCreated($prescription));
+        if ($AutoMessage = AutoMessage::create($input)) {
+            event(new AutoMessagesCreated($AutoMessage));
 
             return true;
         }
@@ -79,12 +79,12 @@ class AutoMessagesRepository extends BaseRepository
     //  * @param \App\Models\Prescription $prescription
     //  * @param array $input
     //  */
-    public function update(PreciptionType $preciptionType, array $input)
+    public function update(AutoMessage $AutoMessage, array $input)
     {
-        // dd($input);
+        $input['status'] = isset($input['status']) ? 1 : 0;
 
-        if ($preciptionType->update($input)) {
-            event(new AutoMessagesUpdated($preciptionType));
+        if ($AutoMessage->update($input)) {
+            event(new AutoMessagesUpdated($AutoMessage));
 
             return true;
         }
@@ -99,11 +99,11 @@ class AutoMessagesRepository extends BaseRepository
     //  *
     //  * @return bool
     //  */
-    public function delete($preciptionType)
+    public function delete($AutoMessage)
     {
-       // dd($preciptionType);
-        if ($preciptionType->delete()) {
-            event(new AutoMessagesDeleted($preciptionType));
+       // dd($AutoMessage);
+        if ($AutoMessage->delete()) {
+            event(new AutoMessagesDeleted($AutoMessage));
 
             return true;
         }

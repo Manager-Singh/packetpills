@@ -87,9 +87,9 @@ class AutoMessagesController extends Controller
     //  *
     //  * @return \App\Http\Responses\Backend\AutoMessages\EditResponse
     //  */
-    public function edit(PreciptionType $preciptionType, ManageAutoMessagesRequest $request)
+    public function edit(AutoMessage $AutoMessage, ManageAutoMessagesRequest $request)
     {
-        return new EditResponse($preciptionType);
+        return new EditResponse($AutoMessage);
     }
 
     // /**
@@ -98,9 +98,11 @@ class AutoMessagesController extends Controller
     //  *
     //  * @return \App\Http\Responses\RedirectResponse
     //  */
-    public function update(PreciptionType $preciptionType, UpdateAutoMessagesRequest $request)
+    public function update(AutoMessage $AutoMessage, UpdateAutoMessagesRequest $request)
     {
-        $this->repository->update($preciptionType, $request->except(['_token', '_method']));
+        // print_r($request->all());
+        // die;
+        $this->repository->update($AutoMessage, $request->except(['_token', '_method']));
 
         return new RedirectResponse(route('admin.auto-messages.index'), ['flash_success' => __('alerts.backend.auto-messages.updated')]);
     }
@@ -111,10 +113,10 @@ class AutoMessagesController extends Controller
      *
      * @return \App\Http\Responses\RedirectResponse
      */
-    public function destroy(PreciptionType $preciptionType,DeleteAutoMessagesRequest $request)
+    public function destroy(AutoMessage $AutoMessage,DeleteAutoMessagesRequest $request)
     {
-        // dd($preciptionType);
-        $this->repository->delete($preciptionType);
+        // dd($AutoMessage);
+        $this->repository->delete($AutoMessage);
         return new RedirectResponse(route('admin.auto-messages.index'), ['flash_success' => __('alerts.backend.auto-messages.deleted')]);
     }
 }

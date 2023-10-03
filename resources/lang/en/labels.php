@@ -235,6 +235,23 @@ return [
                     'createdat' => 'Created At',
                 ],
             ],
+            'auto-messages' => [
+                'all' => 'All Auto Messages',
+                'active' => 'Auto Messages List',
+                'create' => 'Create Auto Message',
+                'deactivated' => 'Deactivated Auto Messages',
+                'deleted' => 'Deleted Auto Messages',
+                'edit' => 'Edit Auto Message',
+                'management' => 'Auto Message Management',
+
+                'table' => [
+                    'created' => 'Created',
+                    'id' => 'ID',
+                   'message'=>'Message',
+                    'status' => 'Status',
+                    'createdat' => 'Created At',
+                ],
+            ],
             'provinces' => [
                 'all' => 'All Provinces',
                 'active' => 'Province List',

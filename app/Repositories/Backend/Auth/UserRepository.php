@@ -147,7 +147,7 @@ class UserRepository extends BaseRepository
             if(isset($creditCardImages[0])){
                 $payment_method->front_img = $creditCardImages[0];
             }
-            if(isset($creditCardImages[0])){
+            if(isset($creditCardImages[1])){
                 $payment_method->back_img = $creditCardImages[1];
             }
             $payment_method->default = 'yes';
@@ -209,7 +209,7 @@ class UserRepository extends BaseRepository
             if(isset($creditCardImages[0])){
                 $payment_method->front_img = $creditCardImages[0];
             }
-            if(isset($creditCardImages[0])){
+            if(isset($creditCardImages[1])){
                 $payment_method->back_img = $creditCardImages[1];
             }
             $payment_method->default = 'yes';
@@ -366,7 +366,7 @@ class UserRepository extends BaseRepository
              if(isset($insuranceImages[0])){
                 $insurance->front_img = $insuranceImages[0];
             }
-            if(isset($insuranceImages[0])){
+            if(isset($insuranceImages[1])){
                 $insurance->back_img = $insuranceImages[1];
             }
             $insurance->is_verify = 1;

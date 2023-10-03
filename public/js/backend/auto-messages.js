@@ -19,7 +19,7 @@
                         type: 'post'
                     },
                     columns: [
-                        { data: 'preciption_type', name: 'preciption_type' },
+                        { data: 'message', name: 'message' },
                         { data: 'status', name: 'status' },
                         { data: 'created_at', name: 'created_at' },
                         { data: 'actions', name: 'actions', searchable: false, sortable: false }
