@@ -231,6 +231,11 @@ return [
                     'status' => 'Status',
                     'slug' => 'Preciption Type Slug',
                 ],
+                'auto-messages' => [
+                    'messsage' => 'Message',
+                    'status' => 'Status',
+                    //'slug' => 'Preciption Type Slug',
+                ],
                 'provinces' => [
                     'name' => 'Province Name',
                     'status' => 'Status',

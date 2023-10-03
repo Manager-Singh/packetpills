@@ -93,6 +93,11 @@ return [
             'updated' => 'The preciption types was successfully updated.',
             'deleted' => 'The preciption types was successfully deleted.',
         ],
+        'auto-messages'=> [
+            'created' => 'The Auto Message was successfully created.',
+            'updated' => 'The Auto Message was successfully updated.',
+            'deleted' => 'The Auto Message was successfully deleted.',
+        ],
         'provinces'=> [
             'created' => 'The province was successfully created.',
             'updated' => 'The province was successfully updated.',
