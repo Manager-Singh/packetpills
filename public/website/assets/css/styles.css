@@ -5804,7 +5804,7 @@ img.single-drug {
 }
 .price-calculator {
   padding: 15px 40px;
-  margin-top: 80px;
+  margin-top: 0px;
   background: #71737a0d;
 }
 p.related {
@@ -5819,9 +5819,10 @@ p.related span {
   font-size: 14px;
 }   
 .price-detail .d-flex p, .price-detail .d-flex input.input, .price-detail .d-flex select, .price-detail .d-flex div#accordionExample {
-  width: 16%;
+  width: 25%;
   margin: 0px auto;
   font-size: 15px;
+  padding: 0px 0px 0px 9px;
 }
 .price-detail .d-flex p span {
   display: block;
@@ -5858,7 +5859,7 @@ button.accordion-button {
   padding-bottom: 35px;
 }
 .product-tab .nav-tabs li.nav-item {
-  border: 3px solid #000;
+  border: 2px solid #638e3c;
   padding: 10px 32px;
   border-radius: 50px;
   margin-right: 15px;
@@ -5868,7 +5869,7 @@ button.accordion-button {
   color: #212843;
 }
 .product-tab .nav-tabs li.nav-item.active, .product-tab .nav-tabs li.nav-item:hover {
-  background: #212843;
+  background: #8ac03d;
 }
 .product-tab .nav-tabs li.nav-item.active a, .product-tab .nav-tabs li.nav-item:hover a {
   color: #fff;

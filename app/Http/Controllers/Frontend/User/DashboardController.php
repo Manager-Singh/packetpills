@@ -353,9 +353,10 @@ class DashboardController extends Controller
        return view('frontend.user.medications.search-medication',$data); 
     }
 
-    public function drugSingleDetails(Request $request,$id)
+    public function drugSingleDetails(Request $request,$slug)
     {
-        $data['drug'] = Drug::find($id); 
+        
+        $data['drug'] = Drug::where('slug',$slug)->first(); 
         return view('frontend.user.medications.single-medication',$data); 
     }
 

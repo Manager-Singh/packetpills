@@ -68,7 +68,7 @@ li.drug-list-child {
                 <div class="single-result">
                   <img src="{{asset('website/assets/images/icon-rx.png')}}" />
                   <p>{{$drug->brand_name}}</p>
-                  <a href="">View</a>  
+                  <a href="{{route('frontend.drug.single',$drug->slug)}}">View</a>  
                 </div>
               </div>
 
@@ -104,7 +104,7 @@ li.drug-list-child {
 var page_no=0;
    function druglistView(page_no=0,type=''){
  var search = $('.search').val();
-    ajaxurl = "{{ route('frontend.user.drug.ajax.search') }}";
+    ajaxurl = "{{ route('frontend.drug.ajax.search') }}";
         _token = "{{ csrf_token() }}";
         $.ajax({
             url: ajaxurl,
