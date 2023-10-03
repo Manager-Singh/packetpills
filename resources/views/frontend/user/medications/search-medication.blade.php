@@ -68,7 +68,7 @@ li.drug-list-child {
                 <div class="single-result">
                   <img src="{{asset('website/assets/images/icon-rx.png')}}" />
                   <p>{{$drug->brand_name}}</p>
-                  <a href="{{route('frontend.drug.single',$drug->id)}}">View</a>  
+                  <a href="{{route('frontend.drug.single',$drug->slug)}}">View</a>  
                 </div>
               </div>
 

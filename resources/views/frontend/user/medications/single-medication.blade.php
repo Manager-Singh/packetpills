@@ -1,8 +1,7 @@
 @extends('frontend.layouts.step')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
-
-@section('content')
+@push('after-styles')
 <style>
 ul.drug-list-main {
     list-style: none;
@@ -29,8 +28,26 @@ li.drug-list-child {
     box-shadow: 0px 0px 3px 3px #eee;
     border-radius: 3px;
 }
-
+.check-img{
+  width: 25px;
+  height: 25px;
+  padding-right: 3px;
+}
+.prescription {
+    align-items: center;
+}
+.img-m {
+    width: 500px;
+    height: 400px;
+}
+.img-o {
+    width: 100px;
+    height: 80px;
+}
 </style>
+@endpush
+@section('content')
+
 
 <div class="container mt-5 mb-5">
 		    	<div class="row ">
@@ -45,7 +62,9 @@ li.drug-list-child {
 				    </div>
             <div class="col-md-6">
               <div class="bredcrumbs mt-5">Home > Drug > {{$drug->brand_name}}</div>
-              <div class="prescription"> <input type="checkbox" id="prescription" name="prescription" value="Prescription Required" checked  />
+              <div class="prescription">
+              <img class="check-img"  src="{{asset('website/assets/images/icons8-checked-checkbox-50.png')}}" alt="Los Angeles">
+                 
                 <label for="prescription">Prescription Required</label></div>
                 
                     <p class="bold">Available Form: <span>{{$drug->format->name}}</span></p>
@@ -61,51 +80,82 @@ li.drug-list-child {
     
               </div>
               <div class="col-md-6">
-                <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-                  <!-- Slides -->
-                  <div class="carousel-inner mb-5">
-                    <div class="carousel-item active">
-                      <img src="{{asset('website/assets/images/home-banner-2.png')}}" class="d-block w-100" alt="..." />
-                    </div>
-                    <div class="carousel-item">
-                      <img src="{{asset('website/assets/images/home-banner-2.png')}}" class="d-block w-100"
-                        alt="..." />
-                    </div>
-                    <div class="carousel-item">
-                      <img src="{{asset('website/assets/images/home-banner-2.png')}}" class="d-block w-100" alt="..." />
-                    </div>
-                  </div>
+                
 
-                  <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators"
-                    data-mdb-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators"
-                    data-mdb-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
 
-                  <div class="carousel-indicators" style="margin-bottom: -20px;">
-                    <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="0" class="active"
-                      aria-current="true" aria-label="Slide 1" style="width: 100px;">
-                      <img class="d-block w-100"
-                        src="{{asset('website/assets/images/home-banner-2.png')}}" class="img-fluid" />
-                    </button>
-                    <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="1"
-                      aria-label="Slide 2" style="width: 100px;">
-                      <img class="d-block w-100"
-                        src="{{asset('website/assets/images/home-banner-2.png')}}" class="img-fluid" />
-                    </button>
-                    <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="2"
-                      aria-label="Slide 3" style="width: 100px;">
-                      <img class="d-block w-100"
-                        src="{{asset('website/assets/images/home-banner-2.png')}}" class="img-fluid" />
-                    </button>
-                  </div>
-                  <!-- Thumbnails -->
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  @if($drug->images)
+
+                  @foreach($drug->images as $img)
+
+                  <div class="carousel-item {{ ($loop->index == 0) ? 'active' : ''  }} ">
+                          <img class="d-block w-100 img-m"
+                              src="{{asset($img->image)}}"
+                              alt="First slide">
+                      </div>
+                  @endforeach
+                  @endif
+
+                    
+                  
                 </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+ 
+    
+    <div class="container pt-4 pb-5">
+        <div class="row carousel-indicators">
+
+        @if($drug->images)
+
+        @foreach($drug->images as $img)
+
+        <div class="col-md-4 item">
+                        <img src="{{asset($img->image)}}"
+                            class="img-o" data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" />
+                    </div>
+        @endforeach
+        @endif
+
+
+
+            
+
+           
+            
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+              
+                  <!-- Slides -->
+                  
+
+                 
+                  
+
+
+                
+                  <!-- Thumbnails -->
+                
               </div>
 			
 			</div>

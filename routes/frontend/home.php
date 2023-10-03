@@ -19,7 +19,7 @@ Route::post('contact/send', [ContactController::class, 'send'])->name('contact.s
 Route::get('enterprise/connect', [ConnectController::class, 'index'])->name('enterprise.connect');
 Route::post('enterprise/connect/send', [ConnectController::class, 'store'])->name('enterprise.connect.submit');
 Route::get('drug/search', [DashboardController::class, 'drugSearch'])->name('drug.search');
-Route::get('drug/single-details/{id}', [DashboardController::class, 'drugSingleDetails'])->name('drug.single');
+Route::get('drug/{slug}', [DashboardController::class, 'drugSingleDetails'])->name('drug.single');
 Route::post('drug/get-search', [DashboardController::class, 'drugAjaxSearch'])->name('drug.ajax.search');
 
 /*

@@ -5859,7 +5859,7 @@ button.accordion-button {
   padding-bottom: 35px;
 }
 .product-tab .nav-tabs li.nav-item {
-  border: 3px solid #000;
+  border: 2px solid #638e3c;
   padding: 10px 32px;
   border-radius: 50px;
   margin-right: 15px;
@@ -5869,7 +5869,7 @@ button.accordion-button {
   color: #212843;
 }
 .product-tab .nav-tabs li.nav-item.active, .product-tab .nav-tabs li.nav-item:hover {
-  background: #212843;
+  background: #8ac03d;
 }
 .product-tab .nav-tabs li.nav-item.active a, .product-tab .nav-tabs li.nav-item:hover a {
   color: #fff;
