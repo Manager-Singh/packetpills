@@ -9,6 +9,7 @@ use App\Http\Requests\Backend\Auth\User\UpdateUserRequest;
 use App\Http\Responses\ViewResponse;
 use App\Models\Auth\User;
 use App\Models\Province;
+use App\Models\AutoMessage;
 use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;
@@ -162,10 +163,12 @@ class UserController extends Controller
     public function show(ManageUserRequest $request, User $user)
     {
         // dd($user);
+        $auto_messages = AutoMessage::get()->pluck('message','id');
         $province = Province::get()->pluck('name','name');
         return view('backend.auth.user.show')
             ->with([
                 'provinces'=>$province,
+                'auto_messages'=>$auto_messages,
             ])
             ->withUser($user);
     }
@@ -202,7 +205,9 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user  = $this->userRepository->update($user, $request->all());
+        // print_r( $request->all());
+        // die;
+        $user  = $this->userRepository->update($user, $request->except(['_token', '_method','files']));
       //  ->route('admin.auth.user.show', $user)
         return redirect()->route('admin.auth.user.show', $user)->withFlashSuccess(__('alerts.backend.access.users.updated'));
     }

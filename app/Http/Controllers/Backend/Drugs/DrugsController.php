@@ -176,6 +176,8 @@ class DrugsController extends Controller
         if( $request->hasFile('drug_csv') ) {
 
             $csv    = file($request->drug_csv);
+            // print_r(  $csv);
+            // die;
             $chunks = array_chunk($csv,1000);
             $header = [];
 

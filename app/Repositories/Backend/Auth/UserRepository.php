@@ -532,9 +532,14 @@ class UserRepository extends BaseRepository
         unset($data['permissions']);
 
         return DB::transaction(function () use ($user, $data, $roles, $permissions) {
+          
             $user->status = isset($data['status']) && $data['status'] == '1' ? 1 : 0;
             $user->confirmed = isset($data['confirmed']) && $data['confirmed'] == '1' ? 1 : 0;
-
+            $user->gender = isset($data['gender']) ? $data['gender'] : null;
+            $user->date_of_birth = isset($data['date_of_birth']) ? $data['date_of_birth'] : null;
+            $user->province = isset($data['province']) ? $data['province'] : null;
+//   print_r($data);
+//             die;
             if ($user->update($data)) {
                 $user->roles()->sync($roles);
                 $user->permissions()->sync($permissions);

@@ -38,9 +38,9 @@ class DrugCSVUploadJob implements ShouldQueue
      */
     public function handle()
     {
-        print_r($this->data);
-        print_r($this->header);
-        die;
+        // print_r($this->data);
+        // print_r($this->header);
+        // die;
         foreach ($this->data as $item) {
             $strength_unit = DrugAttribute::whereIn('name',[$item[4]])->where('type','strength_unit')->first();
 

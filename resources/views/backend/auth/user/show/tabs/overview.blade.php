@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-4">
-        <h4 class="text-center">Basic Details</h4>
+        <h4 class="text-center">Basic Details <a href="{{route('admin.auth.user.edit', $user)}}" style="float: right; color: #086d9b;"><i class="fa fa-pencil"></i></a></h4>
         <div class="table-responsive">
             <table class="table table-hover" style="border: 1px solid #c8ced3;">
                 <tr>
