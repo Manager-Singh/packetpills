@@ -142,7 +142,8 @@ class UserRepository extends BaseRepository
             $payment_method->user_id = $user_id;
             $payment_method->card_number = $data['card_number'];
             $payment_method->cardholder_name = $data['cardholder_name'];
-            $payment_method->expiry_date = $data['expiry_date'];
+            $expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
+            $payment_method->expiry_date = $expiry_date;
             $payment_method->cvc = $data['cvc'];
             if(isset($creditCardImages[0])){
                 $payment_method->front_img = $creditCardImages[0];
@@ -204,7 +205,8 @@ class UserRepository extends BaseRepository
             $payment_method->user_id = $user_id;
             $payment_method->card_number = $data['card_number'];
             $payment_method->cardholder_name = $data['cardholder_name'];
-            $payment_method->expiry_date = $data['expiry_date'];
+            $expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
+            $payment_method->expiry_date = $expiry_date;
             $payment_method->cvc = $data['cvc'];
             if(isset($creditCardImages[0])){
                 $payment_method->front_img = $creditCardImages[0];
@@ -396,6 +398,11 @@ class UserRepository extends BaseRepository
              }
             $HealthInformation->allergies = $data['allergies'];
             $HealthInformation->supplements_medications = $data['supplements_medications'];
+            if($data['allergies']==1){
+                $HealthInformation->allergies_medications = $data['allergies_medications'];
+            }else{
+                $HealthInformation->allergies_medications = null;
+            }
             if($HealthInformation->save()){
                 return true;
             }

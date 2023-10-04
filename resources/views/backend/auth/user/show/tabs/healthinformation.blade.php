@@ -16,7 +16,7 @@
             <div id="collapseHealthinformation" class="panel-collapse collapse in" role="tabpanel"
                 aria-labelledby="headingHealthcard">
                 <div class="panel-body">
-                    {{ Form::open(['route' => 'admin.auth.user.create.healthinformation', 'class' => 'form-horizontal', 'role' =>
+                    {{ Form::open(['route' => 'admin.auth.user.create.healthinformation', 'class' => 'form-horizontal input-tag', 'role' =>
                     'form', 'method' => 'post']) }}
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
 
@@ -34,13 +34,31 @@
                                 </label>&nbsp;&nbsp;
                                 <label for="allergies-no" class="control">
                                     <input type="radio" value="0" name="allergies" id="allergies-no"
-                                        class="allergies"  />
+                                        class="allergies"  checked/>
                                     &nbsp;&nbsp;@lang('No')
                                 </label>
                             </div>
                         </div>
                         <!--col-->
                     </div>
+                    <div class="allergies-medications">
+                     <div class="form-group row">
+                    
+
+                        {{ Form::label('allergies_medications', trans('Allergies to any medication list here'),
+                        ['class' => 'col-md-2 from-control-label
+                        required']) }}
+                        <div class="col-md-10">
+                            <div class="input-group ">
+                                {{ Form::text('allergies_medications', null, ['class' => 'form-control',
+                                'placeholder' => trans(''),'data-role'=>'tagsinput' ]) }}
+
+                            </div>
+                        </div>
+                        <!--col-->
+                    </div>
+                    </div>
+
                     <div class="form-group row">
                         {{ Form::label('supplements_medications', trans('Supplement & medications that you one taking'),
                         ['class' => 'col-md-2 from-control-label
@@ -87,6 +105,19 @@
                 No
                 @endif
             </div>
+            @if($user->healthinformation->allergies == 1)
+            <div><strong>Allergies to any medication listed here:</strong>
+                @if($user->healthinformation->allergies_medications)
+                @php
+                $allergies_medications = explode(",",$user->healthinformation->allergies_medications);
+                @endphp
+                @foreach($allergies_medications as $allergies_medication)
+                <span class="label label-info">{{$allergies_medication}}</span>
+                @endforeach
+
+                @endif
+            </div>
+            @endif
             <div><strong>Supplement & medications that you one taking:</strong>
                 @if($user->healthinformation->supplements_medications)
                 @php

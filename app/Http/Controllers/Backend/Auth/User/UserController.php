@@ -70,9 +70,10 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $this->userRepository->create($request->except(['_token', '_method','files']),$request->file('files'));
-
-        return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.access.users.created'));
+        $user = $this->userRepository->create($request->except(['_token', '_method','files']),$request->file('files'));
+      //  $user->id;
+       // route('admin.auth.user.show', $this)
+        return redirect()->route('admin.auth.user.show', $user)->withFlashSuccess(__('alerts.backend.access.users.created'));
     }
 
     public function create_prescription(Request $request)
@@ -201,9 +202,9 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->userRepository->update($user, $request->all());
-
-        return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.access.users.updated'));
+        $user  = $this->userRepository->update($user, $request->all());
+      //  ->route('admin.auth.user.show', $user)
+        return redirect()->route('admin.auth.user.show', $user)->withFlashSuccess(__('alerts.backend.access.users.updated'));
     }
 
     /**

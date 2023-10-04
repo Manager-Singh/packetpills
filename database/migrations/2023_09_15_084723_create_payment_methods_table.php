@@ -18,7 +18,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->bigInteger('user_id');
             $table->string('card_number');
             $table->string('cardholder_name')->nullable();
-            $table->date('expiry_date');
+            $table->string('expiry_date');
             $table->string('cvc');
             $table->string('front_img')->nullable();
             $table->string('back_img')->nullable();

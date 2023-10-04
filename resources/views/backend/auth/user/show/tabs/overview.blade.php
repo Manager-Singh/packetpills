@@ -652,6 +652,9 @@
             border-radius: 4px;
             padding: 2px 4px;
         }
+        .allergies-medications{
+        display:none;
+        }
     </style>
 @endpush
 @section('pagescript')
@@ -812,5 +815,20 @@
             });
 
         }
+
+        $(document).ready(function() {
+            $('input[type=radio][name=allergies]').change(function() {
+                if ($(this).is(':checked')) {
+                    if(this.value==1){
+                    $('.allergies-medications').show();
+                    }else{
+                      $('.allergies-medications').hide();
+                    }
+                  
+                }
+            });
+             
+            });
+         
     </script>
 @endsection
