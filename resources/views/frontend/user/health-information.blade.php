@@ -58,21 +58,27 @@
                                 <label for="no">No</label> 
                            
                             </div>
-                            <div class="form-group allergies_medications" style="display:none;">
+                            <div class="form-group allergies_medications" {{ ($health_info && $health_info->allergies == 1) ? 'style=display:block' : 'style=display:none' }} >
 
                             <label for="lname">Allergies to any medication list here</label>
-                            <textarea id="allergies_medications" name="allergies_medications" rows="6" cols="100" data-role="tagsinput" placeholder="(e.g. Drug A, etc)">{{ ($health_info) ? $health_info->allergies_medications : '' }}</textarea>
+                            <input id="allergies_medications" name="allergies_medications" rows="6" cols="100" data-role="tagsinput" value="{{ ($health_info) ? $health_info->allergies_medications : '' }}" placeholder="(e.g. Drug A, etc)">
                             
 
                             </div>
                             <div class="form-group">
 
                             <label for="lname">Enter any over the counter supplements and medications that you are taking</label>
-                            <textarea id="w3review" name="supplement_medicaton" rows="6" cols="100" data-role="tagsinput" placeholder="(e.g. Vitamin A, etc)" required>{{ ($health_info) ? $health_info->supplements_medications : '' }}</textarea>
+                            <input id="w3review" name="supplement_medicaton" rows="6" cols="100" data-role="tagsinput" placeholder="(e.g. Vitamin A, etc)" value="{{ ($health_info) ? $health_info->supplements_medications : '' }}" required />
                             
 
                             </div>
+                            @if($health_info)
+                            <input type="hidden" name="health_information_id" value="{{$health_info->id}}" />
+                            <button type="submit" class="next button" onclick="" >Update</button>
+                            @else
                             <button type="submit" class="next button" onclick="" >Save</button>
+                            @endif
+                            
                             
                                 
                           </form>

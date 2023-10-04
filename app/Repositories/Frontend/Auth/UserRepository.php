@@ -513,7 +513,7 @@ class UserRepository extends BaseRepository
           $card = new PaymentMethod;
           $card->user_id = auth()->user()->id;
           $card->card_number = $data['card_number'];
-          $card->expiry_date = $data['expiry_date'];
+          $card->expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
           $card->cvc = $data['cvc'];
           
            
@@ -524,10 +524,21 @@ class UserRepository extends BaseRepository
 
       public function createHealthInformation(array $data){
         
-        $healthInformation = new HealthInformation;
+        if(isset($data['health_information_id'])){
+            $healthInformation = HealthInformation::find($data['health_information_id']);
+        }else{
+            $healthInformation = new HealthInformation;
+        }
+        
         $healthInformation->user_id = auth()->user()->id;
         $healthInformation->allergies = $data['allergie'];
-        $healthInformation->allergies_medications = $data['allergies_medications'];
+        if($data['allergie'] == 1){
+            $healthInformation->allergies_medications = $data['allergies_medications'];
+
+        }else{
+            $healthInformation->allergies_medications = null;
+
+        }
         $healthInformation->supplements_medications = $data['supplement_medicaton'];
                 
           
