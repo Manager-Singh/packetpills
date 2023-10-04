@@ -26,7 +26,27 @@
         
         @stack('after-styles')
 
-        
+  <style>
+		header.re-header.show {
+		padding: 2px 24px;
+		border-radius: 0px !important;
+		background-color: #fff;
+		box-shadow: 0 2px 100px #0003;
+		position: fixed;
+		width: 100%;
+		max-width: 100% !important;
+		z-index: 8;
+		padding-right: 0.8rem;
+		transition: top .2s ease;
+	}
+  .arrow-header{
+    margin-top: 6rem;
+    padding: 0;
+  }
+  .arrow-header a img {
+    margin: 4px 28px;
+}
+	</style>     
     <link rel="shortcut icon" href="{{asset('step/assets/images/logo.png')}}" type="images/png" id="favicon">
 	
 	<link rel="stylesheet" href=".{{asset('step/assets/css/styles.css')}}">
@@ -35,7 +55,8 @@
 	<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="{{asset('plugins/parsley/parsley.css')}}"> -->
-    <link rel='stylesheet' href='//common.olemiss.edu/_js/sweet-alert/sweet-alert.css'></link>   
+    <link rel='stylesheet' href='//common.olemiss.edu/_js/sweet-alert/sweet-alert.css'></link> 
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" /> 
   </head>
     <body>
       
@@ -44,21 +65,19 @@
        @if(Route::currentRouteName() == 'frontend.user.dashboard' || (Auth::check() && Auth::user()->is_profile_status == "completed"))
        @include('frontend.navbar.step.header')
       @else
-        <header>
-		  <a href="{{url()->previous()}}"><img class="header-icon" src="{{asset('step/assets/images/arrow.png')}}" /></a>
-		  <img class="header-logo" src="{{asset('step/assets/images/logo-main.png')}}" /> 
-	  </header>
+      @include('frontend.navbar.header')
+      <header class="re-header show arrow-header">
+        <a href="{{url()->previous()}}">
+          <img class="header-icon" src="{{asset('step/assets/images/arrow.png')}}" />
+        </a>
+      </header>
     @endif
         
         <main>
+        
             @yield('content')
            
         </main>
-        
-        
-
-
-        
         <!-- Scripts -->
         @stack('before-scripts')
         {!! script(mix('js/manifest.js')) !!}
@@ -72,6 +91,8 @@
         <script src="{{ asset('website/assets/js/main.js')}}" type="module"></script>
         <!-- <script src="{{asset('plugins/parsley/parsley.js')}}"></script> -->
         <script src="//common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
         <script>
     $(document).ready(function(){       
      

@@ -22,9 +22,19 @@
               @csrf 
                 <label for="address">Card Number</label>
                 <input type="number" id="address" name="card_number"  value="" placeholder="Card Number"><br><br>
-                
-                <label for="zip">Expiry(MMYY)</label>
-                <input type="date" id="zip" name="expiry_date" value="" placeholder="Expiry(MMYY)">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+
+                    <label for="zip">Expiry Month(MM)</label>
+                    <input type="text" id="expiry_month" name="expiry_month" value="" placeholder="Expiry(MM)">
+                  </div>
+                  <div class="form-group col-md-6 mt-0">
+
+                    <label for="zip">Expiry Year(YY)</label>
+                    <input type="text" id="expiry_year" name="expiry_year" value="" placeholder="Expiry(YY)">
+                  </div>
+
+                </div>
 
                 <label for="city">CVC</label>
                 <input type="number" id="city" name="cvc" value="" placeholder="CVC">

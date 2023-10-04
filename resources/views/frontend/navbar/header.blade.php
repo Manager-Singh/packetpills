@@ -12,8 +12,8 @@
         </div>
      
         <div class="column">
-          <a class="re-header__logo-default" aria-label="Return to home page" href="#">
-            <img alt="logo" width="136" height="25" src="{{asset('website/assets/images/logo-removebg.png')}}">
+          <a class="re-header__logo-default" aria-label="Return to home page" href="{{route('frontend.index')}}">
+            <img alt="logo" width="136" height="25" src="{{asset('website/assets/images/logo.gif')}}">
           </a>
 
         </div>
@@ -27,11 +27,13 @@
               </li>
               <li role="menuitem" class="hover-menu">
                 <div>
+                  <a href="{{route('frontend.drug.search')}}">
                   <button class="is-clickable button font-regular color-dark focus-visible-button" aria-label="Open drugs menu" aria-expanded="false">
                     <span  class="font-regular">Drugs</span> 
                     <!-- <i class="fa fa-angle-down" aria-hidden="true"></i> -->
 
                   </button>
+                  </a>
                   
                   <ul  class="row re-subnav xsmall-5" aria-label="Read about the drug">
                   @if($drugs)
@@ -39,14 +41,14 @@
                       <li  class="column">
                     
                         <div >
-                          <a  href="#">{{$drug->name}}</a>
+                          <a  href="{{route('frontend.drug.single',$drug->slug)}}">{{$drug->brand_name}}</a>
                         </div>
                     
                       </li>
                     @endforeach
                   @else
                   @endif
-                    <li  class="column">
+                    <!-- <li  class="column">
                    
                       <div >
                         <a  href="#">Finasteride</a>
@@ -66,7 +68,7 @@
                         <a  href="#">Escitalopram</a>
                       </div>
                    
-                    </li> 
+                    </li>  -->
                     
                                   
                     
@@ -78,12 +80,16 @@
 
               </li>
               <li  role="menuitem" class="">
-             
-             
-                <a  href="#">For Business</a>
-             
-             
-             
+                <a  href="#">Minor Ailment</a>
+              </li>
+              <li  role="menuitem" class="">
+                <a  href="#">Blog</a>
+              </li>
+              <li  role="menuitem" class="">
+                <a  href="#">About Us</a>
+              </li>
+              <li  role="menuitem" class="">
+                <a  href="#">Contact Us</a>
               </li>
            
             </ul>
@@ -96,12 +102,12 @@
     <div  class="column">
       <div  class="row row--middle row--gutter-half">
         <div  class="column">
-          <div  class="select re-lang-pref">
+          <!-- <div  class="select re-lang-pref">
             <select  name="lang-pref" aria-haspopup="listbox" aria-expanded="false" class="font-regular ng-untouched ng-pristine ng-valid" aria-label="Choose a language">
               <option  value="en" selected="">EN</option>
               <option  value="fr">FR</option>
             </select>
-          </div>
+          </div> -->
         </div>
      
         <div  class="re-nav xsmall-5">
