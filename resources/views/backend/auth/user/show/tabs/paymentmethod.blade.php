@@ -27,13 +27,14 @@
                     <div class="form-group row">
                         {{ Form::label('card_number', trans('Card Number'), [
                             'class' => 'col-md-2 from-control-label
-                                                                                                                                                                                                                        required',
+                                                                                                                                                                                                                                                required',
                         ]) }}
                         <div class="col-md-10">
                             <div class="input-group ">
                                 {{ Form::text('card_number', null, [
                                     'class' => 'form-control',
                                     'placeholder' => trans('Card Number'),
+                                    'required' => 'required',
                                 ]) }}
 
                             </div>
@@ -43,13 +44,14 @@
                     <div class="form-group row">
                         {{ Form::label('cardholder_name', trans('Card Holder Name'), [
                             'class' => 'col-md-2 from-control-label
-                                                                                                                                                                                                                        required',
+                                                                                                                                                                                                                                                required',
                         ]) }}
                         <div class="col-md-10">
                             <div class="input-group ">
                                 {{ Form::text('cardholder_name', null, [
                                     'class' => 'form-control',
                                     'placeholder' => trans('Card Holder Name'),
+                                    'required' => 'required',
                                 ]) }}
 
                             </div>
@@ -59,15 +61,27 @@
                     <div class="form-group row">
                         {{ Form::label('expiry_date', trans('Expiry Date'), [
                             'class' => 'col-md-2 from-control-label
-                                                                                                                                                                                                                        required',
+                                                                                                                                                                                                                                                required',
                         ]) }}
                         <div class="col-md-10">
-                            <div class="input-group ">
-                                {{ Form::text('expiry_date', null, [
-                                    'class' => 'form-control',
-                                    'placeholder' => trans('Expiry Date'),
-                                ]) }}
+                            <div class="row">
+                             <div class="input-group col-md-2">
+                                    {{ Form::text('expiry_month', null, [
+                                        'class' => 'form-control ',
+                                        'placeholder' => trans('Expiry Month (MM)'),
+                                        'required' => 'required',
+                                    ]) }}
 
+                                </div>
+                                <div class="input-group col-md-2">
+                                    {{ Form::text('expiry_year', null, [
+                                        'class' => 'form-control ',
+                                        'placeholder' => trans('Expiry Year (YY)'),
+                                        'required' => 'required',
+                                    ]) }}
+
+                                </div>
+                               
                             </div>
                         </div>
                         <!--col-->
@@ -75,13 +89,14 @@
                     <div class="form-group row">
                         {{ Form::label('cvc', trans('CVC'), [
                             'class' => 'col-md-2 from-control-label
-                                                                                                                                                                                                                        required',
+                                                                                                                                                                                                                                                required',
                         ]) }}
                         <div class="col-md-10">
                             <div class="input-group ">
                                 {{ Form::text('cvc', null, [
                                     'class' => 'form-control',
                                     'placeholder' => trans('CVC'),
+                                    'required' => 'required',
                                 ]) }}
 
                             </div>
@@ -116,7 +131,7 @@
                             <div class="col text-right">
                                 {{ Form::submit(trans('buttons.general.crud.create'), [
                                     'class' => 'btn btn-success
-                                                                                                                                                                                                                                                                                                pull-right',
+                                                                                                                                                                                                                                                                                                                                pull-right',
                                 ]) }}
                             </div><!--row-->
                         </div><!--row-->
@@ -141,10 +156,10 @@
                         aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                {{ Form::open(['route' => 'admin.auth.user.edit.paymentmethod', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post','files' => true]) }}
+                                {{ Form::open(['route' => 'admin.auth.user.edit.paymentmethod', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
 
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="modalLabel">Edit Address</h4>
+                                    <h4 class="modal-title" id="modalLabel">Edit Card</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -157,14 +172,15 @@
 
                                     <div class="form-group row">
                                         {{ Form::label('card_number', trans('Card Number'), [
-                                            'class' => 'col-md-2 from-control-label
-                                                                                                                                                                                                                                                                                                                        required',
+                                            'class' => 'col-md-3 from-control-label
+                                                                                                                                                                                                                                                                                                                                                                required',
                                         ]) }}
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <div class="input-group ">
                                                 {{ Form::text('card_number', $pmethod->card_number, [
                                                     'class' => 'form-control',
                                                     'placeholder' => trans('Card Number'),
+                                                    'required' => 'required',
                                                 ]) }}
 
                                             </div>
@@ -173,14 +189,15 @@
                                     </div>
                                     <div class="form-group row">
                                         {{ Form::label('cardholder_name', trans('Card Holder Name'), [
-                                            'class' => 'col-md-2 from-control-label
-                                                                                                                                                                                                                                                                                                                        required',
+                                            'class' => 'col-md-3 from-control-label
+                                                                                                                                                                                                                                                                                                                                                                required',
                                         ]) }}
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <div class="input-group ">
                                                 {{ Form::text('cardholder_name', $pmethod->cardholder_name, [
                                                     'class' => 'form-control',
                                                     'placeholder' => trans('Card Holder Name'),
+                                                    'required' => 'required',
                                                 ]) }}
 
                                             </div>
@@ -189,30 +206,47 @@
                                     </div>
                                     <div class="form-group row">
                                         {{ Form::label('expiry_date', trans('Expiry Date'), [
-                                            'class' => 'col-md-2 from-control-label
-                                                                                                                                                                                                                                                                                                                        required',
+                                            'class' => 'col-md-3 from-control-label
+                                                                                                                                                                                                                                                                                                                                                                required',
                                         ]) }}
-                                        <div class="col-md-10">
-                                            <div class="input-group ">
-                                                {{ Form::text('expiry_date', $pmethod->expiry_date, [
-                                                    'class' => 'form-control',
-                                                    'placeholder' => trans('Expiry Date'),
-                                                ]) }}
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                            @php
+                                             
+                                            $expiry_date =  explode ("/", $pmethod->expiry_date);
+                                            @endphp
+                                            <div class="input-group col-md-6">
+                                                    {{ Form::text('expiry_month', $expiry_date[0], [
+                                                        'class' => 'form-control ',
+                                                        'placeholder' => trans('Expiry Month (MM)'),
+                                                        'required' => 'required',
+                                                    ]) }}
 
+                                                </div>
+                                                <div class="input-group col-md-6">
+                                                    {{ Form::text('expiry_year', $expiry_date[1], [
+                                                        'class' => 'form-control ',
+                                                        'placeholder' => trans('Expiry Year (YY)'),
+                                                        'required' => 'required',
+                                                    ]) }}
+
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <!--col-->
                                     </div>
                                     <div class="form-group row">
                                         {{ Form::label('cvc', trans('CVC'), [
-                                            'class' => 'col-md-2 from-control-label
-                                                                                                                                                                                                                                                                                                                        required',
+                                            'class' => 'col-md-3 from-control-label
+                                                                                                                                                                                                                                                                                                                                                                required',
                                         ]) }}
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <div class="input-group ">
                                                 {{ Form::text('cvc', $pmethod->cvc, [
                                                     'class' => 'form-control',
                                                     'placeholder' => trans('CVC'),
+                                                    'required' => 'required',
                                                 ]) }}
 
                                             </div>
@@ -220,16 +254,16 @@
                                         <!--col-->
                                     </div>
                                     <div class="form-group row">
-                                        {{ Form::label('creditcard_images', trans('Credit card Images'), ['class' => 'col-md-2 from-control-label required']) }}
-                                        <div class="col-md-10">
+                                        {{ Form::label('creditcard_images', trans('Credit card Images'), ['class' => 'col-md-3 from-control-label required']) }}
+                                        <div class="col-md-9">
                                             <div class="files-wrapper creditcard-wrapper-{{ $pmethod->id }}">
                                                 <div class="file-upload creditcard-wrapper-inner-{{ $pmethod->id }}">
                                                     <div class="file-select file-select-box">
                                                         <div class="imagePreview"></div>
                                                         <button class="file-upload-custom-btn" type="button"><i
                                                                 class="fa fa-plus"></i></button>
-                                                        <input type="file" name="files_{{ $pmethod->id }}[]" class="profileimg"
-                                                            required>
+                                                        <input type="file" name="files_{{ $pmethod->id }}[]"
+                                                            class="profileimg" required>
                                                     </div>
                                                 </div>
                                             </div>
