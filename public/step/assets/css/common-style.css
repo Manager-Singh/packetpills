@@ -230,6 +230,7 @@ a.button.save {
     border-radius: 0px 0px 12px 12px;
 }
 .user-info {
+    margin-top: 2rem;
     padding: 20px 20px;
     text-align: center;
     border: 1px solid #e5e2e2;
@@ -237,6 +238,7 @@ a.button.save {
 .user-info .row {
     text-align: left;
 }
+
 .tab {
     margin-bottom: 20px;
 }

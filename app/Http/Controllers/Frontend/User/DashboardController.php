@@ -177,7 +177,6 @@ class DashboardController extends Controller
     }
     public function healthInformationsave(Request $request){
         
-        
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->createHealthInformation($data);
         if($output){

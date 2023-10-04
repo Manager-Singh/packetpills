@@ -527,6 +527,7 @@ class UserRepository extends BaseRepository
         $healthInformation = new HealthInformation;
         $healthInformation->user_id = auth()->user()->id;
         $healthInformation->allergies = $data['allergie'];
+        $healthInformation->allergies_medications = $data['allergies_medications'];
         $healthInformation->supplements_medications = $data['supplement_medicaton'];
                 
           
