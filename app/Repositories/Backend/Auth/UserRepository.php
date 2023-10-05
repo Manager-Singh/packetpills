@@ -26,6 +26,8 @@ use App\Models\Address;
 use App\Models\HealthInformation;
 use App\Models\PaymentMethod;
 use App\Models\Insurance;
+use App\Models\Medication;
+use App\Models\MedicationItem;
 use File;
 use Ramsey\Uuid\Uuid;
 
@@ -440,15 +442,52 @@ class UserRepository extends BaseRepository
                             $prescriptionIteam->save();
                             $page_no++;
                         }
+                        return true;
                     }
                 
                 }
     
             }
-            return true;
+            
             
          throw new GeneralException(__('Problem With Create prescription.'));
         });
+    }
+
+    
+    public function create_medication(array $data)
+    {
+        return DB::transaction(function () use ($data) {
+            
+            $medication = Medication::where('user_id',$data['user_id'])->where('prescription_id',$data['prescription_id'])->first();
+            // print_r($medication);
+            // die;
+                if ($medication === null) {
+                    $medication  = new Medication;
+                    
+                }
+            $medication->prescription_id = $data['prescription_id'];
+            $medication->user_id = $data['user_id'];
+            $medication->created_by = access()->user()->id;
+            if($medication->save()){
+                foreach($data['drug'] as $key => $drug){
+                    $medicationItem = new MedicationItem;
+                    $medicationItem->medication_id = $medication->id;
+                    $medicationItem->drug_id = $drug;
+                    $medicationItem->qty_left = $data['qty_left'][$key];
+                    $medicationItem->qty_filled = $data['qty_filled'][$key];
+                    $medicationItem->prescribing_doctor = $data['prescribing_doctor'];
+                    $medicationItem->pharmacy = $data['pharmacy'];
+                    $medicationItem->save();
+                }
+                
+                return true;
+            }
+       
+        
+            
+        throw new GeneralException(__('Problem With Create Medication.'));
+       });
     }
     public function create(array $data,$files)
     {

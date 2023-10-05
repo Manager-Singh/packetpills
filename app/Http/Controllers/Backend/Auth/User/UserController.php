@@ -10,6 +10,7 @@ use App\Http\Responses\ViewResponse;
 use App\Models\Auth\User;
 use App\Models\Province;
 use App\Models\AutoMessage;
+use App\Models\Drug;
 use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;
@@ -132,6 +133,19 @@ class UserController extends Controller
 
         return redirect()->back()->with('tab','paymentmethod')->withFlashSuccess(__('Payment Method Successfully Updated.'));
     }
+    public function create_medication(Request $request)
+    {
+            // print_r($request->all());
+            // die;
+    //     $pfile = 'files_'.$request->payment_method_id;
+
+    //     // print_r($request->file($pfile));
+    //     // die;
+       $this->userRepository->create_medication($request->except(['_token', '_method']));
+
+        return redirect()->back()->with('tab','overview')->withFlashSuccess(__('Medication Successfully Created.'));
+    }
+    
     
     public function delete_payment_method($id)
     {
@@ -162,13 +176,17 @@ class UserController extends Controller
      */
     public function show(ManageUserRequest $request, User $user)
     {
-        // dd($user);
+        
         $auto_messages = AutoMessage::get()->pluck('message','id');
+        $drugs = Drug::get()->pluck('brand_name','id');
         $province = Province::get()->pluck('name','name');
+
+        // dd($drugs);
         return view('backend.auth.user.show')
             ->with([
                 'provinces'=>$province,
                 'auto_messages'=>$auto_messages,
+                'drugs'=>$drugs,
             ])
             ->withUser($user);
     }

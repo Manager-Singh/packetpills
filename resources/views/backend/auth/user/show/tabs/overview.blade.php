@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-md-4">
-        <h4 class="text-center">Basic Details <a href="{{route('admin.auth.user.edit', $user)}}" style="float: right; color: #086d9b;"><i class="fa fa-pencil"></i></a></h4>
+        <h4 class="text-center">Basic Details <a href="{{ route('admin.auth.user.edit', $user) }}"
+                style="float: right; color: #086d9b;"><i class="fa fa-pencil"></i></a></h4>
         <div class="table-responsive">
             <table class="table table-hover" style="border: 1px solid #c8ced3;">
                 <tr>
@@ -96,10 +97,19 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                     <div class="panel-body">
-                        {{ Form::open(['route' => 'admin.auth.user.create.prescription', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
+                        {{ Form::open([
+                            'route' => 'admin.auth.user.create.prescription',
+                            'class' => 'form-horizontal',
+                            'role' => 'form',
+                            'method' => 'post',
+                            'files' => true,
+                        ]) }}
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <div class="form-group row">
-                            {{ Form::label('prescription_images', trans('Prescription Images'), ['class' => 'col-md-2 from-control-label required']) }}
+                            {{ Form::label('prescription_images', trans('Prescription Images'), [
+                                'class' => 'col-md-2
+                                                        from-control-label required',
+                            ]) }}
                             <div class="col-md-10">
                                 <div class="files-wrapper prescription-wrapper">
                                     <div class="file-upload files-wrapper-inner">
@@ -123,7 +133,10 @@
                                 </div><!--col-->
 
                                 <div class="col text-right">
-                                    {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success pull-right']) }}
+                                    {{ Form::submit(trans('buttons.general.crud.create'), [
+                                        'class' => 'btn btn-success
+                                                                        pull-right',
+                                    ]) }}
                                 </div><!--row-->
                             </div><!--row-->
                         </div><!--card-footer-->
@@ -185,9 +198,94 @@
                                             </div>
                                         @endforeach
                                     </div>
+                                    <div>
+                                        <h5 class="prescription-heading">Medications</h5>
+
+                                        <div class="panel panel-default">
+
+                                            <div class="panel-body">
+
+                                                <form action="{{ route('admin.auth.user.create.medication') }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="prescription_id"
+                                                        value="{{ $prescription->id }}">
+                                                    <input type="hidden" name="user_id"
+                                                        value="{{ $user->id }}">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 nopadding">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="prescribing_doctor" value=""
+                                                                    placeholder="Prescribing Doctor" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 nopadding">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control"
+                                                                    name="pharmacy" value=""
+                                                                    placeholder="Pharmacy Name" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row main-idv">
+                                                        <div class="col-sm-3 nopadding">
+                                                            <div class="form-group">
+                                                                <select class="form-control" name="drug[]" required>
+                                                                    <option value="">Select Drug</option>
+                                                                    @foreach ($drugs as $drug)
+                                                                        <option value="{{ $drug->id }}">
+                                                                            {{ $drug->brand_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 nopadding">
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="qty_left[]" value=""
+                                                                    placeholder="Quantity Left" required
+                                                                    min="0" pattern="[0-9]"
+                                                                    onkeypress="return !(event.charCode == 46)"
+                                                                    step="1">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 nopadding">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input type="number" class="form-control"
+                                                                        name="qty_filled[]" value=""
+                                                                        placeholder="Quantity Filled" required
+                                                                        min="0" pattern="[0-9]"
+                                                                        onkeypress="return !(event.charCode == 46)"
+                                                                        step="1">
+                                                                    <div class="input-group-btn">
+                                                                        <button class="btn btn-success" type="button"
+                                                                            onclick="education_fields('{{ $prescription->id }}')">
+                                                                            <span class="fa fa-plus"
+                                                                                aria-hidden="true"></span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div id="education_fields-{{ $prescription->id }}">
+
+                                                    </div>
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 @else
                                     <p>Prescription images not added!</p>
                                 @endif
+
                             </div>
                         </div>
                     </div>
@@ -652,8 +750,15 @@
             border-radius: 4px;
             padding: 2px 4px;
         }
-        .allergies-medications{
-        display:none;
+
+        .allergies-medications {
+            display: none;
+        }
+        .panel-body form {
+            border: 1px solid #ebe0e0;
+            padding: 12px;
+            border-radius: 4px;
+            box-shadow: 0px 0px 8px 0px #ebe0e0;
         }
     </style>
 @endpush
@@ -705,7 +810,7 @@
 
 
 
-        function add_more(wrapper, inner, number_of_image = 8,a_id=0) {
+        function add_more(wrapper, inner, number_of_image = 8, a_id = 0) {
             // files-wrapper
             $("#overlay").fadeIn(300);
             var numItems = $('.' + inner).length;
@@ -720,11 +825,11 @@
             html += '<div class="file-select file-select-box">';
             html += '<div class="imagePreview"></div>';
             html += '<button class="file-upload-custom-btn" type="button"><i class="fa fa-plus"></i></button>';
-            if(a_id!=0){
-            html += '<input type="file" name="files_'+a_id+'[]" class="profileimg" required>';
+            if (a_id != 0) {
+                html += '<input type="file" name="files_' + a_id + '[]" class="profileimg" required>';
 
-            }else{
-            html += '<input type="file" name="files[]" class="profileimg" required>';
+            } else {
+                html += '<input type="file" name="files[]" class="profileimg" required>';
 
             }
             html += '</div>';
@@ -755,7 +860,7 @@
                 buttons: {
                     confirm: function() {
                         $("#overlay").fadeIn(300);
-                        var ajaxurl = '{{ route('admin.auth.user.create.address.remove', ':id') }}';
+                        var ajaxurl = '{{ route('admin.auth.user.create.address.remove', ': id') }}';
                         ajaxurl = ajaxurl.replace(':id', id);
                         $.ajax({
                             url: ajaxurl,
@@ -781,7 +886,7 @@
 
         }
 
-         function delete_pmethod(id) {
+        function delete_pmethod(id) {
 
             console.log(id);
             $.confirm({
@@ -790,7 +895,7 @@
                 buttons: {
                     confirm: function() {
                         $("#overlay").fadeIn(300);
-                        var ajaxurl = '{{ route('admin.auth.user.paymentmethod.remove', ':id') }}';
+                        var ajaxurl = '{{ route('admin.auth.user.paymentmethod.remove', ': id') }}';
                         ajaxurl = ajaxurl.replace(':id', id);
                         $.ajax({
                             url: ajaxurl,
@@ -819,16 +924,61 @@
         $(document).ready(function() {
             $('input[type=radio][name=allergies]').change(function() {
                 if ($(this).is(':checked')) {
-                    if(this.value==1){
-                    $('.allergies-medications').show();
-                    }else{
-                      $('.allergies-medications').hide();
+                    if (this.value == 1) {
+                        $('.allergies-medications').show();
+                    } else {
+                        $('.allergies-medications').hide();
                     }
-                  
+
                 }
             });
-             
-            });
-         
+
+        });
+        var room = 1;
+
+        function education_fields(id) {
+            room++;
+            var objTo = document.getElementById("education_fields-" + id);
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "form-group removeclass" + room);
+            var rdiv = "removeclass" + room;
+            divtest.innerHTML =
+                '<div class="row main-idv">' +
+                '<div class="col-sm-3 nopadding">' +
+                '<div class="form-group">' +
+                '<select class="form-control" name="drug[]" required>' +
+                '<option value="">Select Drug</option>' +
+                '@foreach ($drugs as $drug)' +
+                '<option value="{{ $drug->id }}">{{ $drug->brand_name }}</option>' +
+                '@endforeach' +
+                '</select>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-sm-3 nopadding">' +
+                '<div class="form-group">' +
+                '<input type="number" class="form-control" name="qty_left[]" value="" placeholder="Quantity Left" required min="0" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1">' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-sm-3 nopadding">' +
+                '<div class="form-group">' +
+                '<div class="input-group">' +
+                '<input type="number" class="form-control" name="qty_filled[]" value="" placeholder="Quantity Filled" required min="0" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1">' +
+                '<div class="input-group-btn">' +
+                '<button class="btn btn-danger" type="button" onclick="remove_education_fields(' + room + ');">' +
+                '<span class="fa fa-minus" aria-hidden="true"></span>' +
+                '</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="clear"></div>' +
+                '</div>';
+
+            objTo.appendChild(divtest);
+        }
+
+        function remove_education_fields(rid) {
+            $(".removeclass" + rid).remove();
+        }
     </script>
 @endsection

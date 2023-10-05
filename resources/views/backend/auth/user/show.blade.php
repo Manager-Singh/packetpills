@@ -38,7 +38,7 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
-                                <span class="" id="send-message-error"></span>
+                                    <span class="" id="send-message-error"></span>
                                     <input type="hidden" id="active-tab-val" value="{{ $tab }}">
                                     <label for="send-sms" class="btn btn-primary">SMS <input type="checkbox" id="send-sms"
                                             class="badgebox"><span class="badge">&check;</span></label>
@@ -152,23 +152,33 @@
             </div><!--row-->
         </div><!--card-footer-->
     </div><!--card-->
-    <script>
+    
+@endsection
+@push('after-scripts')
+<script>
         function send_message() {
             var isSmsChecked = $("#send-sms").is(":checked");
             var isEmailChecked = $("#send-email").is(":checked");
             if (!isSmsChecked && !isEmailChecked) {
-            $("#send-message-error").html('Select Any one message line');
-            
+                $("#send-message-error").html('Select Any one message line');
+
                 console.log('Select Any one message line');
-               // return false;
-            }else{
+                // return false;
+            } else {
                 $("#send-message-error").text('');
             }
-            
-        }
-    </script>
-@endsection
 
+        }
+        $(document).ready(function() {
+            $('.badgebox').click(function() {
+                if ($(this).prop("checked") == true) {
+                   $("#send-message-error").text('');
+                }
+
+            });
+        });
+    </script>
+@endpush
 @push('after-styles')
     <style>
         .badgebox {
