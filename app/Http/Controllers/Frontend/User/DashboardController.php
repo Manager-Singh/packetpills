@@ -237,10 +237,16 @@ class DashboardController extends Controller
     }
     public function addressSave(Request $request){
         
+        if(!isset($request->id) && Address::where('address_type',$request->address_type)->exists()){
+            return redirect()->back()->withFlashSuccess(__('Address type already exist.'));
+        }
+
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->saveAddress($data);
+
+
         if($output){
-            return redirect()->back()->withFlashSuccess(__('Address Information Updated'));
+            return redirect()->route('frontend.user.address')->withFlashSuccess(__('Address Information Updated'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }
