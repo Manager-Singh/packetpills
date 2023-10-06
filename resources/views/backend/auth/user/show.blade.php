@@ -96,6 +96,11 @@
                                 href="#paymentmethod" role="tab" aria-controls="paymentmethod" aria-expanded="true"><i
                                     class="fas fa-credit-card"></i> @lang('Payment Method')</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ $tab == 'medications' ? 'active' : '' }}" data-toggle="tab"
+                                href="#medications" role="tab" aria-controls="medications" aria-expanded="true"><i
+                                    class="fas fa fa-ambulance"></i> @lang('Medications')</a>
+                        </li>
 
                     </ul>
 
@@ -127,6 +132,10 @@
                         <div class="tab-pane {{ $tab == 'paymentmethod' ? 'active' : '' }}" id="paymentmethod"
                             role="tabpanel" aria-expanded="true">
                             @include('backend.auth.user.show.tabs.paymentmethod')
+                        </div><!--tab-->
+                        <div class="tab-pane {{ $tab == 'medications' ? 'active' : '' }}" id="medications"
+                            role="tabpanel" aria-expanded="true">
+                            @include('backend.auth.user.show.tabs.medications')
                         </div><!--tab-->
 
 

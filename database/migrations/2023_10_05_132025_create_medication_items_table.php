@@ -15,7 +15,9 @@ class CreateMedicationItemsTable extends Migration
     {
         Schema::create('medication_items', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('medication_id')->unsigned()->nullable();
+            $table->bigInteger('prescription_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('created_by')->unsigned()->nullable();
             $table->bigInteger('drug_id')->unsigned()->nullable();
             $table->boolean('automatic_refil')->default(0);
             $table->string('prescribing_doctor')->nullable();

@@ -26,7 +26,6 @@ use App\Models\Address;
 use App\Models\HealthInformation;
 use App\Models\PaymentMethod;
 use App\Models\Insurance;
-use App\Models\Medication;
 use App\Models\MedicationItem;
 use File;
 use Ramsey\Uuid\Uuid;
@@ -459,30 +458,22 @@ class UserRepository extends BaseRepository
     {
         return DB::transaction(function () use ($data) {
             
-            $medication = Medication::where('user_id',$data['user_id'])->where('prescription_id',$data['prescription_id'])->first();
-            // print_r($medication);
-            // die;
-                if ($medication === null) {
-                    $medication  = new Medication;
-                    
-                }
-            $medication->prescription_id = $data['prescription_id'];
-            $medication->user_id = $data['user_id'];
-            $medication->created_by = access()->user()->id;
-            if($medication->save()){
+          
                 foreach($data['drug'] as $key => $drug){
                     $medicationItem = new MedicationItem;
-                    $medicationItem->medication_id = $medication->id;
                     $medicationItem->drug_id = $drug;
                     $medicationItem->qty_left = $data['qty_left'][$key];
                     $medicationItem->qty_filled = $data['qty_filled'][$key];
                     $medicationItem->prescribing_doctor = $data['prescribing_doctor'];
                     $medicationItem->pharmacy = $data['pharmacy'];
+                    $medicationItem->prescription_id = $data['prescription_id'];
+                    $medicationItem->user_id = $data['user_id'];
+                    $medicationItem->created_by = access()->user()->id;
                     $medicationItem->save();
                 }
                 
                 return true;
-            }
+         
        
         
             
