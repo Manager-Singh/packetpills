@@ -25,8 +25,6 @@ class Prescription extends BaseModel
      */
     protected $attributes = [];
 
-    protected $with = ['prescription_iteams'];
-
     public static function generatePrescriptionNumber()
 {
     $date = now()->format('Ymd');

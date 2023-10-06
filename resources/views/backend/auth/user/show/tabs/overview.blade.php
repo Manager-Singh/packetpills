@@ -451,7 +451,6 @@
         }
 
         #accordion2 .panel-heading,
-        .myaccordion .panel-heading,
         #accordionAddress .panel-heading,
         #accordionHealthinformation .panel-heading,
         #accordionquandaryInsurance .panel-heading,
@@ -467,6 +466,14 @@
             color: #fff;
             padding: 0;
         }
+        .myaccordion .panel-heading{
+            background-color: #02b786;
+            border-radius: 0;
+            border: none;
+            color: #fff;
+            padding: 0;
+        }
+
 
 
         /* Light box CSS */
@@ -763,13 +770,22 @@
             border-radius: 4px;
             box-shadow: 0px 0px 8px 0px #ebe0e0;
         }
+        p.sub-heading {
+            font-style: italic;
+            margin: 0;
+        }
+
+        .switch-refil .switch-input:checked + .switch-slider {
+    background-color: #00b788;
+    border-color: #00b788;
+}
     </style>
 @endpush
 @section('pagescript')
     <script>
         $(document).ready(function() {
             $('.collapse.in').prev('.panel-heading').addClass('active');
-            $('#accordion, #bs-collapse,#accordion2,#accordionHealthcard')
+            $('#accordion, #bs-collapse,#accordion2,#accordionHealthcard,.myaccordion,#accordionprimaryInsurance,#accordionsecondaryInsurance,#accordionternaryInsurance,#accordionquandaryInsurance,#accordionHealthinformation,#accordionPaymentmethod')
                 .on('show.bs.collapse', function(a) {
                     $(a.target).prev('.panel-heading').addClass('active');
                 })

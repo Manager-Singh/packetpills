@@ -11,6 +11,7 @@ use App\Models\Auth\User;
 use App\Models\Province;
 use App\Models\AutoMessage;
 use App\Models\Drug;
+use App\Models\MedicationItem;
 use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;

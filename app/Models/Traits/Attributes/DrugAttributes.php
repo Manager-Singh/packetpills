@@ -50,7 +50,7 @@ trait DrugAttributes
     public function getDrugPackAttribute()
     {
         
-        return $this->pack_size .' '. $this->pack_unit; 
+        return $this->pack_size .' '. $this->packSize->name; 
         
     }
 
