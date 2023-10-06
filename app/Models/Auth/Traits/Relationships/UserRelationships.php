@@ -12,6 +12,8 @@ use App\Models\Insurance;
 use App\Models\PaymentMethod;
 use App\Models\HealthInformation;
 use App\Models\Prescription;
+use App\Models\MedicationItem;
+
 
 
 
@@ -98,6 +100,10 @@ trait UserRelationships
     public function paymentmethod()
     {
         return $this->hasMany(PaymentMethod::class);
+    }
+    public function medications()
+    {
+        return $this->hasMany(MedicationItem::class);
     }
     public function healthinformation()
     {
