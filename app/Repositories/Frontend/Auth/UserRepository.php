@@ -516,6 +516,28 @@ class UserRepository extends BaseRepository
           $card->expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
           $card->cvc = $data['cvc'];
           
+        $uuid = Uuid::uuid4()->toString();
+        $front_img = (isset($data['front_img'])) ? $data['front_img'] : '' ;
+        $back_img = (isset($data['back_img'])) ? $data['back_img'] : '' ;
+        if($front_img){
+
+            $fileName   = $uuid . '.' . $front_img->getClientOriginalExtension();
+            $destinationPath = public_path('img/frontend/payment-card');
+            $front_img->move($destinationPath, $fileName);
+            $front_url = 'img/frontend/payment-card/'.$fileName;
+            $card->front_img = $front_url;
+
+        } 
+        if($back_img){
+            
+            $fileName   = $uuid. '.' . $back_img->getClientOriginalExtension();
+            $destinationPath = public_path('img/frontend/payment-card');
+            $back_img->move($destinationPath, $fileName);
+            $back_url = 'img/frontend/payment-card/'.$fileName;
+            $card->back_img = $back_url;
+            
+        }    
+          
            
           $card->save();
           return $card;

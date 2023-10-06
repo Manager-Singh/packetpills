@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
 @endpush
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+<div class="container mt-0 mb-5 pt-0"> 
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info p-details">
@@ -17,11 +17,11 @@
 				    </div>
             <div class="col-md-2">
               </div>
-				    <div class="col-md-8">
+				    <div class="col-md-8" id="table">
             <form name="myForm" id="card-form" method='post' action="{{route('frontend.user.payment.save')}}" enctype='multipart/form-data'>
               @csrf 
                 <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" maxlength=19 name="card_number"  value="" placeholder="Card Number" required><br><br>
+                <input type="text" id="card-number" data-parsley-minlength="19" data-parsley-maxlength="19" maxlength=19 name="card_number"  value="" placeholder="Card Number" required><br><br>
                 <div class="form-row">
                   <div class="form-group col-md-6">
 
@@ -39,7 +39,38 @@
                 <label for="cvc">CVC</label>
                 <input type="text" id="cvc" data-parsley-maxlength="3" maxlength="3"  name="cvc" value="" placeholder="CVC" required>
 
-                
+                <div class="row mt-3 payment-card">
+                <label class="col-md-12" for="myfile">Payment Card</label>
+                <div class="col-md-6">
+                  <div class="upload">
+                  <input type="file" required id="myFile" name="front_img" onchange="readURL(this);">
+                    <label for="myfile">
+                      <i class="fa fa-camera" aria-hidden="true"></i>
+                      <br>Card <br>(front) </label>
+                      <div class="upload-after">
+                        
+                        <img id="output" src="#" width="100%" />
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        
+                        	
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="upload" >
+                  <input type="file" required id="myFile" name="back_img" onchange="readURL(this);">
+                    <label  for="myfile">
+                      <i class="fa fa-camera" aria-hidden="true"></i>
+                      <br>Card <br>(back) </label>
+                      <div class="upload-after" >
+                      
+                        <img id="output" src="#" width="100%" />
+                        <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        
+                      </div>
+                  </div>
+                </div>
+              </div>
 
                 <div class="btn-div">
                   <a href="{{route('frontend.user.payment')}}"><button type="button" class="save button" onclick="" > Cancel </button></a>
@@ -134,8 +165,34 @@
           
           $(this).val(newval);
        })
+
+
+       $('#table').on('click', "#delete", function(e) {
+        console.log($(this).closest('.upload-after').find('#output'));
+        
+        $(this).closest('.upload-after').find('#output').attr('src', '#').width(0).height(0);
+        //$(this).closest('.upload-after').remove();
+        $(this).closest('.upload-after').removeClass("d-block");
+ 
+      });
      
     });
+
+    function readURL(input) {
+      //console.log($(input).parent());
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+          console.log($(input).parent());
+          
+          $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
+          $(input).parent().find('.upload-after').addClass("d-block");
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
 
     function expiryYearCheck() {
       card_year = $('#expiry_year').val().toString();
@@ -145,6 +202,7 @@
       }
       return true;
     }
+
     function expiryMonthCheck() {
 
       card_month =$('#expiry_month').val();

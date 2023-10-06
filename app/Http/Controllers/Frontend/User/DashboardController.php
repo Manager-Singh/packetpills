@@ -267,7 +267,7 @@ class DashboardController extends Controller
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->savePayment($data);
         if($output){
-            return redirect()->back()->withFlashSuccess(__('Payment Information Updated'));
+            return redirect()->route('frontend.user.payment')->withFlashSuccess(__('Payment Information Updated'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

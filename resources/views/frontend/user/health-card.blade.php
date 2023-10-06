@@ -15,12 +15,12 @@
 				    </div>
 				    <div class="col-md-6">
 
-                        <form name="myForm" method='post' action="{{route('frontend.user.health.card.save')}}" enctype='multipart/form-data'>
+                        <form name="myForm" id="health-form" method='post' action="{{route('frontend.user.health.card.save')}}" enctype='multipart/form-data'>
                         @csrf      
                         <div class="row" id="table">
                             <div class="col-md-6">
                               <div class="upload">
-                              <input type="file" id="myFile" name="front_img" onchange="readURL(this);">
+                              <input type="file" required id="myFile" name="front_img" onchange="readURL(this);">
                             
                               <label for="myfile"><i class="fa fa-camera" aria-hidden="true"></i> <br>Health Card <br>(front)</label>
                               <div class="upload-after" {{($healthCard && isset($healthCard->front_img)) ? 'style=display:block;' : ''}} >
@@ -37,7 +37,7 @@
                           </div>
                             <div class="col-md-6">
                               <div class="upload">
-                              <input type="file" id="myFile" name="back_img" onchange="readURL(this);"/>
+                              <input type="file" required id="myFile" name="back_img" onchange="readURL(this);"/>
                               
                               <label for="myfile"><i class="fa fa-camera" aria-hidden="true"></i> <br>Health Card <br>(back)</label>
                               <div class="upload-after" {{($healthCard && isset($healthCard->back_img)) ? 'style=display:block;' : ''}} >
@@ -54,7 +54,7 @@
                             <p class="info">You must be at least 14 year old.</p>
                            
                             </div>
-                            <button type="submit" class="next button" onclick="" >Continue</button>
+                            <button type="submit" id="submit" class="next button" onclick="" >Continue</button>
                    
                           </form>
                  
@@ -69,7 +69,19 @@
 @push('after-scripts')
 <script>
    
-   $(document).ready(function(){   
+   $(document).ready(function(){  
+    
+    $('#health-form').parsley().on('field:success', function() {
+        // In here, `this` is the parlsey instance of #some-input
+
+        if ($('#health-form').parsley('isValid')) {
+          console.log('form is valid');
+          $('#submit').removeAttr('disabled');
+        }
+      });
+
+
+
       var upload_count = 1;     
        
        

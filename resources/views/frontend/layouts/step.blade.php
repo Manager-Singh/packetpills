@@ -49,7 +49,7 @@
 	</style>     
     <link rel="shortcut icon" href="{{asset('step/assets/images/logo.png')}}" type="images/png" id="favicon">
 	
-	<link rel="stylesheet" href=".{{asset('step/assets/css/styles.css')}}">
+	<link rel="stylesheet" href="{{asset('step/assets/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('step/assets/font/font.css')}}">
 	<link rel="stylesheet" href="{{asset('step/assets/css/common-style.css')}}">
 	<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">

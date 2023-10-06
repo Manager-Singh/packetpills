@@ -3,7 +3,7 @@
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+<div class="container mt-0 mb-5 pt-0">
         <div class="row ">
           <div class="col-md-12">
             <div class="user-info p-details">
@@ -14,13 +14,13 @@
           </div>
           <div class="col-md-2"></div>
           <div class="col-md-8" id="table">
-          <form name="myForm" method='post' action="{{route('frontend.user.insurance.save')}}" enctype='multipart/form-data'>
+          <form name="myForm" id="insurance-form" method='post' action="{{route('frontend.user.insurance.save')}}" enctype='multipart/form-data'>
           @csrf 
               <div class="row mt-3 primary-insurance">
-                <label for="myfile">Primary Insurance</label>
+                <label class="col-md-12" for="myfile">Primary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
-                  <input type="file" id="myFile" name="front_img" onchange="readURL(this);">
+                  <input type="file" id="myFile" required name="front_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(front) </label>
@@ -38,8 +38,8 @@
                 </div>
                 <div class="col-md-6">
                   <div class="upload" >
-                  <input type="file" id="myFile" name="back_img" onchange="readURL(this);">
-                    <label for="myfile">
+                  <input type="file" id="myFile" required name="back_img" onchange="readURL(this);">
+                    <label  for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(back) </label>
                       <div class="upload-after" {{($primary_insurance && isset($primary_insurance->back_img)) ? 'style=display:block;' : ''}} >
@@ -55,7 +55,7 @@
                 </div>
               </div>
               <div class="row mt-3 secondary-insurance" {{ (isset($secondary_insurance)) ? '' : 'style=display:none;' }}>
-                <label for="myfile">Secondary Insurance</label>
+                <label class="col-md-12" for="myfile">Secondary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload" >
                     <input type="file" id="myFile" name="secondary_front_img" onchange="readURL(this);">
@@ -91,7 +91,7 @@
                 </div>
               </div>
               <div class="row mt-3 tertiary-insurance" {{ (isset($tertiary_insurance)) ? '' : 'style=display:none;' }}>
-                <label for="myfile">Tertiary Insurance</label>
+                <label class="col-md-12" for="myfile">Tertiary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
                     <input type="file" id="myFile" name="tertiary_front_img" onchange="readURL(this);">
@@ -128,7 +128,7 @@
                 </div>
               </div>
               <div class="row mt-3 quaternary-insurance" {{ (isset($quaternary_insurance)) ? '' : 'style=display:none;' }}>
-                <label for="myfile">Quaternary Insurance</label>
+                <label class="col-md-12" for="myfile">Quaternary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
                   <input type="file" id="myFile" name="quaternary_front_img" onchange="readURL(this);">
@@ -173,7 +173,7 @@
               @endif
                     
                 </div>
-              <button type="submit" class="next button" onclick="">Save</button>
+              <button type="submit" id="submit" class="next button" onclick="">Save</button>
             </form>
           </div>
           <div class="col-md-2"></div>
@@ -225,6 +225,15 @@
         $(this).closest('.upload-after').removeClass("d-block");
  
       });
+
+      $('#insurance-form').parsley().on('field:success', function() {
+        // In here, `this` is the parlsey instance of #some-input
+
+        if ($('#insurance-form').parsley('isValid')) {
+          console.log('form is valid');
+          $('#submit').removeAttr('disabled');
+        }
+      }); 
     });
  
 
