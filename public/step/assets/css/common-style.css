@@ -410,6 +410,7 @@ span.radio {
 
 .dashboard {
     position: relative;
+    z-index: 1;
 }
 nav#sidebarMenu {
     width: 33%;
@@ -421,6 +422,7 @@ nav#sidebarMenu {
     height: auto;
     top: 0px;
     padding-top: 70px;
+    z-index: 1;
 }
 nav#sidebarMenu .main {
     display: inline-block;
