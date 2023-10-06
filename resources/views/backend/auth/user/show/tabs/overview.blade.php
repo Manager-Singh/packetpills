@@ -415,6 +415,7 @@
         /* #accordion rotate icon option */
 
         #accordion .panel-heading a:before,
+        .myaccordion .panel-heading a:before,
         #accordionHealthcard .panel-heading a:before,
         #accordionHealthinformation .panel-heading a:before,
         #accordionPaymentmethod .panel-heading a:before,
@@ -435,6 +436,7 @@
         }
 
         #accordion .panel-heading.active a:before,
+        .myaccordion .panel-heading.active a:before,
         #accordionHealthcard .panel-heading.active a:before,
         #accordionHealthinformation .panel-heading.active a:before,
         #accordionPaymentmethod .panel-heading.active a:before,
@@ -449,6 +451,7 @@
         }
 
         #accordion2 .panel-heading,
+        .myaccordion .panel-heading,
         #accordionAddress .panel-heading,
         #accordionHealthinformation .panel-heading,
         #accordionquandaryInsurance .panel-heading,
