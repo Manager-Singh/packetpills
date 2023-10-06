@@ -5,8 +5,10 @@
 <link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
 @endpush
 @section('content')
-
-<div class="container mt-5 mb-5 pt-5">
+@php 
+$address_count = ($address) ? $address->count() : 0;
+@endphp
+<div class="container mt-0 mb-5 pt-0">
     <div class="row ">
         <div class="col-md-12">
             <div class="user-info p-details">
@@ -42,9 +44,11 @@
                 @endforeach
                @else
                @endif 
+               @if($address_count < 2)
                 <div class="order-footer mt-5">
                     <a class="btn-big" href="{{route('frontend.user.address.add')}}">+ Add anew address</a>
                 </div>
+               @endif
                 <div class="btn-div">
                     <button type="button" class="save button" onclick=""> Back </button>
                     <button type="button" class="next button" onclick="">Continue</button>

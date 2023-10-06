@@ -74,6 +74,13 @@
     @endif
         
         <main>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                @include('includes.partials.messages')
+              </div>
+            </div>
+          </div>
         
             @yield('content')
            

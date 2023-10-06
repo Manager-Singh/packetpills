@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
 @endpush
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+<div class="container mt-0 mb-5 pt-0">
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info p-details">
@@ -23,20 +23,20 @@
             <div class="col-md-2">
               </div>
 				    <div class="col-md-8">
-            <form name="myForm" method='post' action="{{route('frontend.user.address.save')}}" enctype='multipart/form-data'>
+            <form name="myForm" id="address-form" method='post' action="{{route('frontend.user.address.save')}}" enctype='multipart/form-data'>
               @csrf 
                 <label for="address">Street Address</label>
-                <input type="text" id="address" name="address1"  value="{{ (isset($address) && isset($address->address1)) ? $address->address1 : ''}}" placeholder="Address line 1"><br><br>
+                <input type="text" id="address" name="address1"  value="{{ (isset($address) && isset($address->address1)) ? $address->address1 : ''}}" placeholder="Address line 1" required><br><br>
                 <input type="text" id="address" name="address2" value="{{ (isset($address) && isset($address->address2)) ? $address->address2 : ''}}" placeholder="Address line 2">
 
                 <label for="zip">Postal Code</label>
-                <input type="text" id="zip" name="postal_code" value="{{ (isset($address) && isset($address->postal_code)) ? $address->postal_code : ''}}" placeholder="Postal Code">
+                <input type="number" id="zip" data-parsley-type="number" name="postal_code" value="{{ (isset($address) && isset($address->postal_code)) ? $address->postal_code : ''}}" placeholder="Postal Code" required>
 
                 <label for="city">City</label>
-                <input type="text" id="city" name="city" value="{{ (isset($address) && isset($address->city)) ? $address->city : ''}}" placeholder="City">
+                <input type="text" id="city" name="city" value="{{ (isset($address) && isset($address->city)) ? $address->city : ''}}" placeholder="City" required>
 
                 <label for="province">Province</label>
-                <select name="province" id="province">
+                <select name="province" id="province" required>
                   <option value="">Select a Province</option>
                   @if($provinces)
                     @foreach($provinces as $province)
@@ -61,13 +61,11 @@
                  </select>
 
                 <label for="address">Address Type</label>
-                <select name="address_type" id="address">
+                <select name="address_type" id="address" required>
                   <option value="">Select a Address Type</option>
-                  <option value="Home" {{ (isset($address) && $address->address_type == 'Home') ? 'selected' : ''}}>Home</option>
-                  <option value="Work" {{ (isset($address) && $address->address_type == 'Work') ? 'selected' : ''}}>Work</option>
-                  <option value="Other" {{ (isset($address) && $address->address_type == 'Other') ? 'selected' : ''}}>Other</option>
-              
-                </select>
+                  <option value="Mailing Address" {{ (isset($address) && $address->address_type == 'Mailing Address') ? 'selected' : ''}}>Mailing Address</option>
+                  <option value="Shipping/Delivery Address" {{ (isset($address) && $address->address_type == 'Shipping/Delivery Address') ? 'selected' : ''}}>Shipping/Delivery Address</option>
+                 </select>
 
                 <input type="checkbox" id="mark" name="mark_as" {{ (isset($address) && $address->mark_as == 'default') ? 'checked' : ''}} value="yes">
                 <label for="mark"> Mark this as a default address</label>
@@ -75,9 +73,9 @@
                   <a href="{{route('frontend.user.address')}}"   > <button type="button" class="save button"> Cancel </button></a>
                   @if(isset($_GET['id']) && isset($address))
                     <input type="hidden" name="id" value="{{$address->id}}"/>
-                    <button type="submit" class="next button" onclick="" >Update</button>
+                    <button type="submit" id ="submit" class="next button" onclick="" >Update</button>
                   @else
-                    <button type="submit" class="next button" onclick="" >Save</button>
+                    <button type="submit" id="submit" class="next button" onclick="" >Save</button>
                   @endif
                   
                  
@@ -97,7 +95,14 @@
 <script>
    
     $(document).ready(function(){       
-       
+      $('#address-form').parsley().on('field:success', function() {
+        // In here, `this` is the parlsey instance of #some-input
+
+        if ($('#address-form').parsley('isValid')) {
+          console.log('form is valid');
+          $('#submit').removeAttr('disabled');
+        }
+      });  
      
     });
  
