@@ -167,13 +167,14 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $data['healthCard']= HealthCard::where('user_id',$user->id)->first();
+        //dd($data['healthCard']);
         return view('frontend.user.health-card',$data); 
     }
     public function healthInformation()
     {
         $user = Auth::user();
         $data['health_info']= HealthInformation::where('user_id',$user->id)->first();
-         return view('frontend.user.health-information',$data); 
+        return view('frontend.user.health-information',$data); 
     }
     public function healthInformationsave(Request $request){
         

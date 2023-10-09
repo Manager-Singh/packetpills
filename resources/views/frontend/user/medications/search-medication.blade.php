@@ -1,9 +1,9 @@
-@extends('frontend.layouts.step')
+@extends('frontend.layouts.website')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
-
-@section('content')
-<style>
+@push('after-styles')
+	<link rel="stylesheet" href="{{asset('step/assets/css/common-style.css')}}">
+  <style>
 ul.drug-list-main {
     list-style: none;
     text-align: left;
@@ -20,6 +20,12 @@ li.drug-list-child {
     border: 1px solid #d1a7a7;
     padding: 2px 7px;
 }
+.user-info.p-details {
+    margin-top: 5rem;
+}
+.mega-footer footer {
+    display: none;
+}
 
 .autocom-box.ajax-result {
     height: 400px;
@@ -31,6 +37,9 @@ li.drug-list-child {
 }
 
 </style>
+@endpush
+@section('content')
+
 <div class="container mt-5 mb-5">
 		    	<div class="row ">
             <div class="col-md-2">

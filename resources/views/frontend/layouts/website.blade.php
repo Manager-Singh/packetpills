@@ -47,6 +47,13 @@
 		transition: top .2s ease;
 	}
 	</style>
+
+<link rel="stylesheet" href="{{asset('step/assets/font/font.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{asset('plugins/parsley/parsley.css')}}">
+    <link rel='stylesheet' href='//common.olemiss.edu/_js/sweet-alert/sweet-alert.css'></link> 
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" /> 
+  
     </head>
     <body>
       
@@ -54,6 +61,7 @@
         @include('includes.partials.read-only')
        
         @include('frontend.navbar.header')
+        
         @if(Route::currentRouteName() == 'frontend.auth.new.login'  || Route::currentRouteName() == 'frontend.index'  )
         
         @else
@@ -83,6 +91,10 @@
         <script src="{{ asset('website/assets/js/polyfills.js')}}" type="module"></script>
         <script src="{{ asset('website/assets/js/vendor.js')}}" type="module"></script>
         <script src="{{ asset('website/assets/js/main.js')}}" type="module"></script>
+        <script src="{{asset('plugins/parsley/parsley.js')}}"></script>
+        <script src="//common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+        
         @include('includes.partials.ga')
     </body>
 </html>

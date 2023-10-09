@@ -1,8 +1,17 @@
-@extends('frontend.layouts.step')
-
+@extends('frontend.layouts.website')
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
 <style>
+  .user-info.p-details {
+    margin-top: 10rem;
+}
+.search-input input {
+    width: 100%;
+    padding: 4px 4px !important;
+}
+.mega-footer footer {
+    display: none;
+}
 ul.drug-list-main {
     list-style: none;
     text-align: left;
@@ -215,35 +224,38 @@ li.drug-list-child {
 
               <p>Estimated copay</p>
             <div class="accordion" id="accordionExample" style="width: 32%;">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    $<span class="d-total" data-total="{{$drug->patient_pays}}">{{$drug->patient_pays}} </span>
-                  </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <table>
-                      <tr>
-                        <td>Drug cost</td>
-                        <td>$<span class="drug-cost">{{$drug->drug_cost}}</span></td>
-                        </tr>
+            <div class="card">  
+                <div class="card-item">
+                  <h2 class="card-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      $<span class="d-total" data-total="{{$drug->patient_pays}}">{{$drug->patient_pays}} </span>
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <table>
                         <tr>
-                        <td>Dispensing fee</td>
-                        <td>$ <span class="dispensing-fee">{{$drug->dispensing_fee}}</span></td>
-                        </tr>
-                        <tr>
-                        <td>Delivery cost</td>
-                        <td>FREE</td>
-                        </tr>
-                        <tr>
-                        <td>Insurance coverage</td>
-                        <td>$<span class="insurance-cov">00.00</span></td>
-                        </tr>
-                      </table>
+                          <td>Drug cost</td>
+                          <td>$<span class="drug-cost">{{$drug->drug_cost}}</span></td>
+                          </tr>
+                          <tr>
+                          <td>Dispensing fee</td>
+                          <td>$ <span class="dispensing-fee">{{$drug->dispensing_fee}}</span></td>
+                          </tr>
+                          <tr>
+                          <td>Delivery cost</td>
+                          <td>FREE</td>
+                          </tr>
+                          <tr>
+                          <td>Insurance coverage</td>
+                          <td>$<span class="insurance-cov">00.00</span></td>
+                          </tr>
+                        </table>
+                    </div>
                   </div>
                 </div>
               </div>
+
             </div>
             
             </div>
