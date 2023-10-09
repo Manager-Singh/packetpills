@@ -138,11 +138,16 @@ small.seond-heading {
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
                   <table>
-                    <tr><td>Automatically refill this medication?</td><td class="text-right"><label class="switch">
-  <input class="switch-input" type="checkbox" />
-  <span class="switch-label" data-on="Yes" data-off="No"></span> 
-  <span class="switch-handle"></span> 
- </label></td></tr>
+                    <!-- <tr>
+                      <td>Automatically refill this medication?</td>
+                      <td class="text-right">
+                        <label class="switch">
+                          <input class="switch-input" type="checkbox" />
+                          <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                          <span class="switch-handle"></span> 
+                        </label>
+                      </td>
+                    </tr> -->
                     <tr><td>Prescribing doctor</td><td class="text-right">Lorena Barrientos</td></tr>
                     <tr><td>Quantity left</td><td class="text-right">30 unit(s)</td></tr>
                     <tr><td>Quantity filled</td><td class="text-right">30 unit(s)</td></tr>
@@ -163,7 +168,7 @@ small.seond-heading {
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
                   <table>
-                    <tr>
+                    <!-- <tr>
                       <td>Automatically refill this medication?</td>
                       <td class="text-right">
                         <label class="switch">
@@ -172,7 +177,7 @@ small.seond-heading {
                           <span class="switch-handle"></span> 
                         </label>
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr><td>Prescribing doctor</td><td class="text-right">Lorena Barrientos</td></tr>
                     <tr><td>Quantity left</td><td class="text-right">30 unit(s)</td></tr>
                     <tr><td>Quantity filled</td><td class="text-right">30 unit(s)</td></tr>

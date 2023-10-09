@@ -63,7 +63,7 @@
                 <label for="address">Address Type</label>
                 <select name="address_type" id="address" required>
                   <option value="">Select a Address Type</option>
-                  <option value="Mailing Address" {{ (isset($address) && $address->address_type == 'Mailing Address') ? 'selected' : ''}}>Mailing Address</option>
+                  <option value="Billing Address" {{ (isset($address) && $address->address_type == 'Billing Address') ? 'selected' : ''}}>Billing Address</option>
                   <option value="Shipping/Delivery Address" {{ (isset($address) && $address->address_type == 'Shipping/Delivery Address') ? 'selected' : ''}}>Shipping/Delivery Address</option>
                  </select>
 

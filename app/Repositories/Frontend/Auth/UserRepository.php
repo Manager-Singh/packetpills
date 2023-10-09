@@ -390,14 +390,20 @@ class UserRepository extends BaseRepository
     public function createHealthCard(array $data){
         
         $healthCard = new HealthCard;
-        $uuid = Uuid::uuid4()->toString();
+        
         $front_img = (isset($data['front_img'])) ? $data['front_img'] : '' ;
         $back_img = (isset($data['back_img'])) ? $data['back_img'] : '' ;
         
-        $healthCard = new HealthCard;
+        if(isset($data['health_id']) && !empty($data['health_id'])){
+            $healthCard = HealthCard::find($data['health_id']);
+        }else{
+            $healthCard = new HealthCard;
+        }
+        
         $healthCard->user_id = auth()->user()->id;
+        $healthCard->card_number = (isset($data['health_card_number'])) ? $data['health_card_number'] : '' ;
         if($front_img){
-            
+                $uuid = Uuid::uuid4()->toString();
                 $fileName   = $uuid . '.' . $front_img->getClientOriginalExtension();
                 $destinationPath = public_path('img/frontend/health-card');
                 $front_img->move($destinationPath, $fileName);
@@ -406,7 +412,7 @@ class UserRepository extends BaseRepository
                 
         } 
         if($back_img){
-            
+            $uuid = Uuid::uuid4()->toString();
             $fileName   = $uuid. '.' . $back_img->getClientOriginalExtension();
             $destinationPath = public_path('img/frontend/health-card');
             $back_img->move($destinationPath, $fileName);
@@ -622,13 +628,17 @@ class UserRepository extends BaseRepository
 
     public function healthCardDelete(array $data){
         $healthCard = HealthCard::find($data['id']);
-        if(File::exists($healthCard->back_img)) {
+        if(File::exists($healthCard->back_img) && $data['type'] == 'back_img') {
            File::delete($healthCard->back_img);
+           $healthCard->back_img = null;
+
        }
-       if(File::exists($healthCard->front_img)) {
+       if(File::exists($healthCard->front_img) && $data['type'] == 'front_img') {
            File::delete($healthCard->front_img);
+           $healthCard->front_img = null;
        }
-       if($healthCard->forceDelete()){
+       
+       if($healthCard->update()){
            return true;
        }
        
