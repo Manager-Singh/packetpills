@@ -15,11 +15,11 @@ return [
     'backend' => [
         'access' => [
             'users' => [
-                'delete_user_confirm' => 'Are you sure you want to delete this user permanently? Anywhere in the application that references this user\'s id will most likely error. Proceed at your own risk. This can not be un-done.',
+                'delete_user_confirm' => 'Are you sure you want to delete this Patient permanently? Anywhere in the application that references this user\'s id will most likely error. Proceed at your own risk. This can not be un-done.',
                 'if_confirmed_off' => '(If confirmed is off)',
-                'no_deactivated' => 'There are no deactivated users.',
-                'no_deleted' => 'There are no deleted users.',
-                'restore_user_confirm' => 'Restore this user to its original state?',
+                'no_deactivated' => 'There are no deactivated Patients.',
+                'no_deleted' => 'There are no deleted Patients.',
+                'restore_user_confirm' => 'Restore this Patient to its original state?',
             ],
         ],
 
@@ -103,10 +103,10 @@ return [
             'using_blade_extensions' => 'Using Blade Extensions',
 
             'using_access_helper' => [
-                'array_permissions' => 'Using Access Helper with Array of Permission Names or ID\'s where the user does have to possess all.',
-                'array_permissions_not' => 'Using Access Helper with Array of Permission Names or ID\'s where the user does not have to possess all.',
-                'array_roles' => 'Using Access Helper with Array of Role Names or ID\'s where the user does have to possess all.',
-                'array_roles_not' => 'Using Access Helper with Array of Role Names or ID\'s where the user does not have to possess all.',
+                'array_permissions' => 'Using Access Helper with Array of Permission Names or ID\'s where the Patient does have to possess all.',
+                'array_permissions_not' => 'Using Access Helper with Array of Permission Names or ID\'s where the Patient does not have to possess all.',
+                'array_roles' => 'Using Access Helper with Array of Role Names or ID\'s where the Patient does have to possess all.',
+                'array_roles_not' => 'Using Access Helper with Array of Role Names or ID\'s where the Patient does not have to possess all.',
                 'permission_id' => 'Using Access Helper with Permission ID',
                 'permission_name' => 'Using Access Helper with Permission Name',
                 'role_id' => 'Using Access Helper with Role ID',

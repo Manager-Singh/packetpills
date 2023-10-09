@@ -43,6 +43,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <th>@lang('Health card No')</th>
+                    <td>
+                   
+                        {{  Str::upper($user->healthcard->card_number) }}
+                    </td>
+                </tr>
+                
+                <tr>
                     <th>@lang('validation.attributes.backend.access.users.province')</th>
                     <td>
                         {{ ucfirst($user->province) }}
@@ -52,7 +60,7 @@
                     <th>@lang('labels.backend.access.users.tabs.content.overview.status')</th>
                     <td>@include('backend.auth.user.includes.status', ['user' => $user])</td>
                 </tr>
-
+{{--
                 <tr>
                     <th>@lang('labels.backend.access.users.tabs.content.overview.confirmed')</th>
                     <td>@include('backend.auth.user.includes.confirm', ['user' => $user])</td>
@@ -78,6 +86,7 @@
                     <th>@lang('labels.backend.access.users.tabs.content.overview.last_login_ip')</th>
                     <td>{{ $user->last_login_ip ?? 'N/A' }}</td>
                 </tr>
+                --}}
             </table>
         </div>
     </div>

@@ -100,8 +100,8 @@
                                 &nbsp;&nbsp;@lang('validation.attributes.backend.access.users.female')
                             </label>
                             <label for="gender-other" class="control">
-                                <input type="radio" value="Prefered To Not Share" name="gender" id="gender-other" class="gender" />
-                                &nbsp;&nbsp;@lang('Prefered To Not Share')
+                                <input type="radio" value="Prefer To Not Share" name="gender" id="gender-other" class="gender" />
+                                &nbsp;&nbsp;@lang('Prefer To Not Share')
                             </label>
 
 

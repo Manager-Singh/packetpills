@@ -111,6 +111,14 @@
                         @lang('menus.backend.sidebar.auto-messages')
                     </a>
                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/mail-messages'))
+                    }}" href="{{ route('admin.mail-messages.index') }}">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        @lang('menus.backend.sidebar.mail-messages')
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{
                         active_class(Route::is('admin/provinces'))

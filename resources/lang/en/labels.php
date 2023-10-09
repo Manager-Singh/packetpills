@@ -46,7 +46,7 @@ return [
                 'all' => 'Roles',
 
                 'table' => [
-                    'number_of_users' => 'Number of Users',
+                    'number_of_users' => 'Number of Patients',
                     'permissions' => 'Permissions',
                     'role' => 'Role',
                     'sort' => 'Sort',
@@ -80,19 +80,19 @@ return [
             ],
 
             'users' => [
-                'active' => 'Active Users',
+                'active' => 'Active Patients',
                 'all_permissions' => 'All Permissions',
                 'change_password' => 'Change Password',
                 'change_password_for' => 'Change Password for :user',
-                'create' => 'Create User',
-                'deactivated' => 'Deactivated Users',
-                'deleted' => 'Deleted Users',
-                'edit' => 'Edit User',
-                'management' => 'User Management',
+                'create' => 'Create Patient',
+                'deactivated' => 'Deactivated Patients',
+                'deleted' => 'Deleted Patients',
+                'edit' => 'Edit Patient',
+                'management' => 'Patient management',
                 'no_permissions' => 'No Permissions',
                 'no_roles' => 'No Roles to set.',
                 'permissions' => 'Permissions',
-                'user_actions' => 'User Actions',
+                'user_actions' => 'Patients Actions',
 
                 'table' => [
                     'confirmed' => 'Confirmed',
@@ -103,14 +103,14 @@ return [
                     'name' => 'Name',
                     'first_name' => 'First Name',
                     'last_name' => 'Last Name',
-                    'no_deactivated' => 'No Deactivated Users',
-                    'no_deleted' => 'No Deleted Users',
+                    'no_deactivated' => 'No Deactivated Patients',
+                    'no_deleted' => 'No Deleted Patients',
                     'other_permissions' => 'Other Permissions',
                     'permissions' => 'Permissions',
                     'abilities' => 'Abilities',
                     'roles' => 'Roles',
                     'social' => 'Social',
-                    'total' => 'user total|users total',
+                    'total' => 'patient total|Patient total',
                 ],
 
                 'tabs' => [
@@ -141,7 +141,7 @@ return [
                     ],
                 ],
 
-                'view' => 'View User',
+                'view' => 'View Patient',
             ],
 
             'blogs' => [
@@ -236,18 +236,36 @@ return [
                 ],
             ],
             'auto-messages' => [
-                'all' => 'All Auto Messages',
-                'active' => 'Auto Messages List',
-                'create' => 'Create Auto Message',
-                'deactivated' => 'Deactivated Auto Messages',
-                'deleted' => 'Deleted Auto Messages',
-                'edit' => 'Edit Auto Message',
-                'management' => 'Auto Message Management',
+                'all' => 'All Admin Messages',
+                'active' => 'Admin Messages List',
+                'create' => 'Create Admin Message',
+                'deactivated' => 'Deactivated Admin Messages',
+                'deleted' => 'Deleted Admin Messages',
+                'edit' => 'Edit Admin Message',
+                'management' => 'Admin Message Management',
 
                 'table' => [
                     'created' => 'Created',
                     'id' => 'ID',
                    'message'=>'Message',
+                    'status' => 'Status',
+                    'createdat' => 'Created At',
+                ],
+            ],
+            'mail-messages' => [
+                'all' => 'All Mail & Messages',
+                'active' => 'Mail & Messages List',
+                'create' => 'Create Mail & Message',
+                'deactivated' => 'Deactivated Mail & Messages',
+                'deleted' => 'Deleted Mail & Messages',
+                'edit' => 'Edit Mail & Message',
+                'management' => 'Mail & Message Management',
+
+                'table' => [
+                    'created' => 'Created',
+                    'id' => 'ID',
+                   'message'=>'Message',
+                   'message_for'=>'Message For',
                     'status' => 'Status',
                     'createdat' => 'Created At',
                 ],

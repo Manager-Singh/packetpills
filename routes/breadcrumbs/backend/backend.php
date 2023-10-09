@@ -18,5 +18,6 @@ require __DIR__.'/auth/permission.php';
 require __DIR__.'/enterprise-connects/enterprise-connects.php';
 require __DIR__.'/preciption-types/preciption-types.php';
 require __DIR__.'/auto-messages/auto-messages.php';
+require __DIR__.'/mail-messages/mail-messages.php';
 require __DIR__.'/provinces/provinces.php';
 

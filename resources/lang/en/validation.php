@@ -236,6 +236,12 @@ return [
                     'status' => 'Status',
                     //'slug' => 'Preciption Type Slug',
                 ],
+                'mail-messages' => [
+                    'message' => 'Message',
+                    'status' => 'Status',
+                    'message_for' => 'Message For',
+                    //'slug' => 'Preciption Type Slug',
+                ],
                 'provinces' => [
                     'name' => 'Province Name',
                     'status' => 'Status',

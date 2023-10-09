@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAutoMessagesTable extends Migration
+class CreateMailMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateAutoMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('auto_messages', function (Blueprint $table) {
+        Schema::create('mail_messages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('message')->nullable();
+            $table->string('message_for')->nullable();
             $table->string('type', 191)->nullable();
             $table->boolean('status')->default(1);
             $table->integer('created_by')->unsigned()->nullable();
@@ -31,6 +32,6 @@ class CreateAutoMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auto_messages');
+        Schema::dropIfExists('mail_messages');
     }
 }

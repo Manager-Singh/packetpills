@@ -63,6 +63,11 @@
 
     @if ($user->healthcard)
         <div class="row">
+        <div class="col-md-6">
+        <p>Health card No: {{$user->healthcard->card_number}}</p>
+        </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <div class="card">
                     <img class="card-img-top" src="{{ asset('/') . $user->healthcard->front_img }}" alt="Bologna"

@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
 {{ Form::model($autoMessage, ['route' => ['admin.auto-messages.update', $autoMessage], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH', 'id' => 'create-permission', 'files' => true]) }}
 
     <div class="card">

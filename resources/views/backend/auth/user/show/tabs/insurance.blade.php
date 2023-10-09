@@ -20,7 +20,7 @@
                         <input type="hidden" name="type" value="primary">
 
                         <div class="form-group row">
-                            {{ Form::label('healthcard_images', trans('Health card Images'), ['class' => 'col-md-2 from-control-label required']) }}
+                            {{ Form::label('healthcard_images', trans('Primary Insurance Images'), ['class' => 'col-md-2 from-control-label required']) }}
                             <div class="col-md-10">
                                 <div class="files-wrapper primary-wrapper">
                                     <div class="file-upload primary-wrapper-inner">
@@ -94,7 +94,7 @@
                         <input type="hidden" name="type" value="secondary">
 
                         <div class="form-group row">
-                            {{ Form::label('healthcard_images', trans('Health card Images'), ['class' => 'col-md-2 from-control-label required']) }}
+                            {{ Form::label('healthcard_images', trans('Secondary Insurance Images'), ['class' => 'col-md-2 from-control-label required']) }}
                             <div class="col-md-10">
                                 <div class="files-wrapper secondary-wrapper">
                                     <div class="file-upload secondary-wrapper-inner">
@@ -155,7 +155,7 @@
                         <a role="button" data-toggle="collapse" data-parent="#accordionternaryInsurance"
                             href="#collapseternaryInsurance" aria-expanded="true"
                             aria-controls="collapseternaryInsurance">
-                            Ternary Insurance
+                            Tertiary Insurance
                         </a>
                     </h4>
                 </div>
@@ -167,7 +167,7 @@
                         <input type="hidden" name="type" value="ternary">
 
                         <div class="form-group row">
-                            {{ Form::label('healthcard_images', trans('Health card Images'), ['class' => 'col-md-2 from-control-label required']) }}
+                            {{ Form::label('healthcard_images', trans('Tertiary Insurance Images'), ['class' => 'col-md-2 from-control-label required']) }}
                             <div class="col-md-10">
                                 <div class="files-wrapper ternary-wrapper">
                                     <div class="file-upload ternary-wrapper-inner">
@@ -228,7 +228,7 @@
                         <a role="button" data-toggle="collapse" data-parent="#accordionquandaryInsurance"
                             href="#collapsequandaryInsurance" aria-expanded="true"
                             aria-controls="collapsequandaryInsurance">
-                            Quandary Insurance
+                            Quaternary Insurance
                         </a>
                     </h4>
                 </div>
@@ -240,7 +240,7 @@
                         <input type="hidden" name="type" value="quandary">
 
                         <div class="form-group row">
-                            {{ Form::label('healthcard_images', trans('Health card Images'), ['class' => 'col-md-2 from-control-label required']) }}
+                            {{ Form::label('healthcard_images', trans('Quaternary Insurance Images'), ['class' => 'col-md-2 from-control-label required']) }}
                             <div class="col-md-10">
                                 <div class="files-wrapper quandary-wrapper">
                                     <div class="file-upload quandary-wrapper-inner">

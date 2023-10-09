@@ -23,7 +23,7 @@ return [
                 'delete_permanently' => 'Delete Permanently',
                 'login_as' => 'Login As :user',
                 'resend_email' => 'Resend Confirmation E-mail',
-                'restore_user' => 'Restore User',
+                'restore_user' => 'Restore Patient',
                 'unconfirm' => 'Un-confirm',
                 'unlink' => 'Unlink',
             ],
