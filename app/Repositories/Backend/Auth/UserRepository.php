@@ -563,6 +563,7 @@ class UserRepository extends BaseRepository
 
         return DB::transaction(function () use ($user, $data, $roles, $permissions) {
           
+            $user->mobile_no = $data['mobile_no'] ;
             $user->status = isset($data['status']) && $data['status'] == '1' ? 1 : 0;
             $user->confirmed = isset($data['confirmed']) && $data['confirmed'] == '1' ? 1 : 0;
             $user->gender = isset($data['gender']) ? $data['gender'] : null;
@@ -573,9 +574,16 @@ class UserRepository extends BaseRepository
             if ($user->update($data)) {
                 $user->roles()->sync($roles);
                 $user->permissions()->sync($permissions);
+               // $nuser = User::where('id',$user->id)->first();
 
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    sendMessage($mobile,'mail','patient_account_updated',$data=null);
+                }
+               
                 event(new UserUpdated($user));
-
                 return $user;
             }
 
