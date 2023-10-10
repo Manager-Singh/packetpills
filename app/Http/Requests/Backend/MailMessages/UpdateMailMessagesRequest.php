@@ -28,7 +28,7 @@ class UpdateMailMessagesRequest extends FormRequest
     {
         return [
             'message' => 'required|max:191|unique:mail_messages,message,'.$this->segment(3),
-            'message_for' => 'required|max:191|unique:mail_messages,message_for,',
+            'message_for' => 'required|max:191|unique:mail_messages,message_for,'.$this->segment(3),
         ];
     }
 

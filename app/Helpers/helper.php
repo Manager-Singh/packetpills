@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Str;
+use Twilio\Rest\Client;
+use App\Models\AutoMessage;
+use App\Models\MailMessage;
 
 /**
  * Henerate UUID.
@@ -221,6 +224,36 @@ if (! function_exists('authUserShortName')) {
             return true;
         } catch (Exception $ex) {
             return false;
+        }
+    }
+}
+if (! function_exists('sendMessage')) {
+
+    function sendMessage($mobile_no,$type,$message_for,$data){
+        if($type=='admin'){
+           $message = AutoMessage::where('id',$message_for)->first();
+           //$body = $message->message."\n\n"."Pharmacy Canada"."\n"."Always with you.";
+           $body = $message->message;
+        }else{
+            $message = MailMessage::where('message_for',$message_for)->first();
+           // $body = $message->message."\n\n"."Pharmacy Canada"."\n"."Always with you.";
+            $body = $message->message;
+        }
+       
+        
+        
+        $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
+        $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
+        try{
+            $client = new Client($accountSid, $authToken);
+            $message = $client->messages->create($mobile_no, [
+                'from' => +16475034144,
+                'body' => $body]);
+                return 1;
+        }
+        catch (Exception $e){
+         dd($e);
+            return 0;
         }
     }
 }
