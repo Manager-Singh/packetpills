@@ -1,5 +1,4 @@
 @extends('frontend.layouts.step')
-
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
 <style>
@@ -43,6 +42,7 @@
 
 				    </div>
             <div class="col-md-2">
+
               </div>
 				    <div class="col-md-8">
 

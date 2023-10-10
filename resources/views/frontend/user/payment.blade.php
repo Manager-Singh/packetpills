@@ -1,5 +1,4 @@
 @extends('frontend.layouts.step')
-
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
 	<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
@@ -75,8 +74,7 @@
                 <div class="btn-div">
                   <a href="{{route('frontend.user.payment')}}"><button type="button" class="save button" onclick="" > Cancel </button></a>
                   <button type="submit" id="submit" class="next button" onclick="" >Save</button>
-                 
-                  </div>
+                 </div>
               </form> 
                  
                  

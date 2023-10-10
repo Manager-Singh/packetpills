@@ -1,9 +1,32 @@
-@extends('frontend.layouts.website')
+@extends('frontend.layouts.step')
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
 <style>
+  main .price-calculator {
+    padding: 12px;
+    margin-top: 0px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px #f7e3c1ba;
+    background-color: #fff;
+}
+.product-tab .nav-tabs {
+   border: unset;
+}
+  .product-tab .nav-tabs li.nav-item.active, .product-tab .nav-tabs li.nav-item:hover {
+    background: #8ac03d !important;
+  }
+.product-tab .nav-tabs li.nav-item {
+    border: 2px solid #638e3c !important;
+   
+}
+  img.header-icon {
+    display: none;
+}
+ header .row>.column {
+    width: unset;
+}
   .user-info.p-details {
-    margin-top: 10rem;
+    margin-top: 3rem;
 }
 .search-input input {
     width: 100%;
