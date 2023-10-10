@@ -45,8 +45,9 @@
                 <tr>
                     <th>@lang('Health card No')</th>
                     <td>
-                   
+                   @if(isset($user->healthcard->card_number))
                         {{  Str::upper($user->healthcard->card_number) }}
+                        @endif
                     </td>
                 </tr>
                 
