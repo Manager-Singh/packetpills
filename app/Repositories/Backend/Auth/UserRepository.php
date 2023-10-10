@@ -228,7 +228,7 @@ class UserRepository extends BaseRepository
         $user_id = $data['user_id'];
        
         return DB::transaction(function () use ($data,$user_id) {
-            Address::where('user_id',$user_id)->update(array('address_type' => 'normal'));
+            Address::where('user_id',$user_id)->update(array('mark_as' => 'normal'));
             $address = new Address;
             $address->user_id = $user_id;
             $address->address1 = $data['address1'];
@@ -236,7 +236,8 @@ class UserRepository extends BaseRepository
             $address->postal_code = $data['postal_code'];
             $address->city = $data['city'];
             $address->province = $data['province'];
-            $address->address_type = 'default';
+            $address->mark_as = 'default';
+            $address->address_type = $data['address_type'];
             $address->is_verify = 1;
             if($address->save()){
                 return true;
@@ -254,7 +255,7 @@ class UserRepository extends BaseRepository
         $address_id = $data['address_id'];
        
         return DB::transaction(function () use ($data,$user_id,$address_id) {
-            Address::where('user_id',$user_id)->update(array('address_type' => 'normal'));
+           Address::where('user_id',$user_id)->update(array('mark_as' => 'normal'));
            
             $address =  Address::where('id',$address_id)->first();
             $address->user_id = $user_id;
@@ -263,7 +264,8 @@ class UserRepository extends BaseRepository
             $address->postal_code = $data['postal_code'];
             $address->city = $data['city'];
             $address->province = $data['province'];
-            $address->address_type = 'default';
+            $address->mark_as = 'default';
+            $address->address_type = $data['address_type'];
             $address->is_verify = 1;
             if($address->save()){
                 return true;

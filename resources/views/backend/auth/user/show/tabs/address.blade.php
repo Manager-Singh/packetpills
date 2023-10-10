@@ -55,7 +55,7 @@
                             <!--col-->
                         </div>
                         <div class="form-group row">
-                            {{ Form::label('address_type', trans('validation.attributes.backend.access.users.province'), ['class' => 'col-md-2 from-control-label required']) }}
+                            {{ Form::label('address_type', trans('Address Type'), ['class' => 'col-md-2 from-control-label required']) }}
 
                             <div class="col-md-10">
                                 @php
