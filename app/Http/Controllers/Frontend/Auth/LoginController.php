@@ -315,6 +315,10 @@ class LoginController extends Controller
                     $user->save();
                     Auth::loginUsingId($user_otp->user_id);
                     // return redirect()->route('frontend.index');
+                    if($user->mobile_no && $user->dialing_code){
+                        $mobile = $user->dialing_code.$user->mobile_no;
+                        sendMessage($mobile,'mail','patient_account_created',$data=null);
+                    }
                     return json_encode(['error' => 0, 'message' => 'Login Successfully','profile_step'=>$user->profile_step]);
                 }
             }else{
