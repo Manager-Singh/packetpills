@@ -417,7 +417,8 @@ class UserRepository extends BaseRepository
     public function create_prescription(array $data,$files)
     {
         $user_id = $data['user_id'];
-        return DB::transaction(function () use ($user_id,$files) {
+        $user = User::where('id',$user_id)->first();
+        return DB::transaction(function () use ($user_id,$files, $user) {
             if(isset($files)){
                 if(count($files)>0){
                     $prescription = new Prescription;
@@ -440,6 +441,13 @@ class UserRepository extends BaseRepository
                             $prescriptionIteam->prescripiton_id = $prescription->id;
                             $prescriptionIteam->save();
                             $page_no++;
+                        }
+                        if($user->mobile_no && $user->dialing_code){
+                            $mobile = $user->dialing_code.$user->mobile_no;
+                            // print_r($mobile);
+                            // die;
+                            $data =  "Your Prescription no is ".$prescription->prescription_number;
+                            sendMessage($mobile,'mail','patient_prescription_created',$data);
                         }
                         return true;
                     }

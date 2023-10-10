@@ -232,12 +232,16 @@ if (! function_exists('sendMessage')) {
     function sendMessage($mobile_no,$type,$message_for,$data){
         if($type=='admin'){
            $message = AutoMessage::where('id',$message_for)->first();
-           //$body = $message->message."\n\n"."Pharmacy Canada"."\n"."Always with you.";
-           $body = $message->message;
+           $body = $message->message."\n\n"."Pharmacy Canada"."\n"."Always with you.";
+        //    $body = $message->message;
         }else{
             $message = MailMessage::where('message_for',$message_for)->first();
-           // $body = $message->message."\n\n"."Pharmacy Canada"."\n"."Always with you.";
-            $body = $message->message;
+           $body = $message->message;
+           if($data!==null){
+            $body .= "\n".$data;
+           }
+           $body .= "\n\n"."Pharmacy Canada"."\n"."Always with you.";
+            // $body = $message->message;
         }
        
         
