@@ -46,6 +46,12 @@
             .arrow-header a img {
                 margin: 4px 28px;
               }
+              header .row .column {
+                  width: unset;
+              }
+              main.main-div {
+                  margin-top: 6rem;
+              }
           </style>     
     <link rel="shortcut icon" href="{{asset('step/assets/images/logo.png')}}" type="images/png" id="favicon">
 	
@@ -73,8 +79,8 @@
       </header>
     @endif
         
-        <main>
-          <div class="container">
+        <main class="main-div">
+          <div class="container mt-5">
             <div class="row">
               <div class="col-md-12">
                 @include('includes.partials.messages')

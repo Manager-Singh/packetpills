@@ -149,8 +149,17 @@ class UserRepository extends BaseRepository
                 ];
             }
         }
+        if( $user->save()){
+            if(isset($user->password)){
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    sendMessage($mobile,'mail','patient_account_completed',$data=null);
+                }
+            }
 
-        return $user->save();
+        }
+
+       return $user;
     }
 
     /**
