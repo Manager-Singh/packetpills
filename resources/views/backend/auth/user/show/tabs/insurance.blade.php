@@ -1,5 +1,19 @@
 <div class="col">
  <h4 class="text-center">Insurance Details</h4>
+  <div class="form-group row">
+        <div class="col-md-10">
+           <input type="hidden" name="user_id" id="user-id" value="{{$user->id}}">
+           @if($user->is_insurance==1)
+           <input type="checkbox" id="no-insurance" class="box-size" checked>
+           @else
+           <input type="checkbox" id="no-insurance" class="box-size">
+           @endif
+            
+            As of today's date - I certify that I have no private drug insurance/ coverage
+        </div>
+        <!--col-->
+    </div>
+<div class="main-wrapper-insurance" style="@if($user->is_insurance==1) pointer-events:none; @endif">
     @if ($user->insurance)
         <div class="panel-group wrap" id="accordionprimaryInsurance" role="tablist" aria-multiselectable="true">
             <div class="panel">
@@ -294,3 +308,38 @@
 
     @endif
 </div><!--table-responsive-->
+</div>
+
+@push('after-scripts')
+  <script>
+            $('#no-insurance').click(function() {
+            $("#overlay").fadeIn(300);
+           
+
+             var user_id = $('#user-id').val();
+                if ($(this).prop("checked") == true) {
+                insurance_val = 1;
+                $('.main-wrapper-insurance').css("pointer-events","none");
+                
+                } else {
+                    insurance_val = 0;
+                   $('.main-wrapper-insurance').css("pointer-events","auto");
+                   
+                }
+                
+                 var ajaxurl_i_s = "{{ route('admin.auth.user.update.insurance.status') }}";
+                 $.ajax({
+                    url: ajaxurl_i_s,
+                    type: 'POST',
+                    data: {_token: '{{ csrf_token() }}', user_id:user_id,insurance_val:insurance_val},
+                    dataType: 'JSON',
+                    success: function (data) {
+                    $("#overlay").fadeOut(300);
+                    
+                    }
+
+            });
+            });
+
+           </script>
+@endpush

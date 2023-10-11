@@ -27,7 +27,7 @@ class StoreMailMessagesRequest extends FormRequest
     public function rules()
     {
         return [
-            'message' => 'required|max:191|unique:mail_messages,message',
+            'message' => 'required',
             'message_for' => 'required|max:191|unique:mail_messages,message_for',
         ];
     }

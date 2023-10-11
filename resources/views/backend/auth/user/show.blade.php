@@ -25,37 +25,7 @@
                     </h4>
                 </div><!--col-->
                 <div class="col-sm-7">
-                    <button class="btn btn-success send-message-btn" style="float: right;" data-toggle="modal"
-                        data-target="#send-message">Send Message</button>
-
-                    <div id="send-message" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Send Message</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <span class="" id="send-message-error"></span>
-                                    <input type="hidden" id="active-tab-val" value="{{ $tab }}">
-                                    <label for="send-sms" class="btn btn-primary">SMS <input type="checkbox" id="send-sms"
-                                            class="badgebox"><span class="badge">&check;</span></label>
-                                    <label for="send-email" class="btn btn-success">EMAIL <input type="checkbox"
-                                            id="send-email" class="badgebox"><span class="badge">&check;</span></label>
-                                    {{ Form::select('message', $auto_messages, null, ['id' => 'message-data', 'class' => 'form-control box-size', 'placeholder' => trans('Select Messages')]) }}
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" onclick="send_message()">Send</button>
-
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                    @include('backend.auth.user.includes.send-message')
                 </div><!--col-->
             </div><!--row-->
 
@@ -163,57 +133,3 @@
     </div><!--card-->
     
 @endsection
-@push('after-scripts')
-<script>
-        function send_message() {
-            var isSmsChecked = $("#send-sms").is(":checked");
-            var isEmailChecked = $("#send-email").is(":checked");
-            if (!isSmsChecked && !isEmailChecked) {
-                $("#send-message-error").html('Select Any one message line');
-
-                console.log('Select Any one message line');
-                // return false;
-            } else {
-                $("#send-message-error").text('');
-            }
-
-        }
-        $(document).ready(function() {
-            $('.badgebox').click(function() {
-                if ($(this).prop("checked") == true) {
-                   $("#send-message-error").text('');
-                }
-
-            });
-        });
-    </script>
-@endpush
-@push('after-styles')
-    <style>
-        .badgebox {
-            opacity: 0;
-        }
-
-        .badgebox+.badge {
-            text-indent: -999999px;
-            width: 18px;
-            background: #fff;
-            color: #000;
-            font-size: 11px;
-        }
-
-        .badgebox:focus+.badge {
-            /* Set something to make the badge looks focused */
-            /* This really depends on the application, in my case it was: */
-
-            /* Adding a light border */
-            /* box-shadow: inset 0px 0px 5px; */
-            /* Taking the difference out of the padding */
-        }
-
-        .badgebox:checked+.badge {
-            /* Move the check mark back when checked */
-            text-indent: 0;
-        }
-    </style>
-@endpush

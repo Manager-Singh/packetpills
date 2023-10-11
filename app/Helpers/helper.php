@@ -229,10 +229,13 @@ if (! function_exists('authUserShortName')) {
 }
 if (! function_exists('sendMessage')) {
 
-    function sendMessage($mobile_no,$type,$message_for,$data){
+    function sendMessage($mobile_no=null,$type,$message_for=null,$data){
         if($type=='admin'){
-           $message = AutoMessage::where('id',$message_for)->first();
-           $body = $message->message."\n\n"."Pharmacy Canada"."\n"."Always with you.";
+            // print_r($mobile_no);
+            // print_r($data);
+            // die;
+        //    $message = AutoMessage::where('id',$message_for)->first();
+           $body = $data."\n\n"."Pharmacy Canada"."\n"."Always with you.";
         //    $body = $message->message;
         }else{
             $message = MailMessage::where('message_for',$message_for)->first();
@@ -250,7 +253,7 @@ if (! function_exists('sendMessage')) {
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         try{
             $client = new Client($accountSid, $authToken);
-            $message = $client->messages->create($mobile_no, [
+            $messagesend = $client->messages->create($mobile_no, [
                 'from' => +16475034144,
                 'body' => $body]);
                 return 1;

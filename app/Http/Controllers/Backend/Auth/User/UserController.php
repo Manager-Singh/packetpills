@@ -148,6 +148,27 @@ class UserController extends Controller
     }
     
     
+    public function send_message(Request $request)
+    {
+            // print_r($request->all());
+            // die;
+            if($request->isSmsChecked){
+                $response_data = sendMessage($request->dialingCode.$request->mobile_no,'admin',null,$request->message);
+            }
+            return $response_data;
+            
+     }
+
+    
+    public function send_insurance_status(Request $request)
+    {
+            // print_r($request->all());
+            // die;
+            User::where('id',$request->user_id)->update(array('is_insurance' => $request->insurance_val));
+            return 1;
+            
+     }
+    
     public function delete_payment_method($id)
     {
         $datat = $this->userRepository->delete_payment_method($id);

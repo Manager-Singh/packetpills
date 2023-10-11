@@ -39,6 +39,9 @@ Route::group([
         Route::get('user/delete/payment/method/{id}', [UserController::class, 'delete_payment_method'])->name('user.paymentmethod.remove');
         Route::post('user/create/address/edit', [UserController::class, 'edit_address'])->name('user.edit.address');
         Route::post('user/create/medication', [UserController::class, 'create_medication'])->name('user.create.medication');
+        Route::post('user/send/message', [UserController::class, 'send_message'])->name('user.send.message');
+        Route::post('user/update/insurance/status', [UserController::class, 'send_insurance_status'])->name('user.update.insurance.status');
+        
 
 
         // Specific User
