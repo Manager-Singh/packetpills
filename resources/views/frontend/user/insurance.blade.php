@@ -1,7 +1,14 @@
 @extends('frontend.layouts.step')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
-
+@push('after-styles')
+<link rel="stylesheet" href="{{asset('step/assets/css/after-login-style.css')}}">
+<style>
+.next.button {
+    margin-left: 0px !important;
+}
+</style>
+@endpush
 @section('content')
 <div class="container mt-0 mb-5 pt-0">
         <div class="row ">

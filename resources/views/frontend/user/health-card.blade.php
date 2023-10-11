@@ -2,22 +2,23 @@
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
+<link rel="stylesheet" href="{{asset('step/assets/css/after-login-style.css')}}">
 	<style>
-    .upload-after button.delete {
+   .upload-after button.delete {
     position: absolute;
     right: 2px;
     bottom: 2px;
-    border: 1px solid #ccc;
+    border: 1px solid #638e3c;
     font-size: 20px;
     z-index: 999;
-    color: #fff;
+    color: #8ac03d;
 }
   </style>
 @endpush
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+<div class="container mt-0 mb-5 pt-0">
 		    	<div class="row ">
-				    <div class="col-md-6">
+				    <div class="col-md-12">
               <div class="user-info">
                 <i class="fa fa-address-card-o" aria-hidden="true"></i>
                 <p class="txt-large">Your provincial Health Card</p>
@@ -25,7 +26,8 @@
               </div> 
 
 				    </div>
-				    <div class="col-md-6">
+				    <div class="row justify-content-center">
+              <div class="col-md-7">
 
                         <form name="myForm" id="health-form" method='post' action="{{route('frontend.user.health.card.save')}}" enctype='multipart/form-data'>
                         @csrf      
@@ -87,7 +89,8 @@
                           </form>
                  
                  
-                </div>
+            </div>
+          </div>
  
 			
 			</div>

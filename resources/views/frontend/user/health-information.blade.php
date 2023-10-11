@@ -1,6 +1,7 @@
 @extends('frontend.layouts.step')
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
+<link rel="stylesheet" href="{{asset('step/assets/css/after-login-style.css')}}">
 <style>
 .bootstrap-tagsinput span {
     display: inherit;
@@ -28,10 +29,23 @@
     font-weight: 600;
     color: #212843;
 }
+.radio1 input[type='radio']:checked:after {
+    width: 38px;
+    height: 38px;
+    border-radius: 21px;
+    top: -3px;
+    left: 11px;
+    position: relative;
+    background-color: #ffa500;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
 </style>
 @endpush
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+<div class="container mt-0 mb-5 pt-0">
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info p-details">
