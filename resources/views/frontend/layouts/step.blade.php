@@ -50,7 +50,7 @@
                   width: unset;
               }
               main.main-div {
-                  margin-top: 6rem;
+                  margin-top: 3rem;
               }
           </style>     
     <link rel="shortcut icon" href="{{asset('step/assets/images/logo.png')}}" type="images/png" id="favicon">

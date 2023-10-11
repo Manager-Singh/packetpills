@@ -1,4 +1,23 @@
 
+<style>
+.menu ul li a i.fa {
+    color: #638e3c;
+}
+nav.step-menu ul li a{
+    color: #638e3c;
+    text-decoration: unset;
+    font-size: 18px;
+    font-weight: 600;
+}
+nav.step-menu ul li a:hover, .login-in-out a:hover{
+    text-decoration: unset;
+}
+.step-main-menu {
+    position: absolute;
+    right: 0;
+}
+
+</style>
 <div class="landing-page newui" style="justify-content: center; display: flex;">
 
 <header  class="re-header show">
@@ -17,8 +36,8 @@
           </a>
 
         </div>
-        <div class="column hide-mobile">
-          <nav>
+        <div class="column hide-mobile step-main-menu">
+          <nav class="step-menu">
             <ul role="menu" class="re-nav">
               <li role="menuitem" class="">
 
@@ -91,6 +110,13 @@
               <li  role="menuitem" class="">
                 <a  href="#">Contact Us</a>
               </li>
+              <li  role="menuitem" class="">
+              @if(Auth::check())
+                <a keyname="landing.navbar.login" href="{{ route('frontend.auth.logout') }}">Log Out</a>
+            @else
+                <a keyname="landing.navbar.login" href="{{ route('frontend.auth.new.login') }}">Log In</a>
+            @endif
+              </li>
            
             </ul>
          
@@ -99,18 +125,18 @@
      
       </div>
     </div>
-    <div  class="column">
+    <!-- <div  class="column">
       <div  class="row row--middle row--gutter-half">
         <div  class="column">
-          <!-- <div  class="select re-lang-pref">
+           <div  class="select re-lang-pref">
             <select  name="lang-pref" aria-haspopup="listbox" aria-expanded="false" class="font-regular ng-untouched ng-pristine ng-valid" aria-label="Choose a language">
               <option  value="en" selected="">EN</option>
               <option  value="fr">FR</option>
             </select>
-          </div> -->
+          </div> 
         </div>
      
-        <div  class="re-nav xsmall-5">
+        <div  class="re-nav xsmall-5 login-in-out">
             @if(Auth::check())
                 <a keyname="landing.navbar.login" href="{{ route('frontend.auth.logout') }}">Log Out</a>
             @else
@@ -119,7 +145,7 @@
         </div>
 
       </div>
-    </div>
+    </div> -->
   </div>
 </header>
 </div>

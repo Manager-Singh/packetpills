@@ -1,9 +1,14 @@
 @extends('frontend.layouts.step')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
+@push('after-styles')
+<link rel="stylesheet" href="{{asset('step/assets/css/after-login-style.css')}}">
+<style>
 
+</style>
+@endpush
 @section('content')
-<div class="container mt-5 mb-5">
+<div class="container mt-0 mb-5">
 		    	<div class="row ">
 				    <div class="col-md-6">
               <div class="p-detail">
@@ -14,12 +19,12 @@
               <p class="txt-b">Phone number</p>
               <p class="bold-txt">{{$user->mobile_no}}</p>
               </div>
-              <label for="fname">Language Preference</label>
+              <!-- <label for="fname">Language Preference</label>
                 <select name="language" id="language">
                     <option value="">English (EN)</option>
                     <option value="">Français (FR)</option>
                     
-                  </select>
+                  </select> -->
 
 				    </div>
 				    <div class="col-md-6">   

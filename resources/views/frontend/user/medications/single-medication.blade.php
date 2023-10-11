@@ -26,7 +26,7 @@
     width: unset;
 }
   .user-info.p-details {
-    margin-top: 3rem;
+    margin-top: 0rem;
 }
 .search-input input {
     width: 100%;
@@ -76,12 +76,13 @@ li.drug-list-child {
     width: 100px;
     height: 80px;
 }
+
 </style>
 @endpush
 @section('content')
 
 
-<div class="container mt-5 mb-5">
+<div class="container mt-0 mb-5">
 		    	<div class="row ">
             
 				    <div class="col-md-12">
@@ -117,16 +118,24 @@ li.drug-list-child {
 
               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                  @if($drug->images)
+                  @if($drug->images->count() > 0)
 
-                  @foreach($drug->images as $img)
+                    @foreach($drug->images as $img)
 
-                  <div class="carousel-item {{ ($loop->index == 0) ? 'active' : ''  }} ">
+                    <div class="carousel-item {{ ($loop->index == 0) ? 'active' : ''  }} ">
+                            <img class="d-block w-100 img-m"
+                                src="{{asset($img->image)}}"
+                                alt="First slide">
+                        </div>
+                    @endforeach
+                  @else
+                  <div class="carousel-item active">
                           <img class="d-block w-100 img-m"
-                              src="{{asset($img->image)}}"
+                              src="{{asset('website/assets/images/image-drug-p.png')}}"
                               alt="First slide">
                       </div>
-                  @endforeach
+
+                  
                   @endif
 
                     
@@ -145,7 +154,7 @@ li.drug-list-child {
     <div class="container pt-4 pb-5">
         <div class="row carousel-indicators">
 
-        @if($drug->images)
+        @if($drug->images->count() >0)
 
         @foreach($drug->images as $img)
 
@@ -154,6 +163,10 @@ li.drug-list-child {
                             class="img-o" data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" />
                     </div>
         @endforeach
+        @else
+        <div class="col-md-4 item">
+          <img src="{{asset('website/assets/images/image-drug-p.png')}}"  class="img-o" data-target="#carouselExampleIndicators" data-slide-to="0" />
+        </div>
         @endif
 
 

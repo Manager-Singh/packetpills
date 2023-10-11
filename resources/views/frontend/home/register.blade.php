@@ -27,8 +27,18 @@
 
                     <div aria-label="Sign up with Pocketpills">
                         @if(Auth::check())
-                            <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Hi, Alexandre</p>
-                            <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand"> Welcome back!</p><a href="{{route('frontend.user.dashboard')}}"><button _ngcontent-serverapp-c48="" type="submit" class="btn btn--brand txt-defaultcase"><span _ngcontent-serverapp-c48="" translate="" class="button__label txt-defaultcase">Go to dashboard</span><i class="fa fa-angle-arrow-right" aria-hidden="true"></i></button></a>
+                            <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">
+                                Hi, 
+                                @if(isset(Auth::user()->full_name))
+
+                                    {{Auth::user()->full_name}}
+
+                                @else
+                                    Alexandre
+                                @endif
+                                
+                            </p>
+                            <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand"> Welcome back!</p><a href="{{route('frontend.user.dashboard')}}"><button _ngcontent-serverapp-c48="" type="submit" class="btn btn--brand txt-defaultcase go-dashboard-btn"><span _ngcontent-serverapp-c48="" translate="" class="button__label txt-defaultcase">Go to dashboard</span><i class="fa fa-angle-arrow-right" aria-hidden="true"></i></button></a>
                         @else
                         <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Simply sign in to
                             join <br> over 300,000 satisfied members:</p>

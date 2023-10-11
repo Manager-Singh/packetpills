@@ -8,13 +8,18 @@
     align-items: center;
     justify-content: center;
     border-radius: 500px !important;
-    background: #c1cbe5;
-    color: #212843 !important;
+    background: #fff;
+    color: #8ac03d !important;
     margin: 0px 10px;
-    border: none !important;
+    border: 1px solid #638e3c;
+    transition: 0.7s;
+}
+.nav-tabs .nav-link:hover {
+    background-color: #8ac03d;
+    color: #fff !important;
 }
 .nav-tabs .nav-link.active {
-    background: #212843 !important;
+    background: #8ac03d !important;
     color: #fff !important;
 }
 .nav-tabs {
@@ -89,19 +94,18 @@ select#language {
 .btn-div {
     display: flex;
 }
-.next.button {
-    margin-left: 10px;
-}
+
 button.save.button {
     width: 100%;
     height: 50px;
     font-size: 18px;
     margin-top: 40px;
     border-radius: 40px;
-    color: #212843;
+    color: #8ac03d;
     background: #00000000;
-    border: 2px solid #212843;
-    margin-left: 10px;
+    border: 2px solid #638e3c;
+    margin-left: 0px;
+    transition: 0.8s;
 }
 .radio {
     display: flex;
@@ -128,13 +132,19 @@ input {
 }
 a.btn-big {
     border-style: dashed;
-    font-size: 21px;
-    padding: 1rem 1.2rem;
+    font-size: 18px;
+    padding: 10px 0;
     width: 100%;
     display: block;
     text-align: center;
     border-radius: 50px;
-    color: #212843;
+    color: #8ac03d;
     text-decoration: none;
     font-weight: 600;
+    border: 2px dashed #638e3c;
+    transition: 0.8s;
+}
+a.btn-big:hover, button.save.button:hover {
+    background: #8ac03d;
+    color: #fff;
 }

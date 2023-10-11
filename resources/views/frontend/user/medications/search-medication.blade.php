@@ -12,12 +12,50 @@ ul.drug-list-main {
 }
 
 li.drug-list-child:hover {
-    background: #fff;
-    color: #000;
+    background: #8ac03d;
+    color: #fff;
+}
+li.drug-list-child a {
+    color: #638e3c;
+    text-decoration: unset;
 }
 li.drug-list-child {
-    border: 1px solid #d1a7a7;
+    border: 1px solid #638e3c;
     padding: 2px 7px;
+    background-color: #fff;
+}
+a.drug-list-btn.loard-more-drug:hover {
+    background-color: #fff;
+    color: #8ac03d;
+    border: 1px solid;
+}
+li.drug-list-child a:hover {
+    color: #fff;
+}
+.single-result a:hover {
+    background-color: #fff;
+    color: #8ac03d;
+    border: 1px solid;
+}
+a.drug-list-btn.loard-more-drug {
+    color: #fff;
+    background-color: #8ac03d;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: unset;
+    transition: .7s;
+}
+.single-result a {
+    color: #fff;
+    background-color: #8ac03d;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: unset;
+    transition: .7s;
 }
 .user-info.p-details {
     margin-top: 5rem;

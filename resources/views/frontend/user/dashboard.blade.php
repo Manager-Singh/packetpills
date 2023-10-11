@@ -3,8 +3,8 @@
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 
 @section('content')
-<div class="container mb-5 mt-5">
-		    	<div class="row bg-light">
+<div class="container mb-5 mt-0 dashboard-main">
+		    	<div class="row bg-light refill-section">
               <div class="col-md-8">
                 <div class="med-info">                    
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
@@ -19,7 +19,7 @@
           </div>
 
           <p class="bold-txt mt-5">What would you like to do?</p>
-          <div class="row">
+          <div class="row med-iin">
             
             <div class="col-md-3">
               <a href="#">
@@ -57,7 +57,7 @@
             </a>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5 appointemt-contact">
           <div class="col-md-6">
             <div class="bg-light">
                 <div class="med-info">                    

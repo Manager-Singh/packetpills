@@ -5776,7 +5776,7 @@ a.btn.btn-sm.btn-outline-info.m-1 {
   border-color: #212843;
 }
 .registration-home {
-  background: #c1cbe5 !important;
+  background: #8ac03d !important;
 }
 
 .prescription {
@@ -5887,4 +5887,26 @@ button.accordion-button {
   margin: 0px;
   border: none !important;
   background: #fff;
+}
+
+a:hover .go-dashboard-btn {
+  background-color: #8ac03d !important;
+  border-color: #8ac03d !important;
+}
+a .go-dashboard-btn {
+  border: 2px solid #638e3c;
+  padding: 3px 49px;
+  font-size: 18px;
+  color: #8ac03d;
+}
+
+.row.login-with a {
+  border: 2px solid #638e3c !important;
+  font-size: 14px;
+  color: #8ac03d !important;
+  left: 14px;
+}
+.registration-home .row.login-with a:hover {
+  background-color: #8ac03d;
+  color: #fff !important;
 }
