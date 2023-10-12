@@ -154,6 +154,14 @@ class UserRepository extends BaseRepository
             }
             $payment_method->default = 'yes';
             if($payment_method->save()){
+                $user = User::where('id',$user_id)->first();
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                    sendMessage($mobile,'mail','payment_method_created',null);
+                }
                 return true;
             }
             
@@ -217,6 +225,14 @@ class UserRepository extends BaseRepository
             }
             $payment_method->default = 'yes';
             if($payment_method->save()){
+                $user = User::where('id',$user_id)->first();
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                    sendMessage($mobile,'mail','payment_method_updated',null);
+                }
                 return true;
             }
             
@@ -240,6 +256,14 @@ class UserRepository extends BaseRepository
             $address->address_type = $data['address_type'];
             $address->is_verify = 1;
             if($address->save()){
+                $user = User::where('id',$user_id)->first();
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                    sendMessage($mobile,'mail','address_created',null);
+                }
                 return true;
             }
             
@@ -268,6 +292,14 @@ class UserRepository extends BaseRepository
             $address->address_type = $data['address_type'];
             $address->is_verify = 1;
             if($address->save()){
+                $user = User::where('id',$user_id)->first();
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                    sendMessage($mobile,'mail','address_updated',null);
+                }
                 return true;
             }
             
@@ -298,16 +330,30 @@ class UserRepository extends BaseRepository
                 
                 }
             $healthCard = HealthCard::where('user_id',$user_id)->first();
+            $hc = 1;
             if ($healthCard === null) {
                 $healthCard  = new HealthCard;
                 $healthCard->user_id = $user_id;
-             
+                $hc = 2;
              }
             $healthCard->front_img = $healthCardImages[0];
             $healthCard->back_img = $healthCardImages[1];
             $healthCard->is_verify = 1;
             $healthCard->card_number = $healthcard_number;
             if($healthCard->save()){
+                $user = User::where('id',$user_id)->first();
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                    if($hc=1){
+                        sendMessage($mobile,'mail','healthcard_updated',null);
+                    }else{
+                        sendMessage($mobile,'mail','healthcard_created',null);
+                    }
+                    
+                }
                 return true;
             }
            
@@ -362,11 +408,12 @@ class UserRepository extends BaseRepository
                 
                 }
             //$healthCard = HealthCard::where('user_id',$user_id)->first();
+            $insu =1;
             if ($insurance === null) {
                 $insurance  = new Insurance;
                 $insurance->user_id = $user_id;
                 $insurance->type = $type;
-             
+                $insu =2;
              }
              if(isset($insuranceImages[0])){
                 $insurance->front_img = $insuranceImages[0];
@@ -376,6 +423,18 @@ class UserRepository extends BaseRepository
             }
             $insurance->is_verify = 1;
             if($insurance->save()){
+                $user = User::where('id',$user_id)->first();
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                    if($insu=1){
+                        sendMessage($mobile,'mail','insurance_updated',null);
+                    }else{
+                        sendMessage($mobile,'mail','insurance_created',null);
+                    }
+                }
                 return true;
             }
            
@@ -394,10 +453,11 @@ class UserRepository extends BaseRepository
          
          
             $HealthInformation = HealthInformation::where('user_id',$user_id)->first();
+            $Hi=1;
             if ($HealthInformation === null) {
                 $HealthInformation  = new HealthInformation;
                 $HealthInformation->user_id = $user_id;
-             
+                $Hi=2;
              }
             $HealthInformation->allergies = $data['allergies'];
             $HealthInformation->supplements_medications = $data['supplements_medications'];
@@ -407,6 +467,18 @@ class UserRepository extends BaseRepository
                 $HealthInformation->allergies_medications = null;
             }
             if($HealthInformation->save()){
+                $user = User::where('id',$user_id)->first();
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                    if($Hi=1){
+                        sendMessage($mobile,'mail','healthinformation_updated',null);
+                    }else{
+                        sendMessage($mobile,'mail','healthinformation_created',null);
+                    }
+                }
                 return true;
             }
            
@@ -426,10 +498,7 @@ class UserRepository extends BaseRepository
                     $prescription = new Prescription;
                     $prescription->prescription_number = Prescription::generatePrescriptionNumber();
                     $prescription->user_id = $user_id;
-                    // $prescription->prescription_type_id
                     if($prescription->save()){
-                        // print_r($prescription);
-                        // die;
                         $page_no = 1;
                         foreach ($files as $key => $image) {
                             $uuid = Uuid::uuid4()->toString();
@@ -446,8 +515,6 @@ class UserRepository extends BaseRepository
                         }
                         if($user->mobile_no && $user->dialing_code){
                             $mobile = $user->dialing_code.$user->mobile_no;
-                            // print_r($mobile);
-                            // die;
                             $data =  "Your Prescription no is ".$prescription->prescription_number;
                             sendMessage($mobile,'mail','patient_prescription_created',$data);
                         }
@@ -490,7 +557,7 @@ class UserRepository extends BaseRepository
         throw new GeneralException(__('Problem With Create Medication.'));
        });
     }
-    public function create(array $data,$files)
+    public function create(array $data,$files,$iprofile_mage=false)
     {
         // print_r($files);
         // die;
@@ -503,7 +570,8 @@ class UserRepository extends BaseRepository
 
         $user = $this->createUserStub($data);
 
-        return DB::transaction(function () use ($user, $data, $roles, $permissions,$files) {
+        return DB::transaction(function () use ($user, $data, $roles, $permissions,$files,$iprofile_mage) {
+          
             if ($user->save()) {
                 //Attach new roles
                 $user->attachRoles($roles);
@@ -515,7 +583,17 @@ class UserRepository extends BaseRepository
                 if (isset($data['confirmation_email']) && $user->confirmed == 0) {
                     $user->notify(new UserNeedsConfirmation($user->confirmation_code));
                 }
-
+               
+                if($iprofile_mage){
+                    $nuuid = Uuid::uuid4()->toString();
+                    $fileNamen   = $nuuid . '.' . $iprofile_mage->getClientOriginalExtension();
+                    $destinationPathn = public_path('img/frontend/avatar');
+                    $iprofile_mage->move($destinationPathn, $fileNamen);
+                    $front_urln = 'img/frontend/avatar/'.$fileNamen;
+                    $user->avatar_type = 'upload';
+                    $user->avatar_location = $front_urln;
+                    $user->save();
+                }
                 event(new UserCreated($user));
                
                     if(isset($files)){
@@ -563,28 +641,47 @@ class UserRepository extends BaseRepository
      * @throws \Throwable
      * @return \App\Models\Auth\User
      */
-    public function update(User $user, array $data)
+    public function update(User $user, array $data,$iprofile_mage=false)
     {
+
         $roles = $data['assignees_roles'];
         $permissions = $data['permissions'];
 
         unset($data['assignees_roles']);
         unset($data['permissions']);
 
-        return DB::transaction(function () use ($user, $data, $roles, $permissions) {
+        return DB::transaction(function () use ($user, $data, $roles, $permissions,$iprofile_mage) {
           
-            $user->mobile_no = $data['mobile_no'] ;
+            $user->mobile_no = $data['mobile_no'];
             $user->status = isset($data['status']) && $data['status'] == '1' ? 1 : 0;
             $user->confirmed = isset($data['confirmed']) && $data['confirmed'] == '1' ? 1 : 0;
             $user->gender = isset($data['gender']) ? $data['gender'] : null;
             $user->date_of_birth = isset($data['date_of_birth']) ? $data['date_of_birth'] : null;
             $user->province = isset($data['province']) ? $data['province'] : null;
+
+            // print_r( $iprofile_mage);
+            // die;
+          
 //   print_r($data);
 //             die;
             if ($user->update($data)) {
                 $user->roles()->sync($roles);
                 $user->permissions()->sync($permissions);
-               // $nuser = User::where('id',$user->id)->first();
+               $nuser = User::where('id',$user->id)->first();
+
+               if($iprofile_mage){
+                    $nuuid = Uuid::uuid4()->toString();
+                    $fileName   = $nuuid . '.' . $iprofile_mage->getClientOriginalExtension();
+                    $destinationPath = public_path('img/frontend/avatar');
+                    $iprofile_mage->move($destinationPath, $fileName);
+                    $front_url = 'img/frontend/avatar/'.$fileName;
+                    $nuser->avatar_type = 'upload';
+                    $nuser->avatar_location = $front_url;
+                    $nuser->save();
+                //      print_r( $front_url);
+                // die;
+                    
+                }
 
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;

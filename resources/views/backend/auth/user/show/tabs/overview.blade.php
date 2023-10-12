@@ -6,7 +6,13 @@
             <table class="table table-hover" style="border: 1px solid #c8ced3;">
                 <tr>
                     <th>@lang('labels.backend.access.users.tabs.content.overview.avatar')</th>
+                    @if($user->avatar_type=='upload')
+                    <td><img src="{{asset('/') . $user->avatar_location }}" class="user-profile-image" width="150"/></td>
+
+                    @else
                     <td><img src="{{ $user->picture }}" class="user-profile-image" /></td>
+
+                    @endif
                 </tr>
 
                 <tr>

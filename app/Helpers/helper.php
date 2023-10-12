@@ -231,12 +231,8 @@ if (! function_exists('sendMessage')) {
 
     function sendMessage($mobile_no=null,$type,$message_for=null,$data){
         if($type=='admin'){
-            // print_r($mobile_no);
-            // print_r($data);
-            // die;
-        //    $message = AutoMessage::where('id',$message_for)->first();
+           
            $body = $data."\n\n"."Pharmacy Canada"."\n"."Always with you.";
-        //    $body = $message->message;
         }else{
             $message = MailMessage::where('message_for',$message_for)->first();
            $body = $message->message;
@@ -244,7 +240,6 @@ if (! function_exists('sendMessage')) {
             $body .= "\n".$data;
            }
            $body .= "\n\n"."Pharmacy Canada"."\n"."Always with you.";
-            // $body = $message->message;
         }
        
         

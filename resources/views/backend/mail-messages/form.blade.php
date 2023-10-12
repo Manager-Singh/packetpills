@@ -18,7 +18,7 @@
                 {{ Form::label('messsage', trans('validation.attributes.backend.access.mail-messages.message'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::text('message', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.mail-messages.message'), 'required' => 'required']) }}
+                    {{ Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.mail-messages.message'), 'required' => 'required']) }}
                 </div>
                 <!--col-->
             </div>

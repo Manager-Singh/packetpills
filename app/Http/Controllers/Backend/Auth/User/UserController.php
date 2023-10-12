@@ -73,7 +73,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $user = $this->userRepository->create($request->except(['_token', '_method','files']),$request->file('files'));
+        $user = $this->userRepository->create($request->except(['_token', '_method','files']),$request->file('files'), $request->has('avatar_location') ? $request->file('avatar_location') : false);
       //  $user->id;
        // route('admin.auth.user.show', $this)
         return redirect()->route('admin.auth.user.show', $user)->withFlashSuccess(__('alerts.backend.access.users.created'));
@@ -245,9 +245,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        // print_r( $request->all());
-        // die;
-        $user  = $this->userRepository->update($user, $request->except(['_token', '_method','files']));
+        
+        $user  = $this->userRepository->update($user, $request->except(['_token', '_method','files']),$request->has('avatar_location') ? $request->file('avatar_location') : false);
       //  ->route('admin.auth.user.show', $user)
         return redirect()->route('admin.auth.user.show', $user)->withFlashSuccess(__('alerts.backend.access.users.updated'));
     }

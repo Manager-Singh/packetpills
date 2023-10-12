@@ -45,6 +45,17 @@
                     <!--col-->
                 </div>
                 <!--form-group-->
+                  <!--image avtaar-->
+                    <div class="form-group row">
+                      
+                        <label class="col-md-2" for="avatar">Avatar</label>
+
+                        <div class="col-md-10" id="avatar_location">
+                            <input class="form-control-file" type="file" name="avatar_location" id="avatar_location">
+                        </div><!--form-group-->
+                        
+                    </div>
+                    <!--image avtaar end-->
 
                 <div class="form-group row">
                     {{ Form::label('email', __('validation.attributes.backend.access.users.email'), [ 'class'=>'col-md-2 form-control-label']) }}

@@ -43,6 +43,8 @@ trait UserMethods
 
             case 'storage':
                 return url('storage/'.$this->avatar_location);
+            case 'upload':
+                    return url($this->avatar_location);
         }
 
         $social_avatar = $this->providers()->where('provider', $this->avatar_type)->first();

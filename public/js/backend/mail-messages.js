@@ -34,10 +34,10 @@
             }
         },
 
-        edit: {
-            init: function (locale) {
-                FTX.tinyMCE.init(locale);
-            }
-        },
+        // edit: {
+        //     init: function (locale) {
+        //         FTX.tinyMCE.init(locale);
+        //     }
+        // },
     }
 })();

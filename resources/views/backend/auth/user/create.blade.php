@@ -47,7 +47,17 @@
                         <!--col-->
                     </div>
                     <!--form-group-->
+                    <!--image avtaar-->
+                    <div class="form-group row">
+                      
+                        <label class="col-md-2" for="avatar">Avatar </label>
 
+                        <div class="col-md-10" id="avatar_location">
+                            <input class="form-control-file" type="file" name="avatar_location" id="avatar_location">
+                        </div><!--form-group-->
+                        
+                    </div>
+                    <!--image avtaar end-->
                     <div class="form-group row">
                         {{ Form::label('email', __('validation.attributes.backend.access.users.email'), ['class' => 'col-md-2 form-control-label']) }}
 
@@ -92,7 +102,7 @@
                         <div class="col-md-8">
 
                             <label for="gender-male" class="control">
-                                <input type="radio" value="male" name="gender" id="gender-male" class="gender" />
+                                <input type="radio" value="male" name="gender" id="gender-male" class="gender" checked/>
                                 &nbsp;&nbsp;@lang('validation.attributes.backend.access.users.male')
                             </label>
                             <label for="gender-female" class="control">
