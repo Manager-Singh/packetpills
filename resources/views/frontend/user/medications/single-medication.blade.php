@@ -44,14 +44,20 @@ ul.drug-list-main {
 }
 
 li.drug-list-child:hover {
-    background: #fff;
-    color: #000;
+    background: #8ac03d;
 }
 li.drug-list-child {
-    border: 1px solid #d1a7a7;
+    border: 1px solid #638e3c;
     padding: 2px 7px;
+    background-color: #fff;
 }
-
+li.drug-list-child a {
+    color: #8ac03d;
+    text-decoration: unset;
+}
+li.drug-list-child:hover a {
+    color: #fff;
+}
 .autocom-box.ajax-result {
     height: 400px;
     overflow-y: scroll;
@@ -75,6 +81,22 @@ li.drug-list-child {
 .img-o {
     width: 100px;
     height: 80px;
+}
+a.drug-list-btn.loard-more-drug {
+    color: #fff;
+    background-color: #8ac03d;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: unset;
+    transition: .7s;
+    margin-left: 10px;
+}
+a.drug-list-btn.loard-more-drug:hover {
+    background-color: #fff;
+    color: #8ac03d;
+    border: 1px solid;
 }
 
 </style>

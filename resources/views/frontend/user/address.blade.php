@@ -3,6 +3,11 @@
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
 	<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
+  <style>
+    .btn-div a {
+    display: contents;
+    }
+  </style>
 @endpush
 @section('content')
 <div class="container mt-0 mb-5 pt-0">

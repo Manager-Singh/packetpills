@@ -440,9 +440,10 @@ img.partner-img {
     height: 170px;
     position: relative;
     width: 100%;
-    background: #c9d2e5;
-    color: #212843;
+    background: #fff;
+    color: #8ac03d;
     font-size: 18px;
+    border-color: #638e3c;
 }
 .add-btn button#add .fa {
     font-size: 24px;
@@ -512,6 +513,11 @@ nav#sidebarMenu .list-group a {
     font-size: 17px;
     font-weight: 500;
     border-top: 1px solid #638e3c;
+}
+
+nav#sidebarMenu .list-group a.active, nav#sidebarMenu .list-group a.active i.fa {
+    background-color: #8ac03d;
+    color: #fff;
 }
 nav#sidebarMenu .main a {
     width: 44%;

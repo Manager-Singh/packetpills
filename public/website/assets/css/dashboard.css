@@ -28,7 +28,7 @@
 }
 .order .order-head {
     padding: 10px 18px;
-    background: #f2f2f2;
+    background: #638e3c0d;
 }
 .order {
     border: 1px solid #ccc;
@@ -46,22 +46,39 @@ a.txt-b {
     color: #212843;
     text-decoration: none;
 }
+a.delete-btn, a.edit-btn {
+    color: #638e3c;
+    padding-right: 40px;
+}
+a.delete-btn:hover, a.edit-btn:hover {
+    color: #8ac03d;
+}
 .col-md-4.text-right {
     text-align: right;
 }
 a.btn-success {
-    background: #0da90d38;
-    color: #212843;
-    padding: 6px 10px;
+    background: #8ac03d;
+    color: #fff;
+    padding: 4px 10px;
     border-radius: 30px;
     text-decoration: none !important;
 }
+a.btn-success:hover {
+    background: #fff;
+    color: #8ac03d;
+    border: 1px solid #638e3c;
+}
 a.btn-error {
-    background: #de000038;
-    color: #212843;
-    padding: 6px 10px;
+    background: #8ac03d;
     border-radius: 30px;
     text-decoration: none !important;
+    color: #fff;
+    padding: 3px 10px;
+}
+a.btn-error:hover {
+    background-color: #fff;
+    color: #8ac03d;
+    border: 1px solid #638e3c;
 }
 .text-right {
     text-align: right;

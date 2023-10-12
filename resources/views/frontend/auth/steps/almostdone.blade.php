@@ -51,8 +51,8 @@
                                 <label>Female</label>
                             </span>
                             <span class="gender">
-                                <input type="radio" name="gender" {{ ( $auth->gender == 'Other') ? 'checked' : ''}} value="Other" required>
-                                <label>Other</label>
+                                <input type="radio" name="gender" {{ ( $auth->gender == 'Prefer to not share') ? 'checked' : ''}} value="Prefer to not share" required>
+                                <label>Prefer to not share</label>
                             </span>
                         </div>
                     </div>

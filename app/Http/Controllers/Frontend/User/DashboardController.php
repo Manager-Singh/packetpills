@@ -122,7 +122,7 @@ class DashboardController extends Controller
             return redirect()->route('frontend.user.dashboard');
         }
         return view('frontend.auth.steps.create-password');
-    }
+    } 
 
     public function createPassword_save(Request $request){
 
@@ -130,7 +130,7 @@ class DashboardController extends Controller
         // 'province'=>$request->province,
         $output = $this->userRepository->update(
             Auth::user(),
-            ['password'=>$request->password,'profile_step'=>3,'is_profile_status' =>'completed'],
+            ['password'=>$request->password,'password_updated'=>$request->password_updated,'profile_step'=>3,'is_profile_status' =>'completed'],
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 

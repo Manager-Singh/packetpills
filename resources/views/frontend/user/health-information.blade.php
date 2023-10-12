@@ -36,7 +36,7 @@
     top: -3px;
     left: 11px;
     position: relative;
-    background-color: #ffa500;
+    background-color: #8ac03d;
     content: '';
     display: inline-block;
     visibility: visible;

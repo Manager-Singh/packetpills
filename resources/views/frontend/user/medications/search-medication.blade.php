@@ -72,6 +72,10 @@ a.drug-list-btn.loard-more-drug {
     box-shadow: 0px 0px 3px 3px #eee;
     border-radius: 3px;
 }
+ 
+li.drug-list-child:hover a {
+    color: #fff;
+}
 
 </style>
 @endpush
