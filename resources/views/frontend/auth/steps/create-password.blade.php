@@ -35,10 +35,11 @@
                         <p class="info">Please enter 8 or more characters</p>
                         <p class="info"><span id='message'></span></p>
                     </div>
+                    <input type="hidden" name="password_updated" value="yes"/>
                 </div>
                 <button type="submit" class="next button submit-passowrd">Next</button>
 
-            </form>
+            </form> 
 
 
         </div>

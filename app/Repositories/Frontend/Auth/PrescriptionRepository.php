@@ -128,12 +128,12 @@ class PrescriptionRepository extends BaseRepository
      */
     public function create(array $data)
     {
-        
+            $user = Auth::user();
             $images = $data['prescription_upload'];
             $prescription = new Prescription;
             $prescription->prescription_number =  Prescription::generatePrescriptionNumber();
             $prescription->prescription_type_id = PreciptionType::first()->id;
-            $prescription->user_id = Auth::user()->id;
+            $prescription->user_id = $user->id;
             
             if($images && $prescription->save()){
                 foreach($images as $key => $image){
@@ -150,6 +150,13 @@ class PrescriptionRepository extends BaseRepository
                     $prescription_iteams->prescription_upload = $url;
                     $prescription_iteams->save();
                 }
+
+                
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    sendMessage($mobile,'mail','patient_prescription_created',$data=null);
+                }
+               
 
                 return $prescription_iteams;
 

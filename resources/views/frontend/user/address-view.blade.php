@@ -4,12 +4,28 @@
 @push('after-styles')
 <link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
 <link rel="stylesheet" href="{{asset('step/assets/css/after-login-style.css')}}">
+<style>
+.order .order-head input[type='radio']:checked:after {
+    width: 26px;
+    height: 26px;
+    border-radius: 21px;
+    top: 0px;
+    left: 0px;
+    position: relative;
+    background-color: #8ac03d;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+</style>
 @endpush
 @section('content')
 @php 
 $address_count = ($address) ? $address->count() : 0;
 @endphp
-<div class="container mt-0 mb-5 pt-0">
+<div class="container mt-0 mb-5 pt-0 address-view-pg">
     <div class="row ">
         <div class="col-md-12">
             <div class="user-info p-details">
@@ -36,8 +52,8 @@ $address_count = ($address) ? $address->count() : 0;
                             <div class="col-md-8">
                                 <p class="txt"> {{$addres->address1}}  {{$addres->address2}}</p>
                                 <p class="txt"> {{$addres->city}} {{$addres->province}}</p>
-                                <a class="txt-b" href="javascript:void(0)" onclick="removeAddress({{$addres->id}},{{$user->id}})"> Delete </a>
-                                <a class="txt-b" href="{{route('frontend.user.address.add')}}?id={{$addres->id}}"> Edit </a>
+                                <a class="txt-b delete-btn" href="javascript:void(0)" onclick="removeAddress({{$addres->id}},{{$user->id}})"> Delete </a>
+                                <a class="txt-b edit-btn" href="{{route('frontend.user.address.add')}}?id={{$addres->id}}"> Edit </a>
                             </div>
                         </div>
                     </div>

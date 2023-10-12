@@ -5910,3 +5910,6 @@ a .go-dashboard-btn {
   background-color: #8ac03d;
   color: #fff !important;
 }
+.main-div li.nav-item {
+  padding-top: 0;
+}

@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{{asset('step/assets/css/after-login-style.css')}}">
 @endpush
 @section('content')
-<div class="container mt-0 mb-5 pt-0">
+<div class="container mt-0 mb-5 pt-0 payment-view-pg">
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info p-details">
@@ -30,7 +30,7 @@
                       <div class="row">
                         <div class="col-md-8">  
                           <p class="txt">{{$payment->expiry_date}}</p>
-                          <a class="txt-b" href="javascript:void(0)" onclick="removePayment({{$payment->id}},{{$user->id}})"> Delete </a>
+                          <a class="txt-b delete-btn" href="javascript:void(0)" onclick="removePayment({{$payment->id}},{{$user->id}})"> Delete </a>
                       
                         </div>
                         <div class="col-md-4 text-right">  

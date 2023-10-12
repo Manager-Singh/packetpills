@@ -1,7 +1,7 @@
 @extends('frontend.layouts.step')
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+<div class="container mt-0 mb-5 pt-0">
 		    	<div class="row ">
 				    <div class="col-md-6">
               <div class="user-info">
