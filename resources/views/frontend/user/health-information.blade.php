@@ -17,7 +17,7 @@
 }
 .radio1 {
     display: flex;
-    padding: 30px 4px;
+    padding: 14px 4px;
 }
 .radio1 input, .radio1 select {
     width: 64px;

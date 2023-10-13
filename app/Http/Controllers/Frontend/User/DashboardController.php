@@ -98,6 +98,7 @@ class DashboardController extends Controller
         if(Auth::check() && Auth::user()->is_profile_status == "completed"){
             return redirect()->route('frontend.user.dashboard');
         }
+
         return view('frontend.auth.steps.almostdone');
     }
     public function almostdone_save(Request $request){
@@ -121,6 +122,7 @@ class DashboardController extends Controller
         if(Auth::check() && Auth::user()->is_profile_status == "completed"){
             return redirect()->route('frontend.user.dashboard');
         }
+        
         return view('frontend.auth.steps.create-password');
     } 
 
@@ -209,7 +211,7 @@ class DashboardController extends Controller
     }
     public function insuranceSave(Request $request){
         
-
+        //dd($request->all());
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->createInsurance($data);
         if($output){

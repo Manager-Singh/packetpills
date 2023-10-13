@@ -65,16 +65,16 @@ class UserRepository extends BaseRepository
     public function update(User $user, array $input, $image = false)
     {
         // dd($input);
-
+       
         if(isset($input['first_name'])){
             $user->first_name = $input['first_name'];
         }
         if(isset($input['last_name'])){
             $user->last_name = $input['last_name'];
         }
-        if(isset($input['avatar_type'])){
-            $user->avatar_type = $input['avatar_type'];
-        }
+        // if(isset($input['avatar_type'])){
+        //     $user->avatar_type = $input['avatar_type'];
+        // }
         if(isset($input['date_of_birth'])){
             $user->date_of_birth = $input['date_of_birth'];
         }
@@ -99,29 +99,43 @@ class UserRepository extends BaseRepository
 
 
         // Upload profile image if necessary
-        if ($image) {
-            $user->avatar_location = $image->store('/avatars', 'public');
-        } else {
-            // No image being passed
-            if(isset($input['avatar_type'])){
+        // if ($image) {
+        //     $user->avatar_location = $image->store('/avatars', 'public');
+        // } else {
+        //     // No image being passed
+        //     if(isset($input['avatar_type'])){
 
 
-            if ($input['avatar_type'] === 'storage') {
-                // If there is no existing image
-                if (auth()->user()->avatar_location === '') {
-                    throw new GeneralException('You must supply a profile image.');
-                }
-            } else {
-                // If there is a current image, and they are not using it anymore, get rid of it
-                if (auth()->user()->avatar_location !== '') {
-                    Storage::disk('public')->delete(auth()->user()->avatar_location);
-                }
+        //     if ($input['avatar_type'] === 'storage') {
+        //         // If there is no existing image
+        //         if (auth()->user()->avatar_location === '') {
+        //             throw new GeneralException('You must supply a profile image.');
+        //         }
+        //     } else {
+        //         // If there is a current image, and they are not using it anymore, get rid of it
+        //         if (auth()->user()->avatar_location !== '') {
+        //             Storage::disk('public')->delete(auth()->user()->avatar_location);
+        //         }
 
-                $user->avatar_location = null;
-            }
-            }else{
-                $user->avatar_location = null;
-            }
+        //         $user->avatar_location = null;
+        //     }
+        //     }else{
+        //         $user->avatar_location = null;
+        //     }
+        // }
+
+        if($image){
+            $nuuid = Uuid::uuid4()->toString();
+            $fileName   = $nuuid . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('img/frontend/avatar');
+            $image->move($destinationPath, $fileName);
+            $front_url = 'img/frontend/avatar/'.$fileName;
+            $user->avatar_type = 'upload';
+            $user->avatar_location = $front_url;
+            
+            // print_r( $front_url);
+            // die;
+            
         }
 
         if ($user->canChangeEmail()) {
@@ -437,39 +451,50 @@ class UserRepository extends BaseRepository
     }
 
     public function createInsurance(array $data){
+        $userData = User::find(auth()->id());
+        if(isset($data['is_insurance']) && $data['is_insurance'] == 1){
+            
+            $userData->is_insurance = 1;
+            
+        }else{
+            $userData->is_insurance = 0;
         
-        if(isset($data['front_img']) || isset($data['back_img'])){
-            $front_img = (isset($data['front_img'])) ? $data['front_img'] : '' ;
-            $back_img = (isset($data['back_img'])) ? $data['back_img'] : '' ;
-    
-            $this->insuranceImageUpload($front_img,$back_img,'primary');
+            if(isset($data['front_img']) || isset($data['back_img'])){
+                $front_img = (isset($data['front_img'])) ? $data['front_img'] : '' ;
+                $back_img = (isset($data['back_img'])) ? $data['back_img'] : '' ;
+        
+                $this->insuranceImageUpload($front_img,$back_img,'primary');
 
+            }
+
+            if(isset($data['secondary_front_img']) || isset($data['secondary_back_img'])){
+                $front_img = (isset($data['secondary_front_img'])) ? $data['secondary_front_img'] : '' ;
+                $back_img = (isset($data['secondary_back_img'])) ? $data['secondary_back_img'] : '' ;
+        
+                $this->insuranceImageUpload($front_img,$back_img,'secondary');
+
+            }
+
+            if(isset($data['tertiary_front_img']) || isset($data['tertiary_back_img'])){
+                $front_img = (isset($data['tertiary_front_img'])) ? $data['tertiary_front_img'] : '' ;
+                $back_img = (isset($data['tertiary_back_img'])) ? $data['tertiary_back_img'] : '' ;
+                
+                $this->insuranceImageUpload($front_img,$back_img,'tertiary');
+
+            }
+
+            if(isset($data['quaternary_front_img']) || isset($data['quaternary_back_img'])){
+                $front_img = (isset($data['quaternary_front_img'])) ? $data['quaternary_front_img'] : '' ;
+                $back_img = (isset($data['quaternary_back_img'])) ? $data['quaternary_back_img'] : '' ;
+                
+                $this->insuranceImageUpload($front_img,$back_img,'quaternary');
+
+            }
         }
-
-        if(isset($data['secondary_front_img']) || isset($data['secondary_back_img'])){
-            $front_img = (isset($data['secondary_front_img'])) ? $data['secondary_front_img'] : '' ;
-            $back_img = (isset($data['secondary_back_img'])) ? $data['secondary_back_img'] : '' ;
-    
-            $this->insuranceImageUpload($front_img,$back_img,'secondary');
-
+        if($userData->save()){
+            return true;
         }
-
-        if(isset($data['tertiary_front_img']) || isset($data['tertiary_back_img'])){
-            $front_img = (isset($data['tertiary_front_img'])) ? $data['tertiary_front_img'] : '' ;
-            $back_img = (isset($data['tertiary_back_img'])) ? $data['tertiary_back_img'] : '' ;
-            
-            $this->insuranceImageUpload($front_img,$back_img,'tertiary');
-
-        }
-
-        if(isset($data['quaternary_front_img']) || isset($data['quaternary_back_img'])){
-            $front_img = (isset($data['quaternary_front_img'])) ? $data['quaternary_front_img'] : '' ;
-            $back_img = (isset($data['quaternary_back_img'])) ? $data['quaternary_back_img'] : '' ;
-            
-            $this->insuranceImageUpload($front_img,$back_img,'quaternary');
-
-        }
-        return true;
+        return false;
         
     }
     public function insuranceImageUpload($front_img,$back_img,$insurance_type){

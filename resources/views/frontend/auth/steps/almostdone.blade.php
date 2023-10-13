@@ -1,13 +1,31 @@
 @extends('frontend.layouts.step')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
+@push('after-styles')
+<style>
+.almostdone-pg img.user-img {
+    border-radius: 50%;
+    margin-bottom: 25px;
+    width: 100px;
+    height: 100px;
+    border: unset;
+    box-shadow: 0px 0px 17px -3px #638e3c;
+    margin-right: 25px;
+}
 
+</style>
+@endpush
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+<div class="container mt-5 mb-5 pt-4 almostdone-pg">
     <div class="row ">
         <div class="col-md-12">
             <div class="user-info">
+                @if($auth->avatar_type == 'upload')
+                <img class="user-img" src="{{asset($auth->avatar_location)}}">
+                @else
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
+                @endif
+                
                 <p class="txt">Great! We just need a few more details to complete your profile and then we can start adding family members to your account.</p>
             </div>
 
@@ -23,19 +41,15 @@
                         <label for="fname">Province</label>
                         <select name="province" id="province" required>
                         <option  value="">Select a Province</option>
+                        @if(getAllProvince())
+                            @foreach(getAllProvince() as $province)
+                            <option value="{{$province->slug}}" {{ (isset($address) && $auth->province == $province->slug) ? 'selected' : ''}}>{{$province->name}}</option>
+                        
+                            @endforeach
+                        @else
+                        @endif
                         <option  value="Alberta" {{ ( $auth->province == 'Alberta') ? 'selected' : ''}}>Alberta</option>
-                        <option  value="British Columbia" {{ ( $auth->province == 'British Columbia') ? 'selected' : ''}}>British Columbia</option>
-                        <option  value="Manitoba" {{ ( $auth->province == 'Manitoba') ? 'selected' : ''}}>Manitoba</option>
-                        <option  value="New Brunswick" {{ ( $auth->province == 'New Brunswick') ? 'selected' : ''}}>New Brunswick</option>
-                        <option  value="Newfoundland and Labrador" {{ ( $auth->province == 'Newfoundland and Labrador') ? 'selected' : ''}}>Newfoundland and Labrador</option>
-                        <option  value="Northwest Territories" {{ ( $auth->province == 'Northwest Territories') ? 'selected' : ''}}>Northwest Territories</option>
-                        <option  value="Nova Scotia" {{ ( $auth->province == 'Nova Scotia') ? 'selected' : ''}}>Nova Scotia</option>
-                        <option  value="Nunavut" {{ ( $auth->province == 'Nunavut') ? 'selected' : ''}}>Nunavut</option>
-                        <option  value="Ontario" {{ ( $auth->province == 'Ontario') ? 'selected' : ''}}>Ontario</option>
-                        <option  value="Prince Edward Island" {{ ( $auth->province == 'Prince Edward Island') ? 'selected' : ''}}>Prince Edward Island</option>
-                        <option  value="Quebec" {{ ( $auth->province == 'Quebec') ? 'selected' : ''}}>Quebec</option>
-                        <option  value="Saskatchewan" {{ ( $auth->province == 'Saskatchewan') ? 'selected' : ''}}>Saskatchewan</option>
-                        <option  value="Yukon" {{ ( $auth->province == 'Yukon') ? 'selected' : ''}}>Yukon</option>
+                        
                         </select>
                         <p class="info">As mentioned at least 14 year old.</p>
                     </div>
