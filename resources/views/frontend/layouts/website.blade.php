@@ -72,7 +72,7 @@
             @yield('content')
             @if(Route::currentRouteName() == 'frontend.auth.new.login' || Route::currentRouteName() == 'frontend.index' )
             @else
-                @include('frontend.navbar.footer')
+                <!-- @include('frontend.navbar.footer') -->
             @endif 
         </main>
         
