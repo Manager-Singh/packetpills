@@ -1,13 +1,33 @@
 @extends('frontend.layouts.step')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
+@push('after-styles')
+<style>
+.password-pg img.user-img {
+    border-radius: 50%;
+    margin-bottom: 25px;
+    width: 100px;
+    height: 100px;
+    border: unset;
+    box-shadow: 0px 0px 17px -3px #638e3c;
+    margin-right: 25px;
+}
+
+</style>
+@endpush
 
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+
+<div class="container mt-5 mb-5 pt-5 password-pg">
     <div class="row ">
         <div class="col-md-12">
             <div class="user-info">
+                <!-- <img class="user-img" src="{{asset('step/assets/images/user.png')}}"> -->
+                @if($auth->avatar_type == 'upload')
+                <img class="user-img" src="{{asset($auth->avatar_location)}}">
+                @else
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
+                @endif
                 <p class="txt">Designed with the latest design trends</p>
                 <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the
                     latest design trends </p>

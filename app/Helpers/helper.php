@@ -4,6 +4,7 @@ use Illuminate\Support\Str;
 use Twilio\Rest\Client;
 use App\Models\AutoMessage;
 use App\Models\MailMessage;
+use App\Models\Province;
 
 /**
  * Henerate UUID.
@@ -259,3 +260,14 @@ if (! function_exists('sendMessage')) {
         }
     }
 }
+
+if (! function_exists('getAllProvince')) {
+    /**
+     * @return bool
+     */
+    function getAllProvince()
+    {
+        return Province::get();
+    }
+}
+

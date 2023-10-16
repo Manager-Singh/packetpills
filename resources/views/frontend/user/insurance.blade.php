@@ -7,10 +7,21 @@
 .next.button {
     margin-left: 0px !important;
 }
+.no-inurance{
+    width: 20px;
+    height: 16px;
+    border-radius: 6px;
+    border: 2px solid #638e3c !important;
+    padding: 12px;
+    margin-right: 6px;
+}
+ .common-insurance{
+  pointer-events: auto;
+} 
 </style>
 @endpush
 @section('content')
-<div class="container mt-0 mb-5 pt-0">
+<div class="container mt-0 mb-5 pt-0 insurance-pg">
         <div class="row ">
           <div class="col-md-12">
             <div class="user-info p-details">
@@ -23,7 +34,14 @@
           <div class="col-md-8" id="table">
           <form name="myForm" id="insurance-form" method='post' action="{{route('frontend.user.insurance.save')}}" enctype='multipart/form-data'>
           @csrf 
-              <div class="row mt-3 primary-insurance">
+              <div class="row">
+                <div class="col-md-12">
+                
+                <label class="mt-0" for="noInsurance"><input type="checkbox" class="no-inurance" id="noInsurance" name="is_insurance"  value="1" > As of today's date - I certify that I have no private drug insurance/ coverage.</label>
+                
+                </div>
+              </div>
+              <div class="row mt-3 common-insurance primary-insurance">
                 <label class="col-md-12" for="myfile">Primary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
@@ -61,7 +79,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row mt-3 secondary-insurance" {{ (isset($secondary_insurance)) ? '' : 'style=display:none;' }}>
+              <div class="row mt-3 common-insurance secondary-insurance" {{ (isset($secondary_insurance)) ? '' : 'style=display:none;' }}>
                 <label class="col-md-12" for="myfile">Secondary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload" >
@@ -97,7 +115,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row mt-3 tertiary-insurance" {{ (isset($tertiary_insurance)) ? '' : 'style=display:none;' }}>
+              <div class="row mt-3  common-insurance tertiary-insurance" {{ (isset($tertiary_insurance)) ? '' : 'style=display:none;' }}>
                 <label class="col-md-12" for="myfile">Tertiary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
@@ -134,7 +152,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row mt-3 quaternary-insurance" {{ (isset($quaternary_insurance)) ? '' : 'style=display:none;' }}>
+              <div class="row mt-3 common-insurance quaternary-insurance" {{ (isset($quaternary_insurance)) ? '' : 'style=display:none;' }}>
                 <label class="col-md-12" for="myfile">Quaternary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
@@ -173,7 +191,7 @@
                   </div>
                 </div>
               </div>
-                <div class="order-footer mt-5">
+                <div class="order-footer common-insurance mt-5">
               @if(isset($quaternary_insurance))
               @else
               <a class="btn-big add-more-insurance" href="javascript:void(0)">+ Add more insurance</a>
@@ -191,6 +209,25 @@
 
 @push('after-scripts')
 <script>
+     $('#noInsurance').click(function() {
+           
+           
+
+          
+                if ($(this).prop("checked") == true) {
+                
+                $('.common-insurance').css("pointer-events","none");
+                $(".common-insurance input").attr('required', false);
+                
+                } else {
+                    
+                   $('.common-insurance').css("pointer-events","auto");
+                   //$(".common-insurance input").attr("required"); 
+                   $(".common-insurance input").attr('required', true);
+                   
+                }
+                 
+            });
    
    $(document).ready(function(){   
       var upload_count = 1;     

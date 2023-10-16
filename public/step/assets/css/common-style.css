@@ -56,7 +56,7 @@ input, select {
     padding: 12px;
 }
 label {
-    margin: 30px 0px 10px;
+    /* margin: 30px 0px 10px; */
     font-size: 17px;
     font-weight: 600;
     color: #212843;
@@ -192,10 +192,12 @@ input#myFile {
 }
 .card:nth-child(1) .card-body {
     background: #fff;
+    transition: 0.7s;
 }
 .card:nth-child(1) .card-body .icon.icon-primary .fa {
-    background: #dfe7fc;
-    color: #4e2a84;
+    background: #fff;
+    color: #638e3c;
+    border: 1px solid #638e3c;
 }
 .card:nth-child(2) .card-body {
     background: #fff;
