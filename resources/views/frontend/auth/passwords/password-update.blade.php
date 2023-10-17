@@ -47,12 +47,7 @@ button.btn {
 <div class="wrapper wrapper--small phone-rest-email">
     <div class="content--x-small" style="padding-top: 8rem;">
         
-        <!-- @php 
-
-        if(isset($user)){
-          print_r($user);
-        }
-        @endphp -->
+       
 
         <section class="margin-t-xl">
             <div class="row">
@@ -61,21 +56,18 @@ button.btn {
 
                 <div class="card " >
            
-                @if(isset($user))
-                    <form action="{{route('frontend.auth.password.phone.verify')}}" method="post" class="reset-form">
-                @else    
-                    <form action="{{route('frontend.auth.password.phone.post')}}" method="post" class="reset-form">
-                @endif
+                    <form action="{{route('frontend.auth.password.save')}}" method="post" class="reset-form">
+                
                     @csrf
-                        <div class="card-header text-center h5 text-white bg-primary">Password Reset</div>
+                        <div class="card-header text-center h5 text-white bg-primary">Change Password</div>
                         <div class="card-body px-5">
-                            <p class="card-text py-2 text-center">
-                                Enter your phone no./email address and we'll send you an sms/email with instructions to reset your password.
-                            </p>
+                        <p class="card-text py-2 text-center">
+                        {{(isset($mobile_email)) ? $mobile_email : ''}}
+                        </p>
                             <div class="form-outline">
-                                <label class="form-label" for="typeEmail">Phone/Email Address</label>
-                                <input type="text" name="mobile_no" id="typeEmail" value="{{ (isset($mobile_email)) ? $mobile_email : '' }}"  {{ (isset($user)) ? 'readonly' : '' }} class="form-control my-3 @error('mobile_no') is-invalid @enderror" rquired />
-                                @error('mobile_no')
+                                <label class="form-label" for="typePassword">New Password</label>
+                                <input type="password" name="password" id="typePassword" value=""  class="form-control my-3 @error('password') is-invalid @enderror" rquired />
+                                @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -83,11 +75,10 @@ button.btn {
                                 
                                 
                             </div>
-                            @if(isset($user))
                             <div class="form-outline">
-                                <label class="form-label" for="typeOtp">OTP</label>
-                                <input type="text" name="otp" id="typeOtp" class="form-control my-3 @error('otp') is-invalid @enderror" rquired />
-                                @error('otp')
+                                <label class="form-label" for="typeConfirmPassword">Confirm Password</label>
+                                <input type="password" name="confirm_password" id="typeConfirmPassword" value=""  class="form-control my-3 @error('confirm_password') is-invalid @enderror" rquired />
+                                @error('confirm_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -95,12 +86,10 @@ button.btn {
                                 
                                 
                             </div>
-                            @endif
-                            @if(isset($user))
-                            <button type="submit" class="btn btn-primary w-100">OTP Verify</button>
-                            @else
-                            <button type="submit" class="btn btn-primary w-100">Reset password</button>
-                            @endif
+                           <input type="hidden" name="user_id" value="{{(isset($user)) ? $user->id : ''}}"/>
+                           <input type="hidden" name="mobile_no" value="{{(isset($mobile_email)) ? $mobile_email : ''}}"/>
+                            <button type="submit" class="btn btn-primary w-100">Update password</button>
+                           
                             <div class="d-flex justify-content-between mt-4">
                                 <a class="" href="#">Login</a>
                                 <a class="" href="#">Register</a>
