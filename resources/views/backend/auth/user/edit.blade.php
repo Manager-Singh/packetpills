@@ -78,7 +78,6 @@
                 <div class="form-group row">
                     {{ Form::label('gender', trans('validation.attributes.backend.access.users.gender'), ['class' => 'col-md-2 control-label']) }}
                     <div class="col-md-8">
-                        
                         <label for="gender-male" class="control">
                             <input type="radio" value="male" name="gender" id="gender-male" class="gender" {{ $user->gender == 'male' ? 'checked' : ''}} /> &nbsp;&nbsp;@lang('validation.attributes.backend.access.users.male')
                         </label>
@@ -88,8 +87,6 @@
                         <label for="gender-other" class="control">
                             <input type="radio" value="Prefer To Not Share" name="gender" id="gender-other" class="gender" {{ $user->gender == 'Prefer To Not Share' ? 'checked' : ''}} /> &nbsp;&nbsp;@lang('Prefer To Not Share')
                         </label>
-                       
-                    
                     </div>
                 </div>
                 <!--form-group-->

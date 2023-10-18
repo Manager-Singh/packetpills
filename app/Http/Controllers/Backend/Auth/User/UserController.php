@@ -150,11 +150,19 @@ class UserController extends Controller
     
     public function send_message(Request $request)
     {
+       
             // print_r($request->all());
             // die;
-            if($request->isSmsChecked){
+            
+            
+            if($request->isSmsChecked=='true'){
                 $response_data = sendMessage($request->dialingCode.$request->mobile_no,'admin',null,$request->message);
             }
+
+            if($request->isEmailChecked=='true'){
+                $response_data = sendMail('admin',null,$request->message,$request->user_id);
+            }
+
             return $response_data;
             
      }

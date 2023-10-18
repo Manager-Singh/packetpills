@@ -5,6 +5,7 @@ use Twilio\Rest\Client;
 use App\Models\AutoMessage;
 use App\Models\MailMessage;
 use App\Models\Province;
+use App\Models\Auth\User;
 
 /**
  * Henerate UUID.
@@ -260,6 +261,41 @@ if (! function_exists('sendMessage')) {
         }
     }
 }
+
+if (! function_exists('sendMail')) {
+    function sendMail($type,$message_for=null,$data,$user_id = null){
+        $user = User::where('id',$user_id)->first();
+        if($type=='admin'){
+           
+            $body = $data."\n\n"."Pharmacy Canada"."\n"."Always with you.";
+         }else{
+             $message = MailMessage::where('message_for',$message_for)->first();
+            $body = $message->message;
+            if($data!==null){
+             $body .= "\n".$data;
+            }
+            $body .= "\n\n"."Pharmacy Canada"."\n"."Always with you.";
+         }
+         $full_name = $user->first_name.' '.$user->last_name;
+        $to_name = $full_name;
+        $to_email = $user->email;
+        $data = array("name"=>$full_name, "body" => $body);
+        try{
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+        ->subject('Pharmacy Canada Always with you');
+        $message->from('hello@example.com','Test Mail');
+        });
+        return 1;
+    }
+    catch (Exception $e){
+     dd($e);
+        return 0;
+    }
+    }
+}
+
+
 
 if (! function_exists('getAllProvince')) {
     /**

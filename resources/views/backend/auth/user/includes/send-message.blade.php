@@ -27,7 +27,7 @@
                 {{ Form::textarea('custom_message', null, ['id' => 'custom-message', 'class' => 'form-control input', 'cols' => 20, 'rows' => 5, 'maxlength' => '400']) }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="send_message()">Send</button>
+                <button type="button" class="btn btn-success" onclick="send_message({{$user->id}})">Send</button>
 
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
@@ -95,7 +95,7 @@
                  $.ajax({
                     url: ajaxurl,
                     type: 'POST',
-                    data: {_token: '{{ csrf_token() }}', isSmsChecked:isSmsChecked,isEmailChecked:isEmailChecked,message:message,dialingCode:dialing_code,mobile_no:mobile_no,user_email:user_email},
+                    data: {_token: '{{ csrf_token() }}', isSmsChecked:isSmsChecked,isEmailChecked:isEmailChecked,message:message,dialingCode:dialing_code,mobile_no:mobile_no,user_email:user_email,user_id:id},
                     dataType: 'JSON',
                     success: function (data) {
                     if(data==1){

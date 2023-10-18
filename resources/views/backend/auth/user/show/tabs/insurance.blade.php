@@ -85,8 +85,6 @@
                 </div>
             </div>
         </div>
-
-
     @endif
     @if ($user->secondaryInsurance)
         <div class="panel-group wrap" id="accordionsecondaryInsurance" role="tablist" aria-multiselectable="true">
