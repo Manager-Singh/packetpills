@@ -1,9 +1,72 @@
 @extends('frontend.layouts.website')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
+@push('after-styles')
+    <style>
+        .login-btn button {
+            width: 100%;
+            padding: 4px 0;
+            font-size: 18px;
+            background-color: #8ac03d;
+            transition: 0.9s;
+            border-color: #638e3c;
+        }
+        .login-btn button:hover {
+            background-color: #fff;
+            color: #8ac03d;
+        }
+        .login-btn {
+            margin-bottom: 0;
+        }
+        .inner-div {
+            padding: 22px 30px;
+            box-shadow: 0px 0px 20px 1px #8ac03d36;
+            margin-top: 8rem;
+            border-radius: 4px;
+            background-color: #fff;
+            margin-bottom: 2rem;
+        }
+        .login-pg .section-divider:before, .section-divider:after{
+            background-color: #8ac03d; 
+        }
+        .google-signup-btn a.btn.btn-sm.btn-outline-info.m-1 {
+            padding: 5px 25px;
+            border-color: #638e3c;
+            color: #8ac03d;
+            transition: 0.5s;
+            font-size: 13px;
+        }
+        
+        .google-signup-btn a.btn.btn-sm.btn-outline-info.m-1:hover {
+            color: #fff;
+            background-color: #8ac03d;
+            border-color: #638e3c;
+        }
+        .login-pg button.btn a, .login-pg a {
+            text-decoration: unset;
+            transition: 0.9s;
+            color: #8ac03d;
+            font-weight: 600;
+        }
+        .login-pg button.btn a:hover, .login-pg a:hover {
+            color: #638e3c;
+        }
+        .login-pg .form-group input {
+            border-color: #638e3c !important;
+            padding: 0px 10px !important;
+            font-size: 15px;
+        }
+        .tel-input {
+            border-color: #638e3c;
+        }
+        .tel{
+            border-color: #638e3c;
+        }
+    </style>
+@endpush
 
 @section('content')
-              <header  class="nav-header__secondary bg-white nav-header__secondary--shadow top-reset">
+              <!-- <header  class="nav-header__secondary bg-white nav-header__secondary--shadow top-reset">
                 <div >
                   <div  class="landing-wrapper">
                     <div  class="padding-reset-l padding-reset-r card__header">
@@ -27,34 +90,35 @@
                   </div>
                 </div>
 
-              </header>
+              </header> -->
 
-<div class="wrapper wrapper--small">
-    <div class="content--x-small" style="padding-top: 8rem;">
+<div class="wrapper wrapper--small login-pg">
+    <div class="content--x-small inner-div" >
         <section class="txt-c">
-            <div class="margin-t-xl">
+            <div class="">
                 <h1 class="h1 color-dark font-bold"> Welcome back! </h1>
-                <p>Login to your MisterPharmacist account</p>
+                <span>Login to your MisterPharmacist account</span>
 
             </div>
         </section>
         <div>
-            <div class="row row--middle center-xs margin-t-xl">
+            <div class="row row--middle center-xs ">
                 <div class="column column--xs-12">
                     <button class="margin-center w-full flex is-clickable google-signup-btn" style="width: 300px;">
                         @include('frontend.auth.includes.socialite')
-                        <img src="{{asset('website/assets/images/google-logo.svg')}}" alt="Google logo" width="35"
+                        <!-- <img src="{{asset('website/assets/images/google-logo.svg')}}" alt="Google logo" width="35"
                             height="35">
                         <span class="txt-l txt-no-wrap margin-center google-signup-btn__text">Sign in with Google</span>
+                     -->
                     </button>
                     <div class="hidden"></div>
 
                 </div>
             </div>
-            <div class="section-divider margin-t-xl font-bold color-dark h5"> or </div>
+            <div class="section-divider font-bold color-dark h5"> or </div>
         </div>
 
-        <section class="margin-t-xl">
+        <section class="mt-0">
 
 
 
@@ -71,7 +135,7 @@
 
                             <div class="tel phone-prefix">
                                 <div class="tel-prefix txt-c">
-                                    <p class="color-dark font-semibold">+1</p>
+                                    <p class="color-dark font-semibold mb-0">+1</p>
                                 </div>
                                 <div class="tel-input">
                                     <input autocomplete="off" maxlength="10" type="tel"
@@ -84,9 +148,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group__msg">
+                            <!-- <div class="form-group__msg">
                                 <span class="color-error xsmall"></span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!--form-group-->
@@ -137,8 +201,7 @@
                 </div>
                 <div class="col">
                     <div class="form-group text-right">
-                        <a
-                            href="{{ route('frontend.auth.password.reset') }}">@lang('labels.frontend.passwords.forgot_password')</a>
+                        <a href="{{ route('frontend.auth.password.reset') }}">@lang('labels.frontend.passwords.forgot_password')</a>
                     </div>
                     <!--form-group-->
                 </div>
@@ -148,7 +211,7 @@
 
             <div class="row">
                 <div class="col">
-                    <div class="form-group clearfix">
+                    <div class="form-group clearfix login-btn">
                         {{ form_submit(__('labels.frontend.auth.login_button')) }}
                     </div>
                     <!--form-group-->

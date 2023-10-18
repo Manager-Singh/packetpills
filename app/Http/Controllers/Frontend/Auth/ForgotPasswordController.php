@@ -103,8 +103,12 @@ class ForgotPasswordController extends Controller
                 $user_otp->status = 'verified';
                 if($user_otp->save()){
                     //Auth::loginUsingId($user->id);
-                    return view('frontend.auth.passwords.password-update',compact('user','mobile_email'));
-                }
+                    $data = [
+                        'user' => $user,
+                        'mobile_email' => $mobile_email,
+                    ];
+                    return redirect()->route('frontend.auth.password.update')->with($data);
+               }
             }else{
                 return redirect()->back()->withFlashSuccess(__('Something went wrong.'));
                 //password.update
@@ -124,9 +128,9 @@ class ForgotPasswordController extends Controller
             'confirm_password' => 'required|same:password|min:6'
         ]);
         
-        if(PasswordResetsOtp::where('mobile_email',$request->mobile_no)->first()){
-            return redirect()->back()->withFlashSuccess(__('OTP does not match please try again.'));
-        }
+        // if(PasswordResetsOtp::where('mobile_email',$request->mobile_no)->first()){
+        //     return redirect()->back()->withFlashSuccess(__('OTP does not match please try again.'));
+        // }
 
         $user = User::where('mobile_no',$request->mobile_no)->first();
         $user->password = Hash::make($request->password);

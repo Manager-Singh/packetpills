@@ -14,9 +14,43 @@
 button.btn {
     background: #8ac03d;
     border-color: #8ac03d;
+    transition: 0.9s;
+}
+.login-register a:hover {
+    background: #8ac03d;
+    color: #fff;
+}
+.login-register a {
+    font-size: 18px;
+    color: #638e3c;
+    text-decoration: unset;
+    border: 1px solid;
+    padding: 1px 7px;
+    border-radius: 0.25rem;
+    transition: 0.9s;
 }
   </style>
 @endpush
+@php 
+
+$user ='';
+$mobile_email ='';
+
+
+
+  if(session()->has('user')){
+
+    $user = Session::get('user');
+
+
+  }
+  if(session()->has('mobile_email')){
+
+    $mobile_email = Session::get('mobile_email');
+
+  }
+
+@endphp
 @section('content')
               <header  class="nav-header__secondary bg-white nav-header__secondary--shadow top-reset">
                 <div >
@@ -90,9 +124,9 @@ button.btn {
                            <input type="hidden" name="mobile_no" value="{{(isset($mobile_email)) ? $mobile_email : ''}}"/>
                             <button type="submit" class="btn btn-primary w-100">Update password</button>
                            
-                            <div class="d-flex justify-content-between mt-4">
-                                <a class="" href="#">Login</a>
-                                <a class="" href="#">Register</a>
+                            <div class="d-flex justify-content-between mt-4 login-register">
+                                <a class="login" href="{{route('frontend.auth.new.login')}}">Login</a>
+                                <a class="register" href="{{route('frontend.index')}}">Register</a>
                             </div>
                         </div>
                     </form>    

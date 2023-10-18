@@ -3,6 +3,9 @@
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
 <style>
+  p.text-subtitle {
+      font-size: 15px;
+  }
   .phone-rest-email .card-header {
     background-color: #8ac03d !important;
     }
@@ -14,6 +17,20 @@
 button.btn {
     background: #8ac03d;
     border-color: #8ac03d;
+    transition: 0.9s;
+}
+.login-register a:hover {
+    background: #8ac03d;
+    color: #fff;
+}
+.login-register a {
+    font-size: 18px;
+    color: #638e3c;
+    text-decoration: unset;
+    border: 1px solid;
+    padding: 1px 7px;
+    border-radius: 0.25rem;
+    transition: 0.9s;
 }
   </style>
 @endpush
@@ -69,8 +86,8 @@ button.btn {
                     @csrf
                         <div class="card-header text-center h5 text-white bg-primary">Password Reset</div>
                         <div class="card-body px-5">
-                            <p class="card-text py-2 text-center">
-                                Enter your phone no./email address and we'll send you an sms/email with instructions to reset your password.
+                            <p class="card-text py-2 text-center text-subtitle">
+                                Enter your mobile number/email address and we'll send you an sms/email with instructions to reset your password.
                             </p>
                             <div class="form-outline">
                                 <label class="form-label" for="typeEmail">Phone/Email Address</label>
@@ -101,9 +118,9 @@ button.btn {
                             @else
                             <button type="submit" class="btn btn-primary w-100">Reset password</button>
                             @endif
-                            <div class="d-flex justify-content-between mt-4">
-                                <a class="" href="#">Login</a>
-                                <a class="" href="#">Register</a>
+                            <div class="d-flex justify-content-between mt-4 login-register">
+                                <a class="login" href="{{route('frontend.auth.new.login')}}">Login</a>
+                                <a class="register" href="{{route('frontend.index')}}">Register</a>
                             </div>
                         </div>
                     </form>    
