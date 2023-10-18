@@ -81,10 +81,10 @@ class ForgotPasswordController extends Controller
             }
             
             
-            return redirect()->back()->with('message', 'We have e-mailed your password reset link!');
+            //return redirect()->back()->with('message', 'We have e-mailed your password reset link!');
         }catch (\Exception $e) {
             // something went wrong
-           // dd($e);
+           //dd($e->getMessage());
             DB::rollback();
             return redirect()->back()->with('message', $e->getMessage());
             //return response()->json(['status'=>0,'message'=>$e->getMessage()]);

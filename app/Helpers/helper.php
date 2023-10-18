@@ -237,7 +237,7 @@ if (! function_exists('sendMessage')) {
            $body = $data."\n\n"."Pharmacy Canada"."\n"."Always with you.";
         }else{
             $message = MailMessage::where('message_for',$message_for)->first();
-           $body = $message->message;
+           $body = (isset($message->message)) ? $message->message : 'Welcome';
            if($data!==null){
             $body .= "\n".$data;
            }
