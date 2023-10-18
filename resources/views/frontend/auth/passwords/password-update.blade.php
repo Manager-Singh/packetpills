@@ -52,7 +52,7 @@ $mobile_email ='';
 
 @endphp
 @section('content')
-              <header  class="nav-header__secondary bg-white nav-header__secondary--shadow top-reset">
+              <!-- <header  class="nav-header__secondary bg-white nav-header__secondary--shadow top-reset">
                 <div >
                   <div  class="landing-wrapper">
                     <div  class="padding-reset-l padding-reset-r card__header">
@@ -76,7 +76,7 @@ $mobile_email ='';
                   </div>
                 </div>
 
-              </header>
+              </header> -->
              
 <div class="wrapper wrapper--small phone-rest-email">
     <div class="content--x-small" style="padding-top: 8rem;">
