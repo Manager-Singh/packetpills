@@ -62,6 +62,10 @@
         .tel{
             border-color: #638e3c;
         }
+        .login-pg .mobile-error{
+            margin-top: 10px;
+            position: absolute;
+        }
     </style>
 @endpush
 
@@ -94,6 +98,11 @@
 
 <div class="wrapper wrapper--small login-pg">
     <div class="content--x-small inner-div" >
+    <div class="row">
+              <div class="col-md-12">
+                @include('includes.partials.messages')
+              </div>
+            </div>
         <section class="txt-c">
             <div class="">
                 <h1 class="h1 color-dark font-bold"> Welcome back! </h1>
@@ -142,9 +151,14 @@
                                         oninput="javascript: if (this.value.length &gt; this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                         onkeypress="return (event.charCode &gt;= 48 &amp;&amp; event.charCode &lt;= 57) || event.charCode == 13"
                                         size="16" pattern="\d*" keyname="landing.fields.phone"
-                                        class="full-width home-input ng-untouched ng-pristine ng-invalid"
+                                        class="full-width home-input ng-untouched ng-pristine ng-invalid @error('mobile_no') is-invalid @enderror"
                                         id="phoneField" placeholder="@lang('validation.attributes.frontend.mobileno')"
                                         required="" name="mobile_no">
+                                        <!-- @error('mobile_no')
+                                            <span class="invalid-feedback mobile-error" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror -->
                                 </div>
                             </div>
 
@@ -164,10 +178,26 @@
                     <div class="form-group">
                         {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
 
+                        @php 
+                        $is_invalid = false; 
+                        @endphp
+
+                            @error('password')
+                                @php 
+                                    $is_invalid = true; 
+                                @endphp
+                            @enderror
+
+                        
                         {{ html()->password('password')
-                                        ->class('form-control')
+                                        ->class(['form-control','is-invalid' => $is_invalid])
                                         ->placeholder(__('validation.attributes.frontend.password'))
                                         ->required() }}
+                        <!-- @error('password')
+                            <span class="invalid-feedback pass-error" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror -->
                     </div>
                     <!--form-group-->
                 </div>

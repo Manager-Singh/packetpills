@@ -104,11 +104,7 @@ button.btn {
                             <div class="form-outline">
                                 <label class="form-label" for="typeOtp">OTP</label>
                                 <input type="text" name="otp" id="typeOtp" class="form-control my-3 @error('otp') is-invalid @enderror" rquired />
-                                @error('otp')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                
                                 
                                 
                             </div>
