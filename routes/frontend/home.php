@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::group(['middleware' => ['checkSteps']], function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::get('prescription', [DashboardController::class, 'userPrescripiton'])->name('prescription');
+            Route::get('prescription/{prescription_number}', [DashboardController::class, 'singleUserPrescripiton'])->name('prescription.single');
             Route::get('medications', [DashboardController::class, 'medications'])->name('medications');
             Route::get('orders', [DashboardController::class, 'orders'])->name('orders');
         });

@@ -69,6 +69,7 @@
         @endif
        
         <main>
+            
             @yield('content')
             @if(Route::currentRouteName() == 'frontend.auth.new.login' || Route::currentRouteName() == 'frontend.index' )
             @else

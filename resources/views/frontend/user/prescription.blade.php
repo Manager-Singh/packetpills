@@ -1,7 +1,26 @@
 @extends('frontend.layouts.step')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
-
+@push('after-styles')
+<style>
+.btn-error {
+    background: #8ac03d;
+    border-radius: 30px;
+    text-decoration: none !important;
+    color: #fff;
+    padding: 3px 10px;
+}
+.btn-error:hover {
+    background-color: #fff;
+    color: #8ac03d;
+    border: 1px solid #638e3c;
+}
+.prescription-pg a {
+    text-decoration: unset;
+    color: #212843;
+}
+</style>
+@endpush
 @section('content')
 <ul class="nav nav-tabs mb-3 justify-content-end" id="ex1" role="tablist">
   <li class="nav-item" role="presentation">
@@ -17,30 +36,95 @@
     <a class="nav-link" id="tab-3" data-mdb-toggle="tab" href="#filled" role="tab" aria-controls="tabs-3" aria-selected="false">Filled</a>
   </li>
 </ul>
-<div class="row mt-5">
+<div class="row mt-5 prescription-pg">
   <div class="col-md-1"></div>
   <div class="col-md-10">
     <div class="tab-content " id="content">
       <div class="tab-pane fade show active" id="tabs-1" role="tabpanel" aria-labelledby="tab-1">
        @if($prescriptions)
         @foreach($prescriptions as $prescription)
+        
             <div class="order">
-                <div class="order-head">
-                    <div class="row">
-                    <div class="col-md-8">
-                        <p class="txt">Created On: {{$prescription->created_at->format('F d, Y ')}}</p>
-                    </div>
-                    <div class="col-md-4 text-right">
-                        <a class="btn-error" href="#">Cancelled</a>
-                    </div>
-                    </div>
-                </div>
-                <div class="order-body">
-                    <p class="txt">Prescription ID: {{$prescription->prescription_number}}</p>
-                    <p class="txt-b">Transfer requested from MisterPharmacist</p>
-                </div>
-            </div>
+            <a href="{{route('frontend.user.prescription.single',$prescription->prescription_number)}}">
+                  <div class="order-head">
+                      <div class="row">
+                        <div class="col-md-8">
+                            <p class="txt">Created On: {{$prescription->created_at->format('F d, Y ')}}</p>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <span class="btn-error" >{{$prescription->status}}</sapn>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="order-body">
+                      <p class="txt">Prescription ID: {{$prescription->prescription_number}}</p>
+                      <p class="txt-b">Prescription Uploaded</p>
+                  </div>
+              </a>
 
+              <div class="accordion" id="accordionExample">
+            <div class="card">
+              <h2 class="card-header" id="headingOne">
+                <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Proctodan-hc Oint 
+                </button>
+                <small class="seond-heading">"Apply topically to anal area twice daily"</small>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  <table>
+                    <!-- <tr>
+                      <td>Automatically refill this medication?</td>
+                      <td class="text-right">
+                        <label class="switch">
+                          <input class="switch-input" type="checkbox" />
+                          <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                          <span class="switch-handle"></span> 
+                        </label>
+                      </td>
+                    </tr> -->
+                    <tr><td>Prescribing doctor</td><td class="text-right">Lorena Barrientos</td></tr>
+                    <tr><td>Quantity left</td><td class="text-right">30 unit(s)</td></tr>
+                    <tr><td>Quantity filled</td><td class="text-right">30 unit(s)</td></tr>
+                    <tr><td>Pocketpacks</td><td class="text-right">No</td></tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h2 class="card-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <span>Proctodan-hc Oint </span>
+                  
+                </button>
+                
+                <small class="seond-heading">"Apply topically to anal area twice daily"</small>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  <table>
+                    <!-- <tr>
+                      <td>Automatically refill this medication?</td>
+                      <td class="text-right">
+                        <label class="switch">
+                          <input class="switch-input" type="checkbox" />
+                          <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                          <span class="switch-handle"></span> 
+                        </label>
+                      </td>
+                    </tr> -->
+                    <tr><td>Prescribing doctor</td><td class="text-right">Lorena Barrientos</td></tr>
+                    <tr><td>Quantity left</td><td class="text-right">30 unit(s)</td></tr>
+                    <tr><td>Quantity filled</td><td class="text-right">30 unit(s)</td></tr>
+                    <tr><td>Pocketpacks</td><td class="text-right">No</td></tr>
+                    </table>
+                  </div>
+              </div>
+            </div>
+           
+          </div>
+            </div>
+        
         @endforeach
        @else
        @endif 

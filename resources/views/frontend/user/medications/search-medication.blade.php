@@ -76,7 +76,23 @@ a.drug-list-btn.loard-more-drug {
 li.drug-list-child:hover a {
     color: #fff;
 }
-
+.arrow-back a {
+    font-size: 24px;
+    border: 1px solid #638e3c;
+    color: #638e3c;
+    padding: 0px 10px;
+    border-radius: 4px;
+    transition: 0.7s;
+    box-shadow: 0px 0px 6px 0px #638e3c61;
+}
+.arrow-back {
+    margin-top: 6rem;
+}
+.arrow-back a:hover {
+    color: #fff;
+    background-color: #8ac03d;
+    border-color: #8ac03d;
+}
 </style>
 @endpush
 @section('content')
@@ -84,7 +100,10 @@ li.drug-list-child:hover a {
 <div class="container mt-5 mb-5">
 		    	<div class="row ">
             <div class="col-md-2">
+              <div class="arrow-back">
+                <a href="{{url()->previous()}}"> <i class="fas fa-arrow-left"></i></a>
               </div>
+            </div>
 				    <div class="col-md-8">
               <div class="user-info p-details">
                 <p class="txt-large">Search Medicines</p>

@@ -164,7 +164,7 @@ class LoginController extends Controller
         $user = Auth::user();
         // Check to see if the users account is confirmed and active
         if (! $user->isConfirmed()) {
-            dd($user->isConfirmed());
+           // dd($user->isConfirmed());
             auth()->logout();
 
             // If the user is pending (account approval is on)
