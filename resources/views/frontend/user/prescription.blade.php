@@ -19,6 +19,9 @@
     text-decoration: unset;
     color: #212843;
 }
+div#accordionExample {
+    padding: 3rem 19rem 4rem 3rem;
+}
 </style>
 @endpush
 @section('content')
@@ -36,7 +39,7 @@
     <a class="nav-link" id="tab-3" data-mdb-toggle="tab" href="#filled" role="tab" aria-controls="tabs-3" aria-selected="false">Filled</a>
   </li>
 </ul>
-<div class="row mt-5 prescription-pg">
+<div class="row mt-0  mb-5 prescription-pg">
   <div class="col-md-1"></div>
   <div class="col-md-10">
     <div class="tab-content " id="content">
@@ -61,16 +64,28 @@
                       <p class="txt-b">Prescription Uploaded</p>
                   </div>
               </a>
-
+             @if($prescription) 
+              <div class="order-head">
+                  <div class="row">
+                    <div class="col-md-8">
+                        <p class="txt">Added Medications</p>
+                    </div>
+                   
+                  </div>
+              </div>
               <div class="accordion" id="accordionExample">
+
+              @foreach($prescription->medications as $medication)
+
             <div class="card">
               <h2 class="card-header" id="headingOne">
-                <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Proctodan-hc Oint 
+                <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne_{{$medication->id}}" aria-expanded="true" aria-controls="collapseOne_{{$medication->id}}">
+                  <!-- Proctodan-hc Oint   -->
+                  {{ $medication->pharmacy }}
                 </button>
-                <small class="seond-heading">"Apply topically to anal area twice daily"</small>
+               
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div id="collapseOne_{{$medication->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
                   <table>
                     <!-- <tr>
@@ -83,47 +98,20 @@
                         </label>
                       </td>
                     </tr> -->
-                    <tr><td>Prescribing doctor</td><td class="text-right">Lorena Barrientos</td></tr>
-                    <tr><td>Quantity left</td><td class="text-right">30 unit(s)</td></tr>
-                    <tr><td>Quantity filled</td><td class="text-right">30 unit(s)</td></tr>
-                    <tr><td>Pocketpacks</td><td class="text-right">No</td></tr>
+                    <tr><td>Prescribing doctor</td><td class="text-right"> {{ $medication->prescribing_doctor }}</td></tr>
+                    <tr><td>Quantity left</td><td class="text-right">{{ $medication->qty_left }}</td></tr>
+                    <tr><td>Quantity filled</td><td class="text-right">{{ $medication->qty_filled }}</td></tr>
+                    <!-- <tr><td>Pocketpacks</td><td class="text-right">No</td></tr> -->
                     </table>
                 </div>
               </div>
             </div>
-            <div class="card">
-              <h2 class="card-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  <span>Proctodan-hc Oint </span>
-                  
-                </button>
-                
-                <small class="seond-heading">"Apply topically to anal area twice daily"</small>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body">
-                  <table>
-                    <!-- <tr>
-                      <td>Automatically refill this medication?</td>
-                      <td class="text-right">
-                        <label class="switch">
-                          <input class="switch-input" type="checkbox" />
-                          <span class="switch-label" data-on="Yes" data-off="No"></span> 
-                          <span class="switch-handle"></span> 
-                        </label>
-                      </td>
-                    </tr> -->
-                    <tr><td>Prescribing doctor</td><td class="text-right">Lorena Barrientos</td></tr>
-                    <tr><td>Quantity left</td><td class="text-right">30 unit(s)</td></tr>
-                    <tr><td>Quantity filled</td><td class="text-right">30 unit(s)</td></tr>
-                    <tr><td>Pocketpacks</td><td class="text-right">No</td></tr>
-                    </table>
-                  </div>
-              </div>
-            </div>
+            @endforeach
+
            
-          </div>
-            </div>
+          </div><!-- accordion-->
+          @endif
+        </div>
         
         @endforeach
        @else
