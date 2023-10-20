@@ -154,7 +154,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $data['prescriptions'] = Prescription::where('user_id',$user->id)->get();
-        //dd($data['prescriptions'][0]);
+        //dd($data['prescriptions'][0]->medications);
         return view('frontend.user.prescription',$data); 
     }
 

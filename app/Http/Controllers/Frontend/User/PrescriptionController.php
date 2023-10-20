@@ -31,7 +31,7 @@ class PrescriptionController extends Controller
      */
     public function prescriptionUpload()
     {
-       //return '<h2>You are logedin successfully!</h2>';
+      // return '<h2>You are logedin successfully!</h2>';
         return view('frontend.user.prescription.tabs.upload-prescription');
     }
 
