@@ -1017,4 +1017,34 @@ class UserRepository extends BaseRepository
             ->orderBy($orderBy, $sort)
             ->paginate($paged);
     }
+
+    public function prescriptionStatusUpdate($request)
+    {
+
+        print_r($request['prescription_id']);
+        $id = $request['prescription_id'];
+        $status = $request['status'];
+       
+        return DB::transaction(function () use ($id,$status) {
+            $prescription = Prescription::where('id',$id)->first();
+           if($status=='Cancel'){
+            $nstatus = 'cancelled';
+           }else{
+            $nstatus = 'approved';
+           }
+            $prescription->status = $nstatus;
+                if ($prescription->save()) {
+               
+                    return $id;
+                }
+           
+                return 0;
+            
+           // throw new GeneralException(__('Problem With Prescription Status Update.'));
+           });
+    }
+
+    
+
+    
 }

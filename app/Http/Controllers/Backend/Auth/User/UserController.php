@@ -11,6 +11,7 @@ use App\Models\Auth\User;
 use App\Models\Province;
 use App\Models\AutoMessage;
 use App\Models\Drug;
+use App\Models\Prescription;
 use App\Models\MedicationItem;
 use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Repositories\Backend\Auth\RoleRepository;
@@ -206,17 +207,22 @@ class UserController extends Controller
      */
     public function show(ManageUserRequest $request, User $user)
     {
-        
+        // print_r($user->id);
+        // die;
         $auto_messages = AutoMessage::get()->pluck('message','id');
         $drugs = Drug::get()->pluck('brand_name','id');
         $province = Province::get()->pluck('name','name');
+        $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->get();
 
-        // dd($drugs);
+        // print_r('<pre>');
+        // print_r($prescriptions);
+        //  die;
         return view('backend.auth.user.show')
             ->with([
                 'provinces'=>$province,
                 'auto_messages'=>$auto_messages,
                 'drugs'=>$drugs,
+                'prescriptions'=>$prescriptions,
             ])
             ->withUser($user);
     }
@@ -272,4 +278,10 @@ class UserController extends Controller
 
         return redirect()->route('admin.auth.user.deleted')->withFlashSuccess(__('alerts.backend.access.users.deleted'));
     }
+      public function prescriptionStatusUpdate(Request $request)
+        {
+           $data = $this->userRepository->prescriptionStatusUpdate($request->except(['_token', '_method','files']));
+
+            return $data;
+        }
 }

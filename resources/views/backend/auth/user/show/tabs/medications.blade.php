@@ -1,55 +1,58 @@
 <div class="col">
-    <h4 class="text-center">Medications Details</h4>
-    @if ($user->medications)
-        @foreach ($user->medications as $medication)
-            <div class="panel-group wrap myaccordion" id="accordinon-{{ $medication->id }}" role="tablist"
+    <h4 class="text-center">Medications</h4>
+    @if ($prescriptions)
+        @foreach ($prescriptions as $prescription)
+            <div class="panel-group wrap myaccordion" id="accordinon-{{ $prescription->id }}" role="tablist"
                 aria-multiselectable="true">
                 <div class="panel">
-                    <div class="panel-heading" role="tab" id="heading-{{ $medication->id }}">
+                    <div class="panel-heading" role="tab" id="heading-{{ $prescription->id }}">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordinon-{{ $medication->id }}"
-                                href="#collapse-{{ $medication->id }}" aria-expanded="true"
-                                aria-controls="collapse-{{ $medication->id }}">
-                                {{ $medication->drug->brand_name }}
-                                <p class="sub-heading">"{{ $medication->drug->main_therapeutic_use }}"</p>
+                            <a role="button" data-toggle="collapse" data-parent="#accordinon-{{ $prescription->id }}"
+                                href="#collapse-{{ $prescription->id }}" aria-expanded="true"
+                                aria-controls="collapse-{{ $prescription->id }}">
+                                {{ $prescription->prescription_number }} Created At
+                                {{ $prescription->created_at }}
                             </a>
                         </h4>
-                        
+
                     </div>
-                    <div id="collapse-{{ $medication->id }}" class="panel-collapse collapse in" role="tabpanel"
-                        aria-labelledby="heading-{{ $medication->id }}">
+                    <div id="collapse-{{ $prescription->id }}" class="panel-collapse collapse in" role="tabpanel"
+                        aria-labelledby="heading-{{ $prescription->id }}">
                         <div class="panel-body">
-                            <div class="form-group row">
-                                <div class="col-md-2 from-control-label">Automatically refil this medication ?</div>
-                                <div class="col-md-10">
-                                   {{-- <div class="checkbox d-flex align-items-center">
-                                        <label class="switch switch-label switch-pill switch-refil mr-2"
-                                            for="role-1"><input class="switch-input" type="checkbox" name="status"
-                                                id="role-1" value="{{ $medication->automatic_refil }}"
-                                                {{ !isset($medication->automatic_refil) || (isset($medication->automatic_refil) && $medication->automatic_refil === 1) ? 'checked' : '' }}><span
-                                                class="switch-slider" data-checked="Yes"
-                                                data-unchecked="No"></span></label>
-                                    </div> --}}
+                            <h4 class="text-center">Medications Details</h4>
+                            @foreach ($prescription->medications as $medication)
+                                <div class="row medication-seprator">
+                                    <div class="col-md-1 from-control-label">
+                                        <input type="checkbox" id="medication-iteam-{{ $medication->id }}"
+                                            class="box-size custom-checkbox medication-iteam-{{ $medication->id }}"
+                                            value="{{ $medication->id }}">
+                                    </div>
+                                    <label class="col-md-11" for="medication-iteam-{{ $medication->id }}">
+                                        <div class="row">
+                                            <div class="col-md-2 from-control-label">Prescribing Doctor</div>
+                                            <div class="col-md-10">
+                                                {{ $medication->prescribing_doctor }}
+                                            </div>
+                                            <div class="col-md-2 from-control-label">Quantity Left</div>
+                                            <div class="col-md-10">
+                                                {{ $medication->qty_left }} Unit(s)
+                                                {{-- $medication->drug->packSize->name --}}
+                                            </div>
+                                            <div class="col-md-2 from-control-label">Quantity Filled</div>
+                                            <div class="col-md-10">
+                                                {{ $medication->qty_filled }} Unit(s)
+                                            </div>
+                                            <div class="col-md-2 from-control-label">Pharmacy</div>
+                                            <div class="col-md-10">
+                                                {{ $medication->pharmacy }}
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <!--col-->
                                 </div>
-                                 <div class="col-md-2 from-control-label">Prescribing Doctor</div>
-                                <div class="col-md-10">
-                                    {{ $medication->prescribing_doctor }}
-                                </div>
-                                <div class="col-md-2 from-control-label">Quantity Left</div>
-                                <div class="col-md-10">
-                                    {{ $medication->qty_left }} Unit(s)
-                                   {{-- $medication->drug->packSize->name --}}
-                                </div>
-                                 <div class="col-md-2 from-control-label">Quantity Filled</div>
-                                <div class="col-md-10">
-                                    {{ $medication->qty_filled }} Unit(s)
-                                </div>
-                                  <div class="col-md-2 from-control-label">Pharmacy</div>
-                                <div class="col-md-10">
-                                    {{ $medication->pharmacy }}
-                                </div>
-                                <!--col-->
-                            </div>
+                            @endforeach
+
+                           {{-- <button class="btn btn-success">Create Order</button> --}}
                         </div>
                     </div>
                 </div>
@@ -58,3 +61,25 @@
     @endif
 
 </div><!--table-responsive-->
+
+@push('after-styles')
+    <style>
+        .myaccordion .medication-seprator:last-child {
+             border-bottom: none;
+        }
+
+        .myaccordion .medication-seprator {
+            border-bottom: 1px solid #f1eaea;
+                padding: 12px 0px;
+        }
+        .myaccordion .medication-seprator:hover {
+               background: #f9f5f5;
+               cursor:pointer;
+        }
+
+        .custom-checkbox {
+            width: 100%;
+            margin-top: 35%;
+        }
+    </style>
+@endpush

@@ -1,4 +1,3 @@
-
 @section('pagescript')
     <script>
         $(document).ready(function() {
@@ -10,12 +9,12 @@
                 .on('hide.bs.collapse', function(a) {
                     $(a.target).prev('.panel-heading').removeClass('active');
                 });
-                
 
 
-$(".drug-data").select2({
-    width: '100%',
-});
+
+            $(".drug-data").select2({
+                width: '100%',
+            });
         });
 
         $(document).ready(function() {
@@ -164,6 +163,64 @@ $(".drug-data").select2({
 
         }
 
+        function change_status(id, status) {
+
+            console.log(id);
+            console.log(status);
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Are you sure to ' + status + ' Prescription?',
+                theme: 'material', // 'material', 'bootstrap'
+                buttons: {
+                    confirm: function() {
+
+
+
+                        var ajaxurl = "{{ route('admin.auth.user.prescription.update.status') }}";
+                        $("#overlay").fadeIn(300);
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                prescription_id: id,
+                                status: status
+                            },
+                            dataType: 'JSON',
+                            success: function(data) {
+                                if (data != 0) {
+                                    if (status == 'Cancel') {
+
+                                        message =
+                                            '<span class="badge badge-danger status-wrapper-' + id +
+                                            '" style="right: 29px; position: absolute;">Cancelled</span>';
+                                        $(".approve-" + id).show();
+                                        $(".cancel-" + id).hide();
+                                    }
+                                    if (status == 'Approve') {
+                                        message =
+                                            '<span class="badge badge-success status-wrapper-' +
+                                            id +
+                                            '" style="right: 29px; position: absolute;">Approved</span>';
+                                        $(".approve-" + id).hide();
+                                        $(".cancel-" + id).show();
+                                    }
+                                    $(".status-wrapper-" + id).html(message);
+                                }else{
+                                console.log('Problem with save data');
+                                }
+                                $("#overlay").fadeOut(300);
+                            }
+                        });
+
+                    },
+                    cancel: function() {
+
+                    }
+                }
+            });
+
+        }
         $(document).ready(function() {
             $('input[type=radio][name=allergies]').change(function() {
                 if ($(this).is(':checked')) {
@@ -180,8 +237,8 @@ $(".drug-data").select2({
         var room = 1;
 
         function education_fields(id) {
-              
-                    room++;
+
+            room++;
             var objTo = document.getElementById("education_fields-" + id);
             var divtest = document.createElement("div");
             divtest.setAttribute("class", "form-group removeclass" + room);
@@ -220,9 +277,9 @@ $(".drug-data").select2({
 
             objTo.appendChild(divtest);
             $(".drug-data").select2({
-    width: '100%',
-});
-             
+                width: '100%',
+            });
+
         }
 
         function remove_education_fields(rid) {
