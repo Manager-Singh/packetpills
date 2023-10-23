@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::post('payment/delete', [DashboardController::class, 'paymentDelete'])->name('payment.delete');
         Route::post('payment/defaultChange', [DashboardController::class, 'paymentDefaultChange'])->name('payment.default.change');
         Route::get('personal-details', [DashboardController::class, 'personalDetails'])->name('personal.details');
-
+        
+        Route::get('search-pharma', [DashboardController::class, 'searchPharma'])->name('search.pharma');
+        
     });
 });

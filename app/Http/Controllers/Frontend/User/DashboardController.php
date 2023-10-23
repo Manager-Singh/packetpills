@@ -154,7 +154,8 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $data['prescriptions'] = Prescription::where('user_id',$user->id)->get();
-        //dd($data['prescriptions'][0]->medications);
+        //dd($data['prescriptions'][0]);
+        //dd('sss');
         return view('frontend.user.prescription',$data); 
     }
 
@@ -384,6 +385,11 @@ class DashboardController extends Controller
       
         return $output;
         
+    }
+    public function searchPharma()
+    {
+        $user = Auth::user();
+        return view('frontend.user.search-pharma'); 
     }
     
 }

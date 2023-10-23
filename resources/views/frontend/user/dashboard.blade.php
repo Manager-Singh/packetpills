@@ -22,7 +22,7 @@
           <div class="row med-iin">
             
             <div class="col-md-3">
-              <a href="#">
+            <a href="{{route('frontend.user.search.pharma')}}">
                 <div class="med-info bg-light"> 
                     <p><i class="fa fa-exchange" aria-hidden="true"></i></p>                   
                     <p class="txt"><strong> Transfer your refills </strong></p>

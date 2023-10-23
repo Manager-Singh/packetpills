@@ -39,11 +39,20 @@
 main.main-div {
     margin-top: 0rem;
 }
+.medication-section .btn:hover {
+    background-color: #fff;
+    color: #638e3c;
+    border-color: #638e3c;
+}
+.medication-section .btn {
+    background-color: #8ac03d;
+    border-color: #638e3c;
+}
 </style>
 @endpush
 @section('content')
 
-<div class="row mt-0 prescription-pg">
+<div class="row mt-0 mb-5 prescription-pg">
 <div class="col-md-1">
   
   </div>
@@ -65,16 +74,16 @@ main.main-div {
             <div class="order-body">
                       <div class="row">
                         <div class="col-md-4">
-                      <p class="txt">Prescription ID </p>
-                      <p class="txt-b">{{$prescription->prescription_number}}</p>
+                          <p class="txt">Prescription ID </p>
+                          <p class="txt-b">{{$prescription->prescription_number}}</p>
                         </div>
                         <div class="col-md-4">
-                      <p class="txt">Prescription type</p>
-                      <p class="txt-b">{{ (isset($prescription->type)) ? $prescription->type : 'Upload' }}</p>
+                          <p class="txt">Prescription type</p>
+                          <p class="txt-b">{{ (isset($prescription->type)) ? $prescription->type : 'Upload' }}</p>
                         </div>
                         <div class="col-md-4">
-                      <p class="txt">Created On</p>
-                      <p class="txt-b">{{$prescription->created_at->format('F d, Y ')}}</p>
+                          <p class="txt">Created On</p>
+                          <p class="txt-b">{{$prescription->created_at->format('F d, Y ')}}</p>
                         </div>
                       </div>
                   </div>
@@ -107,6 +116,42 @@ main.main-div {
                     </div>
                      
                   </div>
+                  @php 
+                  //print_r($prescription->medications);
+                  @endphp
+
+            @if($prescription->medications)
+            <div class="medication-section">
+            <div class="order-head mt-5">
+              <div class="row">
+                <div class="col-md-8">
+                    <p class="txt-b">Medications</p>
+                </div>
+              </div>
+            </div>
+            <div class="order-body">
+              <h6>Choose medications to order</h6>
+              <div class="row">
+              @foreach($prescription->medications as $key => $medication)
+                <div class="col-8 mb-2">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck{{$key}}" >
+                    <label class="custom-control-label" for="customCheck{{$key}}">{{ $medication->pharmacy }}</label>
+                    
+                  </div>
+                  <span class="subtitle ml-4">Quantity left: {{ $medication->qty_left }} unit(s) </span>
+                </div>
+              @endforeach
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                <button type="button" class="btn btn-primary btn-lg">Create an order</button>
+                </div>
+              </div>
+            </div>
+          </div>
+            @endif
+
              
             </div>
         
