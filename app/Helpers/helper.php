@@ -6,6 +6,7 @@ use App\Models\AutoMessage;
 use App\Models\MailMessage;
 use App\Models\Province;
 use App\Models\Auth\User;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Henerate UUID.
@@ -281,11 +282,14 @@ if (! function_exists('sendMail')) {
         $to_email = $user->email;
         $data = array("name"=>$full_name, "body" => $body);
         try{
-        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
-        $message->to($to_email, $to_name)
-        ->subject('Pharmacy Canada Always with you');
-        $message->from('hello@example.com','Test Mail');
+        $aaaa = Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name);
+        $message->subject('Pharmacy Canada Always with you');
+        $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),'Pharmacy Canada');
         });
+
+        // print_r($aaaa);
+        // die('asAS');
         return 1;
     }
     catch (Exception $e){

@@ -97,6 +97,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
+                               
                                     @if ($prescription->status == 'pending')
                                         @php
                                             $approve = 'block';
@@ -120,6 +121,7 @@
                                             $ap = 29;
                                             $cp =29;
                                         @endphp
+                                    
                                     @endif
 
                                      <span class="badge badge-success approve-{{ $prescription->id }}"
@@ -164,7 +166,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <div>
+                                <div class="medication-form-{{ $prescription->id }}" style="display:{{ $prescription->status == 'pending' || $prescription->status == 'cancelled' ? "none" : "block" }}">
                                     <h5 class="prescription-heading">Medications</h5>
 
                                     <div class="panel panel-default">
@@ -185,13 +187,13 @@
                                                                 placeholder="Prescribing Doctor" required>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-12 nopadding">
+                                                  {{--  <div class="col-sm-12 nopadding">
                                                         <div class="form-group">
                                                             <input type="text" class="form-control"
                                                                 name="pharmacy" value=""
                                                                 placeholder="Pharmacy Name" required>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 <div class="row main-idv">
                                                     <div class="col-sm-3 nopadding">

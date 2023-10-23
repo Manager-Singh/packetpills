@@ -196,6 +196,8 @@
                                             '" style="right: 29px; position: absolute;">Cancelled</span>';
                                         $(".approve-" + id).show();
                                         $(".cancel-" + id).hide();
+                                        $(".medication-form-" + id).hide();
+                                        
                                     }
                                     if (status == 'Approve') {
                                         message =
@@ -204,6 +206,7 @@
                                             '" style="right: 29px; position: absolute;">Approved</span>';
                                         $(".approve-" + id).hide();
                                         $(".cancel-" + id).show();
+                                        $(".medication-form-" + id).show();
                                     }
                                     $(".status-wrapper-" + id).html(message);
                                 }else{
@@ -247,12 +250,7 @@
                 '<div class="row main-idv">' +
                 '<div class="col-sm-3 nopadding">' +
                 '<div class="form-group">' +
-                '<select class="form-control drug-data" name="drug[]" required>' +
-                '<option value="">Select Drug</option>' +
-                '@foreach ($drugs as $drug)' +
-                '<option value="{{ $drug->id }}">{{ $drug->brand_name }}</option>' +
-                '@endforeach' +
-                '</select>' +
+                ' <input type="text" class="form-control" name="drug[]" value="" placeholder="Pharmacy Name" required>' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-sm-3 nopadding">' +
