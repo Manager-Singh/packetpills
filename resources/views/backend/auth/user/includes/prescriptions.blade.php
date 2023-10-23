@@ -63,10 +63,11 @@
     </div>
 
 
-    @if (count($user->prescriptions) > 0)
-
+    @if (count($prescriptions) > 0)
+  
+    
         <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
-            @foreach ($user->prescriptions as $key => $prescription)
+            @foreach ($prescriptions as $key => $prescription)
                 <div class="panel">
                     <div class="panel-heading" role="tab" id="heading-{{ $prescription->id }}">
                         <h4 class="panel-title">

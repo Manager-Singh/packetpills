@@ -214,9 +214,9 @@ class UserController extends Controller
         $province = Province::get()->pluck('name','name');
         $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->get();
 
-        // print_r('<pre>');
-        // print_r($prescriptions);
-        //  die;
+        //  print_r('<pre>');
+        //  print_r($prescriptions);
+        //   die;
         return view('backend.auth.user.show')
             ->with([
                 'provinces'=>$province,

@@ -37,7 +37,7 @@ class DrugsRepository extends BaseRepository
      */
     private $sortable = [
         'id',
-        'name',
+        'brand_name',
         'available_form',
         'manufacturer_name',
         'generic_name',

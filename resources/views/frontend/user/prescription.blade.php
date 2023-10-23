@@ -64,7 +64,7 @@ div#accordionExample {
                       <p class="txt-b">Prescription Uploaded</p>
                   </div>
               </a>
-             @if($prescription) 
+             @if($prescription && isset($prescription->medications) && $prescription->medications->count() > 0) 
               <div class="order-head">
                   <div class="row">
                     <div class="col-md-8">
