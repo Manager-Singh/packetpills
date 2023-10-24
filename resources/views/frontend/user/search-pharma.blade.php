@@ -12,9 +12,9 @@
       font-weight: 500;
     }
     li.ajax-li address {
-    font-size: 14px;
-    font-weight: 200;
-}
+        font-size: 13px;
+        font-weight: 300;
+    }
 .ajax-result ul.ajax-ul {
     list-style: none;
     padding: 0;
@@ -26,6 +26,24 @@ li.ajax-li {
     border-bottom: 1px solid #638e3c;
     padding: 4px 0 0 10px;
     cursor: pointer;
+}
+li.ajax-li:hover {
+    background-color: #638e3cd9;
+    color: #fff;
+}
+.from-div-main , .to-div-main{
+    border: 1px solid #638e3c;
+    border-radius: 8px;
+    background-color: #638e3c2b;
+    padding: 8px 0 0 8px;
+    margin-bottom: 8px;
+}
+.selected-pharma p.heading {
+    margin: 0;
+    margin-top: 10px;
+    padding-left: 8px;
+    font-size: 18px;
+    font-weight: 600;
 }
   </style>
 @endpush
@@ -45,22 +63,25 @@ li.ajax-li {
                         <form name="myForm" action="/action_page.php" method="get">
                             <div class="row">
                             <div class="col-md-12">
-                            <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy">
-                            <div class="ajax-result">
-                             <ul class="ajax-ul" style="display:none;">
-                                <li class="ajax-li">
-                                  <span>Front st pharmacy</span>
-                                  <address>431 king st e, Toronto</addrdess>
-                                </li>
-                                <li class="ajax-li">
-                                  <span>Front st pharmacy 1</span>
-                                  <address>431 king st e, Toronto</addrdess>
-                                </li>
-                                <li class="ajax-li">
-                                  <span>Front st pharmacy2</span>
-                                  <address>431 king st e, Toronto</addrdess>
-                                </li>
-                             </ul>
+                              <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy">
+                              <div class="ajax-result">
+                              </div>
+                            <div class="selected-pharma" style="display:none;">
+                              <p class="heading">Transfer Request</p>
+                              <div class="from-div-main">
+                                <h6>From:</h6>
+                                <div class="from-div">
+                                  <span>From st pharmacy</span>
+                                  <address>asdfassdfdf</address>
+                                </div>
+                              </div>
+                              <div class="to-div-main">
+                                <h6>To:</h6>
+                                <div class="to-div">
+                                  <span>From st pharmacy</span>
+                                  <address>asdfassdfdf</address>
+                                </div>
+                              </div>
 
                             </div>
                             <p class="error"><span>Postal Code Not Found</span><a href="#">Change</a></p> 
@@ -98,19 +119,55 @@ li.ajax-li {
 @push('after-scripts')
 <script>
    
-    $(document).ready(function(){       
+    $(document).ready(function(){  
+      $('.ajax-result').fadeOut();     
       $('#search').keyup(function(){
           console.log('safadsfasf');
-          if($(this).val()){
-            $('.ajax-ul').fadeIn();
+          var thismain  = $(this);
+          var search    = $(this).val();
+          
+          if(search){
+           placelistView(thismain,search);
           }else{
-            $('.ajax-ul').fadeOut();
+            $('.ajax-result').fadeOut();  
+            // $('.ajax-ul').fadeOut();
+            // $('.ajax-result').fadeIn();
           }
             
+        })
+        
+        $('.ajax-result').on('click','.ajax-li',function(){
+          console.log($(this).text());
+          console.log($(this).html());
+          $('.ajax-result').fadeOut();
+          $('.from-div').html($(this).html());
+          $('.selected-pharma').fadeIn();
+
         })
 
      
     });
+
+    function placelistView(thismain,search=''){
+      
+      ajaxurl = "{{ route('frontend.user.place.ajax.search') }}";
+        _token = "{{ csrf_token() }}";
+        $.ajax({
+            url: ajaxurl,
+            type: "POST",
+            data: {_token:_token,search:search},
+            success: function(data){
+                if(data){
+                    console.log(data.html); 
+                    $('.ajax-result').html(data.html);
+                    $('.ajax-result').fadeIn();
+                }else{
+
+                }
+            }
+        });
+
+    }
  
 
       </script>

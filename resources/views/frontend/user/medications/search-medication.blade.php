@@ -172,8 +172,8 @@ li.drug-list-child:hover a {
 
 var page_no=0;
    function druglistView(page_no=0,type=''){
- var search = $('.search').val();
-    ajaxurl = "{{ route('frontend.drug.ajax.search') }}";
+      var search = $('.search').val();
+      ajaxurl = "{{ route('frontend.drug.ajax.search') }}";
         _token = "{{ csrf_token() }}";
         $.ajax({
             url: ajaxurl,
@@ -204,7 +204,7 @@ var page_no=0;
             }
         });
 
-   }
+    }
 
    $(document).on('click','.loard-more-drug',function(){
     

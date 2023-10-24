@@ -679,37 +679,86 @@ class UserRepository extends BaseRepository
        
    }
 
-   public function drugAjaxSearch(array $array){
-        $total          =   Drug::get()->count();
+   public function placeAjaxSearch(array $array){
+        $total          =   '';
         $limit          =   10;
-        $no_of_pages    =   $total/$limit;
-        $page_no        =   ($array['page_no']) ? $array['page_no'] : 0;
-        $offset         =   $page_no*$limit;
-        if ($array['search']) {
-            $search = $array['search'];
-            $drug   = Drug::where('brand_name', 'like', '%' . $search . '%')
-                        ->orWhere('generic_name', 'like', '%' . $search . '%')
-                        ->orWhere('manufacturer', 'like', '%' . $search . '%')->skip($offset)->take($limit)->get();
-        }else{
+        $no_of_pages    =   '';
+        $page_no        =   '';
+        $offset         =   '';
+        $curl = curl_init();
 
-            $drug = '';
+        $search = (isset($array['search'])) ? $array['search'] : '' ;
+        $key     = env('Google_API_Key');
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = json_decode(curl_exec($curl));
+
+        curl_close($curl);
+        //echo $response;
+      //dd($response);
+        $html ='<ul class="ajax-ul" style="display:block;">';
+        
+        if($response->status == 'OK'){
+
+            foreach($response->results as $result){
+
+                $html .='<li class="ajax-li"><span>'.$result->name.'</span><address>'.$result->formatted_address.'</addrdess></li>';
+            }
+
+        }else{
+            $html .='<li class="drug-list-child">Data not found.</li>';
         }
 
-        $html ='';
-        if($drug){
-            foreach($drug as $out){
-                $html .='<li class="drug-list-child"><a href="'.route('frontend.drug.single',$out->slug).'">'.$out->brand_name.'('.$out->id.')</a></li>';
-            }
-        }else{
-                $html .='<li class="drug-list-child">Data not found.</li>';
-        } 
+        $html .= '</ul>';
+       
         return array(
-                    'total'         =>  $total,  
-                    'no_of_pages'   =>  $no_of_pages,  
-                    'page_no'       =>  $page_no,  
+                    'success' => true,
                     'html'          =>  $html,  
                 );       
 
    }
+
+   public function drugAjaxSearch(array $array){
+    $total          =   Drug::get()->count();
+    $limit          =   10;
+    $no_of_pages    =   $total/$limit;
+    $page_no        =   ($array['page_no']) ? $array['page_no'] : 0;
+    $offset         =   $page_no*$limit;
+    if ($array['search']) {
+        $search = $array['search'];
+        $drug   = Drug::where('brand_name', 'like', '%' . $search . '%')
+                    ->orWhere('generic_name', 'like', '%' . $search . '%')
+                    ->orWhere('manufacturer', 'like', '%' . $search . '%')->skip($offset)->take($limit)->get();
+    }else{
+
+        $drug = '';
+    }
+
+    $html ='';
+    if($drug){
+        foreach($drug as $out){
+            $html .='<li class="drug-list-child"><a href="'.route('frontend.drug.single',$out->slug).'">'.$out->brand_name.'('.$out->id.')</a></li>';
+        }
+    }else{
+            $html .='<li class="drug-list-child">Data not found.</li>';
+    } 
+    return array(
+                'total'         =>  $total,  
+                'no_of_pages'   =>  $no_of_pages,  
+                'page_no'       =>  $page_no,  
+                'html'          =>  $html,  
+            );       
+
+    }
 
 }
