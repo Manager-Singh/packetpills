@@ -27,6 +27,8 @@ use App\Models\HealthInformation;
 use App\Models\PaymentMethod;
 use App\Models\Insurance;
 use App\Models\MedicationItem;
+use App\Models\Order;
+use App\Models\OrderItem;
 use File;
 use Ramsey\Uuid\Uuid;
 
@@ -572,11 +574,9 @@ class UserRepository extends BaseRepository
           
                 foreach($data['drug'] as $key => $drug){
                     $medicationItem = new MedicationItem;
-                    $medicationItem->drug_id = $drug;
-                    $medicationItem->qty_left = $data['qty_left'][$key];
-                    $medicationItem->qty_filled = $data['qty_filled'][$key];
+                    $medicationItem->drug_name = $drug;
+                    $medicationItem->price = $data['price'][$key];
                     $medicationItem->prescribing_doctor = $data['prescribing_doctor'];
-                    $medicationItem->pharmacy = $data['pharmacy'];
                     $medicationItem->prescription_id = $data['prescription_id'];
                     $medicationItem->user_id = $data['user_id'];
                     $medicationItem->created_by = access()->user()->id;
@@ -588,6 +588,31 @@ class UserRepository extends BaseRepository
        
         
             
+        throw new GeneralException(__('Problem With Create Medication.'));
+       });
+    }
+
+    public function createMedicationOrder(array $data)
+    {
+       
+        return DB::transaction(function () use ($data) {
+           // $data['medication'];
+            $order = new Order;
+            $order->prescription_id = $data['prescription_id'];
+            $order->user_id = $data['user_id'];
+            $order->total_amount = getTotalAmount($data['medication']);
+            $order->created_by = access()->user()->id;
+            if($order->save()){
+                foreach($data['medication'] as $key => $medication){
+                    $order_item = new OrderItem;       
+                    $order_item->order_id = $order->id;
+                    $order_item->medication_id = $medication;
+                    $order_item->price = getPrice($medication);
+                    $order_item->save();
+                }
+                return 1;
+            }
+          
         throw new GeneralException(__('Problem With Create Medication.'));
        });
     }

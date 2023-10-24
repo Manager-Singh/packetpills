@@ -187,47 +187,23 @@
                                                                 placeholder="Prescribing Doctor" required>
                                                         </div>
                                                     </div>
-                                                  {{--  <div class="col-sm-12 nopadding">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control"
-                                                                name="pharmacy" value=""
-                                                                placeholder="Pharmacy Name" required>
-                                                        </div>
-                                                    </div> --}}
                                                 </div>
                                                 <div class="row main-idv">
                                                     <div class="col-sm-3 nopadding">
                                                         <div class="form-group">
-                                                            <select class="form-control drug-data" name="drug[]"
-                                                                required>
-                                                                <option value="">Select Drug</option>
-                                                                @foreach ($drugs as $drug)
-                                                                    <option value="{{ $drug->id }}">
-                                                                        {{ $drug->brand_name }}</option>
-                                                                @endforeach
-                                                            </select>
+                                                            <input type="text" class="form-control" name="drug[]" value="" placeholder="Drug Name" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 nopadding">
                                                         <div class="form-group">
+                                                        <div class="input-group">
                                                             <input type="number" class="form-control"
-                                                                name="qty_left[]" value=""
-                                                                placeholder="Quantity Left" required min="0"
+                                                                name="price[]" value=""
+                                                                placeholder="Drug Price" required min="1"
                                                                 pattern="[0-9]"
                                                                 onkeypress="return !(event.charCode == 46)"
                                                                 step="1">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3 nopadding">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <input type="number" class="form-control"
-                                                                    name="qty_filled[]" value=""
-                                                                    placeholder="Quantity Filled" required
-                                                                    min="0" pattern="[0-9]"
-                                                                    onkeypress="return !(event.charCode == 46)"
-                                                                    step="1">
-                                                                <div class="input-group-btn">
+                                                                 <div class="input-group-btn">
                                                                     <button class="btn btn-success" type="button"
                                                                         onclick="education_fields('{{ $prescription->id }}')">
                                                                         <span class="fa fa-plus"
@@ -237,8 +213,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-
+                                                   
                                                     <div class="clear"></div>
                                                 </div>
                                                 <div id="education_fields-{{ $prescription->id }}">

@@ -5,6 +5,7 @@ use Twilio\Rest\Client;
 use App\Models\AutoMessage;
 use App\Models\MailMessage;
 use App\Models\Province;
+use App\Models\MedicationItem;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -311,3 +312,28 @@ if (! function_exists('getAllProvince')) {
     }
 }
 
+if (! function_exists('getTotalAmount')) {
+    /**
+     * @return bool
+     */
+    function getTotalAmount($ids_array)
+    {
+        $sum = MedicationItem::whereIn('id', $ids_array)->sum('price');
+        // print_r($sum);
+        // die;
+        return $sum;
+    }
+}
+
+if (! function_exists('getPrice')) {
+    /**
+     * @return bool
+     */
+    function getPrice($id)
+    {
+        $price = MedicationItem::where('id', $id)->first()->price;
+        // print_r($sum);
+        // die;
+        return $price;
+    }
+}

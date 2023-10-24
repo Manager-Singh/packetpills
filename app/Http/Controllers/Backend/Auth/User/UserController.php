@@ -13,6 +13,8 @@ use App\Models\AutoMessage;
 use App\Models\Drug;
 use App\Models\Prescription;
 use App\Models\MedicationItem;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;
@@ -137,24 +139,23 @@ class UserController extends Controller
     }
     public function create_medication(Request $request)
     {
-            // print_r($request->all());
-            // die;
-    //     $pfile = 'files_'.$request->payment_method_id;
-
-    //     // print_r($request->file($pfile));
-    //     // die;
        $this->userRepository->create_medication($request->except(['_token', '_method']));
 
         return redirect()->back()->with('tab','overview')->withFlashSuccess(__('Medication Successfully Created.'));
     }
+    public function createMedicationOrder(Request $request)
+    {
+       $this->userRepository->createMedicationOrder($request->except(['_token', '_method']));
+
+        return redirect()->back()->with('tab','order')->withFlashSuccess(__('Medication Order Successfully Created.'));
+    }
+
+    
     
     
     public function send_message(Request $request)
     {
        
-            // print_r($request->all());
-            // die;
-            
             
             if($request->isSmsChecked=='true'){
                 $response_data = sendMessage($request->dialingCode.$request->mobile_no,'admin',null,$request->message);
@@ -214,9 +215,12 @@ class UserController extends Controller
         $province = Province::get()->pluck('name','name');
         $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->get();
         $aaprescriptions = Prescription::where('user_id',$user->id)->get();
+        $orders = Order::where('user_id',$user->id)->with('order_items')->has('order_items')->get();
+        
+
 
         //  print_r('<pre>');
-        //  print_r($prescriptions);
+        //  print_r($orders);
         //   die;
         return view('backend.auth.user.show')
             ->with([
@@ -225,6 +229,7 @@ class UserController extends Controller
                 'drugs'=>$drugs,
                 'prescriptions'=>$prescriptions,
                 'aaprescriptions'=>$aaprescriptions,
+                'orders'=>$orders,
             ])
             ->withUser($user);
     }

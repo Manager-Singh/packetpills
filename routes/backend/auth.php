@@ -42,6 +42,7 @@ Route::group([
         Route::post('user/send/message', [UserController::class, 'send_message'])->name('user.send.message');
         Route::post('user/update/insurance/status', [UserController::class, 'send_insurance_status'])->name('user.update.insurance.status');
         Route::post('user/prescription/update/status', [UserController::class, 'prescriptionStatusUpdate'])->name('user.prescription.update.status');
+        Route::post('user/create/medication/order', [UserController::class, 'createMedicationOrder'])->name('user.create.medication.order');
         
 
 

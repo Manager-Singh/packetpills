@@ -197,7 +197,7 @@
                                         $(".approve-" + id).show();
                                         $(".cancel-" + id).hide();
                                         $(".medication-form-" + id).hide();
-                                        
+
                                     }
                                     if (status == 'Approve') {
                                         message =
@@ -209,8 +209,8 @@
                                         $(".medication-form-" + id).show();
                                     }
                                     $(".status-wrapper-" + id).html(message);
-                                }else{
-                                console.log('Problem with save data');
+                                } else {
+                                    console.log('Problem with save data');
                                 }
                                 $("#overlay").fadeOut(300);
                             }
@@ -250,19 +250,14 @@
                 '<div class="row main-idv">' +
                 '<div class="col-sm-3 nopadding">' +
                 '<div class="form-group">' +
-                ' <input type="text" class="form-control" name="drug[]" value="" placeholder="Pharmacy Name" required>' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-sm-3 nopadding">' +
-                '<div class="form-group">' +
-                '<input type="number" class="form-control" name="qty_left[]" value="" placeholder="Quantity Left" required min="0" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1">' +
+                '<input type="text" class="form-control" name="drug[]" value="" placeholder="Drug Name" required>' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-sm-3 nopadding">' +
                 '<div class="form-group">' +
                 '<div class="input-group">' +
-                '<input type="number" class="form-control" name="qty_filled[]" value="" placeholder="Quantity Filled" required min="0" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1">' +
-                '<div class="input-group-btn">' +
+                '<input type="number" class="form-control" name="price[]" value="" placeholder="Drug Price" required min="1" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1">' +
+                 '<div class="input-group-btn">' +
                 '<button class="btn btn-danger" type="button" onclick="remove_education_fields(' + room + ');">' +
                 '<span class="fa fa-minus" aria-hidden="true"></span>' +
                 '</button>' +
@@ -270,6 +265,7 @@
                 '</div>' +
                 '</div>' +
                 '</div>' +
+                
                 '<div class="clear"></div>' +
                 '</div>';
 

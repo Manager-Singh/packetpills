@@ -20,12 +20,17 @@
                         aria-labelledby="heading-{{ $prescription->id }}">
                         <div class="panel-body">
                             <h4 class="text-center">Medications Details</h4>
+                            <form action="{{ route('admin.auth.user.create.medication.order') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="prescription_id"
+                                                    value="{{ $prescription->id }}">
+                                                <input type="hidden" name="user_id" value="{{ $user->id }}">
                             @foreach ($prescription->medications as $medication)
                                 <div class="row medication-seprator">
                                     <div class="col-md-1 from-control-label">
                                         <input type="checkbox" id="medication-iteam-{{ $medication->id }}"
                                             class="box-size custom-checkbox medication-iteam-{{ $medication->id }}"
-                                            value="{{ $medication->id }}">
+                                            value="{{ $medication->id }}" name="medication[]">
                                     </div>
                                     <label class="col-md-11" for="medication-iteam-{{ $medication->id }}">
                                         <div class="row">
@@ -33,18 +38,13 @@
                                             <div class="col-md-10">
                                                 {{ $medication->prescribing_doctor }}
                                             </div>
-                                            <div class="col-md-2 from-control-label">Quantity Left</div>
+                                            <div class="col-md-2 from-control-label">Drug Name</div>
                                             <div class="col-md-10">
-                                                {{ $medication->qty_left }} Unit(s)
-                                                {{-- $medication->drug->packSize->name --}}
+                                                {{ $medication->drug_name }}
                                             </div>
-                                            <div class="col-md-2 from-control-label">Quantity Filled</div>
+                                            <div class="col-md-2 from-control-label">Price</div>
                                             <div class="col-md-10">
-                                                {{ $medication->qty_filled }} Unit(s)
-                                            </div>
-                                            <div class="col-md-2 from-control-label">Pharmacy</div>
-                                            <div class="col-md-10">
-                                                {{ $medication->pharmacy }}
+                                                ($) {{ $medication->price }} 
                                             </div>
                                         </div>
                                     </label>
@@ -52,7 +52,8 @@
                                 </div>
                             @endforeach
 
-                           {{-- <button class="btn btn-success">Create Order</button> --}}
+                           <button class="btn btn-success">Create Order</button>
+                           <form>
                         </div>
                     </div>
                 </div>
