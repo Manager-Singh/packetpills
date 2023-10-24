@@ -121,10 +121,10 @@ a.drug-list-btn.loard-more-drug:hover {
               <img class="check-img"  src="{{asset('website/assets/images/icons8-checked-checkbox-50.png')}}" alt="Los Angeles">
                  
                 <label for="prescription">Prescription Required</label></div>
-                
-                    <p class="bold">Available Form: <span>{{$drug->format->name}}</span></p>
+              
+                    <p class="bold">Available Form: <span>{{(isset($drug->format)) ? $drug->format->name : '' }}</span></p>
                     <p class="bold">Manufacturer name: <span>{{$drug->manufacturer}}</span></p>
-                    <p class="bold">Strength: <span>{{$drug->drug_strength}} {{$drug->strenthUnit->name}}</span></p>
+                    <p class="bold">Strength: <span>{{$drug->drug_strength}} {{ (isset($drug->strenthUnit )) ? $drug->strenthUnit->name : '' }} </span></p>
                     <p class="bold">Brand Name: <span>{{$drug->brand_name}}</span></p>
                     <p class="bold">Generic Name: <span>{{$drug->generic_name}}</span></p>
                     <!-- <p class="bold">Manufacturer: <span>{{$drug->manufacturer}}</span></p> -->
@@ -249,7 +249,7 @@ a.drug-list-btn.loard-more-drug:hover {
         <p class="bold-txt">Price and Cost Calculator</p>
         <div class="search-input">
           <a href="" target="_blank" hidden></a>
-          <input type="text" class="input search" value="{{$drug->brand_name}} {{$drug->drug_strength}} {{$drug->strenthUnit->name}}" name="search" onkeyup="druglistView()" placeholder="Type to search..">
+          <input type="text" class="input search" value="{{$drug->brand_name}} {{$drug->drug_strength}} {{(isset($drug->strenthUnit)) ? $drug->strenthUnit->name : ''}}" name="search" onkeyup="druglistView()" placeholder="Type to search..">
           
         <div class="autocom-box ajax-result" style="display:none">
         <ul class="drug-list-main">
@@ -261,7 +261,7 @@ a.drug-list-btn.loard-more-drug:hover {
           <div class="price-detail mt-5">
              <div class="d-flex">
             <p>Quantity
-              <span>Total no. of {{$drug->format->name}}(S)</span></p>
+              <span>Total no. of {{(isset($drug->format)) ? $drug->format->name : ''}}(S)</span></p>
             <input type="number" class="input tablet-qty" value="1"/>
             <p>Insurance coverage
               <span>We accept all insurance plans</span></p>

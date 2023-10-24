@@ -391,5 +391,13 @@ class DashboardController extends Controller
         $user = Auth::user();
         return view('frontend.user.search-pharma'); 
     }
+
+    public function placeAjaxSearch(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->placeAjaxSearch($data);
+      
+        return $output;
+        
+    }
     
 }
