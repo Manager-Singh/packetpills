@@ -772,11 +772,11 @@ class UserRepository extends BaseRepository
             $order = new Order;
             $order->order_number = Order::generateOrderNumber();
             $order->prescription_id = $data['prescription_id'];
-            $order->user_id = $data['user_id'];
-            $order->total_amount = getTotalAmount($data['medication']);
+            $order->user_id = access()->user()->id;
+            $order->total_amount = getTotalAmount($data['medication_ids']);
             $order->created_by = access()->user()->id;
             if($order->save()){
-                foreach($data['medication'] as $key => $medication){
+                foreach($data['medication_ids'] as $key => $medication){
                     $order_item = new OrderItem;       
                     $order_item->order_id = $order->id;
                     $order_item->medication_id = $medication;

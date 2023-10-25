@@ -313,7 +313,7 @@ main.main-div {
               @foreach($prescription->medications as $key => $medication)
                 <div class="col-3 mb-2 medication-se">
                   <label class="card">
-                      <input class="card__input" name="medication_id[]" value="{{ $medication->id }}" type="checkbox"/>
+                      <input class="card__input" name="medication_ids[]" value="{{ $medication->id }}" type="checkbox"/>
                       <div class="card__body">
                         <div class="card__body-cover card__body-cover-image">
                             <span class="card__body-cover-checkbox"> 
