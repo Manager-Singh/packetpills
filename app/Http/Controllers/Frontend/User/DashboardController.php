@@ -399,5 +399,11 @@ class DashboardController extends Controller
         return $output;
         
     }
+    public function orderSave(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->createMedicationOrder($data);
+      
+        return $output;
+    }
     
 }

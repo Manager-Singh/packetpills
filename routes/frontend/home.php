@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         
         Route::get('search-pharma', [DashboardController::class, 'searchPharma'])->name('search.pharma');
         Route::post('place/get-search', [DashboardController::class, 'placeAjaxSearch'])->name('place.ajax.search');
+        Route::post('order/save', [DashboardController::class, 'orderSave'])->name('order.save');
         
     });
 });

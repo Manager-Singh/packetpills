@@ -97,8 +97,7 @@
                   <div class="med-info">                    
                       <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
                       <p class="txt">Welcome latest design trends Designed </p>
-   
-                </div>  
+                  </div>  
 
               </div>
        
