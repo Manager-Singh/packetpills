@@ -71,6 +71,11 @@
                                 href="#medications" role="tab" aria-controls="medications" aria-expanded="true"><i
                                     class="fas fa fa-ambulance"></i> @lang('Medications')</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link {{ $tab == 'orders' ? 'active' : '' }}" data-toggle="tab"
+                                href="#orders" role="tab" aria-controls="orders" aria-expanded="true"><i
+                                    class="fas fa-shopping-cart"></i> @lang('Orders')</a>
+                        </li>
 
                     </ul>
 
@@ -106,6 +111,10 @@
                         <div class="tab-pane {{ $tab == 'medications' ? 'active' : '' }}" id="medications"
                             role="tabpanel" aria-expanded="true">
                             @include('backend.auth.user.show.tabs.medications')
+                        </div><!--tab-->
+                         <div class="tab-pane {{ $tab == 'orders' ? 'active' : '' }}" id="orders"
+                            role="tabpanel" aria-expanded="true">
+                            @include('backend.auth.user.show.tabs.orders')
                         </div><!--tab-->
 
 

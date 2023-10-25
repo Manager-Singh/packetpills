@@ -2,7 +2,7 @@
     <script>
         $(document).ready(function() {
             $('.collapse.in').prev('.panel-heading').addClass('active');
-            $('#accordion, #bs-collapse,#accordion2,#accordionHealthcard,.myaccordion,#accordionprimaryInsurance,#accordionsecondaryInsurance,#accordionternaryInsurance,#accordionquandaryInsurance,#accordionHealthinformation,#accordionPaymentmethod')
+            $('#accordion, #bs-collapse,#accordion2,#accordionHealthcard,.myaccordion,.order-myaccordion,#accordionprimaryInsurance,#accordionsecondaryInsurance,#accordionternaryInsurance,#accordionquandaryInsurance,#accordionHealthinformation,#accordionPaymentmethod')
                 .on('show.bs.collapse', function(a) {
                     $(a.target).prev('.panel-heading').addClass('active');
                 })
