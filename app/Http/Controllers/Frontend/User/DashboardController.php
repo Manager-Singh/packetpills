@@ -13,6 +13,8 @@ use App\Models\Insurance;
 use App\Models\HealthCard;
 use App\Models\Drug;
 use App\Models\Prescription;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 /**
  * Class DashboardController.
@@ -174,7 +176,9 @@ class DashboardController extends Controller
     }
     public function orders()
     {
-         return view('frontend.user.order'); 
+        $user = Auth::user();
+        $data['orders']= Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
+        return view('frontend.user.order',$data); 
     }
     public function healthCard()
     {
@@ -398,6 +402,16 @@ class DashboardController extends Controller
       
         return $output;
         
+    }
+    public function orderSave(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->createMedicationOrder($data);
+      
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Order Created Successfully'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
     }
     
 }

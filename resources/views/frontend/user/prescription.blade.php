@@ -81,7 +81,7 @@ div#accordionExample {
               <h2 class="card-header" id="headingOne">
                 <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne_{{$medication->id}}" aria-expanded="true" aria-controls="collapseOne_{{$medication->id}}">
                   <!-- Proctodan-hc Oint   -->
-                  {{ $medication->pharmacy }}
+                  {{ $medication->drug_name }}
                 </button>
                
               </h2>
@@ -99,8 +99,8 @@ div#accordionExample {
                       </td>
                     </tr> -->
                     <tr><td>Prescribing doctor</td><td class="text-right"> {{ $medication->prescribing_doctor }}</td></tr>
-                    <tr><td>Quantity left</td><td class="text-right">{{ $medication->qty_left }}</td></tr>
-                    <tr><td>Quantity filled</td><td class="text-right">{{ $medication->qty_filled }}</td></tr>
+                    <!-- <tr><td>Quantity left</td><td class="text-right">{{ $medication->qty_left }}</td></tr>
+                    <tr><td>Quantity filled</td><td class="text-right">{{ $medication->qty_filled }}</td></tr> -->
                     <!-- <tr><td>Pocketpacks</td><td class="text-right">No</td></tr> -->
                     </table>
                 </div>

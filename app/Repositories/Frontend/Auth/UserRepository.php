@@ -14,6 +14,8 @@ use App\Models\Insurance;
 use App\Models\Address;
 use App\Models\PaymentMethod;
 use App\Models\Drug;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\UploadedFile;
@@ -760,5 +762,33 @@ class UserRepository extends BaseRepository
             );       
 
     }
+
+   
+    public function createMedicationOrder(array $data)
+    {
+       
+        return DB::transaction(function () use ($data) {
+           // $data['medication'];
+            $order = new Order;
+            $order->order_number = Order::generateOrderNumber();
+            $order->prescription_id = $data['prescription_id'];
+            $order->user_id = access()->user()->id;
+            $order->total_amount = getTotalAmount($data['medication_ids']);
+            $order->created_by = access()->user()->id;
+            if($order->save()){
+                foreach($data['medication_ids'] as $key => $medication){
+                    $order_item = new OrderItem;       
+                    $order_item->order_id = $order->id;
+                    $order_item->medication_id = $medication;
+                    $order_item->price = getPrice($medication);
+                    $order_item->save();
+                }
+                return 1;
+            }
+          
+        throw new GeneralException(__('Problem With Create Medication.'));
+       });
+    }
+
 
 }
