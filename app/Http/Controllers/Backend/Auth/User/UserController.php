@@ -215,7 +215,7 @@ class UserController extends Controller
         $province = Province::get()->pluck('name','name');
         $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->get();
         $aaprescriptions = Prescription::where('user_id',$user->id)->get();
-        $orders = Order::where('user_id',$user->id)->with('order_items')->has('order_items')->get();
+        $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
         
 
 

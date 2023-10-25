@@ -598,6 +598,7 @@ class UserRepository extends BaseRepository
         return DB::transaction(function () use ($data) {
            // $data['medication'];
             $order = new Order;
+            $order->order_number = Order::generateOrderNumber();
             $order->prescription_id = $data['prescription_id'];
             $order->user_id = $data['user_id'];
             $order->total_amount = getTotalAmount($data['medication']);

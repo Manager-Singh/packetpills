@@ -114,6 +114,7 @@
 
         #accordion .panel-heading a:before,
         .myaccordion .panel-heading a:before,
+        .order-myaccordion .panel-heading a:before,
         #accordionHealthcard .panel-heading a:before,
         #accordionHealthinformation .panel-heading a:before,
         #accordionPaymentmethod .panel-heading a:before,
@@ -135,6 +136,7 @@
 
         #accordion .panel-heading.active a:before,
         .myaccordion .panel-heading.active a:before,
+        .order-myaccordion .panel-heading.active a:before,
         #accordionHealthcard .panel-heading.active a:before,
         #accordionHealthinformation .panel-heading.active a:before,
         #accordionPaymentmethod .panel-heading.active a:before,
@@ -164,7 +166,9 @@
             color: #fff;
             padding: 0;
         }
-        .myaccordion .panel-heading{
+        .myaccordion .panel-heading,
+        .order-myaccordion .panel-heading
+        {
             background-color: #02b786;
             border-radius: 0;
             border: none;
@@ -343,6 +347,13 @@
         .gallery-lightboxes .image-lightbox .image-lightbox-wrapper img {
             margin: 0 auto;
             max-height: 70vh;
+        }
+
+        /*Order Style*/
+        .order-medication-details {
+            border: 1px dashed red;
+            margin-bottom: 8px;
+            padding: 6px 12px;
         }
 
         /* Image privew */
