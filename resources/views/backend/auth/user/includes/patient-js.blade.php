@@ -236,6 +236,103 @@
                 }
             });
 
+            $('.orderStatus').change(function() {
+                var order_id = this.id;
+                order_id = order_id.split('-');
+                var norder_id = order_id[1];
+                var order_status = $(this).val();
+                var order_status_text = $(this).find("option:selected").text();
+                console.log($(this).val());
+                console.log(norder_id); 
+                $.confirm({
+                title: 'Confirm!',
+                content: 'Are you sure to ' + order_status_text + ' order?',
+                theme: 'material', // 'material', 'bootstrap'
+                buttons: {
+                    confirm: function() {
+
+
+
+                        var ajaxurl = "{{ route('admin.auth.user.order.update.status') }}";
+                        $("#overlay").fadeIn(300);
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: norder_id,
+                                status: order_status,
+                                type:"order"
+                            },
+                            dataType: 'JSON',
+                            success: function(data) {
+                                if (data != 0) {
+                                   $("#overlay").fadeOut(300);
+                                } else {
+                                    console.log('Problem with save data');
+                                }
+                                $("#overlay").fadeOut(300);
+                            }
+                        });
+
+                    },
+                    cancel: function() {
+
+                    }
+                }
+            });
+
+            });
+
+            $('.paymentStatus').change(function() {
+                var payment_id = this.id;
+                payment_id = payment_id.split('-');
+                var npayment_id = payment_id[1];
+                var payment_status = $(this).val();
+                var payment_status_text = $(this).find("option:selected").text();
+                console.log($(this).val());
+                console.log(npayment_id); 
+                $.confirm({
+                title: 'Confirm!',
+                content: 'Are you sure to ' + payment_status_text + ' order payment?',
+                theme: 'material', // 'material', 'bootstrap'
+                buttons: {
+                    confirm: function() {
+
+
+
+                        var ajaxurl = "{{ route('admin.auth.user.order.update.status') }}";
+                        $("#overlay").fadeIn(300);
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: npayment_id,
+                                status: payment_status,
+                                type:"payment"
+                            },
+                            dataType: 'JSON',
+                            success: function(data) {
+                                if (data != 0) {
+                                   $("#overlay").fadeOut(300);
+                                } else {
+                                    console.log('Problem with save data');
+                                }
+                                $("#overlay").fadeOut(300);
+                            }
+                        });
+
+                    },
+                    cancel: function() {
+
+                    }
+                }
+            });
+
+            });
+            
+
         });
         var room = 1;
 

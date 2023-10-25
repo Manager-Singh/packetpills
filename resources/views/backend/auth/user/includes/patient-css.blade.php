@@ -351,7 +351,7 @@
 
         /*Order Style*/
         .order-medication-details {
-            border: 1px dashed red;
+            border: 1px dashed #4ed10b;
             margin-bottom: 8px;
             padding: 6px 12px;
         }

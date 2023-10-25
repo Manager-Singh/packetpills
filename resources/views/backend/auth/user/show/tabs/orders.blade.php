@@ -24,7 +24,25 @@
                             <p>Order Number: {{ $order->order_number }}</p>
                             <p>Total Amount: ${{ $order->total_amount }}</p>
                             <p>Order Date: {{ $order->created_at }}</p>
-                            <p>Order Status: {{ $order->order_status }}</p>
+                            @php
+                                $order_status_array = [
+                                'pending'=>'Pending',
+                                'approved'=>'Approved',
+                                'cancelled'=>'Cancelled',
+                                'declined'=>'Declined',
+                                'processing'=>'Processing',
+                                'ready_to_pick'=>'Ready To Pick',
+                                'picked_up'=>'Picked Up',
+                                'in_transit'=>'In Transit',
+                                'delivered'=>'Delivered'
+                                ];
+                                $payment_status_array = [
+                                'pending'=>'Pending',
+                                'approved'=>'Approved'
+                                ];
+                            @endphp
+                            <p>Order Status: {{ Form::select('order_status', $order_status_array, $order->order_status, ['class' => 'form-control orderStatus box-size','id' => 'orderStatus-'.$order->id, 'data-placeholder' => trans('Order Status')]) }}</p>
+                            <p>Payment Status: {{ Form::select('payment_status[]', $payment_status_array, $order->payment_status, ['class' => 'form-control paymentStatus box-size','id' => 'paymentStatus-'.$order->id, 'data-placeholder' => trans('Payment Status')]) }}</p>
                             <p>Prescription Number: {{ $order->prescription->prescription_number }}</p>
                             </div>
                             <h4 class="text-center">Medication Details</h4>

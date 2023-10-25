@@ -1047,7 +1047,6 @@ class UserRepository extends BaseRepository
     public function prescriptionStatusUpdate($request)
     {
 
-        print_r($request['prescription_id']);
         $id = $request['prescription_id'];
         $status = $request['status'];
        
@@ -1064,6 +1063,34 @@ class UserRepository extends BaseRepository
                     return $id;
                 }
            
+                return 0;
+            
+           // throw new GeneralException(__('Problem With Prescription Status Update.'));
+           });
+    }
+
+    
+
+    public function orderStatusUpdate($data)
+    {
+
+      
+       
+        return DB::transaction(function () use ($data) {
+            $id = $data['id'];
+            $status = $data['status'];
+            $type = $data['type'];
+            $order = Order::where('id',$id)->first();
+            if($type=='order'){
+                $order->order_status = $status;
+            }else{
+                $order->payment_status = $status;
+            }
+            if ($order->save()) {
+            
+                return $id;
+            }
+        
                 return 0;
             
            // throw new GeneralException(__('Problem With Prescription Status Update.'));

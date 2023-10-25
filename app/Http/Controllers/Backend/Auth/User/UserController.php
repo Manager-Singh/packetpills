@@ -147,7 +147,7 @@ class UserController extends Controller
     {
        $this->userRepository->createMedicationOrder($request->except(['_token', '_method']));
 
-        return redirect()->back()->with('tab','order')->withFlashSuccess(__('Medication Order Successfully Created.'));
+        return redirect()->back()->with('tab','orders')->withFlashSuccess(__('Medication Order Successfully Created.'));
     }
 
     
@@ -291,4 +291,12 @@ class UserController extends Controller
 
             return $data;
         }
+        public function orderStatusUpdate(Request $request)
+        {
+           $data = $this->userRepository->orderStatusUpdate($request->except(['_token', '_method','files']));
+
+            return $data;
+        }
+
+        
 }
