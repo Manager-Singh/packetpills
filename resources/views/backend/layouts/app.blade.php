@@ -20,6 +20,7 @@
     <!-- Check if the language is set to RTL, so apply the RTL layouts -->
     <!-- Otherwise apply the normal LTR layouts -->
     {{ style(mix('css/backend.css')) }}
+  
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
 
@@ -28,6 +29,7 @@
     <link rel="stylesheet" href="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
     
     @stack('after-styles')
     <style>
@@ -156,12 +158,17 @@
     {!! script(mix('js/manifest.js')) !!}
     {!! script(mix('js/vendor.js')) !!}
     {!! script(mix('js/backend.js')) !!}
+   
+ 
     <script src="{{ asset('/js/tinymce/tinymce.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     {!! script(asset('js/backend/common.js')) !!}
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.0/Chart.bundle.js" integrity="sha512-piw5Tzhy4Xv8tQX9A7sysrIrNcsi5pWDSefF5P4bnWKlqfqwMFEdvTphOBcljyvsbyzVECi2Rsv46tztOTgs2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+
 
     @isset($js)
     @foreach($js as $j)
