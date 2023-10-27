@@ -20,7 +20,19 @@
     color: #212843;
 }
 div#accordionExample {
-    padding: 3rem 19rem 4rem 3rem;
+    padding: 3rem 3rem 3rem 3rem;
+}
+
+div#accordionExample tr td {
+    padding: 0;
+    font-size: 14px;
+}
+div#accordionExample .card-body {
+    background: #fff;
+    padding: 4px 10px 0px 10px;
+}
+div#accordionExample {
+    padding: 20px 50px;
 }
 </style>
 @endpush
@@ -73,35 +85,27 @@ div#accordionExample {
                    
                   </div>
               </div>
-              <div class="accordion" id="accordionExample">
+              <div class="accordion row" id="accordionExample">
 
               @foreach($prescription->medications as $medication)
 
-            <div class="card">
-              <h2 class="card-header" id="headingOne">
-                <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne_{{$medication->id}}" aria-expanded="true" aria-controls="collapseOne_{{$medication->id}}">
-                  <!-- Proctodan-hc Oint   -->
-                  {{ $medication->drug_name }}
-                </button>
-               
-              </h2>
-              <div id="collapseOne_{{$medication->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card col-md-3">
+              <div id="collapseOne_{{$medication->id}}" class="accordion-collapse"  >
                 <div class="card-body">
                   <table>
-                    <!-- <tr>
-                      <td>Automatically refill this medication?</td>
-                      <td class="text-right">
-                        <label class="switch">
-                          <input class="switch-input" type="checkbox" />
-                          <span class="switch-label" data-on="Yes" data-off="No"></span> 
-                          <span class="switch-handle"></span> 
-                        </label>
-                      </td>
-                    </tr> -->
-                    <tr><td>Prescribing doctor</td><td class="text-right"> {{ $medication->prescribing_doctor }}</td></tr>
-                    <!-- <tr><td>Quantity left</td><td class="text-right">{{ $medication->qty_left }}</td></tr>
-                    <tr><td>Quantity filled</td><td class="text-right">{{ $medication->qty_filled }}</td></tr> -->
-                    <!-- <tr><td>Pocketpacks</td><td class="text-right">No</td></tr> -->
+                    
+                    <tr>
+                      <td> Drug Name</td>
+                      <td class="text-right"> {{ $medication->drug_name }}</td>
+                    </tr>
+                    <tr>
+                      <td> Doctor Name</td>
+                      <td class="text-right"> {{ $medication->prescribing_doctor }}</td>
+                    </tr>
+                    <tr>
+                      <td> Price</td>
+                      <td class="text-right"> ${{ $medication->price }}</td>
+                    </tr>
                     </table>
                 </div>
               </div>

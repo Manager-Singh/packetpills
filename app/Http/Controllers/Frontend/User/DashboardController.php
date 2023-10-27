@@ -178,7 +178,20 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $data['orders']= Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
+        $data['user']=$user;
         return view('frontend.user.order',$data); 
+    }
+    public function singleOrder(Request $request,$order_no)
+    {
+        $user = Auth::user();
+        $data['order']= Order::where('order_number',$order_no)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->first();
+        $data['user']=$user;
+        $data['address']=$user->defaultAddress;
+        $data['paymentmethod']=$user->defaultpaymentmethod;
+       //dd($user->defaultpaymentmethod);
+
+        //dd($data['order']);
+        return view('frontend.user.order-single',$data); 
     }
     public function healthCard()
     {

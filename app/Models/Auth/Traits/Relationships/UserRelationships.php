@@ -68,6 +68,12 @@ trait UserRelationships
     {
         return $this->hasMany(Address::class);
     }
+    public function defaultAddress()
+    {
+        $address = $this->hasOne(Address::class);
+        $address->getQuery()->where('mark_as','default');
+        return $address;
+    }
     
     public function healthcard()
     {
@@ -100,6 +106,10 @@ trait UserRelationships
     public function paymentmethod()
     {
         return $this->hasMany(PaymentMethod::class);
+    }
+    public function defaultpaymentmethod()
+    {
+        return $this->hasOne(PaymentMethod::class)->where('default','yes');
     }
     public function medications()
     {

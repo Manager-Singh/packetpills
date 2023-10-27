@@ -1,0 +1,122 @@
+.check-block .main {
+    background: #31d9582e;
+}
+.order-description .main p, .order-description .sub p {
+    margin: 0px;
+    padding: 10px;
+    width: 50%;
+}
+.order-description .sub {
+    display: flex;
+    margin-top: 10px;
+    padding: 5px 15px;
+    flex-wrap: wrap;
+}
+.order-description .main {
+    margin-top: 6px;
+}
+.order-description .sub p.left {
+    text-align: right;
+}
+.pagenation {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    border-bottom: 1px solid #c1cbe5;
+}
+.order-step {
+    border-top: 1px solid #c1cbe5;
+    width: 16%;
+    font-size: 14px !important;
+    text-align: center;
+    position: relative;
+}
+.order-step.bigg:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    display: block;
+    background: #638e3c;
+    position: relative;
+    top: -10px;
+    left: 80px;
+}
+.order-step.smmall:before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 500px;
+    display: block;
+    background: #212843;
+    position: relative;
+    top: -6px;
+    left: 80px;
+}
+.order-step .on-top {
+    position: relative;
+    top: -58px;
+    left: 0px;
+}
+.order-step-two span.on-top {
+    top: -50px;
+}
+.order-step-one {
+    content: '';
+    background-image: linear-gradient(to right, #ffffff 50%, #c1cbe5 50%);
+    height: 1px;
+    border: none;
+    margin-top: 9px;
+}
+.order-step-six {
+    background-image: linear-gradient(to right, #c1cbe5 50%, #ffffff 50%);
+    height: 1px;
+    border: none;
+}
+.complete:after {
+    content: "\2713";
+    position: absolute;
+    top: -8px;
+    left: 82px;
+    color: #fff;
+    background: #10b535;
+    height: 16px;
+    width: 16px;
+    padding: 0px;
+    border-radius: 500px;
+    font-size: 11px;
+}
+.order-page {
+    border: 1px solid #c1cbe5;
+    padding: 40px 0px !important;
+}
+.order-details .col-md-4 {
+    padding: 0px 40px;
+}
+.order-step-one.completed {
+    background-image: linear-gradient(to right, #ffffff 50%, #10b535 50%);
+    height: 1px;
+    border: none;
+    /* margin-top: 9px; */
+}
+.completed:before {
+    background: #8ac03d !important;
+}
+.completed {
+    border-top: 1px solid #10b535;
+}
+.complete {
+    background-image: linear-gradient(to right, #10b535 50%, #c1cbe5 50%);
+    height: 1px;
+    border: none;
+    margin-top: 9px;
+}
+.order-step-six.complete {
+    background-image: linear-gradient(to right, #10b535 50%, #ffffff 50%) !important;
+}
+p.dotted {
+    border-top: 3px dotted #000;
+    margin-top: 15px !important;
+}

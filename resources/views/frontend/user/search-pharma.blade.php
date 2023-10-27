@@ -78,7 +78,7 @@ li.ajax-li:hover {
                               <div class="to-div-main">
                                 <h6>To:</h6>
                                 <div class="to-div">
-                                  <span>From st pharmacy</span>
+                                  <span>Mister Pharmacy Canada.</span>
                                   <address>asdfassdfdf</address>
                                 </div>
                               </div>
@@ -142,6 +142,7 @@ li.ajax-li:hover {
           $('.ajax-result').fadeOut();
           $('.from-div').html($(this).html());
           $('.selected-pharma').fadeIn();
+          $('#search').val($(this).find('span').text());
 
         })
 

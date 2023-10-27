@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
             Route::get('prescription/{prescription_number}', [DashboardController::class, 'singleUserPrescripiton'])->name('prescription.single');
             Route::get('medications', [DashboardController::class, 'medications'])->name('medications');
             Route::get('orders', [DashboardController::class, 'orders'])->name('orders');
+            Route::get('single-order/{order_no}', [DashboardController::class, 'singleOrder'])->name('order.single');
         });
         
         Route::get('upload/prescription', [PrescriptionController::class, 'prescriptionUpload'])->name('prescription.upload');
