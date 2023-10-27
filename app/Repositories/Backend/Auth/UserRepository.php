@@ -571,7 +571,7 @@ class UserRepository extends BaseRepository
     {
         return DB::transaction(function () use ($data) {
             
-          
+          $t = 0;
                 foreach($data['drug'] as $key => $drug){
                     $medicationItem = new MedicationItem;
                     $medicationItem->drug_name = $drug;
@@ -581,8 +581,26 @@ class UserRepository extends BaseRepository
                     $medicationItem->user_id = $data['user_id'];
                     $medicationItem->created_by = access()->user()->id;
                     $medicationItem->save();
+                    $t=1;
                 }
                 
+                
+                if($t==1){
+                    $user = User::where('id',$data['user_id'])->first();
+
+                    if($user->mobile_no && $user->dialing_code){
+                        $mobile = $user->dialing_code.$user->mobile_no;
+                        // print_r($mobile);
+                        // die;
+                        $data =  "Your Prescription no is ".$prescription->prescription_number;
+                            sendMessage($mobile,'mail','patient_medication_created',null);
+                            if(isset($user->email)){
+                                sendMail('mail','patient_medication_created',null,$user->id);
+                            }
+                         
+    
+                    }
+                }
                 return true;
          
        
@@ -611,6 +629,19 @@ class UserRepository extends BaseRepository
                     $order_item->price = getPrice($medication);
                     $order_item->save();
                 }
+                $user = User::where('id',$order->user_id)->first();
+
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    $data =  $status." & Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
+                        sendMessage($mobile,'mail','patient_order_created',$data);
+                        if(isset($user->email)){
+                            sendMail('mail','patient_order_created',$data,$user->id);
+                        }
+                }
+                
                 return 1;
             }
           
@@ -1059,6 +1090,27 @@ class UserRepository extends BaseRepository
            }
             $prescription->status = $nstatus;
                 if ($prescription->save()) {
+
+                    $user = User::where('id',$prescription->user_id)->first();
+
+                    if($user->mobile_no && $user->dialing_code){
+                        $mobile = $user->dialing_code.$user->mobile_no;
+                        // print_r($mobile);
+                        // die;
+                        $data =  "Your Prescription no is ".$prescription->prescription_number;
+                        if($prescription->status=='cancelled'){ 
+                            sendMessage($mobile,'mail','patient_prescription_cancelled',$data);
+                            if(isset($user->email)){
+                                sendMail('mail','patient_prescription_cancelled',$data,$user->id);
+                            }
+                         }else{
+                            sendMessage($mobile,'mail','patient_prescription_approved',$data);
+                            if(isset($user->email)){
+                                sendMail('mail','patient_prescription_approved',$data,$user->id);
+                            }
+                         }
+    
+                    }
                
                     return $id;
                 }
@@ -1087,9 +1139,31 @@ class UserRepository extends BaseRepository
                 $order->payment_status = $status;
             }
             if ($order->save()) {
+
+                $user = User::where('id',$order->user_id)->first();
+
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    if($type=='order'){
+                    $data =  $status." & Your Order no is ".$order->order_number;
+                        sendMessage($mobile,'mail','patient_order_status',$data);
+                        if(isset($user->email)){
+                            sendMail('mail','patient_order_status',$data,$user->id);
+                        }
+                    }else{
+                        $data =  $status." & Your Order no is ".$order->order_number;
+                        sendMessage($mobile,'mail','patient_payment_status',$data);
+                        if(isset($user->email)){
+                            sendMail('mail','patient_payment_status',$data,$user->id);
+                        }
+                    }
+                }
             
                 return $id;
-            }
+            
+        }
         
                 return 0;
             
