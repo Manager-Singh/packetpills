@@ -234,7 +234,7 @@ class LoginController extends Controller
                     if($otp_unverified->save()){
                         if(isset($isexist->email)){
                             $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
-                           sendMail('admin',null,$data1,$isexist->id);
+                           sendMail('mail',null,$data1,$isexist->id);
                         }
                         //$this->sendSms($request,$otp);
                         return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
@@ -260,6 +260,10 @@ class LoginController extends Controller
         
         if($this->sendSms($request,$otp,($request->dialing_code)?$request->dialing_code:'1')){
             if($user->save()){
+                if(isset($isexist->email)){
+                    $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
+                   sendMail('mail',null,$data1,$isexist->id);
+                }
 
             $user->attachRole(3);
             $permissions = $user->roles->first()->permissions->pluck('id');

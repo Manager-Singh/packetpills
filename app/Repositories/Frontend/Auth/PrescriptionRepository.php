@@ -154,7 +154,11 @@ class PrescriptionRepository extends BaseRepository
                 
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
-                    sendMessage($mobile,'mail','patient_prescription_created',$data=null);
+                    $data =  "Your Prescription no is ".$prescription->prescription_number;
+                    sendMessage($mobile,'mail','patient_prescription_created',$data);
+                    if(isset($user->email)){
+                        sendMail('mail','patient_prescription_created',$data,$user->id);
+                    }
                 }
                
 

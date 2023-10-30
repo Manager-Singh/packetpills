@@ -292,10 +292,10 @@ main.main-div {
                      
                   </div>
                   @php 
-                    //print_r($prescription->medications);
+                    //print_r($prescription->medications->count());
                   @endphp
 
-            @if($prescription->medications)
+            @if($prescription->medications->count() > 0)
             <div class="medication-section">
             <div class="order-head mt-5">
               <div class="row">

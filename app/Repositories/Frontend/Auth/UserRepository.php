@@ -171,6 +171,9 @@ class UserRepository extends BaseRepository
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     sendMessage($mobile,'mail','patient_account_completed',$data=null);
+                        if(isset($user->email)){
+                            sendMail('mail','patient_account_completed',$data=null,$user->id);
+                        }
                 }
             }
 
@@ -527,7 +530,8 @@ class UserRepository extends BaseRepository
 
     }
     public function saveAddress(array $data){
-      // dd($data);
+        $user = auth()->user();  
+        //dd($user);
       if(isset($data['id']) && Address::find($data['id'])){
         $address = Address::find($data['id']);
       }else{
@@ -546,8 +550,13 @@ class UserRepository extends BaseRepository
         }else{
             $address->mark_as = 'undefault';
         }
-                  
-        $address->save();
+               
+        if($address->save()){
+            sendMessage($user->mobile_no,'mail','address_created',null);
+            if(isset($user->email)){
+                sendMail('mail','address_created',null,$user->id);
+            }
+        }
         return $address;
         
     }
@@ -783,6 +792,21 @@ class UserRepository extends BaseRepository
                     $order_item->price = getPrice($medication);
                     $order_item->save();
                 }
+
+                $user = User::where('id',$order->user_id)->first();
+
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                    // print_r($mobile);
+                    // die;
+                    $data1 =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
+                        sendMessage($mobile,'mail','patient_order_created',$data1);
+                        if(isset($user->email)){
+                            sendMail('mail','patient_order_created',$data1,$user->id);
+                        }
+                }
+
+
                 return 1;
             }
           

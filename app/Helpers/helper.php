@@ -8,6 +8,8 @@ use App\Models\Province;
 use App\Models\MedicationItem;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Prescription;
+use App\Models\PrescriptionIteam;
 
 /**
  * Henerate UUID.
@@ -335,6 +337,17 @@ if (! function_exists('getPrice')) {
         // print_r($sum);
         // die;
         return $price;
+    }
+}
+
+if (! function_exists('getPrescriptionData')) {
+    /**
+     * @return bool
+     */
+    function getPrescriptionData($id)
+    {
+        $prescription = Prescription::where('id', $id)->first();
+        return $prescription;
     }
 }
 

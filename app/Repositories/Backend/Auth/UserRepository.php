@@ -551,7 +551,7 @@ class UserRepository extends BaseRepository
                             $data =  "Your Prescription no is ".$prescription->prescription_number;
                             sendMessage($mobile,'mail','patient_prescription_created',$data);
                             if(isset($user->email)){
-                                sendMail('mail','patient_prescription_created',null,$user_id);
+                                sendMail('mail','patient_prescription_created',$data,$user_id);
                             }
                         }
                         return true;
@@ -592,7 +592,7 @@ class UserRepository extends BaseRepository
                         $mobile = $user->dialing_code.$user->mobile_no;
                         // print_r($mobile);
                         // die;
-                        $data =  "Your Prescription no is ".$prescription->prescription_number;
+                        $data =  "Your Prescription no is ".getPrescriptionData($data['prescription_id'])->prescription_number;
                             sendMessage($mobile,'mail','patient_medication_created',null);
                             if(isset($user->email)){
                                 sendMail('mail','patient_medication_created',null,$user->id);
@@ -635,7 +635,7 @@ class UserRepository extends BaseRepository
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
-                    $data =  $status." & Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
+                    $data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
                         sendMessage($mobile,'mail','patient_order_created',$data);
                         if(isset($user->email)){
                             sendMail('mail','patient_order_created',$data,$user->id);
