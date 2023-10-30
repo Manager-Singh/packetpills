@@ -227,11 +227,15 @@ class LoginController extends Controller
                 if(!$otp_unverified){
                     $otp_unverified = new UserOtp();
                 }
-               // dd($isexist->id);
+               
                 $otp_unverified->user_id = $isexist->id;
                 $otp_unverified->otp = $otp;
                 if($this->sendSms($request,$otp,($isexist->dialing_code)?$isexist->dialing_code:'1')){
                     if($otp_unverified->save()){
+                        if(isset($isexist->email)){
+                            $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
+                           sendMail('admin',null,$data1,$isexist->id);
+                        }
                         //$this->sendSms($request,$otp);
                         return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
                     }else{

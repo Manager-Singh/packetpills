@@ -66,6 +66,11 @@ class ForgotPasswordController extends Controller
             if($user->mobile_no && $user->dialing_code){
                 $mobile = $user->dialing_code.$user->mobile_no;
                 if(sendMessage($mobile,'mail','forgot_reset_otp',$otp)){
+                    if(isset($user->email)){
+                        
+                       $gg = sendMail('mail','forgot_reset_otp',$otp,$user->id);
+                       dd($gg);
+                    }
                     if($passwordResetsOtp = PasswordResetsOtp::where('mobile_email',$request->mobile_no)->first()){
                         $password_resets_otp  = $passwordResetsOtp;
                     }else{
@@ -75,6 +80,7 @@ class ForgotPasswordController extends Controller
                     $password_resets_otp->mobile_email = $request->mobile_no; 
                     $password_resets_otp->otp = $otp; 
                     if($password_resets_otp->save()){
+                        dd('adfafd');
                         return view('frontend.auth.passwords.phone-email',compact('user','mobile_email'));
                     }
                 }
