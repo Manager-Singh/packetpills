@@ -60,8 +60,9 @@ li.ajax-li:hover {
 				    </div>
 				    <div class="col-md-6">
 
-                        <form name="myForm" action="/action_page.php" method="get">
-                            <div class="row">
+                        <form name="myForm" enctype='multipart/form-data' action="{{route('frontend.user.transfer.request')}}" method="post">
+                        @csrf     
+                        <div class="row">
                             <div class="col-md-12">
                               <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy">
                               <div class="ajax-result">
@@ -105,6 +106,11 @@ li.ajax-li:hover {
                             </div>
                           </div>
                         </div>
+                        <input type ="hidden" id="place_id" name="place_id"/>
+                        <div class="btn-div transfer-request" style="display:none;">
+                        
+                 <button type="submit" id="submit" class="next button" >Transfer Request</button>
+                 </div>
                             
                       </form>
                  
@@ -143,6 +149,12 @@ li.ajax-li:hover {
           $('.from-div').html($(this).html());
           $('.selected-pharma').fadeIn();
           $('#search').val($(this).find('span').text());
+          var place_id = $(this).attr('data-placeid');
+          console.log(place_id);
+          $('#place_id').val(place_id);
+          $('.transfer-request').fadeIn('slow');
+
+          
 
         })
 
@@ -150,13 +162,16 @@ li.ajax-li:hover {
     });
 
     function placelistView(thismain,search=''){
+
+      var lat=$('#latitude').val();
+      var long=$('#longitude').val();
       
       ajaxurl = "{{ route('frontend.user.place.ajax.search') }}";
         _token = "{{ csrf_token() }}";
         $.ajax({
             url: ajaxurl,
             type: "POST",
-            data: {_token:_token,search:search},
+            data: {_token:_token,search:search,lat:lat,long:long},
             success: function(data){
                 if(data){
                     console.log(data.html); 
@@ -172,6 +187,9 @@ li.ajax-li:hover {
  
 
       </script>
+
+
+
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif

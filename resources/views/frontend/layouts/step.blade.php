@@ -52,6 +52,10 @@
               main.main-div {
                   margin-top: 3rem;
               }
+              header.re-header.show.arrow-header{
+                margin-top: 6rem;
+                position: relative;
+              }
           </style>     
     <link rel="shortcut icon" href="{{asset('step/assets/images/logo.png')}}" type="images/png" id="favicon">
 	
@@ -87,7 +91,8 @@
               </div>
             </div>
           </div>
-        
+          <input type="hidden" name="latitude" id="latitude"/>
+          <input type="hidden" name="longitude"  id="longitude"/>
             @yield('content')
            
         </main>
@@ -105,6 +110,19 @@
         <script src="{{asset('plugins/parsley/parsley.js')}}"></script>
         <script src="//common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+        <script>
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                document.getElementById("latitude").value = latitude;
+                document.getElementById("longitude").value = longitude;
+            });
+        } else {
+            console.log('Geolocation is not supported in this browser.');
+        }
+    </script>
         <script>
     $(document).ready(function(){       
      

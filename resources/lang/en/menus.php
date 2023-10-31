@@ -193,7 +193,7 @@ return [
             'email-templates' => 'Email Templates',
             'prescriptions' => 'Prescriptions',
             'enterprise_connect' => 'Enterprise Connect',
-            'preciption-types' => 'Preciption Types',
+            'preciption-types' => 'Prescription Types',
             'auto-messages' => 'Admin Messages',
             'mail-messages' => 'Mail & Messages',
             'provinces'=>'Province',

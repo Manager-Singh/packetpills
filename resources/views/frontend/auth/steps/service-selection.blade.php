@@ -46,7 +46,7 @@ button.btn.btn-secondary {
 </style>
 @endpush
 @section('content')
-<div class="container mt-5 mb-5 pt-5">
+<div class="container mt-0 mb-5 pt-0">
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info">
@@ -62,7 +62,7 @@ button.btn.btn-secondary {
                         <div class="col-md-4">
 
               <div class="card blue border-light text-left p-1 mb-4">
-                <a href="{{route('frontend.auth.step.transfer')}}">
+                <a href="{{route('frontend.user.search.pharma')}}">
                   <div class="card-body">
                       <div class="d-flex px-1 px-md-3">
                           <div>
@@ -80,7 +80,7 @@ button.btn.btn-secondary {
 </div>
 <div class="col-md-4">
                  <div class="card red border-light text-left p-1 mb-4">
-                    <a href="{{route('frontend.auth.step.prescription')}}">
+                    <a href="{{route('frontend.user.prescription.upload')}}">
                   <div class="card-body">
                       <div class="d-flex px-1 px-md-3">
                           <div>

@@ -16,6 +16,7 @@ use App\Models\PaymentMethod;
 use App\Models\Drug;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\TransferRequest;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\UploadedFile;
@@ -448,7 +449,19 @@ class UserRepository extends BaseRepository
             $back_url = 'img/frontend/health-card/'.$fileName;
             $healthCard->back_img = $back_url;
             
-        }         
+        }     
+        $healthCard->odsp = null;
+        $healthCard->trillium_program = null;
+        $healthCard->ohip = null;
+        if(isset($data['odsp']) && !empty($data['odsp'])){
+            $healthCard->odsp = $data['odsp'];
+        }
+        if(isset($data['trillium_program']) && !empty($data['trillium_program'])){
+            $healthCard->trillium_program = $data['trillium_program'];
+        }
+        if(isset($data['ohip']) && !empty($data['ohip'])){
+            $healthCard->ohip = $data['ohip'];
+        }
           //dd($healthCard);
             $healthCard->save();
             return $healthCard;
@@ -700,9 +713,20 @@ class UserRepository extends BaseRepository
 
         $search = (isset($array['search'])) ? $array['search'] : '' ;
         $key     = env('Google_API_Key');
+        if(!empty($array['lat']) && !empty($array['long'])){
+            $lat    = $array['lat'];
+            $long   = $array['long'];
+            
+
+            $query = 'key='.$key.'&location=&'.$lat . ',' . $long.'&radius=10&query=pharmacy%20'.$search;
+            //$apiUrl ='https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search;
+        }else{
+            $query = 'key='.$key.'&query=pharmacy%20'.$search;
+           // $apiUrl='https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search;
+        }
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search,
+        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/textsearch/json?'.$query,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -722,8 +746,7 @@ class UserRepository extends BaseRepository
         if($response->status == 'OK'){
 
             foreach($response->results as $result){
-
-                $html .='<li class="ajax-li"><span>'.$result->name.'</span><address>'.$result->formatted_address.'</addrdess></li>';
+                $html .='<li class="ajax-li" data-placeid="'.$result->place_id.'"><span>'.$result->name.'</span><address>'.$result->formatted_address.'</addrdess></li>';
             }
 
         }else{
@@ -813,6 +836,52 @@ class UserRepository extends BaseRepository
         throw new GeneralException(__('Problem With Create Medication.'));
        });
     }
+
+    public function transferRequestSave(array $array){
+
+        
+        
+        $curl = curl_init();
+
+        $search = (isset($array['search'])) ? $array['search'] : '' ;
+        $key     = env('Google_API_Key');
+       
+       $query = 'place_id='.$array['place_id'].'&key='.$key;
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/details/json?'.$query,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = json_decode(curl_exec($curl));
+
+        curl_close($curl);
+      
+        if($response->status == 'OK'){
+            $transferRequest = new TransferRequest();
+            $transferRequest->business_status = $response->result->business_status;
+            $transferRequest->formatted_address = $response->result->formatted_address;
+            $transferRequest->name = $response->result->name;
+            $transferRequest->place_id = $response->result->place_id;
+            $transferRequest->user_id = access()->user()->id;
+            $transferRequest->formatted_phone_number = $response->result->formatted_phone_number;
+
+            if($transferRequest->save()){
+                return $transferRequest;
+            }
+        }else{
+            throw new GeneralException(__('Problem With Create Transfer Request.'));
+        }
+        //$response->status ;
+        //dd($response->result);
+    
+   }
 
 
 }

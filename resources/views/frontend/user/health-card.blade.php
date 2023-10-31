@@ -77,6 +77,23 @@
                             </div>
                           </div>
                             <p class="info">You must be at least 14 year old.</p>
+                            <div class="row">
+                              <div class="col-md-8">
+                              <div class="form-check">
+                                <input class="form-check-input" name="odsp" type="checkbox" id="inlineCheckbox1" value="ODSP" {{(($healthCard && isset($healthCard->odsp)) && $healthCard->odsp == 'ODSP') ? 'checked' : ''}}>
+                                <label class="form-check-label" for="inlineCheckbox1">ODSP</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" name="ohip" type="checkbox" id="inlineCheckbox2" value="OHIP+  (under 25 year old Ontario Program)" {{(($healthCard && isset($healthCard->ohip)) && $healthCard->ohip == 'OHIP+  (under 25 year old Ontario Program)') ? 'checked' : ''}}>
+                                <label class="form-check-label" for="inlineCheckbox2">OHIP+  (under 25 year old Ontario Program)</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" name="trillium_program" type="checkbox" id="inlineCheckbox3" value="Trillium program" {{(($healthCard && isset($healthCard->trillium_program)) && $healthCard->trillium_program == 'Trillium program') ? 'checked' : ''}}>
+                                <label class="form-check-label" for="inlineCheckbox3">Trillium program</label>
+                              </div>
+                            </div>
+
+                            </div>
                            @if($healthCard)
                            <input type="hidden" name="health_id" value="{{$healthCard->id}}" />
                            <button type="submit" id="submit" class="next button" onclick="" >Update</button>

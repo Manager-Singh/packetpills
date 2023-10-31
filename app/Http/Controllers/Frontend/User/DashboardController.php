@@ -219,7 +219,7 @@ class DashboardController extends Controller
     }
     public function healthCardsave(Request $request){
         
-
+        
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->createHealthCard($data);
         if($output){
@@ -425,6 +425,18 @@ class DashboardController extends Controller
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }
+    }
+
+    public function transferRequest(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->transferRequestSave($data);
+        
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Transfer Request Created Successfully'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
     }
     
 }
