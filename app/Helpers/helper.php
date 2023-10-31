@@ -273,6 +273,9 @@ if (! function_exists('sendMessage')) {
 if (! function_exists('sendMail')) {
     function sendMail($type,$message_for=null,$data,$user_id = null){
         $user = User::where('id',$user_id)->first();
+        if(isset($user) && empty($user->email)){
+            return true;
+        }
         if($type=='admin'){
            
             $body = $data."\n\n"."Pharmacy Canada"."\n"."Always with you.";
