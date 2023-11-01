@@ -85,26 +85,26 @@ li.ajax-li:hover {
                               </div>
 
                             </div>
-                            <p class="error"><span>Postal Code Not Found</span><a href="#">Change</a></p> 
+          <!-- <p class="error"><span>Postal Code Not Found</span><a href="#">Change</a></p>-->
                           </div>
                            
                             <div class="col-md-12">
-                            <label for="lname">Populer Searches</label>
-                            <div class="search-div">
-                              <span class="search">                             
-                                  <label>Shopping drug mart</label>
-                              </span>
-                              <span class="search">
-                                  <label>Walmart</label> 
-                              </span>
-                              <span class="search">
-                                  <label>Rexall</label>
-                              </span>
-                              <span class="search">
-                                <label>Costco</label>
-                              </span>
+                                <!-- <label for="lname">Populer Searches</label>
+                                <div class="search-div">
+                                  <span class="search">                             
+                                      <label>Shopping drug mart</label>
+                                  </span>
+                                  <span class="search">
+                                      <label>Walmart</label> 
+                                  </span>
+                                  <span class="search">
+                                      <label>Rexall</label>
+                                  </span>
+                                  <span class="search">
+                                    <label>Costco</label>
+                                  </span>
+                                </div> -->
                             </div>
-                          </div>
                         </div>
                         <input type ="hidden" id="place_id" name="place_id"/>
                         <div class="btn-div transfer-request" style="display:none;">
@@ -113,6 +113,23 @@ li.ajax-li:hover {
                  </div>
                             
                       </form>
+                            @if($transfer_request->count() > 0)
+                            <p class="heading pt-1"><b>Old Transfer Request</b></p>
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr>
+                                  <th>Pharmacy</th>
+                                  <th>Status</th>
+                                </tr>
+                                @foreach($transfer_request as $trequest)
+                                  <tr>
+                                    <td><small>{{$trequest->formatted_address}}</small></td>
+                                    <td><small>{{$trequest->status}}</small></td>
+                                  </tr>
+                                @endforeach
+                              </tbody>
+                            </table>
+                            @endif
                  
                  
                 </div>

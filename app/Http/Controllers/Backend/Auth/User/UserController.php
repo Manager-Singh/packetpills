@@ -11,6 +11,7 @@ use App\Models\Auth\User;
 use App\Models\Province;
 use App\Models\AutoMessage;
 use App\Models\Drug;
+use App\Models\TransferRequest;
 use App\Models\Prescription;
 use App\Models\MedicationItem;
 use App\Models\Order;
@@ -216,7 +217,7 @@ class UserController extends Controller
         $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->get();
         $aaprescriptions = Prescription::where('user_id',$user->id)->get();
         $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
-        
+        $transferRequests = TransferRequest::where('user_id',$user->id)->get();
 
 
         //  print_r('<pre>');
@@ -230,6 +231,7 @@ class UserController extends Controller
                 'prescriptions'=>$prescriptions,
                 'aaprescriptions'=>$aaprescriptions,
                 'orders'=>$orders,
+                'transferRequests'=>$transferRequests,
             ])
             ->withUser($user);
     }
@@ -294,6 +296,12 @@ class UserController extends Controller
         public function orderStatusUpdate(Request $request)
         {
            $data = $this->userRepository->orderStatusUpdate($request->except(['_token', '_method','files']));
+
+            return $data;
+        }
+        public function transferStatusUpdate(Request $request)
+        {
+           $data = $this->userRepository->transferStatusUpdate($request->except(['_token', '_method','files']));
 
             return $data;
         }

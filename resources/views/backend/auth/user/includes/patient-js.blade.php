@@ -331,6 +331,55 @@
             });
 
             });
+
+
+
+            $('.transferStatus').change(function() {
+                var transfer_id = this.id;
+                transfer_id = transfer_id.split('-');
+                var ntransfer_id = transfer_id[1];
+                var transfer_status = $(this).val();
+                var transfer_status_text = $(this).find("option:selected").text();
+                console.log($(this).val());
+                console.log(ntransfer_id); 
+                $.confirm({
+                title: 'Confirm!',
+                content: 'Are you sure to ' + transfer_status_text + ' transfer request?',
+                theme: 'material', // 'material', 'bootstrap'
+                buttons: {
+                    confirm: function() {
+
+
+
+                        var ajaxurl = "{{ route('admin.auth.user.transfer.update.status') }}";
+                        $("#overlay").fadeIn(300);
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: ntransfer_id,
+                                status: transfer_status
+                            },
+                            dataType: 'JSON',
+                            success: function(data) {
+                                if (data != 0) {
+                                   $("#overlay").fadeOut(300);
+                                } else {
+                                    console.log('Problem with save data');
+                                }
+                                $("#overlay").fadeOut(300);
+                            }
+                        });
+
+                    },
+                    cancel: function() {
+
+                    }
+                }
+            });
+
+            });
             
 
         });

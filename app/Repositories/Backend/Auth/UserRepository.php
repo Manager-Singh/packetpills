@@ -23,6 +23,7 @@ use App\Models\Prescription;
 use App\Models\HealthCard;
 use App\Models\PrescriptionIteam;
 use App\Models\Address;
+use App\Models\TransferRequest;
 use App\Models\HealthInformation;
 use App\Models\PaymentMethod;
 use App\Models\Insurance;
@@ -1171,7 +1172,44 @@ class UserRepository extends BaseRepository
            });
     }
 
-    
+    public function transferStatusUpdate($data)
+    {
+
+      
+       
+        return DB::transaction(function () use ($data) {
+            $id = $data['id'];
+            $status = $data['status'];
+            $transferRequest = TransferRequest::find($id);
+            if($transferRequest){
+                $transferRequest->status = $status;
+            }else{
+                $transferRequest->status = $transferRequest->status;
+            }
+            if ($transferRequest->save()) {
+
+                $user = User::where('id',$transferRequest->user_id)->first();
+
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                   
+                    $data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
+                        sendMessage($mobile,'mail','patient_transfer_status',$data);
+                        if(isset($user->email)){
+                            sendMail('mail','patient_transfer_status',$data,$user->id);
+                        }
+                   
+                }
+            
+                return $id;
+            
+        }
+        
+                return 0;
+            
+           // throw new GeneralException(__('Problem With Prescription Status Update.'));
+           });
+    }
 
     
 }

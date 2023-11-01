@@ -15,6 +15,7 @@ use App\Models\Drug;
 use App\Models\Prescription;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\TransferRequest;
 
 /**
  * Class DashboardController.
@@ -406,7 +407,9 @@ class DashboardController extends Controller
     public function searchPharma()
     {
         $user = Auth::user();
-        return view('frontend.user.search-pharma'); 
+        $data['transfer_request'] = TransferRequest::where('user_id',$user->id)->get();
+        $data['user'] = $user;
+        return view('frontend.user.search-pharma',$data); 
     }
 
     public function placeAjaxSearch(Request $request){

@@ -21,7 +21,8 @@ class CreateTransferRequestsTable extends Migration
             $table->string('business_status')->nullable();
             $table->string('formatted_address')->nullable();
             $table->string('formatted_phone_number')->nullable();
-            $table->string('status')->default('active')->commemnt('active,inactive');
+            $table->string('transfer_number')->nullable();
+            $table->string('status')->default('pending')->comment('pending, approved, cancelled, declined, processing');
             $table->timestamps();
             $table->softDeletes();
         });

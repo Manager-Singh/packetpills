@@ -76,6 +76,11 @@
                                 href="#orders" role="tab" aria-controls="orders" aria-expanded="true"><i
                                     class="fas fa-shopping-cart"></i> @lang('Orders')</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link {{ $tab == 'transfer' ? 'active' : '' }}" data-toggle="tab"
+                                href="#transfer-request" role="tab" aria-controls="orders" aria-expanded="true"><i
+                                    class="fas fa-exchange-alt"></i> @lang('Transfer Request')</a>
+                        </li>
 
                     </ul>
 
@@ -115,6 +120,10 @@
                          <div class="tab-pane {{ $tab == 'orders' ? 'active' : '' }}" id="orders"
                             role="tabpanel" aria-expanded="true">
                             @include('backend.auth.user.show.tabs.orders')
+                        </div><!--tab-->
+                         <div class="tab-pane {{ $tab == 'transfer' ? 'active' : '' }}" id="transfer-request"
+                            role="tabpanel" aria-expanded="true">
+                            @include('backend.auth.user.show.tabs.transfer-request')
                         </div><!--tab-->
 
 

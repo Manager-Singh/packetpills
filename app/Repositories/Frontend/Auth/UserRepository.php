@@ -426,8 +426,10 @@ class UserRepository extends BaseRepository
         
         if(isset($data['health_id']) && !empty($data['health_id'])){
             $healthCard = HealthCard::find($data['health_id']);
+            $healthcard_msg_key =   'healthcard_updated';
         }else{
             $healthCard = new HealthCard;
+            $healthcard_msg_key =   'insurance_created';
         }
         
         $healthCard->user_id = auth()->user()->id;
@@ -463,7 +465,27 @@ class UserRepository extends BaseRepository
             $healthCard->ohip = $data['ohip'];
         }
           //dd($healthCard);
-            $healthCard->save();
+            
+            if($healthCard->save()){
+                $user = auth()->user();
+                // send messages to users
+                $mobile = $user->dialing_code.$user->mobile_no;
+                sendMessage($mobile,'mail',$healthcard_msg_key,null);
+                if(isset($user->email)){
+                    sendMail('mail',$healthcard_msg_key,null,$user->id);
+                }
+
+                //send messages to admin
+                $admin = User::whereHas('roles', function ($subQuery) { 
+                                $subQuery->where('name', 'Administrator');
+                            })->first();
+                $data1 =  "Health Card details updated by ".$user->full_name;
+                $adminmobile = $admin->dialing_code.$admin->mobile_no;
+                        sendMessage($adminmobile,'admin',null,$data1);
+                        if(isset($admin->email)){
+                            sendMail('admin',null,$data1,$admin->id);
+                        }
+            }
             return $healthCard;
         
     }
@@ -510,6 +532,25 @@ class UserRepository extends BaseRepository
             }
         }
         if($userData->save()){
+           $user = auth()->user();
+            // send messages to users
+            $mobile = $user->dialing_code.$user->mobile_no;
+            sendMessage($mobile,'mail','insurance_created',null);
+            if(isset($user->email)){
+                sendMail('mail','insurance_created',null,$user->id);
+            }
+
+            //send messages to admin
+            $admin = User::whereHas('roles', function ($subQuery) { 
+                            $subQuery->where('name', 'Administrator');
+                        })->first();
+            $data1 =  "Insurance details updated by ".$user->full_name;
+            $adminmobile = $admin->dialing_code.$admin->mobile_no;
+            sendMessage($adminmobile,'admin',null,$data1);
+            if(isset($admin->email)){
+                sendMail('admin',null,$data1,$admin->id);
+            }
+           
             return true;
         }
         return false;
@@ -537,14 +578,14 @@ class UserRepository extends BaseRepository
             $insurance->back_img = $back_url;
             
         }  
-        $insurance->type = $insurance_type;       
+        $insurance->type = $insurance_type;   
+            
         $insurance->save();
         
 
     }
     public function saveAddress(array $data){
-        $user = auth()->user();  
-        //dd($user);
+        
       if(isset($data['id']) && Address::find($data['id'])){
         $address = Address::find($data['id']);
       }else{
@@ -565,17 +606,30 @@ class UserRepository extends BaseRepository
         }
                
         if($address->save()){
-            sendMessage($user->mobile_no,'mail','address_created',null);
-            if(isset($user->email)){
-                sendMail('mail','address_created',null,$user->id);
-            }
+            $user = auth()->user();
+             // send messages to users
+             $mobile = $user->dialing_code.$user->mobile_no;
+             sendMessage($mobile,'mail','address_created',null);
+             if(isset($user->email)){
+                 sendMail('mail','address_created',null,$user->id);
+             }
+ 
+             //send messages to admin
+             $admin = User::whereHas('roles', function ($subQuery) { 
+                             $subQuery->where('name', 'Administrator');
+                         })->first();
+             $data1 =  "Address details updated by ".$user->full_name;
+             $adminmobile = $admin->dialing_code.$admin->mobile_no;
+             sendMessage($adminmobile,'admin',null,$data1);
+             if(isset($admin->email)){
+                 sendMail('admin',null,$data1,$admin->id);
+             }
         }
         return $address;
         
     }
     public function savePayment(array $data){
-        // dd($data);
-          $card = new PaymentMethod;
+            $card = new PaymentMethod;
           $card->user_id = auth()->user()->id;
           $card->card_number = $data['card_number'];
           $card->expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
@@ -604,7 +658,27 @@ class UserRepository extends BaseRepository
         }    
           
            
-          $card->save();
+          if($card->save()){
+            
+            $user = auth()->user();
+            // send messages to users
+            $mobile = $user->dialing_code.$user->mobile_no;
+            sendMessage($mobile,'mail','payment_method_created',null);
+            if(isset($user->email)){
+                sendMail('mail','payment_method_created',null,$user->id);
+            }
+
+            //send messages to admin
+            $admin = User::whereHas('roles', function ($subQuery) {
+                            $subQuery->where('name', 'Administrator');
+                        })->first();
+            $data1 =  "Payment Method updated by ".$user->full_name;
+            $adminmobile = $admin->dialing_code.$admin->mobile_no;
+            sendMessage($adminmobile,'admin',null,$data1);
+            if(isset($admin->email)){
+                sendMail('admin',null,$data1,$admin->id);
+            }
+        }
           return $card;
           
       }
@@ -629,7 +703,27 @@ class UserRepository extends BaseRepository
         $healthInformation->supplements_medications = $data['supplement_medicaton'];
                 
           
-        $healthInformation->save();
+        if($healthInformation->save()){
+
+            $user = auth()->user();
+            // send messages to users
+            $mobile = $user->dialing_code.$user->mobile_no;
+            sendMessage($mobile,'mail','healthinformation_created',null);
+            if(isset($user->email)){
+                sendMail('mail','healthinformation_created',null,$user->id);
+            }
+
+            //send messages to admin
+            $admin = User::whereHas('roles', function ($subQuery) {
+                            $subQuery->where('name', 'Administrator');
+                        })->first();
+            $data1 =  "Health information updated by ".$user->full_name;
+            $adminmobile = $admin->dialing_code.$admin->mobile_no;
+            sendMessage($adminmobile,'admin',null,$data1);
+            if(isset($admin->email)){
+                sendMail('admin',null,$data1,$admin->id);
+            }
+        }
         return $healthInformation;
         
     }
@@ -839,8 +933,7 @@ class UserRepository extends BaseRepository
 
     public function transferRequestSave(array $array){
 
-        
-        
+
         $curl = curl_init();
 
         $search = (isset($array['search'])) ? $array['search'] : '' ;
@@ -860,19 +953,31 @@ class UserRepository extends BaseRepository
         ));
 
         $response = json_decode(curl_exec($curl));
-
+//dd($response);
         curl_close($curl);
       
         if($response->status == 'OK'){
             $transferRequest = new TransferRequest();
-            $transferRequest->business_status = $response->result->business_status;
-            $transferRequest->formatted_address = $response->result->formatted_address;
-            $transferRequest->name = $response->result->name;
+            $transferRequest->business_status = (isset($response->result->business_status)) ? $response->result->business_status : '';
+            $transferRequest->formatted_address = (isset($response->result->formatted_address)) ? $response->result->formatted_address : '';
+            $transferRequest->name = (isset($response->result->name)) ? $response->result->name : '';
             $transferRequest->place_id = $response->result->place_id;
             $transferRequest->user_id = access()->user()->id;
-            $transferRequest->formatted_phone_number = $response->result->formatted_phone_number;
+            $transferRequest->status = 'pending';
+            $transferRequest->transfer_number = TransferRequest::generateTransferNumber();
+            $transferRequest->formatted_phone_number = (isset($response->result->formatted_phone_number)) ? $response->result->formatted_phone_number : '' ;
 
             if($transferRequest->save()){
+                $user = auth()->user();
+                $admin = User::whereHas('roles', function ($subQuery) { 
+                                $subQuery->where('name', 'Administrator');
+                            })->first();
+                $data1 =  "New transfer request generated by ".$user->full_name;
+                $mobile = $admin->dialing_code.$admin->mobile_no;
+                        sendMessage($mobile,'admin',null,$data1);
+                        if(isset($admin->email)){
+                            sendMail('admin',null,$data1,$admin->id);
+                        }
                 return $transferRequest;
             }
         }else{

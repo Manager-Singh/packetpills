@@ -63,8 +63,21 @@
 
     @if ($user->healthcard)
         <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12 mb-3">
         <p>Health card No: {{$user->healthcard->card_number}}</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="odsp" type="checkbox" id="inlineCheckbox1" value="ODSP" {{(($user->healthcard && isset($user->healthcard->odsp)) && $user->healthcard->odsp == 'ODSP') ? 'checked' : ''}}>
+            <label class="form-check-label" for="inlineCheckbox1">ODSP</label>
+        </div>
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" name="ohip" type="checkbox" id="inlineCheckbox2" value="OHIP+  (under 25 year old Ontario Program)" {{(($user->healthcard && isset($user->healthcard->ohip)) && $user->healthcard->ohip == 'OHIP+  (under 25 year old Ontario Program)') ? 'checked' : ''}}>
+        <label class="form-check-label" for="inlineCheckbox2">OHIP+  (under 25 year old Ontario Program)</label>
+        </div>
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" name="trillium_program" type="checkbox" id="inlineCheckbox3" value="Trillium program" {{(($user->healthcard && isset($user->healthcard->trillium_program)) && $user->healthcard->trillium_program == 'Trillium program') ? 'checked' : ''}}>
+        <label class="form-check-label" for="inlineCheckbox3">Trillium program</label>
+        </div>
+        
         </div>
         </div>
         <div class="row">

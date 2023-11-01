@@ -23,8 +23,8 @@
              </div>
              <div class="list-group list-group-flush mt-4">
                  <p class="txt"><strong>Medications and Prescriptions</strong></p>
-                 <a href="{{route('frontend.user.medications')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}">
-                     <i class="fa fa-medkit" aria-hidden="true"></i><span class="mx-3">Medications</span>
+                 <a href="{{route('frontend.user.dashboard')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}">
+                     <i class="fa fa-home" aria-hidden="true"></i><span class="mx-3">Home</span>
                  </a>
                  <a href="{{route('frontend.user.orders')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}">
                      <i class="fa fa-ambulance" aria-hidden="true"></i><span class="mx-3">Orders</span>
