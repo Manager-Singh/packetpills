@@ -42,6 +42,20 @@
                             </div>
                             <!--col-->
                         </div>
+                        <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="odsp" type="checkbox" id="inlineCheckbox1" value="ODSP" {{(($user->healthcard && isset($user->healthcard->odsp)) && $user->healthcard->odsp == 'ODSP') ? 'checked' : ''}}>
+                            <label class="form-check-label" for="inlineCheckbox1">ODSP</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="ohip" type="checkbox" id="inlineCheckbox2" value="OHIP+  (under 25 year old Ontario Program)" {{(($user->healthcard && isset($user->healthcard->ohip)) && $user->healthcard->ohip == 'OHIP+  (under 25 year old Ontario Program)') ? 'checked' : ''}}>
+                            <label class="form-check-label" for="inlineCheckbox2">OHIP+  (under 25 year old Ontario Program)</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="trillium_program" type="checkbox" id="inlineCheckbox3" value="Trillium program" {{(($user->healthcard && isset($user->healthcard->trillium_program)) && $user->healthcard->trillium_program == 'Trillium program') ? 'checked' : ''}}>
+                            <label class="form-check-label" for="inlineCheckbox3">Trillium program</label>
+                        </div>
+                        </div>
                         <div class="card-footer-prescription">
                           <div class="row">
                               <div class="col">
@@ -70,12 +84,12 @@
             <label class="form-check-label" for="inlineCheckbox1">ODSP</label>
         </div>
         <div class="form-check form-check-inline">
-        <input class="form-check-input" name="ohip" type="checkbox" id="inlineCheckbox2" value="OHIP+  (under 25 year old Ontario Program)" {{(($user->healthcard && isset($user->healthcard->ohip)) && $user->healthcard->ohip == 'OHIP+  (under 25 year old Ontario Program)') ? 'checked' : ''}}>
-        <label class="form-check-label" for="inlineCheckbox2">OHIP+  (under 25 year old Ontario Program)</label>
+            <input class="form-check-input" name="ohip" type="checkbox" id="inlineCheckbox2" value="OHIP+  (under 25 year old Ontario Program)" {{(($user->healthcard && isset($user->healthcard->ohip)) && $user->healthcard->ohip == 'OHIP+  (under 25 year old Ontario Program)') ? 'checked' : ''}}>
+            <label class="form-check-label" for="inlineCheckbox2">OHIP+  (under 25 year old Ontario Program)</label>
         </div>
         <div class="form-check form-check-inline">
-        <input class="form-check-input" name="trillium_program" type="checkbox" id="inlineCheckbox3" value="Trillium program" {{(($user->healthcard && isset($user->healthcard->trillium_program)) && $user->healthcard->trillium_program == 'Trillium program') ? 'checked' : ''}}>
-        <label class="form-check-label" for="inlineCheckbox3">Trillium program</label>
+            <input class="form-check-input" name="trillium_program" type="checkbox" id="inlineCheckbox3" value="Trillium program" {{(($user->healthcard && isset($user->healthcard->trillium_program)) && $user->healthcard->trillium_program == 'Trillium program') ? 'checked' : ''}}>
+            <label class="form-check-label" for="inlineCheckbox3">Trillium program</label>
         </div>
         
         </div>

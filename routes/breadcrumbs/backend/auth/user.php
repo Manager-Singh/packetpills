@@ -3,7 +3,9 @@
 Breadcrumbs::for('admin.auth.user.index', function ($trail) {
     $trail->push(__('labels.backend.access.users.management'), route('admin.auth.user.index'));
 });
-
+Breadcrumbs::for('admin.auth.user.members', function ($trail,$id) {
+    $trail->push(__('labels.backend.access.users.management'), route('admin.auth.user.members',$id));
+});
 Breadcrumbs::for('admin.auth.user.deactivated', function ($trail) {
     $trail->parent('admin.auth.user.index');
     $trail->push(__('menus.backend.access.users.deactivated'), route('admin.auth.user.deactivated'));

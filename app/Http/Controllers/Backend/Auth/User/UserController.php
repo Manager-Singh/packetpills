@@ -306,5 +306,17 @@ class UserController extends Controller
             return $data;
         }
 
+    /**
+     * @param \App\Http\Requests\Backend\Auth\User\ManageUserRequest $request
+     * @param \App\Models\Auth\User $user
+     *
+     * @return mixed
+     */
+    public function members(ManageUserRequest $request, User $user)
+    {
+        
+        return view('backend.auth.user.members');
+    }
+
         
 }

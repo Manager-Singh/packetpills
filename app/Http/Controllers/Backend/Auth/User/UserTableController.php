@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\Auth\User\ManageUserRequest;
 use App\Repositories\Backend\Auth\UserRepository;
 use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Route;
 
 /**
  * Class UserTableController.
@@ -33,7 +34,14 @@ class UserTableController extends Controller
      */
     public function __invoke(ManageUserRequest $request)
     {
-        return Datatables::make($this->repository->getForDataTable($request->get('status'), $request->get('trashed')))
+        
+     
+        if(Route::currentRouteName() == 'admin.auth.user.member.get'){
+            $type   =   'members';
+        }else{
+            $type   =   'users';
+        }
+        return Datatables::make($this->repository->getForDataTable($request->get('status'), $request->get('trashed'),$type))
             ->escapeColumns(['first_name', 'email'])
             ->editColumn('confirmed', function ($user) {
                 return $user->confirmed_label;

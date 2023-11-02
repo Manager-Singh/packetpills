@@ -52,7 +52,7 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getForDataTable($status = 1, $trashed = false)
+    public function getForDataTable($status = 1, $trashed = false, $type = false)
     {
         /**
          * Note: You must return deleted_at or the User getActionButtonsAttribute won't
@@ -70,6 +70,13 @@ class UserRepository extends BaseRepository
                 'users.updated_at',
                 'users.deleted_at',
             ]);
+        
+            if($type == 'members'){
+                $dataTableQuery->where('parent_id','!=',null);
+
+            }else{
+                $dataTableQuery->where('parent_id','=',null);
+            }
 
         if ($trashed == 'true') {
             return $dataTableQuery->onlyTrashed();
@@ -327,7 +334,8 @@ class UserRepository extends BaseRepository
     {
         $user_id = $data['user_id'];
         $healthcard_number = $data['healthcard_number'];
-        return DB::transaction(function () use ($user_id,$healthcard_number,$files) {
+
+        return DB::transaction(function () use ($user_id,$healthcard_number,$files,$data) {
             $healthCardImages = [];
             if(isset($files)){
                 if(count($files)>0){
@@ -352,10 +360,25 @@ class UserRepository extends BaseRepository
                 $healthCard->user_id = $user_id;
                 $hc = 2;
              }
-            $healthCard->front_img = $healthCardImages[0];
-            $healthCard->back_img = $healthCardImages[1];
+            $healthCard->front_img = (isset($healthCardImages[0])) ? $healthCardImages[0] : '';
+            if(isset($healthCardImages[1])){
+                $healthCard->back_img = $healthCardImages[1];
+            }
+            
             $healthCard->is_verify = 1;
             $healthCard->card_number = $healthcard_number;
+            $healthCard->odsp = null;
+            $healthCard->trillium_program = null;
+            $healthCard->ohip = null;
+            if(isset($data['odsp']) && !empty($data['odsp'])){
+                $healthCard->odsp = $data['odsp'];
+            }
+            if(isset($data['trillium_program']) && !empty($data['trillium_program'])){
+                $healthCard->trillium_program = $data['trillium_program'];
+            }
+            if(isset($data['ohip']) && !empty($data['ohip'])){
+                $healthCard->ohip = $data['ohip'];
+            }
             if($healthCard->save()){
                 $user = User::where('id',$user_id)->first();
                 if($user->mobile_no && $user->dialing_code){

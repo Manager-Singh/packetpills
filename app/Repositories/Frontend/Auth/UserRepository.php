@@ -988,5 +988,50 @@ class UserRepository extends BaseRepository
     
    }
 
+   public function addMemberSave(array $input){
+        $user = new User();
+        if(isset($input['first_name'])){
+            $user->first_name = $input['first_name'];
+        }
+        if(isset($input['last_name'])){
+            $user->last_name = $input['last_name'];
+        }
+        if(isset($input['month']) && isset($input['date']) && isset($input['year'])){
+            $user->date_of_birth = $input['date'].'-'.$input['month'].'-'.$input['year'];
+        }
+        if(isset($input['gender'])){
+            $user->gender = $input['gender'];
+        }
+        if(isset($input['email'])){
+            $user->email = $input['email'];
+        }
+        if(isset($input['password'])){
+            $user->password = $input['password'];
+        }
+        if(isset($input['email'])){
+            $user->password = $input['email'];
+        }
+        if(isset($input['phone_no'])){
+            $user->mobile_no = $input['phone_no'];
+        }
+        if(isset($input['relationship'])){
+            if($input['relationship'] == 'Other' && isset($input['relationship_type']) ){
+                $user->relationship_type = $input['relationship_type'];  
+            }
+            $user->relationship = $input['relationship'];
+            
+        }
+        $user->parent_id = access()->user()->id;
+
+        if($user->save()){
+            return $user;
+
+        }else{
+            throw new GeneralException(__('Problem With Create new member.'));
+        }
+    
+
+   }
+
 
 }

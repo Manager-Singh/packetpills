@@ -153,6 +153,18 @@ trait UserAttributes
     /**
      * @return string
      */
+    public function getAddMemberButtonAttribute($class)
+    {
+        if (access()->allow('show-user')) {
+            return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.members', $this).'" title="'.trans('buttons.general.crud.view').'"> 
+                    <i class="fa fa-user-plus"></i>
+                </a>';
+        }
+    }
+
+    /**
+     * @return string
+     */
     public function getShowButtonAttribute($class)
     {
         if (access()->allow('show-user')) {
@@ -320,6 +332,7 @@ trait UserAttributes
         // Check if role have all permission
         if (access()->user()->roles[0]->all) {
             return '<div class="btn-group" role="group" aria-label="'.trans('labels.backend.access.users.user_actions').'">
+                    '.$this->getAddMemberButtonAttribute('btn btn-primary btn-sm').'
                     '.$this->getShowButtonAttribute('btn btn-success btn-sm').'
                     '.$this->getEditButtonAttribute('btn btn-primary btn-sm').'
                     '.$this->getChangePasswordButtonAttribute('btn btn-secondary btn-sm').'

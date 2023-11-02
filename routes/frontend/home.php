@@ -73,5 +73,8 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::post('order/save', [DashboardController::class, 'orderSave'])->name('order.save');
         Route::post('transfer/request', [DashboardController::class, 'transferRequest'])->name('transfer.request');
         
+        Route::get('add-member', [DashboardController::class, 'addMember'])->name('add.member');
+        Route::post('add/member/save', [DashboardController::class, 'addMemberSave'])->name('add.member.save');
+        
     });
 });

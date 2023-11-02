@@ -411,6 +411,12 @@ class DashboardController extends Controller
         $data['user'] = $user;
         return view('frontend.user.search-pharma',$data); 
     }
+    public function addMember()
+    {
+        $user = Auth::user();
+        $data['user'] = $user;
+        return view('frontend.user.add-member',$data); 
+    }
 
     public function placeAjaxSearch(Request $request){
         $data = collect($request->all())->toArray();
@@ -436,6 +442,18 @@ class DashboardController extends Controller
         
         if($output){
             return redirect()->back()->withFlashSuccess(__('Transfer Request Created Successfully'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
+    }
+    
+    public function addMemberSave(Request $request){
+        $data = collect($request->all())->toArray();
+        $output = $this->userRepository->addMemberSave($data);
+        
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Add Member Created Successfully!'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

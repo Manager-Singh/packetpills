@@ -19,6 +19,7 @@ Route::group([
     Route::group(['namespace' => 'User'], function () {
         // For DataTables
         Route::post('user/get', 'UserTableController')->name('user.get');
+        Route::post('user/member/get', 'UserTableController')->name('user.member.get');
 
         // User Status'
         Route::get('user/deactivated', [UserStatusController::class, 'getDeactivated'])->name('user.deactivated');
@@ -56,6 +57,8 @@ Route::group([
             Route::get('edit', [UserController::class, 'edit'])->name('user.edit');
             Route::patch('/', [UserController::class, 'update'])->name('user.update');
             Route::delete('/', [UserController::class, 'destroy'])->name('user.destroy');
+
+            Route::get('members', [UserController::class, 'members'])->name('user.members');
 
             // Account
             Route::get('account/confirm/resend', [UserConfirmationController::class, 'sendConfirmationEmail'])->name('user.account.confirm.resend');

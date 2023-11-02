@@ -197,12 +197,10 @@
                                                     <div class="col-sm-3 nopadding">
                                                         <div class="form-group">
                                                         <div class="input-group">
-                                                            <input type="number" class="form-control"
+                                                            <input type="text" class="form-control"
                                                                 name="price[]" value=""
                                                                 placeholder="Drug Price" required min="1"
-                                                                pattern="[0-9]"
-                                                                onkeypress="return !(event.charCode == 46)"
-                                                                step="1">
+                                                                tep="1">
                                                                  <div class="input-group-btn">
                                                                     <button class="btn btn-success" type="button"
                                                                         onclick="education_fields('{{ $prescription->id }}')">

@@ -12,6 +12,18 @@
                                 aria-controls="order-collapse-{{ $transferRequest->id }}">
                                 {{ $transferRequest->transfer_number }} Created At
                                 {{ $transferRequest->created_at }}
+                                <div class="status-wrapper-{{ $transferRequest->id }}" style="display: inline;">
+                                    @if ($transferRequest->status == 'pending')
+                                        <span class="badge badge-warning"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($transferRequest->status) }}</span>
+                                    @elseif($transferRequest->status == 'cancelled')
+                                        <span class="badge badge-danger"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($transferRequest->status) }}</span>
+                                    @elseif($transferRequest->status == 'approved')
+                                        <span class="badge badge-success"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($transferRequest->status) }}</span>
+                                    @endif
+                                </div>
                             </a>
                         </h4>
 
