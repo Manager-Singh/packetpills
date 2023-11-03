@@ -10,6 +10,7 @@ use App\Models\Auth\User;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Prescription;
 use App\Models\PrescriptionIteam;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Henerate UUID.
@@ -358,6 +359,33 @@ if (! function_exists('getPrescriptionData')) {
     {
         $prescription = Prescription::where('id', $id)->first();
         return $prescription;
+    }
+}
+
+if (! function_exists('getAllChildUsers')) {
+    /**
+     * @return bool
+     */
+    function getAllChildUsers()
+    {
+        
+        $user = auth()->user();
+        if(isset($user->parent_id) && !empty($user->parent_id)){
+            $user = User::find($user->parent_id);
+        }else{
+            $user = User::where('id',$user->id)->where('parent_id',null)->first();
+        }
+        
+       
+        if($user){
+            $orig_user = User::where('id',$user->id)->with('subuser')->get();
+            
+            return $orig_user;
+            
+        }
+        return false;
+        
+        
     }
 }
 

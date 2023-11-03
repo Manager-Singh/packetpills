@@ -8,16 +8,16 @@
                 users_table: $('#users-table'),
             },
 
-            init: function (pageName) {
+            init: function (pageName,uid='') {
 
                 var data = {};
-
+                
                 if (pageName == 'active') {
-                    data = { status: 1, trashed: false };
+                    data = { status: 1, trashed: false,uid:uid };
                 } else if (pageName == 'deleted') {
-                    data = { status: 0, trashed: true };
+                    data = { status: 0, trashed: true, uid:uid };
                 } else if (pageName == 'deactive') {
-                    data = { status: 0, trashed: false };
+                    data = { status: 0, trashed: false,uid:uid };
                 }
 
                 this.selectors.users_table.dataTable({

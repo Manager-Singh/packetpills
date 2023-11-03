@@ -13,6 +13,7 @@ use App\Models\PaymentMethod;
 use App\Models\HealthInformation;
 use App\Models\Prescription;
 use App\Models\MedicationItem;
+use App\Models\Auth\User;
 
 
 
@@ -122,6 +123,11 @@ trait UserRelationships
     public function prescriptions()
     {
         return $this->hasMany(Prescription::class);
+    }
+
+    public function subuser()
+    {
+        return $this->hasMany(User::class, 'parent_id');
     }
     
     

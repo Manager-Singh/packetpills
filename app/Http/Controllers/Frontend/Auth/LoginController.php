@@ -17,6 +17,8 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Session;
+
 /**
  * Class LoginController.
  */
@@ -163,39 +165,42 @@ class LoginController extends Controller
 
         $user = Auth::user();
         // Check to see if the users account is confirmed and active
-        if (! $user->isConfirmed()) {
-           // dd($user->isConfirmed());
-            auth()->logout();
+            if (! $user->isConfirmed()) {
+            // dd($user->isConfirmed());
+                auth()->logout();
 
-            // If the user is pending (account approval is on)
-            if ($user->isPending()) {
-                throw new GeneralException(__('exceptions.frontend.auth.confirmation.pending'));
+                // If the user is pending (account approval is on)
+                if ($user->isPending()) {
+                    throw new GeneralException(__('exceptions.frontend.auth.confirmation.pending'));
+                }
+
+                // Otherwise see if they want to resent the confirmation e-mail
+
+                throw new GeneralException(__('exceptions.frontend.auth.confirmation.resend', ['url' => route('frontend.auth.account.confirm.resend', e($user->{$user->getUuidName()}))]));
             }
 
-            // Otherwise see if they want to resent the confirmation e-mail
+            if (! $user->isActive()) {
+                auth()->logout();
+            
+                throw new GeneralException(__('exceptions.frontend.auth.deactivated'));
+            }
 
-            throw new GeneralException(__('exceptions.frontend.auth.confirmation.resend', ['url' => route('frontend.auth.account.confirm.resend', e($user->{$user->getUuidName()}))]));
-        }
+            event(new UserLoggedIn($user));
 
-        if (! $user->isActive()) {
-            auth()->logout();
+            Session::put( 'orig_user', $user->id );
            
-            throw new GeneralException(__('exceptions.frontend.auth.deactivated'));
-        }
 
-        event(new UserLoggedIn($user));
+            if (config('access.users.single_login')) {
+                auth()->logoutOtherDevices($request->password);
+            }
+            if( Auth::user()->hasRole('Administrator')){
+                return redirect()->route('admin.dashboard');
+            }
+            if($user->profile_step==0){
+                return redirect()->route('frontend.auth.service.selection');
+            }
 
-        if (config('access.users.single_login')) {
-            auth()->logoutOtherDevices($request->password);
-        }
-        if( Auth::user()->hasRole('Administrator')){
-            return redirect()->route('admin.dashboard');
-        }
-        if($user->profile_step==0){
-            return redirect()->route('frontend.auth.service.selection');
-        }
-
-        return redirect()->intended($this->redirectPath());
+            return redirect()->intended($this->redirectPath());
         }
 
         return redirect("account/login")->withFlashDanger(__('exceptions.frontend.auth.password.wrong_password'));
@@ -363,4 +368,6 @@ class LoginController extends Controller
 
         return redirect()->route('frontend.index');
     }
+
+
 }

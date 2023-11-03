@@ -32,20 +32,39 @@
                  <a href="{{route('frontend.user.prescription')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}">
                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="mx-3">Prescriptions</span>
                  </a>
-                 <div class="acc-info">
-                     <p class="txt mt-5"><strong>Other Accounts</strong></p>
-                     <a href="#">
-                         <div class="left">
-                             <p class="user-ins">DT</p>
-                             <p class="user-name">Demo Test</p>
-                             <p class="info">Other</p>
-                         </div>
-                         <div class="right">
-                             <span class="info">Switch</span>
-                         </div>
-                     </a>
+                 
+                @if(getAllChildUsers())
+                
+                    <div class="acc-info">
+                        <p class="txt mt-5"><strong>Other Accounts</strong></p>
+                        @foreach(getAllChildUsers() as $user)
+                            <a href="{{route('frontend.user.switch.start',$user->id)}}">
+                                <div class="left">
+                                    <p class="user-ins">{{substr($user->first_name, 0, 1)}}{{substr($user->last_name, 0, 1)}}</p>
+                                    <p class="user-name">{{$user->full_name}}</p>
+                                    <p class="info">Primary</p>
+                                </div>
+                                <div class="right swt">
+                                    <span class="info">Switch</span>
+                                </div>
+                            </a>
+                            @foreach($user->subuser as $sbuser)
+                                <a href="{{route('frontend.user.switch.start',$sbuser->id)}}">
+                                    <div class="left">
+                                        <p class="user-ins">{{substr($sbuser->first_name, 0, 1)}}{{substr($sbuser->last_name, 0, 1)}}</p>
+                                        <p class="user-name">{{$sbuser->full_name}}</p>
+                                        <p class="info">Other</p>
+                                    </div>
+                                    <div class="right swt">
+                                         <span class="info">Switch</span>
+                                    </div>
+                                </a>
+                            @endforeach
+                        @endforeach
+                    </div>
 
-                 </div>
+                @endif
+
                  <div class="sidebar-footer">
                      <div class="left">
                          <a href="#">
@@ -73,8 +92,9 @@
              <p class="user-name"> {{(auth()->check()) ? auth()->user()->full_name: 'Alexandre'}} <i class="fa fa-sort-desc" aria-hidden="true"></i></p>
          </div>
          <div class="col-md-6 text-end">
-             
-             <a href="#" class="profile-btn"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Member</a>
+             @if(auth()->check() && auth()->user()->parent_id == null)
+                <a href="{{route('frontend.user.add.member')}}" class="profile-btn"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Member</a>
+             @endif
          </div>
      </div>
      <div class="row menu">

@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         
         Route::get('add-member', [DashboardController::class, 'addMember'])->name('add.member');
         Route::post('add/member/save', [DashboardController::class, 'addMemberSave'])->name('add.member.save');
+        Route::get('switch/start/{id}', [DashboardController::class, 'user_switch_start'])->name('switch.start');
         
     });
 });

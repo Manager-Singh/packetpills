@@ -35,13 +35,14 @@ class UserTableController extends Controller
     public function __invoke(ManageUserRequest $request)
     {
         
-     
         if(Route::currentRouteName() == 'admin.auth.user.member.get'){
             $type   =   'members';
+            $uid    =   $request->uid;
         }else{
             $type   =   'users';
+            $uid    =   $request->uid;
         }
-        return Datatables::make($this->repository->getForDataTable($request->get('status'), $request->get('trashed'),$type))
+        return Datatables::make($this->repository->getForDataTable($request->get('status'), $request->get('trashed'),$type,$uid))
             ->escapeColumns(['first_name', 'email'])
             ->editColumn('confirmed', function ($user) {
                 return $user->confirmed_label;

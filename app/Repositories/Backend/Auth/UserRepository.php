@@ -52,7 +52,7 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getForDataTable($status = 1, $trashed = false, $type = false)
+    public function getForDataTable($status = 1, $trashed = false, $type = false, $uid= false)
     {
         /**
          * Note: You must return deleted_at or the User getActionButtonsAttribute won't
@@ -71,8 +71,9 @@ class UserRepository extends BaseRepository
                 'users.deleted_at',
             ]);
         
-            if($type == 'members'){
-                $dataTableQuery->where('parent_id','!=',null);
+            if($type == 'members' && $uid){
+                //dd($uid);
+                $dataTableQuery->where('parent_id','=',$uid);
 
             }else{
                 $dataTableQuery->where('parent_id','=',null);
@@ -165,14 +166,22 @@ class UserRepository extends BaseRepository
             $payment_method->default = 'yes';
             if($payment_method->save()){
                 $user = User::where('id',$user_id)->first();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  ' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $user_id = $user->id;
+                }else{
+                    $data =  "";
+                    
+                }
+
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
-                    // print_r($mobile);
-                    // die;
-                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
-                    sendMessage($mobile,'mail','payment_method_created',null);
+                    sendMessage($mobile,'mail','payment_method_created',$data);
                     if(isset($user->email)){
-                        sendMail('mail','payment_method_created',null,$user_id);
+                        sendMail('mail','payment_method_created',$data,$user_id);
                     }
 
                 }
@@ -240,14 +249,23 @@ class UserRepository extends BaseRepository
             $payment_method->default = 'yes';
             if($payment_method->save()){
                 $user = User::where('id',$user_id)->first();
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  ' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $user_id = $user->id;
+                }else{
+                    $data =  "";
+                    
+                }
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
-                    sendMessage($mobile,'mail','payment_method_updated',null);
+                    sendMessage($mobile,'mail','payment_method_updated',$data);
                     if(isset($user->email)){
-                        sendMail('mail','payment_method_updated',null,$user_id);
+                        sendMail('mail','payment_method_updated',$data,$user_id);
                     }
                 }
                 return true;
@@ -274,14 +292,24 @@ class UserRepository extends BaseRepository
             $address->is_verify = 1;
             if($address->save()){
                 $user = User::where('id',$user_id)->first();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  ' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $user_id = $user->id;
+                }else{
+                    $data =  "";
+                    
+                }
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
-                    sendMessage($mobile,'mail','address_created',null);
+                    sendMessage($mobile,'mail','address_created',$data);
                     if(isset($user->email)){
-                        sendMail('mail','address_created',null,$user_id);
+                        sendMail('mail','address_created',$data,$user_id);
                     }
                 }
                 return true;
@@ -313,14 +341,25 @@ class UserRepository extends BaseRepository
             $address->is_verify = 1;
             if($address->save()){
                 $user = User::where('id',$user_id)->first();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  ' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $user_id = $user->id;
+                }else{
+                    $data =  "";
+                    
+                }
+
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
-                    sendMessage($mobile,'mail','address_updated',null);
+                    sendMessage($mobile,'mail','address_updated',$data);
                     if(isset($user->email)){
-                        sendMail('mail','address_updated',null,$user_id);
+                        sendMail('mail','address_updated',$data,$user_id);
                     }
                 }
                 return true;
@@ -381,20 +420,30 @@ class UserRepository extends BaseRepository
             }
             if($healthCard->save()){
                 $user = User::where('id',$user_id)->first();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  ' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $user_id = $user->id;
+                }else{
+                    $data =  "";
+                    
+                }
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
                     if($hc=1){
-                        sendMessage($mobile,'mail','healthcard_updated',null);
+                        sendMessage($mobile,'mail','healthcard_updated',$data);
                         if(isset($user->email)){
-                            sendMail('mail','healthcard_updated',null,$user_id);
+                            sendMail('mail','healthcard_updated',$data,$user_id);
                         }
                     }else{
-                        sendMessage($mobile,'mail','healthcard_created',null);
+                        sendMessage($mobile,'mail','healthcard_created',$data);
                         if(isset($user->email)){
-                            sendMail('mail','healthcard_created',null,$user_id);
+                            sendMail('mail','healthcard_created',$data,$user_id);
                         }
                     }
                     
@@ -469,20 +518,30 @@ class UserRepository extends BaseRepository
             $insurance->is_verify = 1;
             if($insurance->save()){
                 $user = User::where('id',$user_id)->first();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  ' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $user_id = $user->id;
+                }else{
+                    $data =  null;
+                    
+                }
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
                     if($insu=1){
-                        sendMessage($mobile,'mail','insurance_updated',null);
+                        sendMessage($mobile,'mail','insurance_updated',$data);
                         if(isset($user->email)){
-                            sendMail('mail','insurance_updated',null,$user_id);
+                            sendMail('mail','insurance_updated',$data,$user_id);
                         }
                     }else{
-                        sendMessage($mobile,'mail','insurance_created',null);
+                        sendMessage($mobile,'mail','insurance_created',$data);
                         if(isset($user->email)){
-                            sendMail('mail','insurance_created',null,$user_id);
+                            sendMail('mail','insurance_created',$data,$user_id);
                         }
                     }
                 }
@@ -519,20 +578,32 @@ class UserRepository extends BaseRepository
             }
             if($HealthInformation->save()){
                 $user = User::where('id',$user_id)->first();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  ' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $user_id = $user->id;
+                }else{
+                    $data =  null;
+                    
+                }
+
+
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
                     if($Hi=1){
-                        sendMessage($mobile,'mail','healthinformation_updated',null);
+                        sendMessage($mobile,'mail','healthinformation_updated',$data);
                         if(isset($user->email)){
-                            sendMail('mail','healthinformation_updated',null,$user_id);
+                            sendMail('mail','healthinformation_updated',$data,$user_id);
                         }
                     }else{
-                        sendMessage($mobile,'mail','healthinformation_created',null);
+                        sendMessage($mobile,'mail','healthinformation_created',$data);
                         if(isset($user->email)){
-                            sendMail('mail','healthinformation_created',null,$user_id);
+                            sendMail('mail','healthinformation_created',$data,$user_id);
                         }
                     }
                 }
@@ -570,9 +641,17 @@ class UserRepository extends BaseRepository
                             $prescriptionIteam->save();
                             $page_no++;
                         }
+                        if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                            $data =  "Your Prescription no is ".$prescription->prescription_number.' & created to '.$user->full_name;
+                            $user = User::where('id',$user->parent_id)->first(); 
+                            $user_id = $user->id;
+                        }else{
+                            $data =  "Your Prescription no is ".$prescription->prescription_number;
+                            
+                        }
                         if($user->mobile_no && $user->dialing_code){
                             $mobile = $user->dialing_code.$user->mobile_no;
-                            $data =  "Your Prescription no is ".$prescription->prescription_number;
+                            //$data =  "Your Prescription no is ".$prescription->prescription_number;
                             sendMessage($mobile,'mail','patient_prescription_created',$data);
                             if(isset($user->email)){
                                 sendMail('mail','patient_prescription_created',$data,$user_id);
@@ -612,14 +691,22 @@ class UserRepository extends BaseRepository
                 if($t==1){
                     $user = User::where('id',$data['user_id'])->first();
 
+                    if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                        $data =  "Your Prescription no is ".getPrescriptionData($data['prescription_id'])->prescription_number.' & created to '.$user->full_name;
+                        $user = User::where('id',$user->parent_id)->first(); 
+                   }else{
+                    $data =  "Your Prescription no is ".getPrescriptionData($data['prescription_id'])->prescription_number;
+                        
+                    }
+
                     if($user->mobile_no && $user->dialing_code){
                         $mobile = $user->dialing_code.$user->mobile_no;
                         // print_r($mobile);
                         // die;
-                        $data =  "Your Prescription no is ".getPrescriptionData($data['prescription_id'])->prescription_number;
-                            sendMessage($mobile,'mail','patient_medication_created',null);
+                        
+                            sendMessage($mobile,'mail','patient_medication_created',$data);
                             if(isset($user->email)){
-                                sendMail('mail','patient_medication_created',null,$user->id);
+                                sendMail('mail','patient_medication_created',$data,$user->id);
                             }
                          
     
@@ -655,11 +742,18 @@ class UserRepository extends BaseRepository
                 }
                 $user = User::where('id',$order->user_id)->first();
 
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount.' & created to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+               }else{
+                    $data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;   
+                }
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
-                    $data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
+                    //$data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
                         sendMessage($mobile,'mail','patient_order_created',$data);
                         if(isset($user->email)){
                             sendMail('mail','patient_order_created',$data,$user->id);
@@ -797,14 +891,22 @@ class UserRepository extends BaseRepository
                 // die;
                     
                 }
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  ' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $user_id = $user->id;
+                }else{
+                    $data =  null;
+                    
+                }
 
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
-                    sendMessage($mobile,'mail','patient_account_updated',$data=null);
+                    sendMessage($mobile,'mail','patient_account_updated',$data);
                     if(isset($user->email)){
-                        sendMail('mail','patient_account_updated',null,$user->id);
+                        sendMail('mail','patient_account_updated',$data,$user->id);
                     }
                 }
                
@@ -1116,12 +1218,17 @@ class UserRepository extends BaseRepository
                 if ($prescription->save()) {
 
                     $user = User::where('id',$prescription->user_id)->first();
-
+                    
+                    if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                        $data =  "Your Prescription no is ".$prescription->prescription_number.' & status changed to '.$user->full_name;
+                        $user = User::where('id',$user->parent_id)->first(); 
+                   }else{
+                        $data =  "Your Prescription no is ".$prescription->prescription_number;
+                        
+                    }
                     if($user->mobile_no && $user->dialing_code){
                         $mobile = $user->dialing_code.$user->mobile_no;
-                        // print_r($mobile);
-                        // die;
-                        $data =  "Your Prescription no is ".$prescription->prescription_number;
+                       // $data =  "Your Prescription no is ".$prescription->prescription_number;
                         if($prescription->status=='cancelled'){ 
                             sendMessage($mobile,'mail','patient_prescription_cancelled',$data);
                             if(isset($user->email)){
@@ -1166,12 +1273,19 @@ class UserRepository extends BaseRepository
 
                 $user = User::where('id',$order->user_id)->first();
 
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  $status." & Your Order no is ".$order->order_number.' & status changed to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+               }else{
+                    $data =  $status." & Your Order no is ".$order->order_number;
+                }
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                     // print_r($mobile);
                     // die;
                     if($type=='order'){
-                    $data =  $status." & Your Order no is ".$order->order_number;
+                   // $data =  $status." & Your Order no is ".$order->order_number;
                         sendMessage($mobile,'mail','patient_order_status',$data);
                         if(isset($user->email)){
                             sendMail('mail','patient_order_status',$data,$user->id);
@@ -1213,10 +1327,16 @@ class UserRepository extends BaseRepository
 
                 $user = User::where('id',$transferRequest->user_id)->first();
 
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  $status."  & Your transfer number is ".$transferRequest->transfer_number.' & status changed to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+               }else{
+                    $data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
+                }
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
                    
-                    $data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
+                    //$data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
                         sendMessage($mobile,'mail','patient_transfer_status',$data);
                         if(isset($user->email)){
                             sendMail('mail','patient_transfer_status',$data,$user->id);

@@ -332,7 +332,7 @@ trait UserAttributes
         // Check if role have all permission
         if (access()->user()->roles[0]->all) {
             return '<div class="btn-group" role="group" aria-label="'.trans('labels.backend.access.users.user_actions').'">
-                    '.$this->getAddMemberButtonAttribute('btn btn-primary btn-sm').'
+                    '.$this->getAddMemberButtonAttribute('btn btn-primary btn-sm add-member').'
                     '.$this->getShowButtonAttribute('btn btn-success btn-sm').'
                     '.$this->getEditButtonAttribute('btn btn-primary btn-sm').'
                     '.$this->getChangePasswordButtonAttribute('btn btn-secondary btn-sm').'

@@ -5,7 +5,13 @@
 @section('breadcrumb-links')
 @include('backend.auth.user.includes.breadcrumb-links')
 @endsection
-
+@push('after-styles')
+<style>
+    .add-member {
+        display: none;
+    }
+</style>
+@endpush
 @section('content')
 <div class="card">
     <div class="card-body">
@@ -23,7 +29,7 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="table-responsive" style="overflow-y:visible;overflow-x:visible;">
-                    <table class="table" id="users-table" data-ajax_url="{{ route("admin.auth.user.member.get") }}">
+                    <table class="table" id="users-table" data-ajax_url="{{ route('admin.auth.user.member.get') }}">
                         <thead>
                             <tr>
                                 <th>@lang('labels.backend.access.users.table.last_name')</th>
@@ -53,7 +59,7 @@
 @section('pagescript')
 <script>
     FTX.Utils.documentReady(function() {
-        FTX.Users.list.init('active');
+        FTX.Users.list.init('active',{{$user->id}});
     });
 </script>
 @endsection

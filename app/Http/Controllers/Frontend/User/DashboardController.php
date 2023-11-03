@@ -16,6 +16,8 @@ use App\Models\Prescription;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\TransferRequest;
+use Illuminate\Support\Facades\Session;
+use App\Models\Auth\User;
 
 /**
  * Class DashboardController.
@@ -458,6 +460,12 @@ class DashboardController extends Controller
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }
         
+    }
+    public function user_switch_start( $id ){
+        $new_user = User::find( $id );
+        Session::put( 'orig_user', Auth::id() );
+        Auth::login( $new_user );
+        return redirect()->back();
     }
     
 }

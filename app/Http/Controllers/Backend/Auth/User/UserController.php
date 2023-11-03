@@ -156,14 +156,22 @@ class UserController extends Controller
     
     public function send_message(Request $request)
     {
-       
+            $user = User::where('id',$request->user_id)->first();
+            if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                $data =  ' to '.$user->full_name;
+                $user = User::where('id',$user->parent_id)->first(); 
+                $user_id = $user->id;
+            }else{
+                $data =  "";
+                
+            }
             
             if($request->isSmsChecked=='true'){
-                $response_data = sendMessage($request->dialingCode.$request->mobile_no,'admin',null,$request->message);
+                $response_data = sendMessage($user->dialingCode.$user->mobile_no,'admin',null,$request->message);
             }
 
             if($request->isEmailChecked=='true'){
-                $response_data = sendMail('admin',null,$request->message,$request->user_id);
+                $response_data = sendMail('admin',null,$request->message,$user->id);
             }
 
             return $response_data;
@@ -314,8 +322,7 @@ class UserController extends Controller
      */
     public function members(ManageUserRequest $request, User $user)
     {
-        
-        return view('backend.auth.user.members');
+        return view('backend.auth.user.members')->withUser($user);
     }
 
         

@@ -1022,7 +1022,7 @@ class UserRepository extends BaseRepository
             
         }
         $user->parent_id = access()->user()->id;
-
+        $user->attachRole(3);
         if($user->save()){
             return $user;
 
