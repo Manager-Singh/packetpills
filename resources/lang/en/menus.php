@@ -24,6 +24,10 @@ return [
                 'main' => 'Roles',
             ],
 
+            'members' => [
+                'create' => 'Create Member',
+            ],
+
             'users' => [
                 'all' => 'All Patients',
                 'active' => 'Active Patients',

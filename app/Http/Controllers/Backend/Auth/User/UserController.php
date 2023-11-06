@@ -70,6 +70,20 @@ class UserController extends Controller
     }
 
     /**
+     * @param \App\Http\Requests\Backend\Auth\User\ManageUserRequest $request
+     *
+     * @return mixed
+     */
+    public function memberCreate(ManageUserRequest $request,$user)
+    {
+        $province = Province::get()->pluck('name','name');
+        return view('backend.auth.user.create')->with([
+               'provinces'=>$province,
+               'member_id'=>$user->id,
+           ])->withRoles($this->roleRepository->getAll());
+    }
+
+    /**
      * @param \App\Http\Requests\Backend\Auth\User\StoreUserRequest $request
      *
      * @throws \Throwable

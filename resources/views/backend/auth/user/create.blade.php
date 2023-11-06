@@ -1,9 +1,22 @@
 @extends('backend.layouts.app')
 
+@if(isset($member_id))
+@section('title', __('labels.backend.access.members.management') . ' | ' . __('labels.backend.access.members.create'))
+
+
+@else
 @section('title', __('labels.backend.access.users.management') . ' | ' . __('labels.backend.access.users.create'))
 
+@endif
+
+
 @section('breadcrumb-links')
-    @include('backend.auth.user.includes.breadcrumb-links')
+    @if(isset($member_id))
+        @include('backend.auth.user.includes.breadcrumb-links',['member_id'=>$member_id])
+    @else
+        @include('backend.auth.user.includes.breadcrumb-links')
+    @endif
+    
 @endsection
 
 @section('content')
@@ -16,8 +29,17 @@
             <div class="row">
                 <div class="col-sm-5">
                     <h4 class="card-title mb-0">
+                    @if(isset($member_id))
+                        @lang('labels.backend.access.members.management')
+                    @else
                         @lang('labels.backend.access.users.management')
-                        <small class="text-muted">@lang('labels.backend.access.users.create')</small>
+                    @endif
+                    @if(isset($member_id))  
+                        <small class="text-muted">@lang('labels.backend.access.members.create')</small>
+                    @else
+                        <small class="text-muted">@lang('labels.backend.access.users.create')</small>   
+                    @endif
+                        
                     </h4>
                 </div>
                 <!--col-->
@@ -209,7 +231,9 @@
                         </div>
                     </div>
                     <!--form-group-->
-
+                    @if(isset($member_id)) 
+                        <input type="hidden" name="parent_id" value="{{$member_id}}" />
+                    @endif
                     <div class="form-group row">
                         {{ Form::label('associated-permissions', trans('validation.attributes.backend.access.roles.associated_permissions'), ['class' => 'col-md-2 control-label']) }}
                         <div class="col-md-10 search-permission">

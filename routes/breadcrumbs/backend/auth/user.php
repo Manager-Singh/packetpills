@@ -20,6 +20,10 @@ Breadcrumbs::for('admin.auth.user.create', function ($trail) {
     $trail->parent('admin.auth.user.index');
     $trail->push(__('labels.backend.access.users.create'), route('admin.auth.user.create'));
 });
+Breadcrumbs::for('admin.auth.member.create', function ($trail,$id) {
+    $trail->parent('admin.auth.user.index');
+    $trail->push(__('labels.backend.access.members.create'), route('admin.auth.member.create',$id));
+});
 
 Breadcrumbs::for('admin.auth.user.show', function ($trail, $id) {
     $trail->parent('admin.auth.user.index');

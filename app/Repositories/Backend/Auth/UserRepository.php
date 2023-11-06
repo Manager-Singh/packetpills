@@ -1125,6 +1125,9 @@ class UserRepository extends BaseRepository
         $user->confirmation_code = md5(uniqid(mt_rand(), true));
         $user->confirmed = isset($input['confirmed']) ? 1 : 0;
         $user->created_by = access()->user()->id;
+        if(isset($input['parent_id']) && !empty($input['parent_id'])){
+            $user->parent_id = $input['parent_id'];
+        }
 
         return $user;
     }

@@ -28,6 +28,7 @@ Route::group([
         // User CRUD
         Route::get('user', [UserController::class, 'index'])->name('user.index');
         Route::get('user/create', [UserController::class, 'create'])->name('user.create');
+        
         Route::post('user', [UserController::class, 'store'])->name('user.store');
         Route::post('user/create/prescription', [UserController::class, 'create_prescription'])->name('user.create.prescription');
         Route::post('user/create/healthcard', [UserController::class, 'create_healthcard'])->name('user.create.healthcard');
@@ -59,7 +60,7 @@ Route::group([
             Route::delete('/', [UserController::class, 'destroy'])->name('user.destroy');
 
             Route::get('members', [UserController::class, 'members'])->name('user.members');
-
+            Route::get('member/create', [UserController::class, 'memberCreate'])->name('member.create');
             // Account
             Route::get('account/confirm/resend', [UserConfirmationController::class, 'sendConfirmationEmail'])->name('user.account.confirm.resend');
 

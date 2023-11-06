@@ -78,7 +78,10 @@ return [
                     'total' => 'permissions total|permissions total',
                 ],
             ],
-
+            'members' => [
+                'create' => 'Create Member',
+                'management' => 'Member management',
+            ],
             'users' => [
                 'active' => 'Active Patients',
                 'all_permissions' => 'All Permissions',
@@ -93,6 +96,7 @@ return [
                 'no_roles' => 'No Roles to set.',
                 'permissions' => 'Permissions',
                 'user_actions' => 'Patients Actions',
+                'create' => 'Create Member',
 
                 'table' => [
                     'confirmed' => 'Confirmed',

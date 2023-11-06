@@ -3,7 +3,7 @@
 @section('title', app_name() . ' | ' . __('labels.backend.access.users.management'))
 
 @section('breadcrumb-links')
-@include('backend.auth.user.includes.breadcrumb-links')
+@include('backend.auth.user.includes.breadcrumb-links',['member_id'=>$user->id])
 @endsection
 @push('after-styles')
 <style>
