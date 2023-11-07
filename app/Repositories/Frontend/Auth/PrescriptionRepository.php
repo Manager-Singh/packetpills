@@ -151,10 +151,17 @@ class PrescriptionRepository extends BaseRepository
                     $prescription_iteams->save();
                 }
 
-                
+                   
+                    if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                        $data =  "Your Prescription no is ".$prescription->prescription_number.' to '.$user->full_name;
+                        $user = User::where('id',$user->parent_id)->first(); 
+                   }else{
+                        $data =  "Your Prescription no is ".$prescription->prescription_number;
+                        
+                    }
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
-                    $data =  "Your Prescription no is ".$prescription->prescription_number;
                     sendMessage($mobile,'mail','patient_prescription_created',$data);
                     if(isset($user->email)){
                         sendMail('mail','patient_prescription_created',$data,$user->id);

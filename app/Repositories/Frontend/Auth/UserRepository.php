@@ -168,6 +168,11 @@ class UserRepository extends BaseRepository
         }
         if( $user->save()){
             if(isset($input['password_updated'])){
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $user = User::where('id',$user->parent_id)->first(); 
+                   
+                }
                 
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
@@ -468,6 +473,17 @@ class UserRepository extends BaseRepository
             
             if($healthCard->save()){
                 $user = auth()->user();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $parient_name = $user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $data1 =  "Health Card details updated by ".$user->full_name.' to '.$parient_name;
+                }else{
+                    $data1 =  "Health Card details updated by ".$user->full_name;
+                    
+                }
+
+
                 // send messages to users
                 $mobile = $user->dialing_code.$user->mobile_no;
                 sendMessage($mobile,'mail',$healthcard_msg_key,null);
@@ -479,7 +495,6 @@ class UserRepository extends BaseRepository
                 $admin = User::whereHas('roles', function ($subQuery) { 
                                 $subQuery->where('name', 'Administrator');
                             })->first();
-                $data1 =  "Health Card details updated by ".$user->full_name;
                 $adminmobile = $admin->dialing_code.$admin->mobile_no;
                         sendMessage($adminmobile,'admin',null,$data1);
                         if(isset($admin->email)){
@@ -533,6 +548,16 @@ class UserRepository extends BaseRepository
         }
         if($userData->save()){
            $user = auth()->user();
+           if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                $parient_name = $user->full_name;
+                $user = User::where('id',$user->parent_id)->first(); 
+                $data1 =  "Insurance details updated by ".$user->full_name.' to '.$parient_name;
+            }else{
+                $data1 =  "Insurance details updated by ".$user->full_name;
+                
+            }
+
+
             // send messages to users
             $mobile = $user->dialing_code.$user->mobile_no;
             sendMessage($mobile,'mail','insurance_created',null);
@@ -544,7 +569,6 @@ class UserRepository extends BaseRepository
             $admin = User::whereHas('roles', function ($subQuery) { 
                             $subQuery->where('name', 'Administrator');
                         })->first();
-            $data1 =  "Insurance details updated by ".$user->full_name;
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
             sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
@@ -607,6 +631,16 @@ class UserRepository extends BaseRepository
                
         if($address->save()){
             $user = auth()->user();
+
+            if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                $parient_name = $user->full_name;
+                $user = User::where('id',$user->parent_id)->first(); 
+                $data1 =  "Address details updated by ".$user->full_name.' to '.$parient_name;
+            }else{
+                $data1 =  "Address details updated by ".$user->full_name;
+                
+            }
+
              // send messages to users
              $mobile = $user->dialing_code.$user->mobile_no;
              sendMessage($mobile,'mail','address_created',null);
@@ -618,7 +652,6 @@ class UserRepository extends BaseRepository
              $admin = User::whereHas('roles', function ($subQuery) { 
                              $subQuery->where('name', 'Administrator');
                          })->first();
-             $data1 =  "Address details updated by ".$user->full_name;
              $adminmobile = $admin->dialing_code.$admin->mobile_no;
              sendMessage($adminmobile,'admin',null,$data1);
              if(isset($admin->email)){
@@ -661,6 +694,16 @@ class UserRepository extends BaseRepository
           if($card->save()){
             
             $user = auth()->user();
+
+            if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                $parient_name = $user->full_name;
+                $user = User::where('id',$user->parent_id)->first(); 
+                $data1 =  "Payment Method updated by ".$user->full_name.' to '.$parient_name;
+            }else{
+                $data1 =  "Payment Method updated by ".$user->full_name;
+                
+            }
+
             // send messages to users
             $mobile = $user->dialing_code.$user->mobile_no;
             sendMessage($mobile,'mail','payment_method_created',null);
@@ -672,7 +715,6 @@ class UserRepository extends BaseRepository
             $admin = User::whereHas('roles', function ($subQuery) {
                             $subQuery->where('name', 'Administrator');
                         })->first();
-            $data1 =  "Payment Method updated by ".$user->full_name;
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
             sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
@@ -706,6 +748,17 @@ class UserRepository extends BaseRepository
         if($healthInformation->save()){
 
             $user = auth()->user();
+            
+            if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                $parient_name = $user->full_name;
+                $user = User::where('id',$user->parent_id)->first(); 
+                $data1 =  "Health information updated by ".$user->full_name.' to '.$parient_name;
+            }else{
+                $data1 =  "Health information updated by ".$user->full_name;
+                
+            }
+
+
             // send messages to users
             $mobile = $user->dialing_code.$user->mobile_no;
             sendMessage($mobile,'mail','healthinformation_created',null);
@@ -717,7 +770,7 @@ class UserRepository extends BaseRepository
             $admin = User::whereHas('roles', function ($subQuery) {
                             $subQuery->where('name', 'Administrator');
                         })->first();
-            $data1 =  "Health information updated by ".$user->full_name;
+            //$data1 =  "Health information updated by ".$user->full_name;
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
             sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
@@ -812,13 +865,14 @@ class UserRepository extends BaseRepository
             $long   = $array['long'];
             
 
-            $query = 'key='.$key.'&location=&'.$lat . ',' . $long.'&radius=10&query=pharmacy%20'.$search;
+            $query = 'key='.$key.'&location=&'.$lat . ',' . $long.'&radius=50000&query=pharmacy%20'.$search.'+in+Canada';
             //$apiUrl ='https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search;
         }else{
-            $query = 'key='.$key.'&query=pharmacy%20'.$search;
+            $query = 'key='.$key.'&query=pharmacy%20'.$search.'+in+Canada';
            // $apiUrl='https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search;
         }
-
+        //$query = 'input=110%20Ward&key='.$key.'&query=pharmacy%20'.$search.'+in+Canada';
+        
         curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/textsearch/json?'.$query,
         CURLOPT_RETURNTRANSFER => true,
@@ -912,11 +966,17 @@ class UserRepository extends BaseRepository
 
                 $user = User::where('id',$order->user_id)->first();
 
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data1 =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount.' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+               }else{
+                    $data1 =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
+                    
+                }
+
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
-                    // print_r($mobile);
-                    // die;
-                    $data1 =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
+                   //$data1 =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
                         sendMessage($mobile,'mail','patient_order_created',$data1);
                         if(isset($user->email)){
                             sendMail('mail','patient_order_created',$data1,$user->id);
@@ -969,10 +1029,20 @@ class UserRepository extends BaseRepository
 
             if($transferRequest->save()){
                 $user = auth()->user();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $parient_name = $user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                    $data1 =  "New transfer request generated by ".$user->full_name." to ".$parient_name;
+                    
+               }else{
+                    $data1 =  "New transfer request generated by ".$user->full_name;
+                    
+                }
                 $admin = User::whereHas('roles', function ($subQuery) { 
                                 $subQuery->where('name', 'Administrator');
                             })->first();
-                $data1 =  "New transfer request generated by ".$user->full_name;
+                //$data1 =  "New transfer request generated by ".$user->full_name;
                 $mobile = $admin->dialing_code.$admin->mobile_no;
                         sendMessage($mobile,'admin',null,$data1);
                         if(isset($admin->email)){

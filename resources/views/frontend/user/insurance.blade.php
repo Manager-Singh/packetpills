@@ -45,7 +45,7 @@
                 <label class="col-md-12" for="myfile">Primary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
-                  <input type="file" id="myFile" required name="front_img" onchange="readURL(this);">
+                  <input type="file" id="myFile" name="front_img" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(front) </label>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="upload" >
-                  <input type="file" id="myFile" required name="back_img" onchange="readURL(this);">
+                  <input type="file" id="myFile"  name="back_img" onchange="readURL(this);">
                     <label  for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(back) </label>

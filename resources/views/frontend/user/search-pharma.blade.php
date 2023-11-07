@@ -21,6 +21,8 @@
     margin: 0;
     border: 1px solid #638e3c;
     border-radius: 8px;
+    overflow-y: scroll;
+    height: 329px;
 }
 li.ajax-li {
     border-bottom: 1px solid #638e3c;
