@@ -73,6 +73,16 @@
                         Drugs Management
                     </a>
                 </li>
+                <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/transfer-requests'))
+                    }}" href="{{ route('admin.transfer-requests.index') }}">
+                        
+                        <i class="nav-icon fas fa-exchange-alt"></i>
+                        Transfer Requests
+                    </a>
+                </li>
                 <!-- <li class="divider"></li>
                 <li class="nav-item">
                     <a class="nav-link {{

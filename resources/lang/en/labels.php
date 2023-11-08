@@ -53,6 +53,9 @@ return [
                     'total' => 'role total|roles total',
                 ],
             ],
+            'transfer-requests'=>[
+                'management' => 'Transfer Request Management',
+            ],
 
             'permissions' => [
                 'all' => 'All Permissions',
