@@ -29,10 +29,12 @@ class TransferRequestsRepository extends BaseRepository
         return $this->query()
             ->select([
                
+                'transfer_requests.id',
                 'transfer_requests.name',
                 'transfer_requests.formatted_address',
                 'transfer_requests.formatted_phone_number',
                 'transfer_requests.created_at',
+                'transfer_requests.status',
             ])
             ->orderBy($orderBy, $sort)
             ->paginate($paged);
@@ -46,10 +48,12 @@ class TransferRequestsRepository extends BaseRepository
         return $this->query()
             ->select([
                 
+                'transfer_requests.id',
                 'transfer_requests.name',
                 'transfer_requests.formatted_address',
                 'transfer_requests.formatted_phone_number',
                 'transfer_requests.created_at',
+                'transfer_requests.status',
             ]);
     }
 

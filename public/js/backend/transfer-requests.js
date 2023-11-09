@@ -24,6 +24,7 @@
                         { data: 'formatted_address', name: 'formatted_address' },
                         { data: 'formatted_phone_number', name: 'formatted_phone_number' },
                         { data: 'created_at', name: 'created_at' },
+                        { data: 'status', name: 'status' },
                         //{ data: 'actions', name: 'actions', searchable: false, sortable: false }
                     ],
                     order: [[3, "asc"]],

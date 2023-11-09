@@ -34,8 +34,7 @@ class TransferRequestsTableController extends Controller
         return Datatables::of($this->repository->getForDataTable())
             ->escapeColumns(['name'])
             ->addColumn('name', function ($transfer_requests) {
-               
-                return $transfer_requests->name;
+               return $transfer_requests->name;
             })
             ->addColumn('formatted_address', function ($transfer_requests) {
                 return $transfer_requests->formatted_address;
@@ -46,7 +45,35 @@ class TransferRequestsTableController extends Controller
             ->addColumn('created_at', function ($transfer_requests) {
                 return $transfer_requests->created_at->toDateString();
             })
-            
+            ->addColumn('status', function ($transfer_requests) {
+                $html ='';
+                $html .='<select class="form-control transferStatus box-size" id="transferStatus-'.$transfer_requests->id.'" onclick="transferStatusChange('.$transfer_requests->id.')" data-placeholder="Transfer Status" name="status"><option value="pending"';
+                if($transfer_requests->status == 'pending'){
+                    $html .= 'selected';
+                }
+                $html .='>Pending</option><option value="approved"';
+                
+                if($transfer_requests->status == 'approved'){
+                    $html .= 'selected';
+                }
+                
+                $html .='>Approved</option><option value="cancelled"';
+
+                if($transfer_requests->status == 'cancelled'){
+                    $html .= 'selected';
+                }
+                
+                $html .= '>Cancelled</option><option value="declined"';
+                if($transfer_requests->status == 'declined'){
+                    $html .= 'selected';
+                }
+                $html .='>Declined</option><option value="processing"';
+                if($transfer_requests->status == 'processing'){
+                    $html .= 'selected';
+                }
+                $html .='>Processing</option></select>';
+                return $html;
+            })
             ->make(true);
             
     }
