@@ -35,7 +35,7 @@ class TransferRequestsRepository extends BaseRepository
                 'transfer_requests.formatted_phone_number',
                 'transfer_requests.created_at',
                 'transfer_requests.status',
-            ])
+            ])->with('owner')
             ->orderBy($orderBy, $sort)
             ->paginate($paged);
     }
@@ -54,7 +54,7 @@ class TransferRequestsRepository extends BaseRepository
                 'transfer_requests.formatted_phone_number',
                 'transfer_requests.created_at',
                 'transfer_requests.status',
-            ]);
+            ])->with('owner');
     }
 
     /**

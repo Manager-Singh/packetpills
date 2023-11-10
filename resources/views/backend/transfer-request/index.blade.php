@@ -31,6 +31,10 @@
                     <table id="transfer-requests-table" class="table" data-ajax_url="{{ route('admin.transfer.request.get') }}">
                         <thead>
                             <tr>
+                            <th>Patient Name</th>
+                            <th>Patient DOB</th>
+                            <th>Patient Phone No.</th>
+
                                 <th>Pharmacy Name</th>
                                 <th>Address</th>
                                 <th>Phone Number</th>

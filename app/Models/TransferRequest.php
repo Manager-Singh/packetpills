@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Models;
+use App\Models\Traits\Relationships\TransferRequestsRelationships;
 
 
 class TransferRequest extends BaseModel
 {
 
 
-    
+    use TransferRequestsRelationships; 
     public static function generateTransferNumber()
     {
         $date = now()->format('Ymd');

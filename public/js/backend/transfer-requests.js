@@ -20,6 +20,9 @@
                         type: 'post'
                     },
                     columns: [
+                        { data: 'full_name', name: 'full_name' },
+                        { data: 'date_of_birth', name: 'date_of_birth' },
+                        { data: 'mobile_no', name: 'mobile_no' },
                         { data: 'name', name: 'name' },
                         { data: 'formatted_address', name: 'formatted_address' },
                         { data: 'formatted_phone_number', name: 'formatted_phone_number' },
