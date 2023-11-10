@@ -34,14 +34,15 @@ class TransferRequestsTableController extends Controller
         return Datatables::of($this->repository->getForDataTable())
             ->escapeColumns(['name'])
             ->addColumn('full_name', function ($transfer_requests) {
-                return $transfer_requests->owner->full_name;
+                return (isset($transfer_requests->owner->full_name)) ? $transfer_requests->owner->full_name : '' ;
              })
              ->addColumn('date_of_birth', function ($transfer_requests) {
-                return $transfer_requests->owner->date_of_birth;
+                return (isset($transfer_requests->owner->date_of_birth)) ? $transfer_requests->owner->date_of_birth : '' ;
+               
              })
              ->addColumn('mobile_no', function ($transfer_requests) {
-                return $transfer_requests->owner->mobile_no;
-             })
+                return (isset($transfer_requests->owner->mobile_no)) ? $transfer_requests->owner->mobile_no : '' ;
+            })
             ->addColumn('name', function ($transfer_requests) {
                return $transfer_requests->name;
             })
