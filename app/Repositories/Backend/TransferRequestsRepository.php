@@ -33,6 +33,7 @@ class TransferRequestsRepository extends BaseRepository
                 'transfer_requests.name',
                 'transfer_requests.formatted_address',
                 'transfer_requests.formatted_phone_number',
+                'transfer_requests.fax_number',
                 'transfer_requests.created_at',
                 'transfer_requests.status',
             ])->with('owner')
@@ -52,6 +53,7 @@ class TransferRequestsRepository extends BaseRepository
                 'transfer_requests.name',
                 'transfer_requests.formatted_address',
                 'transfer_requests.formatted_phone_number',
+                'transfer_requests.fax_number',
                 'transfer_requests.created_at',
                 'transfer_requests.status',
             ])->with('owner');
@@ -112,5 +114,21 @@ class TransferRequestsRepository extends BaseRepository
         }
 
         throw new GeneralException(__('exceptions.backend.email-templates.delete_error'));
+    }
+
+    /**
+     * @param 
+     * @param array $input
+     */
+    public function faxNumberUpdate(array $input)
+    {
+        
+        $transfer_request = self::find($input['id']);
+        $transfer_request->fax_number = $input['fax_number'];
+        if ($transfer_request->save()) {
+           return true;
+        }else{
+            return false;
+        }
     }
 }

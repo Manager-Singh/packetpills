@@ -52,6 +52,13 @@ class TransferRequestsTableController extends Controller
             ->addColumn('formatted_phone_number', function ($transfer_requests) {
                 return $transfer_requests->formatted_phone_number;
             })
+            ->addColumn('fax_number', function ($transfer_requests) {
+                if(empty($transfer_requests->fax_number)){
+                    return '<div class="add-fax-no"><button type="button" onclick="faxnumberUpdate('.$transfer_requests->id.')" class="btn btn-primary btn-sm">Add Fax</button></div>';
+                }else{
+                    return $transfer_requests->fax_number;
+                }
+            })
             ->addColumn('created_at', function ($transfer_requests) {
                 return $transfer_requests->created_at->toDateString();
             })

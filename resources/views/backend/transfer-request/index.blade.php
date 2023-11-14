@@ -32,14 +32,14 @@
                         <thead>
                             <tr>
                             <th>Patient Name</th>
-                            <th>Patient DOB</th>
-                            <th>Patient Phone No.</th>
-
-                                <th>Pharmacy Name</th>
-                                <th>Address</th>
-                                <th>Phone Number</th>
-                                <th>{{ trans('labels.backend.access.prescriptions.table.createdat') }}</th>
-                                <th>Status</th> 
+                            <th>DOB</th>
+                            <th>Phone No.</th>
+                            <th>Pharmacy</th>
+                            <th>Address</th>
+                            <th>Phone No.</th>
+                            <th>Fax No.</th>
+                            <!-- <th>{{ trans('labels.backend.access.prescriptions.table.createdat') }}</th> -->
+                            <th>Status</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -114,5 +114,52 @@
             });
 
         };
+
+
+function  faxnumberUpdate(id){
+        var url = "{{route('admin.transfer.fax.number.update')}}";
+        var token= '<input type="hidden" name="_token" value="{{ csrf_token() }}" />';
+        
+    $.confirm({
+        title: 'Fax Number!',
+        content: '' +
+        '<form action="'+url+'" id="fax-form" method="POST" class="formName">' +token+
+        '<div class="form-group">' +
+        '<label>Enter Fax Number</label>' +
+        '<input type="number" placeholder="Fax Number" name="fax_number" class="name form-control" required />' +
+        '<input type="hidden" value="'+id+'" name="id"  class="name form-control" />' +
+        '</div>' +
+        '</form>',
+        buttons: {
+            formSubmit: {
+                text: 'Submit',
+                btnClass: 'btn-blue',
+                action: function () {
+                    var name = this.$content.find('.name').val();
+                    if(!name){
+                        $.alert('provide a valid name');
+                        return false;
+                    }
+                    $('#fax-form').off('submit').submit();
+                    //$.alert('Your name is ' + name);
+                }
+            },
+            cancel: function () {
+                //close
+            },
+        },
+        onContentReady: function () {
+            // bind to events
+            var jc = this;
+            this.$content.find('form').on('submit', function (e) {
+                // if the user submits the form by pressing enter in the field.
+                e.preventDefault();
+                jc.$$formSubmit.trigger('click'); // reference the button and click it
+            });
+        }
+    });
+
+
+}
 </script>
 @stop

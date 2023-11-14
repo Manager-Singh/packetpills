@@ -10,6 +10,7 @@ use App\Http\Responses\RedirectResponse;
 use App\Http\Responses\ViewResponse;
 use App\Http\Requests\Backend\TransferRequests\ManageTransferRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 class TransferRequestsController extends Controller
 {
@@ -111,5 +112,19 @@ class TransferRequestsController extends Controller
         $this->repository->delete($prescription);
 
         return new RedirectResponse(route('admin.prescriptions.index'), ['flash_success' => __('alerts.backend.prescriptions.deleted')]);
+    }
+
+
+    public function faxNumberUpdate(Request $request)
+    {
+        //dd($request->all());
+        $data = $this->repository->faxNumberUpdate($request->except(['_token', '_method']));
+        
+        if($data){
+            return redirect()->back()->withFlashSuccess(__('Fax Number Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
     }
 }
