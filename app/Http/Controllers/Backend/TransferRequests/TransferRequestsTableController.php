@@ -64,7 +64,7 @@ class TransferRequestsTableController extends Controller
             })
             ->addColumn('status', function ($transfer_requests) {
                 $html ='';
-                $html .='<select class="form-control transferStatus box-size" id="transferStatus-'.$transfer_requests->id.'" onclick="transferStatusChange('.$transfer_requests->id.')" data-placeholder="Transfer Status" name="status"><option value="pending"';
+                $html .='<select class="form-control transferStatus box-size" id="transferStatus-'.$transfer_requests->id.'" onchange="transferStatusChange('.$transfer_requests->id.')" data-placeholder="Transfer Status" name="status"><option value="pending"';
                 if($transfer_requests->status == 'pending'){
                     $html .= 'selected';
                 }
