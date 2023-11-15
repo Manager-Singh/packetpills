@@ -47,9 +47,11 @@ class PrescriptionController extends Controller
         $output = $this->prescriptionRepository->create($data); 
         
         // E-mail address was updated, user has to reconfirm
-        if ($output) {
-            
-            return redirect()->back();
+       
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Prescription Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }
 
         
