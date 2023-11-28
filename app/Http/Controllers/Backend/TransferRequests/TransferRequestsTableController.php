@@ -56,7 +56,7 @@ class TransferRequestsTableController extends Controller
                 if(empty($transfer_requests->fax_number)){
                     return '<div class="add-fax-no"><button type="button" onclick="faxnumberUpdate('.$transfer_requests->id.')" class="btn btn-primary btn-sm">Add Fax</button></div>';
                 }else{
-                    return $transfer_requests->fax_number;
+                    return $transfer_requests->fax_number.'<div class="add-fax-no"><button type="button" onclick="faxnumberUpdate('.$transfer_requests->id.','.$transfer_requests->fax_number.')" class="btn btn-success btn-sm">Edit Fax</button></div>';
                 }
             })
             ->addColumn('created_at', function ($transfer_requests) {

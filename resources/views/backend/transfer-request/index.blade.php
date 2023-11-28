@@ -116,9 +116,10 @@
         };
 
 
-function  faxnumberUpdate(id){
+function  faxnumberUpdate(id,fax_number=false){
         var url = "{{route('admin.transfer.fax.number.update')}}";
         var token= '<input type="hidden" name="_token" value="{{ csrf_token() }}" />';
+        
         
     $.confirm({
         title: 'Fax Number!',
@@ -126,7 +127,7 @@ function  faxnumberUpdate(id){
         '<form action="'+url+'" id="fax-form" method="POST" class="formName">' +token+
         '<div class="form-group">' +
         '<label>Enter Fax Number</label>' +
-        '<input type="number" placeholder="Fax Number" name="fax_number" class="name form-control" required />' +
+        '<input type="number" placeholder="Fax Number" name="fax_number" value="'+fax_number+'" class="name form-control" required />' +
         '<input type="hidden" value="'+id+'" name="id"  class="name form-control" />' +
         '</div>' +
         '</form>',
