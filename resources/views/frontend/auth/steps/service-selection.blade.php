@@ -62,7 +62,12 @@ button.btn.btn-secondary {
                         <div class="col-md-4">
 
               <div class="card blue border-light text-left p-1 mb-4">
+                @if(Auth::check() && Auth::user()->is_profile_status == "completed")
                 <a href="{{route('frontend.user.search.pharma')}}">
+                @else
+                <a href="{{route('frontend.user.dashboard')}}">
+                @endif
+                
                   <div class="card-body">
                       <div class="d-flex px-1 px-md-3">
                           <div>
@@ -80,7 +85,12 @@ button.btn.btn-secondary {
 </div>
 <div class="col-md-4">
                  <div class="card red border-light text-left p-1 mb-4">
-                    <a href="{{route('frontend.user.prescription.upload')}}">
+                 @if(Auth::check() && Auth::user()->is_profile_status == "completed")
+                 <a href="{{route('frontend.user.prescription.upload')}}">
+                @else
+                <a href="{{route('frontend.user.dashboard')}}">
+                @endif
+                    
                   <div class="card-body">
                       <div class="d-flex px-1 px-md-3">
                           <div>
@@ -140,7 +150,12 @@ button.btn.btn-secondary {
           </div>
           <div class="modal-body">
             <div class="card text-left p-1 mb-4">
-              <a href="#">
+             
+              @if(Auth::check() && Auth::user()->is_profile_status == "completed")
+                 <a href="{{route('frontend.drug.search')}}">
+                @else
+                <a href="{{route('frontend.user.dashboard')}}">
+                @endif
                 <div class="card-b">
                     <div class="d-flex px-1 px-md-3">
                         <div>

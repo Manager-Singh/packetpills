@@ -65,7 +65,7 @@
             <div class="card border-light text-left p-1 mb-4 add-member-tab">
                 
                 <div class="card-body">
-                    <a href="#">
+                    <a href="{{route('frontend.user.add.member')}}">
                         <div class="text-center px-1 px-md-3">
                             <div>
                                 <div class="icon icon-primary"><i class="fa fa-users" aria-hidden="true"></i></div>
@@ -83,7 +83,7 @@
 <div class="col-md-4">
             <div class="card border-light text-left p-1 mb-4 complete-profile-tab">
                 <div class="card-body">
-                    <a href="#">
+                <a href="{{route('frontend.user.dashboard')}}">
                         <div class="text-center px-1 px-md-3">
                             <div>
                                 <div class="icon icon-primary"><i class="fa fa-truck" aria-hidden="true"></i></div>
