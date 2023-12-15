@@ -69,6 +69,7 @@ div#accordionExample {
                         <div class="col-md-4 text-right">
                             <span class="btn-error" >{{$prescription->status}}</sapn>
                         </div>
+                        
                       </div>
                   </div>
                   <div class="order-body">
@@ -77,7 +78,18 @@ div#accordionExample {
                   </div>
               </a>
              @if($prescription && isset($prescription->medications) && $prescription->medications->count() > 0) 
-              <div class="order-head">
+            <div class="order-head">
+                  <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group form-check">
+                          <input type="checkbox" class="form-check-input askForRefill" id="{{$prescription->id}}">
+                          <label class="form-check-label" for="{{$prescription->id}}">Ask for a refill</label>
+                        </div>
+                    </div>
+                   
+                  </div>
+              </div>
+             <div class="order-head">
                   <div class="row">
                     <div class="col-md-8">
                         <p class="txt">Added Medications</p>
@@ -166,6 +178,36 @@ div#accordionExample {
 @endsection
 
 @push('after-scripts')
+<script>
+  $('.askForRefill').change(function(){
+    if($(this).is(":checked")) {
+
+      _this = $(this);
+
+      console.log('sd jkl');
+    swal({
+          title: "Are you want to refill?",
+          text: "",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, to refill!",
+          closeOnConfirm: false
+        },
+    function(){
+      swal.close();
+      console.log(_this.attr('id'));
+      var id = _this.attr('id');
+      window.location.href= "{{ route('frontend.user.prescription.refill', ['id' => '__id__']) }}".replace('__id__', id);
+    });
+
+    }
+    
+    
+  })
+  </script>
+
+
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif

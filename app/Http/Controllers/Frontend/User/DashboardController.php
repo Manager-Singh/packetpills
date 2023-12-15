@@ -18,6 +18,7 @@ use App\Models\OrderItem;
 use App\Models\TransferRequest;
 use Illuminate\Support\Facades\Session;
 use App\Models\Auth\User;
+use App\Models\PrescriptionRefill;
 
 /**
  * Class DashboardController.
@@ -162,6 +163,53 @@ class DashboardController extends Controller
         //dd($data['prescriptions'][0]);
         //dd('sss');
         return view('frontend.user.prescription',$data); 
+    }
+    public function userPrescripitonRefill($id){
+
+        $prescription = Prescription::find($id);
+        $user = Auth::user();
+        $prescriptionRefill = new PrescriptionRefill();
+        $prescriptionRefill->prescription_id =  $id;
+        $prescriptionRefill->user_id =  $user->id;
+        $prescriptionRefill->status =  'pending';
+        
+        if($prescriptionRefill->save()){
+            
+            if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                $parient_name = $user->full_name;
+                $user = User::where('id',$user->parent_id)->first(); 
+                
+            }
+            $data =  'Hello MisterPharmacist team!'."\n\n ".$user->full_name.' - '.$user->date_of_birth.' - '.$user->mobile_no.' - '.$user->email.' Is requesting a refill for the above indicated medication"
+
+            '."\n\n".' Please review the patient pharmacy record and determine if the medication can be refilled or the patient healthcare provider needs to be contacted to reissue the refill-   
+            
+            '."\n\n".' Please use your professional judgement and contact the patient to inform of the appropriate next steps"';
+          
+            $data_u =$user->full_name;
+            // send messages to users
+            $mobile = $user->dialing_code.$user->mobile_no;
+            sendMessage($mobile,'mail','prescription_refill_created',$data_u);
+            if(isset($user->email)){
+                sendMail('mail','prescription_refill_created',$data_u,$user->id);
+            }
+
+            //send messages to admin
+            $admin = User::whereHas('roles', function ($subQuery) { 
+                            $subQuery->where('name', 'Administrator');
+                        })->first();
+            $adminmobile = $admin->dialing_code.$admin->mobile_no;
+                    sendMessage($adminmobile,'admin',null,$data);
+                    if(isset($admin->email)){
+                        sendMail('admin',null,$data,$admin->id);
+                    }
+           
+
+
+            return redirect()->back()->withFlashSuccess(__('Prescription refill created.'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
     }
 
     public function singleUserPrescripiton(Request $request,$prescription_number)

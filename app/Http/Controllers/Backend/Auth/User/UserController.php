@@ -21,6 +21,7 @@ use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
+use App\Models\PrescriptionRefill;
 
 class UserController extends Controller
 {
@@ -240,8 +241,8 @@ class UserController extends Controller
         $aaprescriptions = Prescription::where('user_id',$user->id)->get();
         $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
         $transferRequests = TransferRequest::where('user_id',$user->id)->get();
-
-
+        $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->get();
+               
         //  print_r('<pre>');
         //  print_r($orders);
         //   die;
@@ -254,6 +255,7 @@ class UserController extends Controller
                 'aaprescriptions'=>$aaprescriptions,
                 'orders'=>$orders,
                 'transferRequests'=>$transferRequests,
+                'prescriptionRefills'=>$prescriptionRefills,
             ])
             ->withUser($user);
     }
@@ -337,6 +339,13 @@ class UserController extends Controller
     public function members(ManageUserRequest $request, User $user)
     {
         return view('backend.auth.user.members')->withUser($user);
+    }
+
+
+    public function prescriptionRefillStatusUpdate(Request $request)
+    {
+       $data = $this->userRepository->prescriptionRefillStatusUpdate($request->except(['_token', '_method','files']));
+        return $data;
     }
 
 

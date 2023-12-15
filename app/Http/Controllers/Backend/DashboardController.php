@@ -100,7 +100,7 @@ class DashboardController extends Controller
         $months = [];
         foreach ($result as $rdata) {
             array_push($data,$rdata->total);
-            array_push($months,$month[(int)$rdata->month]);
+            array_push($months,$month[(int)$rdata->month - 1]);
         }
        
         // if($type=='revenue'){

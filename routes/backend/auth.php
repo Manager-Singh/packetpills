@@ -47,6 +47,7 @@ Route::group([
         Route::post('user/create/medication/order', [UserController::class, 'createMedicationOrder'])->name('user.create.medication.order');
         Route::post('user/order/update/status', [UserController::class, 'orderStatusUpdate'])->name('user.order.update.status');
         Route::post('user/transfer/update/status', [UserController::class, 'transferStatusUpdate'])->name('user.transfer.update.status');
+        Route::post('user/prescription/refill/update/status', [UserController::class, 'prescriptionRefillStatusUpdate'])->name('user.prescription.refill.status');
         
 
 

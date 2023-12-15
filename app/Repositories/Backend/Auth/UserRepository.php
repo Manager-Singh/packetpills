@@ -32,6 +32,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use File;
 use Ramsey\Uuid\Uuid;
+use App\Models\PrescriptionRefill;
 
 
 
@@ -1355,6 +1356,47 @@ class UserRepository extends BaseRepository
             
            // throw new GeneralException(__('Problem With Prescription Status Update.'));
            });
+    }
+    public function prescriptionRefillStatusUpdate($data)
+    {
+        
+        return DB::transaction(function () use ($data) {
+            $id = $data['id'];
+            $status = $data['status'];
+            $prescriptionRefill = PrescriptionRefill::find($id);
+            if($prescriptionRefill){
+                $prescriptionRefill->status = $status;
+            }else{
+                $prescriptionRefill->status = $prescriptionRefill->status;
+            }
+            if ($prescriptionRefill->save()) {
+
+                $user = User::where('id',$prescriptionRefill->user_id)->first();
+
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  $status.' & status changed to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+               }else{
+                    $data =  $status;
+                }
+                if($user->mobile_no && $user->dialing_code){
+                    $mobile = $user->dialing_code.$user->mobile_no;
+                   
+                        sendMessage($mobile,'mail','prescription_refill_status',$data);
+                        if(isset($user->email)){
+                            sendMail('mail','prescription_refill_status',$data,$user->id);
+                        }
+                   
+                }
+            
+                return $id;
+            
+            }
+        
+            return 0;
+            
+           // throw new GeneralException(__('Problem With Prescription Status Update.'));
+        });
     }
 
     

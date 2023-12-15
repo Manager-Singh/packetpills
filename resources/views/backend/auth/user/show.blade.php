@@ -81,6 +81,11 @@
                                 href="#transfer-request" role="tab" aria-controls="orders" aria-expanded="true"><i
                                     class="fas fa-exchange-alt"></i> @lang('Transfer Request')</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link {{ $tab == 'prescriptionrefill' ? 'active' : '' }}" data-toggle="tab"
+                                href="#prescription-refill" role="tab" aria-controls="orders" aria-expanded="true"><i
+                                    class="fas fa-exchange-alt"></i>Prescription Refill</a>
+                        </li>
 
                     </ul>
 
@@ -124,6 +129,10 @@
                          <div class="tab-pane {{ $tab == 'transfer' ? 'active' : '' }}" id="transfer-request"
                             role="tabpanel" aria-expanded="true">
                             @include('backend.auth.user.show.tabs.transfer-request')
+                        </div><!--tab-->
+                        <div class="tab-pane {{ $tab == 'prescriptionrefill' ? 'active' : '' }}" id="prescription-refill"
+                            role="tabpanel" aria-expanded="true">
+                            @include('backend.auth.user.show.tabs.prescription-refill')
                         </div><!--tab-->
 
 
