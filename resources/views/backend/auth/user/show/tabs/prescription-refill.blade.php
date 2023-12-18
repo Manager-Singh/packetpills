@@ -36,6 +36,16 @@
                             <p>Prescription Number: {{ $prescriptionRefill->prescription->prescription_number }}</p>
                             <p>Patient Name: {{ $prescriptionRefill->user->first_name }} {{ $prescriptionRefill->user->last_name }}</p>
                             <p>Patient Email: {{ $prescriptionRefill->user->email }}</p>
+                            <p>Medication: 
+                                @if(isset($prescriptionRefill->prescription->medications))
+                                    @foreach($prescriptionRefill->prescription->medications as $medication)
+                                       {{$medication->drug_name }}  ,
+                                    @endforeach
+                                @endif
+
+                            </p>
+
+                            
                            @php
                                 $prescription_refill_status_array = [
                                 'pending'=>'Pending',

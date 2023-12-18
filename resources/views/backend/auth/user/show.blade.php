@@ -84,7 +84,7 @@
                          <li class="nav-item">
                             <a class="nav-link {{ $tab == 'prescriptionrefill' ? 'active' : '' }}" data-toggle="tab"
                                 href="#prescription-refill" role="tab" aria-controls="orders" aria-expanded="true"><i
-                                    class="fas fa-exchange-alt"></i>Prescription Refill</a>
+                                    class="fas fa-refresh"></i> Prescription Refill</a>
                         </li>
 
                     </ul>

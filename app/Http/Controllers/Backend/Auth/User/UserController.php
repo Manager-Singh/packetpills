@@ -242,7 +242,7 @@ class UserController extends Controller
         $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
         $transferRequests = TransferRequest::where('user_id',$user->id)->get();
         $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->get();
-               
+        
         //  print_r('<pre>');
         //  print_r($orders);
         //   die;
