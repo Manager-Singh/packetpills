@@ -3456,7 +3456,7 @@ margin-top: 0.6rem !important;
 margin-top: 1.2rem !important;
 }
 .margin-t-xl {
-margin-top: 2.4rem !important;
+margin-top: 0 !important;
 }
 .margin-t-xxl {
 margin-top: 3.6rem !important;
@@ -4640,8 +4640,8 @@ font-size: 1.2rem;
   margin-left: 0;
   margin-right: 0;
   text-align: center;
-  margin-bottom: 2.4rem;
-  margin-bottom: 3.2rem;
+  margin-bottom: 0;
+ 
 }
 .hero__form--vertical .tnc {
   text-align: center;

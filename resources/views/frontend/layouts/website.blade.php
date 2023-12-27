@@ -28,7 +28,7 @@
 .hero__heading {
     font-size: 3.4rem;
     line-height: 1.2;
-    margin-top: 3.2rem;
+    margin-top: 0;
 }
 	
 

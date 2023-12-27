@@ -1,6 +1,6 @@
 
 <div class="hero hero--desktop hero--exp-2"
-    style="background-size: auto 125%;background-position: center center;padding: 0;min-height: 100vh;background-repeat: no-repeat; background-image: url({{asset('website/assets/images/bg-signup-modal.webp')}});">
+    style="background-size: auto 125%;background-position: center center;background-size: contain;padding: 0;min-height: 100vh;background-repeat: no-repeat; background-image: url({{asset('website/assets/images/TransparentCircle.png')}});">
 
     <div class="landing-wrapper margin-t-xl">
    
@@ -16,7 +16,7 @@
         </div>     -->
         <div class="content-exp2">
             <div>
-                <h1 class="hero__heading color-brand font-bold txt-c"> You're almost<br> there! </h1>
+                <h1 class="hero__heading color-brand font-bold txt-c"> Let's Get Started !</h1>
                 
             </div>
 
@@ -40,8 +40,8 @@
                             </p>
                             <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand"> Welcome back!</p><a href="{{route('frontend.user.dashboard')}}"><button _ngcontent-serverapp-c48="" type="submit" class="btn btn--brand txt-defaultcase go-dashboard-btn"><span _ngcontent-serverapp-c48="" translate="" class="button__label txt-defaultcase">Go to dashboard</span><i class="fa fa-angle-arrow-right" aria-hidden="true"></i></button></a>
                         @else
-                        <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Simply sign in to
-                            join <br> over 300,000 satisfied members:</p>
+                        <p style="margin-bottom: 0;" class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Simply sign in to
+                            join </p>
 
                         @endif
 
@@ -132,9 +132,8 @@
                                     </div>
                                     <small keyname="landing.banner.terms"
                                         class="font-smallest tnc block margin-t-l term-cond">By proceeding, you agree to
-                                        our <a href="" class="txt-underline" target="_blank">Terms of Use</a> &amp; <a
-                                            href="" class="txt-underline" target="_blank">Privacy Policy</a>. Message
-                                        and data rates may apply. </small>
+                                        our <a href="https://misterpharmacist.com/terms-and-conditions" class="txt-underline" target="_blank">Terms of Use</a> &amp; <a
+                                            href="https://misterpharmacist.com/privacy-policy" class="txt-underline" target="_blank">Privacy Policy</a>.  </small>
 
                                 </div>
                             </div>

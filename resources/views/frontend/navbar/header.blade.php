@@ -39,7 +39,12 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
         <div class="column hide-mobile step-main-menu">
           <nav class="step-menu">
             <ul role="menu" class="re-nav">
-              <li role="menuitem" class="">
+               <li role="menuitem" class="">
+
+                <a href="https://misterpharmacist.com">Home</a>
+
+              </li>
+              <!--i role="menuitem" class="">
 
                 <a href="#">How it works</a>
 
@@ -49,7 +54,7 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
                   <a href="{{route('frontend.drug.search')}}">
                   <button class="is-clickable button font-regular color-dark focus-visible-button" aria-label="Open drugs menu" aria-expanded="false">
                     <span  class="font-regular">Drugs</span> 
-                    <!-- <i class="fa fa-angle-down" aria-hidden="true"></i> -->
+                     <i class="fa fa-angle-down" aria-hidden="true"></i> 
 
                   </button>
                   </a>
@@ -67,7 +72,8 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
                     @endforeach
                   @else
                   @endif
-                    <!-- <li  class="column">
+                  
+                  <li  class="column">
                    
                       <div >
                         <a  href="#">Finasteride</a>
@@ -87,7 +93,7 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
                         <a  href="#">Escitalopram</a>
                       </div>
                    
-                    </li>  -->
+                    </li>  
                     
                                   
                     
@@ -97,18 +103,18 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
                   </ul>
                 </div>
 
+              </li-->
+              <li  role="menuitem" class="">
+                <a  href="https://misterpharmacist.com/minor-ailment/">Minor Ailment</a>
               </li>
               <li  role="menuitem" class="">
-                <a  href="#">Minor Ailment</a>
+                <a  href="https://misterpharmacist.com/blog/">Blog</a>
               </li>
               <li  role="menuitem" class="">
-                <a  href="#">Blog</a>
+                <a  href="https://misterpharmacist.com/about-us/">About Us</a>
               </li>
               <li  role="menuitem" class="">
-                <a  href="#">About Us</a>
-              </li>
-              <li  role="menuitem" class="">
-                <a  href="#">Contact Us</a>
+                <a  href="https://misterpharmacist.com/contact-us/">Contact Us</a>
               </li>
               <li  role="menuitem" class="">
               @if(Auth::check())
