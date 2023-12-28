@@ -128,6 +128,12 @@ class PrescriptionRepository extends BaseRepository
      */
     public function create(array $data)
     {
+        
+        //sendMessage('+919501427078','mail','forgot_reset_otp','dddddd');
+        //sendMessage('919501427078','mail','patient_prescription_created','hellllll');
+
+        //dd('hjk');
+        
             $user = Auth::user();
             $images = $data['prescription_upload'];
             $prescription = new Prescription;
@@ -162,8 +168,8 @@ class PrescriptionRepository extends BaseRepository
 
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
-                    sendMessage($mobile,'mail','patient_prescription_created',$data);
-                    if(isset($user->email)){
+                    
+                    if(sendMessage($mobile,'mail','patient_prescription_created',$data) && isset($user->email)){
                         sendMail('mail','patient_prescription_created',$data,$user->id);
                     }
                 }

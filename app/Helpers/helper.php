@@ -262,10 +262,11 @@ if (! function_exists('sendMessage')) {
             $messagesend = $client->messages->create($mobile_no, [
                 'from' => +16475034144,
                 'body' => $body]);
+           
                 return 1;
         }
         catch (Exception $e){
-         dd($e);
+         //dd($e);
             return 0;
         }
     }
