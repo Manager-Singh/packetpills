@@ -120,8 +120,8 @@ $mobile_email ='';
                                 
                                 
                             </div>
-                           <input type="hidden" name="user_id" value="{{(isset($user)) ? $user->id : ''}}"/>
-                           <input type="hidden" name="mobile_no" value="{{(isset($mobile_email)) ? $mobile_email : ''}}"/>
+                           <input type="hidden" name="user_id" value="{{(isset($user->id)) ? $user->id : old('user_id') }}"/>
+                           <input type="hidden" name="mobile_no" value="{{(isset($mobile_email) && !empty($mobile_email)) ? $mobile_email : old('mobile_no')}}"/>
                             <button type="submit" class="btn btn-primary w-100">Update password</button>
                            
                             <div class="d-flex justify-content-between mt-4 login-register">

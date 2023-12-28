@@ -239,7 +239,7 @@ if (! function_exists('sendMessage')) {
     function sendMessage($mobile_no=null,$type,$message_for=null,$data){
         if($type=='admin'){
            
-           $body = $data."\n\n"."Pharmacy Canada"."\n"."Always with you.";
+           $body = $data."\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
         }else{
             $message = MailMessage::where('message_for',$message_for)->where('status',1)->first();
             
@@ -250,7 +250,7 @@ if (! function_exists('sendMessage')) {
            if($data!==null){
             $body .= "\n".$data;
            }
-           $body .= "\n\n"."Pharmacy Canada"."\n"."Always with you.";
+           $body .= "\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
         }
        
         
@@ -279,7 +279,7 @@ if (! function_exists('sendMail')) {
         }
         if($type=='admin'){
            
-            $body = $data."\n\n"."Pharmacy Canada"."\n"."Always with you.";
+            $body = $data."\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
          }else{
             $message = MailMessage::where('message_for',$message_for)->where('status',1)->first();
             if(!$message){
@@ -289,7 +289,7 @@ if (! function_exists('sendMail')) {
             if($data!==null){
              $body .= "\n".$data;
             }
-            $body .= "\n\n"."Pharmacy Canada"."\n"."Always with you.";
+            $body .= "\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
          }
          $full_name = $user->first_name.' '.$user->last_name;
         $to_name = $full_name;
@@ -298,7 +298,7 @@ if (! function_exists('sendMail')) {
         try{
         $aaaa = Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
         $message->to($to_email, $to_name);
-        $message->subject('Pharmacy Canada Always with you');
+        $message->subject('MisterPharmacist Online Pharmacy');
         $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),'Pharmacy Canada');
         });
 
@@ -307,7 +307,8 @@ if (! function_exists('sendMail')) {
         return 1;
     }
     catch (Exception $e){
-     dd($e);
+     //dd($e);
+    //$e->getMessage()
         return 0;
     }
     }

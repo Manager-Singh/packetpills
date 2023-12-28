@@ -34,7 +34,6 @@ class ForgotPasswordController extends Controller
 
     public function sendResetLinkPhone(Request $request){
        
-       // dd($request->all());
        $type = '';
        if (is_numeric($request->input('mobile_no'))){
         
@@ -136,8 +135,12 @@ class ForgotPasswordController extends Controller
         // if(PasswordResetsOtp::where('mobile_email',$request->mobile_no)->first()){
         //     return redirect()->back()->withFlashSuccess(__('OTP does not match please try again.'));
         // }
-
+        if(empty($request->mobile_no)){
+            return redirect()->route('frontend.auth.password.email')->withFlashInfo(__('Something went wrong.')); 
+        }
+        
         $user = User::where('mobile_no',$request->mobile_no)->first();
+       
         $user->password = Hash::make($request->password);
         // if($user->save()){
         //     return redirect()->route('dashboard')->with('success', 'Password updated successfully.');
