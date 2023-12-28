@@ -1,0 +1,13 @@
+@media screen and (max-width: 480px)
+{ 
+.landing-wrapper.margin-t-xl {
+    padding-top: 11rem;
+}
+
+	.hero--desktop {
+		display: block;
+	}
+	.login-pg .col {
+    flex-basis: unset !important;
+}
+}

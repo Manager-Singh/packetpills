@@ -36,15 +36,15 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
           </a>
 
         </div>
-        <div class="column hide-mobile step-main-menu">
-          <nav class="step-menu">
+        <div class="column step-main-menu">
+          <!-- <nav class="step-menu">
             <ul role="menu" class="re-nav">
                <li role="menuitem" class="">
 
                 <a href="https://misterpharmacist.com">Home</a>
 
               </li>
-              <!--i role="menuitem" class="">
+             <li role="menuitem" class="">
 
                 <a href="#">How it works</a>
 
@@ -103,29 +103,50 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
                   </ul>
                 </div>
 
-              </li-->
-              <li  role="menuitem" class="">
-                <a  href="https://misterpharmacist.com/minor-ailment/">Minor Ailment</a>
-              </li>
-              <li  role="menuitem" class="">
-                <a  href="https://misterpharmacist.com/blog/">Blog</a>
-              </li>
-              <li  role="menuitem" class="">
-                <a  href="https://misterpharmacist.com/about-us/">About Us</a>
-              </li>
-              <li  role="menuitem" class="">
-                <a  href="https://misterpharmacist.com/contact-us/">Contact Us</a>
-              </li>
-              <li  role="menuitem" class="">
-              @if(Auth::check())
-                <a keyname="landing.navbar.login" href="{{ route('frontend.auth.logout') }}">Log Out</a>
-            @else
-                <a keyname="landing.navbar.login" href="{{ route('frontend.auth.new.login') }}">Log In</a>
-            @endif
-              </li>
+              </li
+             
+             
+              
+              
+              
            
             </ul>
          
+          </nav> -->
+
+
+          <nav  class="navbar navbar-expand-md navbar-light bg-light step-menu">
+            <!-- <a class="navbar-brand" href="#">Your Logo</a> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  
+                  <a  class="nav-link" href="https://misterpharmacist.com">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://misterpharmacist.com/minor-ailment/">Minor Ailment</a>
+                </li>
+                <li class="nav-item">
+                  <a  class="nav-link" href="https://misterpharmacist.com/blog/">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a  class="nav-link" href="https://misterpharmacist.com/about-us/">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a  class="nav-link" href="https://misterpharmacist.com/contact-us/">Contact Us</a>
+                </li>
+                <li  class="nav-item" >
+                  @if(Auth::check())
+                    <a class="nav-link" keyname="landing.navbar.login" href="{{ route('frontend.auth.logout') }}">Log Out</a>
+                @else
+                    <a class="nav-link" keyname="landing.navbar.login" href="{{ route('frontend.auth.new.login') }}">Log In</a>
+                @endif
+                </li>
+              </ul>
+            </div>
           </nav>
         </div>
      

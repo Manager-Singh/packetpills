@@ -47,7 +47,7 @@
 		transition: top .2s ease;
 	}
 	</style>
-
+<link rel="stylesheet" href="{{asset('css/responsive-style.css')}}">
 <link rel="stylesheet" href="{{asset('step/assets/font/font.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('plugins/parsley/parsley.css')}}">

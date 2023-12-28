@@ -58,7 +58,7 @@
               }
           </style>     
     <link rel="shortcut icon" href="{{asset('step/assets/images/logo.png')}}" type="images/png" id="favicon">
-	
+    <link rel="stylesheet" href="{{asset('css/responsive-style.css')}}">
     <link rel="stylesheet" href="{{asset('step/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('step/assets/font/font.css')}}">
     <link rel="stylesheet" href="{{asset('step/assets/css/common-style.css')}}">
