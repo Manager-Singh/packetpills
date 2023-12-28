@@ -1,8 +1,9 @@
 @media screen and (max-width: 480px)
 { 
     .landing-wrapper.margin-t-xl {
-        position: relative;
+       position: relative;
         top: 32vh;
+        right: -1vh;
     }
 
 	.hero--desktop {
@@ -58,6 +59,11 @@ button.navbar-toggler {
     button.btn.btn--full.btn--brand.txt-defaultcase.lineheight-reset {
         padding: 6px !important;
     }	
+    .landing-wrapper.margin-t-xl {
+        position: relative;
+         top: 32vh;
+         right: -1vh;
+     }
 	
 }
 
