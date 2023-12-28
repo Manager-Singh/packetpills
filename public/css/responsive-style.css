@@ -11,3 +11,35 @@
     flex-basis: unset !important;
 }
 }
+
+
+
+
+ul.navbar-nav li.nav-item {
+    padding: 0px;
+}
+
+ul.navbar-nav li.nav-item {
+    padding: 0px;
+    margin: 0px 10px;
+}
+
+@media screen and (max-width: 480px)
+{ 
+button.navbar-toggler {
+    position: fixed;
+    top: 30px;
+    right: 15px;
+}
+.navbar-collapse.collapse {
+    position: absolute;
+    width: 230px;
+    right: -10px;
+    top: 22px;
+    background: #1e1e1e;
+    padding: 15px;
+}
+.navbar-collapse.collapse a.nav-link, .navbar-collapse.collapse li.nav-item.active a {
+    color: #fff;
+}
+}

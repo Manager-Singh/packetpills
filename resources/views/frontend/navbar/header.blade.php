@@ -24,11 +24,11 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
   <div  class="row between-xs row--nogutters row--middle row--nowrap">
     <div  class="column">
       <div  class="row row--gutter row--middle re-header__nav-container">
-        <div  class="column hide-desktop">
+        <!-- <div  class="column hide-desktop">
           <button  class="btn-hamburger login-recognition">
             <i class="material-icons">menu</i>
           </button>
-        </div>
+        </div> -->
      
         <div class="column">
           <a class="re-header__logo-default" aria-label="Return to home page" href="{{route('frontend.index')}}">
@@ -115,7 +115,7 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
           </nav> -->
 
 
-          <nav  class="navbar navbar-expand-md navbar-light bg-light step-menu">
+          <nav  class="navbar navbar-expand-md navbar-light step-menu">
             <!-- <a class="navbar-brand" href="#">Your Logo</a> -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -123,7 +123,6 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  
                   <a  class="nav-link" href="https://misterpharmacist.com">Home</a>
                 </li>
                 <li class="nav-item">
