@@ -47,7 +47,7 @@ button.navbar-toggler {
 
 }
 
-@media only screen and (max-width: 375px) and (min-width: 320px)  {
+@media only screen and (max-width: 430px) and (min-width: 320px)  {
     .margin-t-l {
         margin-top: 0.2rem !important;
     }
