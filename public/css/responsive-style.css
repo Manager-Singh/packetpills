@@ -1,8 +1,9 @@
 @media screen and (max-width: 480px)
 { 
-.landing-wrapper.margin-t-xl {
-    padding-top: 11rem;
-}
+    .landing-wrapper.margin-t-xl {
+        position: relative;
+        top: 32vh;
+    }
 
 	.hero--desktop {
 		display: block;
