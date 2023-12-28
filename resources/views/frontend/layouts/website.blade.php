@@ -15,6 +15,7 @@
     <title>@yield('title')</title>
     <meta name="description" content="@yield('meta_description', 'Laravel Starter')">
     <meta name="author" content="@yield('meta_author', 'FasTrax Infotech')">
+   
     @yield('meta')
     @include('frontend.navbar.head')
     @stack('before-styles')

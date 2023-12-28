@@ -12,7 +12,9 @@
 }
 }
 
-
+.navbar-collapse {
+    transition: none !important;
+}
 
 
 ul.navbar-nav li.nav-item {
@@ -42,4 +44,7 @@ button.navbar-toggler {
 .navbar-collapse.collapse a.nav-link, .navbar-collapse.collapse li.nav-item.active a {
     color: #fff;
 }
+
 }
+
+

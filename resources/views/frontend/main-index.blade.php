@@ -1,6 +1,6 @@
 @extends('frontend.layouts.website')
 
-@section('title', app_name() . ' | ' . __('navs.general.home'))
+@section('title','Create Account | ' . __('navs.general.home'))
 
 
 @section('content')
