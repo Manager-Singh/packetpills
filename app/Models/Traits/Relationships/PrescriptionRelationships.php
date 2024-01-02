@@ -18,5 +18,10 @@ trait PrescriptionRelationships
     public function medications(){
         return $this->hasMany('App\Models\MedicationItem', 'prescription_id');
     }
+
+    
+    public function user(){
+        return $this->belongsTo('App\Models\Auth\User', 'user_id');
+    }
     
 }

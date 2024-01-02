@@ -52,8 +52,7 @@
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
                 @endif
                 <p class="bold-txt">Add members to MisterPharmacist</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the
-                    latest design trends </p>
+                <!-- <p class="txt"> Your profile has been completed. </p> -->
             </div>
 
         </div>
@@ -72,7 +71,7 @@
                             </div>
                             <div class="pl-2 pl-md-3 pt-3">
                                 <h5>Add family member</h5>
-                                <p>Designed with the latest design trends in mind. Our product feels modern, creative.</p>
+                                <p>Add your family member to create profile.</p>
 
                             </div>
                         </div>
@@ -90,7 +89,7 @@
                             </div>
                             <div class="pl-2 pl-md-3 pt-3">
                                 <h5>Complete your profile</h5>
-                                <p>Designed with the latest design trends in mind.</p>
+                                <p>Complete you profile to add prescription.</p>
 
                             </div>
                         </div>
@@ -110,7 +109,7 @@
                             </div>
                             <div class="pl-2 pl-md-3 pt-3">
                                 <h5>Explore the dashboard</h5>
-                                <p>Designed with the latest design trends in mind. Our product feels modern, creative.</p>
+                                <p>Visit your dashboard.</p>
 
                             </div>
                         </div>

@@ -26,9 +26,7 @@
                         <thead>
                             <tr>
                                 <th>{{ trans('labels.backend.access.prescriptions.table.prescription_id') }}</th>
-                                <th>{{ trans('labels.backend.access.prescriptions.table.name') }}</th>
-                                <th>{{ trans('labels.backend.access.prescriptions.table.type') }}</th>
-                                <th>{{ trans('labels.backend.access.prescriptions.table.medications') }}</th>
+                                <th>Prescription Number</th>
                                 <th>{{ trans('labels.backend.access.prescriptions.table.createdat') }}</th>
                                 <th>{{ trans('labels.general.actions') }}</th>
                             </tr>

@@ -13,7 +13,7 @@
                                 <i class="fa fa-cog"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="{{ route('admin.auth.user.index') }}">View all</a>
                             </div>
                         </div>
                         <div class="text-value">{{$userDataset["count"]}}</div>
@@ -27,13 +27,19 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-info">
                     <div class="card-body pb-0">
-                        <button class="btn btn-transparent p-0 float-right" type="button">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </button>
+                       
+                        <button class="btn btn-transparent dropdown-toggle p-0 float-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-map-marker-alt"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{{ route('admin.prescriptions.index') }}">View all</a>
+                            </div>
                         <div class="text-value">{{$prescriptionDataset["count"]}}</div>
                         <div>Total Prescription</div>
                     </div>
                     <div class="chart-wrapper mt-3 mx-3" style="height: 70px;">
+                    
+                    
                         <canvas id="card-chart2" class="chart" height="70"></canvas>
                     </div>
                 </div>
@@ -42,12 +48,12 @@
                 <div class="card text-white bg-warning">
                     <div class="card-body pb-0">
                         <div class="btn-group float-right">
-                            <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-cog"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#">Action</a>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="text-value">{{$orderDataset['count']}}</div>
                         <div>Total Orders</div>
@@ -61,12 +67,12 @@
                 <div class="card text-white bg-danger">
                     <div class="card-body pb-0">
                         <div class="btn-group float-right">
-                            <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-cog"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#">Action</a>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="text-value">${{$orderRevenueDataset["count"]}}</div>
                         <div>Total Revenue</div>

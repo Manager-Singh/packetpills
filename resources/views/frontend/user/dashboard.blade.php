@@ -8,12 +8,12 @@
               <div class="col-md-8">
                 <div class="med-info">                    
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
-                    <p class="txt">Welcome latest design trends Designed </p>
+                   
                   
                 </div> 
               </div>  
               <div class="col-md-4 text-end">
-                    <a href="#" class="info-btn">Request Refill</a>
+                    <a href="{{route('frontend.user.prescription')}}" class="info-btn mt-0">Request Refill</a>
             
               </div> 
           </div>
@@ -39,13 +39,14 @@
             </a>
             </div> 
             <div class="col-md-3">
-            <a href="{{route('frontend.drug.search')}}">
+            <!-- <a href="{{route('frontend.drug.search')}}"> -->
               <div class="med-info bg-light">  
                 <p><i class="fa fa-search" aria-hidden="true"></i></p>                   
                   <p class="txt"><strong> Search prices </strong></p>
+                  <p class="txt"><strong> Coming soon </strong></p>
                   
               </div>
-            </a>
+            <!-- </a> -->
             </div>
             <!-- <div class="col-md-3">
               <a href="#">
@@ -62,7 +63,6 @@
             <div class="bg-light">
                 <div class="med-info">                    
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
-                    <p class="txt">Welcome latest design trends Designed </p>
  
               </div>  
           </div>
@@ -71,7 +71,6 @@
               <div class="bg-light">
                 <div class="med-info">                    
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
-                    <p class="txt">Welcome latest design trends Designed </p>
  
               </div>  
           </div>
@@ -83,7 +82,6 @@
 
                   <div class="med-info">                    
                       <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
-                      <p class="txt">Welcome latest design trends Designed </p>
    
 
               </div>
@@ -96,7 +94,6 @@
               <div class="bg-light">
                   <div class="med-info">                    
                       <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
-                      <p class="txt">Welcome latest design trends Designed </p>
                   </div>  
 
               </div>

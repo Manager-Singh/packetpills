@@ -343,7 +343,7 @@ main.main-div {
                 <input type="hidden" name="prescription_id" value="{{ $prescription->id }}"/>
               <div class="row">
                 <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-lg order-btn">Create an order</button>
+                <button type="submit" class="btn btn-primary btn-lg order-btn submit">Create an order</button>
                 </div>
               </div><!-- row -->
 
@@ -405,4 +405,22 @@ main.main-div {
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif
+
+
+<script>
+    $(document).ready(function() {
+      $(".submit").click(function() {
+        // Show the loader before submitting the form
+        $(".loader-container").show();
+
+        // Perform your form submission logic here
+
+        // For demonstration purposes, setTimeout is used to simulate a delay (replace with your actual form submission logic)
+        setTimeout(function() {
+          // Hide the loader after the form is submitted
+        //  $(".loader-container").hide();
+        }, 2000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+      });
+    });
+  </script>
 @endpush

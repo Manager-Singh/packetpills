@@ -21,9 +21,7 @@
                     },
                     columns: [
                         { data: 'prescription_id', name: 'prescription_id' },
-                        { data: 'name', name: 'name' },
-                        { data: 'type', name: 'type' },
-                        { data: 'medications', name: 'medications' },
+                        { data: 'prescription_number', name: 'prescription_number' },
                         { data: 'created_at', name: 'created_at' },
                         { data: 'actions', name: 'actions', searchable: false, sortable: false }
                     ],

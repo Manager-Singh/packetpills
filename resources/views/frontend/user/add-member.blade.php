@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="txt">Hi, I'm Cathy, your pharmacist and I'll need some information to fill your orders & provide consultation.</p>
+                <p class="txt">Hi, I'm Alex, your pharmacist and I'll need some information to fill your orders & provide consultation.</p>
              
                 
 

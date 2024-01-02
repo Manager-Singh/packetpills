@@ -6,8 +6,8 @@
 				    <div class="col-md-6">
               <div class="user-info">
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
-                <p class="txt">Designed with the latest design trends</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
+                <p class="txt">Add your prescription here.</p>
+                <p class="txt">You can upload 1 to 8 prescription images. </p>
               </div> 
 
 				    </div>
@@ -110,6 +110,23 @@
       }
     }
       </script>
+
+<script>
+    $(document).ready(function() {
+      $(".submit").click(function() {
+        // Show the loader before submitting the form
+        $(".loader-container").show();
+
+        // Perform your form submission logic here
+
+        // For demonstration purposes, setTimeout is used to simulate a delay (replace with your actual form submission logic)
+        setTimeout(function() {
+          // Hide the loader after the form is submitted
+        //  $(".loader-container").hide();
+        }, 2000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+      });
+    });
+  </script>
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif

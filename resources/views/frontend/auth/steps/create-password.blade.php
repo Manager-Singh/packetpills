@@ -28,9 +28,7 @@
                 @else
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
                 @endif
-                <p class="txt">Designed with the latest design trends</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the
-                    latest design trends </p>
+              
             </div>
 
         </div>
@@ -45,13 +43,13 @@
                     <div class="col-md-12 verify">
                         <label for="lname">Choose a Password</label>
                         <input type="password" id="password" name="password" placeholder="" />
-                        <p class="reshare"> <a href="">Show</a></p>
+                        <!-- <p class="reshare"> <a href="">Show</a></p> -->
                         <p class="info">Please enter 8 or more characters</p>
                     </div>
                     <div class="col-md-12 verify">
                         <label for="lname">Confirm Password</label>
                         <input type="password" id="confirm_password" name="confirm_password" placeholder="" />
-                        <p class="reshare"> <a href="">Show</a></p>
+                        <!-- <p class="reshare"> <a href="">Show</a></p> -->
                         <p class="info">Please enter 8 or more characters</p>
                         <p class="info"><span id='message'></span></p>
                     </div>

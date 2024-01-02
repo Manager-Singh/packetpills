@@ -184,7 +184,7 @@ div#accordionExample {
 
       _this = $(this);
 
-      console.log('sd jkl');
+      // console.log('sd jkl');
     swal({
           title: "Are you want to refill?",
           text: "",
@@ -196,7 +196,8 @@ div#accordionExample {
         },
     function(){
       swal.close();
-      console.log(_this.attr('id'));
+      $(".loader-container").show();
+      // console.log(_this.attr('id'));
       var id = _this.attr('id');
       window.location.href= "{{ route('frontend.user.prescription.refill', ['id' => '__id__']) }}".replace('__id__', id);
     });

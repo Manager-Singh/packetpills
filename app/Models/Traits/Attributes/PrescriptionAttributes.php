@@ -9,12 +9,20 @@ trait PrescriptionAttributes
      */
     public function getActionButtonsAttribute()
     {
+        //dd($this->user);
         return '<div class="btn-group action-btn">
-                    '.$this->getViewButtonAttribute('view-prescription', 'admin.prescriptions.show').'
-                    '.$this->getEditButtonAttribute('edit-prescription', 'admin.prescriptions.edit').'
-                    '.$this->getDeleteButtonAttribute('delete-prescription', 'admin.prescriptions.destroy').'
                     
+                <a href="'.route('admin.auth.user.show', $this->user).'" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.edit').'" class="btn btn-success btn-sm">
+                    <i class="fas fa-eye"></i>
+                </a> 
                 </div>';
+
+                // return '<div class="btn-group action-btn">
+                //     '.$this->getViewButtonAttribute('view-prescription', 'admin.prescriptions.show').'
+                //     '.$this->getEditButtonAttribute('edit-prescription', 'admin.prescriptions.edit').'
+                //     '.$this->getDeleteButtonAttribute('delete-prescription', 'admin.prescriptions.destroy').'
+                    
+                // </div>';
     }
     
    

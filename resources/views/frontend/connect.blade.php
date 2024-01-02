@@ -49,8 +49,7 @@ img.partner-img {
 				    <div class="col-md-6 position-relative">
                 
                 <h2 class="display-5 pt-5"><strong>Learn how MisterPharmacist make team healthier</strong></h2>
-                <p class="txt pt-4">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
-                 <p class="big"><i class="fa fa-tachometer" aria-hidden="true"></i></p>
+                
 				    </div>
            
 				    <div class="col-md-6">

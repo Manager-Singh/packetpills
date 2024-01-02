@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="txt">Hi, I'm Cathy, your pharmacist and I'll need some information to fill your orders & provide consultation.</p>
+                <p class="txt">Hi, I'm Alex, your pharmacist and I'll need some information to fill your orders & provide consultation.</p>
              
                 
 
@@ -112,16 +112,16 @@
                             <label for="lname">Date Of Birth</label>
                             <p class="info">You must be at least 14 year old.</p>
                             <span class="dob">
-                                <input type="number" class="form-control" name="month" value="{{$auth->dob('month')}}"  placeholder="MM" maxlength="2" size="2" required />
+                                <input type="text" class="form-control orderUnits" name="month" value="{{$auth->dob('month')}}"  placeholder="MM" maxlength="2"  required />
 
-                                <input type="number" class="form-control" name="date"  value="{{$auth->dob('day')}}" placeholder="DD" maxlength="2" size="2" required />
+                                <input type="text" class="form-control orderUnits1" name="date"  value="{{$auth->dob('day')}}" placeholder="DD" maxlength="2"  required />
 
-                                <input type="number" class="form-control"  name="year"  value="{{$auth->dob('year')}}"  placeholder="YYYY" maxlength="4" size="4" required />
+                                <input type="text" class="form-control orderUnits2"  name="year"  value="{{$auth->dob('year')}}"  placeholder="YYYY" maxlength="4"  required />
                             </span>
                             </div>
                             </div>
                             <input type="submit" class="next button" value="Next" />
-                            <p class="info-bold">1 Day delivery in the Greater area</p>
+                            <p class="info-bold">3 Hours delivery for emergency medicines.</p>
                           
 
 
@@ -155,6 +155,15 @@
         }
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+
+document.getElementsByClassName("orderUnits")[0].addEventListener("input", amountofUnits);
+document.getElementsByClassName("orderUnits1")[0].addEventListener("input", amountofUnits);
+document.getElementsByClassName("orderUnits2")[0].addEventListener("input", amountofUnits);
+
+function amountofUnits() {
+   this.value = this.value.replace(/[^\d]/, '')
 }
 
 </script>

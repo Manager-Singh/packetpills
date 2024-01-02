@@ -44,6 +44,23 @@
                                 @endif
                             </a>
                         </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link {{
+                                active_class(Route::is('admin/auth/user*'))
+                            }}" href="{{ route('admin.auth.user.deactivated') }}">
+                            @lang('menus.backend.access.users.deactivated')
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{
+                                active_class(Route::is('admin/auth/user*'))
+                            }}" href="{{ route('admin.auth.user.deleted') }}">
+                            @lang('menus.backend.access.users.deleted')
+
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {{
                                 active_class(Route::is('admin/auth/role*'))
@@ -83,7 +100,7 @@
                         Transfer Requests
                     </a>
                 </li>
-                <!-- <li class="divider"></li>
+                <li class="divider"></li>
                 <li class="nav-item">
                     <a class="nav-link {{
                         active_class(Route::is('admin/prescriptions'))
@@ -91,7 +108,7 @@
                         <i class="nav-icon fas fa-prescription"></i>
                         @lang('menus.backend.sidebar.prescriptions')
                     </a>
-                </li> -->
+                </li>
                 <li class="divider"></li>
                 <li class="nav-item">
                     <a class="nav-link {{

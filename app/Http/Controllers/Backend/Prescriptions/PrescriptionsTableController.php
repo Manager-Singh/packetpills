@@ -32,15 +32,8 @@ class PrescriptionsTableController extends Controller
         
         return Datatables::of($this->repository->getForDataTable())
             ->escapeColumns(['name'])
-            ->addColumn('name', function ($prescriptions) {
-               
-                return $prescriptions->name;
-            })
-            ->addColumn('type', function ($prescriptions) {
-                return $prescriptions->type;
-            })
-            ->addColumn('medications', function ($prescriptions) {
-                return $prescriptions->medications;
+            ->addColumn('prescription_id', function ($prescriptions) {
+                return $prescriptions->id;
             })
             ->addColumn('prescription_number', function ($prescriptions) {
                 return $prescriptions->prescription_number;

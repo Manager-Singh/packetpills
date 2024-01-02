@@ -27,12 +27,11 @@ class PrescriptionsRepository extends BaseRepository
     public function getActivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc')
     {
         return $this->query()
+        ->has('user')
             ->select([
                 'prescriptions.id',
                 'prescriptions.prescription_number',
-                'prescriptions.name',
-                'prescriptions.type',
-                'prescriptions.medications',
+                'prescriptions.user_id',
                 'prescriptions.created_at',
             ])
             ->orderBy($orderBy, $sort)
@@ -45,14 +44,13 @@ class PrescriptionsRepository extends BaseRepository
     public function getForDataTable()
     {
         return $this->query()
+            ->has('user')
             ->select([
                 'prescriptions.id',
                 'prescriptions.prescription_number',
-                'prescriptions.name',
-                'prescriptions.type',
-                'prescriptions.medications',
+                'prescriptions.user_id',
                 'prescriptions.created_at',
-            ]);
+            ])->with('user');
     }
 
     /**
@@ -83,8 +81,7 @@ class PrescriptionsRepository extends BaseRepository
      */
     public function update(Prescription $prescription, array $input)
     {
-        dd($input);
-
+        
         if ($prescription->update($input)) {
             event(new PrescriptionUpdated($prescription));
 

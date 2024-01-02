@@ -102,8 +102,8 @@ class ProvincesRepository extends BaseRepository
     public function delete($Province)
     {
        // dd($preciptionType);
-        if ($Province->delete()) {
-            event(new ProvincesDeleted($Province));
+        if ($Province->forceDelete()) {
+            // event(new ProvincesDeleted($Province));
 
             return true;
         }

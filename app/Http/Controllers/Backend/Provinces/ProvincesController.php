@@ -115,6 +115,6 @@ class ProvincesController extends Controller
     {
         // dd($preciptionType);
         $this->repository->delete($province);
-        return new RedirectResponse(route('admin.province.index'), ['flash_success' => __('alerts.backend.provinces.deleted')]);
+        return new RedirectResponse(route('admin.provinces.index'), ['flash_success' => __('alerts.backend.provinces.deleted')]);
     }
 }
