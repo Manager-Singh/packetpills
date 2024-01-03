@@ -67,7 +67,8 @@ div#accordionExample {
                             <p class="txt">Created On: {{$prescription->created_at->format('F d, Y ')}}</p>
                         </div>
                         <div class="col-md-4 text-right">
-                            <span class="btn-error" >{{$prescription->status}}</sapn>
+                            <span class="btn-error">{{$prescription->status}}</span>
+                            <span class="bg-danger btn-error" onclick="prescritpionDelted('{{$prescription->id}}')">Delete</span>
                         </div>
                         
                       </div>
@@ -206,6 +207,26 @@ div#accordionExample {
     
     
   })
+
+  function prescritpionDelted(id){
+    event.preventDefault();
+    swal({
+          title: "Are you want to delete?",
+          text: "",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, to delete!",
+          closeOnConfirm: false
+        },
+    function(){
+      swal.close();
+      $(".loader-container").show();
+      // console.log(_this.attr('id'));
+      
+      window.location.href= "{{ route('frontend.user.prescription.delete', ['id' => '__id__']) }}".replace('__id__', id);
+    });
+  }
   </script>
 
 

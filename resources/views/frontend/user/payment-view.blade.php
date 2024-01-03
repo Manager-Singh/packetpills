@@ -12,7 +12,6 @@
               <div class="user-info p-details">
                 <i class="fa fa-credit-card" aria-hidden="true"></i>
                 <p class="txt-large">Select Payment Method</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
               </div> 
 
 				    </div>

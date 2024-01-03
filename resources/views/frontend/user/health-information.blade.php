@@ -51,7 +51,6 @@
               <div class="user-info p-details">
                 <i class="fa fa-heartbeat" aria-hidden="true"></i>
                 <p class="txt-large">Health information</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
               </div> 
 
 				    </div>
@@ -88,9 +87,9 @@
                             </div>
                             @if($health_info)
                             <input type="hidden" name="health_information_id" value="{{$health_info->id}}" />
-                            <button type="submit" id="submit" class="next button" onclick="" >Update</button>
+                            <button type="submit" id="submit" class="next button submit" onclick="" >Update</button>
                             @else
-                            <button type="submit" id="submit" class="next button" onclick="" >Save</button>
+                            <button type="submit" id="submit" class="next button submit" onclick="" >Save</button>
                             @endif
                             
                             
@@ -137,7 +136,20 @@
       });
     });
  
+    $(document).ready(function() {
+      $(".submit").click(function() {
+        // Show the loader before submitting the form
+        $(".loader-container").show();
 
+        // Perform your form submission logic here
+
+        // For demonstration purposes, setTimeout is used to simulate a delay (replace with your actual form submission logic)
+        setTimeout(function() {
+          // Hide the loader after the form is submitted
+        //  $(".loader-container").hide();
+        }, 2000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+      });
+    });
       </script>
 @if(config('access.captcha.login'))
 @captchaScripts

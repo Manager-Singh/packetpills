@@ -16,8 +16,7 @@ button.save.button {
 				    <div class="col-md-12">
               <div class="user-info p-details">
                 <i class="fa fa-home" aria-hidden="true"></i>
-                <p class="txt-large">Add Shipping Address</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
+                <p class="txt-large">Add Card Details</p>
               </div> 
 
 				    </div>
@@ -80,7 +79,7 @@ button.save.button {
 
                 <div class="btn-div">
                   <a href="{{route('frontend.user.payment')}}"><button type="button" class="save button" onclick="" > Cancel </button></a>
-                  <button type="submit" id="submit" class="next button" onclick="" >Save</button>
+                  <button type="submit" id="submit" class="next button submit" onclick="" >Save</button>
                  </div>
               </form> 
                  
@@ -233,7 +232,22 @@ function luhnCheck(val) {
     return (sum % 10) == 0;
 }
  
+$(document).ready(function() {
+      $(".submit").click(function() {
+        $('#card-form').parsley().validate();
 
+        console.log($('#card-form').parsley().isValid());
+        if ($('#card-form').parsley().isValid()) {
+              $(".loader-container").show();
+          }
+      
+        setTimeout(function() {
+        
+          //$(".loader-container").hide();
+         
+        }, 2000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+      });
+    });
       </script>
 @if(config('access.captcha.login'))
 @captchaScripts

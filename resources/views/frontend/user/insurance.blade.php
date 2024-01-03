@@ -27,7 +27,6 @@
             <div class="user-info p-details">
               <i class="fa fa-shield" aria-hidden="true"></i>
               <p class="txt-large">Your insurance details</p>
-              <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
             </div>
           </div>
           <div class="col-md-2"></div>
@@ -45,7 +44,7 @@
                 <label class="col-md-12" for="myfile">Primary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
-                  <input type="file" id="myFile" name="front_img" onchange="readURL(this);">
+                  <input type="file" id="myFile" name="front_img" class="primary-insurance-input" onchange="readURL(this);">
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(front) </label>
@@ -63,7 +62,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="upload" >
-                  <input type="file" id="myFile"  name="back_img" onchange="readURL(this);">
+                  <input type="file" id="myFile"  name="back_img" class="primary-insurance-input" onchange="readURL(this);">
                     <label  for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(back) </label>
@@ -198,7 +197,7 @@
               @endif
                     
                 </div>
-              <button type="submit" id="submit" class="next button" onclick="">Save</button>
+              <button type="submit" id="submit" class="next button submit" onclick="">Save</button>
             </form>
           </div>
           <div class="col-md-2"></div>
@@ -216,14 +215,14 @@
           
                 if ($(this).prop("checked") == true) {
                 
-                $('.common-insurance').css("pointer-events","none");
-                $(".common-insurance input").attr('required', false);
+                  $('.common-insurance').css("pointer-events","none");
+                  $(".primary-insurance-input").attr('required', false);
                 
                 } else {
                     
                    $('.common-insurance').css("pointer-events","auto");
                    //$(".common-insurance input").attr("required"); 
-                   $(".common-insurance input").attr('required', true);
+                   $(".primary-insurance-input").attr('required', true);
                    
                 }
                  
@@ -274,7 +273,7 @@
         // In here, `this` is the parlsey instance of #some-input
 
         if ($('#insurance-form').parsley('isValid')) {
-          console.log('form is valid');
+         
           $('#submit').removeAttr('disabled');
         }
       }); 
@@ -287,8 +286,7 @@
         var reader = new FileReader();
         
         reader.onload = function (e) {
-          console.log($(input).parent());
-          
+         
           $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
           $(input).parent().find('.upload-after').addClass("d-block");
         };
@@ -300,9 +298,7 @@
 
     function removeInsurance(id) 
     {
-        console.log(id);
         
-       
         swal({
             title: "Are you sure you want to do this?",
             text: "",
@@ -336,7 +332,48 @@
      
     }
  
+    $(document).ready(function() {
+      $(".submit").click(function() {
+        //$('#insurance-form').parsley().validate();
 
+        if ($('#noInsurance').prop("checked") == true) {
+          
+          $(".primary-insurance-input").attr('required', false);
+          $('#insurance-form').parsley().validate();
+          $('#noInsurance').parsley().isValid();
+          $(".loader-container").show();
+        }else{
+          $(".primary-insurance-input").attr('required', true);
+          
+          if($('#insurance-form').parsley().validate()){
+            $(".loader-container").show();
+          }else{
+            return false;
+          }
+         
+        }
+
+       // $('#noInsurance').parsley().isValid();
+       
+      //  $(".loader-container").show();
+
+       // $(".loader-container").hide();
+              
+        // Show the loader before submitting the form
+        
+
+        // Perform your form submission logic here
+        
+        // For demonstration purposes, setTimeout is used to simulate a delay (replace with your actual form submission logic)
+        
+        setTimeout(function() {
+          // Hide the loader after the form is submitted
+         
+          //$(".loader-container").hide();
+         
+        }, 5000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+      });
+    });
       </script>
 @if(config('access.captcha.login'))
 @captchaScripts

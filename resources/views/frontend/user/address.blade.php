@@ -21,8 +21,7 @@
                 <p class="txt-large">Add Shipping Address</p>
                 @endif
                 
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
-              </div> 
+             </div> 
 
 				    </div>
             <div class="col-md-2">
@@ -78,9 +77,9 @@
                   <a href="{{route('frontend.user.address')}}"   > <button type="button" class="save button"> Cancel </button></a>
                   @if(isset($_GET['id']) && isset($address))
                     <input type="hidden" name="id" value="{{$address->id}}"/>
-                    <button type="submit" id ="submit" class="next button" onclick="" >Update</button>
+                    <button type="submit" id ="submit" class="next button submit" onclick="" >Update</button>
                   @else
-                    <button type="submit" id="submit" class="next button" onclick="" >Save</button>
+                    <button type="submit" id="submit" class="next button submit" onclick="" >Save</button>
                   @endif
                   
                  
@@ -104,13 +103,36 @@
         // In here, `this` is the parlsey instance of #some-input
 
         if ($('#address-form').parsley('isValid')) {
-          console.log('form is valid');
           $('#submit').removeAttr('disabled');
         }
       });  
      
     });
  
+
+    $(document).ready(function() {
+      $(".submit").click(function() {
+        $('#address-form').parsley().validate();
+
+
+        if ($('#address-form').parsley().isValid()) {
+              $(".loader-container").show();
+          }
+        // Show the loader before submitting the form
+        
+
+        // Perform your form submission logic here
+        
+        // For demonstration purposes, setTimeout is used to simulate a delay (replace with your actual form submission logic)
+        
+        setTimeout(function() {
+          // Hide the loader after the form is submitted
+         
+          //$(".loader-container").hide();
+         
+        }, 2000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+      });
+    });
 
       </script>
 @if(config('access.captcha.login'))

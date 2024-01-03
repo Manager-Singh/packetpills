@@ -82,14 +82,29 @@ class DashboardController extends Controller
         return view('frontend.auth.steps.personal');
     }
 
+    public function personal_update(Request $request){
 
+
+        $output = $this->userRepository->update(
+            Auth::user(),
+            ['first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'gender'=>$request->gender],
+            $request->has('avatar_location') ? $request->file('avatar_location') : false
+        );
+
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+
+    }
     public function personal_save(Request $request){
 
 
 
         $output = $this->userRepository->update(
             Auth::user(),
-            ['first_name'=>$request->first_name, 'last_name'=>$request->first_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'profile_step'=>1],
+            ['first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'profile_step'=>1],
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
@@ -163,6 +178,17 @@ class DashboardController extends Controller
         //dd($data['prescriptions'][0]);
         //dd('sss');
         return view('frontend.user.prescription',$data); 
+    }
+    public function userPrescripitonDelete($id){
+        $prescription = Prescription::find($id);
+        $user = Auth::user();
+       
+        
+        if($prescription->delete()){
+          return redirect()->back()->withFlashSuccess(__('Prescription deleted.'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
     }
     public function userPrescripitonRefill($id){
 

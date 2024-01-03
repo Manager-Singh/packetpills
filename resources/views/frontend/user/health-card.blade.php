@@ -22,7 +22,6 @@
               <div class="user-info">
                 <i class="fa fa-address-card-o" aria-hidden="true"></i>
                 <p class="txt-large">Your provincial Health Card</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
               </div> 
 
 				    </div>
@@ -96,9 +95,9 @@
                             </div>
                            @if($healthCard)
                            <input type="hidden" name="health_id" value="{{$healthCard->id}}" />
-                           <button type="submit" id="submit" class="next button" onclick="" >Update</button>
+                           <button type="submit" id="submit" class="next button submit" onclick="" >Update</button>
                            @else
-                           <button type="submit" id="submit" class="next button" onclick="" >Continue</button>
+                           <button type="submit" id="submit" class="next button submit" onclick="" >Continue</button>
                            @endif
                             </div>
                             
@@ -123,7 +122,7 @@
         // In here, `this` is the parlsey instance of #some-input
 
         if ($('#health-form').parsley('isValid')) {
-          console.log('form is valid');
+          
           $('#submit').removeAttr('disabled');
         }
       });
@@ -135,7 +134,7 @@
        
           
        $('#table').on('click', "#delete", function(e) {
-        console.log($(this).closest('.upload-after').find('#output'));
+        //console.log($(this).closest('.upload-after').find('#output'));
         
         $(this).closest('.upload-after').find('#output').attr('src', '#').width(0).height(0);
         //$(this).closest('.upload-after').remove();
@@ -151,7 +150,7 @@
         var reader = new FileReader();
         
         reader.onload = function (e) {
-          console.log($(input).parent());
+          //console.log($(input).parent());
           
           $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
           $(input).parent().find('.upload-after').addClass("d-block");
@@ -163,7 +162,7 @@
  
     function removeInsurance(id,type) 
     {
-        console.log(id);
+       // console.log(id);
         
        
         swal({
@@ -198,6 +197,28 @@
 
      
   }
+
+  $(document).ready(function() {
+      $(".submit").click(function() {
+        $('#health-form').parsley().validate();
+        if ($('#health-form').parsley().isValid()) {
+              $(".loader-container").show();
+          }
+        // Show the loader before submitting the form
+        
+
+        // Perform your form submission logic here
+        
+        // For demonstration purposes, setTimeout is used to simulate a delay (replace with your actual form submission logic)
+        
+        setTimeout(function() {
+          // Hide the loader after the form is submitted
+         
+          //$(".loader-container").hide();
+         
+        }, 2000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+      });
+    });
       </script>
 @if(config('access.captcha.login'))
 @captchaScripts

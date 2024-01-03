@@ -67,7 +67,7 @@
 
                  <div class="sidebar-footer">
                      <div class="left">
-                         <a href="#">
+                         <a aria-label="Return to home page" href="{{route('frontend.index')}}">
                              <img src="{{ asset('step/assets/images/logo.png') }}" alt="logo" />
                          </a>
                      </div>

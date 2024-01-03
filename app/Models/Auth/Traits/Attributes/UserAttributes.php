@@ -156,7 +156,7 @@ trait UserAttributes
     public function getAddMemberButtonAttribute($class)
     {
         if (access()->allow('show-user')) {
-            return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.members', $this).'" title="'.trans('buttons.general.crud.view').'"> 
+            return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.members', $this).'" title="Add Family Members"> 
                     <i class="fa fa-user-plus"></i>
                 </a>';
         }
