@@ -859,12 +859,13 @@ class UserRepository extends BaseRepository
         $curl = curl_init();
 
         $search = (isset($array['search'])) ? $array['search'] : '' ;
-        $key     = env('Google_API_Key');
+        //$key     = env('Google_API_Key');
+        $key     = 'AIzaSyAArxBsomoj_zfX0ws6gOR4LP72DjaNDcA';
         if(!empty($array['lat']) && !empty($array['long'])){
             $lat    = $array['lat'];
-            $long   = $array['long'];
+            $long   = $array['long']; 
             
-
+                     
             $query = 'key='.$key.'&location=&'.$lat . ',' . $long.'&radius=50000&query=pharmacy%20'.$search.'+in+Canada';
             //$apiUrl ='https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search;
         }else{
