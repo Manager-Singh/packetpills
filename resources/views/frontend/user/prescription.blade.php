@@ -54,7 +54,7 @@ div#accordionExample {
 <div class="row mt-0  mb-5 prescription-pg">
   <div class="col-md-1"></div>
   <div class="col-md-10">
-    <div class="tab-content " id="content">
+    <div class="tab-content hhh " id="content">
       <div class="tab-pane fade show active" id="tabs-1" role="tabpanel" aria-labelledby="tab-1">
        @if($prescriptions)
         @foreach($prescriptions as $prescription)
@@ -124,7 +124,7 @@ div#accordionExample {
               </div>
             </div>
             @endforeach
-
+           
            
           </div><!-- accordion-->
           @endif
@@ -132,6 +132,7 @@ div#accordionExample {
         
         @endforeach
        @else
+
        @endif 
 
         

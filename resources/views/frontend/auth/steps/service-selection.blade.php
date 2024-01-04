@@ -124,7 +124,7 @@ button.btn.btn-secondary {
                             </div>
                             <div class="pl-2 pl-md-3">
                                 <h5>Need a prescription? </h5>
-                                <p>Visit our Minor Ailments Page to see if you qualify for a minor ailment prescription or ask you doctor to fax a perscription to us at <b>416-593-4166</b></p>
+                                <p>Visit our Minor Ailments Page to see if you qualify for a minor ailment prescription or ask you doctor to fax a prescription to us at <b>416-593-4166</b></p>
                                 
                             </div>
                         </div>
@@ -173,7 +173,7 @@ button.btn.btn-secondary {
                             <div class="icon"><i class="fa fa-search" aria-hidden="true"></i></div>
                         </div>
                         <div class="pl-2 pl-md-3">
-                            <h5>Search for medication prices (coming soon)</h5>
+                            <h5>Search for medication prices (Coming Soon)</h5>
                             
                          
                         </div>
@@ -189,7 +189,7 @@ button.btn.btn-secondary {
                               <div class="icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
                           </div>
                           <div class="pl-2 pl-md-3">
-                              <h5>See how it work</h5>
+                              <h5>See how it work (Coming Soon)</h5>
                               
                            
                           </div>

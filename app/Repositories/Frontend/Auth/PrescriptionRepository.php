@@ -131,8 +131,7 @@ class PrescriptionRepository extends BaseRepository
         
         //sendMessage('+919501427078','mail','forgot_reset_otp','dddddd');
         //sendMessage('919501427078','mail','patient_prescription_created','hellllll');
-
-        //dd('hjk');
+  
         
             $user = Auth::user();
             $images = $data['prescription_upload'];

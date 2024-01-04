@@ -262,11 +262,10 @@ if (! function_exists('sendMessage')) {
             $messagesend = $client->messages->create($mobile_no, [
                 'from' => +16475034144,
                 'body' => $body]);
-           
-                return 1;
+            return 1;
         }
         catch (Exception $e){
-         //dd($e);
+        // dd($e);
             return 0;
         }
     }
@@ -296,6 +295,7 @@ if (! function_exists('sendMail')) {
         $to_name = $full_name;
         $to_email = $user->email;
         $data = array("name"=>$full_name, "body" => $body);
+        
         try{
         $aaaa = Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
         $message->to($to_email, $to_name);

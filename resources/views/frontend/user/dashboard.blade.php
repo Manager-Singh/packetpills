@@ -59,25 +59,25 @@
             </div> -->  
         </div>
         <div class="row mt-5 appointemt-contact">
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <div class="bg-light">
                 <div class="med-info">                    
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
  
               </div>  
           </div>
-            </div>
-            <div class="col-md-6">
+            </div> -->
+            <!-- <div class="col-md-6">
               <div class="bg-light">
                 <div class="med-info">                    
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
  
               </div>  
           </div>
-            </div>
+            </div> -->
           </div>
 
-          <p class="txt mt-5"><strong>OFFERS FOR YOU</strong></p>
+          <!-- <p class="txt mt-5"><strong>OFFERS FOR YOU</strong></p>
           <div class="row bg-light">
 
                   <div class="med-info">                    
@@ -86,9 +86,9 @@
 
               </div>
        
-            </div>
+            </div> -->
 
-            <p class="txt mt-5"><strong>RECENT MEDICATIONS</strong></p>
+            <!-- <p class="txt mt-5"><strong>RECENT MEDICATIONS</strong></p>
           <div class="row">
 
               <div class="bg-light">
@@ -98,7 +98,7 @@
 
               </div>
        
-            </div>
+            </div> -->
 			
 			</div>
 @endsection

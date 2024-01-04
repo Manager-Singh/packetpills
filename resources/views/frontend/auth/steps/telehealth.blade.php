@@ -8,8 +8,7 @@
 				    <div class="col-md-6">
               <div class="user-info">
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
-                <p class="bold-txt">Designed with the latest design trends</p>
-                <p class="txt">Welcome latest design trends Designed with the latest design trendsDesigned with the latest design trends </p>
+                <!-- <p class="bold-txt">Designed with the latest design trends</p> -->
               </div> 
 
 				    </div>

@@ -120,7 +120,7 @@
                             </div>
                             <div class="col-md-12">
                             <label for="lname">Date Of Birth</label>
-                            <p class="info">You must be at least 14 year old.</p>
+                            <!-- <p class="info">You must be at least 14 year old.</p> -->
                             <span class="dob">
                                 <input type="text" class="form-control orderUnits" name="month" value="{{$auth->dob('month')}}"  placeholder="MM" maxlength="2"  required />
 

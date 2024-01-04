@@ -122,11 +122,13 @@ li.ajax-li:hover {
                                 <tr>
                                   <th>Pharmacy</th>
                                   <th>Status</th>
+                                  <th>Action</th>
                                 </tr>
                                 @foreach($transfer_request as $trequest)
                                   <tr>
                                     <td><small>{{$trequest->formatted_address}}</small></td>
                                     <td><small>{{$trequest->status}}</small></td>
+                                    <td><small class="btn btn-danger" onclick="transferRequestCancle('{{$trequest->id}}')">Cancel</small></td>
                                   </tr>
                                 @endforeach
                               </tbody>
@@ -204,7 +206,25 @@ li.ajax-li:hover {
 
     }
  
-
+    function transferRequestCancle(id){
+    event.preventDefault();
+    swal({
+          title: "Are you want to delete?",
+          text: "",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, to delete!",
+          closeOnConfirm: false
+        },
+    function(){
+      swal.close();
+      $(".loader-container").show();
+      
+      
+      window.location.href= "{{ route('frontend.user.transfer.request.delete', ['id' => '__id__']) }}".replace('__id__', id);
+    });
+  }
       </script>
 
 

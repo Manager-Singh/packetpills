@@ -74,6 +74,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::post('place/get-search', [DashboardController::class, 'placeAjaxSearch'])->name('place.ajax.search');
         Route::post('order/save', [DashboardController::class, 'orderSave'])->name('order.save');
         Route::post('transfer/request', [DashboardController::class, 'transferRequest'])->name('transfer.request');
+        Route::get('transfer/request/delete', [DashboardController::class, 'transferRequestDelete'])->name('transfer.request.delete');
         
         Route::get('add-member', [DashboardController::class, 'addMember'])->name('add.member');
         Route::post('add/member/save', [DashboardController::class, 'addMemberSave'])->name('add.member.save');

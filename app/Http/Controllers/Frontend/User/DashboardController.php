@@ -125,6 +125,9 @@ class DashboardController extends Controller
     public function almostdone_save(Request $request){
 
 
+        if(isset($request->email) && User::where('email',$request->email)->exists()){
+            return redirect()->back()->withFlashInfo(__('      This  email ( '.$request->email.' ) already exists.')); 
+        }
         // 'province'=>$request->province,
         $output = $this->userRepository->update(
             Auth::user(),
@@ -518,6 +521,18 @@ class DashboardController extends Controller
         
         if($output){
             return redirect()->back()->withFlashSuccess(__('Transfer Request Created Successfully'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        
+    }
+
+    public function transferRequestDelete(Request $request){
+        
+        $output = TransferRequest::find($request->id);
+        
+        if($output->delete()){
+            return redirect()->back()->withFlashSuccess(__('Transfer Request Deleted Successfully'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

@@ -994,13 +994,14 @@ class UserRepository extends BaseRepository
 
     public function transferRequestSave(array $array){
 
-
+       // sendMessage('919501427078','patient_account_completed',null,'fghhhhh');
+       // sendMessage('919816971001','mail','insurance_created',null);
+       
         $curl = curl_init();
 
         $search = (isset($array['search'])) ? $array['search'] : '' ;
         $key     = env('GOOGLE_API_KEY');
-       
-       $query = 'place_id='.$array['place_id'].'&key='.$key;
+        $query = 'place_id='.$array['place_id'].'&key='.$key;
 
         curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/details/json?'.$query,

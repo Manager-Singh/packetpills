@@ -58,10 +58,10 @@
                             @endforeach
                         @else
                         @endif
-                        <option  value="Alberta" {{ ( $auth->province == 'Alberta') ? 'selected' : ''}}>Alberta</option>
-                        
+                        <!-- <option  value="Alberta" {{ ( $auth->province == 'Alberta') ? 'selected' : ''}}>Alberta</option>
+                         -->
                         </select>
-                        <p class="info">As mentioned at least 14 year old.</p>
+                       
                     </div>
                     <div class="col-md-12">
                         <label for="lname">Gender</label>
@@ -83,7 +83,7 @@
                     <div class="col-md-12">
                         <label for="lname">Email Address</label>
                         <input type="email" name="email" value="{{$auth->email}}" placeholder="" required />
-                        <p class="info">To send updates about your order.</p>
+                        <!-- <p class="info">To send updates about your order.</p> -->
                     </div>
                 </div>
                 <button type="submit" class="next button">Next</button>
