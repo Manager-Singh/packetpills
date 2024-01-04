@@ -128,11 +128,6 @@ class PrescriptionRepository extends BaseRepository
      */
     public function create(array $data)
     {
-        
-        //sendMessage('+919501427078','mail','forgot_reset_otp','dddddd');
-        //sendMessage('919501427078','mail','patient_prescription_created','hellllll');
-  
-        
             $user = Auth::user();
             $images = $data['prescription_upload'];
             $prescription = new Prescription;
