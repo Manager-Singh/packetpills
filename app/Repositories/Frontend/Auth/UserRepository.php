@@ -859,8 +859,8 @@ class UserRepository extends BaseRepository
         $curl = curl_init();
 
         $search = (isset($array['search'])) ? $array['search'] : '' ;
-        //$key     = env('Google_API_Key');
-        $key     = 'AIzaSyAArxBsomoj_zfX0ws6gOR4LP72DjaNDcA';
+        $key     = env('GOOGLE_API_KEY');
+        
         if(!empty($array['lat']) && !empty($array['long'])){
             $lat    = $array['lat'];
             $long   = $array['long']; 
@@ -998,7 +998,7 @@ class UserRepository extends BaseRepository
         $curl = curl_init();
 
         $search = (isset($array['search'])) ? $array['search'] : '' ;
-        $key     = env('Google_API_Key');
+        $key     = env('GOOGLE_API_KEY');
        
        $query = 'place_id='.$array['place_id'].'&key='.$key;
 

@@ -308,7 +308,7 @@ if (! function_exists('sendMail')) {
         return 1;
     }
     catch (Exception $e){
-     //dd($e);
+    // dd($e);
     //$e->getMessage()
         return 0;
     }

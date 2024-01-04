@@ -12,11 +12,21 @@
     box-shadow: 0px 0px 17px -3px #638e3c;
     margin-right: 25px;
 }
-
+.service-selection-btn {
+    position: absolute;
+    right: 0;
+    z-index: 5;
+    background: #8ac03d !important;
+    border-color: #638e3c !important;
+}
+.almostdone-pg {
+    position: relative;
+}
 </style>
 @endpush
 @section('content')
 <div class="container mt-5 mb-5 pt-4 almostdone-pg">
+<a class="btn btn-primary btn-sm service-selection-btn" href="{{route('frontend.auth.service.selection')}}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Service Selection</a>
     <div class="row ">
         <div class="col-md-12">
             <div class="user-info">

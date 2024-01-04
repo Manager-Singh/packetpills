@@ -66,12 +66,22 @@
 .avatar-upload label {
     margin: 8px 0;
 }
+.service-selection-btn {
+    position: absolute;
+    right: 0;
+    z-index: 5;
+    background: #8ac03d !important;
+    border-color: #638e3c !important;
+}
+.personal-main {
+    position: relative;
+}
 </style>
 @endpush
 @section('content')
 
-<div class="container mt-3 mb-5 pt-2">
-		    	
+<div class="container mt-3 mb-5 pt-2 personal-main">
+<a class="btn btn-primary btn-sm service-selection-btn" href="{{route('frontend.auth.service.selection')}}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Service Selection</a>
                 <form name="myForm" class="row" enctype="multipart/form-data" id="personal-step" action="{{route('frontend.auth.step.personal.submit')}}" method="post">
                             @csrf
 				    <div class="col-md-12">

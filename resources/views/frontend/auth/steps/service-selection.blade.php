@@ -43,6 +43,14 @@ button.btn.btn-secondary {
     border-color: #212843;
 }
 
+.more-btn-o a {
+    padding: 10px 15px 10px 15px;
+    background-color: #638e3c61;
+    border-radius: 40px;
+    color: #000;
+    text-decoration: unset;
+}
+
 </style>
 @endpush
 @section('content')
@@ -51,9 +59,9 @@ button.btn.btn-secondary {
 				    <div class="col-md-12">
               <div class="user-info">
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
-                <p class="txt">Designed with the latest design trends</p>
-                <p class="txt">Welcome latest design trends</p>
-                <p class="bold-txt">Designed with the latest design trends</p>
+                <p class="txt mb-0">Welcome to your personal</p>
+                <p class="txt mb-0 mt-0">Toronrto Online Pharmacy</p>
+                <p class="txt mt-0">MisterPharmacist</p>
               </div> 
 
 				    </div>
@@ -116,7 +124,7 @@ button.btn.btn-secondary {
                             </div>
                             <div class="pl-2 pl-md-3">
                                 <h5>Need a prescription? </h5>
-                                <p>Explore options to see a doctor online; or get your doctor to send us your prescription.</p>
+                                <p>Visit our Minor Ailments Page to see if you qualify for a minor ailment prescription or ask you doctor to fax a perscription to us at <b>416-593-4166</b></p>
                                 
                             </div>
                         </div>
@@ -125,7 +133,7 @@ button.btn.btn-secondary {
 </div>
 </div>
 </div>
-                <div class=" text-center p-1 ">
+                <div class=" text-center p-1 more-btn-o">
                     
                     
                     <a href="javascript:void(0)" data-toggle="modal" data-target="#pharmaModal">More options</a>
@@ -143,7 +151,7 @@ button.btn.btn-secondary {
           <div class="modal-header">
             <div class="on-top">
               <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
-              <h5 class="modal-title" id="pharmaModalLabel">Welcome latest design trends</h5>
+              <h5 class="modal-title" id="pharmaModalLabel">Welcome to Toronrto Online Pharmacy</h5>
               <h4 class="modal-title " id="pharmaModalLabel">How can we Help?</h4>
             </div>
             
@@ -152,9 +160,12 @@ button.btn.btn-secondary {
             <div class="card text-left p-1 mb-4">
              
               @if(Auth::check() && Auth::user()->is_profile_status == "completed")
-                 <a href="{{route('frontend.drug.search')}}">
+              <!-- <a href="{{route('frontend.drug.search')}}"> -->
+                 <a href="#">
+
                 @else
-                <a href="{{route('frontend.user.dashboard')}}">
+                <!-- <a href="{{route('frontend.user.dashboard')}}"> -->
+                <a href="#">
                 @endif
                 <div class="card-b">
                     <div class="d-flex px-1 px-md-3">
@@ -162,8 +173,8 @@ button.btn.btn-secondary {
                             <div class="icon"><i class="fa fa-search" aria-hidden="true"></i></div>
                         </div>
                         <div class="pl-2 pl-md-3">
-                            <h5>Search for medication prices</h5>
-                            <p>Designed with the latest design trends in mind.</p>
+                            <h5>Search for medication prices (coming soon)</h5>
+                            
                          
                         </div>
                     </div>
@@ -179,7 +190,7 @@ button.btn.btn-secondary {
                           </div>
                           <div class="pl-2 pl-md-3">
                               <h5>See how it work</h5>
-                              <p>Designed with the latest design trends in mind.</p>
+                              
                            
                           </div>
                       </div>
@@ -195,7 +206,7 @@ button.btn.btn-secondary {
                             </div>
                             <div class="pl-2 pl-md-3">
                                 <h5>Sign up to add others</h5>
-                                <p>Designed with the latest design trends in mind.</p>
+                                
                              
                             </div>
                         </div>

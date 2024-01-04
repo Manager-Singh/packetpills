@@ -83,6 +83,28 @@
                 </div>
             </div>
         </div>
+          <div class="row">
+            <div class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-info">
+                    <div class="card-body pb-0">
+                        <div class="btn-group float-right">
+                            <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cog"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{{ route('admin.transfer-requests.index') }}">View all</a>
+                            </div>
+                        </div>
+                        <div class="text-value">{{$transferRequestDataset["count"]}}</div>
+                        <div>Total Transfer Requests</div>
+                    </div>
+                    <div class="chart-wrapper mt-3 mx-3" style="height: 70px;">
+                        <canvas id="card-chart5" class="chart" height="70"></canvas>
+                    </div>
+                </div>
+            </div>
+          </div>
+          </div>
      
 
  
@@ -436,6 +458,22 @@ var brandBoxChart3 = new Chart($('#social-box-chart-3'), {
 }); // eslint-disable-next-line no-unused-vars
 
 var brandBoxChart4 = new Chart($('#social-box-chart-4'), {
+  type: 'line',
+  data: {
+    labels: brandBoxChartLabels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgba(255,255,255,.1)',
+      borderColor: 'rgba(255,255,255,.55)',
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 2,
+      data: [35, 23, 56, 22, 97, 23, 64]
+    }]
+  },
+  options: brandBoxChartOptions
+}); // eslint-disable-next-line no-unused-vars
+
+var brandBoxChart5 = new Chart($('#social-box-chart-5'), {
   type: 'line',
   data: {
     labels: brandBoxChartLabels,
