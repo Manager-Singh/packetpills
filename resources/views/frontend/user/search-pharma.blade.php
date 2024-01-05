@@ -47,6 +47,9 @@ li.ajax-li:hover {
     font-size: 18px;
     font-weight: 600;
 }
+tr.status-cancelled td {
+    background: #ff000033;
+}
   </style>
 @endpush
 @section('content')
@@ -82,7 +85,7 @@ li.ajax-li:hover {
                                 <h6>To:</h6>
                                 <div class="to-div">
                                   <span>Mister Pharmacy Canada.</span>
-                                  <address>asdfassdfdf</address>
+                                  <address>116A Sherbourne street, Toronto, Ontario M5A 2R2 -Canada</address>
                                 </div>
                               </div>
 
@@ -125,10 +128,15 @@ li.ajax-li:hover {
                                   <th>Action</th>
                                 </tr>
                                 @foreach($transfer_request as $trequest)
-                                  <tr>
+                                  <tr class="status-{{$trequest->status}}">
                                     <td><small>{{$trequest->formatted_address}}</small></td>
                                     <td><small>{{$trequest->status}}</small></td>
+                                    @if(isset($trequest->status) && $trequest->status == 'cancelled')
+                                    <td><small class="btn btn-danger" disabled>Cancelled</small></td>
+                                    @else
                                     <td><small class="btn btn-danger" onclick="transferRequestCancle('{{$trequest->id}}')">Cancel</small></td>
+                                    @endif
+                                    
                                   </tr>
                                 @endforeach
                               </tbody>
@@ -209,12 +217,12 @@ li.ajax-li:hover {
     function transferRequestCancle(id){
     event.preventDefault();
     swal({
-          title: "Are you want to delete?",
+          title: "Do you want to cancel request?",
           text: "",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, to delete!",
+          confirmButtonText: "Yes, Cancel it.",
           closeOnConfirm: false
         },
     function(){

@@ -19,6 +19,8 @@ use App\Models\TransferRequest;
 use Illuminate\Support\Facades\Session;
 use App\Models\Auth\User;
 use App\Models\PrescriptionRefill;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 /**
  * Class DashboardController.
@@ -530,9 +532,9 @@ class DashboardController extends Controller
     public function transferRequestDelete(Request $request){
         
         $output = TransferRequest::find($request->id);
-        
-        if($output->delete()){
-            return redirect()->back()->withFlashSuccess(__('Transfer Request Deleted Successfully'));
+        $output->status = 'cancelled';
+        if($output->save()){
+            return redirect()->back()->withFlashSuccess(__('Transfer Request Cancelled Successfully'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

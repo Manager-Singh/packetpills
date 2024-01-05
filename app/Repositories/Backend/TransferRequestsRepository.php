@@ -30,6 +30,7 @@ class TransferRequestsRepository extends BaseRepository
             ->select([
                
                 'transfer_requests.id',
+                'transfer_requests.user_id',
                 'transfer_requests.name',
                 'transfer_requests.formatted_address',
                 'transfer_requests.formatted_phone_number',
@@ -50,6 +51,7 @@ class TransferRequestsRepository extends BaseRepository
             ->select([
                 
                 'transfer_requests.id',
+                'transfer_requests.user_id',
                 'transfer_requests.name',
                 'transfer_requests.formatted_address',
                 'transfer_requests.formatted_phone_number',

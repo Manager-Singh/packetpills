@@ -72,7 +72,7 @@
                          </a>
                      </div>
                      <div class="right">
-                         <a href="#">Need help?</a>
+                         <a href="#" class="need-text">Need help?</a>
                          @if(Auth::check())
              <a href="{{ route('frontend.auth.logout') }}" class="text-danger"> Logout</a>
              @endif

@@ -39,27 +39,30 @@ div#accordionExample {
 @section('content')
 <ul class="nav nav-tabs mb-3 justify-content-end" id="ex1" role="tablist">
   <li class="nav-item" role="presentation">
+    <a class="nav-link active"  href="{{route('frontend.user.prescription.upload')}}">Add Prescription</a>
+  </li>
+  <li class="nav-item" role="presentation">
     <p>Showing: </p>
   </li>
   <li class="nav-item" role="presentation">
     <a class="nav-link active" id="tab-1" data-mdb-toggle="tab" href="#all" role="tab" aria-controls="tabs-1" aria-selected="true">All</a>
   </li>
-  <li class="nav-item" role="presentation">
+  <!-- <li class="nav-item" role="presentation">
     <a class="nav-link" id="tab-2" data-mdb-toggle="tab" href="#cancelled" role="tab" aria-controls="tabs-2" aria-selected="false">Cancelled</a>
   </li>
   <li class="nav-item" role="presentation">
     <a class="nav-link" id="tab-3" data-mdb-toggle="tab" href="#filled" role="tab" aria-controls="tabs-3" aria-selected="false">Filled</a>
-  </li>
+  </li> -->
 </ul>
 <div class="row mt-0  mb-5 prescription-pg">
   <div class="col-md-1"></div>
   <div class="col-md-10">
     <div class="tab-content hhh " id="content">
-      <div class="tab-pane fade show active" id="tabs-1" role="tabpanel" aria-labelledby="tab-1">
-       @if($prescriptions)
+      <div class="tab-pane fade show active kkkkkkk" id="tabs-1" role="tabpanel" aria-labelledby="tab-1">
+       @if($prescriptions->isNotEmpty())
         @foreach($prescriptions as $prescription)
         
-            <div class="order">
+          <div class="order">
             <a href="{{route('frontend.user.prescription.single',$prescription->prescription_number)}}">
                   <div class="order-head">
                       <div class="row">
@@ -132,7 +135,11 @@ div#accordionExample {
         
         @endforeach
        @else
-
+        <div class="order">
+          <div class="order-head">
+            <p class="txt text-center">Not Prescritpion found!</p>
+          </div>
+        </div>
        @endif 
 
         

@@ -27,7 +27,7 @@
 
         <div class="row mt-4">
             <div class="col">
-                <div class="table-responsive">
+                <div class="">
                     <table id="transfer-requests-table" class="table" data-ajax_url="{{ route('admin.transfer.request.get') }}">
                         <thead>
                             <tr>
@@ -38,7 +38,7 @@
                             <th>Address</th>
                             <th>Phone No.</th>
                             <th>Fax No.</th>
-                            <!-- <th>{{ trans('labels.backend.access.prescriptions.table.createdat') }}</th> -->
+                            <th>{{ trans('labels.backend.access.prescriptions.table.createdat') }}</th>
                             <th>Status</th> 
                             </tr>
                         </thead>

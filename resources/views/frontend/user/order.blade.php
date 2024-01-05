@@ -35,9 +35,9 @@ body main.main-div {
         <li class="nav-item" role="presentation">
             <a class="nav-link active" id="tab-1" data-mdb-toggle="tab" href="#all" role="tab" aria-controls="tabs-1" aria-selected="true">All</a>
         </li>
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
             <a class="nav-link" id="tab-2" data-mdb-toggle="tab" href="#cancelled" role="tab" aria-controls="tabs-2" aria-selected="false">Delivered</a>
-        </li>
+        </li> -->
 
     </ul>
     <div class="row mt-0 order-pg">
@@ -46,7 +46,7 @@ body main.main-div {
     <div class="col-md-10">
     <div class="tab-content mb-5" id="content">
         <div class="tab-pane fade show active" id="tabs-1" role="tabpanel" aria-labelledby="tab-1">
-            @if($orders)
+            @if($orders->isNotEmpty())
             @foreach($orders as $order)
                 <a href="{{ route('frontend.user.order.single',['order_no'=>$order->order_number]) }}">
                     <div class="order">
@@ -71,6 +71,11 @@ body main.main-div {
             @endforeach
 
             @else
+                <div class="order">
+                <div class="order-head">
+                    <p class="txt text-center">Not Order found!</p>
+                </div>
+                </div>
 
             @endif
             

@@ -1,6 +1,9 @@
 body {
 transition: opacity ease-in 0.2s;
 }
+a.need-text:hover {
+    color: #212843 !important;
+}
 header {
     text-align: center;
     box-shadow: 0px 2px 4px 2px #ccc;

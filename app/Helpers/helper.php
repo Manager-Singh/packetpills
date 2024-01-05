@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Prescription;
 use App\Models\PrescriptionIteam;
 use Illuminate\Support\Facades\Session;
+use PHPMailer\PHPMailer\PHPMailer;
+//use PHPMailer\PHPMailer\Exception;
 
 /**
  * Henerate UUID.
@@ -272,6 +274,7 @@ if (! function_exists('sendMessage')) {
     }
 }
 
+
 if (! function_exists('sendMail')) {
     function sendMail($type,$message_for=null,$data,$user_id = null){
         $user = User::where('id',$user_id)->first();
@@ -300,12 +303,10 @@ if (! function_exists('sendMail')) {
         try{
         $aaaa = Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
         $message->to($to_email, $to_name);
-        $message->subject('MisterPharmacist Online Pharmacy');
+        $message->subject('MisterPharmacist Online Canada');
         $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),'Pharmacy Canada');
         });
 
-        // print_r($aaaa);
-        // die('asAS');
         return 1;
     }
     catch (Exception $e){
