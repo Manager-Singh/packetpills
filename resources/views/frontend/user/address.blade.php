@@ -34,7 +34,7 @@
                 <input type="text" id="address" name="address2" value="{{ (isset($address) && isset($address->address2)) ? $address->address2 : ''}}" placeholder="Address line 2">
 
                 <label for="zip">Postal Code</label>
-                <input type="number" id="zip" data-parsley-type="number" name="postal_code" value="{{ (isset($address) && isset($address->postal_code)) ? $address->postal_code : ''}}" placeholder="Postal Code" required>
+                <input type="text" id="zip"  name="postal_code" value="{{ (isset($address) && isset($address->postal_code)) ? $address->postal_code : ''}}" placeholder="Postal Code" required>
 
                 <label for="city">City</label>
                 <input type="text" id="city" name="city" value="{{ (isset($address) && isset($address->city)) ? $address->city : ''}}" placeholder="City" required>
@@ -44,7 +44,7 @@
                   <option value="">Select a Province</option>
                   @if($provinces)
                     @foreach($provinces as $province)
-                    <option value="{{$province->slug}}" {{ (isset($address) && $address->province == $province->slug) ? 'selected' : ''}}>{{$province->name}}</option>
+                    <option value="{{$province->slug}}" {{ (isset($address) && $address->province == $province->name) ? 'selected' : ''}}>{{$province->name}}</option>
                   
                     @endforeach
                   @else
