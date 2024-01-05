@@ -58,7 +58,7 @@ class TransferRequestsRepository extends BaseRepository
                 'transfer_requests.fax_number',
                 'transfer_requests.created_at',
                 'transfer_requests.status',
-            ])->with('owner');
+            ])->with('owner')->orderBy('id', 'desc');
     }
 
     /**
