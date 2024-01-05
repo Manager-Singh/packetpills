@@ -13,7 +13,6 @@
 
                 this.selectors.transfer_requests.dataTable({
 
-                    responsive: true,
                     processing: false,
                     serverSide: true,
                     ajax: {
@@ -28,7 +27,7 @@
                         { data: 'formatted_address', name: 'formatted_address' },
                         { data: 'formatted_phone_number', name: 'formatted_phone_number' },
                         { data: 'fax_number', name: 'fax_number' },
-                         { data: 'created_at', name: 'created_at' },
+                        //{ data: 'created_at', name: 'created_at' },
                         { data: 'status', name: 'status' },
                         //{ data: 'actions', name: 'actions', searchable: false, sortable: false }
                     ],
