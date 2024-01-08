@@ -18,8 +18,9 @@
                 <p class="bold-txt">{{$user->first_name}} </p>
                 <p class="txt-b">Date of Birth</p>
                 <p class="bold-txt">{{$user->date_of_birth}}</p>
-                <p class="txt-b">Phone number</p>
+                <p class="txt-b">Cell Phone (SMS enabled)</p>
                 <p class="bold-txt">{{$user->mobile_no}}</p>
+                <p class="txt-b">Alternate Phone Ext XXXXXXXXXXX</p>
               </div>
               <!-- <label for="fname">Language Preference</label>
                 <select name="language" id="language">

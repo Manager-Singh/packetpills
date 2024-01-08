@@ -104,13 +104,12 @@ button.btn {
                             <div class="form-outline">
                                 <label class="form-label" for="typeOtp">OTP</label>
                                 <input type="text" name="otp" id="typeOtp" class="form-control my-3 @error('otp') is-invalid @enderror" rquired />
-                                
-                                
+                               <span class="otp-msg" style="display:none">OTP is required.</span>
                                 
                             </div>
                             @endif
                             @if(isset($user))
-                            <button type="submit" class="btn btn-primary w-100">OTP Verify</button>
+                            <button type="button" class="btn btn-primary w-100 otp-validation">OTP Verify</button>
                             @else
                             <button type="submit" class="btn btn-primary w-100">Reset password</button>
                             @endif
@@ -136,6 +135,34 @@ button.btn {
 @endsection
 
 @push('after-scripts')
+
+
+
+<script>
+    $(document).ready(function() {
+      //otp-validation
+        $(".reset-form").parsley();
+        $(".otp-validation").click(function() {
+          event.preventDefault();
+          
+          if($('#typeOtp').val()){
+            $('.otp-msg').fadeOut();
+            $('.reset-form').submit();
+          }else{
+            $('.otp-msg').fadeIn();
+          }
+          
+
+           
+           
+         // $('.reset-form').submit();
+          
+
+        });
+        
+    });
+
+</script>
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif

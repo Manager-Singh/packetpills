@@ -12,6 +12,13 @@
     box-shadow: 0px 0px 17px -3px #638e3c;
     margin-right: 25px;
 }
+        span.toggle-password.LikePost {
+            position: relative;
+            top: -40px;
+            right: 13px;
+            float: right;
+            font-size: 18px;
+        }
 
 </style>
 @endpush
@@ -43,12 +50,14 @@
                     <div class="col-md-12 verify">
                         <label for="lname">Choose a Password</label>
                         <input type="password" id="password" name="password" placeholder="" />
+                        <span class="toggle-password LikePost"><i class="far fa-eye"></i></span>
                         <!-- <p class="reshare"> <a href="">Show</a></p> -->
                         <p class="info">Please enter 8 or more characters</p>
                     </div>
                     <div class="col-md-12 verify">
                         <label for="lname">Confirm Password</label>
                         <input type="password" id="confirm_password" name="confirm_password" placeholder="" />
+                        <span class="toggle-password LikePost"><i class="far fa-eye"></i></span>
                         <!-- <p class="reshare"> <a href="">Show</a></p> -->
                         <p class="info">Please enter 8 or more characters</p>
                         <p class="info"><span id='message'></span></p>
@@ -83,7 +92,36 @@
     });
 </script>
 
+<script>
+  // Add a click event listener to elements with the class "LikePost"
+  $('.LikePost').on('click', function() {
+    // Toggle the visibility of the password input and change the eye icon
+    var passwordInput = $('#password');
+    var passwordInput1 = $('#confirm_password');
+    passwordInput.toggleAttr('type', 'password', 'text');
+    passwordInput1.toggleAttr('type', 'password', 'text');
+    toggleEyeIcon($(this));
+  });
+
+  // jQuery plugin to toggle attribute values
+  $.fn.toggleAttr = function(attr, val1, val2) {
+    return this.each(function() {
+      var currentVal = $(this).attr(attr);
+      var newVal = currentVal === val1 ? val2 : val1;
+      $(this).attr(attr, newVal);
+    });
+  };
+
+  // Function to toggle the eye icon
+  function toggleEyeIcon(element) {
+    var eyeIcon = element.find('i');
+    eyeIcon.toggleClass('fa-eye fa-eye-slash');
+  }
+</script>
+
 @if(config('access.captcha.login'))
+
+
 @captchaScripts
 @endif
 @endpush

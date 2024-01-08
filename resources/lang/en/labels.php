@@ -480,7 +480,7 @@ return [
             'register_button' => 'Register',
             'remember_me' => 'Remember Me',
             "get_started" => 'Get started',
-            "otp_verfied" => 'OTP Verfied',
+            "otp_verfied" => 'Verify OTP',
             "next" => 'Next',
         ],
 

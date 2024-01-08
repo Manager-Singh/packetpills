@@ -31,12 +31,15 @@
           </div>
           <div class="col-md-2"></div>
           <div class="col-md-8" id="table">
-          <form name="myForm" id="insurance-form" method='post' action="{{route('frontend.user.insurance.save')}}" enctype='multipart/form-data'>
+          <form name="myForm" id="insurance-form" class ="{{ ($is_insurance) ? 'is_insurance' :  '' }}" method='post' action="{{route('frontend.user.insurance.save')}}" enctype='multipart/form-data'>
           @csrf 
               <div class="row">
                 <div class="col-md-12">
                 
-                <label class="mt-0" for="noInsurance"><input type="checkbox" class="no-inurance" id="noInsurance" name="is_insurance"  value="1" > As of today's date - I certify that I have no private drug insurance/ coverage.</label>
+                <label class="mt-0" for="noInsurance">
+                  <input type="checkbox" class="no-inurance" id="noInsurance" name="is_insurance" {{ ($is_insurance) ? "checked" :  "" }}  value="1" >
+                   As of today's date - I certify that I have no private drug insurance/ coverage.
+                  </label>
                 
                 </div>
               </div>
@@ -208,6 +211,12 @@
 
 @push('after-scripts')
 <script>
+    if($('#insurance-form').hasClass("is_insurance")) {
+      $('.common-insurance').css("pointer-events","none");
+      $(".primary-insurance-input").attr('required', false);
+    } 
+
+
      $('#noInsurance').click(function() {
            
            
@@ -217,6 +226,25 @@
                 
                   $('.common-insurance').css("pointer-events","none");
                   $(".primary-insurance-input").attr('required', false);
+               
+
+
+          swal({
+            title: "Are you sure you want to do this?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#28a745",
+            confirmButtonText: "Yes, Save it!",
+            closeOnConfirm: false
+            },
+            function(){
+              swal.close();
+                $(".loader-container").show();
+                $('.submit').trigger('click');
+                  
+                         
+            });
                 
                 } else {
                     
@@ -336,22 +364,7 @@
       $(".submit").click(function() {
         //$('#insurance-form').parsley().validate();
 
-        if ($('#noInsurance').prop("checked") == true) {
-          
-          $(".primary-insurance-input").attr('required', false);
-          $('#insurance-form').parsley().validate();
-          $('#noInsurance').parsley().isValid();
-          $(".loader-container").show();
-        }else{
-          $(".primary-insurance-input").attr('required', true);
-          
-          if($('#insurance-form').parsley().validate()){
-            $(".loader-container").show();
-          }else{
-            return false;
-          }
-         
-        }
+        submitForm();
 
        // $('#noInsurance').parsley().isValid();
        
@@ -374,6 +387,28 @@
         }, 5000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
       });
     });
+
+    function submitForm(){
+
+
+      if ($('#noInsurance').prop("checked") == true) {
+          
+          $(".primary-insurance-input").attr('required', false);
+          $('#insurance-form').parsley().validate();
+          $('#noInsurance').parsley().isValid();
+          $(".loader-container").show();
+        }else{
+          $(".primary-insurance-input").attr('required', true);
+          
+          if($('#insurance-form').parsley().validate()){
+            $(".loader-container").show();
+          }else{
+            return false;
+          }
+         
+        }
+
+    }
       </script>
 @if(config('access.captcha.login'))
 @captchaScripts

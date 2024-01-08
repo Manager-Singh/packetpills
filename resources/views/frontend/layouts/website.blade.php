@@ -70,8 +70,16 @@
         @endif
        
         <main>
+            <section class="margin-t-xl">
+                <div class="row">
+                    <div class="col-md-12">
+                      @include('includes.partials.messages')
+                    </div>
+                </div>
+            </section>
             
             @yield('content')
+
             @if(Route::currentRouteName() == 'frontend.auth.new.login' || Route::currentRouteName() == 'frontend.index' )
             @else
                 <!-- @include('frontend.navbar.footer') -->

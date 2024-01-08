@@ -40,8 +40,8 @@
                             </p>
                             <p class="paragraph font-semibold hero__form-label txt-center--xs color-brand"> Welcome back!</p><a href="{{route('frontend.user.dashboard')}}"><button _ngcontent-serverapp-c48="" type="submit" class="btn btn--brand txt-defaultcase go-dashboard-btn"><span _ngcontent-serverapp-c48="" translate="" class="button__label txt-defaultcase">Go to dashboard</span><i class="fa fa-angle-arrow-right" aria-hidden="true"></i></button></a>
                         @else
-                        <p style="margin-bottom: 0;" class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Simply sign in to
-                            join </p>
+                        <p style="margin-bottom: 0;" class="paragraph font-semibold hero__form-label txt-center--xs color-brand">Simply Signup to
+                            Join </p>
 
                         @endif
 
@@ -105,6 +105,7 @@
                                                     <span id="error-msg" class="p-2 float-left"></span>
                                                     <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset request-otp">{{ __('labels.frontend.auth.get_started') }}</button>
                                                     <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset register-submit" style="display:none">{{ __('labels.frontend.auth.otp_verfied') }} & {{ __('labels.frontend.auth.next') }}</button>
+                                                    <a href="{{route('frontend.index')}}" ><button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset mt-2">Start Again</button></a>
                                                 </div>
 
 

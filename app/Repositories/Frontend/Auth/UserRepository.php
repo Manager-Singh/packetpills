@@ -486,9 +486,9 @@ class UserRepository extends BaseRepository
 
                 // send messages to users
                 $mobile = $user->dialing_code.$user->mobile_no;
-                sendMessage($mobile,'mail',$healthcard_msg_key,null);
+               // sendMessage($mobile,'mail',$healthcard_msg_key,null);
                 if(isset($user->email)){
-                    sendMail('mail',$healthcard_msg_key,null,$user->id);
+                   // sendMail('mail',$healthcard_msg_key,null,$user->id);
                 }
 
                 //send messages to admin
@@ -496,9 +496,9 @@ class UserRepository extends BaseRepository
                                 $subQuery->where('name', 'Administrator');
                             })->first();
                 $adminmobile = $admin->dialing_code.$admin->mobile_no;
-                        sendMessage($adminmobile,'admin',null,$data1);
+                        //sendMessage($adminmobile,'admin',null,$data1);
                         if(isset($admin->email)){
-                            sendMail('admin',null,$data1,$admin->id);
+                        //    sendMail('admin',null,$data1,$admin->id);
                         }
             }
             return $healthCard;
@@ -560,9 +560,9 @@ class UserRepository extends BaseRepository
 
             // send messages to users
             $mobile = $user->dialing_code.$user->mobile_no;
-            sendMessage($mobile,'mail','insurance_created',null);
+            //sendMessage($mobile,'mail','insurance_created',null);
             if(isset($user->email)){
-                sendMail('mail','insurance_created',null,$user->id);
+              //  sendMail('mail','insurance_created',null,$user->id);
             }
 
             //send messages to admin
@@ -570,9 +570,9 @@ class UserRepository extends BaseRepository
                             $subQuery->where('name', 'Administrator');
                         })->first();
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
-            sendMessage($adminmobile,'admin',null,$data1);
+           // sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
-                sendMail('admin',null,$data1,$admin->id);
+              //  sendMail('admin',null,$data1,$admin->id);
             }
            
             return true;
@@ -643,9 +643,9 @@ class UserRepository extends BaseRepository
 
              // send messages to users
              $mobile = $user->dialing_code.$user->mobile_no;
-             sendMessage($mobile,'mail','address_created',null);
+            // sendMessage($mobile,'mail','address_created',null);
              if(isset($user->email)){
-                 sendMail('mail','address_created',null,$user->id);
+                // sendMail('mail','address_created',null,$user->id);
              }
  
              //send messages to admin
@@ -653,9 +653,9 @@ class UserRepository extends BaseRepository
                              $subQuery->where('name', 'Administrator');
                          })->first();
              $adminmobile = $admin->dialing_code.$admin->mobile_no;
-             sendMessage($adminmobile,'admin',null,$data1);
+             //sendMessage($adminmobile,'admin',null,$data1);
              if(isset($admin->email)){
-                 sendMail('admin',null,$data1,$admin->id);
+                // sendMail('admin',null,$data1,$admin->id);
              }
         }
         return $address;
@@ -706,9 +706,9 @@ class UserRepository extends BaseRepository
 
             // send messages to users
             $mobile = $user->dialing_code.$user->mobile_no;
-            sendMessage($mobile,'mail','payment_method_created',null);
+           // sendMessage($mobile,'mail','payment_method_created',null);
             if(isset($user->email)){
-                sendMail('mail','payment_method_created',null,$user->id);
+              //  sendMail('mail','payment_method_created',null,$user->id);
             }
 
             //send messages to admin
@@ -716,9 +716,9 @@ class UserRepository extends BaseRepository
                             $subQuery->where('name', 'Administrator');
                         })->first();
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
-            sendMessage($adminmobile,'admin',null,$data1);
+           // sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
-                sendMail('admin',null,$data1,$admin->id);
+              //  sendMail('admin',null,$data1,$admin->id);
             }
         }
           return $card;
@@ -761,9 +761,9 @@ class UserRepository extends BaseRepository
 
             // send messages to users
             $mobile = $user->dialing_code.$user->mobile_no;
-            sendMessage($mobile,'mail','healthinformation_created',null);
+           // sendMessage($mobile,'mail','healthinformation_created',null);
             if(isset($user->email)){
-                sendMail('mail','healthinformation_created',null,$user->id);
+             //   sendMail('mail','healthinformation_created',null,$user->id);
             }
 
             //send messages to admin
@@ -772,9 +772,9 @@ class UserRepository extends BaseRepository
                         })->first();
             //$data1 =  "Health information updated by ".$user->full_name;
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
-            sendMessage($adminmobile,'admin',null,$data1);
+          //  sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
-                sendMail('admin',null,$data1,$admin->id);
+              //  sendMail('admin',null,$data1,$admin->id);
             }
         }
         return $healthInformation;

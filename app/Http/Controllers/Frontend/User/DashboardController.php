@@ -317,6 +317,7 @@ class DashboardController extends Controller
         $data['secondary_insurance']= Insurance::where('type','secondary')->where('user_id',$user->id)->first();
         $data['tertiary_insurance']= Insurance::where('type','tertiary')->where('user_id',$user->id)->first();
         $data['quaternary_insurance']= Insurance::where('type','quaternary')->where('user_id',$user->id)->first();
+        $data['is_insurance']= ($user->is_insurance) ? $user->is_insurance : null ;
         return view('frontend.user.insurance',$data); 
     }
     public function insuranceSave(Request $request){

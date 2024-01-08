@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mb-5 mt-0 dashboard-main">
-		    	<div class="row bg-light refill-section">
+		    	<!-- <div class="row bg-light refill-section">
               <div class="col-md-8">
                 <div class="med-info">                    
                     <p class="txt"><strong>Add members to MisterPharmacist</strong></p>
@@ -16,7 +16,7 @@
                     <a href="{{route('frontend.user.prescription')}}" class="info-btn mt-0">Request Refill</a>
             
               </div> 
-          </div>
+          </div> -->
 
           <p class="bold-txt mt-5">What would you like to do?</p>
           <div class="row med-iin">

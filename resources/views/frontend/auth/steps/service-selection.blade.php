@@ -60,7 +60,7 @@ button.btn.btn-secondary {
               <div class="user-info">
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
                 <p class="txt mb-0">Welcome to your personal</p>
-                <p class="txt mb-0 mt-0">Toronrto Online Pharmacy</p>
+                <p class="txt mb-0 mt-0">Toronto Online Pharmacy</p>
                 <p class="txt mt-0">MisterPharmacist</p>
               </div> 
 

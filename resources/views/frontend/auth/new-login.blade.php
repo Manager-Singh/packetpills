@@ -66,6 +66,13 @@
             margin-top: 10px;
             position: absolute;
         }
+        span.toggle-password.LikePost {
+            position: relative;
+            top: -29px;
+            right: 13px;
+            float: right;
+            font-size: 18px;
+        }
     </style>
 @endpush
 
@@ -193,6 +200,7 @@
                                         ->class(['form-control','is-invalid' => $is_invalid])
                                         ->placeholder(__('validation.attributes.frontend.password'))
                                         ->required() }}
+                        <span class="toggle-password LikePost"><i class="far fa-eye"></i></span>
                         <!-- @error('password')
                             <span class="invalid-feedback pass-error" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -275,6 +283,31 @@
 @endsection
 
 @push('after-scripts')
+
+<script>
+  // Add a click event listener to elements with the class "LikePost"
+  $('.LikePost').on('click', function() {
+    // Toggle the visibility of the password input and change the eye icon
+    var passwordInput = $('#password');
+    passwordInput.toggleAttr('type', 'password', 'text');
+    toggleEyeIcon($(this));
+  });
+
+  // jQuery plugin to toggle attribute values
+  $.fn.toggleAttr = function(attr, val1, val2) {
+    return this.each(function() {
+      var currentVal = $(this).attr(attr);
+      var newVal = currentVal === val1 ? val2 : val1;
+      $(this).attr(attr, newVal);
+    });
+  };
+
+  // Function to toggle the eye icon
+  function toggleEyeIcon(element) {
+    var eyeIcon = element.find('i');
+    eyeIcon.toggleClass('fa-eye fa-eye-slash');
+  }
+</script>
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif

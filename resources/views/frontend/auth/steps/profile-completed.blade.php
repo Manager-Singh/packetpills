@@ -51,7 +51,7 @@
                 @else
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
                 @endif
-                <p class="bold-txt">Add members to MisterPharmacist</p>
+                <!-- <p class="bold-txt">Add members to MisterPharmacist</p> -->
                 <!-- <p class="txt"> Your profile has been completed. </p> -->
             </div>
 
@@ -82,7 +82,7 @@
 <div class="col-md-4">
             <div class="card border-light text-left p-1 mb-4 complete-profile-tab">
                 <div class="card-body">
-                <a href="{{route('frontend.user.dashboard')}}">
+                <a href="{{route('frontend.user.personal.details')}}">
                         <div class="text-center px-1 px-md-3">
                             <div>
                                 <div class="icon icon-primary"><i class="fa fa-truck" aria-hidden="true"></i></div>

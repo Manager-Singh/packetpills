@@ -99,6 +99,20 @@ class ForgotPasswordController extends Controller
     public function phoneOtpVerfiy(Request $request){
        // dd($request->all());
 
+       $request->validate([
+        'mobile_no'=>'required',
+        'otp'=>'required',
+        
+        ], [
+            'mobile_no.required' => 'The Mobile is required.',
+            'otp.required' => 'The OTP is required.',
+        ]);
+
+        if(isset($request->otp) && empty($request->otp)){
+
+            return redirect()->back()->withFlashSuccess(__('The OTP is required.'));
+        }
+
         $user = User::where('mobile_no',$request->mobile_no)->first();
         if($user ){
             $user_otp = PasswordResetsOtp::where('mobile_email',$request->mobile_no)->where('otp',$request->otp)->first();
@@ -114,7 +128,9 @@ class ForgotPasswordController extends Controller
                     return redirect()->route('frontend.auth.password.update')->with($data);
                }
             }else{
-                return redirect()->back()->withFlashSuccess(__('Something went wrong.'));
+                $mobile_email = $request->mobile_no;
+                return view('frontend.auth.passwords.phone-email',compact('user','mobile_email'))->withFlashSuccess(__('Something went wrong.'));
+                //return redirect()->route('frontend.auth.password.email')->withFlashSuccess(__('Something went wrong.'));
                 //password.update
             }
         }

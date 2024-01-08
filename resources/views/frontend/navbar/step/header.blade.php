@@ -5,8 +5,8 @@
                  <a href="{{route('frontend.user.personal.details')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.personal.details') ? 'active' : '' }}" aria-current="true">
                      <i class="fa fa-user" aria-hidden="true"></i><span>Personal</span>
                  </a>
-                 <a href="{{route('frontend.user.health.information')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}">
-                     <i class="fa fa-heart" aria-hidden="true"></i><span>Health</span>
+                 <a href="{{route('frontend.user.address')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}">
+                     <i class="fa fa-home" aria-hidden="true"></i><span>Address</span>
                  </a>
                  <a href="{{route('frontend.user.health.card')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}">
                      <i class="fa fa-id-card-o" aria-hidden="true"></i><span>Health Card</span>
@@ -14,15 +14,15 @@
                  <a href="{{route('frontend.user.payment')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.payment') ? 'active' : '' }}">
                      <i class="fa fa-credit-card" aria-hidden="true"></i><span>Payments</span>
                  </a>
-                 <a href="{{route('frontend.user.address')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}">
-                     <i class="fa fa-home" aria-hidden="true"></i><span>Address</span>
+                 <a href="{{route('frontend.user.health.information')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}">
+                     <i class="fa fa-heart" aria-hidden="true"></i><span>Health</span>
                  </a>
                  <a href="{{route('frontend.user.insurance')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.insurance') ? 'active' : '' }}">
                      <i class="fa fa-shield" aria-hidden="true"></i><span>Insurance</span>
                  </a>
              </div>
              <div class="list-group list-group-flush mt-4">
-                 <p class="txt"><strong>Medications and Prescriptions</strong></p>
+                 <!-- <p class="txt"><strong>Medications and Prescriptions</strong></p> -->
                  <a href="{{route('frontend.user.dashboard')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}">
                      <i class="fa fa-home" aria-hidden="true"></i><span class="mx-3">Home</span>
                  </a>
@@ -72,7 +72,7 @@
                          </a>
                      </div>
                      <div class="right">
-                         <a href="#" class="need-text">Need help?</a>
+                         <a href="javascript:void(0)" data-toggle="modal" data-target="#adminPersonalDetails" class="need-text">Need help?</a>
                          @if(Auth::check())
              <a href="{{ route('frontend.auth.logout') }}" class="text-danger"> Logout</a>
              @endif
@@ -113,10 +113,10 @@
          @if(in_array(Route::getCurrentRoute()->getName(),$profile_route))
             <ul>
             <li><a href="{{route('frontend.user.personal.details')}}" class="{{ (Route::currentRouteName() == 'frontend.user.personal.details') ? 'active' : '' }}"><i class="fa fa-user-o" aria-hidden="true"></i> Personal details</a></li>
-            <li><a href="{{route('frontend.user.health.information')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}"><i class="fa fa-heart-o" aria-hidden="true"></i> Health details</a></li>
+            <li><a href="{{route('frontend.user.address')}}" class="{{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Address</a></li>
             <li><a href="{{route('frontend.user.health.card')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}"><i class="fa fa-address-card-o" aria-hidden="true"></i> Health Card</a></li>
             <li><a href="{{route('frontend.user.insurance')}}" class="{{ (Route::currentRouteName() == 'frontend.user.insurance') ? 'active' : '' }}"><i class="fa fa-shield" aria-hidden="true"></i> Insurance</a></li>
-            <li><a href="{{route('frontend.user.address')}}" class="{{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Address</a></li>
+            <li><a href="{{route('frontend.user.health.information')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}"><i class="fa fa-heart-o" aria-hidden="true"></i> Health details</a></li>
             <li><a href="{{route('frontend.user.payment')}}" class="{{ (Route::currentRouteName() == 'frontend.user.payment') ? 'active' : '' }}"><i class="fa fa-credit-card" aria-hidden="true"></i> Payment</a></li>
             </ul>
          @else
@@ -131,4 +131,34 @@
 
      </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="adminPersonalDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Support Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row ">
+            <div class="col-md-12"> 
+            <p class="txt-b">Email: rx@misterpharmacist.com</p>
+            <p class="txt-b">Phone Number :  +1 416-8170-858</p>
+
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
  </header>
+
