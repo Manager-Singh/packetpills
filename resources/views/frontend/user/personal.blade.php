@@ -20,7 +20,8 @@
                 <p class="bold-txt">{{$user->date_of_birth}}</p>
                 <p class="txt-b">Cell Phone (SMS enabled)<a href="javascript:void(0)" onclick="changeOTPVerify('mobile');">Change</a></p>
                 <p class="bold-txt">{{$user->mobile_no}}</p>
-                <p class="txt-b">Alternate Phone Ext {{$user->alternate_phone}}</p>
+                <p class="txt-b">Alternate Phone </p>
+                <p class="bold-txt">{{$user->alternate_phone}}</p>
               </div>
               <!-- <label for="fname">Language Preference</label>
                 <select name="language" id="language">

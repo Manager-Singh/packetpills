@@ -102,7 +102,7 @@ class DashboardController extends Controller
         );
 
         if($output){
-            return redirect()->back()->withFlashSuccess(__('Information Updated'));
+            return redirect()->route('frontend.user.personal.details')->withFlashSuccess(__('Information Updated'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

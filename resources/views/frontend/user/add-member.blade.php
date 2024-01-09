@@ -168,7 +168,7 @@
               <label for="other_text">Other Relation</label>
               <input type="text" name="relationship_type" id="other_text" />
             </div>
-
+<input type="hidden" name="password" value="1234567">
           <div class="col-md-12">
             <input type="submit" id="submit" class="next button mt-4" value="Submit" />
           </div>
