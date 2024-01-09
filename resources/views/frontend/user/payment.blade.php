@@ -17,6 +17,7 @@ button.save.button {
               <div class="user-info p-details">
                 <i class="fa fa-home" aria-hidden="true"></i>
                 <p class="txt-large">Add Card Details</p>
+                <p class="txt">To make sure your medicine gets shipped without delay, please add your payment information. We'll charge your card only after we've handled your prescription, whether you're paying yourself or using government or private insurance.  You will be contacted with a total $ amount for your pre-approval.</p>
               </div> 
 
 				    </div>
@@ -26,23 +27,23 @@ button.save.button {
             <form name="myForm" id="card-form" method='post' action="{{route('frontend.user.payment.save')}}" enctype='multipart/form-data'>
               @csrf 
                 <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" data-parsley-minlength="19" data-parsley-maxlength="19" maxlength=19 name="card_number"  value="" placeholder="Card Number" required><br><br>
+                <input type="text" id="card-number" data-parsley-minlength="19" data-parsley-maxlength="19" maxlength=19 name="card_number"  value="" placeholder="Card Number"><br><br>
                 <div class="form-row">
                   <div class="form-group col-md-6">
 
                     <label for="zip">Expiry Month(MM)</label>
-                    <input type="text" maxlength=2 id="expiry_month" name="expiry_month" value="" placeholder="Expiry(MM)" required>
+                    <input type="text" maxlength=2 id="expiry_month" name="expiry_month" value="" placeholder="Expiry(MM)" >
                   </div>
                   <div class="form-group col-md-6 mt-0">
 
                     <label for="zip">Expiry Year(YY)</label>
-                    <input type="text" maxlength=2 id="expiry_year" name="expiry_year" value="" placeholder="Expiry(YY)" required>
+                    <input type="text" maxlength=2 id="expiry_year" name="expiry_year" value="" placeholder="Expiry(YY)" >
                   </div>
 
                 </div>
 
                 <label for="cvc">CVC</label>
-                <input type="text" id="cvc" data-parsley-maxlength="3" maxlength="3"  name="cvc" value="" placeholder="CVC" required>
+                <input type="text" id="cvc" data-parsley-maxlength="3" maxlength="3"  name="cvc" value="" placeholder="CVC" >
 
                 <div class="row mt-3 payment-card">
                 <label class="col-md-12" for="myfile">Payment Card</label>
@@ -78,6 +79,7 @@ button.save.button {
               </div>
 
                 <div class="btn-div">
+                  <a href="{{route('frontend.user.payment')}}" class="skip-btn">Skip</a>
                   <a href="{{route('frontend.user.payment')}}"><button type="button" class="save button" onclick="" > Cancel </button></a>
                   <button type="submit" id="submit" class="next button submit" onclick="" >Save</button>
                  </div>

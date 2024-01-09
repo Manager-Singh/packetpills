@@ -21,6 +21,8 @@ use App\Models\Auth\User;
 use App\Models\PrescriptionRefill;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use App\Models\UserOtp;
+use Twilio\Rest\Client;
 
 /**
  * Class DashboardController.
@@ -86,10 +88,16 @@ class DashboardController extends Controller
 
     public function personal_update(Request $request){
 
+        if(isset($request->alternate_phone)){
+            $alternate_phone = $request->alternate_phone;
+
+        }else{
+            $alternate_phone = '';
+        }
 
         $output = $this->userRepository->update(
             Auth::user(),
-            ['first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'gender'=>$request->gender],
+            ['first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'gender'=>$request->gender,'alternate_phone'=>$alternate_phone],
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
@@ -102,7 +110,8 @@ class DashboardController extends Controller
     }
     public function personal_save(Request $request){
 
-
+        
+       
 
         $output = $this->userRepository->update(
             Auth::user(),
@@ -334,7 +343,7 @@ class DashboardController extends Controller
     }
     public function address(){
         $user = Auth::user();
-        $data['address']= Address::where('user_id',$user->id)->get();
+        $data['address']= Address::where('user_id',$user->id)->orderBy('id','desc')->get();
        
         $data['user'] = $user;
         return view('frontend.user.address-view',$data); 
@@ -345,15 +354,24 @@ class DashboardController extends Controller
         if(isset($_GET['id'])){
             
             $data['address']= Address::find($_GET['id']);
+            if($data['address']->address_type == 'Shipping Address' ){
+                $data['address_type'] = 'shipping_address';
+            }else{
+                $data['address_type'] = 'billing_address';
+            }
+            $pagePath='frontend.user.edit-address';
+        }else{
+            $pagePath='frontend.user.address';
         }
+        
         $data['provinces']= Province::get();
-        return view('frontend.user.address',$data); 
+        return view($pagePath,$data); 
     }
     public function addressSave(Request $request){
         
-        if(!isset($request->id) && Address::where('address_type',$request->address_type)->exists()){
-            return redirect()->back()->withFlashSuccess(__('Address type already exist.'));
-        }
+        // if(!isset($request->id) && Address::where('address_type',$request->address_type)->exists()){
+        //     return redirect()->back()->withFlashSuccess(__('Address type already exist.'));
+        // }
 
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->saveAddress($data);
@@ -389,7 +407,15 @@ class DashboardController extends Controller
     }
     public function personalDetails(){
         $data['user'] = Auth::user();
-        return view('frontend.user.personal',$data); 
+        if(isset($_GET['id'])){
+
+            $pathView = 'frontend.user.edit-personal';
+
+        }else{
+            $pathView = 'frontend.user.personal';
+        }
+        
+        return view($pathView,$data); 
     }
     public function addressDelete(Request $request){
         $data = collect($request->all())->toArray();
@@ -558,6 +584,108 @@ class DashboardController extends Controller
         Session::put( 'orig_user', Auth::id() );
         Auth::login( $new_user );
         return redirect()->back();
+    }
+
+    public function send_otp(Request $request)
+    {
+        $isexist  = Auth::user();
+  
+
+        $otp = generateOTP();
+        try{
+        
+      
+        //  dd($message);
+        if($isexist){
+            $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','verified')->first();
+            if($otp_verified){
+                $otp_unverified = UserOtp::where('user_id',$isexist->id)->where('status','unverified')->first();
+                if(!$otp_unverified){
+                    $otp_unverified = new UserOtp();
+                }
+               
+                $otp_unverified->user_id = $isexist->id;
+                $otp_unverified->otp = $otp;
+
+                if(isset($request->mobile_no) && !empty($request->mobile_no)){
+
+                    if($this->sendSms($request,$otp,($isexist->dialing_code)?$isexist->dialing_code:'1')){
+                        $otp_unverified->save();
+                    }
+
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
+                    
+                }
+
+                if(isset($request->email) && !empty($request->email)){
+                    if($otp_unverified->save()){
+                        $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
+                        sendMail('mail',null,$data1,$isexist->id);
+                    }
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
+
+                }
+                return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
+              
+
+            }
+
+
+            }
+    }catch(Exception $e){
+        //dd($e);
+        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+      //  return json_encode(['error' => 1, 'message' => $e]);
+    }
+    }
+    public function sendSms($request,$otp,$dialing_code='1'){
+        $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
+        $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
+        try{
+            $client = new Client($accountSid, $authToken);
+            $message = $client->messages->create($dialing_code.$request->mobile_no, [
+                'from' => +16475034144,
+                'body' => $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.']);
+                return 1;
+        }
+        catch (Exception $e){
+         //  dd($e);
+            return 0;
+        }
+    }
+
+    public function emailPhoneChange(Request $request)
+    {
+
+        $user = Auth::user();
+        
+            $user_otp = UserOtp::where('user_id',$user->id)->where('otp',$request->otp)->first();
+            if($user_otp){
+                $user_otp->status = 'verified';
+                if($user_otp->save()){
+                    $user->confirmation_code=md5(rand(9,12));
+                    $user->confirmed=1;
+                    if(isset($request->email)){
+                        $user->email = $request->email;
+                    }
+                    if(isset($request->mobile_no)){
+                        $user->mobile_no = $request->mobile_no;
+                    }
+                    $user->save();
+                    if($user->mobile_no && $user->dialing_code){
+                        $mobile = $user->dialing_code.$user->mobile_no;
+                        sendMessage($mobile,'mail','patient_account_created',$data=null);
+                    }
+                    return redirect()->back()->withFlashSuccess(__('User information updated Successfully!'));
+                }
+            }else{
+                return redirect()->back()->withFlashInfo(__('Otp not match'));
+            }
+        
+        
+        return redirect()->back()->withFlashInfo(__('Something went wrong'));
+
+
     }
     
 }

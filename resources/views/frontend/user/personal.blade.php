@@ -10,7 +10,7 @@
 @section('content')
 <div class="container mt-0 mb-5">
 		    	<div class="row ">
-            <div class="col-md-12 text-right">  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit profile</button>
+            <div class="col-md-12 text-right">  <a href="{{route('frontend.user.personal.details')}}?id={{$user->id}}"><button type="button" class="btn btn-primary next">Edit profile</button></a>
 </div>
 				    <div class="col-md-6">
               <div class="p-detail">
@@ -18,9 +18,9 @@
                 <p class="bold-txt">{{$user->first_name}} </p>
                 <p class="txt-b">Date of Birth</p>
                 <p class="bold-txt">{{$user->date_of_birth}}</p>
-                <p class="txt-b">Cell Phone (SMS enabled)</p>
+                <p class="txt-b">Cell Phone (SMS enabled)<a href="javascript:void(0)" onclick="changeOTPVerify('mobile');">Change</a></p>
                 <p class="bold-txt">{{$user->mobile_no}}</p>
-                <p class="txt-b">Alternate Phone Ext XXXXXXXXXXX</p>
+                <p class="txt-b">Alternate Phone Ext {{$user->alternate_phone}}</p>
               </div>
               <!-- <label for="fname">Language Preference</label>
                 <select name="language" id="language">
@@ -36,7 +36,7 @@
                 <p class="bold-txt">{{$user->last_name}}</p>
                 <p class="txt-b">Gender</p>
                 <p class="bold-txt">{{$user->gender}}</p>
-                <p class="txt-b">Email Id</p>
+                <p class="txt-b">Email Id <a href="javascript:void(0)" onclick="changeOTPVerify('email');">Change</a></p></p>
                 <p class="bold-txt">{{$user->email}}</p>
               </div>
             </div>
@@ -113,19 +113,140 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form  id="personal-form" action="{{route('frontend.user.personal.email.phone.change')}}" method="post" enctype='multipart/form-data'>
+      @csrf
+          <div class="form-group mobile_no" style="display:none">
+            <label for="mobile_no" class="col-form-label">Mobile Number:</label>
+            <input type="text" name="mobile_no" class="form-control"  id="mobile_no">
+          </div>
+          <div class="form-group email" style="display:none">
+            <label for="email" class="col-form-label">Email:</label>
+            <input type="text" name="email" class="form-control"  id="email">
+          </div>
+          <div class="form-group otp-box " style="display:none">
+            <label for="otp" class="col-form-label">OTP:</label>
+            <input type="text" name="otp" class="form-control"  id="otp">
+          </div>
+         
+          
+      
+          <div class="margin-t-l">
+              <span id="error-msg" class="p-2 float-left"></span>
+              <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset request-otp">OTP Verfiy</button>
+              <button type="submit" class="btn btn--full btn--brand txt-defaultcase lineheight-reset register-submit" style="display:none">Update</button>
+
+          </div>
+
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @push('after-scripts')
 <script>
-   
-    $(document).ready(function(){       
+         function changeOTPVerify(type){
+
+swal({
+    title: "Are you sure you want to change the movbile no.?",
+    text: "",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Yes, change it!",
+    closeOnConfirm: false
+    },
+    function(){
+      swal.close();
+      console.log(type);
+      if(type == 'email'){
+        $('.email').show();
+        $('.mobile_no').hide();
+
+      }else if(type == 'mobile'){
+
+        $('.email').hide();
+        $('.mobile_no').show();
+
+      }
+      $('#exampleModalCenter').modal();
+       
+                   
+    });
+
+}   
+$(function() {
+
+      $('.request-otp').click(function(e) {
+                  e.preventDefault();
+                  $("#error-msg").text('');
+                  // Get the phone number and OTP
+                  var phone = $('#mobile_no').val();
+                  var email = $('#email').val();
+                  var dialing_code = "{{$auth->dialing_code}}";
+                  console.log("{{ route('frontend.user.personal.send.otp') }}");
+                //   var otp = $('#otp').val();
+                    if(phone && phone.length < 10){
+                        $("#error-msg").text('Phone number should be a 10 digit.');
+                    } 
+                    var tokenn = "{{ csrf_token() }}";
+                  console.log(tokenn);
+                    $.ajax({
+                      type: 'POST',
+                      url: "{{ route('frontend.user.personal.send.otp') }}", 
+                      data: {_token:tokenn,mobile_no:phone,dialing_code:dialing_code,email:email},
+                      success: function(response) {
+                        console.log(response);
+                        response = JSON.parse(response);
+                              console.log(response.otp);
+                              if (response.error == 0 ) {
+                                if(response.status == 'exist'){
+                                   // location.href = response.route;
+                                }
+                                console.log(response);
+                                $('.otp-box').show(); 
+                                $('.genrated-otp').text(response.otp); 
+                                $('.request-otp').hide(); 
+                                $('.register-submit').show(); 
+                                
+                              }else{
+                                $("#error-msg").text(response.message);
+                              }
+                            
+                                                         
+                          }
+                      });
+                });
+
        
      
     });
+
+
+
  
 
       </script>
 @if(config('access.captcha.login'))
+
 @captchaScripts
 @endif
 @endpush

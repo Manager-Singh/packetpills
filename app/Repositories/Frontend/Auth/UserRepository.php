@@ -67,8 +67,7 @@ class UserRepository extends BaseRepository
      */
     public function update(User $user, array $input, $image = false)
     {
-        // dd($input);
-       
+        
         if(isset($input['first_name'])){
             $user->first_name = $input['first_name'];
         }
@@ -98,6 +97,9 @@ class UserRepository extends BaseRepository
         }
         if(isset($input['province'])){
             $user->province = $input['province'];
+        }
+        if(isset($input['alternate_phone'])){
+            $user->alternate_phone = $input['alternate_phone'];
         }
 
 
@@ -610,27 +612,49 @@ class UserRepository extends BaseRepository
     }
     public function saveAddress(array $data){
         
-      if(isset($data['id']) && Address::find($data['id'])){
-        $address = Address::find($data['id']);
-      }else{
-        $address = new Address;
-      }
-        
+        if(isset($data['id']) && Address::find($data['id'])){
+            $address = Address::find($data['id']);
+
+            if($address->address_type == 'Shipping Address'){
+                $address->address_type = 'Shipping Address';
+            }else{
+                $address->address_type = 'Billing Address';
+            }
+
+        }else{
+            $address = new Address;
+
+
+            $billingAddress = new Address;
+            $billingAddress->user_id = auth()->user()->id;
+            $billingAddress->address1 = $data['billing_address1'];
+            $billingAddress->address2 = $data['billing_address2'];
+            $billingAddress->city = $data['billing_address_city'];
+            $billingAddress->postal_code = $data['billiing_postal_code'];
+            $billingAddress->province = $data['billing_province'];
+            $billingAddress->address_type = 'Billing Address';
+            $billingAddress->mark_as = 'undefault';
+            $billingAddress->save();
+            $address->address_type = 'Shipping Address';
+        }
         $address->user_id = auth()->user()->id;
         $address->address1 = $data['address1'];
         $address->address2 = $data['address2'];
         $address->city = $data['city'];
         $address->postal_code = $data['postal_code'];
         $address->province = $data['province'];
-        $address->address_type = $data['address_type'];
-        if(isset($data['mark_as'])){
-            $address->mark_as = 'default';
-        }else{
-            $address->mark_as = 'undefault';
-        }
+        
+        $address->mark_as = 'default';
+       
                
         if($address->save()){
             $user = auth()->user();
+
+
+           
+
+
+
 
             if(isset($user->parent_id) && !empty($user->parent_id)){ 
                 $parient_name = $user->full_name;

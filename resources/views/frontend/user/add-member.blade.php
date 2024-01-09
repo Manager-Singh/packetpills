@@ -72,8 +72,8 @@
 
 <div class="container mt-0 mb-5 pt-0">
 		    	
-                <form name="myForm" class="row" enctype="multipart/form-data" id="add-member" action="{{route('frontend.user.add.member.save')}}" method="post">
-                            @csrf
+        <form name="myForm" class="row" enctype="multipart/form-data" id="add-member" action="{{route('frontend.user.add.member.save')}}" method="post">
+            @csrf
 				    <div class="col-md-12">
               <div class="user-info">
                 <!-- <img class="user-img" src="{{asset('step/assets/images/user.png')}}"> -->
@@ -104,16 +104,16 @@
             <input type="text" id="lname" name="last_name" value=""  required>
           </div>
           
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="email">Email</label>
             <input type="text" id="email" name="email" value="">
           </div>
           <div class="col-md-6">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" value=""  required>
-          </div>
+          </div> -->
           <div class="col-md-12">
-            <label for="phone-no">Phone No.</label>
+            <label for="phone-no">Family Member Telephone Number.</label>
             <input type="number" id="phone-no" name="phone_no" value="">
           </div>
           <div class="col-md-12">
