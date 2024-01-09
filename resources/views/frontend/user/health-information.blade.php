@@ -146,8 +146,8 @@
         // For demonstration purposes, setTimeout is used to simulate a delay (replace with your actual form submission logic)
         setTimeout(function() {
           // Hide the loader after the form is submitted
-        //  $(".loader-container").hide();
-        }, 2000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+         $(".loader-container").hide();
+        }, 5000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
       });
     });
       </script>

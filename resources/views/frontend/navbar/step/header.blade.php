@@ -114,9 +114,9 @@
             <ul>
             <li><a href="{{route('frontend.user.personal.details')}}" class="{{ (Route::currentRouteName() == 'frontend.user.personal.details') ? 'active' : '' }}"><i class="fa fa-user-o" aria-hidden="true"></i> Personal details</a></li>
             <li><a href="{{route('frontend.user.address')}}" class="{{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Address</a></li>
+            <li><a href="{{route('frontend.user.health.information')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}"><i class="fa fa-heart-o" aria-hidden="true"></i> Health details</a></li>
             <li><a href="{{route('frontend.user.health.card')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}"><i class="fa fa-address-card-o" aria-hidden="true"></i> Health Card</a></li>
             <li><a href="{{route('frontend.user.insurance')}}" class="{{ (Route::currentRouteName() == 'frontend.user.insurance') ? 'active' : '' }}"><i class="fa fa-shield" aria-hidden="true"></i> Insurance</a></li>
-            <li><a href="{{route('frontend.user.health.information')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}"><i class="fa fa-heart-o" aria-hidden="true"></i> Health details</a></li>
             <li><a href="{{route('frontend.user.payment')}}" class="{{ (Route::currentRouteName() == 'frontend.user.payment') ? 'active' : '' }}"><i class="fa fa-credit-card" aria-hidden="true"></i> Payment</a></li>
             </ul>
          @else
