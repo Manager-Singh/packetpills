@@ -56,4 +56,21 @@ class PrescriptionController extends Controller
 
         
     }
+
+    public function old_save(SavePrescriptionRequest $request)
+    {
+        $data = collect($request->all())->toArray();
+        
+        $output = $this->prescriptionRepository->oldPrescriptionCreate($data); 
+        
+        // E-mail address was updated, user has to reconfirm
+       
+        if($output){
+            return redirect()->back()->withFlashSuccess(__('Old Prescription Information Updated'));
+        }else{
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+
+        
+    }
 }

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PrescriptionOld;
 
 /**
  * Class PrescriptionRepository.
@@ -164,7 +165,7 @@ class PrescriptionRepository extends BaseRepository
                     $mobile = $user->dialing_code.$user->mobile_no;
                     
                     if(sendMessage($mobile,'mail','patient_prescription_created',$data) && isset($user->email)){
-                        sendMail('mail','patient_prescription_created',$data,$user->id);
+                        sendMail('mail','patient_prescription_created',$data,$user->id,'Prescription Created');
                     }
                 }
                
@@ -374,5 +375,67 @@ class PrescriptionRepository extends BaseRepository
         }
 
         return $result;
+    }
+
+
+
+    public function oldPrescriptionCreate(array $data)
+    {
+            $user = Auth::user();
+            $count = 0;
+            $images = $data['prescription_img'];
+            $prescription_numbers = $data['prescription_number'];
+            $medication_names = $data['medication_name'];
+            if(isset($prescription_numbers) && !empty($prescription_numbers)){
+                foreach($prescription_numbers as $j=>$prescription_number){
+                    $prescriptionOld = new PrescriptionOld;
+                    $prescriptionOld->prescription_number =  $prescription_number;
+                    $prescriptionOld->medication_name =  $medication_names[$j];
+                    $prescriptionOld->user_id = $user->id;
+
+
+                    if(isset($images) && !empty($images)){
+                       
+                            $uuid = Uuid::uuid4()->toString();
+                            $image  = $images[$j]; 
+                            $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                            $destinationPath = public_path('img/frontend/prescription-old');
+                            $image->move($destinationPath, $fileName);
+                            $url = 'img/frontend/prescription/'.$fileName;  
+                            $prescriptionOld->image =  $url;
+                            
+                        }
+                      //  $prescriptionOld->save();
+                    $count++;
+                }
+
+                if($count == count($prescription_numbers)){
+                    
+                    $data1 =  "Old prescription added by ".$user->full_name;
+                    //send messages to admin
+                    $admin = User::whereHas('roles', function ($subQuery) { 
+                        $subQuery->where('name', 'Administrator');
+                    })->first();
+                    $adminmobile = $admin->dialing_code.$admin->mobile_no;
+                            
+                        if(isset($admin->email) && sendMessage($adminmobile,'admin',null,$data1)){
+                            sendMail('admin',null,$data1,$admin->id,'Old Prescription Details');
+                        }
+                            return 1;
+                }
+
+           
+            }else{
+                return 0;
+            }
+
+            
+           
+            
+
+
+              
+
+        
     }
 }

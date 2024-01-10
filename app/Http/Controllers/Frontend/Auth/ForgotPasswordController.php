@@ -67,7 +67,7 @@ class ForgotPasswordController extends Controller
                 if(sendMessage($mobile,'mail','forgot_reset_otp',$otp)){
                     if(isset($user->email)){
                         
-                        sendMail('mail','forgot_reset_otp',$otp,$user->id);
+                        sendMail('mail','forgot_reset_otp',$otp,$user->id,'Forgot Reset');
                        
                     }
                     if($passwordResetsOtp = PasswordResetsOtp::where('mobile_email',$request->mobile_no)->first()){

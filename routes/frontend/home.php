@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         
         Route::get('upload/prescription', [PrescriptionController::class, 'prescriptionUpload'])->name('prescription.upload');
         Route::post('prescription/upload/save', [PrescriptionController::class, 'save'])->name('prescription.upload.save');
+        Route::post('prescription/old/save', [PrescriptionController::class, 'old_save'])->name('prescription.old.save');
 
         // User Account Specific
         Route::get('account', [AccountController::class, 'index'])->name('account');

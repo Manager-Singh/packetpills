@@ -38,21 +38,20 @@
             <!-- <a href="{{route('frontend.drug.search')}}"> -->
               <div class="med-info bg-light">  
                 <p><i class="fa fa-search" aria-hidden="true"></i></p>                   
-                  <p class="txt"><strong> Search prices </strong></p>
-                  <p class="txt"><strong> Coming soon </strong></p>
+                  <p class="txt"><strong> Search prices <small>(Coming Soon)</small> </strong></p>
                   
               </div>
             <!-- </a> -->
             </div>
-            <!-- <div class="col-md-3">
-              <a href="#">
+            <div class="col-md-3">
+              <a href="{{route('frontend.user.prescription')}}">
                 <div class="med-info bg-light">   
-                  <p><i class="fa fa-plus-square" aria-hidden="true"></i></p>                  
-                    <p class="txt"><strong> Build your vitamin pack </strong></p>
+                  <p><i class="fa fa-refresh" aria-hidden="true"></i></p>                  
+                    <p class="txt"><strong> Request Refill </strong></p>
                   
                 </div>
               </a>
-            </div> -->  
+            </div> 
         </div>
         <div class="row mt-5 appointemt-contact">
           <!-- <div class="col-md-6">

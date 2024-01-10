@@ -186,7 +186,7 @@ class UserController extends Controller
             }
 
             if($request->isEmailChecked=='true'){
-                $response_data = sendMail('admin',null,$request->message,$user->id);
+                $response_data = sendMail('admin',null,$request->message,$user->id,'Pharmacy');
             }
 
             return $response_data;

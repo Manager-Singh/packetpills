@@ -139,6 +139,68 @@ div#accordionExample {
           <div class="order-head">
             <p class="txt text-center">Not Prescritpion found!</p>
           </div>
+          <div class="order-body">
+            <p class="txt">Old Prescription Details</p>
+            <form method='post' action="{{route('frontend.user.prescription.old.save')}}" enctype='multipart/form-data'>
+              @csrf 
+              <div class="row main-idv" bis_skin_checked="1">
+                <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                  <div class="form-group" bis_skin_checked="1">
+                    <input type="text" class="form-control" name="prescription_number[]" value="" placeholder="Prescription Number" required="">
+                  </div>
+                </div>
+                <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                  <div class="form-group" bis_skin_checked="1">
+                      <input type="file" class="form-control" name="prescription_img[]" value="" placeholder="Prescription Image" required="">
+                  </div>
+                </div>
+                <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                  <div class="form-group" bis_skin_checked="1">
+                    <div class="input-group align-items-center" bis_skin_checked="1">
+                      <input type="text" class="form-control" name="medication_name[]" value="" placeholder="Medication Name" required="" min="1" tep="1">
+                      <div class="input-group-btn ml-2" bis_skin_checked="1">
+                        <button class="btn btn-success" type="button" onclick="add_prescription_field()">
+                          <span class="fa fa-plus" aria-hidden="true"></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clear" bis_skin_checked="1"></div>
+              </div>
+              <div class="append-html"></div>
+              <div class="col-md-3">
+
+                  <button type="submit"class="next button submit" onclick="" >Submit</button>
+              </div>
+            </form>
+            <!-- <div class="row child-idv" bis_skin_checked="1">
+              <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                <div class="form-group" bis_skin_checked="1">
+                  <input type="text" class="form-control" name="prescription_number" value="" placeholder="Prescription Number" required="">
+                </div>
+              </div>
+              <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                <div class="form-group" bis_skin_checked="1">
+                    <input type="file" class="form-control" name="prescription_img" value="" placeholder="Prescription Image" required="">
+                </div>
+              </div>
+              <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                <div class="form-group" bis_skin_checked="1">
+                  <div class="input-group align-items-center" bis_skin_checked="1">
+                    <input type="text" class="form-control" name="medication_name" value="" placeholder="Medication Name" required="" min="1" tep="1">
+                    <div class="input-group-btn ml-2" bis_skin_checked="1">
+                      <button class="btn btn-success remove_prescription_field1" type="button" onclick="remove_prescription_field()">
+                        <span class="fa fa-minus" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clear" bis_skin_checked="1"></div>
+            </div> -->
+
+          </div>
         </div>
        @endif 
 
@@ -188,6 +250,73 @@ div#accordionExample {
 
 @push('after-scripts')
 <script>
+
+function remove_prescription_field(){
+  //$(".removeclass" + rid).remove();
+}
+$('.append-html').on('click','.remove_prescription_field',function(){
+
+  $(".loader-container").show();
+
+ console.log('ghjk');
+ console.log($(this).parent());
+ console.log($(this).closest('.child-idv'));
+ console.log($(this).parent().closest('.child-idv'));
+ 
+ $(this).parent().closest('.child-idv').remove();
+
+  setTimeout(function() {
+          // Hide the loader after the form is submitted
+          
+          $(".loader-container").hide();
+        }, 300); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+
+})
+
+function add_prescription_field(){
+
+  var html ='';
+  html +='<div class="row child-idv" bis_skin_checked="1">'+
+              '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+
+              '  <div class="form-group" bis_skin_checked="1">'+
+                  '<input type="text" class="form-control" name="prescription_number[]" value="" placeholder="Prescription Number" required="">'+
+                '</div>'+
+              '</div>'+
+              '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+
+                '<div class="form-group" bis_skin_checked="1">'+
+                    '<input type="file" class="form-control" name="prescription_img[]" value="" placeholder="Prescription Image" required="">'+
+               ' </div>'+
+             ' </div>'+
+              '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+
+                '<div class="form-group" bis_skin_checked="1">'+
+                  '<div class="input-group align-items-center" bis_skin_checked="1">'+
+                    '<input type="text" class="form-control" name="medication_name[]" value="" placeholder="Medication Name" required="" min="1" tep="1">'+
+                    '<div class="input-group-btn ml-2" bis_skin_checked="1">'+
+                      '<button class="btn btn-success remove_prescription_field" type="button" onclick="remove_prescription_field()">'+
+                        '<span class="fa fa-minus" aria-hidden="true"></span>'+
+                      '</button>'+
+                   ' </div>'+
+                  '</div>'+
+                '</div>'+
+              '</div>'+
+              '<div class="clear" bis_skin_checked="1"></div>'+
+            '</div>';
+
+            $(".loader-container").show();
+            $('.append-html').append(html);
+      setTimeout(function() {
+          // Hide the loader after the form is submitted
+          
+          $(".loader-container").hide();
+        }, 300); // 2000 milliseconds (2 seconds) is an example, adjust as needed
+
+
+
+
+
+}
+
+
   $('.askForRefill').change(function(){
     if($(this).is(":checked")) {
 

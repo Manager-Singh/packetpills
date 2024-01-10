@@ -276,7 +276,7 @@ if (! function_exists('sendMessage')) {
 
 
 if (! function_exists('sendMail')) {
-    function sendMail($type,$message_for=null,$data,$user_id = null){
+    function sendMail($type,$message_for=null,$data,$user_id = null,$subject=null){
         $user = User::where('id',$user_id)->first();
         if(isset($user) && empty($user->email)){
             return true;
@@ -295,22 +295,23 @@ if (! function_exists('sendMail')) {
             }
             $body .= "\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
          }
+        
          $full_name = $user->first_name.' '.$user->last_name;
         $to_name = $full_name;
         $to_email = $user->email;
         $data = array("name"=>$full_name, "body" => $body);
         
         try{
-        $aaaa = Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+        $aaaa = Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email,$subject) {
         $message->to($to_email, $to_name);
-        $message->subject('MisterPharmacist Online Canada');
+        $message->subject($subject);
         $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),'Pharmacy Canada');
         });
 
         return 1;
     }
     catch (Exception $e){
-    // dd($e);
+     //dd($e);
     //$e->getMessage()
         return 0;
     }

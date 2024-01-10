@@ -231,7 +231,7 @@ class DashboardController extends Controller
             $mobile = $user->dialing_code.$user->mobile_no;
             sendMessage($mobile,'mail','prescription_refill_created',$data_u);
             if(isset($user->email)){
-                sendMail('mail','prescription_refill_created',$data_u,$user->id);
+                sendMail('mail','prescription_refill_created',$data_u,$user->id,'Prescription Refill');
             }
 
             //send messages to admin
@@ -241,7 +241,7 @@ class DashboardController extends Controller
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
                     sendMessage($adminmobile,'admin',null,$data);
                     if(isset($admin->email)){
-                        sendMail('admin',null,$data,$admin->id);
+                        sendMail('admin',null,$data,$admin->id,'Prescription Refill');
                     }
            
 
@@ -620,7 +620,7 @@ class DashboardController extends Controller
                 if(isset($request->email) && !empty($request->email)){
                     if($otp_unverified->save()){
                         $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
-                        sendMail('mail',null,$data1,$isexist->id);
+                        sendMail('mail',null,$data1,$isexist->id,'OTP Send');
                     }
                     return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
 

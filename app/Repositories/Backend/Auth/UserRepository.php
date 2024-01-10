@@ -182,7 +182,7 @@ class UserRepository extends BaseRepository
                     $mobile = $user->dialing_code.$user->mobile_no;
                     sendMessage($mobile,'mail','payment_method_created',$data);
                     if(isset($user->email)){
-                        sendMail('mail','payment_method_created',$data,$user_id);
+                        sendMail('mail','payment_method_created',$data,$user_id,'Payment Add');
                     }
 
                 }
@@ -266,7 +266,7 @@ class UserRepository extends BaseRepository
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
                     sendMessage($mobile,'mail','payment_method_updated',$data);
                     if(isset($user->email)){
-                        sendMail('mail','payment_method_updated',$data,$user_id);
+                        sendMail('mail','payment_method_updated',$data,$user_id,'Payment Method');
                     }
                 }
                 return true;
@@ -310,7 +310,7 @@ class UserRepository extends BaseRepository
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
                     sendMessage($mobile,'mail','address_created',$data);
                     if(isset($user->email)){
-                        sendMail('mail','address_created',$data,$user_id);
+                        sendMail('mail','address_created',$data,$user_id,'Address');
                     }
                 }
                 return true;
@@ -360,7 +360,7 @@ class UserRepository extends BaseRepository
                     //$data =  "Your Prescription no is ".$prescription->prescription_number;
                     sendMessage($mobile,'mail','address_updated',$data);
                     if(isset($user->email)){
-                        sendMail('mail','address_updated',$data,$user_id);
+                        sendMail('mail','address_updated',$data,$user_id,'Address Update');
                     }
                 }
                 return true;
@@ -439,12 +439,12 @@ class UserRepository extends BaseRepository
                     if($hc=1){
                         sendMessage($mobile,'mail','healthcard_updated',$data);
                         if(isset($user->email)){
-                            sendMail('mail','healthcard_updated',$data,$user_id);
+                            sendMail('mail','healthcard_updated',$data,$user_id,'Health Card');
                         }
                     }else{
                         sendMessage($mobile,'mail','healthcard_created',$data);
                         if(isset($user->email)){
-                            sendMail('mail','healthcard_created',$data,$user_id);
+                            sendMail('mail','healthcard_created',$data,$user_id,'Health Card');
                         }
                     }
                     
@@ -537,12 +537,12 @@ class UserRepository extends BaseRepository
                     if($insu=1){
                         sendMessage($mobile,'mail','insurance_updated',$data);
                         if(isset($user->email)){
-                            sendMail('mail','insurance_updated',$data,$user_id);
+                            sendMail('mail','insurance_updated',$data,$user_id,'Prescription Number');
                         }
                     }else{
                         sendMessage($mobile,'mail','insurance_created',$data);
                         if(isset($user->email)){
-                            sendMail('mail','insurance_created',$data,$user_id);
+                            sendMail('mail','insurance_created',$data,$user_id,'Prescription Number');
                         }
                     }
                 }
@@ -599,12 +599,12 @@ class UserRepository extends BaseRepository
                     if($Hi=1){
                         sendMessage($mobile,'mail','healthinformation_updated',$data);
                         if(isset($user->email)){
-                            sendMail('mail','healthinformation_updated',$data,$user_id);
+                            sendMail('mail','healthinformation_updated',$data,$user_id,'Health Information');
                         }
                     }else{
                         sendMessage($mobile,'mail','healthinformation_created',$data);
                         if(isset($user->email)){
-                            sendMail('mail','healthinformation_created',$data,$user_id);
+                            sendMail('mail','healthinformation_created',$data,$user_id,'Health Information');
                         }
                     }
                 }
@@ -655,7 +655,7 @@ class UserRepository extends BaseRepository
                             //$data =  "Your Prescription no is ".$prescription->prescription_number;
                             sendMessage($mobile,'mail','patient_prescription_created',$data);
                             if(isset($user->email)){
-                                sendMail('mail','patient_prescription_created',$data,$user_id);
+                                sendMail('mail','patient_prescription_created',$data,$user_id,'Patient Prescription');
                             }
                         }
                         return true;
@@ -707,7 +707,7 @@ class UserRepository extends BaseRepository
                         
                             sendMessage($mobile,'mail','patient_medication_created',$data);
                             if(isset($user->email)){
-                                sendMail('mail','patient_medication_created',$data,$user->id);
+                                sendMail('mail','patient_medication_created',$data,$user->id,'Patient Medication');
                             }
                          
     
@@ -757,7 +757,7 @@ class UserRepository extends BaseRepository
                     //$data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
                         sendMessage($mobile,'mail','patient_order_created',$data);
                         if(isset($user->email)){
-                            sendMail('mail','patient_order_created',$data,$user->id);
+                            sendMail('mail','patient_order_created',$data,$user->id,'Patient Order');
                         }
                 }
                 
@@ -907,7 +907,7 @@ class UserRepository extends BaseRepository
                     // die;
                     sendMessage($mobile,'mail','patient_account_updated',$data);
                     if(isset($user->email)){
-                        sendMail('mail','patient_account_updated',$data,$user->id);
+                        sendMail('mail','patient_account_updated',$data,$user->id,'Patient Account');
                     }
                 }
                
@@ -1236,12 +1236,12 @@ class UserRepository extends BaseRepository
                         if($prescription->status=='cancelled'){ 
                             sendMessage($mobile,'mail','patient_prescription_cancelled',$data);
                             if(isset($user->email)){
-                                sendMail('mail','patient_prescription_cancelled',$data,$user->id);
+                                sendMail('mail','patient_prescription_cancelled',$data,$user->id,'Cancelled Prescription');
                             }
                          }else{
                             sendMessage($mobile,'mail','patient_prescription_approved',$data);
                             if(isset($user->email)){
-                                sendMail('mail','patient_prescription_approved',$data,$user->id);
+                                sendMail('mail','patient_prescription_approved',$data,$user->id,'Cancelled Prescription');
                             }
                          }
     
@@ -1292,13 +1292,13 @@ class UserRepository extends BaseRepository
                    // $data =  $status." & Your Order no is ".$order->order_number;
                         sendMessage($mobile,'mail','patient_order_status',$data);
                         if(isset($user->email)){
-                            sendMail('mail','patient_order_status',$data,$user->id);
+                            sendMail('mail','patient_order_status',$data,$user->id,'Order Patient');
                         }
                     }else{
                         $data =  $status." & Your Order no is ".$order->order_number;
                         sendMessage($mobile,'mail','patient_payment_status',$data);
                         if(isset($user->email)){
-                            sendMail('mail','patient_payment_status',$data,$user->id);
+                            sendMail('mail','patient_payment_status',$data,$user->id,'Payment Patient');
                         }
                     }
                 }
@@ -1343,7 +1343,7 @@ class UserRepository extends BaseRepository
                     //$data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
                         sendMessage($mobile,'mail','patient_transfer_status',$data);
                         if(isset($user->email)){
-                            sendMail('mail','patient_transfer_status',$data,$user->id);
+                            sendMail('mail','patient_transfer_status',$data,$user->id,'Transfer');
                         }
                    
                 }
@@ -1384,7 +1384,7 @@ class UserRepository extends BaseRepository
                    
                         sendMessage($mobile,'mail','prescription_refill_status',$data);
                         if(isset($user->email)){
-                            sendMail('mail','prescription_refill_status',$data,$user->id);
+                            sendMail('mail','prescription_refill_status',$data,$user->id,'Prescription Refill');
                         }
                    
                 }

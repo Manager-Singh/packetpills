@@ -180,7 +180,7 @@ class UserRepository extends BaseRepository
                     $mobile = $user->dialing_code.$user->mobile_no;
                     sendMessage($mobile,'mail','patient_account_completed',$data=null);
                         if(isset($user->email)){
-                            sendMail('mail','patient_account_completed',$data=null,$user->id);
+                            sendMail('mail','patient_account_completed',$data=null,$user->id,'Patient Account');
                         }
                 }
             }
@@ -490,7 +490,7 @@ class UserRepository extends BaseRepository
                 $mobile = $user->dialing_code.$user->mobile_no;
                // sendMessage($mobile,'mail',$healthcard_msg_key,null);
                 if(isset($user->email)){
-                   // sendMail('mail',$healthcard_msg_key,null,$user->id);
+                   // sendMail('mail',$healthcard_msg_key,null,$user->id,'Health Card');
                 }
 
                 //send messages to admin
@@ -500,7 +500,7 @@ class UserRepository extends BaseRepository
                 $adminmobile = $admin->dialing_code.$admin->mobile_no;
                         //sendMessage($adminmobile,'admin',null,$data1);
                         if(isset($admin->email)){
-                        //    sendMail('admin',null,$data1,$admin->id);
+                        //    sendMail('admin',null,$data1,$admin->id,'Health Card');
                         }
             }
             return $healthCard;
@@ -564,7 +564,7 @@ class UserRepository extends BaseRepository
             $mobile = $user->dialing_code.$user->mobile_no;
             //sendMessage($mobile,'mail','insurance_created',null);
             if(isset($user->email)){
-              //  sendMail('mail','insurance_created',null,$user->id);
+              //  sendMail('mail','insurance_created',null,$user->id,'Insurance');
             }
 
             //send messages to admin
@@ -574,7 +574,7 @@ class UserRepository extends BaseRepository
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
            // sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
-              //  sendMail('admin',null,$data1,$admin->id);
+              //  sendMail('admin',null,$data1,$admin->id,'Insurance');
             }
            
             return true;
@@ -669,7 +669,7 @@ class UserRepository extends BaseRepository
              $mobile = $user->dialing_code.$user->mobile_no;
             // sendMessage($mobile,'mail','address_created',null);
              if(isset($user->email)){
-                // sendMail('mail','address_created',null,$user->id);
+                // sendMail('mail','address_created',null,$user->id,'Address');
              }
  
              //send messages to admin
@@ -679,7 +679,7 @@ class UserRepository extends BaseRepository
              $adminmobile = $admin->dialing_code.$admin->mobile_no;
              //sendMessage($adminmobile,'admin',null,$data1);
              if(isset($admin->email)){
-                // sendMail('admin',null,$data1,$admin->id);
+                // sendMail('admin',null,$data1,$admin->id,'Address');
              }
         }
         return $address;
@@ -732,7 +732,7 @@ class UserRepository extends BaseRepository
             $mobile = $user->dialing_code.$user->mobile_no;
            // sendMessage($mobile,'mail','payment_method_created',null);
             if(isset($user->email)){
-              //  sendMail('mail','payment_method_created',null,$user->id);
+              //  sendMail('mail','payment_method_created',null,$user->id,'Payment Method');
             }
 
             //send messages to admin
@@ -742,7 +742,7 @@ class UserRepository extends BaseRepository
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
            // sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
-              //  sendMail('admin',null,$data1,$admin->id);
+              //  sendMail('admin',null,$data1,$admin->id,'Payment Method');
             }
         }
           return $card;
@@ -787,7 +787,7 @@ class UserRepository extends BaseRepository
             $mobile = $user->dialing_code.$user->mobile_no;
            // sendMessage($mobile,'mail','healthinformation_created',null);
             if(isset($user->email)){
-             //   sendMail('mail','healthinformation_created',null,$user->id);
+             //   sendMail('mail','healthinformation_created',null,$user->id,'Healthinformation');
             }
 
             //send messages to admin
@@ -798,7 +798,7 @@ class UserRepository extends BaseRepository
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
           //  sendMessage($adminmobile,'admin',null,$data1);
             if(isset($admin->email)){
-              //  sendMail('admin',null,$data1,$admin->id);
+              //  sendMail('admin',null,$data1,$admin->id,'Healthinformation');
             }
         }
         return $healthInformation;
@@ -1004,7 +1004,7 @@ class UserRepository extends BaseRepository
                    //$data1 =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
                         sendMessage($mobile,'mail','patient_order_created',$data1);
                         if(isset($user->email)){
-                            sendMail('mail','patient_order_created',$data1,$user->id);
+                            sendMail('mail','patient_order_created',$data1,$user->id,'Patient Order');
                         }
                 }
 
@@ -1069,7 +1069,7 @@ class UserRepository extends BaseRepository
                 $mobile = $admin->dialing_code.$admin->mobile_no;
 
                         if(sendMessage($mobile,'admin',null,$data1) && isset($admin->email)){
-                            sendMail('admin',null,$data1,$admin->id);
+                            sendMail('admin',null,$data1,$admin->id,'Transfer Request');
                         }
                 return $transferRequest;
             }
