@@ -63,16 +63,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3">
+            <!-- <div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-danger">
                     <div class="card-body pb-0">
                         <div class="btn-group float-right">
-                            <!-- <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-cog"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Action</a>
-                            </div> -->
+                            
                         </div>
                         <div class="text-value">${{$orderRevenueDataset["count"]}}</div>
                         <div>Total Revenue</div>
@@ -81,7 +76,7 @@
                         <canvas id="card-chart4" class="chart" height="70"></canvas>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
           <div class="row">
             <div class="col-sm-6 col-lg-3">
