@@ -17,44 +17,131 @@
                     <div class="panel-body">
                         {{ Form::open(['route' => 'admin.auth.user.create.address', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>Billing Address</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <h3>Shipping/Delivery Address</h3>
+                            </div>
+                        </div>
+                        <div class="row">
 
-                        <div class="form-group row">
-                            {{ Form::label('address1', trans('Address Line 1'), ['class' => 'col-md-2 from-control-label required']) }}
-                            <div class="col-md-10">
-                                <div class="input-group ">
-                                    <input type="text" name="address1" class="form-control" required>
+                            <div class="col-md-6 border-right">
+                                <div class="form-group">
+                                    {{ Form::label('address1', trans('Address Line 1'), ['class' => 'from-control-label required']) }}
+                                    <div class="col-md-12">
+                                        <div class="input-group ">
+                                            <input type="text" id="address1" name="address1" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('address2', trans('Address Line 2'), ['class' => 'from-control-label required']) }}
+                                    <div class="col-md-12">
+                                        <div class="input-group ">
+                                            <input type="text" id="address2" name="address2" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('postal_code', trans('Postal Code'), ['class' => 'from-control-label required']) }}
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" id="postal_code" name="postal_code" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('city', trans('City'), ['class' => 'from-control-label required']) }}
+                                    <div class="col-md-12">
+                                        <div class="input-group ">
+                                            <input type="text" id="city" name="city" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('province', trans('validation.attributes.backend.access.users.province'), ['class' => 'from-control-label required']) }}
+
+                                    <div class="col-md-12">
+                                        {{ Form::select('province', $provinces, null, ['class' => 'form-control box-size', 'id' => 'province' , 'placeholder' => trans('validation.attributes.backend.access.users.province'), 'required' => 'required']) }}
+                                    </div>
+                                    <!--col-->
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('shipping_instructions', 'Add shipping Instructions', ['class' => 'from-control-label']) }}
+
+                                    <div class="col-md-12">
+                                        {{ Form::textarea('shipping_instructions', null, ['class' => 'form-control box-size', 'placeholder' => 'Add shipping Instructions', 'required' => 'required']) }}
+                                    </div>
+                                    <!--col-->
                                 </div>
                             </div>
-                            <!--col-->
-                        </div>
-                        <div class="form-group row">
-                            {{ Form::label('address2', trans('Address Line 2'), ['class' => 'col-md-2 from-control-label required']) }}
-                            <div class="col-md-10">
-                                <div class="input-group ">
-                                    <input type="text" name="address2" class="form-control">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ Form::label('billing_address1', trans('Address Line 1'), ['class' => 'from-control-label required']) }}
+                                    <div class="col-md-12">
+                                        <div class="input-group ">
+                                            <input type="text" id ="billing_address1" name="billing_address1" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('billing_address2', trans('Address Line 2'), ['class' => 'from-control-label required']) }}
+                                    <div class="col-md-12">
+                                        <div class="input-group ">
+                                            <input type="text" id ="billing_address2" name="billing_address2" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('billing_postal_code', trans('Postal Code'), ['class' => 'from-control-label required']) }}
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" id ="billing_postal_code" name="billing_postal_code" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('billing_city', trans('City'), ['class' => 'from-control-label required']) }}
+                                    <div class="col-md-12">
+                                        <div class="input-group ">
+                                            <input type="text" id ="billing_city" name="billing_city" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('billing_province', trans('validation.attributes.backend.access.users.province'), ['class' => 'from-control-label required']) }}
+
+                                    <div class="col-md-12">
+                                        {{ Form::select('billing_province', $provinces, null, ['class' => 'form-control box-size', 'id' => "billing_province", 'placeholder' => trans('validation.attributes.backend.access.users.province'), 'required' => 'required']) }}
+                                    </div>
+                                    <!--col-->
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-check mt-4">
+                                    <input type="checkbox" name="same" class="form-check-input same-checkbox" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Add same billing address as Shipping address</label>
                                 </div>
                             </div>
-                            <!--col-->
                         </div>
-                        <div class="form-group row">
-                            {{ Form::label('postal_code', trans('Postal Code'), ['class' => 'col-md-2 from-control-label required']) }}
-                            <div class="col-md-10">
-                                <div class="input-group ">
-                                    <input type="text" name="postal_code" class="form-control" required>
-                                </div>
-                            </div>
-                            <!--col-->
-                        </div>
-                        <div class="form-group row">
-                            {{ Form::label('city', trans('City'), ['class' => 'col-md-2 from-control-label required']) }}
-                            <div class="col-md-10">
-                                <div class="input-group ">
-                                    <input type="text" name="city" class="form-control" required>
-                                </div>
-                            </div>
-                            <!--col-->
-                        </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             {{ Form::label('address_type', trans('Address Type'), ['class' => 'col-md-2 from-control-label required']) }}
 
                             <div class="col-md-10">
@@ -66,27 +153,38 @@
                                 @endphp
                                 {{ Form::select('address_type', $addresses, null, ['class' => 'form-control box-size', 'placeholder' => trans('Address Type'), 'required' => 'required']) }}
                             </div>
-                            <!--col-->
-                        </div>
-                        <div class="form-group row">
-                            {{ Form::label('province', trans('validation.attributes.backend.access.users.province'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                            <div class="col-md-10">
-                                {{ Form::select('province', $provinces, null, ['class' => 'form-control box-size', 'placeholder' => trans('validation.attributes.backend.access.users.province'), 'required' => 'required']) }}
-                            </div>
-                            <!--col-->
-                        </div>
+                            
+                        </div> -->
 
                         <div class="card-footer-address">
                             <div class="row">
 
-
+                                <input type="hidden" name="billing_address" value="Billing Address" />
+                                <input type="hidden" name="shipping_address" value="Shipping/Delivery Address" />
                                 <div class="col text-right">
                                     {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success pull-right']) }}
                                 </div><!--row-->
                             </div><!--row-->
                         </div><!--card-footer-->
+
+
+
+
+
+
+
+
+
+
+
+
+
                         {{ Form::close() }}
+
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -181,6 +279,16 @@
                                         </div>
                                         <!--col-->
                                     </div>
+                                    @if(isset($address->shipping_instructions))
+                                        <div class="form-group row">
+                                            {{ Form::label('shipping_instructions', 'Add shipping Instructions', ['class' => 'col-md-3 from-control-label required']) }}
+
+                                            <div class="col-md-9">
+                                                {{ Form::textarea('shipping_instructions', $address->shipping_instructions, ['class' => 'form-control box-size', 'placeholder' => 'Add shipping Instructions', 'required' => 'required']) }}
+                                            </div>
+                                            <!--col-->
+                                        </div>
+                                    @endif
 
                                     <div class="card-footer-address">
                                         <div class="row">
@@ -213,9 +321,14 @@
                     <span><strong>City:</strong> {{ $address->city }}</span>
                     <span><strong>Province:</strong> {{ $address->province }}</span>
                     <span><strong>Address Type:</strong> {{ $address->address_type }}</span>
+                    @if(isset($address->shipping_instructions) && !empty($address->shipping_instructions))
+                    <span><strong>Shipping Instructions:</strong> {{ $address->shipping_instructions }}</span>
+
+                    @endif
                 </p>
 
             </div>
         @endforeach
     @endif
 </div><!--table-responsive-->
+

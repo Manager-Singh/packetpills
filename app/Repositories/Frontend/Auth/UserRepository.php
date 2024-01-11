@@ -643,6 +643,7 @@ class UserRepository extends BaseRepository
         $address->city = $data['city'];
         $address->postal_code = $data['postal_code'];
         $address->province = $data['province'];
+        $address->shipping_instructions = (isset($data['shipping_instructions'])) ? $data['shipping_instructions'] : '';
         
         $address->mark_as = 'default';
        
@@ -651,12 +652,7 @@ class UserRepository extends BaseRepository
             $user = auth()->user();
 
 
-           
-
-
-
-
-            if(isset($user->parent_id) && !empty($user->parent_id)){ 
+           if(isset($user->parent_id) && !empty($user->parent_id)){ 
                 $parient_name = $user->full_name;
                 $user = User::where('id',$user->parent_id)->first(); 
                 $data1 =  "Address details updated by ".$user->full_name.' to '.$parient_name;

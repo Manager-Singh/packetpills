@@ -278,7 +278,7 @@ class UserRepository extends BaseRepository
     public function create_address(array $data)
     {
         $user_id = $data['user_id'];
-       
+       //dd($data);
         return DB::transaction(function () use ($data,$user_id) {
             Address::where('user_id',$user_id)->update(array('mark_as' => 'normal'));
             $address = new Address;
@@ -289,9 +289,23 @@ class UserRepository extends BaseRepository
             $address->city = $data['city'];
             $address->province = $data['province'];
             $address->mark_as = 'default';
-            $address->address_type = $data['address_type'];
+            $address->address_type = $data['shipping_address'];
             $address->is_verify = 1;
-            if($address->save()){
+            if(isset($data['shipping_instructions']) && !empty($data['shipping_instructions'])){
+                $address->shipping_instructions = $data['shipping_instructions']; 
+            }
+            $billingAddress = new Address;
+            $billingAddress->user_id = $user_id;
+            $billingAddress->address1 = $data['billing_address1'];
+            $billingAddress->address2 = $data['billing_address2'];
+            $billingAddress->postal_code = $data['billing_postal_code'];
+            $billingAddress->city = $data['billing_city'];
+            $billingAddress->province = $data['billing_province'];
+            $billingAddress->mark_as = 'undefault';
+            $billingAddress->address_type = $data['billing_address'];
+            $billingAddress->is_verify = 1;
+
+            if($address->save() && $billingAddress->save()){
                 $user = User::where('id',$user_id)->first();
 
                 if(isset($user->parent_id) && !empty($user->parent_id)){ 
@@ -340,6 +354,9 @@ class UserRepository extends BaseRepository
             $address->mark_as = 'default';
             $address->address_type = $data['address_type'];
             $address->is_verify = 1;
+            if(isset($address->shipping_instructions) && !empty($address->shipping_instructions)){
+                $address->shipping_instructions = $data['shipping_instructions']; 
+            }
             if($address->save()){
                 $user = User::where('id',$user_id)->first();
 

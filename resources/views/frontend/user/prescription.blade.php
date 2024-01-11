@@ -140,24 +140,29 @@ div#accordionExample {
             <p class="txt text-center">Not Prescritpion found!</p>
           </div>
           <div class="order-body">
-            <p class="txt">Old Prescription Details</p>
+            <p class="txt">Existing Prescription Details</p>
             <form method='post' action="{{route('frontend.user.prescription.old.save')}}" enctype='multipart/form-data'>
               @csrf 
               <div class="row main-idv" bis_skin_checked="1">
                 <div class="col-sm-3 nopadding" bis_skin_checked="1">
                   <div class="form-group" bis_skin_checked="1">
-                    <input type="text" class="form-control" name="prescription_number[]" value="" placeholder="Prescription Number" required="">
+                    <label for="prescription_number">Prescription Number (Rx#)</label>
+                    <input type="text" class="form-control" id="prescription_number" name="prescription_number[]" value="" placeholder="Rx# 20231003-0000000001" required="">
                   </div>
                 </div>
                 <div class="col-sm-3 nopadding" bis_skin_checked="1">
                   <div class="form-group" bis_skin_checked="1">
-                      <input type="file" class="form-control" name="prescription_img[]" value="" placeholder="Prescription Image" required="">
+                      <label for="prescription_img">Prescription Image (Optional)</label>
+                      <input type="file" class="form-control" id="prescription_img" name="prescription_img[]" value="" placeholder="Prescription Image" required="">
                   </div>
                 </div>
-                <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                <div class="col-sm-4 nopadding" bis_skin_checked="1">
                   <div class="form-group" bis_skin_checked="1">
-                    <div class="input-group align-items-center" bis_skin_checked="1">
-                      <input type="text" class="form-control" name="medication_name[]" value="" placeholder="Medication Name" required="" min="1" tep="1">
+                    <div class="input-group align-items-end" bis_skin_checked="1">
+                      <div class="rmedication-name">
+                        <label for="medication_name">Medication Name</label>
+                        <input type="text" class="form-control" name="medication_name[]" value="" placeholder="Medication Name" required="" min="1" tep="1">
+                      </div>
                       <div class="input-group-btn ml-2" bis_skin_checked="1">
                         <button class="btn btn-success" type="button" onclick="add_prescription_field()">
                           <span class="fa fa-plus" aria-hidden="true"></span>
@@ -279,7 +284,7 @@ function add_prescription_field(){
   html +='<div class="row child-idv" bis_skin_checked="1">'+
               '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+
               '  <div class="form-group" bis_skin_checked="1">'+
-                  '<input type="text" class="form-control" name="prescription_number[]" value="" placeholder="Prescription Number" required="">'+
+                  '<input type="text" class="form-control" name="prescription_number[]" value="" placeholder="Rx# 20231003-0000000001" required="">'+
                 '</div>'+
               '</div>'+
               '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+

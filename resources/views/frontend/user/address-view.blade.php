@@ -43,7 +43,7 @@ $address_count = ($address) ? $address->count() : 0;
                 @foreach($address as $addres)
                   <div class="order address-{{$addres->id}}">
                     <div class="order-head">
-                        <input type="radio" class="address-default" name="payment"  {{ (isset($addres->mark_as) && $addres->mark_as == 'default') ? 'checked' : '' }} value="{{$addres->id}}">
+                        <!-- <input type="radio" class="address-default" name="payment"  {{ (isset($addres->mark_as) && $addres->mark_as == 'default') ? 'checked' : '' }} value="{{$addres->id}}"> -->
                         <p class="txt-b">{{$addres->address_type}}</p>
                     </div>
                     <div class="order-body">
@@ -51,6 +51,9 @@ $address_count = ($address) ? $address->count() : 0;
                             <div class="col-md-8">
                                 <p class="txt"> {{$addres->address1}}  {{$addres->address2}}</p>
                                 <p class="txt"> {{$addres->city}} {{$addres->province}}</p>
+                                @if(isset($addres->shipping_instructions) && !empty($addres->shipping_instructions))
+                                <p class="txt"> <p class="txt-b m-0">Address Instructions:</p> {{$addres->shipping_instructions}}</p>
+                                @endif
                                 <a class="txt-b delete-btn" href="javascript:void(0)" onclick="removeAddress({{$addres->id}},{{$user->id}})"> Delete </a>
                                 <a class="txt-b edit-btn" href="{{route('frontend.user.address.add')}}?id={{$addres->id}}"> Edit </a>
                             </div>

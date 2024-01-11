@@ -472,5 +472,32 @@
         function remove_education_fields(rid) {
             $(".removeclass" + rid).remove();
         }
+
+        $(document).ready(function(){   
+    console.log('Using t'); 
+      // make billing same as address
+      $(document).on('click','input[name=same]',function() {
+      console.log('Using the same address');  
+      if ($("input[name=same]:checked").is(':checked')) { 
+            $('#billing_address1').val($('#address1').val());
+            $('#billing_address2').val($('#address2').val());
+            $('#billing_postal_code').val($('#postal_code').val());             
+            $('#billing_city').val($('#city').val());             
+            var province = $('select[name=province] option:selected').val(); 
+            $('select[name=billing_province]').val(province);
+      }else{
+          
+            $('#billing_address1').val('');
+            $('#billing_address2').val('');
+            $('#billing_zip').val('');             
+            $('#billing_city').val('');             
+            var province = ''; 
+            $('select[name=billing_province]').val(province);
+        
+        }              
+    });
+
+
+});
     </script>
 @endsection

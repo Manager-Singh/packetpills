@@ -7,6 +7,9 @@
     .btn-div a {
     display: contents;
     }
+    #shipping_instructions {
+        border: 2px solid #638e3c;
+    }
   </style>
 @endpush
 @section('content')
@@ -32,21 +35,21 @@
               <div class="col-md-6">
                 <div class="row">
                   <div class="col-md-12">
-                  <label>Shipping Address</label>
+                  <h3>Shipping Address</h3>
                   </div>
                   <div class="col-md-12">
                 
-                <label for="address">Street Address</label>
+                <label for="address">Street Address*</label>
                 <input type="text" id="address" name="address1"  value="{{ (isset($address) && isset($address->address1)) ? $address->address1 : ''}}" placeholder="Address line 1" required><br><br>
                 <input type="text" id="address2" name="address2" value="{{ (isset($address) && isset($address->address2)) ? $address->address2 : ''}}" placeholder="Address line 2">
 
-                <label for="zip">Postal Code</label>
+                <label for="zip">Postal Code*</label>
                 <input type="text" id="zip"  name="postal_code" value="{{ (isset($address) && isset($address->postal_code)) ? $address->postal_code : ''}}" placeholder="Postal Code" required>
 
-                <label for="city">City</label>
+                <label for="city">City*</label>
                 <input type="text" id="city" name="city" value="{{ (isset($address) && isset($address->city)) ? $address->city : ''}}" placeholder="City" required>
 
-                <label for="province">Province</label>
+                <label for="province">Province*</label>
                 <select name="province" id="province" required>
                   <option value="">Select a Province</option>
                   @if($provinces)
@@ -59,6 +62,11 @@
                   
                  </select>
 
+              
+                <div class="form-group">
+                  <label for="shipping_instructions">Add shipping Instructions</label>
+                  <textarea class="form-control" id="shipping_instructions" name="shipping_instructions" rows="3" placeholder="Add shipping Instructions">{{ (isset($address) && isset($address->city)) ? $address->city : ''}}</textarea>
+                </div>
                 <!-- <label for="address">Address Type</label> -->
                 <!-- <select name="address_type" id="address" required>
                   <option value="">Select a Address Type</option>
@@ -77,21 +85,21 @@
                 <div class="col-md-6">
                 <div class="row">
                   <div class="col-md-12">
-                    <label>Billing Address</label>
+                    <h3>Billing Address</h3>
                   </div>
                   <div class="col-md-12">
                     
-                    <label for="billing_address">Street Address</label>
+                    <label for="billing_address">Street Address*</label>
                     <input type="text" id="billing_address" name="billing_address1"  value="{{ (isset($address) && isset($address->address1)) ? $address->address1 : ''}}" placeholder="Billing Address line 1" required><br><br>
                     <input type="text" id="billing_address2" name="billing_address2" value="{{ (isset($address) && isset($address->address2)) ? $address->address2 : ''}}" placeholder="Billing Address line 2">
 
-                    <label for="billing_zip">Postal Code</label>
+                    <label for="billing_zip">Postal Code*</label>
                     <input type="text" id="billing_zip"  name="billiing_postal_code" value="{{ (isset($address) && isset($address->postal_code)) ? $address->postal_code : ''}}" placeholder="Billing Postal Code" required>
 
-                    <label for="billing_city">City</label>
+                    <label for="billing_city">City*</label>
                     <input type="text" id="billing_city" name="billing_address_city" value="{{ (isset($address) && isset($address->city)) ? $address->city : ''}}" placeholder="Billing City" required>
 
-                    <label for="billing-province">Province</label>
+                    <label for="billing-province">Province*</label>
                     <select name="billing_province" id="billing-province" required>
                       <option value="">Select a Province</option>
                       @if($provinces)
@@ -109,10 +117,10 @@
                 
                 </div>
                 <div class="col-md-12">
-                <div class="form-check mt-4">
-                  <input type="checkbox" name="same" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">Add same billing address as Shipping address</label>
-                </div>
+                  <div class="form-check mt-4">
+                    <input type="checkbox" name="same" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Add same billing address as Shipping address</label>
+                  </div>
                 </div>
                 </div>
                 @if(isset($_GET['id']) && isset($billing_address))
