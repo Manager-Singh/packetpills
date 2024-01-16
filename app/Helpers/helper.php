@@ -307,11 +307,11 @@ if (! function_exists('sendMail')) {
         $message->subject($subject);
         $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),'Pharmacy Canada');
         });
-
         return 1;
     }
     catch (Exception $e){
      //dd($e);
+     
     //$e->getMessage()
         return 0;
     }
