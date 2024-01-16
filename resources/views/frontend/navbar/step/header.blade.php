@@ -149,7 +149,7 @@
             <p class="txt-b">Email: rx@misterpharmacist.com</p>
             <p class="txt-b">Store Number :  416-593-4000</p>
             <p class="txt-b">Fax Number :  416-593-4166</p>
-            <p class="txt-b">On Instgaram:  <a class="text-decoration-none" href="https://www.instagram.com/misterpharmacist/" target="_blank"><i class="fa fa-instagram" style="font-size:22px;color:red"></i>   &nbsp;&nbsp;misterpharmacist</a></p>
+            <p class="txt-b">On Instagram :  <a class="text-decoration-none" href="https://www.instagram.com/misterpharmacist/" target="_blank"><i class="fa fa-instagram" style="font-size:22px;color:red"></i>   &nbsp;&nbsp;misterpharmacist</a></p>
 
 
             </div>

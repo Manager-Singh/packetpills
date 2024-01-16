@@ -18,7 +18,7 @@
                               <div class="col-md-12 company-card">
                                 <img class="company-logo" src="{{asset('step/assets/images/logo-main.png')}}">
                                 <p class="bold-txt">MisterPharmacist</p>
-                                <p class="txt">Fax : 1-000-000-0000</p>
+                                <p class="txt">Fax : 1-416-593-4166</p>
                                 <a href="#" class="button save">Save contact details</a>
                               </div>
                             </div>
