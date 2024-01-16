@@ -136,7 +136,7 @@ class DashboardController extends Controller
     public function almostdone_save(Request $request){
 
 
-        if(isset($request->email) && User::where('email',$request->email)->whereNot('avatar_type','google')->exists()){
+        if(isset($request->email) && User::where('email',$request->email)->where('avatar_type','=!','google')->exists()){
             return redirect()->back()->withFlashInfo(__('      This  email ( '.$request->email.' ) already exists.')); 
         }
         // 'province'=>$request->province,
