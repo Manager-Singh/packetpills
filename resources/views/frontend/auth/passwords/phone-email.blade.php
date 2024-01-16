@@ -81,7 +81,7 @@ button.btn {
                 @if(isset($user))
                     <form action="{{route('frontend.auth.password.phone.verify')}}" method="post" class="reset-form">
                 @else    
-                    <form action="{{route('frontend.auth.password.phone.post')}}" method="post" class="reset-form">
+                    <form action="{{route('frontend.auth.password.phone.post')}}" id="form-reset" method="post" class="reset-form">
                 @endif
                     @csrf
                         <div class="card-header text-center h5 text-white bg-primary">Password Reset</div>
@@ -91,7 +91,7 @@ button.btn {
                             </p>
                             <div class="form-outline">
                                 <label class="form-label" for="typeEmail">Phone Number</label>
-                                <input type="number" name="mobile_no" id="typeEmail" value="{{ (isset($mobile_email)) ? $mobile_email : '' }}"  {{ (isset($user)) ? 'readonly' : '' }} class="form-control my-3 @error('mobile_no') is-invalid @enderror" rquired />
+                                <input type="text" name="mobile_no" id="typeEmail" value="{{ (isset($mobile_email)) ? $mobile_email : '' }}"  {{ (isset($user)) ? 'readonly' : '' }} class="form-control my-3 @error('mobile_no') is-invalid @enderror" rquired />
                                 @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -108,10 +108,12 @@ button.btn {
                                 
                             </div>
                             @endif
+                            <span class="error-msg"></span>
+                        <input type="hidden" id="type" name="type" value="{{ (isset($type)) ? $type : ''}}" />
                             @if(isset($user))
                             <button type="button" class="btn btn-primary w-100 otp-validation">OTP Verify</button>
                             @else
-                            <button type="submit" class="btn btn-primary w-100">Reset password</button>
+                            <button type="submit" class="btn btn-primary w-100 reset-form-submit">Reset password</button>
                             @endif
                             <div class="d-flex justify-content-between mt-4 login-register">
                                 <a class="login" href="{{route('frontend.auth.new.login')}}">Login</a>
@@ -154,10 +156,46 @@ button.btn {
           
 
            
-           
-         // $('.reset-form').submit();
+
+
           
 
+        });
+
+           
+        // $('.reset-form-submit').click(function(event){
+
+        // event.preventDefault();
+        // console.log('asfasfasddf sadfsaf sdf');
+        // $('.reset-form').submit();
+        // });
+        $('.reset-form-submit').click(function(event){
+          event.preventDefault();
+            $('.reset-form-submit').removeAttr('disabled');
+            $('.error-msg').text();
+            var input = $('#typeEmail').val();
+            var emailRegex = /^\S+@\S+\.\S+$/;
+            var phoneRegex = /^\d+$/;
+            if(!input){
+              
+             return false;
+
+            }
+
+            if (emailRegex.test(input)) {
+                
+                $('#type').val('email');
+                // Add your logic for email handling here
+            } else if (phoneRegex.test(input)) {
+              $('#type').val('mobile');
+                // Add your logic for phone number handling here
+            } else {
+              $('.error-msg').text('Invalid email or phone number format');
+              return false;
+            }
+            console.log('It is the help tiei');
+            $('.reset-form').submit();
+            
         });
         
     });

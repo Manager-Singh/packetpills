@@ -33,9 +33,11 @@ class ForgotPasswordController extends Controller
     }
 
     public function sendResetLinkPhone(Request $request){
+
+        
        
-       $type = '';
-       if (is_numeric($request->input('mobile_no'))){
+       $type = $request->input('type');
+       if ($type == 'mobile' ){
         
             $request->validate([
                 'mobile_no' => 'required|exists:users,mobile_no',
@@ -53,35 +55,45 @@ class ForgotPasswordController extends Controller
                 'mobile_no.email' => 'The selected email is invalid.',
                 'mobile_no.exists' => 'You are not registered with this email.',
             ]);
-
             $type = 'email';
             $mobile_email = $request->mobile_no;
             $user = User::where('email',$request->mobile_no)->first();
             
        }
+       
        $otp = generateOTP();
        try {
 
-            if($user->mobile_no && $user->dialing_code){
-                $mobile = $user->dialing_code.$user->mobile_no;
-                if(sendMessage($mobile,'mail','forgot_reset_otp',$otp)){
-                    if(isset($user->email)){
-                        
-                        sendMail('mail','forgot_reset_otp',$otp,$user->id,'Forgot Reset');
-                       
+            if($user){
+
+                if($type == 'email'){
+                    if(isset($user->email) && !empty($user->email)){
+                        if(sendMail('mail','forgot_reset_otp',$otp,$user->id,'Forgot Reset')){
+                            $mailsend =1;
+                        }
                     }
-                    if($passwordResetsOtp = PasswordResetsOtp::where('mobile_email',$request->mobile_no)->first()){
-                        $password_resets_otp  = $passwordResetsOtp;
-                    }else{
-                        $password_resets_otp  = new PasswordResetsOtp();
+
+                }else{
+
+                    if($user->mobile_no && $user->dialing_code){
+                        $mobile = $user->dialing_code.$user->mobile_no;
+                        sendMessage($mobile,'mail','forgot_reset_otp',$otp);
                     }
-                    
-                    $password_resets_otp->mobile_email = $request->mobile_no; 
-                    $password_resets_otp->otp = $otp; 
-                    if($password_resets_otp->save()){
-                        return view('frontend.auth.passwords.phone-email',compact('user','mobile_email'));
-                    }
+
                 }
+
+                if($passwordResetsOtp = PasswordResetsOtp::where('mobile_email',$request->mobile_no)->first()){
+                    $password_resets_otp  = $passwordResetsOtp;
+                }else{
+                    $password_resets_otp  = new PasswordResetsOtp();
+                }
+                
+                $password_resets_otp->mobile_email = $request->mobile_no; 
+                $password_resets_otp->otp = $otp; 
+                if($password_resets_otp->save()){
+                    return view('frontend.auth.passwords.phone-email',compact('user','mobile_email','type'));
+                }
+
             }
             
             
@@ -97,14 +109,13 @@ class ForgotPasswordController extends Controller
     }
 
     public function phoneOtpVerfiy(Request $request){
-       // dd($request->all());
-
+      
        $request->validate([
         'mobile_no'=>'required',
         'otp'=>'required',
         
         ], [
-            'mobile_no.required' => 'The Mobile is required.',
+            'mobile_no.requirred' => 'The Mobile/Email is required.',
             'otp.required' => 'The OTP is required.',
         ]);
 
@@ -112,8 +123,14 @@ class ForgotPasswordController extends Controller
 
             return redirect()->back()->withFlashSuccess(__('The OTP is required.'));
         }
+        
+        if($request->type == 'mobile'){
+            $user = User::where('mobile_no',$request->mobile_no)->first();
+        }else{
+            $user = User::where('email',$request->mobile_no)->first();
+        }
 
-        $user = User::where('mobile_no',$request->mobile_no)->first();
+        
         if($user ){
             $user_otp = PasswordResetsOtp::where('mobile_email',$request->mobile_no)->where('otp',$request->otp)->first();
             $mobile_email = $request->mobile_no;
@@ -122,9 +139,11 @@ class ForgotPasswordController extends Controller
                 if($user_otp->save()){
                     //Auth::loginUsingId($user->id);
                     $data = [
+                        'type' => $request->type,
                         'user' => $user,
                         'mobile_email' => $mobile_email,
                     ];
+                   
                     return redirect()->route('frontend.auth.password.update')->with($data);
                }
             }else{
@@ -143,6 +162,7 @@ class ForgotPasswordController extends Controller
     }
 
     public function updateSavePassword(Request $request){
+        
         $request->validate([
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password|min:6'
@@ -155,7 +175,7 @@ class ForgotPasswordController extends Controller
             return redirect()->route('frontend.auth.password.email')->withFlashInfo(__('Something went wrong.')); 
         }
         
-        $user = User::where('mobile_no',$request->mobile_no)->first();
+        $user = User::find($request->user_id);
        
         $user->password = Hash::make($request->password);
         // if($user->save()){

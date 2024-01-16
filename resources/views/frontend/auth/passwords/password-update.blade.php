@@ -120,6 +120,8 @@ $mobile_email ='';
                                 
                                 
                             </div>
+                          
+                            <input type="hidden" name="type" value="{{(isset($type)) ? $type : old('type') }}"/>
                            <input type="hidden" name="user_id" value="{{(isset($user->id)) ? $user->id : old('user_id') }}"/>
                            <input type="hidden" name="mobile_no" value="{{(isset($mobile_email) && !empty($mobile_email)) ? $mobile_email : old('mobile_no')}}"/>
                             <button type="submit" class="btn btn-primary w-100">Update password</button>
