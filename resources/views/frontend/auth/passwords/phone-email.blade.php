@@ -87,10 +87,10 @@ button.btn {
                         <div class="card-header text-center h5 text-white bg-primary">Password Reset</div>
                         <div class="card-body px-5">
                             <p class="card-text py-2 text-center text-subtitle">
-                                Enter your mobile number and we'll send you an sms with instructions to reset your password.
+                                Enter your mobile number and email we'll send you an sms with instructions to reset your password.
                             </p>
                             <div class="form-outline">
-                                <label class="form-label" for="typeEmail">Phone Number</label>
+                                <label class="form-label" for="typeEmail">Phone Number/Email</label>
                                 <input type="text" name="mobile_no" id="typeEmail" value="{{ (isset($mobile_email)) ? $mobile_email : '' }}"  {{ (isset($user)) ? 'readonly' : '' }} class="form-control my-3 @error('mobile_no') is-invalid @enderror" rquired />
                                 @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
