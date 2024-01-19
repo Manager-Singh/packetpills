@@ -27,7 +27,8 @@ button.save.button {
             <form name="myForm" id="card-form" method='post' action="{{route('frontend.user.payment.save')}}" enctype='multipart/form-data'>
               @csrf 
                 <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" data-parsley-minlength="19" data-parsley-maxlength="19" maxlength=19 name="card_number"  value="" placeholder="Card Number"><br><br>
+                <!-- <input type="text" id="card-numberggg" data-parsley-minlength="19" data-parsley-maxlength="19" maxlength=19 name="card_numbergggg"  value="" placeholder="Card Number"><br><br> -->
+                <input type="text" id="card-number"   name="card_number"  value="" placeholder="Card Number"><br><br>
                 <div class="form-row">
                   <div class="form-group col-md-6">
 
@@ -43,7 +44,7 @@ button.save.button {
                 </div>
 
                 <label for="cvc">CVC</label>
-                <input type="text" id="cvc" data-parsley-maxlength="3" maxlength="3"  name="cvc" value="" placeholder="CVC" >
+                <input type="text" id="cvc" data-parsley-maxlength="4" maxlength="4"  name="cvc" value="" placeholder="CVC" >
 
                 <div class="row mt-3 payment-card">
                 <label class="col-md-12" for="myfile">Payment Card</label>
@@ -138,20 +139,20 @@ button.save.button {
                
           }
 
-          if($(this).is('#cvc')){
+          // if($(this).is('#cvc')){
             
-            if(val.length < 3){
-              $('#cvc').parsley();
-              $('#cvc').addClass('js_error');
-              $('#cvc').parsley().removeError('myError');
-              $('#cvc').parsley().addError('myError', {message: 'Minimum 3 digit'});
-            }else{
-              $('#cvc').parsley().removeError('myError');
-              $('#cvc').removeClass('.js_error');
-            }
+          //   if(val.length < 4){
+          //     $('#cvc').parsley();
+          //     $('#cvc').addClass('js_error');
+          //     $('#cvc').parsley().removeError('myError');
+          //     $('#cvc').parsley().addError('myError', {message: 'Minimum 3/4 digit'});
+          //   }else{
+          //     $('#cvc').parsley().removeError('myError');
+          //     $('#cvc').removeClass('.js_error');
+          //   }
                
                
-          }
+          // }
           if($(this).is('#expiry_month') ){
             if(val > 12){
               $('#expiry_month').parsley();
