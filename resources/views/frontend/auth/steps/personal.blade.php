@@ -130,7 +130,7 @@
                                     </span>
                                 </div>
 
-                                @if(isset($auth->mobile_no) && empty($auth->mobile_no))
+                                @if(!isset($auth->mobile_no) && empty($auth->mobile_no))
 
                                 
 
@@ -175,7 +175,7 @@
 
                             </div>
 
-                            @if(isset($auth->mobile_no) && empty($auth->mobile_no))
+                            @if(!isset($auth->mobile_no) && empty($auth->mobile_no))
                                 <!-- <input type="submit" class="next button" value="Verify Otp" /> -->
 
                                 <span id="error-msg" class="p-2 float-left"></span>
