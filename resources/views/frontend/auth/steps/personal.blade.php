@@ -291,6 +291,7 @@ function amountofUnits() {
                   var otp = $('#otp').val();
                   var user_from = 'google';
                   var email = "{{(isset($auth->email)) ? $auth->email : ''}}";
+                  var dialing_code = $('#dialing-code').val();
                   $("#error-msg").text('');
                     if(otp.length < 6){
                         $("#error-msg").text('Otp should be a 6 digit.');
@@ -299,7 +300,7 @@ function amountofUnits() {
                     $.ajax({
                       type: 'POST',
                       url: "{{ route('frontend.user.personal.email.phone.change') }}", 
-                      data: {_token:"{{ csrf_token() }}",mobile_no:phone,otp:otp,user_from:user_from},
+                      data: {_token:"{{ csrf_token() }}",dialing_code:dialing_code,mobile_no:phone,otp:otp,user_from:user_from},
                       success: function(response) {
                         console.log(response);
                         console.log(response.link);

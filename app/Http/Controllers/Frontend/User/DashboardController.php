@@ -710,7 +710,6 @@ class DashboardController extends Controller
 
     public function emailPhoneChange(Request $request)
     {
-
         $user = Auth::user();
         
             $user_otp = UserOtp::where('user_id',$user->id)->where('otp',$request->otp)->first();
