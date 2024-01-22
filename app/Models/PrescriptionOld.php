@@ -5,11 +5,10 @@ namespace App\Models;
 use App\Models\Traits\Attributes\PrescriptionOldAttributes;
 use App\Models\Traits\ModelAttributes;
 use App\Models\Traits\Relationships\PrescriptionOldRelationships;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PrescriptionOld extends BaseModel 
 {
-    use ModelAttributes, SoftDeletes, PrescriptionOldRelationships, PrescriptionOldAttributes;
+    use ModelAttributes, PrescriptionOldRelationships, PrescriptionOldAttributes;
 
     /**
      * The guarded field which are not mass assignable.

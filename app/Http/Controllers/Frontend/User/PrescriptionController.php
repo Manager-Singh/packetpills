@@ -66,7 +66,7 @@ class PrescriptionController extends Controller
         // E-mail address was updated, user has to reconfirm
        
         if($output){
-            return redirect()->back()->withFlashSuccess(__('Old Prescription Information Updated'));
+            return redirect()->back()->withFlashSuccess(__('Existing Prescription Information Updated'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

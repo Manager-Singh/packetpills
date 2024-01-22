@@ -401,11 +401,11 @@ class PrescriptionRepository extends BaseRepository
                             $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
                             $destinationPath = public_path('img/frontend/prescription-old');
                             $image->move($destinationPath, $fileName);
-                            $url = 'img/frontend/prescription/'.$fileName;  
+                            $url = 'img/frontend/prescription-old/'.$fileName;  
                             $prescriptionOld->image =  $url;
                             
                         }
-                      //  $prescriptionOld->save();
+                      $prescriptionOld->save();
                     $count++;
                 }
 

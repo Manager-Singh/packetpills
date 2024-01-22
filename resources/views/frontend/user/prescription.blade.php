@@ -209,6 +209,41 @@ div#accordionExample {
         </div>
        @endif 
 
+        @if($prescriptions_old->isNotEmpty())
+
+        
+        <div class="order">
+        <div class="order-head">
+          <p class="txt">Existing Prescriptions</p>
+          </div>
+          <div class="order-body table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Prescription no.</th>
+                  <th scope="col">Uploaded Image</th>
+                  <th scope="col">Medication Name</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach($prescriptions_old as $prescription_old)
+
+                <tr>
+                  <th scope="row">{{ $loop->iteration }}</th>
+                  <td>{{$prescription_old->prescription_number}}</td>
+                  <td><img  width="100" height="100" src="{{asset($prescription_old->image)}}" /></td>
+                  <td>{{$prescription_old->medication_name}}</td>
+                  <td>{{ucfirst($prescription_old->status)}}</td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+        @endif
+
         
       </div>
       <div class="tab-pane fade" id="tabs-2" role="tabpanel" aria-labelledby="tab-2">

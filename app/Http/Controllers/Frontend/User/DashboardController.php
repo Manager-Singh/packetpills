@@ -23,6 +23,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\UserOtp;
 use Twilio\Rest\Client;
+use App\Models\PrescriptionOld;
 
 /**
  * Class DashboardController.
@@ -189,7 +190,10 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $data['prescriptions'] = Prescription::where('user_id',$user->id)->get();
-        //dd($data['prescriptions'][0]);
+        
+        $data['prescriptions_old'] = PrescriptionOld::where('user_id',$user->id)->get();
+
+       //dd($data['prescriptions'][0]);
         //dd('sss');
         return view('frontend.user.prescription',$data); 
     }
