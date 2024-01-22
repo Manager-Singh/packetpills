@@ -598,7 +598,7 @@ class DashboardController extends Controller
         if($isexist){
             
             $otp_unverified = UserOtp::where('user_id',$isexist->id)->orderBy('id','desc')->first();
-                if(!$otp_unverified){
+                if($otp_unverified){
                     $createOtp = $otp_unverified;
                     $createOtp->status = 'unverified';
                 }else{
