@@ -222,7 +222,7 @@
         //   console.log(phone);
             $.ajax({
                 type: 'POST',
-                url: "{{ route('frontend.user.personal.send.otp') }}", 
+                url: "{{ route('frontend.user.google.account.send.otp') }}", 
                 data: {_token:"{{ csrf_token() }}",mobile_no:phone,dialing_code:dialing_code,user_from:user_from},
                 success: function(response) {
                 console.log(response);

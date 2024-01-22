@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::get('personal-details', [DashboardController::class, 'personalDetails'])->name('personal.details');
         Route::post('personal/send-otp', [DashboardController::class, 'send_otp'])->name('personal.send.otp');
         Route::post('personal/email/phone/change', [DashboardController::class, 'emailPhoneChange'])->name('personal.email.phone.change');
+        Route::post('google/account/send-otp', [DashboardController::class, 'sendOtpToGoogleAccount'])->name('google.account.send.otp');
         
         Route::get('search-pharma', [DashboardController::class, 'searchPharma'])->name('search.pharma');
         Route::post('place/get-search', [DashboardController::class, 'placeAjaxSearch'])->name('place.ajax.search');

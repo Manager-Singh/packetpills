@@ -586,6 +586,55 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
+    public function sendOtpToGoogleAccount(Request $request)
+    {
+        $isexist  = Auth::user();
+  
+        
+        $otp = generateOTP();
+        try{
+            
+        
+        if($isexist){
+            
+            $otp_unverified = UserOtp::where('user_id',$isexist->id)->orderBy('id','desc')->first();
+                if(!$otp_unverified){
+                    $createOtp = $otp_unverified;
+                    $createOtp->status = 'unverified';
+                }else{
+                    $createOtp = new UserOtp();
+                }
+            
+            $createOtp->user_id = $isexist->id;
+            $createOtp->otp = $otp;
+            
+            if($otp){
+                if(isset($request->mobile_no) && !empty($request->mobile_no)){
+
+                    if($this->sendSms($request,$otp,($request->dialing_code)?$request->dialing_code:'1')){
+                        $createOtp->save();
+                    }
+
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$createOtp->otp]);
+                    
+                }
+
+                return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
+              
+
+            }else{
+                return json_encode(['error' => 0, 'message' => 'Otp not exists.']);
+            }
+
+
+            }
+    }catch(Exception $e){
+        //dd($e);
+        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+      //  return json_encode(['error' => 1, 'message' => $e]);
+    }
+    }
+
     public function send_otp(Request $request)
     {
         $isexist  = Auth::user();
@@ -594,12 +643,7 @@ class DashboardController extends Controller
         $otp = generateOTP();
         try{
             if(isset($request->user_from) && $request->user_from == 'google'){
-                $createOtp = new UserOtp();
-                $createOtp->user_id = $isexist->id;
-                $createOtp->otp = $otp;
-                $createOtp->status = 'verified';
-                $createOtp->save();
-                
+                $createOtp = UserOtp::create(['user_id'=>$isexist->id,'status'=>'verified','otp'=>$otp]);
             }
         
       
@@ -636,11 +680,11 @@ class DashboardController extends Controller
                 return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
               
 
-            }else{
-                return json_encode(['error' => 0, 'message' => 'Otp not exists.']);
             }
 
 
+            }else{
+                 return json_encode(['error' => 0, 'message' => 'Otp not exists.']);
             }
     }catch(Exception $e){
         //dd($e);
