@@ -593,6 +593,9 @@ class DashboardController extends Controller
 
         $otp = generateOTP();
         try{
+            if(isset($request->user_from) && $request->user_from == 'google'){
+                $createOtp = UserOtp::create(['user_id'=>$isexist->id,'status'=>'verified','otp'=>$otp]);
+            }
         
       
         //  dd($message);
@@ -628,6 +631,8 @@ class DashboardController extends Controller
                 return json_encode(['error' => 1, 'message' => 'Check your mobile number']);
               
 
+            }else{
+                return json_encode(['error' => 0, 'message' => 'Otp not exists.']);
             }
 
 

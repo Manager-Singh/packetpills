@@ -213,6 +213,7 @@
             // Get the phone number and OTP
             var phone = $('#phone-number').val();
             var dialing_code = $('#dialing-code').val();
+            var user_from = 'google';
             
         //   var otp = $('#otp').val();
             if(phone.length < 10){
@@ -222,7 +223,7 @@
             $.ajax({
                 type: 'POST',
                 url: "{{ route('frontend.user.personal.send.otp') }}", 
-                data: {_token:"{{ csrf_token() }}",mobile_no:phone,dialing_code:dialing_code},
+                data: {_token:"{{ csrf_token() }}",mobile_no:phone,dialing_code:dialing_code,user_from:user_from},
                 success: function(response) {
                 console.log(response);
                 response = JSON.parse(response);
