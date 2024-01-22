@@ -221,7 +221,7 @@
         //   console.log(phone);
             $.ajax({
                 type: 'POST',
-                url: "{{ route('frontend.auth.send.otp') }}", 
+                url: "{{ route('frontend.user.personal.send.otp') }}", 
                 data: {_token:"{{ csrf_token() }}",mobile_no:phone,dialing_code:dialing_code},
                 success: function(response) {
                 console.log(response);
@@ -288,6 +288,8 @@ function amountofUnits() {
                   // Get the phone number and OTP
                   var phone = $('#phone-number').val();
                   var otp = $('#otp').val();
+                  var user_from = 'google';
+                  var email = "{{(isset($auth->email)) ? $auth->email : ''}}";
                   $("#error-msg").text('');
                     if(otp.length < 6){
                         $("#error-msg").text('Otp should be a 6 digit.');
@@ -295,8 +297,8 @@ function amountofUnits() {
                 //   console.log(phone);
                     $.ajax({
                       type: 'POST',
-                      url: "{{ route('frontend.auth.verify.otp') }}", 
-                      data: {_token:"{{ csrf_token() }}",mobile_no:phone,otp:otp},
+                      url: "{{ route('frontend.user.personal.email.phone.change') }}", 
+                      data: {_token:"{{ csrf_token() }}",mobile_no:phone,otp:otp,user_from:user_from},
                       success: function(response) {
                         console.log(response);
                         console.log(response.link);

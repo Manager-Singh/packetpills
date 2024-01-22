@@ -672,11 +672,16 @@ class DashboardController extends Controller
                         $user->mobile_no = $request->mobile_no;
                     }
                     $user->save();
-                    if($user->mobile_no && $user->dialing_code){
-                        $mobile = $user->dialing_code.$user->mobile_no;
-                        sendMessage($mobile,'mail','patient_account_created',$data=null);
+
+                    if(isset($request->user_from) && $request->user_from == 'google'){
+                        return json_encode(['error' => 0, 'profile_step'=> 0 ,'message' => 'Mobile number is verifyed']);
+                    }else{
+                        if($user->mobile_no && $user->dialing_code){
+                            $mobile = $user->dialing_code.$user->mobile_no;
+                            sendMessage($mobile,'mail','patient_account_created',$data=null);
+                        }
+                        return redirect()->back()->withFlashSuccess(__('User information updated Successfully!'));
                     }
-                    return redirect()->back()->withFlashSuccess(__('User information updated Successfully!'));
                 }
             }else{
                 return redirect()->back()->withFlashInfo(__('Otp not match'));
