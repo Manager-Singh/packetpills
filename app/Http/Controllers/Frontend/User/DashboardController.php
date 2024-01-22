@@ -594,7 +594,12 @@ class DashboardController extends Controller
         $otp = generateOTP();
         try{
             if(isset($request->user_from) && $request->user_from == 'google'){
-                $createOtp = UserOtp::create(['user_id'=>$isexist->id,'status'=>'verified','otp'=>$otp]);
+                $createOtp = new UserOtp();
+                $createOtp->user_id = $isexist->id;
+                $createOtp->otp = $otp;
+                $createOtp->status = 'verified';
+                $createOtp->save();
+                
             }
         
       
