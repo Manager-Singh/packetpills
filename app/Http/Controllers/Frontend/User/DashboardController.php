@@ -724,6 +724,9 @@ class DashboardController extends Controller
                     }
                     if(isset($request->mobile_no)){
                         $user->mobile_no = $request->mobile_no;
+                        if(isset($request->dialing_code) && isset($request->user_from) && $request->user_from == 'google'){
+                            $user->dialing_code = $request->dialing_code;
+                        }
                     }
                     $user->save();
 
