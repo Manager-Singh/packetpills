@@ -182,6 +182,7 @@ input#myFile {
     text-align: center;
     width: 100%;
     z-index: 0;
+    top: 22%;
 }
 .user-info .fa {
     font-size: 80px;
@@ -641,3 +642,7 @@ button.close:hover:after {
     display: none;
 }
 
+
+a.skip-btn {
+    margin-top: 22px;
+}
