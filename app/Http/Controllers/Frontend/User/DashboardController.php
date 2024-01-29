@@ -136,14 +136,23 @@ class DashboardController extends Controller
     }
     public function almostdone_save(Request $request){
 
-
+        $user = Auth::user();
         if(isset($request->email) && User::where('email',$request->email)->where('avatar_type','=!','google')->exists()){
             return redirect()->back()->withFlashInfo(__('      This  email ( '.$request->email.' ) already exists.')); 
         }
         // 'province'=>$request->province,
+
+        if($user && !empty($user->parent_id)){
+
+            $array= ['gender'=>$request->gender,'province'=>$request->province,'profile_step'=>3,'is_profile_status' =>'completed'];
+        
+        }else{
+
+            $array = ['gender'=>$request->gender, 'email'=>$request->email, 'province'=>$request->province,'profile_step'=>2];
+        }
         $output = $this->userRepository->update(
             Auth::user(),
-            ['gender'=>$request->gender, 'email'=>$request->email, 'province'=>$request->province,'profile_step'=>2],
+            $array,
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
@@ -575,14 +584,13 @@ class DashboardController extends Controller
     public function addMemberSave(Request $request){
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->addMemberSave($data);
-        
         if($output){
-            return redirect()->back()->withFlashSuccess(__('Add Member Created Successfully!'));
+            return redirect()->route('frontend.user.dashboard')->withFlashSuccess(__(' Member created successfully!'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }
-        
     }
+
     public function user_switch_start( $id ){
         $new_user = User::find( $id );
         Session::put( 'orig_user', Auth::id() );

@@ -137,7 +137,7 @@ div#accordionExample {
        @else
         <div class="order">
           <div class="order-head">
-            <p class="txt text-center">Not Prescritpion found!</p>
+            <p class="txt text-center">No Prescription found!</p>
           </div>
           <div class="order-body">
             <p class="txt">Existing Prescription Details</p>

@@ -124,7 +124,7 @@ button.btn.btn-secondary {
                             </div>
                             <div class="pl-2 pl-md-3">
                                 <h5>Need a prescription? </h5>
-                                <p>Visit our Minor Ailments Page to see if you qualify for a minor ailment prescription or ask you doctor to fax a prescription to us at <b>416-593-4166</b></p>
+                                <p>Visit our Minor Ailments Page to see if you qualify for a minor ailment prescription or ask your doctor to fax a prescription to us at <b>416-593-4166</b></p>
                                 
                             </div>
                         </div>
