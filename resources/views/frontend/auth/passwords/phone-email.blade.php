@@ -1,7 +1,11 @@
 @extends('frontend.layouts.website')
 
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
+
+
 @push('after-styles')
+<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
+<link rel="stylesheet" href="{{asset('step/assets/css/after-login-style.css')}}">
 <style>
   p.text-subtitle {
       font-size: 15px;
@@ -76,7 +80,14 @@ button.btn {
                 <div class="col-md-12">
 
 
-                <div class="card " >
+
+                  @if(session('message'))
+                    <div class="alert alert-warning" role="alert">
+                        <span class="review-stat">{{session('message')}}</span>
+                    </div>
+                @endif
+                
+                <div class="card" >
            
                 @if(isset($user))
                     <form action="{{route('frontend.auth.password.phone.verify')}}" method="post" class="reset-form">
@@ -103,7 +114,7 @@ button.btn {
                             @if(isset($user))
                             <div class="form-outline">
                                 <label class="form-label" for="typeOtp">OTP</label>
-                                <input type="text" name="otp" id="typeOtp" class="form-control my-3 @error('otp') is-invalid @enderror" rquired />
+                                <input type="number" maxlength="6" name="otp" id="typeOtp" class="form-control my-3 @error('otp') is-invalid @enderror" rquired />
                                <span class="otp-msg" style="display:none">OTP is required.</span>
                                 
                             </div>
@@ -144,9 +155,32 @@ button.btn {
     $(document).ready(function() {
       //otp-validation
         $(".reset-form").parsley();
+        $("#typeOtp").keyup(function() {
+          var inputValue = $('#typeOtp').val().replace(/\D/g, ''); // Remove non-numeric characters
+                
+                if (inputValue.length > 6) {
+                    inputValue = inputValue.slice(0, 6); // Limit to 6 digits
+      
+                    console.log(inputValue);
+                }
+                console.log(inputValue);
+                $('#typeOtp').val(inputValue); // Update the input value
+
+        });
+
         $(".otp-validation").click(function() {
           event.preventDefault();
-          
+
+        //  var inputValue = $('#typeOtp').val().replace(/\D/g, ''); // Remove non-numeric characters
+                
+        //   if (inputValue.length > 6) {
+        //       inputValue = inputValue.slice(0, 6); // Limit to 6 digits
+
+        //       console.log(inputValue);
+        //   }
+        //   $('#typeOtp').val(inputValue); // Update the input value
+        
+        
           if($('#typeOtp').val()){
             $('.otp-msg').fadeOut();
             $('.reset-form').submit();
@@ -173,6 +207,7 @@ button.btn {
           event.preventDefault();
             $('.reset-form-submit').removeAttr('disabled');
             $('.error-msg').text();
+            
             var input = $('#typeEmail').val();
             var emailRegex = /^\S+@\S+\.\S+$/;
             var phoneRegex = /^\d+$/;

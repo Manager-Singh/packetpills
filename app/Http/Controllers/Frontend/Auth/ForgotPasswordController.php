@@ -34,7 +34,6 @@ class ForgotPasswordController extends Controller
 
     public function sendResetLinkPhone(Request $request){
 
-        
        
        $type = $request->input('type');
        if ($type == 'mobile' ){
@@ -91,7 +90,8 @@ class ForgotPasswordController extends Controller
                 $password_resets_otp->mobile_email = $request->mobile_no; 
                 $password_resets_otp->otp = $otp; 
                 if($password_resets_otp->save()){
-                    return view('frontend.auth.passwords.phone-email',compact('user','mobile_email','type'));
+                    return redirect()->route('frontend.auth.reset.request.form')->with(['user'=>$user,'mobile_email'=>$mobile_email,'type'=>$type]);
+                  //  return view('frontend.auth.passwords.phone-email',compact('user','mobile_email','type'));
                 }
 
             }
@@ -108,8 +108,26 @@ class ForgotPasswordController extends Controller
         }
     }
 
+    public function showResetRequestForm(Request $request){
+        
+       
+        $user = session('user');
+        $mobile_email = session('mobile_email');
+        $type = session('type');
+        $message = session('message');
+      
+        // if(!$user){
+            
+        //     return redirect()->back()->with('message', 'Your session has expired. Please try again.');
+        //     //return redirect()->route('frontend.auth.password.email')->withFlashInfo('Your session has expired. Please try again.');
+        // }
+        
+        return view('frontend.auth.passwords.phone-email',compact('user','mobile_email','type','message'));
+    }
+
     public function phoneOtpVerfiy(Request $request){
       
+        
        $request->validate([
         'mobile_no'=>'required',
         'otp'=>'required',
@@ -119,9 +137,10 @@ class ForgotPasswordController extends Controller
             'otp.required' => 'The OTP is required.',
         ]);
 
+        
         if(isset($request->otp) && empty($request->otp)){
 
-            return redirect()->back()->withFlashSuccess(__('The OTP is required.'));
+            return redirect()->back()->with('message','The OTP is required.');
         }
         
         if($request->type == 'mobile'){
@@ -131,11 +150,13 @@ class ForgotPasswordController extends Controller
         }
 
         
-        if($user ){
+        if($user  && PasswordResetsOtp::where('mobile_email',$request->mobile_no)->where('otp',$request->otp)->exists()){
+            
             $user_otp = PasswordResetsOtp::where('mobile_email',$request->mobile_no)->where('otp',$request->otp)->first();
+           
             $mobile_email = $request->mobile_no;
-            if($user_otp){
-                $user_otp->status = 'verified';
+          
+            $user_otp->status = 'verified';
                 if($user_otp->save()){
                     //Auth::loginUsingId($user->id);
                     $data = [
@@ -146,12 +167,20 @@ class ForgotPasswordController extends Controller
                    
                     return redirect()->route('frontend.auth.password.update')->with($data);
                }
-            }else{
-                $mobile_email = $request->mobile_no;
-                return view('frontend.auth.passwords.phone-email',compact('user','mobile_email'))->withFlashSuccess(__('Something went wrong.'));
-                //return redirect()->route('frontend.auth.password.email')->withFlashSuccess(__('Something went wrong.'));
-                //password.update
-            }
+            
+        }else{
+            $mobile_email = $request->mobile_no;
+            $data = [
+                'type' => $request->type,
+                'user' => $user,
+                'mobile_email' => $mobile_email,
+                'message' => 'OTP does not match.',
+            ];
+            
+            return redirect()->route('frontend.auth.reset.request.form')->with($data);
+            //return view('frontend.auth.passwords.phone-email',compact('user','mobile_email'))->with('message','The OTP does not match. Please try again.');
+                
+           
         }
 
     }

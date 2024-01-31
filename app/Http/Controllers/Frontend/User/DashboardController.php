@@ -595,7 +595,7 @@ class DashboardController extends Controller
         $new_user = User::find( $id );
         Session::put( 'orig_user', Auth::id() );
         Auth::login( $new_user );
-        return redirect()->back();
+        return redirect()->route('frontend.user.dashboard');
     }
 
     public function sendOtpToGoogleAccount(Request $request)
