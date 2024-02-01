@@ -166,7 +166,7 @@
         
        
         swal({
-            title: "Are you sure you want to do this?",
+            title: "Do you want to delete?",
             text: "",
             type: "warning",
             showCancelButton: true,

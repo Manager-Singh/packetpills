@@ -367,10 +367,9 @@ class UserRepository extends BaseRepository
                 // Add the default site role to the new user
                 $user->attachRole(3);
                 //$user->assignRole(config('access.users.default_role'));
-
                 if(isset($user->email)){
                     $data1 =  null;
-                   sendMail('mail','patient_account_created',$data,$user->id,'Account Created');
+                   sendMail('mail','email_account_register',$data1,$user->id,'Account Created With Email');
 
                 }
             }

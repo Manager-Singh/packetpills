@@ -217,7 +217,7 @@ tr.status-cancelled td {
     function transferRequestCancle(id){
     event.preventDefault();
     swal({
-          title: "Do you want to cancel request?",
+          title: "Do you want to cancel?",
           text: "",
           type: "warning",
           showCancelButton: true,

@@ -230,7 +230,7 @@
 
 
           swal({
-            title: "Are you sure you want to do this?",
+            title: "Do you want to save?",
             text: "",
             type: "warning",
             showCancelButton: true,
@@ -328,7 +328,7 @@
     {
         
         swal({
-            title: "Are you sure you want to do this?",
+            title: "Do you want to proceed this?",
             text: "",
             type: "warning",
             showCancelButton: true,

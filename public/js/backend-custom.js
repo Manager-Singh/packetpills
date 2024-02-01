@@ -1141,7 +1141,7 @@ var Backend = {}; // common variable used in all the files of the backend
 
                     swal({
                         title: "Warning",
-                        text: "Are you sure you want to remove?",
+                        text: "Do you want to proceed this?",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",

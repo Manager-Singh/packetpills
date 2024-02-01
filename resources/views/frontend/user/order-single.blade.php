@@ -150,13 +150,17 @@ div#accordionExample {
                         
                         <p>Total cost</p>
                         <p class="left">${{$order->total_amount}}</p>
-                        <p>Government</p>
+                        <!-- <p>Government</p>
                         <p class="left">-$0.00</p>
                         <p>Insurance</p>
-                        <p class="left">-$00.00</p>
-                        <p class="dotted"><strong>Copay</strong></p>
-                        <p class="left dotted"><strong>${{$order->total_amount}}</strong></p>
-                        <p><strong>Total Copay</strong></p>
+                        <p class="left">-$00.00</p>  -->
+                        <p class="dotted">
+                            <!-- <strong>Copay</strong> -->
+                        </p>
+                        <p class="left dotted">
+                            <!-- <strong>${{$order->total_amount}}</strong> -->
+                        </p>
+                        <p><strong>Total Cost</strong></p>
                         <p class="left"><strong>${{$order->total_amount}}</strong></p>
                     </div>
                 </div>
