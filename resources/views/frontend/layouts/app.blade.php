@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title', app_name())</title>
+        
         <meta name="description" content="@yield('meta_description', 'Laravel Starter')">
         <meta name="author" content="@yield('meta_author', 'FasTrax Infotech')">
         @yield('meta')
@@ -21,6 +22,8 @@
         {{ style(mix('css/frontend.css')) }}
 
         @stack('after-styles')
+    <link rel="stylesheet" href="//cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css">
+
     </head>
     <body>
         @include('includes.partials.read-only')

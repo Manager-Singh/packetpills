@@ -601,6 +601,10 @@ class DashboardController extends Controller
     public function sendOtpToGoogleAccount(Request $request)
     {
         $isexist  = Auth::user();
+
+        if(isset($request->mobile_no) && User::where('mobile_no',$request->mobile_no)->exists()){
+            return json_encode(['error' => 1, 'message' => 'Mobile number already exists.']);
+        }
   
         
         $otp = generateOTP();
@@ -635,7 +639,7 @@ class DashboardController extends Controller
               
 
             }else{
-                return json_encode(['error' => 0, 'message' => 'Otp not exists.']);
+                return json_encode(['error' => 1, 'message' => 'Otp not exists.']);
             }
 
 

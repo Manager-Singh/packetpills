@@ -12,7 +12,8 @@
       <meta http-equiv="Pragma" content="no-cache">
       <meta http-equiv="Expires" content="0">
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <title>@yield('title')</title>
+      <!-- <title>@yield('title')</title> -->
+      <title>MisterPharmacist Toronto | My Account</title>
       <meta name="description" content="@yield('meta_description', 'Laravel Starter')">
       <meta name="author" content="@yield('meta_author', 'FasTrax Infotech')">
     
@@ -93,10 +94,11 @@
     <link rel="stylesheet" href="{{asset('step/assets/font/font.css')}}">
     <link rel="stylesheet" href="{{asset('step/assets/css/common-style.css')}}">
     <link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('plugins/parsley/parsley.css')}}">
     <link rel='stylesheet' href='//common.olemiss.edu/_js/sweet-alert/sweet-alert.css'></link> 
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" /> 
+    <link rel='stylesheet' href='//cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
   </head>
   <body>
       

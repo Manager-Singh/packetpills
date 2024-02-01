@@ -98,18 +98,18 @@ div#accordionExample {
 
             <div class="order-details">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 offset-4 text-center">
                     <p class="text">Created On</p>
                     <p class="sub-text">{{$order->created_at->format('F d, Y ')}}</p>
                 </div>
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                     <p class="text">Total Copay</p>
                     <p class="sub-text">${{$order->total_amount}}</p>
                 </div>
                 <div class="col-md-4">
                     <p class="text">order receipt</p>
                     <a class="sub-text">Download</a>
-                </div>
+                </div> -->
                 </div>
             </div>
             <div class="order-description">           
@@ -127,13 +127,13 @@ div#accordionExample {
                     <div class="sub">              
                         <p>{{($address) ? $address->address1 .' '.$address->address2 .', '.$address->province .', '.$address->city  : ''}}</p>
                     </div>
-                    <div class="main">              
+                    <!-- <div class="main">              
                         <p>Transactions</p>
                     </div>
                     <div class="sub">              
                         <p><img src="{{ asset('website/assets/images/visa.png')}}" />xxxx xxxx xxxx {{ (isset($paymentmethod)) ? substr($paymentmethod->card_number,-4) : '6633' }}</p>
                         <p class="left">$8.38</p>
-                    </div>
+                    </div> -->
                     <div class="main">              
                         <p>Medications</p>
                     </div>
@@ -148,8 +148,8 @@ div#accordionExample {
                         @endif           
                         
                         
-                        <p>Total cost</p>
-                        <p class="left">${{$order->total_amount}}</p>
+                        <!-- <p>Total cost</p>
+                        <p class="left">${{$order->total_amount}}</p> -->
                         <!-- <p>Government</p>
                         <p class="left">-$0.00</p>
                         <p>Insurance</p>
@@ -162,6 +162,7 @@ div#accordionExample {
                         </p>
                         <p><strong>Total Cost</strong></p>
                         <p class="left"><strong>${{$order->total_amount}}</strong></p>
+                        <small><strong>Note: Rx Fee $9.99/Prescription is included</strong></small>
                     </div>
                 </div>
             </div>

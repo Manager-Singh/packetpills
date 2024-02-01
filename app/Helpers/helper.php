@@ -293,7 +293,7 @@ if (! function_exists('sendMail')) {
             if($data!==null){
              $body .= "\n".$data;
             }
-            $body .= "\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
+           // $body .= "\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
          }
         
          $full_name = $user->first_name.' '.$user->last_name;

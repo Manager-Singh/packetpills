@@ -1,6 +1,3 @@
-<!-- Hello <strong>{{ $name }}</strong>,
-<p>{{$body}}
-</p> -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +5,12 @@
 </head>
 <body>
     <p>Hello, {{ $name }}</p>
-    <p>{{ $body }}.</p>
+    <p>{{ $message }}.</p>
+    <p>Thanks For Contacting us, We will get back to you soon.</p>
     <p></p>
     <p></p>
     <p></p>
-</br>
-</br>
-
-    <p style="margin-top:50px">Thanks & Regards!</p>
+    <p>Thanks & Regards!</p>
     <p>MisterPharmacist Online Pharmacy</p>
     <p>Call: 416-593-4000</p> 
     <p>Fax: 416-593-4166</p> 
