@@ -37,7 +37,12 @@
                 <p class="bold-txt">{{$user->last_name}}</p>
                 <p class="txt-b">Gender</p>
                 <p class="bold-txt">{{$user->gender}}</p>
-                <p class="txt-b">Email Id <a href="javascript:void(0)" onclick="changeOTPVerify('email');">Change</a></p></p>
+                @if($user->avatar_type == 'google')
+                <p class="txt-b">Email Id <small>(*You are signed up using "login with google so you can't change gmail")</small></p>
+                @else
+                <p class="txt-b">Email Id <a href="javascript:void(0)" onclick="changeOTPVerify('email');">Change</a></p>
+
+                @endif
                 <p class="bold-txt">{{$user->email}}</p>
               </div>
             </div>
