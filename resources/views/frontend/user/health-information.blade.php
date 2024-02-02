@@ -49,7 +49,7 @@
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info p-details">
-                <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                <i class="fi fi-br-file-medical-alt fa"></i>
                 <p class="txt-large">Health information</p>
               </div> 
 

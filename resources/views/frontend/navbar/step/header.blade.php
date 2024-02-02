@@ -6,19 +6,19 @@
                      <i class="fa fa-user" aria-hidden="true"></i><span>Personal</span>
                  </a>
                  <a href="{{route('frontend.user.address')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}">
-                     <i class="fa fa-home" aria-hidden="true"></i><span>Address</span>
+                     <i class="fi fi-br-address-book fa"></i><span>Address</span>
                  </a>
                  <a href="{{route('frontend.user.health.card')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}">
-                     <i class="fa fa-id-card-o" aria-hidden="true"></i><span>Health Card</span>
+                     <i class="fi fi-br-hospital-user fa"></i><span>Health Card</span>
                  </a>
                  <a href="{{route('frontend.user.payment')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.payment') ? 'active' : '' }}">
-                     <i class="fa fa-credit-card" aria-hidden="true"></i><span>Payments</span>
+                     <i class="fi fi-br-credit-card fa"></i><span>Payments</span>
                  </a>
                  <a href="{{route('frontend.user.health.information')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}">
-                     <i class="fa fa-heart" aria-hidden="true"></i><span>Health</span>
+                     <i class="fi fi-br-file-medical-alt fa"></i></i><span>Health</span>
                  </a>
                  <a href="{{route('frontend.user.insurance')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.insurance') ? 'active' : '' }}">
-                     <i class="fa fa-shield" aria-hidden="true"></i><span>Insurance</span>
+                     <i class="fi fi-br-compliance-clipboard fa"></i><span>Insurance</span>
                  </a>
              </div>
              <div class="list-group list-group-flush mt-4">
@@ -27,10 +27,10 @@
                      <i class="fa fa-home" aria-hidden="true"></i><span class="mx-3">Home</span>
                  </a>
                  <a href="{{route('frontend.user.orders')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}">
-                     <i class="fa fa-ambulance" aria-hidden="true"></i><span class="mx-3">Orders</span>
+                     <i class="fi fi-br-shopping-cart-add"></i><span class="mx-3">Orders</span>
                  </a>
                  <a href="{{route('frontend.user.prescription')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}">
-                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="mx-3">Prescriptions</span>
+                     <i class="fi fi-br-file-prescription "></i><span class="mx-3">Prescriptions</span>
                  </a>
                  
                 @if(getAllChildUsers())
@@ -113,18 +113,21 @@
          @if(in_array(Route::getCurrentRoute()->getName(),$profile_route))
             <ul>
             <li><a href="{{route('frontend.user.personal.details')}}" class="{{ (Route::currentRouteName() == 'frontend.user.personal.details') ? 'active' : '' }}"><i class="fa fa-user-o" aria-hidden="true"></i> Personal details</a></li>
-            <li><a href="{{route('frontend.user.address')}}" class="{{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Address</a></li>
-            <li><a href="{{route('frontend.user.health.information')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}"><i class="fa fa-heart-o" aria-hidden="true"></i> Health details</a></li>
-            <li><a href="{{route('frontend.user.health.card')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}"><i class="fa fa-address-card-o" aria-hidden="true"></i> Health Card</a></li>
-            <li><a href="{{route('frontend.user.insurance')}}" class="{{ (Route::currentRouteName() == 'frontend.user.insurance') ? 'active' : '' }}"><i class="fa fa-shield" aria-hidden="true"></i> Insurance</a></li>
-            <li><a href="{{route('frontend.user.payment')}}" class="{{ (Route::currentRouteName() == 'frontend.user.payment') ? 'active' : '' }}"><i class="fa fa-credit-card" aria-hidden="true"></i> Payment</a></li>
+            <li><a href="{{route('frontend.user.address')}}" class="{{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}">
+			<i class="fi fi-br-address-book"></i> Address</a></li>
+            <li><a href="{{route('frontend.user.health.information')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.information') ? 'active' : '' }}"><i class="fi fi-br-file-medical-alt"></i> Health details</a></li>
+            <li><a href="{{route('frontend.user.health.card')}}" class="{{ (Route::currentRouteName() == 'frontend.user.health.card') ? 'active' : '' }}"><i class="fi fi-br-hospital-user"></i> Health Card</a></li>
+            <li><a href="{{route('frontend.user.insurance')}}" class="{{ (Route::currentRouteName() == 'frontend.user.insurance') ? 'active' : '' }}">
+			<i class="fi fi-br-compliance-clipboard fa"></i> Insurance</a></li>
+            <li><a href="{{route('frontend.user.payment')}}" class="{{ (Route::currentRouteName() == 'frontend.user.payment') ? 'active' : '' }}">
+			<i class="fi fi-br-credit-card fa"></i> Payment</a></li>
             </ul>
          @else
             <ul>
                 <li><a href="{{route('frontend.user.dashboard')}}" class="{{ (Route::currentRouteName() == 'frontend.user.dashboard') ? 'active' : '' }}"><i class="fa fa-home" aria-hidden="true"></i> @lang('Frontend/dashboard.header.home')</a></li>
                 <!-- <li><a href="{{route('frontend.user.medications')}}" class="{{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}" ><i class="fa fa-medkit" aria-hidden="true"></i> @lang('Frontend/dashboard.header.medication')</a></li> -->
                 <li><a href="{{route('frontend.user.prescription')}}" class="{{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}"> <i class="fi fi-br-file-prescription"></i> @lang('Frontend/dashboard.header.prescription') </a></li>
-                <li><a href="{{route('frontend.user.orders')}}" class="{{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}"><i class="fa fa-truck" aria-hidden="true"></i> @lang('Frontend/dashboard.header.orders')</a></li>
+                <li><a href="{{route('frontend.user.orders')}}" class="{{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}"><i class="fi fi-br-shopping-cart-add"></i> @lang('Frontend/dashboard.header.orders')</a></li>
             </ul>
 
          @endif

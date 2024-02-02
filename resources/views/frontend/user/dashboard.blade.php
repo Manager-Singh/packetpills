@@ -20,7 +20,7 @@
             <div class="col-md-3">
             <a href="{{route('frontend.user.search.pharma')}}">
                 <div class="med-info bg-light"> 
-                    <p><i class="fa fa-exchange" aria-hidden="true"></i></p>                   
+                    <p><i class="fi fi-br-nfc-pen"></i></p>                   
                     <p class="txt"><strong> Transfer Request </strong></p>
                     
                 </div>
@@ -29,7 +29,7 @@
             <div class="col-md-3">
             <a href="{{route('frontend.user.prescription.upload')}}">
               <div class="med-info bg-light">
-                <p><i class="fa fa-list" aria-hidden="true"></i></p> 
+                <p><i class="fi fi-br-file-prescription"></i></p> 
                 <p class="txt"><strong> Have a new Prescription? </strong></p>
               </div>
             </a>
@@ -37,7 +37,7 @@
             <div class="col-md-3">
             <!-- <a href="{{route('frontend.drug.search')}}"> -->
               <div class="med-info bg-light">  
-                <p><i class="fa fa-search" aria-hidden="true"></i></p>                   
+                <p><i class="fi fi-br-search-dollar"></i></p>                   
                   <p class="txt"><strong> Search prices <small>(Coming Soon)</small> </strong></p>
                   
               </div>
@@ -46,7 +46,7 @@
             <div class="col-md-3">
               <a href="{{route('frontend.user.prescription')}}">
                 <div class="med-info bg-light">   
-                  <p><i class="fa fa-refresh" aria-hidden="true"></i></p>                  
+                  <p><i class="fi fi-br-arrows-repeat-1"></i></p>                  
                     <p class="txt"><strong> Request Refill </strong></p>
                   
                 </div>

@@ -67,7 +67,7 @@
                     <a href="{{route('frontend.user.add.member')}}">
                         <div class="text-center px-1 px-md-3">
                             <div>
-                                <div class="icon icon-primary"><i class="fa fa-users" aria-hidden="true"></i></div>
+                                <div class="icon icon-primary"><i class="fi fi-br-person-circle-plus fa"></i></div>
                             </div>
                             <div class="pl-2 pl-md-3 pt-3">
                                 <h5>Add family member</h5>
@@ -85,7 +85,7 @@
                 <a href="{{route('frontend.user.personal.details')}}">
                         <div class="text-center px-1 px-md-3">
                             <div>
-                                <div class="icon icon-primary"><i class="fa fa-truck" aria-hidden="true"></i></div>
+                                <div class="icon icon-primary"><i class="fi fi-br-file-user fa"></i></div>
                             </div>
                             <div class="pl-2 pl-md-3 pt-3">
                                 <h5>Complete your profile</h5>
@@ -105,7 +105,7 @@
                     <a href="{{route('frontend.user.dashboard')}}">
                         <div class="text-center px-1 px-md-3">
                             <div>
-                                <div class="icon icon-primary"><i class="fa fa-th-large" aria-hidden="true"></i></div>
+                                <div class="icon icon-primary"><i class="fi fi-br-dashboard fa"></i></div>
                             </div>
                             <div class="pl-2 pl-md-3 pt-3">
                                 <h5>Explore the dashboard</h5>

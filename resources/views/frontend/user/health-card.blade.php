@@ -20,7 +20,7 @@
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info">
-                <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                <i class="fi fi-br-hospital-user fa"></i>
                 <p class="txt-large">Your provincial Health Card</p>
               </div> 
 

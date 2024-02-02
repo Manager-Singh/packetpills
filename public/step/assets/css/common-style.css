@@ -51,6 +51,9 @@ p.txt {
 .menu ul li a i.fa {
     color: #638e3c;
 }
+.menu ul li a i.fi {
+    color: #638e3c;
+}
 input, select {
     width: 100%;
     height: 50px;
@@ -423,6 +426,9 @@ a.info-btn {
 .menu ul li a:hover i.fa {
     color: #fff;
 }
+.menu ul li a:hover i.fi {
+    color: #fff;
+}
 p.big {
     position: absolute;
     font-size: 400px;
@@ -539,7 +545,7 @@ nav#sidebarMenu .main a.active, nav#sidebarMenu .list-group a:hover{
     color: #fff;
 }
 
-nav#sidebarMenu .main a.active .fa, nav#sidebarMenu .main a.hover .fa, nav#sidebarMenu .list-group a:hover i.fa {
+nav#sidebarMenu .main a.active .fa, nav#sidebarMenu .main a.hover .fa, nav#sidebarMenu .list-group a:hover i.fa, nav#sidebarMenu .list-group a:hover i.fi {
    color: #fff; 
 }
 nav#sidebarMenu .main a .fa {
@@ -547,6 +553,11 @@ nav#sidebarMenu .main a .fa {
     color: #638e3c;
 }
 nav#sidebarMenu .list-group a .fa {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #638e3c;
+}
+nav#sidebarMenu .list-group a .fi {
     font-size: 24px;
     margin-bottom: 10px;
     color: #638e3c;

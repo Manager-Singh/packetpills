@@ -25,7 +25,7 @@
         <div class="row ">
           <div class="col-md-12">
             <div class="user-info p-details">
-              <i class="fa fa-shield" aria-hidden="true"></i>
+              <i class="fi fi-br-compliance-clipboard fa"></i>
               <p class="txt-large">Your insurance details</p>
             </div>
           </div>

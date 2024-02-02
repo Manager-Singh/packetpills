@@ -167,7 +167,7 @@
          function changeOTPVerify(type){
 
 swal({
-    title: "Do you want to change.?",
+    title: "Do you want to change?",
     text: "",
     type: "warning",
     showCancelButton: true,
