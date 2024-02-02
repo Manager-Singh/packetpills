@@ -115,11 +115,11 @@ div#accordionExample {
             <div class="order-description">           
                 <div class="check-block">
                     <div class="main">              
-                        <p>Delivered on</p>
+                        <p>Order Status</p>
                     </div>
                     <div class="sub">              
-                        <p>Tuesday, April 11,2023</p>
-                        <p class="left">Delivered</p>
+                        <p>{{ date_format($order->updated_at,'D, F d, Y') }}</p>
+                        <p class="left">{{ orderStatusText($order->order_status) }}</p>
                     </div>
                     <div class="main">              
                         <p>Shipping Address</p>

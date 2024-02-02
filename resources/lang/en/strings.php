@@ -30,7 +30,7 @@ return [
 
         'general' => [
             'all_rights_reserved' => 'All Rights Reserved.',
-            'are_you_sure' => 'Do you want to proceed this?',
+            'are_you_sure' => 'Do you want to proceed with this?',
             'boilerplate_link' => 'Drugs Managment',
             'continue' => 'Continue',
             'member_since' => 'Member since',

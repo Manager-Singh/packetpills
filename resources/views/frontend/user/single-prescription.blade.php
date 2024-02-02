@@ -249,7 +249,7 @@ main.main-div {
             <div class="order-body">
                       <div class="row">
                         <div class="col-md-4">
-                          <p class="txt">Prescription ID </p>
+                          <p class="txt">Prescription Online ID </p>
                           <p class="txt-b">{{$prescription->prescription_number}}</p>
                         </div>
                         <div class="col-md-4">
@@ -372,7 +372,7 @@ main.main-div {
             </div>
           </div>
           <div class="order-body">
-            <p class="txt">Prescription ID: 000000</p>
+            <p class="txt">Prescription Online ID: 000000</p>
             <p class="txt-b">Transfer requested from MisterPharmacist</p>
           </div>
         </div>
@@ -390,7 +390,7 @@ main.main-div {
             </div>
           </div>
           <div class="order-body">
-            <p class="txt">Prescription ID: 000000</p>
+            <p class="txt">Prescription Online ID: 000000</p>
             <p class="txt-b">Transfer requested from MisterPharmacist</p>
           </div>
         </div>

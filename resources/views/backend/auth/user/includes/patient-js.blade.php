@@ -98,7 +98,7 @@
             console.log(id);
             $.confirm({
                 title: 'Confirm!',
-                content: 'Do you want to proceed this?',
+                content: 'Do you want to proceed with this?',
                 buttons: {
                     confirm: function() {
                         $("#overlay").fadeIn(300);
@@ -133,7 +133,7 @@
             console.log(id);
             $.confirm({
                 title: 'Confirm!',
-                content: 'Do you want to proceed this?',
+                content: 'Do you want to proceed with this?',
                 buttons: {
                     confirm: function() {
                         $("#overlay").fadeIn(300);
@@ -169,7 +169,7 @@
             console.log(status);
             $.confirm({
                 title: 'Confirm!',
-                content: 'Do you want to proceed this?',
+                content: 'Do you want to proceed with this?',
                 theme: 'material', // 'material', 'bootstrap'
                 buttons: {
                     confirm: function() {
@@ -246,7 +246,7 @@
                 console.log(norder_id); 
                 $.confirm({
                 title: 'Confirm!',
-                content: 'Do you want to proceed this?',
+                content: 'Do you want to proceed with this?',
                 theme: 'material', // 'material', 'bootstrap'
                 buttons: {
                     confirm: function() {
@@ -294,7 +294,7 @@
                 console.log(npayment_id); 
                 $.confirm({
                 title: 'Confirm!',
-                content: 'Do you want to proceed this?',
+                content: 'Do you want to proceed with this?',
                 theme: 'material', // 'material', 'bootstrap'
                 buttons: {
                     confirm: function() {
@@ -344,7 +344,7 @@
                 console.log(ntransfer_id); 
                 $.confirm({
                 title: 'Confirm!',
-                content: 'Do you want to proceed this?',
+                content: 'Do you want to proceed with this?',
                 theme: 'material', // 'material', 'bootstrap'
                 buttons: {
                     confirm: function() {
@@ -391,7 +391,7 @@
                 console.log(nprescription_id); 
                 $.confirm({
                 title: 'Confirm!',
-                content: 'Do you want to proceed this?',
+                content: 'Do you want to proceed with this?',
                 theme: 'material', // 'material', 'bootstrap'
                 buttons: {
                     confirm: function() {

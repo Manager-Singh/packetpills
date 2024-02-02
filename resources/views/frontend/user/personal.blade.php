@@ -167,12 +167,12 @@
          function changeOTPVerify(type){
 
 swal({
-    title: "Do you want to change.?",
+    title: "Do you want to make changes?",
     text: "",
     type: "warning",
     showCancelButton: true,
     confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Yes, change it!",
+    confirmButtonText: "Yes",
     closeOnConfirm: false
     },
     function(){

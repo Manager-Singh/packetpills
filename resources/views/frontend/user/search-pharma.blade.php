@@ -222,7 +222,7 @@ tr.status-cancelled td {
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, Cancel it.",
+          confirmButtonText: "Yes",
           closeOnConfirm: false
         },
     function(){

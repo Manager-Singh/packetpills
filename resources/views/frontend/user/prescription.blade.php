@@ -77,7 +77,7 @@ div#accordionExample {
                       </div>
                   </div>
                   <div class="order-body">
-                      <p class="txt">Prescription ID: {{$prescription->prescription_number}}</p>
+                      <p class="txt">Prescription Online ID: {{$prescription->prescription_number}}</p>
                       <p class="txt-b">Prescription Uploaded</p>
                   </div>
               </a>
@@ -218,7 +218,7 @@ div#accordionExample {
         
         <div class="order">
         <div class="order-head">
-          <p class="txt">Existing Prescriptions</p>
+          <p class="txt">Existing prescriptions refill requests</p>
           </div>
           <div class="order-body table-responsive">
             <table class="table">
@@ -263,7 +263,7 @@ div#accordionExample {
             </div>
           </div>
           <div class="order-body">
-            <p class="txt">Prescription ID: 000000</p>
+            <p class="txt">Prescription Online ID: 000000</p>
             <p class="txt-b">Transfer requested from MisterPharmacist</p>
           </div>
         </div>
@@ -281,7 +281,7 @@ div#accordionExample {
             </div>
           </div>
           <div class="order-body">
-            <p class="txt">Prescription ID: 000000</p>
+            <p class="txt">Prescription Online ID: 000000</p>
             <p class="txt-b">Transfer requested from MisterPharmacist</p>
           </div>
         </div>
@@ -368,12 +368,12 @@ function add_prescription_field(){
 
       // console.log('sd jkl');
     swal({
-          title: "Do you want to proceed this?",
+          title: "Do you want to proceed with this?",
           text: "",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, to refill!",
+          confirmButtonText: "Yes",
           closeOnConfirm: false
         },
     function(){
@@ -392,12 +392,12 @@ function add_prescription_field(){
   function prescritpionDelted(id){
     event.preventDefault();
     swal({
-          title: "Do you want to proceed this?",
+          title: "Do you want to proceed with this?",
           text: "",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, to delete!",
+          confirmButtonText: "Yes",
           closeOnConfirm: false
         },
     function(){

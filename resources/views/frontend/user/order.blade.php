@@ -96,7 +96,7 @@ body main.main-div {
             </div> 
             </div>
             <div class="order-body">
-            <p class="txt">Prescription ID: 000000</p>
+            <p class="txt">Prescription Online ID: 000000</p>
             <p class="txt-b">Transfer requested from MisterPharmacist</p>
 
             </div> 

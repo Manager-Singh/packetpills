@@ -125,7 +125,7 @@ function removeAddress(id,user_id)
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Yes",
             closeOnConfirm: false
             },
             function(){

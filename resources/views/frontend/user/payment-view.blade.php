@@ -91,12 +91,12 @@
         
        
         swal({
-            title: "Do you want to proceed this?",
+            title: "Do you want to proceed with this?",
             text: "",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Yes",
             closeOnConfirm: false
             },
             function(){

@@ -394,6 +394,35 @@ if (! function_exists('getAllChildUsers')) {
     }
 }
 
+if (! function_exists('orderStatusText')) {
+    /**
+     * @return bool
+     */
+    function orderStatusText($order_status)
+    {
+        $order_status_array = [
+            'pending'=>'Pending',
+            'approved'=>'Approved',
+            'cancelled'=>'Cancelled',
+            'declined'=>'Declined',
+            'processing'=>'Processing',
+            'ready_to_pick'=>'Ready To Pick',
+            'picked_up'=>'Picked Up',
+            'in_transit'=>'In Transit',
+            'delivered'=>'Delivered'
+            ];
+        
+        if($order_status){
+            foreach($order_status_array as $key => $value ){
+
+                if($key == $order_status){
+                    return $value;
+                }
+            }
+        }
+    }
+}
+
 
 
 

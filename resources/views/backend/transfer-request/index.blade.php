@@ -78,7 +78,7 @@
                 console.log(transfer_status_text); 
                 $.confirm({
                 title: 'Confirm!',
-                content: 'Do you want to proceed this?',
+                content: 'Do you want to proceed with this?',
                 theme: 'material', // 'material', 'bootstrap'
                 buttons: {
                     confirm: function() {

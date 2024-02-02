@@ -235,7 +235,7 @@
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#28a745",
-            confirmButtonText: "Yes, Save it!",
+            confirmButtonText: "Yes",
             closeOnConfirm: false
             },
             function(){
@@ -328,12 +328,12 @@
     {
         
         swal({
-            title: "Do you want to proceed this?",
+            title: "Do you want to proceed with this?",
             text: "",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Yes",
             closeOnConfirm: false
             },
             function(){
