@@ -22,6 +22,7 @@ use App\Repositories\Backend\Auth\UserRepository;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Models\PrescriptionRefill;
+use App\Models\PrescriptionOld;
 
 class UserController extends Controller
 {
@@ -242,7 +243,7 @@ class UserController extends Controller
         $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
         $transferRequests = TransferRequest::where('user_id',$user->id)->get();
         $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->get();
-        
+        $existingPrescriptions = PrescriptionOld::where('user_id',$user->id)->get();
         //  print_r('<pre>');
         //  print_r($orders);
         //   die;
@@ -256,6 +257,7 @@ class UserController extends Controller
                 'orders'=>$orders,
                 'transferRequests'=>$transferRequests,
                 'prescriptionRefills'=>$prescriptionRefills,
+                'existingPrescriptions'=>$existingPrescriptions,
             ])
             ->withUser($user);
     }

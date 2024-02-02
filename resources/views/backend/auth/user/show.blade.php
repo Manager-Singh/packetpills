@@ -86,6 +86,11 @@
                                 href="#prescription-refill" role="tab" aria-controls="orders" aria-expanded="true"><i
                                     class="fas fa-refresh"></i> Prescription Refill</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link {{ $tab == 'existingprescriptionrefill' ? 'active' : '' }}" data-toggle="tab"
+                                href="#existing-prescription-refill" role="tab" aria-controls="orders" aria-expanded="true"><i
+                                    class="fas fa-refresh"></i> Existing Prescription Refill</a>
+                        </li>
 
                     </ul>
 
@@ -133,6 +138,10 @@
                         <div class="tab-pane {{ $tab == 'prescriptionrefill' ? 'active' : '' }}" id="prescription-refill"
                             role="tabpanel" aria-expanded="true">
                             @include('backend.auth.user.show.tabs.prescription-refill')
+                        </div><!--tab-->
+                        <div class="tab-pane {{ $tab == 'existingprescriptionrefill' ? 'active' : '' }}" id="existing-prescription-refill"
+                            role="tabpanel" aria-expanded="true">
+                            @include('backend.auth.user.show.tabs.existing-prescription-refill')
                         </div><!--tab-->
 
 

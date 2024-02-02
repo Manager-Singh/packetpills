@@ -13,7 +13,10 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Setting;
+use App\Http\Responses\RedirectResponse;
+use File;
+use Ramsey\Uuid\Uuid;
 /**
  * Class DashboardController.
  */
@@ -136,5 +139,38 @@ class DashboardController extends Controller
             echo json_encode($results);
             exit;
         }
+    }
+
+    public function setting(Request $request){
+
+        if ($request->isMethod('post')) {
+            $dataCollection = collect($request->all())->except(['_token','id'])->toArray();
+               // dd($request);
+            if ($image = $request->file('logo_path')) {
+                $uuid = Uuid::uuid4()->toString();
+                $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('img/frontend/logo');
+                $image->move($destinationPath, $fileName);
+                $dataCollection['logo_path'] = asset('img/frontend/logo/'.$fileName);
+            }
+            if($setting = Setting::first()){
+                $setting = $setting->update($dataCollection);
+
+            }else{
+                $setting = Setting::updateOrCreate($dataCollection);
+            }
+            if($setting){
+                
+                return new RedirectResponse(route('admin.setting'), ['flash_success' => __('Information updated successfully.')]);
+
+            }else{
+                return new RedirectResponse(route('admin.setting'), ['flash_error' => __('Oops! Something went wrong. Please try again later.')]);
+            }
+            
+        }
+
+        $data['setting'] = $setting = Setting::first();
+        return view('backend.setting.add',$data);
+
     }
 }

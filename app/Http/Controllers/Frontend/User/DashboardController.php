@@ -681,16 +681,16 @@ class DashboardController extends Controller
                         $otp_unverified->save();
                     }
 
-                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>'5555']);
                     
                 }
 
                 if(isset($request->email) && !empty($request->email)){
                     if($otp_unverified->save()){
-                        $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
-                        sendMail('mail',null,$data1,$isexist->id,'OTP Send');
+                        $data1 =  $otp.' use this OTP to confirm your email';
+                        sendMail('mail',null,$data1,$isexist->id,'Confirm Email',$request->email);
                     }
-                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>'5555']);
 
                 }
                 return json_encode(['error' => 1, 'message' => 'Check your mobile number']);

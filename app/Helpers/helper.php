@@ -12,6 +12,7 @@ use App\Models\Prescription;
 use App\Models\PrescriptionIteam;
 use Illuminate\Support\Facades\Session;
 use PHPMailer\PHPMailer\PHPMailer;
+use App\Models\Setting;
 //use PHPMailer\PHPMailer\Exception;
 
 /**
@@ -275,9 +276,12 @@ if (! function_exists('sendMessage')) {
 }
 
 
+
 if (! function_exists('sendMail')) {
-    function sendMail($type,$message_for=null,$data,$user_id = null,$subject=null){
+    function sendMail($type,$message_for=null,$data,$user_id = null,$subject=null,$email=null){
         $user = User::where('id',$user_id)->first();
+        $setting = Setting::first();
+        $body = '';
         if(isset($user) && empty($user->email)){
             return true;
         }
@@ -286,10 +290,14 @@ if (! function_exists('sendMail')) {
             $body = $data."\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
          }else{
             $message = MailMessage::where('message_for',$message_for)->where('status',1)->first();
-            if(!$message){
-                return true;
+           
+            // if(!$message){
+            //     return true;
+            // }
+            if($message){
+                $body = $message->message;
             }
-            $body = $message->message;
+            
             if($data!==null){
              $body .= "\n".$data;
             }
@@ -298,19 +306,24 @@ if (! function_exists('sendMail')) {
         
          $full_name = $user->first_name.' '.$user->last_name;
         $to_name = $full_name;
-        $to_email = $user->email;
-        $data = array("name"=>$full_name, "body" => $body);
+        if($email){
+            $to_email = $email;
+        }else{
+            $to_email = $user->email;
+        }
+       
+        $data = array("name" => $full_name, "body" => $body, 'setting' => $setting);
         
         try{
         $aaaa = Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email,$subject) {
         $message->to($to_email, $to_name);
         $message->subject($subject);
-        $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),'Pharmacy Canada');
+        $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),'MisterPharmacist Online Pharmacy');
         });
         return 1;
     }
     catch (Exception $e){
-     //dd($e);
+      //dd($e);
      
     //$e->getMessage()
         return 0;

@@ -146,6 +146,14 @@
                         @lang('menus.backend.sidebar.mail-messages')
                     </a>
                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link {{
+                        active_class(Route::is('admin/setting'))
+                    }}" href="{{ route('admin.setting') }}">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        Email Signature
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{
                         active_class(Route::is('admin/provinces'))

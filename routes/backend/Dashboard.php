@@ -10,3 +10,7 @@ Route::post('get-permission', 'DashboardController@getPermissionByRole')->name('
 /* Route::get('profile/edit', 'DashboardController@editProfile')->name('profile.edit');
 Route::patch('profile/update', 'DashboardController@updateProfile')
     ->name('profile.update'); */
+
+
+Route::get('setting', 'DashboardController@setting')->name('setting');
+Route::post('setting/add', 'DashboardController@setting')->name('setting.store');

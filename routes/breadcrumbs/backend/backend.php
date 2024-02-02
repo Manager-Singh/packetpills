@@ -21,4 +21,5 @@ require __DIR__.'/auto-messages/auto-messages.php';
 require __DIR__.'/mail-messages/mail-messages.php';
 require __DIR__.'/provinces/provinces.php';
 require __DIR__.'/transfer-requests/transfer-requests.php';
+require __DIR__.'/setting/setting.php';
 
