@@ -15,7 +15,7 @@ button.save.button {
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info p-details">
-                <i class="fa fa-home" aria-hidden="true"></i>
+                <i class="fi fi-br-credit-card fa"></i>
                 <p class="txt-large">Add Card Details</p>
                 <p class="txt">To make sure your medicine gets shipped without delay, please add your payment information. We'll charge your card only after we've handled your prescription, whether you're paying yourself or using government or private insurance.  You will be contacted with a total $ amount for your pre-approval.</p>
               </div> 

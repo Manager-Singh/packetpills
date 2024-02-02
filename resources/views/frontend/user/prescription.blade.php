@@ -142,19 +142,19 @@ div#accordionExample {
         </div>
         <div class="order">
           <div class="order-head">
-            <p class="txt">Enter your existing prescriptions details for refills</p>
+            <p class="txt">Enter your existing prescription details for refills</p>
           </div>
           <div class="order-body">
             <form method='post' action="{{route('frontend.user.prescription.old.save')}}" enctype='multipart/form-data'>
               @csrf 
               <div class="row main-idv" bis_skin_checked="1">
-                <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                <div class="col-sm-4 nopadding" bis_skin_checked="1">
                   <div class="form-group" bis_skin_checked="1">
                     <label for="prescription_number">Prescription Label Number (Rx#)</label>
                     <input type="text" class="form-control" id="prescription_number" name="prescription_number[]" value="" placeholder="Rx# 20231003-0000000001" required="">
                   </div>
                 </div>
-                <div class="col-sm-3 nopadding" bis_skin_checked="1">
+                <div class="col-sm-4 nopadding" bis_skin_checked="1">
                   <div class="form-group" bis_skin_checked="1">
                       <label for="prescription_img">Prescription Label Image (Optional)</label>
                       <input type="file" class="form-control" id="prescription_img" name="prescription_img[]" value="" placeholder="Prescription Image" required="">

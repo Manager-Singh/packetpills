@@ -29,7 +29,7 @@ $address_count = ($address) ? $address->count() : 0;
     <div class="row ">
         <div class="col-md-12">
             <div class="user-info p-details">
-                <i class="fa fa-home" aria-hidden="true"></i>
+               <i class="fi fi-br-address-book fa"></i>
                 <p class="txt-large">Select shipping address</p>
                 
             </div>
