@@ -24,6 +24,7 @@ use PHPMailer\PHPMailer\Exception;
 use App\Models\UserOtp;
 use Twilio\Rest\Client;
 use App\Models\PrescriptionOld;
+use Validator;
 
 /**
  * Class DashboardController.
@@ -410,11 +411,20 @@ class DashboardController extends Controller
     public function paymentSave(Request $request){
         
         $data = collect($request->all())->toArray();
-        $output = $this->userRepository->savePayment($data);
-        if($output){
-            return redirect()->route('frontend.user.payment')->withFlashSuccess(__('Payment Information Updated'));
-        }else{
-            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+       
+        if (empty($request->card_number) || empty($request->expiry_month) || empty($request->expiry_year) || empty($request->cvc)) {
+            return redirect()->back()->withFlashInfo(__('Card fields are required.'));
+        }
+        
+        try{
+            $output = $this->userRepository->savePayment($data);
+            if($output){
+                return redirect()->route('frontend.user.payment')->withFlashSuccess(__('Payment Information Updated'));
+            }else{
+                return redirect()->back()->withFlashInfo(__('Something went wrong'));
+            }
+        }catch(Exception $e){
+            return redirect()->back()->withFlashInfo(__($e->getMessage()));
         }
         
     }

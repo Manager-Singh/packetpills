@@ -168,7 +168,25 @@
               <label for="other_text">Other Relation</label>
               <input type="text" name="relationship_type" id="other_text" />
             </div>
-<input type="hidden" name="password" value="1234567">
+
+
+            <div class="col-md-12">
+                        <label for="fname">Province</label>
+                        <select name="province" id="province" required>
+                        <option  value="">Select a Province</option>
+                        @if(getAllProvince())
+                            @foreach(getAllProvince() as $province)
+                            <option value="{{$province->slug}}" {{ (isset($address) && $auth->province == $province->slug) ? 'selected' : ''}}>{{$province->name}}</option>
+                        
+                            @endforeach
+                        @else
+                        @endif
+                        <!-- <option  value="Alberta" {{ ( $auth->province == 'Alberta') ? 'selected' : ''}}>Alberta</option>
+                         -->
+                        </select>
+                       
+                    </div>
+          <input type="hidden" name="password" value="1234567">
           <div class="col-md-12">
             <input type="submit" id="submit" class="next button mt-4" value="Submit" />
           </div>

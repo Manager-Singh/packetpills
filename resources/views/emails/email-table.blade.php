@@ -10,6 +10,22 @@
 
     <p>Hello, {{ $name }}</p>
     <p>{{ $body }}.</p>
+    <table class="table">
+  <thead>
+    <tr>
+      <th style="box-sizing: border-box;padding: .30rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #dee2e6!important;" scope="col">MisterPharmacist Prescription label Number R#</th>
+      <th style="box-sizing: border-box;padding: .30rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #dee2e6!important;" scope="col">Medicine Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($existing as $exist)
+        <tr>
+        <td style="box-sizing: border-box;padding: .30rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #dee2e6!important;">{{$exist['rx']}}</td>
+        <td style="box-sizing: border-box;padding: .30rem;vertical-align: top;border-top: 1px solid #dee2e6;background-color: #fff!important;border: 1px solid #dee2e6!important;">{{$exist['medicine']}}</td>
+        </tr>
+    @endforeach
+  </tbody>
+</table>
     <p></p>
     <p></p>
     <p></p>

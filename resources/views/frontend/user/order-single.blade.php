@@ -162,8 +162,14 @@ div#accordionExample {
                         </p>
                         <p><strong>Total Cost</strong></p>
                         <p class="left"><strong>${{$order->total_amount}}</strong></p>
-                        <small><strong>Rx Fee $9.99/Prescription is included.</strong></small>
+                        <p><strong>Rx Fee $9.99/Prescription is included.</strong></p></br>
+                        <p></p>
                     </div>
+                    <div class="col-md-12">
+                    <p>Your official prescription(s) detailed receipt will be provided with your delivery.</p>
+
+</div>
+
                 </div>
             </div>
         </div>

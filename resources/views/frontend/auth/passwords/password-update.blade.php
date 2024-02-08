@@ -30,6 +30,25 @@ button.btn {
     transition: 0.9s;
 }
   </style>
+<style>
+.password-pg img.user-img {
+    border-radius: 50%;
+    margin-bottom: 25px;
+    width: 100px;
+    height: 100px;
+    border: unset;
+    box-shadow: 0px 0px 17px -3px #638e3c;
+    margin-right: 25px;
+}
+        span.toggle-password.LikePost {
+            position: relative;
+            top: -50px;
+            right: 13px;
+            float: right;
+            font-size: 18px;
+        }
+
+</style>
 @endpush
 @php 
 
@@ -101,6 +120,8 @@ $mobile_email ='';
                             <div class="form-outline">
                                 <label class="form-label" for="typePassword">New Password</label>
                                 <input type="password" name="password" id="typePassword" value=""  class="form-control my-3 @error('password') is-invalid @enderror" rquired />
+                               
+                                <span class="toggle-password LikePost"><i class="far fa-eye"></i></span>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -112,6 +133,8 @@ $mobile_email ='';
                             <div class="form-outline">
                                 <label class="form-label" for="typeConfirmPassword">Confirm Password</label>
                                 <input type="password" name="confirm_password" id="typeConfirmPassword" value=""  class="form-control my-3 @error('confirm_password') is-invalid @enderror" rquired />
+                                <span class="toggle-password LikePost"><i class="far fa-eye"></i></span>
+                               
                                 @error('confirm_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -148,6 +171,32 @@ $mobile_email ='';
 @endsection
 
 @push('after-scripts')
+<script>
+  // Add a click event listener to elements with the class "LikePost"
+  $('.LikePost').on('click', function() {
+    // Toggle the visibility of the password input and change the eye icon
+    var passwordInput = $('#typePassword');
+    var passwordInput1 = $('#typeConfirmPassword');
+    passwordInput.toggleAttr('type', 'password', 'text');
+    passwordInput1.toggleAttr('type', 'password', 'text');
+    toggleEyeIcon($(this));
+  });
+
+  // jQuery plugin to toggle attribute values
+  $.fn.toggleAttr = function(attr, val1, val2) {
+    return this.each(function() {
+      var currentVal = $(this).attr(attr);
+      var newVal = currentVal === val1 ? val2 : val1;
+      $(this).attr(attr, newVal);
+    });
+  };
+
+  // Function to toggle the eye icon
+  function toggleEyeIcon(element) {
+    var eyeIcon = element.find('i');
+    eyeIcon.toggleClass('fa-eye fa-eye-slash');
+  }
+</script>
 @if(config('access.captcha.login'))
 @captchaScripts
 @endif

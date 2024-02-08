@@ -278,7 +278,7 @@ if (! function_exists('sendMessage')) {
 
 
 if (! function_exists('sendMail')) {
-    function sendMail($type,$message_for=null,$data,$user_id = null,$subject=null,$email=null){
+    function sendMail($type,$message_for=null,$data,$user_id = null,$subject=null,$email=null,$existing_data=null){
         $user = User::where('id',$user_id)->first();
         $setting = Setting::first();
         $body = '';
@@ -312,18 +312,23 @@ if (! function_exists('sendMail')) {
             $to_email = $user->email;
         }
        
-        $data = array("name" => $full_name, "body" => $body, 'setting' => $setting);
-        
+        if($existing_data){
+            $template_name = 'emails.email-table';
+            $data = array("name" => $full_name, "body" => $body, 'setting' => $setting,'existing'=>$existing_data);
+        }else{
+            $template_name = 'emails.mail';
+            $data = array("name" => $full_name, "body" => $body, 'setting' => $setting);
+        }
         try{
-        $aaaa = Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email,$subject) {
+        $aaaa = Mail::send($template_name, $data, function($message) use ($to_name, $to_email,$subject) {
         $message->to($to_email, $to_name);
         $message->subject($subject);
-        $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),'MisterPharmacist Online Pharmacy');
+        $message->from(env('MAIL_FROM_ADDRESS', 'rx@misterpharmacist.com'),"Toronto's Online Pharmacy");
         });
         return 1;
     }
     catch (Exception $e){
-      //dd($e);
+      dd($e);
      
     //$e->getMessage()
         return 0;

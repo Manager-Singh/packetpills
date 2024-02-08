@@ -75,7 +75,7 @@
                               </div>
                             </div>
                           </div>
-                            <p class="info">You must be at least 14 year old.</p>
+                            <p class="info">You must be at least 14 years old.</p>
                             <div class="row">
                               <div class="col-md-8">
                               <div class="form-check">
@@ -84,7 +84,7 @@
                               </div>
                               <div class="form-check">
                                 <input class="form-check-input" name="ohip" type="checkbox" id="inlineCheckbox2" value="OHIP+  (under 25 year old Ontario Program)" {{(($healthCard && isset($healthCard->ohip)) && $healthCard->ohip == 'OHIP+  (under 25 year old Ontario Program)') ? 'checked' : ''}}>
-                                <label class="form-check-label" for="inlineCheckbox2">OHIP+  (under 25 year old Ontario Program)</label>
+                                <label class="form-check-label" for="inlineCheckbox2">OHIP+  (under 25 years old Ontario Program)</label>
                               </div>
                               <div class="form-check">
                                 <input class="form-check-input" name="trillium_program" type="checkbox" id="inlineCheckbox3" value="Trillium program" {{(($healthCard && isset($healthCard->trillium_program)) && $healthCard->trillium_program == 'Trillium program') ? 'checked' : ''}}>

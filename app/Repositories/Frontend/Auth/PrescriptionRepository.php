@@ -386,6 +386,7 @@ class PrescriptionRepository extends BaseRepository
             $images = $data['prescription_img'];
             $prescription_numbers = $data['prescription_number'];
             $medication_names = $data['medication_name'];
+            $existing_data = [];
             if(isset($prescription_numbers) && !empty($prescription_numbers)){
                 foreach($prescription_numbers as $j=>$prescription_number){
                     $prescriptionOld = new PrescriptionOld;
@@ -393,7 +394,7 @@ class PrescriptionRepository extends BaseRepository
                     $prescriptionOld->medication_name =  $medication_names[$j];
                     $prescriptionOld->user_id = $user->id;
 
-
+                    $existing_data[] =['rx'=>$prescription_number,'medicine'=>$medication_names[$j]];
                     if(isset($images) && !empty($images)){
                        
                             $uuid = Uuid::uuid4()->toString();
@@ -405,13 +406,13 @@ class PrescriptionRepository extends BaseRepository
                             $prescriptionOld->image =  $url;
                             
                         }
-                      $prescriptionOld->save();
+                    //  $prescriptionOld->save();
                     $count++;
                 }
 
                 if($count == count($prescription_numbers)){
                     
-                    $data1 =  "Old prescription added by ".$user->full_name;
+                    $data1 =  "Existing prescription added by ".$user->full_name;
                     //send messages to admin
                     $admin = User::whereHas('roles', function ($subQuery) { 
                         $subQuery->where('name', 'Administrator');
@@ -419,7 +420,7 @@ class PrescriptionRepository extends BaseRepository
                     $adminmobile = $admin->dialing_code.$admin->mobile_no;
                             
                         if(isset($admin->email) && sendMessage($adminmobile,'admin',null,$data1)){
-                            sendMail('admin',null,$data1,$admin->id,'Old Prescription Details');
+                            sendMail('admin',null,$data1,$admin->id,'Existing Prescription Details',null,$existing_data);
                         }
                             return 1;
                 }

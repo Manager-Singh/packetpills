@@ -60,6 +60,8 @@ tr.status-cancelled td {
                 <img class="user-img" src="{{asset('website/assets/images/user.png')}}">
                 <p class="txt">Transfer your refills</p>
                 <p class="txt">Search and select your current pharmacy </p>
+                <p class="txt">Can't find your pharmacy on the list?</p>
+                <p class="txt">Enter your prescription(s) transfer request <a target="_blank" href="https://misterpharmacist.com/prescription-transfers/">here</a>!</p>
               </div> 
 
 				    </div>

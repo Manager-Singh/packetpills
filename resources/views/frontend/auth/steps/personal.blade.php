@@ -130,6 +130,8 @@
                                     </span>
                                 </div>
 
+                                @if(!isset($auth->parent_id) && empty($auth->parent_id))
+
                                 @if(!isset($auth->mobile_no) && empty($auth->mobile_no))
 
                                 
@@ -172,10 +174,10 @@
                                     <input type="text" id="mobile_no" name="mobile_no" value="+{{$auth->dialing_code}}{{$auth->mobile_no}}" readonly required>
                                 </div>
                             @endif
-
+                            @endif
                             </div>
 
-                            @if(!isset($auth->mobile_no) && empty($auth->mobile_no))
+                            @if(!isset($auth->mobile_no) && empty($auth->mobile_no) && empty($auth->parent_id))
                                 <!-- <input type="submit" class="next button" value="Verify Otp" /> -->
 
                                 <span id="error-msg" class="p-2 float-left"></span>

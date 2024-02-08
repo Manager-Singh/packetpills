@@ -689,6 +689,7 @@ class UserRepository extends BaseRepository
     }
     public function savePayment(array $data){
             $card = new PaymentMethod;
+            try{
           $card->user_id = auth()->user()->id;
           $card->card_number = $data['card_number'];
           $card->expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
@@ -748,6 +749,11 @@ class UserRepository extends BaseRepository
             }
         }
           return $card;
+
+
+        }catch(Exception $e){
+            return false;
+        }
           
       }
 
@@ -1109,12 +1115,23 @@ class UserRepository extends BaseRepository
         if(isset($input['phone_no'])){
             $user->mobile_no = $input['phone_no'];
         }
+        
+        if(isset($input['province'])){
+            $user->province = $input['province'];
+        }
+
+        
+            $user->is_profile_status = 'completed';
+        
+       
+            $user->profile_step = 3;
+        
+
         if(isset($input['relationship'])){
             if($input['relationship'] == 'Other' && isset($input['relationship_type']) ){
                 $user->relationship_type = $input['relationship_type'];  
             }
             $user->relationship = $input['relationship'];
-            
         }
         $user->parent_id = access()->user()->id;
         

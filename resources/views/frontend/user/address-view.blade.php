@@ -69,8 +69,8 @@ $address_count = ($address) ? $address->count() : 0;
                 </div>
                @endif
                 <div class="btn-div">
-                    <button type="button" class="save button" onclick=""> Back </button>
-                    <button type="button" class="next button" onclick="">Continue</button>
+                    <button type="button" class="save button" onclick="window.location='{{ route('frontend.user.personal.details') }}'"> Back </button>
+                    <button type="button" class="next button" onclick="window.location='{{ route('frontend.user.personal.details') }}'">Continue</button>
 
                 </div>
             </div>
