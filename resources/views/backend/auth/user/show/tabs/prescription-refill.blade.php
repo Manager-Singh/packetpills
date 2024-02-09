@@ -33,7 +33,7 @@
                         <div class="panel-body">
                             <h4 class="text-center">Prescription Details</h4>
                             <div class="order-details">
-                            <p>Prescription Number: {{ $prescriptionRefill->prescription->prescription_number }}</p>
+                            <p>Prescription Number: {{ isset($prescriptionRefill->prescription->prescription_number) ? $prescriptionRefill->prescription->prescription_number : '' }}</p>
                             <p>Patient Name: {{ $prescriptionRefill->user->first_name }} {{ $prescriptionRefill->user->last_name }}</p>
                             <p>Patient Email: {{ $prescriptionRefill->user->email }}</p>
                             <p>Medication: 
