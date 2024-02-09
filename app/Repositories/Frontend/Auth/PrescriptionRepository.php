@@ -406,7 +406,7 @@ class PrescriptionRepository extends BaseRepository
                             $prescriptionOld->image =  $url;
                             
                         }
-                    //  $prescriptionOld->save();
+                    $prescriptionOld->save();
                     $count++;
                 }
 

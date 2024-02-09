@@ -12,6 +12,13 @@
                                 aria-controls="order-collapse-{{ $order->id }}">
                                 {{ $order->order_number }} Created At
                                 {{ $order->created_at }}
+
+                                <div class="status-wrapper-{{ $order->id }}" style="display: inline;">
+                                    
+                                        <span class="badge badge-warning"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($order->order_status) }}</span>
+                                    
+                                </div>
                             </a>
                         </h4>
 
@@ -43,7 +50,7 @@
                             @endphp
                             <p>Order Status: {{ Form::select('order_status', $order_status_array, $order->order_status, ['class' => 'form-control orderStatus box-size','id' => 'orderStatus-'.$order->id, 'data-placeholder' => trans('Order Status')]) }}</p>
                             <p>Payment Status: {{ Form::select('payment_status[]', $payment_status_array, $order->payment_status, ['class' => 'form-control paymentStatus box-size','id' => 'paymentStatus-'.$order->id, 'data-placeholder' => trans('Payment Status')]) }}</p>
-                            <p>Prescription Number: {{ $order->prescription->prescription_number }}</p>
+                            <p>Prescription Number: {{ isset($order->prescription->prescription_number) ?$order->prescription->prescription_number : '' }}</p>
                             </div>
                             <h4 class="text-center">Medication Details</h4>
                             @foreach($order->order_items as $order_item)
