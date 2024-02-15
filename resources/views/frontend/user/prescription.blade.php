@@ -130,6 +130,65 @@ div#accordionExample {
            
            
           </div><!-- accordion-->
+@php 
+$prescription_refills = getPrescriptionRefill($prescription->id);
+@endphp 
+          
+      @if($prescription_refills->isNotEmpty())
+          <div class="order-head">
+            <div class="row">
+              <div class="col-md-12">
+                  <p class="txt">Prescription Refills Requests</p>
+              </div>
+            </div>
+          </div>
+@endif
+
+          <div class="accordion row" id="accordionExample">
+
+            @foreach($prescription_refills as $prescription_refill)
+
+           
+
+            <div class="card col-md-6 mb-3">
+            <div id="collapseOne_{{$medication->id}}" class="accordion-collapse"  >
+              <div class="card-body">
+                <table>
+                  
+                <tr>
+                    <td> Refill Date</td>
+                    <td class="text-right"> {{ $prescription_refill->created_at->format('Y-m-d') }}</td>
+                  </tr>
+                  <tr>
+                    <td> Refill Time</td>
+                    <td class="text-right"> {{ $prescription_refill->created_at->format('H:i:s') }}</td>
+                  </tr>
+                  <tr>
+                    <td> Patient Name:</td>
+                    <td class="text-right"> {{ $prescription_refill->user->full_name }}</td>
+                  </tr>
+                  <tr>
+                    <td> Medication</td>
+                    <td class="text-right"> @if(isset($prescription_refill->prescription->medications))
+                                    @foreach($prescription_refill->prescription->medications as $medication)
+                                       {{$medication->drug_name }}  ,
+                                    @endforeach
+                                @endif</td>
+                  </tr>
+                  <tr>
+                    <td> <b>Status</b></td>
+                    <td class="text-right "> <b>{{ ucfirst($prescription_refill->status) }}<b></td>
+                  </tr>
+                  </table>
+              </div>
+            </div>
+            </div>
+           
+            @endforeach
+
+
+            </div><!-- accordion-->
+
           @endif
         </div>
         

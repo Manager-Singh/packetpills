@@ -13,6 +13,7 @@ use App\Models\PrescriptionIteam;
 use Illuminate\Support\Facades\Session;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Models\Setting;
+use App\Models\PrescriptionRefill;
 //use PHPMailer\PHPMailer\Exception;
 
 /**
@@ -304,7 +305,7 @@ if (! function_exists('sendMail')) {
            // $body .= "\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
          }
         
-         $full_name = $user->first_name.' '.$user->last_name;
+        $full_name = $user->first_name.' '.$user->last_name;
         $to_name = $full_name;
         if($email){
             $to_email = $email;
@@ -313,8 +314,9 @@ if (! function_exists('sendMail')) {
         }
        
         if($existing_data){
-            $template_name = 'emails.email-table';
-            $data = array("name" => $full_name, "body" => $body, 'setting' => $setting,'existing'=>$existing_data);
+            $template_name = 'emails.'.$existing_data['template'];
+            $exist_data = isset($existing_data['data']) ? $existing_data['data'] : '';
+            $data = array("name" => $full_name, "body" => $body, 'setting' => $setting,'existing'=>$exist_data);
         }else{
             $template_name = 'emails.mail';
             $data = array("name" => $full_name, "body" => $body, 'setting' => $setting);
@@ -438,6 +440,18 @@ if (! function_exists('orderStatusText')) {
                 }
             }
         }
+    }
+}
+
+if (! function_exists('getPrescriptionRefill')) {
+    /**
+     * @return bool
+     */
+    function getPrescriptionRefill($id)
+    {
+        $user = Auth::user();
+        $prescription = PrescriptionRefill::where('user_id',$user->id)->where('prescription_id',$id)->orderBy('created_at','desc')->get();
+        return $prescription;
     }
 }
 

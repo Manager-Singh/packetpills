@@ -387,6 +387,7 @@ class PrescriptionRepository extends BaseRepository
             $prescription_numbers = $data['prescription_number'];
             $medication_names = $data['medication_name'];
             $existing_data = [];
+            $existing_data['template'] = 'email-table';
             if(isset($prescription_numbers) && !empty($prescription_numbers)){
                 foreach($prescription_numbers as $j=>$prescription_number){
                     $prescriptionOld = new PrescriptionOld;
@@ -394,7 +395,7 @@ class PrescriptionRepository extends BaseRepository
                     $prescriptionOld->medication_name =  $medication_names[$j];
                     $prescriptionOld->user_id = $user->id;
 
-                    $existing_data[] =['rx'=>$prescription_number,'medicine'=>$medication_names[$j]];
+                    $existing_data['data'][] =['rx'=>$prescription_number,'medicine'=>$medication_names[$j]];
                     if(isset($images) && !empty($images)){
                        
                             $uuid = Uuid::uuid4()->toString();

@@ -200,6 +200,9 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $data['prescriptions'] = Prescription::where('user_id',$user->id)->get();
+        $data['prescription_refills'] = PrescriptionRefill::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        
+         //dd($data['prescription_refills'][0]['prescription']['medications']);
         
         $data['prescriptions_old'] = PrescriptionOld::where('user_id',$user->id)->get();
 
@@ -221,12 +224,24 @@ class DashboardController extends Controller
     public function userPrescripitonRefill($id){
 
         $prescription = Prescription::find($id);
+        
         $user = Auth::user();
         $prescriptionRefill = new PrescriptionRefill();
         $prescriptionRefill->prescription_id =  $id;
         $prescriptionRefill->user_id =  $user->id;
         $prescriptionRefill->status =  'pending';
+        $medications = isset($prescription->medications) ? $prescription->medications : '';
+        $patient_details = array(
+            'name' =>$user->full_name,
+            'dob' =>$user->date_of_birth,
+            'mobile' =>$user->mobile_no,
+            'email' =>$user->email,
+            'prescription_id' =>$prescription->prescription_number,
+        );
+
+        $email_data = array('template'=>'refill-email','data'=>array('medications'=>$medications,'patient'=>$patient_details));
         
+        //dd($email_data['data']);
         if($prescriptionRefill->save()){
             
             if(isset($user->parent_id) && !empty($user->parent_id)){ 
@@ -234,18 +249,14 @@ class DashboardController extends Controller
                 $user = User::where('id',$user->parent_id)->first(); 
                 
             }
-            $data =  'Hello MisterPharmacist team!'."\n\n ".$user->full_name.' - '.$user->date_of_birth.' - '.$user->mobile_no.' - '.$user->email.' Is requesting a refill for the above indicated medication"
-
-            '."\n\n".' Please review the patient pharmacy record and determine if the medication can be refilled or the patient healthcare provider needs to be contacted to reissue the refill-   
-            
-            '."\n\n".' Please use your professional judgement and contact the patient to inform of the appropriate next steps"';
+            $data =  'Hello MisterPharmacist team!';
           
             $data_u =$user->full_name;
             // send messages to users
             $mobile = $user->dialing_code.$user->mobile_no;
-            sendMessage($mobile,'mail','prescription_refill_created',$data_u);
+            //sendMessage($mobile,'mail','prescription_refill_created',$data_u);
             if(isset($user->email)){
-                sendMail('mail','prescription_refill_created',$data_u,$user->id,'Prescription Refill');
+             //   sendMail('mail','prescription_refill_created',$data_u,$user->id,'Prescription Refill');
             }
 
             //send messages to admin
@@ -253,9 +264,9 @@ class DashboardController extends Controller
                             $subQuery->where('name', 'Administrator');
                         })->first();
             $adminmobile = $admin->dialing_code.$admin->mobile_no;
-                    sendMessage($adminmobile,'admin',null,$data);
+                    //sendMessage($adminmobile,'admin',null,$data);
                     if(isset($admin->email)){
-                        sendMail('admin',null,$data,$admin->id,'Prescription Refill');
+                        sendMail('admin',null,$data,$admin->id,'Prescription Refill',null,$email_data);
                     }
            
 
