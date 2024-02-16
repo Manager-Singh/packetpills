@@ -563,7 +563,6 @@ class DashboardController extends Controller
     public function placeAjaxSearch(Request $request){
         $data = collect($request->all())->toArray();
         $output = $this->userRepository->placeAjaxSearch($data);
-      
         return $output;
         
     }

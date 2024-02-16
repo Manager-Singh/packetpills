@@ -303,7 +303,7 @@ if (! function_exists('sendMail')) {
              $body .= "\n".$data;
             }
            // $body .= "\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
-         }
+        }
         
         $full_name = $user->first_name.' '.$user->last_name;
         $to_name = $full_name;
@@ -455,6 +455,32 @@ if (! function_exists('getPrescriptionRefill')) {
     }
 }
 
+
+if (! function_exists('getGoogleApiTextSearch')) {
+    /**
+     * @return bool
+     */
+    function getGoogleApiTextSearch($query)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/textsearch/json?'.$query,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            ));
+    
+            $response = json_decode(curl_exec($curl));
+    
+            curl_close($curl);
+            return $response;
+        
+    }
+}
 
 
 

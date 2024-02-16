@@ -888,7 +888,7 @@ class UserRepository extends BaseRepository
         $no_of_pages    =   '';
         $page_no        =   '';
         $offset         =   '';
-        $curl = curl_init();
+        
 
         $search = (isset($array['search'])) ? $array['search'] : '' ;
         $key     = env('GOOGLE_API_KEY');
@@ -901,27 +901,14 @@ class UserRepository extends BaseRepository
             $query = 'key='.$key.'&location=&'.$lat . ',' . $long.'&radius=50000&query=pharmacy%20'.$search.'+in+Canada';
             //$apiUrl ='https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search;
         }else{
-            $query = 'key='.$key.'&query=pharmacy%20'.$search.'+in+Canada';
+            $query = 'key='.$key.'&query=pharmacy%20'.$search.'+in+Canada&limit=60';
            // $apiUrl='https://maps.googleapis.com/maps/api/place/textsearch/json?key='.$key.'&query=pharmacy%20'.$search;
         }
         //$query = 'input=110%20Ward&key='.$key.'&query=pharmacy%20'.$search.'+in+Canada';
         
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://maps.googleapis.com/maps/api/place/textsearch/json?'.$query,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = json_decode(curl_exec($curl));
-
-        curl_close($curl);
-        //echo $response;
-      //dd($response);
+        
+        $response = getGoogleApiTextSearch($query);
+      
         $html ='<ul class="ajax-ul" style="display:block;">';
         
         if($response->status == 'OK'){
@@ -942,6 +929,8 @@ class UserRepository extends BaseRepository
                 );       
 
    }
+
+
 
    public function drugAjaxSearch(array $array){
     $total          =   Drug::get()->count();

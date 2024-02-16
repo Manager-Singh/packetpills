@@ -411,10 +411,20 @@
                             dataType: 'JSON',
                             success: function(data) {
                                 if (data != 0) {
+                                    if (refill_status == 'pending'){
+                                        var msg = '<span class="badge badge-warning"  style="right: 29px; position: absolute;">'+refill_status_text+'</span>';
+                                    }else if(refill_status == 'cancelled'){
+                                        var msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+refill_status_text+'</span>';
+                                    }else if(refill_status == 'approved'){
+                                        var msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+refill_status_text+'</span>';
+                                    }
+                                    $('.status-wrapper-'+nprescription_id).html(msg);
                                    $("#overlay").fadeOut(300);
                                 } else {
                                     console.log('Problem with save data');
                                 }
+                               // location.reload();
+                            //  window.location.href = window.location.href+"#prescription-refill";
                                 $("#overlay").fadeOut(300);
                             }
                         });

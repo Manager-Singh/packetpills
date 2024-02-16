@@ -7,9 +7,8 @@
     <title>Toronto's Online Pharmacy</title>
 </head>
 <body>
-
-    <p>Hello, {{ $name }}</p>
     <p>{{ $body }} </p>
+    <!-- <p>Hello, {{ $name }}</p> -->
     <p> {{$existing['patient']['name']}} Is requesting a refill for the above indicated medication Please review the patient pharmacy record and determine if the medication can be refilled or the patient healthcare provider needs to be contacted to reissue the refill- Please use your professional judgement and contact the patient to inform of the appropriate next steps</p>
 
     <p><strong>Patient's Detail:</strong></p>
