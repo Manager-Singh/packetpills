@@ -53,7 +53,7 @@ tr.status-cancelled td {
   </style>
 @endpush
 @section('content')
-<div class="container mt-0 mb-5 pt-0">
+<div class="container mt-0 mb-5 pt-0" id="main_scroll">
 		    	<div class="row ">
 				    <div class="col-md-6">
               <div class="user-info">
@@ -62,6 +62,8 @@ tr.status-cancelled td {
                 <p class="txt">Search and select your current pharmacy </p>
                 <p class="txt">Can't find your pharmacy on the list?</p>
                 <p class="txt">Enter your prescription(s) transfer request <a target="_blank" href="https://misterpharmacist.com/prescription-transfers/">here</a>!</p>
+              
+              
               </div> 
 
 				    </div>
@@ -71,8 +73,9 @@ tr.status-cancelled td {
                         @csrf     
                         <div class="row">
                             <div class="col-md-12">
-                              <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy">
-                              <div class="ajax-result">
+                              <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy (Type atleast 3 letters)">
+                              <div class="ajax-result" style="display:none;">
+                              <ul class="ajax-ul" style="display:block;"></ul>
                               </div>
                             <div class="selected-pharma" style="display:none;">
                               <p class="heading">Transfer Request</p>
@@ -118,7 +121,7 @@ tr.status-cancelled td {
                         
                  <button type="submit" id="submit" class="next button" >Transfer Request</button>
                  </div>
-                            
+                 <input type="hidden" id="next_page_t" name="page_token" value="" />     
                       </form>
                             @if($transfer_request->count() > 0)
                             <p class="heading pt-1"><b>Old Transfer Request</b></p>
@@ -154,7 +157,43 @@ tr.status-cancelled td {
 @endsection
 
 @push('after-scripts')
+
 <script>
+
+  function ajaxScroll(pageToken =null){
+    if(pageToken ==  null){
+      pageToken = $('#page_token').val();
+    }
+   
+    // Select the specific section by its class or ID
+    var $yourSection = $('.ajax-result ul.ajax-ul'); // Change '.your-section-class' to the appropriate selector
+   // Flag to track if AJAX request has been triggered
+var ajaxTriggered = false;
+    // Attach a scroll event listener to the selected section
+    $yourSection.scroll(function() {
+        var scrollTop = $yourSection.scrollTop();
+        var sectionHeight = $yourSection.height();
+        var scrollHeight = $yourSection[0].scrollHeight;
+        
+        // Add your conditions based on scroll position within the section
+        if ((scrollTop + sectionHeight >= scrollHeight) && (!ajaxTriggered) && pageToken) {
+          console.log('ajaxTriggered==--'+ajaxTriggered);
+            // This code executes when the user has scrolled to the bottom of the section
+            console.log('Reached the bottom of the section');
+            ajaxTriggered = true;
+          var thismain  = $('#search');
+          var search    = $('#search').val();
+          placelistViewScroll(thismain,search,pageToken); //ajax hit
+          console.log('ajaxTriggered--'+ajaxTriggered);
+        }
+        
+        //ajaxTriggered = false;
+
+    });
+  }
+
+
+
    
     $(document).ready(function(){  
       $('.ajax-result').fadeOut();     
@@ -162,14 +201,21 @@ tr.status-cancelled td {
           console.log('safadsfasf');
           var thismain  = $(this);
           var search    = $(this).val();
+          $('.ajax-result .ajax-ul').html('');
+
+          setTimeout(function() {
+            if(search.length > 2){
+              placelistView(thismain,search,null,null);
+            }else{
+              $('.ajax-result').fadeOut();  
+              // $('.ajax-ul').fadeOut();
+              // $('.ajax-result').fadeIn();
+            }
+                
+
+          }, 300);
           
-          if(search){
-           placelistView(thismain,search);
-          }else{
-            $('.ajax-result').fadeOut();  
-            // $('.ajax-ul').fadeOut();
-            // $('.ajax-result').fadeIn();
-          }
+          
             
         })
         
@@ -189,11 +235,13 @@ tr.status-cancelled td {
 
         })
 
+       
+
      
     });
 
-    function placelistView(thismain,search=''){
-
+    function placelistView(thismain,search='',pageToken=null, isfrom=true){
+      $(".loader-container").show();
       var lat=$('#latitude').val();
       var long=$('#longitude').val();
       
@@ -202,12 +250,68 @@ tr.status-cancelled td {
         $.ajax({
             url: ajaxurl,
             type: "POST",
-            data: {_token:_token,search:search,lat:lat,long:long},
+            data: {_token:_token,search:search,lat:lat,long:long,pageToken:pageToken},
             success: function(data){
                 if(data){
-                    console.log(data.html); 
-                    $('.ajax-result').html(data.html);
+                    console.log(data); 
+                  // console.log(pageToken); 
+                    
+                   if(data.pageToken && !(isfrom)){
+                      ajaxScroll(data.pageToken);
+                   }
+                   $('.ajax-result .ajax-ul').html(data.html);
+                    if(data.pageToken){
+                      
+                      
+                      $('#next_page_t').val(data.pageToken);
+                    }else{
+
+                      
+                      $('#next_page_t').val('');
+                    }
+                    
                     $('.ajax-result').fadeIn();
+                    $(".loader-container").hide();
+                    
+                }else{
+
+                }
+            }
+        });
+
+    }
+
+    function placelistViewScroll(thismain,search='',pageToken=null, isfrom=true){
+      $(".loader-container").show();
+      var lat=$('#latitude').val();
+      var long=$('#longitude').val();
+      
+      ajaxurl = "{{ route('frontend.user.place.ajax.search') }}";
+        _token = "{{ csrf_token() }}";
+        $.ajax({
+            url: ajaxurl,
+            type: "POST",
+            data: {_token:_token,search:search,lat:lat,long:long,pageToken:pageToken},
+            success: function(data){
+                if(data){
+                    console.log(data); 
+                  // console.log(pageToken); 
+                    
+                  
+                   
+                    if(pageToken && data.pageToken){
+                      ajaxScroll(data.pageToken);
+                      $('.ajax-result .ajax-ul').append(data.html);
+                      $('#next_page_t').val(data.pageToken);
+                    }else{
+
+                      //$('.ajax-result .ajax-ul').html(data.html);
+                      $('#next_page_t').val('');
+                    }
+                    
+                    $('.ajax-result').fadeIn();
+                    $(".loader-container").hide();
+                    
                 }else{
 
                 }

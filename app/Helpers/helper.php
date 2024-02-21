@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Session;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Models\Setting;
 use App\Models\PrescriptionRefill;
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Psr7\Request;
 //use PHPMailer\PHPMailer\Exception;
 
 /**
@@ -478,9 +480,96 @@ if (! function_exists('getGoogleApiTextSearch')) {
     
             curl_close($curl);
             return $response;
+
+            
         
     }
 }
+
+
+if (! function_exists('getGoogleApiTextSearch11')) {
+    /**
+     * @return bool
+     */
+    function getGoogleApiTextSearch11($search)
+    {
+        $client = new GuzzleClient(); // Create a new instance of Guzzle HTTP client
+        $baseUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
+        $key = env('GOOGLE_API_KEY'); // Replace with your actual API key
+        $query = 'pharmacy ' . $search . ' in Canada';
+        $limit = 20; // You can adjust the limit as needed
+        $pageToken = null;
+        $data_array = [];
+        $count = 0;
+    
+        do {
+            // Construct the request URL including pagination token if available
+            $url = $baseUrl . '?key=' . $key . '&query=' . urlencode($query);
+            if ($pageToken !== null) {
+                $url .= '&nextpage=' . $pageToken;
+            }
+            // Send the request
+            $res = $client->request('GET', $url); // Use request() method instead of send()
+            $data = json_decode($res->getBody(),true);
+            // Output or process the results as needed
+
+            
+            
+            if(isset($data['results'])){
+                $data_array = array_merge($data_array, $data['results']);
+            } else {
+                // No more results or an error occurred
+                break;
+            }
+
+            // Update the page token for the next iteration
+            $pageToken = isset($data['next_page_token']) ? $data['next_page_token'] : null;
+    
+            // Google Places API has a rate limit, so you might want to introduce a small delay
+            // before making the next request
+            usleep(500000); // Sleep for 0.5 seconds (500,000 microseconds)
+            $count++;
+        } while ($pageToken !== null && count($data_array) < 100);
+
+        //dd($data_array);
+        return $data_array;
+    }
+}
+
+
+if (! function_exists('getGoogleApiTextSearchPaginate')) {
+    /**
+     * @return bool
+     */
+    function getGoogleApiTextSearchPaginate($search,$pageToken = null)
+    {
+        $client = new GuzzleClient(); // Create a new instance of Guzzle HTTP client
+        $baseUrl = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
+        $key = env('GOOGLE_API_KEY'); // Replace with your actual API key
+        $query = 'pharmacy ' . $search . ' in Canada';
+        $limit = 20; // You can adjust the limit as needed
+        
+        $data_array = [];
+        
+       
+            // Construct the request URL including pagination token if available
+            $url = $baseUrl . '?key=' . $key . '&query=' . urlencode($query);
+            if ($pageToken !== null) {
+                $url .= '&pagetoken=' . $pageToken;
+            }
+            // Send the request
+            $res = $client->request('GET', $url); // Use request() method instead of send()
+            $data = json_decode($res->getBody());
+            // Output or process the results as needed
+
+            if($data){
+               return $data;
+            }
+            
+        return false;
+    }
+}
+
 
 
 

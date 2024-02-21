@@ -891,6 +891,7 @@ class UserRepository extends BaseRepository
         
 
         $search = (isset($array['search'])) ? $array['search'] : '' ;
+        $next_pageToken = (isset($array['pageToken'])) ? $array['pageToken'] : null ;
         $key     = env('GOOGLE_API_KEY');
         
         if(!empty($array['lat']) && !empty($array['long'])){
@@ -907,9 +908,13 @@ class UserRepository extends BaseRepository
         //$query = 'input=110%20Ward&key='.$key.'&query=pharmacy%20'.$search.'+in+Canada';
         
         
-        $response = getGoogleApiTextSearch($query);
-      
-        $html ='<ul class="ajax-ul" style="display:block;">';
+        //$response = getGoogleApiTextSearch($query);
+        //$response = getGoogleApiTextSearch11($search);
+        $response = getGoogleApiTextSearchPaginate($search,$next_pageToken);
+        
+        $pageToken = isset($response->next_page_token) ? $response->next_page_token : null;
+        //$html ='<ul class="ajax-ul" style="display:block;">';
+        $html ='';
         
         if($response->status == 'OK'){
 
@@ -921,11 +926,12 @@ class UserRepository extends BaseRepository
             $html .='<li class="drug-list-child">Data not found.</li>';
         }
 
-        $html .= '</ul>';
+        // $html .= '</ul>';
        
         return array(
                     'success' => true,
                     'html'          =>  $html,  
+                    'pageToken'          =>  $pageToken,  
                 );       
 
    }
