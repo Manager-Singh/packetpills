@@ -48,12 +48,12 @@
                 <div class="card text-white bg-warning">
                     <div class="card-body pb-0">
                         <div class="btn-group float-right">
-                            <!-- <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-cog"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Action</a>
-                            </div> -->
+                                <a class="dropdown-item" href="{{ route('admin.orders.index') }}">Action</a>
+                            </div>
                         </div>
                         <div class="text-value">{{$orderDataset['count']}}</div>
                         <div>Total Orders</div>

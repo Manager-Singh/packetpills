@@ -1,5 +1,5 @@
 <div class="col-md-8 blue-right-border">
-    <h4 class="text-center">Prescriptions Details </h4>
+    <h4 class="text-center">Prescriptions Details</h4>
 
     <div class="panel-group wrap" id="accordion2" role="tablist" aria-multiselectable="true">
         <div class="panel">
@@ -23,8 +23,7 @@
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                     <div class="form-group row">
                         {{ Form::label('prescription_images', trans('Prescription Images'), [
-                            'class' => 'col-md-2
-                                                                                from-control-label required',
+                            'class' => 'col-md-2 from-control-label required',
                         ]) }}
                         <div class="col-md-10">
                             <div class="files-wrapper prescription-wrapper">
@@ -140,8 +139,12 @@
                                         <div class="image-wrapper">
                                             <a
                                                 href="#lightbox-image-{{ $prescription_iteam->prescripiton_id }}-{{ $prescription_iteam->page_no }}">
-                                                <img src="{{ asset($prescription_iteam->prescription_upload) }}"
-                                                    alt="">
+                                                    @if(Str::lower(pathinfo($prescription_iteam->prescription_upload, PATHINFO_EXTENSION)) === 'pdf')
+                                                        <img src="{{ asset('img/pdf.png') }}" alt="{{ $prescription_iteam->page_no }}" />
+                                                    @else
+                                                        <img src="{{ asset($prescription_iteam->prescription_upload) }}" alt="{{ $prescription_iteam->page_no }}" />
+                                                    @endif
+                                                    
                                                 <div class="image-title">Prescription page No.
                                                     {{ $prescription_iteam->page_no }}
                                                 </div>
@@ -157,8 +160,13 @@
                                                 <a href="#" class="close"></a>
                                                 <!-- <a href="#lightbox-image-{{ $prescription_iteam_for_modal->page_no + 1 }}" class="arrow-left"></a>
                                                     <a href="#lightbox-image-{{ $prescription_iteam_for_modal->page_no - 1 }}" class="arrow-right"></a> -->
-                                                <img src="{{ asset($prescription_iteam_for_modal->prescription_upload) }}"
-                                                    alt="">
+                                                
+
+                                                @if(Str::lower(pathinfo($prescription_iteam_for_modal->prescription_upload, PATHINFO_EXTENSION)) === 'pdf')
+                                                    <iframe src="{{ asset($prescription_iteam_for_modal->prescription_upload) }}" style="width: 100%; height: 390px; margin-top:10px" frameborder="0"></iframe>
+                                                @else
+                                                    <img src="{{ asset($prescription_iteam_for_modal->prescription_upload) }}"  class="img-fluid">
+                                                @endif
                                                 <div class="image-title">Prescription page No.
                                                     {{ $prescription_iteam_for_modal->page_no }}
                                                 </div>

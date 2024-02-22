@@ -73,7 +73,7 @@ tr.status-cancelled td {
                         @csrf     
                         <div class="row">
                             <div class="col-md-12">
-                              <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy (Type atleast 3 letters)">
+                              <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy (Type at least 3 letters)">
                               <div class="ajax-result" style="display:none;">
                               <ul class="ajax-ul" style="display:block;"></ul>
                               </div>
@@ -159,88 +159,47 @@ tr.status-cancelled td {
 @push('after-scripts')
 
 <script>
+  var pageToken = null;
+  var ajaxTriggered = false;
 
-  function ajaxScroll(pageToken =null){
-    if(pageToken ==  null){
-      pageToken = $('#page_token').val();
-    }
-   
-    // Select the specific section by its class or ID
-    var $yourSection = $('.ajax-result ul.ajax-ul'); // Change '.your-section-class' to the appropriate selector
-   // Flag to track if AJAX request has been triggered
-var ajaxTriggered = false;
-    // Attach a scroll event listener to the selected section
-    $yourSection.scroll(function() {
-        var scrollTop = $yourSection.scrollTop();
-        var sectionHeight = $yourSection.height();
-        var scrollHeight = $yourSection[0].scrollHeight;
-        
-        // Add your conditions based on scroll position within the section
-        if ((scrollTop + sectionHeight >= scrollHeight) && (!ajaxTriggered) && pageToken) {
-          console.log('ajaxTriggered==--'+ajaxTriggered);
-            // This code executes when the user has scrolled to the bottom of the section
-            console.log('Reached the bottom of the section');
-            ajaxTriggered = true;
-          var thismain  = $('#search');
-          var search    = $('#search').val();
-          placelistViewScroll(thismain,search,pageToken); //ajax hit
-          console.log('ajaxTriggered--'+ajaxTriggered);
+  $(document).ready(function(){  
+    $('.ajax-result').fadeOut();     
+    $('#search').keyup(function(){
+      
+      var thismain  = $(this);
+      var search    = $(this).val();
+      $('.ajax-result .ajax-ul').html('');
+
+      setTimeout(function() {
+        if(search.length > 2){
+          placelistView(thismain,search,null,null);
+          //ajaxScroll();
+        }else{
+          $('.ajax-result').fadeOut();  
+          // $('.ajax-ul').fadeOut();
+          // $('.ajax-result').fadeIn();
         }
-        
-        //ajaxTriggered = false;
-
-    });
-  }
-
-
-
-   
-    $(document).ready(function(){  
-      $('.ajax-result').fadeOut();     
-      $('#search').keyup(function(){
-          console.log('safadsfasf');
-          var thismain  = $(this);
-          var search    = $(this).val();
-          $('.ajax-result .ajax-ul').html('');
-
-          setTimeout(function() {
-            if(search.length > 2){
-              placelistView(thismain,search,null,null);
-            }else{
-              $('.ajax-result').fadeOut();  
-              // $('.ajax-ul').fadeOut();
-              // $('.ajax-result').fadeIn();
-            }
-                
-
-          }, 300);
-          
-          
             
-        })
+
+      }, 300);
+    
+    })
         
-        $('.ajax-result').on('click','.ajax-li',function(){
-          console.log($(this).text());
-          console.log($(this).html());
-          $('.ajax-result').fadeOut();
-          $('.from-div').html($(this).html());
-          $('.selected-pharma').fadeIn();
-          $('#search').val($(this).find('span').text());
-          var place_id = $(this).attr('data-placeid');
-          console.log(place_id);
-          $('#place_id').val(place_id);
-          $('.transfer-request').fadeIn('slow');
+    $('.ajax-result').on('click','.ajax-li',function(){
+      $('.ajax-result').fadeOut();
+      $('.from-div').html($(this).html());
+      $('.selected-pharma').fadeIn();
 
-          
+      $('#search').val($(this).find('span').text());
 
-        })
+      var place_id = $(this).attr('data-placeid');
 
-       
+      $('#place_id').val(place_id);
+      $('.transfer-request').fadeIn('slow');
+    })
+  });
 
-     
-    });
-
-    function placelistView(thismain,search='',pageToken=null, isfrom=true){
+  function placelistView(thismain,search='',pageToken=null, isfrom=true){
       $(".loader-container").show();
       var lat=$('#latitude').val();
       var long=$('#longitude').val();
@@ -253,23 +212,17 @@ var ajaxTriggered = false;
             data: {_token:_token,search:search,lat:lat,long:long,pageToken:pageToken},
             success: function(data){
                 if(data){
-                    console.log(data); 
-                  // console.log(pageToken); 
-                    
-                   if(data.pageToken && !(isfrom)){
-                      ajaxScroll(data.pageToken);
-                   }
-                   $('.ajax-result .ajax-ul').html(data.html);
+                    //console.log(data); 
+                  $('.ajax-result .ajax-ul').html(data.html);
                     if(data.pageToken){
-                      
-                      
+                      ajaxTriggered = false;
+                      pageToken = data.pageToken;
                       $('#next_page_t').val(data.pageToken);
                     }else{
-
-                      
+                      ajaxTriggered = true;
+                      pageToken = null;
                       $('#next_page_t').val('');
                     }
-                    
                     $('.ajax-result').fadeIn();
                     $(".loader-container").hide();
                     
@@ -294,19 +247,16 @@ var ajaxTriggered = false;
             data: {_token:_token,search:search,lat:lat,long:long,pageToken:pageToken},
             success: function(data){
                 if(data){
-                    console.log(data); 
-                  // console.log(pageToken); 
-                    
-                  
-                   
-                    if(pageToken && data.pageToken){
-                      ajaxScroll(data.pageToken);
+                    //console.log(data); 
+                   if(pageToken && data.pageToken){
+                      pageToken = data.pageToken;
                       $('.ajax-result .ajax-ul').append(data.html);
                       $('#next_page_t').val(data.pageToken);
+                      ajaxTriggered = false;
                     }else{
-
-                      //$('.ajax-result .ajax-ul').html(data.html);
+                      pageToken = null;
                       $('#next_page_t').val('');
+                      ajaxTriggered = true;
                     }
                     
                     $('.ajax-result').fadeIn();
@@ -339,6 +289,32 @@ var ajaxTriggered = false;
       window.location.href= "{{ route('frontend.user.transfer.request.delete', ['id' => '__id__']) }}".replace('__id__', id);
     });
   }
+
+ 
+    var $yourSection = $('.ajax-result ul.ajax-ul'); 
+    // Flag to track if AJAX request has been triggered
+
+   // Attach a scroll event listener to the selected section
+    $yourSection.scroll(function() {
+
+        if($('#next_page_t').val()){
+          pageToken = $('#next_page_t').val();
+        }
+        var scrollTop = $yourSection.scrollTop();
+        var sectionHeight = $yourSection.height();
+        var scrollHeight = $yourSection[0].scrollHeight;
+        
+        // Add your conditions based on scroll position within the section
+        if ((scrollTop + sectionHeight >= scrollHeight) && (!ajaxTriggered) && pageToken) {
+          ajaxTriggered = true;
+          var thismain  = $('#search');
+          var search    = $('#search').val();
+          placelistViewScroll(thismain,search,pageToken); //ajax hit
+        }
+        
+    });
+
+
       </script>
 
 

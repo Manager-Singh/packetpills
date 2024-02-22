@@ -34,6 +34,10 @@ div#accordionExample .card-body {
 div#accordionExample {
     padding: 20px 50px;
 }
+.gallery img {
+    width: 100%;
+    height: 200px;
+}
 </style>
 @endpush
 @section('content')
@@ -76,9 +80,56 @@ div#accordionExample {
                         
                       </div>
                   </div>
-                  <div class="order-body">
+                  <div class="order-body row">
+                    <div class="col-md-6">
                       <p class="txt">Prescription Online ID: {{$prescription->prescription_number}}</p>
                       <p class="txt-b">Prescription Uploaded</p>
+                    </div>
+                    <div class="col-md-12">
+
+                    
+                      
+                      <!-- Gallery Section -->
+                      <div class="gallery row">
+    @foreach($prescription->prescription_iteams as $iteam => $prescription_iteam)
+        <div class="col-md-3">
+            <a href="#" data-toggle="modal" data-target="#imageModal{{ $prescription_iteam->prescripiton_id }}-{{ $prescription_iteam->page_no }}">
+                @if(Str::lower(pathinfo($prescription_iteam->prescription_upload, PATHINFO_EXTENSION)) === 'pdf')
+                    <img src="{{ asset('img/pdf.png') }}" alt="{{ $prescription_iteam->page_no }}" />
+                @else
+                    <img src="{{ asset($prescription_iteam->prescription_upload) }}" alt="{{ $prescription_iteam->page_no }}" />
+                @endif
+            </a>
+            <div class="image-title text-center"><b>Prescription page No. {{ $prescription_iteam->page_no }}</b></div>
+
+            <div class="modal fade" id="imageModal{{ $prescription_iteam->prescripiton_id }}-{{ $prescription_iteam->page_no }}" tabindex="-1" role="dialog" aria-labelledby="imageModal{{ $prescription_iteam->prescripiton_id }}-{{ $prescription_iteam->page_no }}Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModal{{ $prescription_iteam->prescripiton_id }}-{{ $prescription_iteam->page_no }}Label">Prescription page No.{{ $prescription_iteam->page_no }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            @if(Str::lower(pathinfo($prescription_iteam->prescription_upload, PATHINFO_EXTENSION)) === 'pdf')
+                                <iframe src="{{ asset($prescription_iteam->prescription_upload) }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                            @else
+                                <img src="{{ asset($prescription_iteam->prescription_upload) }}" alt="{{ $prescription_iteam->page_no }}" class="img-fluid">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
+
+                    
+                                
+
+                    </div>
                   </div>
               </a>
              @if($prescription && isset($prescription->medications) && $prescription->medications->count() > 0) 
@@ -210,13 +261,13 @@ $prescription_refills = getPrescriptionRefill($prescription->id);
                 <div class="col-sm-4 nopadding" bis_skin_checked="1">
                   <div class="form-group" bis_skin_checked="1">
                     <label for="prescription_number">MisterPharmacist Prescription label Number R#</label>
-                    <input type="text" class="form-control" id="prescription_number" name="prescription_number[]" value="" placeholder="Rx# 20231003-0000000001" required="">
+                    <input type="text" class="form-control" id="prescription_number" name="prescription_number[]" value="" placeholder="Rx#" required="">
                   </div>
                 </div>
                 <div class="col-sm-4 nopadding" bis_skin_checked="1">
                   <div class="form-group" bis_skin_checked="1">
                       <label for="prescription_img">Prescription Label Image (Optional)</label>
-                      <input type="file" class="form-control" id="prescription_img" name="prescription_img[]" value="" placeholder="Prescription Image" required="">
+                      <input type="file" class="form-control" id="prescription_img" name="prescription_img[]" value="" placeholder="Prescription Image">
                   </div>
                 </div>
                 <div class="col-sm-4 nopadding" bis_skin_checked="1">

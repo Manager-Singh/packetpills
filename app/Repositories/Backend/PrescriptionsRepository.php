@@ -43,14 +43,14 @@ class PrescriptionsRepository extends BaseRepository
      */
     public function getForDataTable()
     {
-        return $this->query()
+       return $this->query()
             ->has('user')
             ->select([
                 'prescriptions.id',
                 'prescriptions.prescription_number',
                 'prescriptions.user_id',
                 'prescriptions.created_at',
-            ])->with('user');
+            ])->with('user')->orderBy('created_at', 'desc');
     }
 
     /**

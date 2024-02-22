@@ -238,12 +238,12 @@ class UserController extends Controller
         $auto_messages = AutoMessage::get()->pluck('message','id');
         $drugs = Drug::get()->pluck('brand_name','id');
         $province = Province::get()->pluck('name','slug');
-        $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->get();
-        $aaprescriptions = Prescription::where('user_id',$user->id)->get();
-        $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
-        $transferRequests = TransferRequest::where('user_id',$user->id)->get();
-        $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->get();
-        $existingPrescriptions = PrescriptionOld::where('user_id',$user->id)->get();
+        $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->orderBy('created_at','desc')->get();
+        $aaprescriptions = Prescription::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->orderBy('created_at','desc')->get();
+        $transferRequests = TransferRequest::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $existingPrescriptions = PrescriptionOld::where('user_id',$user->id)->orderBy('created_at','desc')->get();
         //  print_r('<pre>');
         //  print_r($orders);
         //   die;

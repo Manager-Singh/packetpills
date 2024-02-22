@@ -198,13 +198,13 @@ class DashboardController extends Controller
 
     public function userPrescripiton()
     {
-        $user = Auth::user();
-        $data['prescriptions'] = Prescription::where('user_id',$user->id)->get();
+       $user = Auth::user();
+        $data['prescriptions'] = Prescription::where('user_id',$user->id)->orderBy('created_at','desc')->get();
         $data['prescription_refills'] = PrescriptionRefill::where('user_id',$user->id)->orderBy('created_at','desc')->get();
         
          //dd($data['prescription_refills'][0]['prescription']['medications']);
         
-        $data['prescriptions_old'] = PrescriptionOld::where('user_id',$user->id)->get();
+        $data['prescriptions_old'] = PrescriptionOld::where('user_id',$user->id)->orderBy('created_at','desc')->get();
 
        //dd($data['prescriptions'][0]);
         //dd('sss');

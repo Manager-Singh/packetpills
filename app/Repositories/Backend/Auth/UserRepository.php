@@ -79,7 +79,7 @@ class UserRepository extends BaseRepository
             }else{
                 $dataTableQuery->where('parent_id','=',null);
             }
-
+            $dataTableQuery->orderBy('created_at','desc');
         if ($trashed == 'true') {
             return $dataTableQuery->onlyTrashed();
         }

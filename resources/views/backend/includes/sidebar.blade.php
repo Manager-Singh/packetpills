@@ -103,6 +103,15 @@
                 <li class="divider"></li>
                 <li class="nav-item">
                     <a class="nav-link {{
+                        active_class(Route::is('admin/orders'))
+                    }}" href="{{ route('admin.orders.index') }}">
+                        <i class="nav-icon fab fa-first-order"></i>
+                        All Orders
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link {{
                         active_class(Route::is('admin/prescriptions'))
                     }}" href="{{ route('admin.prescriptions.index') }}">
                         <i class="nav-icon fas fa-prescription"></i>
