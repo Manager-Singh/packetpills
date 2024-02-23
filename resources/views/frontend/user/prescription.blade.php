@@ -65,6 +65,20 @@ div#accordionExample {
       <div class="tab-pane fade show active kkkkkkk" id="tabs-1" role="tabpanel" aria-labelledby="tab-1">
        @if($prescriptions->isNotEmpty())
         @foreach($prescriptions as $prescription)
+
+
+@php
+if ($prescription->status == 'pending'){
+  $status_class = "badge-warning";
+}elseif($prescription->status == 'cancelled'){
+  $status_class = "badge-danger";
+}elseif($prescription->status == 'approved'){
+  $status_class = "badge-success";
+}else{
+  $status_class = "btn-error";
+}
+
+@endphp
         
           <div class="order">
             <a href="{{route('frontend.user.prescription.single',$prescription->prescription_number)}}">
@@ -74,7 +88,7 @@ div#accordionExample {
                             <p class="txt">Created On: {{$prescription->created_at->format('F d, Y ')}}</p>
                         </div>
                         <div class="col-md-4 text-right">
-                            <span class="btn-error">{{$prescription->status}}</span>
+                            <span class="{{$status_class}}" style="border-radius: 14px;padding: 3px 9px;">{{ucfirst($prescription->status)}}</span>
                             <span class="bg-danger btn-error" onclick="prescritpionDelted('{{$prescription->id}}')">Delete</span>
                         </div>
                         
@@ -226,9 +240,28 @@ $prescription_refills = getPrescriptionRefill($prescription->id);
                                     @endforeach
                                 @endif</td>
                   </tr>
+
+@php
+if ($prescription_refill->status == 'pending'){
+  $status_class = "badge-warning";
+}elseif($prescription_refill->status == 'cancelled'){
+  $status_class = "badge-danger";
+}elseif($prescription_refill->status == 'approved'){
+  $status_class = "badge-success";
+}elseif($prescription_refill->status == 'We need to contact doctor'){
+  $status_class = "badge-warning";
+}else{
+  $status_class = "";
+}
+
+@endphp
+
+
+
+
                   <tr>
-                    <td> <b>Status</b></td>
-                    <td class="text-right "> <b>{{ ucfirst($prescription_refill->status) }}<b></td>
+                    <td> <b class="font-weight-bold">Status</b></td>
+                    <td class="text-right"> <b class="{{$status_class}}" style="border-radius: 6px;padding: 0px 5px 1px 5px;">{{ ucfirst($prescription_refill->status) }}<b></td>
                   </tr>
                   </table>
               </div>
@@ -344,12 +377,27 @@ $prescription_refills = getPrescriptionRefill($prescription->id);
               <tbody>
               @foreach($prescriptions_old as $prescription_old)
 
+              @php
+if ($prescription_old->status == 'pending'){
+  $status_class = "badge-warning";
+}elseif($prescription_old->status == 'cancelled'){
+  $status_class = "badge-danger";
+}elseif($prescription_old->status == 'approved'){
+  $status_class = "badge-success";
+}elseif($prescription_old->status == 'active'){
+  $status_class = "badge-success";
+}else{
+  $status_class = "";
+}
+
+@endphp
+
                 <tr>
                   <th scope="row">{{ $loop->iteration }}</th>
                   <td>{{$prescription_old->prescription_number}}</td>
                   <td><img  width="100" height="100" src="{{asset($prescription_old->image)}}" /></td>
                   <td>{{$prescription_old->medication_name}}</td>
-                  <td>{{ucfirst($prescription_old->status)}}</td>
+                  <td><span class="{{$status_class}}" style="border-radius: 6px;padding: 0px 5px 1px 5px;">{{ucfirst($prescription_old->status)}}</span></td>
                 </tr>
               @endforeach
               </tbody>

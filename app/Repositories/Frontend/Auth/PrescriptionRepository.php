@@ -419,8 +419,8 @@ class PrescriptionRepository extends BaseRepository
                         $subQuery->where('name', 'Administrator');
                     })->first();
                     $adminmobile = $admin->dialing_code.$admin->mobile_no;
-                            
-                        if(isset($admin->email) && sendMessage($adminmobile,'admin',null,$data1)){
+                        //sendMessage($adminmobile,'admin',null,$data1);    
+                        if(isset($admin->email)){
                             sendMail('admin',null,$data1,$admin->id,'Existing Prescription Details',null,$existing_data);
                         }
                             return 1;

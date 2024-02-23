@@ -22,6 +22,9 @@
                                     @elseif($prescriptionRefill->status == 'approved')
                                         <span class="badge badge-success"
                                             style="right: 29px; position: absolute;">{{ ucfirst($prescriptionRefill->status) }}</span>
+                                    @elseif($prescriptionRefill->status == 'We need to contact doctor')
+                                    <span class="badge badge-warning"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($prescriptionRefill->status) }}</span>
                                     @endif
                                 </div>
                             </a>
@@ -52,7 +55,8 @@
                                 'approved'=>'Approved',
                                 'cancelled'=>'Cancelled',
                                 'declined'=>'Declined',
-                                'processing'=>'Processing'
+                                'processing'=>'Processing',
+                                'We need to contact doctor'=>'We need to contact doctor'
                                 ];
                                 
                             @endphp

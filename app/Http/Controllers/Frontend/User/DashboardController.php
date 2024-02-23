@@ -268,10 +268,7 @@ class DashboardController extends Controller
                     if(isset($admin->email)){
                         sendMail('admin',null,$data,$admin->id,'Prescription Refill',null,$email_data);
                     }
-           
-
-
-            return redirect()->back()->withFlashSuccess(__('Prescription refill created.'));
+           return redirect()->back()->withFlashSuccess(__('Prescription refill created.'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }
