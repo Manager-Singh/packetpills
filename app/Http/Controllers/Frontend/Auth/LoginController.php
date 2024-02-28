@@ -185,7 +185,7 @@ class LoginController extends Controller
             
                 throw new GeneralException(__('exceptions.frontend.auth.deactivated'));
             }
-
+            // die(Auth::user()->hasRole('Employee'));
             event(new UserLoggedIn($user));
 
             Session::put( 'orig_user', $user->id );

@@ -77,9 +77,18 @@ trait UserMethods
      */
     public function isAdmin()
     {
-        return $this->hasRole(config('access.users.admin_role'));
+        // return $this->hasRole('Administrator');
+        return $this->whereHas('roles', function ($query) {
+            $query->where('name', 'Administrator');
+        })->exists();
     }
 
+    public function isEmploye()
+    {
+        return $this->whereHas('roles', function ($query) {
+            $query->where('name', 'Employee');
+        })->exists();
+    }
     /**
      * @return bool
      */

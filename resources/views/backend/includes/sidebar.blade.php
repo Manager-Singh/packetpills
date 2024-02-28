@@ -12,8 +12,12 @@
                     @lang('menus.backend.sidebar.dashboard')
                 </a>
             </li>
-
-            @if ($logged_in_user->isAdmin())
+@php
+// print_r($logged_in_user->roles[0]->name);
+// print_r($logged_in_user->isEmploye());
+// print_r($logged_in_user->isAdmin());
+@endphp
+            @if ($logged_in_user->roles[0]->name=="Administrator")
                 <li class="nav-title">
                     @lang('menus.backend.sidebar.system')
                 </li>
@@ -272,6 +276,167 @@
                         </li>
                     </ul>
                 </li>
+            @endif
+            @if($logged_in_user->roles[0]->name=="Employee")
+            <li class="nav-title">
+                @lang('menus.backend.sidebar.system')
+            </li>
+
+            <li class="nav-item nav-dropdown {{
+                active_class(Route::is('admin/auth*'), 'open')
+            }}">
+                <a class="nav-link nav-dropdown-toggle {{
+                    active_class(Route::is('admin/auth*'))
+                }}" href="#">
+                    <i class="nav-icon far fa-user"></i>
+                    @lang('menus.backend.access.title')
+
+                    @if ($pending_approval > 0)
+                        <span class="badge badge-danger">{{ $pending_approval }}</span>
+                    @endif
+                </a>
+
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link {{
+                            active_class(Route::is('admin/auth/user*'))
+                        }}" href="{{ route('admin.auth.user.index') }}">
+                            @lang('labels.backend.access.users.management')
+
+                            @if ($pending_approval > 0)
+                                <span class="badge badge-danger">{{ $pending_approval }}</span>
+                            @endif
+                        </a>
+                    </li>
+                    
+                    {{-- <li class="nav-item">
+                        <a class="nav-link {{
+                            active_class(Route::is('admin/auth/user*'))
+                        }}" href="{{ route('admin.auth.user.deactivated') }}">
+                        @lang('menus.backend.access.users.deactivated')
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{
+                            active_class(Route::is('admin/auth/user*'))
+                        }}" href="{{ route('admin.auth.user.deleted') }}">
+                        @lang('menus.backend.access.users.deleted')
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{
+                            active_class(Route::is('admin/auth/role*'))
+                        }}" href="{{ route('admin.auth.role.index') }}">
+                            @lang('labels.backend.access.roles.management')
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{
+                            active_class(Route::is('admin/auth/permission*'))
+                        }}" href="{{ route('admin.auth.permission.index') }}">
+                            @lang('labels.backend.access.permissions.management')
+                        </a>
+                    </li> --}}
+                </ul>
+            </li>
+
+            {{-- <li class="divider"></li>
+            <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/drugs'))
+                }}" href="{{ route('admin.drugs.index') }}">
+                    
+                    <i class="nav-icon fas fa-pills"></i>
+                    <!-- @lang('labels.backend.access.blogs.management') -->
+                    Drugs Management
+                </a>
+            </li> --}}
+            <li class="divider"></li>
+            <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/transfer-requests'))
+                }}" href="{{ route('admin.transfer-requests.index') }}">
+                    
+                    <i class="nav-icon fas fa-exchange-alt"></i>
+                    Transfer Requests
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/orders'))
+                }}" href="{{ route('admin.orders.index') }}">
+                    <i class="nav-icon fab fa-first-order"></i>
+                    All Orders
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/prescriptions'))
+                }}" href="{{ route('admin.prescriptions.index') }}">
+                    <i class="nav-icon fas fa-prescription"></i>
+                    @lang('menus.backend.sidebar.prescriptions')
+                </a>
+            </li>
+            {{-- <li class="divider"></li>
+            <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/enterpriseconnects'))
+                }}" href="{{ route('admin.enterpriseconnects.index') }}">
+                    <i class="nav-icon fas fa-file"></i>
+                    @lang('menus.backend.sidebar.enterprise_connect')
+                </a>
+            </li> --}}
+            {{-- <li class="divider"></li>
+
+            <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/preciption-types'))
+                }}" href="{{ route('admin.preciption-types.index') }}">
+                    <i class="nav-icon fas fa-hand-holding-medical"></i>
+                    @lang('menus.backend.sidebar.preciption-types')
+                </a>
+            </li> --}}
+             {{-- <li class="divider"></li>
+
+            <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/auto-messages'))
+                }}" href="{{ route('admin.auto-messages.index') }}">
+                    <i class="nav-icon fas fa-envelope"></i>
+                    @lang('menus.backend.sidebar.auto-messages')
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/mail-messages'))
+                }}" href="{{ route('admin.mail-messages.index') }}">
+                    <i class="nav-icon fas fa-envelope"></i>
+                    @lang('menus.backend.sidebar.mail-messages')
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/setting'))
+                }}" href="{{ route('admin.setting') }}">
+                    <i class="nav-icon fas fa-envelope"></i>
+                    Email Signature
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{
+                    active_class(Route::is('admin/provinces'))
+                }}" href="{{ route('admin.provinces.index') }}">
+                    <i class="nav-icon fas fa-globe"></i>
+                    @lang('menus.backend.sidebar.provinces')
+                </a>
+            </li> --}}
+
+            
             @endif
         </ul>
     </nav>

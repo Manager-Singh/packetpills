@@ -89,7 +89,7 @@ tr.status-cancelled td {
                               <div class="to-div-main">
                                 <h6>To:</h6>
                                 <div class="to-div">
-                                  <span>Mister Pharmacy Canada.</span>
+                                  <span>MisterPharmacist Pharmacy.</span>
                                   <address>116A Sherbourne street, Toronto, Ontario M5A 2R2 -Canada</address>
                                 </div>
                               </div>

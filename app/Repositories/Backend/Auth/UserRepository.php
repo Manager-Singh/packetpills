@@ -79,10 +79,14 @@ class UserRepository extends BaseRepository
             }else{
                 $dataTableQuery->where('parent_id','=',null);
             }
+            $dataTableQuery->whereHas('roles', function ($query) {
+                $query->where('name', 'User');
+            });
             $dataTableQuery->orderBy('created_at','desc');
-        if ($trashed == 'true') {
-            return $dataTableQuery->onlyTrashed();
-        }
+            if ($trashed == 'true') {
+                return $dataTableQuery->onlyTrashed();
+            }
+        
 
         // active() is a scope on the UserScope trait
         return $dataTableQuery->active($status);
