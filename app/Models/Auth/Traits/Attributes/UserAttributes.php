@@ -135,16 +135,25 @@ trait UserAttributes
     /**
      * @return string
      */
-    public function getDeleteButtonAttribute($class)
+    public function getDeleteButtonAttribute($class,$type='all')
     {
         if ($this->id != access()->id() && access()->allow('delete-user')) {
-            $name = $class == '' ? trans('buttons.general.crud.delete') : '';
 
-            return '<a class="'.$class.'" href="'.route('admin.auth.user.destroy', $this).'"
+            $name = $class == '' ? trans('buttons.general.crud.delete') : '';
+            if($type == 'employee'){
+            return '<a class="'.$class.'" href="'.route('admin.auth.user.employee.delete', $this).'"
                  data-method="delete"
                  data-trans-button-cancel="'.trans('buttons.general.cancel').'"
                  data-trans-button-confirm="'.trans('buttons.general.crud.delete').'"
                  data-trans-title="'.trans('strings.backend.general.are_you_sure').'"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.delete').'"></i>'.$name.'</a>';
+            }else{
+                return '<a class="'.$class.'" href="'.route('admin.auth.user.destroy', $this).'"
+                 data-method="delete"
+                 data-trans-button-cancel="'.trans('buttons.general.cancel').'"
+                 data-trans-button-confirm="'.trans('buttons.general.crud.delete').'"
+                 data-trans-title="'.trans('strings.backend.general.are_you_sure').'"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.delete').'"></i>'.$name.'</a>';
+            
+            }
         }
 
         return '';
@@ -165,37 +174,60 @@ trait UserAttributes
     /**
      * @return string
      */
-    public function getShowButtonAttribute($class)
+    public function getShowButtonAttribute($class,$type='all')
     {
         if (access()->allow('show-user')) {
-            return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.show', $this).'" title="'.trans('buttons.general.crud.view').'"> 
-                    <i class="fa fa-eye"></i>
-                </a>';
+            if($type == 'employee'){
+                return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.employee.show', $this).'" title="'.trans('buttons.general.crud.view').'"> 
+                <i class="fa fa-eye"></i>
+            </a>';
+            }else{
+                return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.show', $this).'" title="'.trans('buttons.general.crud.view').'"> 
+                <i class="fa fa-eye"></i>
+            </a>';
+            }
+            
         }
     }
 
     /**
      * @return string
      */
-    public function getEditButtonAttribute($class)
+    public function getEditButtonAttribute($class,$type='all')
     {
         if (access()->allow('edit-user')) {
-            return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.edit', $this).'" title="'.trans('buttons.general.crud.edit').'">
+            
+           
+                if($type == 'employee'){
+                    return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.employee.edit', $this).'" title="'.trans('buttons.general.crud.edit').'">
                     <i class="fas fa-edit"></i>
                 </a>';
+                }else{
+                    return '<a class="'.$class.'" data-toggle="tooltip" data-placement="top" href="'.route('admin.auth.user.edit', $this).'" title="'.trans('buttons.general.crud.edit').'">
+                    <i class="fas fa-edit"></i>
+                </a>';
+                }
         }
     }
 
     /**
      * @return string
      */
-    public function getChangePasswordButtonAttribute($class)
+    public function getChangePasswordButtonAttribute($class,$type='all')
     {
         if (access()->user()->isAdmin() || (access()->user()->id == $this->id)) {
-            return '<a class="'.$class.'" href="'.route('admin.auth.user.change-password', $this).'">
+         
+                    if($type == 'employee'){
+                        return '<a class="'.$class.'" href="'.route('admin.auth.user.employee.change-password', $this).'">
                         <i class="fa fa-refresh" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.backend.access.users.change_password').'">
                         </i>
                     </a>';
+                    }else{
+                        return '<a class="'.$class.'" href="'.route('admin.auth.user.change-password', $this).'">
+                        <i class="fa fa-refresh" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.backend.access.users.change_password').'">
+                        </i>
+                    </a>';
+                    }
         }
     }
 
@@ -290,6 +322,28 @@ trait UserAttributes
 
         return $str;
     }
+    public function checkAdminEmp()
+    {
+        $str = '';
+
+        if ($this->id != 1) {
+            $str .= '<div class="btn-group">
+                        <button type="button" class="btn btn-warning btn-flat dropdown-toggle btn-sm" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-option-vertical"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                        <li>'.$this->getDeleteButtonAttribute('','employee').'</li>
+                        
+                        </ul>
+                    </div>';
+
+            $str .= '';
+            // <li>' . $this->getLoginAsButtonAttribute('') . '</li>
+        }
+
+        return $str;
+    }
+    
 
     /**
      * @return string
@@ -320,6 +374,70 @@ trait UserAttributes
     /**
      * @return string
      */
+    public function getEmployeeButtonsAttribute()
+    {
+        if ($this->trashed()) {
+            return '<div class="btn-group action-btn">
+                        '.$this->getRestoreButtonAttribute('btn btn-primary btn-sm').'
+                        '.$this->getDeletePermanentlyButtonAttribute('btn btn-danger btn-sm').'
+                    </div>';
+        }
+
+        // Check if role have all permission
+        if (access()->user()->roles[0]->all) {
+            return '<div class="btn-group" role="group" aria-label="'.trans('labels.backend.access.users.user_actions').'">
+                    '.$this->getShowButtonAttribute('btn btn-success btn-sm','employee').'
+                    '.$this->getEditButtonAttribute('btn btn-primary btn-sm','employee').'
+                    '.$this->getChangePasswordButtonAttribute('btn btn-secondary btn-sm','employee').'
+                    '.$this->checkAdminEmp().'    
+                </div>';
+        }
+        $userPermission = $this->getUserPermission();
+        $permissionCounter = count($userPermission);
+        $actionButton = '<div class="btn-group action-btn">';
+        $i = 1;
+
+        if (access()->user()->id == $this->id) {
+            if (in_array('clear-user-session', $userPermission)) {
+                $permissionCounter = $permissionCounter - 1;
+            }
+
+            if (in_array('login-as-user', $userPermission)) {
+                $permissionCounter = $permissionCounter - 1;
+            }
+
+            if (in_array('delete-user', $userPermission)) {
+                $permissionCounter = $permissionCounter - 1;
+            }
+
+            if (in_array('deactivate-user', $userPermission)) {
+                $permissionCounter = $permissionCounter - 1;
+            }
+        }
+
+        foreach ($userPermission as $value) {
+            if ($i != 3) {
+                $actionButton = $actionButton.''.$this->getActionButtonsByPermissionName($value, $i);
+            }
+
+            if ($i == 3) {
+                $actionButton = $actionButton.''.$this->getActionButtonsByPermissionName($value, $i);
+
+                if ($permissionCounter > 3) {
+                    $actionButton = $actionButton.'
+                            <div class="btn-group dropup">
+                            <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-option-vertical"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">';
+                }
+            }
+            $i++;
+        }
+        $actionButton .= '</ul></div></div>';
+
+        return $actionButton;
+    }
     public function getActionButtonsAttribute()
     {
         if ($this->trashed()) {

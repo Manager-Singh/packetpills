@@ -12,6 +12,98 @@
 	.login-pg .col {
     flex-basis: unset !important;
 }
+.menu ul li {
+    width: 33% !important;
+}
+	.menu ul {
+		overflow-x: scroll;
+	}
+	nav#sidebarMenu .main a {
+    width: 100% !important;
+    float: left !important;
+    border: 1px solid #638e3c !important;
+    margin: 10px 2px !important;
+    border-radius: 8px !important;
+}
+header.header nav#sidebarMenu .list-group a {
+    padding: 10px 2px !important
+}
+	nav#sidebarMenu .main {
+		display: inline-block;
+		padding: 0px 6px !important;
+	}
+	.profile-btn {
+		position: absolute !important;
+		right: 0 !important;
+		bottom: 0 !important;
+	}
+	.list-group i {
+		display: block !important;
+		text-align: center !important;
+	}
+	.list-group span {
+		text-align: center!important;
+		width: 100%!important;
+		display: block!important;
+		margin: 0px !important;
+	}
+	.acc-info a .left {
+		text-align: center!important;
+		align-items: center!important;
+		display: inline-grid!important;
+	}
+	.acc-info p.user-ins {
+		margin: 0px auto!important;
+	}
+.acc-info .left p, .acc-info .left a, .list-group .acc-info p.info {
+    padding: 0px 5px!important;
+    font-size: 13px!important;
+    margin-left: 0px !important;
+}
+	.sidebar-footer .right {
+    display: block!important;
+    text-align: left !important;
+}
+	.acc-info a .left {
+    width: 60% !important;
+}
+.acc-info a .right {
+    width: 40% !important;
+}
+p.user-name {
+    width: 100%;
+    text-align: left !important;
+}
+.row.med-iin .col-md-3 {
+    width: 50%;
+    margin: 10px 0px;
+}
+span.gender {
+    margin-right: 10px !important;
+    padding: 0px 15px !important;
+}
+span.gender label {
+    font-size: 14px;
+}
+.form-check .form-check-input {
+    margin-left: -0.5em !important;
+    margin-top: 6px;
+}
+label.form-check-label {
+    margin-left: 20px;
+}
+.upload {
+    margin-bottom: 10px;
+}
+input[type="text"], input[type="number"], input[type="tel"], input[type="password"], input[type="date"], input[type="search"], input[type="email"], input[type="datetime-local"] {
+    padding: 0.4rem 0.8rem 0.5rem 5px !important;
+}
+.btn-div {
+    display: block !important;
+}
+.gallery.row img {
+    object-fit: contain;
+}
 }
 
 .navbar-collapse {

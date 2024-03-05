@@ -55,6 +55,12 @@ class UserController extends Controller
     {
         return new ViewResponse('backend.auth.user.index');
     }
+    public function getEmployee(ManageUserRequest $request)
+    {
+        // print_r($this->repository->getEmployeePaginated(25, 'id', 'asc'));
+        // die;
+        return view('backend.auth.employee.employee');
+    }
 
     /**
      * @param \App\Http\Requests\Backend\Auth\User\ManageUserRequest $request
@@ -65,6 +71,18 @@ class UserController extends Controller
     {
         $province = Province::get()->pluck('name','name');
         return view('backend.auth.user.create')
+            ->with([
+                'provinces'=>$province,
+            ])
+            ->withRoles($this->roleRepository->getAll());
+    }
+
+    
+
+    public function createEmployee(ManageUserRequest $request)
+    {
+        $province = Province::get()->pluck('name','name');
+        return view('backend.auth.employee.create')
             ->with([
                 'provinces'=>$province,
             ])
@@ -97,6 +115,13 @@ class UserController extends Controller
       //  $user->id;
        // route('admin.auth.user.show', $this)
         return redirect()->route('admin.auth.user.show', $user)->withFlashSuccess(__('alerts.backend.access.users.created'));
+    }
+    public function storeEmployee(StoreUserRequest $request)
+    {
+        $user = $this->userRepository->createEmployee($request->except(['_token', '_method','files']), $request->has('avatar_location') ? $request->file('avatar_location') : false);
+      //  $user->id;
+       // route('admin.auth.user.show', $this)
+        return redirect()->route('admin.auth.user.employee', $user)->withFlashSuccess(__('alerts.backend.access.users.created'));
     }
 
     public function create_prescription(Request $request)
@@ -261,6 +286,37 @@ class UserController extends Controller
             ])
             ->withUser($user);
     }
+    public function showEmployee(ManageUserRequest $request, User $user)
+    {
+        // print_r($user->id);
+        // die;
+        $auto_messages = AutoMessage::get()->pluck('message','id');
+        $drugs = Drug::get()->pluck('brand_name','id');
+        $province = Province::get()->pluck('name','slug');
+        $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->orderBy('created_at','desc')->get();
+        $aaprescriptions = Prescription::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->orderBy('created_at','desc')->get();
+        $transferRequests = TransferRequest::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $existingPrescriptions = PrescriptionOld::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        //  print_r('<pre>');
+        //  print_r($orders);
+        //   die;
+        return view('backend.auth.employee.show')
+            ->with([
+                'provinces'=>$province,
+                'auto_messages'=>$auto_messages,
+                'drugs'=>$drugs,
+                'prescriptions'=>$prescriptions,
+                'aaprescriptions'=>$aaprescriptions,
+                'orders'=>$orders,
+                'transferRequests'=>$transferRequests,
+                'prescriptionRefills'=>$prescriptionRefills,
+                'existingPrescriptions'=>$existingPrescriptions,
+            ])
+            ->withUser($user);
+    }
+    
 
     /**
      * @param \App\Http\Requests\Backend\Auth\User\ManageUserRequest $request
@@ -283,7 +339,23 @@ class UserController extends Controller
             ->withPermissions($permissionRepository->getSelectData('display_name'))
             ->withUserPermissions($user->permissions->pluck('id')->all());
     }
+    
 
+    public function editEmployee(ManageUserRequest $request, User $user, PermissionRepository $permissionRepository)
+    {
+
+        $province = Province::get()->pluck('name','name');
+            
+        return view('backend.auth.employee.edit')
+            ->with([
+                'provinces'=>$province,
+            ])
+            ->withUser($user)
+            ->withUserRoles($user->roles->pluck('id')->all())
+            ->withRoles($this->roleRepository->getAll())
+            ->withPermissions($permissionRepository->getSelectData('display_name'))
+            ->withUserPermissions($user->permissions->pluck('id')->all());
+    }
     /**
      * @param \App\Http\Requests\Backend\Auth\User\UpdateUserRequest $request
      * @param \App\Models\Auth\User $user
@@ -299,6 +371,13 @@ class UserController extends Controller
       //  ->route('admin.auth.user.show', $user)
         return redirect()->route('admin.auth.user.show', $user)->withFlashSuccess(__('alerts.backend.access.users.updated'));
     }
+    public function updateEmployee(UpdateUserRequest $request, User $user)
+    {
+        
+        $user  = $this->userRepository->update($user, $request->except(['_token', '_method','files']),$request->has('avatar_location') ? $request->file('avatar_location') : false);
+      //  ->route('admin.auth.user.show', $user)
+        return redirect()->route('admin.auth.user.employee.show', $user)->withFlashSuccess(__('Employee Details Updates Successfully'));
+    }
 
     /**
      * @param \App\Http\Requests\Backend\Auth\User\ManageUserRequest $request
@@ -313,6 +392,14 @@ class UserController extends Controller
 
         return redirect()->route('admin.auth.user.deleted')->withFlashSuccess(__('alerts.backend.access.users.deleted'));
     }
+
+    public function destroyEmployee(ManageUserRequest $request, User $user)
+    {
+        $this->userRepository->forceDelete($user,'employee');
+
+        return redirect()->route('admin.auth.user.employee')->withFlashSuccess(__('Employee Deleted Successfully'));
+    }
+    
       public function prescriptionStatusUpdate(Request $request)
         {
            $data = $this->userRepository->prescriptionStatusUpdate($request->except(['_token', '_method','files']));

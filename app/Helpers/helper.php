@@ -290,7 +290,8 @@ if (! function_exists('sendMail')) {
         }
         if($type=='admin'){
            
-            $body = $data."\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
+            // $body = $data."\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
+            $body = $data;
          }else{
             $message = MailMessage::where('message_for',$message_for)->where('status',1)->first();
            

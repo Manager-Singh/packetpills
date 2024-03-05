@@ -18,6 +18,8 @@
                     data = { status: 0, trashed: true, uid:uid };
                 } else if (pageName == 'deactive') {
                     data = { status: 0, trashed: false,uid:uid };
+                } else if (pageName == 'employee') {
+                    data = { status: 1, trashed: false,uid:uid };
                 }
 
                 this.selectors.users_table.dataTable({
@@ -55,6 +57,7 @@
                 getRoleForPermissions: "",
                 getAvailabelPermissions: "",
                 Role3: "",
+                Role5: "",
                 searchButton: "",
             },
             init: function (pageName) {
@@ -66,6 +69,7 @@
                 this.selectors.getAvailabelPermissions = document.querySelector(".get-available-permissions");
                 this.selectors.searchButton = document.querySelector(".search-button");
                 this.selectors.Role3 = document.getElementById("role-3");
+                this.selectors.Role5 = document.getElementById("role-5");
             },
             addHandlers: function (pageName) {
 
@@ -150,6 +154,10 @@
                 if (pageName == "create") {
                     FTX.Users.edit.selectors.Role3.click();
                 }
+                if (pageName == "createemployee") {
+                    FTX.Users.edit.selectors.Role5.click();
+                }
+                
             },
         },
     }

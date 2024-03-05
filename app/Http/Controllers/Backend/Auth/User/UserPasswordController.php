@@ -47,4 +47,23 @@ class UserPasswordController extends Controller
 
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.access.users.updated_password'));
     }
+
+    public function editEmployee(ManageUserRequest $request, User $user)
+    {
+        return view('backend.auth.employee.change-password')->withUser($user);
+    }
+
+    /**
+     * @param \App\Http\Requests\Backend\Auth\User\UpdateUserPasswordRequest $request
+     * @param \App\Models\Auth\User $user
+     *
+     * @throws \App\Exceptions\GeneralException
+     * @return mixed
+     */
+    public function updateEmployee(UpdateUserPasswordRequest $request, User $user)
+    {
+        $this->repository->updatePassword($user, $request->only('password'));
+
+        return redirect()->route('admin.auth.user.employee')->withFlashSuccess(__('alerts.backend.access.users.updated_password'));
+    }
 }

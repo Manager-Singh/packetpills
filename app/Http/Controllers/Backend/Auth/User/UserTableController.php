@@ -38,6 +38,10 @@ class UserTableController extends Controller
         if(Route::currentRouteName() == 'admin.auth.user.member.get'){
             $type   =   'members';
             $uid    =   $request->uid;
+        } else if(Route::currentRouteName() == 'admin.auth.user.employee.get'){
+            $type   =   'employee';
+            $uid    =   $request->uid;
+         
         }else{
             $type   =   'users';
             $uid    =   $request->uid;
@@ -57,7 +61,12 @@ class UserTableController extends Controller
                 return Carbon::parse($user->updated_at)->toDateString();
             })
             ->addColumn('actions', function ($user) {
-                return $user->action_buttons;
+                if(Route::currentRouteName() == 'admin.auth.user.employee.get'){
+                    return $user->employee_buttons;
+                }else{
+                    return $user->action_buttons;
+                }
+                
             })
             ->make(true);
     }

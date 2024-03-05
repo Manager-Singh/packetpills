@@ -218,11 +218,13 @@
                         <div class="col-md-8">
                             @if (count($roles) > 0)
                                 @foreach ($roles as $role)
+                                @if ($logged_in_user->roles[0]->name == "Administrator" || $role->name == "User")
                                     <label for="role-{{ $role->id }}" class="control">
                                         <input type="radio" value="{{ $role->id }}" name="assignees_roles[]"
                                             {{ $role->id == 3 ? 'checked' : '' }} id="role-{{ $role->id }}"
                                             class="get-role-for-permissions" /> &nbsp;&nbsp;{!! $role->name !!}
                                     </label>
+                                    @endif
                                     <!--permission list-->
                                 @endforeach
                             @else
