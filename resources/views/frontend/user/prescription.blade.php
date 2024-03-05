@@ -395,7 +395,14 @@ if ($prescription_old->status == 'pending'){
                 <tr>
                   <th scope="row">{{ $loop->iteration }}</th>
                   <td>{{$prescription_old->prescription_number}}</td>
-                  <td><img  width="100" height="100" src="{{asset($prescription_old->image)}}" /></td>
+                  <td>
+                    @if(isset($prescription_old->image) && !empty($prescription_old->image))
+                      <img  width="100" height="100" src="{{asset($prescription_old->image)}}" />
+                    @else
+                      No Image
+                    @endif
+                    
+                  </td>
                   <td>{{$prescription_old->medication_name}}</td>
                   <td><span class="{{$status_class}}" style="border-radius: 6px;padding: 0px 5px 1px 5px;">{{ucfirst($prescription_old->status)}}</span></td>
                 </tr>
@@ -486,7 +493,7 @@ function add_prescription_field(){
               '</div>'+
               '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+
                 '<div class="form-group" bis_skin_checked="1">'+
-                    '<input type="file" class="form-control" name="prescription_img[]" value="" placeholder="Prescription Image" required="">'+
+                    '<input type="file" class="form-control" name="prescription_img[]" value="" placeholder="Prescription Image" >'+
                ' </div>'+
              ' </div>'+
               '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+

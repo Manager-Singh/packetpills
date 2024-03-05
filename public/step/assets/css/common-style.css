@@ -18,10 +18,10 @@ img.header-icon {
     top: 30px;
 }
 img.user-img {
-    width: 100px;
-    border: 5px solid #638e3c;
-    border-radius: 50%;
-    margin-bottom: 25px;
+    width: 200px;
+    /* border: 5px solid #638e3c; */
+    /* border-radius: 50%; */
+    margin-bottom: 0px;
 }
 p.bold-txt {
     font-size: 22px;

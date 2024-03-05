@@ -672,7 +672,6 @@ class DashboardController extends Controller
     {
         $isexist  = Auth::user();
   
-
         $otp = generateOTP();
         try{
             if(isset($request->user_from) && $request->user_from == 'google'){
@@ -744,16 +743,25 @@ class DashboardController extends Controller
     public function emailPhoneChange(Request $request)
     {
         $user = Auth::user();
-        
+     
+        if(isset($request->email) && !empty($request->email)){
+            $user->confirmation_code=md5(rand(9,12));
+            $user->confirmed=1;
+            $user->email = $request->email;
+            if($user->save()){
+                return redirect()->back()->withFlashSuccess(__('User information updated Successfully!'));
+            }
+
+        }
             $user_otp = UserOtp::where('user_id',$user->id)->where('otp',$request->otp)->first();
             if($user_otp){
                 $user_otp->status = 'verified';
                 if($user_otp->save()){
                     $user->confirmation_code=md5(rand(9,12));
                     $user->confirmed=1;
-                    if(isset($request->email)){
-                        $user->email = $request->email;
-                    }
+                    // if(isset($request->email)){
+                    //     $user->email = $request->email;
+                    // }
                     if(isset($request->mobile_no)){
                         $user->mobile_no = $request->mobile_no;
                         if(isset($request->dialing_code) && isset($request->user_from) && $request->user_from == 'google'){

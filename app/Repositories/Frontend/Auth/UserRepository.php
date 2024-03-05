@@ -589,11 +589,11 @@ class UserRepository extends BaseRepository
         
     }
     public function insuranceImageUpload($front_img,$back_img,$insurance_type){
-        $uuid = Uuid::uuid4()->toString();
+        
         $insurance = new Insurance;
         $insurance->user_id = auth()->user()->id;
         if($front_img){
-            
+                $uuid = Uuid::uuid4()->toString();
                 $fileName   = $uuid . '.' . $front_img->getClientOriginalExtension();
                 $destinationPath = public_path('img/frontend/insurance');
                 $front_img->move($destinationPath, $fileName);
@@ -602,7 +602,7 @@ class UserRepository extends BaseRepository
                 
         } 
         if($back_img){
-            
+            $uuid = Uuid::uuid4()->toString();
             $fileName   = $uuid . '.' . $back_img->getClientOriginalExtension();
             $destinationPath = public_path('img/frontend/insurance');
             $back_img->move($destinationPath, $fileName);

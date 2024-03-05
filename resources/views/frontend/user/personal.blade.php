@@ -186,11 +186,16 @@ swal({
       if(type == 'email'){
         $('.email').show();
         $('.mobile_no').hide();
+        $('.request-otp').hide(); 
+        $('.otp-box').hide();
+        $('.register-submit').show(); 
 
       }else if(type == 'mobile'){
 
         $('.email').hide();
         $('.mobile_no').show();
+        $('.register-submit').hide(); 
+        $('.request-otp').show(); 
 
       }
       $('#exampleModalCenter').modal();

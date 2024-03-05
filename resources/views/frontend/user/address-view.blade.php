@@ -49,8 +49,9 @@ $address_count = ($address) ? $address->count() : 0;
                     <div class="order-body">
                         <div class="row">
                             <div class="col-md-8">
-                                <p class="txt"> {{$addres->address1}}  {{$addres->address2}}</p>
-                                <p class="txt"> {{$addres->city}} {{$addres->province}}</p>
+                                    <p class="txt"> {{$addres->address1}}  {{$addres->address2}}, {{$addres->city}}, {{$addres->province}}, {{$addres->postal_code}}</p>
+                                    <!-- <p class="txt"> {{$addres->postal_code}}</p>
+                                    <p class="txt"> {{$addres->city}} {{$addres->province}}</p> -->
                                 @if(isset($addres->shipping_instructions) && !empty($addres->shipping_instructions))
                                 <p class="txt"> <p class="txt-b m-0">Address Instructions:</p> {{$addres->shipping_instructions}}</p>
                                 @endif

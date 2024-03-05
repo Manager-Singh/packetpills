@@ -7,12 +7,12 @@
     display: block !important;
     text-align: center;
     position: relative;
-    background: #212843;
-    color: #fff;
+    color: #212843;
+    background: #fff;
 }
 .on-top {
     position: relative;
-    margin-top: -65px;
+    /* margin-top: -65px; */
 }
 div#pharmaModal {
     background: #0006;
@@ -58,10 +58,12 @@ button.btn.btn-secondary {
 		    	<div class="row ">
 				    <div class="col-md-12">
               <div class="user-info">
-                <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
-                <p class="txt mb-0">Welcome to your personal</p>
-                <p class="txt mb-0 mt-0">Toronto Online Pharmacy</p>
-                <p class="txt mt-0">MisterPharmacist</p>
+                <!-- <img class="user-img" src="{{asset('step/assets/images/user.png')}}"> -->
+                <img class="user-img" src="{{asset('website/assets/images/logo.gif')}}">
+                <h3 class="txt mb-0">Welcome To <br> MisterPharmacist</h3>
+                <!-- <p class="txt mb-0">Welcome To</p>
+                <p class="txt mb-0 mt-0">MisterPharmacist</p> -->
+                <!-- <p class="txt mt-0">MisterPharmacist</p> -->
               </div> 
 
 				    </div>
@@ -83,7 +85,7 @@ button.btn.btn-secondary {
                           </div>
                           <div class="pl-2 pl-md-3">
                               <h5>Already taking medications?</h5>
-                              <p>We'll transfer prescriptions from your current pharmacy and deliver them to you.</p>
+                              <p>We'll transfer the prescriptions from your current pharmacy and deliver them to you.</p>
                            
                           </div>
                       </div>
@@ -106,7 +108,7 @@ button.btn.btn-secondary {
                           </div>
                           <div class="pl-2 pl-md-3">
                               <h5>Have a new prescription to fill?</h5>
-                              <p>Upload a picture and we'll deliver your medication.</p>
+                              <p>Upload the picture and we'll deliver your medication.</p>
                               
                           </div>
                       </div>
@@ -124,7 +126,7 @@ button.btn.btn-secondary {
                             </div>
                             <div class="pl-2 pl-md-3">
                                 <h5>Need a prescription? </h5>
-                                <p>Visit our Minor Ailments Page to see if you qualify for a minor ailment prescription or ask your doctor to fax a prescription to us at <b>416-593-4166</b></p>
+                                <p>Visit our Minor Ailments Page to see if you qualify for a minor ailment prescription or ask your doctor to fax a prescription to us at <br><b>416-593-4166</b></p>
                                 
                             </div>
                         </div>
@@ -150,8 +152,8 @@ button.btn.btn-secondary {
         <div class="modal-content">
           <div class="modal-header">
             <div class="on-top">
-              <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
-              <h5 class="modal-title" id="pharmaModalLabel">Welcome to Toronrto Online Pharmacy</h5>
+              <img class="user-img" src="{{asset('website/assets/images/logo.gif')}}">
+              <h5 class="modal-title" id="pharmaModalLabel">Welcome To MisterPharmacist</h5>
               <h4 class="modal-title " id="pharmaModalLabel">How can we Help?</h4>
             </div>
             
@@ -197,7 +199,7 @@ button.btn.btn-secondary {
                   </div>
                   </a>
                 </div>
-                <div class="card text-left p-1 mb-4">
+                <!-- <div class="card text-left p-1 mb-4">
                   <a href="{{route('frontend.auth.step.personal')}}">
                     <div class="card-b">
                         <div class="d-flex px-1 px-md-3">
@@ -212,7 +214,7 @@ button.btn.btn-secondary {
                         </div>
                     </div>
                     </a>
-                  </div>
+                  </div> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

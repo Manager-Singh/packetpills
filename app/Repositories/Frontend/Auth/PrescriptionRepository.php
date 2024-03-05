@@ -383,7 +383,7 @@ class PrescriptionRepository extends BaseRepository
     {
             $user = Auth::user();
             $count = 0;
-            $images = $data['prescription_img'];
+            $images = isset($data['prescription_img']) ? $data['prescription_img'] : null ;
             $prescription_numbers = $data['prescription_number'];
             $medication_names = $data['medication_name'];
             $existing_data = [];
@@ -399,12 +399,16 @@ class PrescriptionRepository extends BaseRepository
                     if(isset($images) && !empty($images)){
                        
                             $uuid = Uuid::uuid4()->toString();
-                            $image  = $images[$j]; 
-                            $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
-                            $destinationPath = public_path('img/frontend/prescription-old');
-                            $image->move($destinationPath, $fileName);
-                            $url = 'img/frontend/prescription-old/'.$fileName;  
-                            $prescriptionOld->image =  $url;
+                            $image  = isset($images[$j]) && !empty($images[$j]) ? $images[$j] : null; 
+                            if($image){
+                                $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                                $destinationPath = public_path('img/frontend/prescription-old');
+                                $image->move($destinationPath, $fileName);
+                                $url = 'img/frontend/prescription-old/'.$fileName;  
+                                $prescriptionOld->image =  $url;
+                            }else{
+                                $prescriptionOld->image =  null;
+                            }
                             
                         }
                     $prescriptionOld->save();

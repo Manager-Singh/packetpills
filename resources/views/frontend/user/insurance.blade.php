@@ -54,7 +54,7 @@
                       <div class="upload-after"  {{($primary_insurance && isset($primary_insurance->front_img)) ? 'style=display:block;' : ''}}>
                         @if($primary_insurance && isset($primary_insurance->front_img))
                         <img id="output" src="{{asset($primary_insurance->front_img)}}" width="100%" />
-                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -72,7 +72,7 @@
                       <div class="upload-after" {{($primary_insurance && isset($primary_insurance->back_img)) ? 'style=display:block;' : ''}} >
                       @if($primary_insurance && isset($primary_insurance->back_img))
                         <img id="output" src="{{asset($primary_insurance->back_img)}}" width="100%" />
-                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}},'back')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -91,7 +91,7 @@
                       <br>Upload <br>(front) </label>
                       <div class="upload-after" {{($secondary_insurance && isset($secondary_insurance->front_img)) ? 'style=display:block;' : ''}} >
                       @if($secondary_insurance && isset($secondary_insurance->front_img))
-                        <img id="output" src="{{asset($secondary_insurance->front_img)}}" width="100%" /><button type="button" class="btn-sm"  onclick="removeInsurance({{$secondary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <img id="output" src="{{asset($secondary_insurance->front_img)}}" width="100%" /><button type="button" class="btn-sm"  onclick="removeInsurance({{$secondary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -108,7 +108,7 @@
                       <div class="upload-after" {{($secondary_insurance && isset($secondary_insurance->back_img)) ? 'style=display:block;' : ''}} >
                       @if($secondary_insurance && isset($secondary_insurance->back_img))
                         <img id="output" src="{{asset($secondary_insurance->back_img)}}" width="100%" />
-                        <button type="button" class="btn-sm" onclick="removeInsurance({{$secondary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-sm" onclick="removeInsurance({{$secondary_insurance->id}},'back')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -128,7 +128,7 @@
                       <div class="upload-after" {{($tertiary_insurance && isset($tertiary_insurance->front_img)) ? 'style=display:block;' : ''}} >
                       @if($tertiary_insurance && isset($tertiary_insurance->front_img))
                         <img id="output" src="{{asset($tertiary_insurance->front_img)}}" width="100%" />
-                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$tertiary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$tertiary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -145,7 +145,7 @@
                       <div class="upload-after" {{($tertiary_insurance && isset($tertiary_insurance->back_img)) ? 'style=display:block;' : ''}} >
                       @if($tertiary_insurance && isset($tertiary_insurance->back_img))
                         <img id="output" src="{{asset($tertiary_insurance->back_img)}}" width="100%" />
-                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$tertiary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$tertiary_insurance->id}},'back')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -165,7 +165,7 @@
                       <div class="upload-after" {{($quaternary_insurance && isset($quaternary_insurance->front_img)) ? 'style=display:block;' : ''}} >
                       @if($quaternary_insurance && isset($quaternary_insurance->front_img))
                         <img id="output" src="{{asset($quaternary_insurance->front_img)}}" width="100%" />
-                        <button type="button" class="btn-sm" onclick="removeInsurance({{$quaternary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-sm" onclick="removeInsurance({{$quaternary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -183,7 +183,7 @@
                       <div class="upload-after"  {{($quaternary_insurance && isset($quaternary_insurance->back_img)) ? 'style=display:block;' : ''}}>
                       @if($quaternary_insurance && isset($quaternary_insurance->back_img))
                         <img id="output" src="{{asset($quaternary_insurance->back_img)}}" width="100%" />
-                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$quaternary_insurance->id}})" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$quaternary_insurance->id}},'back')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -324,7 +324,7 @@
     }
 
 
-    function removeInsurance(id) 
+    function removeInsurance(id,img_type) 
     {
         
         swal({
@@ -342,7 +342,7 @@
                             $.ajax({
                                 url: ajaxurl,
                                 type: "POST",
-                                data: {_token:_token,id:id},
+                                data: {_token:_token,id:id,img_type:img_type},
                                 success: function(data){
                                     if(data.success)
                                     {
