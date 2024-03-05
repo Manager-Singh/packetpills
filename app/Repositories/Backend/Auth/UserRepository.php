@@ -59,6 +59,7 @@ class UserRepository extends BaseRepository
          * Note: You must return deleted_at or the User getActionButtonsAttribute won't
          * be able to differentiate what buttons to show for each row.
          */
+        // dd($type);
         $dataTableQuery = $this->query()
             ->select([
                 'users.id',
@@ -79,17 +80,25 @@ class UserRepository extends BaseRepository
             }else{
                 $dataTableQuery->where('parent_id','=',null);
             }
-            $dataTableQuery->whereHas('roles', function ($query) {
-                $query->where('name', 'User');
-            });
+            if($type == 'employee'){
+                $dataTableQuery->whereHas('roles', function ($query) {
+                    $query->where('name', 'Employee');
+                });
+            }else{
+                $dataTableQuery->whereHas('roles', function ($query) {
+                    $query->where('name', 'User');
+                });
+            }
+            
             $dataTableQuery->orderBy('created_at','desc');
             if ($trashed == 'true') {
                 return $dataTableQuery->onlyTrashed();
             }
         
-
+           $result =  $dataTableQuery->active($status);
+        //    dd($result);
         // active() is a scope on the UserScope trait
-        return $dataTableQuery->active($status);
+        return $result;
     }
 
     /**
@@ -863,6 +872,54 @@ class UserRepository extends BaseRepository
         });
     }
 
+    public function createEmployee(array $data,$iprofile_mage=false)
+    {
+        // print_r($files);
+        // die;
+        $roles = $data['assignees_roles'];
+        $permissions = $data['permissions'];
+        // $permissions = $data['files'];
+
+        unset($data['assignees_roles']);
+        unset($data['permissions']);
+
+        $user = $this->createUserStub($data);
+
+        return DB::transaction(function () use ($user, $data, $roles, $permissions,$iprofile_mage) {
+          
+            if ($user->save()) {
+                //Attach new roles
+                $user->attachRoles($roles);
+
+                // Attach New Permissions
+                $user->attachPermissions($permissions);
+
+                //Send confirmation email if requested and account approval is off
+                if (isset($data['confirmation_email']) && $user->confirmed == 0) {
+                    $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+                }
+               
+                if($iprofile_mage){
+                    $nuuid = Uuid::uuid4()->toString();
+                    $fileNamen   = $nuuid . '.' . $iprofile_mage->getClientOriginalExtension();
+                    $destinationPathn = public_path('img/frontend/avatar');
+                    $iprofile_mage->move($destinationPathn, $fileNamen);
+                    $front_urln = 'img/frontend/avatar/'.$fileNamen;
+                    $user->avatar_type = 'upload';
+                    $user->avatar_location = $front_urln;
+                    $user->save();
+                }
+                event(new UserCreated($user));
+               
+        //             
+
+                return $user;
+            }
+
+            throw new GeneralException(__('exceptions.backend.access.users.create_error'));
+        });
+    }
+
     /**
      * @param \App\Models\Auth\User  $user
      * @param array $data
@@ -1084,11 +1141,14 @@ class UserRepository extends BaseRepository
      * @throws \Throwable
      * @return \App\Models\Auth\User
      */
-    public function forceDelete(User $user)
-    {
-        if ($user->deleted_at === null) {
-            throw new GeneralException(__('exceptions.backend.access.users.delete_first'));
+    public function forceDelete(User $user,$type='all')
+    {   
+        if($type=='all'){
+            if ($user->deleted_at === null) {
+                throw new GeneralException(__('exceptions.backend.access.users.delete_first'));
+            }
         }
+        
 
         return DB::transaction(function () use ($user) {
             // Delete associated relationships
@@ -1210,6 +1270,15 @@ class UserRepository extends BaseRepository
             ->paginate($paged);
     }
 
+    public function getEmployeePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc'): LengthAwarePaginator
+    {
+        return $this->query()
+            ->with('roles', 'permissions', 'providers')
+            ->active(1)
+            ->orderBy($orderBy, $sort)
+            ->paginate($paged);
+    }
+    
     /**
      * @param int    $paged
      * @param string $orderBy

@@ -10,6 +10,29 @@ Breadcrumbs::for('admin.auth.user.deactivated', function ($trail) {
     $trail->parent('admin.auth.user.index');
     $trail->push(__('menus.backend.access.users.deactivated'), route('admin.auth.user.deactivated'));
 });
+Breadcrumbs::for('admin.auth.user.employee', function ($trail) {
+    $trail->push(__('Employee'), route('admin.auth.user.employee'));
+});
+Breadcrumbs::for('admin.auth.user.employee.create', function ($trail) {
+    $trail->parent('admin.auth.user.employee');
+    $trail->push(__('Create'), route('admin.auth.user.employee.create'));
+});
+Breadcrumbs::for('admin.auth.user.employee.show', function ($trail,$id) {
+    $trail->parent('admin.auth.user.employee');
+    $trail->push(__('Create'), route('admin.auth.user.employee.show',$id));
+});
+Breadcrumbs::for('admin.auth.user.employee.edit', function ($trail,$id) {
+    $trail->parent('admin.auth.user.employee');
+    $trail->push(__('Create'), route('admin.auth.user.employee.edit',$id));
+});
+Breadcrumbs::for('admin.auth.user.employee.update', function ($trail,$id) {
+    $trail->parent('admin.auth.user.employee');
+    $trail->push(__('Create'), route('admin.auth.user.employee.update',$id));
+});
+Breadcrumbs::for('admin.auth.user.employee.delete', function ($trail,$id) {
+    $trail->parent('admin.auth.user.employee');
+    $trail->push(__('Create'), route('admin.auth.user.employee.delete',$id));
+});
 
 Breadcrumbs::for('admin.auth.user.deleted', function ($trail) {
     $trail->parent('admin.auth.user.index');
@@ -38,4 +61,9 @@ Breadcrumbs::for('admin.auth.user.edit', function ($trail, $id) {
 Breadcrumbs::for('admin.auth.user.change-password', function ($trail, $id) {
     $trail->parent('admin.auth.user.index');
     $trail->push(__('menus.backend.access.users.change-password'), route('admin.auth.user.change-password', $id));
+});
+
+Breadcrumbs::for('admin.auth.user.employee.change-password', function ($trail, $id) {
+    $trail->parent('admin.auth.user.employee');
+    $trail->push(__('menus.backend.access.users.change-password'), route('admin.auth.user.employee.change-password', $id));
 });

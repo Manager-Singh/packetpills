@@ -11,16 +11,14 @@
 
 
 @section('breadcrumb-links')
-    @if(isset($member_id))
-        @include('backend.auth.user.includes.breadcrumb-links',['member_id'=>$member_id])
-    @else
-        @include('backend.auth.user.includes.breadcrumb-links')
-    @endif
+   
+@include('backend.auth.user.includes.breadcrumb-links-employee')
+   
     
 @endsection
 
 @section('content')
-    {{ Form::open(['route' => 'admin.auth.user.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
+    {{ Form::open(['route' => 'admin.auth.user.employee.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
     @php
         //print_r($provinces);
     @endphp
@@ -157,28 +155,6 @@
                         <!--col-->
                     </div>
 
-                    <div class="form-group row">
-                        {{ Form::label('prescription_images', trans('Prescription Images'), ['class' => 'col-md-2 from-control-label required']) }}
-
-                        <div class="col-md-10">
-
-                            <div class="files-wrapper">
-
-                                <div class="file-upload prescription_images">
-                                    <div class="file-select file-select-box">
-                                        <div class="imagePreview"></div>
-                                        <button class="file-upload-custom-btn" type="button"><i
-                                                class="fa fa-plus"></i></button>
-                                        <input type="file" name="files[]" class="profileimg">
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="button" class="add-more btn btn-success" onclick="add_more()"> Add More</button>
-
-                        </div>
-                        <!--col-->
-                    </div>
-                    <!--form-group-->
 
                     <div class="form-group row">
                         {{ Form::label('status', trans('validation.attributes.backend.access.users.active'), ['class' => 'col-md-2 control-label']) }}
@@ -218,10 +194,10 @@
                         <div class="col-md-8">
                             @if (count($roles) > 0)
                                 @foreach ($roles as $role)
-                                @if ($logged_in_user->roles[0]->name == "Administrator" || $role->name == "User")
+                               @if ($role->name == "Employee")
                                     <label for="role-{{ $role->id }}" class="control">
                                         <input type="radio" value="{{ $role->id }}" name="assignees_roles[]"
-                                            {{ $role->id == 3 ? 'checked' : '' }} id="role-{{ $role->id }}"
+                                            {{ $role->id == 5 ? 'checked' : '' }} id="role-{{ $role->id }}"
                                             class="get-role-for-permissions" /> &nbsp;&nbsp;{!! $role->name !!}
                                     </label>
                                     @endif
@@ -347,7 +323,7 @@
     <script>
         FTX.Utils.documentReady(function() {
             FTX.Users.edit.selectors.getPremissionURL = "{{ route('admin.get.permission') }}";
-            FTX.Users.edit.init("create");
+            FTX.Users.edit.init("createemployee");
         });
         $(function() {
             $("#datepicker").datepicker({

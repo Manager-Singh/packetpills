@@ -48,7 +48,14 @@
                                 @endif
                             </a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link {{
+                                active_class(Route::is('admin/auth/user/employee*'))
+                            }}" href="{{ route('admin.auth.user.employee') }}">
+                               Employee
+
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {{
                                 active_class(Route::is('admin/auth/user*'))
@@ -401,7 +408,7 @@
                     @lang('menus.backend.sidebar.preciption-types')
                 </a>
             </li> --}}
-             {{-- <li class="divider"></li>
+             <li class="divider"></li>
 
             <li class="nav-item">
                 <a class="nav-link {{
@@ -419,7 +426,7 @@
                     @lang('menus.backend.sidebar.mail-messages')
                 </a>
             </li>
-             <li class="nav-item">
+            {{--<li class="nav-item">
                 <a class="nav-link {{
                     active_class(Route::is('admin/setting'))
                 }}" href="{{ route('admin.setting') }}">

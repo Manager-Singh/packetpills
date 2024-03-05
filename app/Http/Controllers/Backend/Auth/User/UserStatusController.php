@@ -37,6 +37,8 @@ class UserStatusController extends Controller
         return view('backend.auth.user.deactivated')
             ->withUsers($this->repository->getInactivePaginated(25, 'id', 'asc'));
     }
+ 
+    
 
     /**
      * @param \App\Http\Requests\Backend\Auth\User\ManageUserRequest $request

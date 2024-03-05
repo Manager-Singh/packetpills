@@ -20,9 +20,11 @@ Route::group([
         // For DataTables
         Route::post('user/get', 'UserTableController')->name('user.get');
         Route::post('user/member/get', 'UserTableController')->name('user.member.get');
+        Route::post('user/employee/get', 'UserTableController')->name('user.employee.get');
 
         // User Status'
         Route::get('user/deactivated', [UserStatusController::class, 'getDeactivated'])->name('user.deactivated');
+        Route::get('user/employee/get', [UserController::class, 'getEmployee'])->name('user.employee');
         Route::get('user/deleted', [UserStatusController::class, 'getDeleted'])->name('user.deleted');
 
         // User CRUD
@@ -30,6 +32,9 @@ Route::group([
         Route::get('user/create', [UserController::class, 'create'])->name('user.create');
         
         Route::post('user', [UserController::class, 'store'])->name('user.store');
+        Route::get('user/employee/create', [UserController::class, 'createEmployee'])->name('user.employee.create');
+        
+        Route::post('user/employee', [UserController::class, 'storeEmployee'])->name('user.employee.store');
         Route::post('user/create/prescription', [UserController::class, 'create_prescription'])->name('user.create.prescription');
         Route::post('user/create/healthcard', [UserController::class, 'create_healthcard'])->name('user.create.healthcard');
         Route::post('user/create/insurance', [UserController::class, 'create_insurance'])->name('user.create.insurance');
@@ -49,8 +54,15 @@ Route::group([
         Route::post('user/transfer/update/status', [UserController::class, 'transferStatusUpdate'])->name('user.transfer.update.status');
         Route::post('user/prescription/refill/update/status', [UserController::class, 'prescriptionRefillStatusUpdate'])->name('user.prescription.refill.status');
         
-
-
+        Route::group(['prefix' => 'user/{user}/employee'], function () {
+            // User
+            Route::get('/', [UserController::class, 'showEmployee'])->name('user.employee.show');
+            Route::get('edit', [UserController::class, 'editEmployee'])->name('user.employee.edit');
+            Route::patch('/', [UserController::class, 'updateEmployee'])->name('user.employee.update');
+            Route::delete('/', [UserController::class, 'destroyEmployee'])->name('user.employee.delete');
+            Route::get('password/change', [UserPasswordController::class, 'editEmployee'])->name('user.employee.change-password');
+            Route::patch('password/change', [UserPasswordController::class, 'updateEmployee'])->name('user.employee.change-password.post');
+        });
         // Specific User
         Route::group(['prefix' => 'user/{user}'], function () {
             // User

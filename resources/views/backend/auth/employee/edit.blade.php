@@ -3,20 +3,20 @@
 @section('title', __('labels.backend.access.users.management') . ' | ' . __('labels.backend.access.users.edit'))
 
 @section('breadcrumb-links')
-@include('backend.auth.user.includes.breadcrumb-links')
+@include('backend.auth.user.includes.breadcrumb-links-employee')
 @endsection
 
 @section('content')
 
-{{ Form::model($user, ['route' => ['admin.auth.user.update', $user], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH','files' => true]) }}
+{{ Form::model($user, ['route' => ['admin.auth.user.employee.update', $user], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH','files' => true]) }}
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-sm-5">
-                <h4 class="card-title mb-0">
-                    @lang('labels.backend.access.users.management')
-                    <small class="text-muted">@lang('labels.backend.access.users.edit')</small>
-                </h4>
+            <h4 class="card-title mb-0">
+                        Employee Management
+                        <small class="text-muted">Edit Employee</small>
+                    </h4>
             </div>
             <!--col-->
         </div>
@@ -134,7 +134,7 @@
                     <div class="col-md-8">
                         @if (count($roles) > 0)
                         @foreach($roles as $role)
-                        @if ($logged_in_user->roles[0]->name == "Administrator" || $role->name == "User")
+                        @if ($role->name == "Employee")
                         <label for="role-{{$role->id}}" class="control">
                             <input type="radio" value="{{$role->id}}" name="assignees_roles[]" {{ is_array(old('assignees_roles')) ? (in_array($role->id, old('assignees_roles')) ? 'checked' : '') : (in_array($role->id, $userRoles) ? 'checked' : '') }} id="role-{{$role->id}}" class="get-role-for-permissions" /> &nbsp;&nbsp;{!! $role->name !!}
                         </label>
