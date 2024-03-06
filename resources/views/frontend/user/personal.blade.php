@@ -16,6 +16,8 @@
               <div class="p-detail">
                 <p class="txt-b">First Name</p>
                 <p class="bold-txt">{{$user->first_name}} </p>
+                <p class="txt-b">Pronouns</p>
+                <p class="bold-txt">{{$user->pronouns_text}} </p>
                 <p class="txt-b">Date of Birth</p>
                 <p class="bold-txt">{{$user->date_of_birth}}</p>
                 <p class="txt-b">Cell Phone (SMS enabled)<a href="javascript:void(0)" onclick="changeOTPVerify('mobile');">Change</a></p>
@@ -35,8 +37,10 @@
               <div class="p-detail">
                 <p class="txt-b">Last Name</p>
                 <p class="bold-txt">{{$user->last_name}}</p>
-                <p class="txt-b">Gender</p>
+                <p class="txt-b">Sex Assigned At Birth</p>
                 <p class="bold-txt">{{$user->gender}}</p>
+                <p class="txt-b">Gender Identity</p>
+                <p class="bold-txt">{{$user->gender_identity}}</p>
                 @if($user->avatar_type == 'google')
                 <p class="txt-b">Email Id <small>(*You are signed up using "login with google so you can't change gmail")</small></p>
                 @else
@@ -44,6 +48,8 @@
 
                 @endif
                 <p class="bold-txt">{{$user->email}}</p>
+                <p class="txt-b">Self Described</p>
+                <p class="txt">{{$user->self_described}}</p>
               </div>
             </div>
  

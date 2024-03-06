@@ -6,6 +6,21 @@ use Illuminate\Support\Facades\Hash;
 
 trait UserAttributes
 {
+    
+    /**
+     * @return string
+     */
+    public function getPronounsTextAttribute($value)
+    {
+       // dd($this);
+        if($this->pronouns == 'Custom'){
+            return $this->custom_pronouns;
+        }else{
+            return $value;
+        }
+        
+    }
+    
     /**
      * @param $password
      */

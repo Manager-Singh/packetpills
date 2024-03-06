@@ -67,7 +67,6 @@ class UserRepository extends BaseRepository
      */
     public function update(User $user, array $input, $image = false)
     {
-        
         if(isset($input['first_name'])){
             $user->first_name = $input['first_name'];
         }
@@ -101,8 +100,20 @@ class UserRepository extends BaseRepository
         if(isset($input['alternate_phone'])){
             $user->alternate_phone = $input['alternate_phone'];
         }
+        if(isset($input['pronouns'])){
+            $user->pronouns = $input['pronouns'];
+        }
+        if(isset($input['custom_pronouns'])){
+            $user->custom_pronouns = $input['custom_pronouns'];
+        }
+        if(isset($input['gender_identity'])){
+            $user->gender_identity = $input['gender_identity'];
+        }
+        if(isset($input['self_described'])){
+            $user->self_described = $input['self_described'];
+        }
 
-
+        
         // Upload profile image if necessary
         // if ($image) {
         //     $user->avatar_location = $image->store('/avatars', 'public');
@@ -915,7 +926,7 @@ class UserRepository extends BaseRepository
         $pageToken = isset($response->next_page_token) ? $response->next_page_token : null;
         //$html ='<ul class="ajax-ul" style="display:block;">';
         $html ='';
-        
+        //dd($response);
         if($response->status == 'OK'){
 
             foreach($response->results as $result){
@@ -1113,6 +1124,18 @@ class UserRepository extends BaseRepository
         
         if(isset($input['province'])){
             $user->province = $input['province'];
+        }
+        if(isset($input['pronouns'])){
+            $user->pronouns = $input['pronouns'];
+        }
+        if(isset($input['custom_pronouns'])){
+            $user->custom_pronouns = $input['custom_pronouns'];
+        }
+        if(isset($input['gender_identity'])){
+            $user->gender_identity = $input['gender_identity'];
+        }
+        if(isset($input['self_described'])){
+            $user->self_described = $input['self_described'];
         }
 
         

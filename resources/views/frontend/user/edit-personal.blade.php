@@ -14,6 +14,22 @@
         <div class="col-md-8 offset-md-2">
         <form  id="personal-form" action="{{route('frontend.auth.step.personal.update')}}" method="post" enctype='multipart/form-data'>
       @csrf
+        <div class="form-group">
+            <label for="pronouns">Pronouns</label>
+            <select id="pronouns" name="pronouns" class="form-control color-dark">
+                <option value="">Select</option>
+                <option value="She/Her" {{(isset($user->pronouns) && $user->pronouns == 'She/Her') ? 'selected' : ""}}>She/Her</option>
+                <option value="He/Him" {{(isset($user->pronouns) && $user->pronouns == 'He/Him') ? 'selected' : ""}}>He/Him</option>
+                <option value="They/Them" {{(isset($user->pronouns) && $user->pronouns == 'They/Them') ? 'selected' : ""}}>They/Them</option>
+                <option value="Custom" {{(isset($user->pronouns) && $user->pronouns == 'Custom') ? 'selected' : ""}}>Custom</option>
+            </select>
+        </div>
+        <div class="form-group custom-pronouns" {{ ($user->pronouns != 'Custom') ? 'style=display:none' : "" }} >
+            <label for="custom-pronouns">Custom Pronouns</label>
+            <input type="text" id="custom-pronouns" name="custom_pronouns" value="{{$user->custom_pronouns}}">
+        </div>
+          
+          
           <div class="form-group">
             <label for="first_name" class="col-form-label">First Name:</label>
             <input type="text" name="first_name" class="form-control" value="{{$user->first_name}}" id="first_name">
@@ -23,7 +39,7 @@
             <input type="text" name="last_name" class="form-control" value="{{$user->last_name}}" id="last_name">
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Gender:</label>
+            <label for="message-text" class="col-form-label">Sex Assigned At Birth:</label>
             
                 
                 <div class="gender-div">
@@ -41,6 +57,36 @@
                     </span>
                 </div>
                     
+          </div>
+          <div class="form-group">
+              <label for="lname">Gender Identity:</label>
+              <div class="gender-div">
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Male') ? 'checked' : ''}} value="Male">
+                      <label>Male</label>
+                  </span>
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Female') ? 'checked' : ''}} value="Female">
+                      <label>Female</label>
+                  </span>
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Non-Binary') ? 'checked' : ''}} value="Non-Binary">
+                      <label>Non-Binary</label>
+                  </span>
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Trans') ? 'checked' : ''}} value="Trans">
+                      <label>Trans</label>
+                  </span>
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Prefer Not To Share') ? 'checked' : ''}} value="Prefer Not To Share">
+                      <label>Prefer Not To Share</label>
+                  </span>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label for="self-described">Self Described:</label>
+              <textarea class="form-control"  name="self_described" id="self-described" rows="2">{{$auth->self_described}}</textarea>
           </div>
           <div class="row form-group">
             <div class="col-md-12">
@@ -84,7 +130,14 @@
 <script>
    
     $(document).ready(function(){       
-       
+      $("#pronouns").change(function() {
+            var pronouns = $(this).val();
+            if(pronouns && pronouns == 'Custom'){
+                $('.custom-pronouns').fadeIn();
+            }else{
+                $('.custom-pronouns').fadeOut();
+            }
+        });
      
     });
  

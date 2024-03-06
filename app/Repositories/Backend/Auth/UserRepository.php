@@ -937,7 +937,7 @@ class UserRepository extends BaseRepository
 
         unset($data['assignees_roles']);
         unset($data['permissions']);
-
+        //dd($data);
         return DB::transaction(function () use ($user, $data, $roles, $permissions,$iprofile_mage) {
           
             $user->mobile_no = $data['mobile_no'];
@@ -946,6 +946,10 @@ class UserRepository extends BaseRepository
             $user->gender = isset($data['gender']) ? $data['gender'] : null;
             $user->date_of_birth = isset($data['date_of_birth']) ? $data['date_of_birth'] : null;
             $user->province = isset($data['province']) ? $data['province'] : null;
+            $user->pronouns = isset($data['pronouns']) ? $data['pronouns'] : null;
+            $user->custom_pronouns = isset($data['custom_pronouns']) ? $data['custom_pronouns'] : null;
+            $user->gender_identity = isset($data['gender_identity']) ? $data['gender_identity'] : null;
+            $user->self_described = isset($data['self_described']) ? $data['self_described'] : null;
 
             // print_r( $iprofile_mage);
             // die;
@@ -1209,6 +1213,18 @@ class UserRepository extends BaseRepository
         $user->created_by = access()->user()->id;
         if(isset($input['parent_id']) && !empty($input['parent_id'])){
             $user->parent_id = $input['parent_id'];
+        }
+        if(isset($input['pronouns']) && !empty($input['pronouns'])){
+            $user->pronouns = $input['pronouns'];
+        }
+        if(isset($input['custom_pronouns']) && !empty($input['custom_pronouns'])){
+            $user->custom_pronouns = $input['custom_pronouns'];
+        }
+        if(isset($input['gender_identity']) && !empty($input['gender_identity'])){
+            $user->gender_identity = $input['gender_identity'];
+        }
+        if(isset($input['self_described']) && !empty($input['self_described'])){
+            $user->self_described = $input['self_described'];
         }
 
         return $user;

@@ -48,12 +48,12 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
-                        <label for="fname">Province</label>
+                        <label for="fname">Province:</label>
                         <select name="province" id="province" required>
                         <option  value="">Select a Province</option>
                         @if(getAllProvince())
                             @foreach(getAllProvince() as $province)
-                            <option value="{{$province->slug}}" {{ (isset($address) && $auth->province == $province->slug) ? 'selected' : ''}}>{{$province->name}}</option>
+                            <option value="{{$province->slug}}" {{ (isset($auth->province) && $auth->province == $province->slug) ? 'selected' : ''}}>{{$province->name}}</option>
                         
                             @endforeach
                         @else
@@ -64,7 +64,7 @@
                        
                     </div>
                     <div class="col-md-12">
-                        <label for="lname">Gender</label>
+                        <label for="lname">Sex Assigned At Birth:</label>
                         <div class="gender-div">
                             <span class="gender">
                                 <input type="radio" name="gender" {{ ( $auth->gender == 'Male') ? 'checked' : ''}} value="Male" required>
@@ -80,9 +80,39 @@
                             </span>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <label for="lname">Gender Identity:</label>
+                        <div class="gender-div">
+                            <span class="gender">
+                                <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Male') ? 'checked' : ''}} value="Male">
+                                <label>Male</label>
+                            </span>
+                            <span class="gender">
+                                <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Female') ? 'checked' : ''}} value="Female">
+                                <label>Female</label>
+                            </span>
+                            <span class="gender">
+                                <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Non-Binary') ? 'checked' : ''}} value="Non-Binary">
+                                <label>Non-Binary</label>
+                            </span>
+                            <span class="gender">
+                                <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Trans') ? 'checked' : ''}} value="Trans">
+                                <label>Trans</label>
+                            </span>
+                            <span class="gender">
+                                <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Prefer Not To Share') ? 'checked' : ''}} value="Prefer Not To Share">
+                                <label>Prefer Not To Share</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="self-described">Self Described:</label>
+                        <textarea class="form-control"  name="self_described" id="self-described" rows="2">{{$auth->self_described}}</textarea>
+                    </div>
+
                     @if(Auth::check() && empty(Auth::user()->parent_id))
                     <div class="col-md-12">
-                        <label for="lname">Email Address</label>
+                        <label for="lname">Email Address:</label>
                         <input type="email" name="email" value="{{$auth->email}}" placeholder="" required />
                         <!-- <p class="info">To send updates about your order.</p> -->
                     </div>

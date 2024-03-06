@@ -110,6 +110,20 @@
 
                         
                             <div class="row">
+                                <div class="col-md-12">
+                                    <label for="pronouns">Pronouns</label>
+                                    <select id="pronouns" name="pronouns" class="form-control color-dark">
+                                        <option value="">Select</option>
+                                        <option value="She/Her" {{(isset($auth->pronouns) && $auth->pronouns == 'She/Her') ? 'selected' : ""}}>She/Her</option>
+                                        <option value="He/Him" {{(isset($auth->pronouns) && $auth->pronouns == 'He/Him') ? 'selected' : ""}}>He/Him</option>
+                                        <option value="They/Them" {{(isset($auth->pronouns) && $auth->pronouns == 'They/Them') ? 'selected' : ""}}>They/Them</option>
+                                        <option value="Custom" {{(isset($auth->pronouns) && $auth->pronouns == 'Custom') ? 'selected' : ""}}>Custom</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 custom-pronouns" {{(empty($auth->custom_pronouns)) ? 'style="display:none"' : ""}}>
+                                    <label for="custom-pronouns">Custom Pronouns</label>
+                                    <input type="text" id="custom-pronouns" name="custom_pronouns" value="{{$auth->custom_pronouns}}">
+                                </div>
                                 <div class="col-md-6">
                                     <label for="fname">First name</label>
                                     <input type="text" id="fname" name="first_name" value="{{$auth->first_name}}" required>
@@ -208,6 +222,19 @@
         $("#imageUpload").change(function() {
             readURL(this);
         });
+
+
+        $("#pronouns").change(function() {
+            var pronouns = $(this).val();
+            if(pronouns && pronouns == 'Custom'){
+                $('.custom-pronouns').fadeIn();
+            }else{
+                $('.custom-pronouns').fadeOut();
+            }
+        });
+
+
+        
 
         $('.request-otp').click(function(e) {
             e.preventDefault();

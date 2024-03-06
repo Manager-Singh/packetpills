@@ -95,6 +95,20 @@
 </div>
       <div class="col-md-8 mt-2">
         <div class="row">
+          <div class="col-md-12">
+              <label for="pronouns">Pronouns</label>
+              <select id="pronouns" name="pronouns" class="form-control color-dark">
+                  <option value="">Select</option>
+                  <option value="She/Her">She/Her</option>
+                  <option value="He/Him">He/Him</option>
+                  <option value="They/Them">They/Them</option>
+                  <option value="Custom">Custom</option>
+              </select>
+          </div>
+          <div class="col-md-12 custom-pronouns" style="display:none">
+              <label for="custom-pronouns">Custom Pronouns</label>
+              <input type="text" id="custom-pronouns" name="custom_pronouns" value="">
+          </div>
           <div class="col-md-6">
             <label for="fname">First name</label>
             <input type="text" id="fname" name="first_name" value="" required>
@@ -129,7 +143,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <label for="lname">Gender</label>
+            <label for="lname">Sex Assigned At Birth</label>
             <div class="gender-div">
                 <span class="gender">
                     <input type="radio" id="male" name="gender"  value="Male" required>
@@ -145,6 +159,37 @@
                 </span>
             </div>
           </div>
+          <div class="col-md-12">
+              <label for="lname">Gender Identity:</label>
+              <div class="gender-div">
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" {{ ( $auth->gender_identity == 'Male') ? 'checked' : ''}} value="Male" required>
+                      <label>Male</label>
+                  </span>
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" value="Female" >
+                      <label>Female</label>
+                  </span>
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" value="Non-Binary" >
+                      <label>Non-Binary</label>
+                  </span>
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" value="Trans" >
+                      <label>Trans</label>
+                  </span>
+                  <span class="gender">
+                      <input type="radio" name="gender_identity" value="Prefer Not To Share" >
+                      <label>Prefer Not To Share</label>
+                  </span>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <label for="self-described">Self Described:</label>
+              <textarea class="form-control"  name="self_described" id="self-described" rows="2"></textarea>
+          </div>
+
+
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -210,7 +255,14 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-
+      $("#pronouns").change(function() {
+            var pronouns = $(this).val();
+            if(pronouns && pronouns == 'Custom'){
+                $('.custom-pronouns').fadeIn();
+            }else{
+                $('.custom-pronouns').fadeOut();
+            }
+        });
 
       $('#add-member').parsley().on('field:success', function() {
         // In here, `this` is the parlsey instance of #some-input

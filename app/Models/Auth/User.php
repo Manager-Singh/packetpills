@@ -17,4 +17,14 @@ use Laravel\Passport\HasApiTokens;
 class User extends BaseUser
 {
     use HasApiTokens, Notifiable, SoftDeletes, UserAttributes, UserScopes, UserAccess, UserRelationships, UserMethods;
+   
+    /**
+     * Appends.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'pronouns_text',
+    ];
+
 }

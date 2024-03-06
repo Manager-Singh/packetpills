@@ -99,7 +99,7 @@ class DashboardController extends Controller
 
         $output = $this->userRepository->update(
             Auth::user(),
-            ['first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'gender'=>$request->gender,'alternate_phone'=>$alternate_phone],
+            ['gender_identity'=>$request->gender_identity,'self_described'=>$request->self_described,'pronouns'=>$request->pronouns, 'custom_pronouns'=>$request->custom_pronouns, 'first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'gender'=>$request->gender,'alternate_phone'=>$alternate_phone],
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
@@ -112,12 +112,9 @@ class DashboardController extends Controller
     }
     public function personal_save(Request $request){
 
-        
-       
-
-        $output = $this->userRepository->update(
+       $output = $this->userRepository->update(
             Auth::user(),
-            ['first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'profile_step'=>1],
+            ['pronouns'=>$request->pronouns, 'custom_pronouns'=>$request->custom_pronouns, 'first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'profile_step'=>1],
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
@@ -151,6 +148,11 @@ class DashboardController extends Controller
 
             $array = ['gender'=>$request->gender, 'email'=>$request->email, 'province'=>$request->province,'profile_step'=>2];
         }
+        $array['gender_identity']=$request->gender_identity;
+        $array['self_described']=$request->self_described;
+        
+
+       
         $output = $this->userRepository->update(
             Auth::user(),
             $array,

@@ -14,6 +14,10 @@
 
                     @endif
                 </tr>
+                <tr>
+                    <th>Pronouns</th>
+                    <td>{{ $user->pronouns_text }}</td>
+                </tr>
 
                 <tr>
                     <th>@lang('labels.backend.access.users.tabs.content.overview.first_name')</th>
@@ -37,9 +41,21 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>@lang('validation.attributes.backend.access.users.gender')</th>
+                    <th>Sex Assigned At Birth</th>
                     <td>
                         {{ ucfirst($user->gender) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Gender Identity</th>
+                    <td>
+                        {{ ucfirst($user->gender_identity) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Self Described</th>
+                    <td>
+                        {{ $user->self_described }}
                     </td>
                 </tr>
                 <tr>

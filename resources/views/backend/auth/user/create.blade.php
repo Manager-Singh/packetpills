@@ -48,8 +48,33 @@
 
             <hr>
 
+
+
+
             <div class="row mt-4 mb-4">
                 <div class="col">
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            <label for="pronouns">Pronouns</label>
+                        </div>
+                        <div class="col-md-10">
+                            <select id="pronouns" name="pronouns" class="form-control color-dark">
+                                <option value="">Select</option>
+                                <option value="She/Her">She/Her</option>
+                                <option value="He/Him">He/Him</option>
+                                <option value="They/Them">They/Them</option>
+                                <option value="Custom">Custom</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row custom-pronouns" style="display:none" >
+                        <div class="col-md-2">
+                            <label for="custom-pronouns">Custom Pronouns</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="custom-pronouns" name="custom_pronouns" value="">
+                        </div>
+                    </div>
                     <div class="form-group row">
                         {{ Form::label('first_name', __('validation.attributes.backend.access.users.first_name'), ['class' => 'col-md-2 form-control-label']) }}
 
@@ -120,7 +145,7 @@
                     </div>
                     <!--form-group-->
                     <div class="form-group row">
-                        {{ Form::label('gender', trans('validation.attributes.backend.access.users.gender'), ['class' => 'col-md-2 control-label']) }}
+                        {{ Form::label('gender', 'Sex Assigned At Birth', ['class' => 'col-md-2 control-label']) }}
                         <div class="col-md-8">
                             <label for="gender-male" class="control">
                                 <input type="radio" value="male" name="gender" id="gender-male" class="gender" checked/>
@@ -137,6 +162,44 @@
                         </div>
                     </div>
                     <!--form-group-->
+                    <div class="form-group row">
+                        <div class="col-md-2 control-label">
+                            <label for="lname">Gender Identity:</label>
+                        </div>
+                    
+                        <div class="gender-div col-md-10">
+                            <span class="gender">
+                                <input type="radio" name="gender_identity"  value="Male">
+                                <label>Male</label>
+                            </span>
+                            <span class="gender">
+                                <input type="radio" name="gender_identity"  value="Female">
+                                <label>Female</label>
+                            </span>
+                            <span class="gender">
+                                <input type="radio" name="gender_identity"  value="Non-Binary">
+                                <label>Non-Binary</label>
+                            </span>
+                            <span class="gender">
+                                <input type="radio" name="gender_identity"  value="Trans">
+                                <label>Trans</label>
+                            </span>
+                            <span class="gender">
+                                <input type="radio" name="gender_identity" value="Prefer Not To Share">
+                                <label>Prefer Not To Share</label>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            <label for="self-described">Self Described:</label>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea class="form-control"  name="self_described" id="self-described" rows="2"></textarea>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         {{ Form::label('date_of_birth', __('validation.attributes.backend.access.users.d_o_b'), ['class' => 'col-md-2 form-control-label']) }}
                         <div class="col-md-10">
@@ -359,6 +422,17 @@
 
 
         $(document).ready(function() {
+
+            $("#pronouns").change(function() {
+                var pronouns = $(this).val();
+                if(pronouns && pronouns == 'Custom'){
+                    $('.custom-pronouns').fadeIn();
+                }else{
+                    $('.custom-pronouns').fadeOut();
+                }
+            });
+
+
             $(document).on('change', '.file-upload input[type="file"]', function() {
                 var filename = $(this).val();
                 if (/^\s*$/.test(filename)) {
