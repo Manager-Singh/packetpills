@@ -260,6 +260,15 @@
         FTX.Users.edit.init();
     });
     $(function () {
+
+        $("#pronouns").change(function() {
+                var pronouns = $(this).val();
+                if(pronouns && pronouns == 'Custom'){
+                    $('.custom-pronouns').fadeIn();
+                }else{
+                    $('.custom-pronouns').fadeOut();
+                }
+            });
         $("#datepicker").datepicker({ 
                 autoclose: true, 
                 todayHighlight: true,
