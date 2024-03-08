@@ -44,7 +44,6 @@ class PrescriptionController extends Controller
      */
     public function save(SavePrescriptionRequest $request)
     {
-        return redirect()->back()->withFlashSuccess(__('Thank you for uploading your prescription(s)! <br>Expect a follow up from a pharmacy team member soon!'));
         $data = collect($request->all())->toArray();
         $output = $this->prescriptionRepository->create($data); 
         
