@@ -44,7 +44,7 @@
             <!-- </a> -->
             </div>
             <div class="col-md-3">
-              <a href="{{route('frontend.user.prescription')}}">
+              <a href="{{route('frontend.user.prescription')}}?isrefill=yes">
                 <div class="med-info bg-light">   
                   <p><i class="fi fi-br-arrows-repeat-1"></i></p>                  
                     <p class="txt"><strong> Request Refill </strong></p>

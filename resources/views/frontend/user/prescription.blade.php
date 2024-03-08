@@ -3,6 +3,34 @@
 @section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
 @push('after-styles')
 <style>
+  .alert-main {
+    position: fixed;
+    background-color: rgb(33 40 67 / 25%);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 1;
+    width: 100%;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.alert-main .alert {
+    z-index: 1000;
+    position: absolute;
+    width: 50%;
+}
+.alert-main button.close:after{
+    all:unset;
+}
+.message-alert {
+    margin: 4rem;
+    text-align: center;
+    font-size: 16px;
+}
+ </style>
+<style>
 .btn-error {
     background: #8ac03d;
     border-radius: 30px;
@@ -288,7 +316,7 @@ if ($prescription_refill->status == 'pending'){
           <div class="order-head">
             <p class="txt">Existing MisterPharmacist Patients: Enter Your Prescription(s) Details For A Refill Request</p>
           </div>
-          <div class="order-body">
+          <div class="order-body existing-pres">
             <form method='post' action="{{route('frontend.user.prescription.old.save')}}" enctype='multipart/form-data'>
               @csrf 
               <div class="row main-idv" bis_skin_checked="1">
@@ -487,17 +515,17 @@ function add_prescription_field(){
 
   var html ='';
   html +='<div class="row child-idv" bis_skin_checked="1">'+
-              '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+
+              '<div class="col-sm-4 nopadding" bis_skin_checked="1">'+
               '  <div class="form-group" bis_skin_checked="1">'+
                   '<input type="text" class="form-control" name="prescription_number[]" value="" placeholder="Rx# 20231003-0000000001" required="">'+
                 '</div>'+
               '</div>'+
-              '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+
+              '<div class="col-sm-4 nopadding" bis_skin_checked="1">'+
                 '<div class="form-group" bis_skin_checked="1">'+
                     '<input type="file" class="form-control" name="prescription_img[]" value="" placeholder="Prescription Image" >'+
                ' </div>'+
              ' </div>'+
-              '<div class="col-sm-3 nopadding" bis_skin_checked="1">'+
+              '<div class="col-sm-4 nopadding" bis_skin_checked="1">'+
                 '<div class="form-group" bis_skin_checked="1">'+
                   '<div class="input-group align-items-center" bis_skin_checked="1">'+
                     '<input type="text" class="form-control" name="medication_name[]" value="" placeholder="Medication Name" required="" min="1" tep="1">'+

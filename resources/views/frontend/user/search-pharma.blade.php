@@ -4,6 +4,34 @@
 @push('after-styles')
 	<link rel="stylesheet" href="{{asset('website/assets/css/dashboard.css')}}">
   <style>
+  .alert-main {
+    position: fixed;
+    background-color: rgb(33 40 67 / 25%);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 1;
+    width: 100%;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.alert-main .alert {
+    z-index: 1000;
+    position: absolute;
+    width: 50%;
+}
+.alert-main button.close:after{
+    all:unset;
+}
+.message-alert {
+    margin: 4rem;
+    text-align: center;
+    font-size: 16px;
+}
+ </style>
+  <style>
     .btn-div a {
     display: contents;
     }

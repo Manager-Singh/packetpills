@@ -64,6 +64,9 @@ input, select {
     border: 2px solid #638e3c !important;
     padding: 12px;
 }
+.existing-pres label{
+    font-size: 14px; 
+}
 label {
     /* margin: 30px 0px 10px; */
     font-size: 17px;

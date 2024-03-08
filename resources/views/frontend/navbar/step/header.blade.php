@@ -87,10 +87,12 @@
      </nav>
      <div class="row dashboard">
          <div class="col-md-6">
-             <button class="user-ins short-name" title="View Account">{{authUserShortName()}} </button>
+             <button class="user-ins short-name" title="View Account">{{authUserShortName()}}  </button>
              <p class="info">Viewing as</p>
              <p class="user-name"> {{(auth()->check()) ? auth()->user()->full_name: 'Alexandre'}} <i class="fa fa-sort-desc" aria-hidden="true"></i></p>
-         </div>
+         
+             <small style="float: left;    font-size: 9px;padding: 0 5px 0;">My Account</small>
+       </div>
          <div class="col-md-6 text-end">
              @if(auth()->check() && auth()->user()->parent_id == null)
                 <a href="{{route('frontend.user.add.member')}}" class="profile-btn"><i class="fa fa-user-plus" aria-hidden="true"></i> Add Member</a>

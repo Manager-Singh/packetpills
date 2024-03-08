@@ -198,7 +198,7 @@ class DashboardController extends Controller
     }
 
 
-    public function userPrescripiton()
+    public function userPrescripiton(Request $request)
     {
        $user = Auth::user();
         $data['prescriptions'] = Prescription::where('user_id',$user->id)->orderBy('created_at','desc')->get();
@@ -210,7 +210,20 @@ class DashboardController extends Controller
 
        //dd($data['prescriptions'][0]);
         //dd('sss');
-        return view('frontend.user.prescription',$data); 
+        
+        if($request->input('isrefill') == 'yes'){
+            if(!Prescription::where('user_id',$user->id)->where('status','approved')->exists()){
+                Session::flash('flash_warning', __('Sorry! You do not have any approved prescription(s). <br> A pharmacy team member will contact you with follow up questions soon or you can upload your existing prescription(s) for refill.'));
+            }else{
+                Session::forget('flash_warning');
+            }
+            return view('frontend.user.prescription',$data); 
+        }else{
+            Session::forget('flash_warning');
+           
+            return view('frontend.user.prescription',$data); 
+        }
+        
     }
     public function userPrescripitonDelete($id){
         $prescription = Prescription::find($id);
@@ -581,7 +594,7 @@ class DashboardController extends Controller
         $output = $this->userRepository->transferRequestSave($data);
         
         if($output){
-            return redirect()->back()->withFlashSuccess(__('Thank you for requesting a transfer- a pharmacy team member will contact you with follow up questions soon!'));
+            return redirect()->back()->withFlashSuccess(__('Thank you for requesting a transfer. <br> A pharmacy team member will contact you with follow up questions soon!'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

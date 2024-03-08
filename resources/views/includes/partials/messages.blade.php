@@ -1,5 +1,5 @@
 
-<style>
+<!-- <style>
   .alert-main {
     position: fixed;
     background-color: rgb(33 40 67 / 25%);
@@ -26,7 +26,7 @@
     text-align: center;
     font-size: 16px;
 }
- </style>
+ </style> -->
  @if($errors->any())
  <div class="alert-main">
     <div class="alert alert-danger" role="alert">
