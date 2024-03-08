@@ -37,8 +37,12 @@
               </div>
               <div class="d-flex">
 
-              <a class="next button" href="{{route('frontend.user.dashboard')}}">Cancel</a>
-                  <button type="submit"class="next button submit" onclick="" >Continue</button>
+                <a class="next button" href="{{route('frontend.user.dashboard')}}">Cancel</a>
+                <button type="submit"class="next button submit" onclick="" >Continue</button>
+
+              </div>
+              <div class="text-center">
+                <a class="next button text-decoration-none" href="{{route('frontend.user.prescription')}}">View All Prescriptions</a>
               </div>
               
             

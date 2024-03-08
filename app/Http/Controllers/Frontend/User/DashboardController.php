@@ -581,7 +581,7 @@ class DashboardController extends Controller
         $output = $this->userRepository->transferRequestSave($data);
         
         if($output){
-            return redirect()->back()->withFlashSuccess(__('Transfer Request Created Successfully'));
+            return redirect()->back()->withFlashSuccess(__('Thank you for requesting a transfer- a pharmacy team member will contact you with follow up questions soon!'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

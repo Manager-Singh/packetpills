@@ -31,7 +31,8 @@ class PrescriptionController extends Controller
      */
     public function prescriptionUpload()
     {
-      // return '<h2>You are logedin successfully!</h2>';
+        
+        // return '<h2>You are logedin successfully!</h2>';
         return view('frontend.user.prescription.tabs.upload-prescription');
     }
 
@@ -43,13 +44,14 @@ class PrescriptionController extends Controller
      */
     public function save(SavePrescriptionRequest $request)
     {
+        return redirect()->back()->withFlashSuccess(__('Thank you for uploading your prescription(s)! <br>Expect a follow up from a pharmacy team member soon!'));
         $data = collect($request->all())->toArray();
         $output = $this->prescriptionRepository->create($data); 
         
         // E-mail address was updated, user has to reconfirm
        
         if($output){
-            return redirect()->route('frontend.user.prescription')->withFlashSuccess(__('Prescription Information Updated'));
+            return redirect()->route('frontend.user.prescription')->withFlashSuccess(__('Thank you for uploading your prescription(s)! <br>Expect a follow up from a pharmacy team member soon!'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

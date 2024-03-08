@@ -73,7 +73,7 @@ tr.status-cancelled td {
                         @csrf     
                         <div class="row">
                             <div class="col-md-12">
-                              <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy (Type at least 3 letters)">
+                              <input type="text" id="search" name="serch" placeholder="Search for your current pharmacy">
                               <div class="ajax-result" style="display:none;">
                               <ul class="ajax-ul" style="display:block;"></ul>
                               </div>
@@ -124,7 +124,7 @@ tr.status-cancelled td {
                  <input type="hidden" id="next_page_t" name="page_token" value="" />     
                       </form>
                             @if($transfer_request->count() > 0)
-                            <p class="heading pt-1"><b>Old Transfer Request</b></p>
+                            <p class="heading pt-1"><b>All Transfer Requests</b></p>
                             <table class="table table-hover">
                               <tbody>
                                 <tr>

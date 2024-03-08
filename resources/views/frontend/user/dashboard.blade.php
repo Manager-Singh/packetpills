@@ -9,7 +9,7 @@
                 
               </div>  
               <div class="col-md-4 text-end">
-                    <a href="{{route('frontend.auth.step.profile.completed')}}" class="next btn btn-primary info-btn mt-0">Go to service selection</a>
+                    <a href="{{route('frontend.auth.step.profile.completed')}}" class="next btn btn-error info-btn mt-0">Go to service selection</a>
             
               </div> 
           </div>

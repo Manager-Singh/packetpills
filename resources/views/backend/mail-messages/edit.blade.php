@@ -11,7 +11,7 @@
 {{ Form::model($MailMessage, ['route' => ['admin.mail-messages.update', $MailMessage], 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'PATCH', 'id' => 'create-permission', 'files' => true]) }}
 
     <div class="card">
-        @include('backend.mail-messages.form')
+        @include('backend.mail-messages.form',['mailMessage'=>$MailMessage])
         @include('backend.components.footer-buttons', [ 'cancelRoute' => 'admin.mail-messages.index', 'id' => $MailMessage->id ])
     </div><!--card-->
     {{ Form::close() }}

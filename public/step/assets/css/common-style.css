@@ -1,3 +1,6 @@
+.short-name{
+    color: #fff !important;
+}
 body {
 transition: opacity ease-in 0.2s;
 }
@@ -349,7 +352,7 @@ a.profile-btn:hover {
     /* border: 2px solid #638e3c; */
 }
 .menu ul li a {
-    padding: 20px !important;
+    padding: 20px 0px !important;
     font-size: 18px;
     color: #212843;
     text-decoration: none;

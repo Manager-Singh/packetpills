@@ -1321,8 +1321,10 @@ class UserRepository extends BaseRepository
             $prescription = Prescription::where('id',$id)->first();
            if($status=='Cancel'){
             $nstatus = 'cancelled';
+            $email_subject = 'Cancelled Prescription';
            }else{
             $nstatus = 'approved';
+            $email_subject = 'Approved Prescription';
            }
             $prescription->status = $nstatus;
                 if ($prescription->save()) {
@@ -1342,12 +1344,12 @@ class UserRepository extends BaseRepository
                         if($prescription->status=='cancelled'){ 
                             sendMessage($mobile,'mail','patient_prescription_cancelled',$data);
                             if(isset($user->email)){
-                                sendMail('mail','patient_prescription_cancelled',$data,$user->id,'Cancelled Prescription');
+                                sendMail('mail','patient_prescription_cancelled',$data,$user->id,$email_subject);
                             }
                          }else{
                             sendMessage($mobile,'mail','patient_prescription_approved',$data);
                             if(isset($user->email)){
-                                sendMail('mail','patient_prescription_approved',$data,$user->id,'Cancelled Prescription');
+                                sendMail('mail','patient_prescription_approved',$data,$user->id,$email_subject);
                             }
                          }
     

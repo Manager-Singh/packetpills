@@ -87,7 +87,7 @@
      </nav>
      <div class="row dashboard">
          <div class="col-md-6">
-             <button class="user-ins">{{authUserShortName()}}</button>
+             <button class="user-ins short-name" title="View Account">{{authUserShortName()}} </button>
              <p class="info">Viewing as</p>
              <p class="user-name"> {{(auth()->check()) ? auth()->user()->full_name: 'Alexandre'}} <i class="fa fa-sort-desc" aria-hidden="true"></i></p>
          </div>
@@ -112,6 +112,7 @@
          @endphp
          @if(in_array(Route::getCurrentRoute()->getName(),$profile_route))
             <ul>
+            <li><a href="{{route('frontend.user.dashboard')}}" class="{{ (Route::currentRouteName() == 'frontend.user.dashboard') ? 'active' : '' }}"><i class="fa fa-home" aria-hidden="true"></i> @lang('Frontend/dashboard.header.home')</a></li>
             <li><a href="{{route('frontend.user.personal.details')}}" class="{{ (Route::currentRouteName() == 'frontend.user.personal.details') ? 'active' : '' }}"><i class="fa fa-user-o" aria-hidden="true"></i> Personal details</a></li>
             <li><a href="{{route('frontend.user.address')}}" class="{{ (Route::currentRouteName() == 'frontend.user.address') ? 'active' : '' }}">
 			<i class="fi fi-br-address-book"></i> Address</a></li>

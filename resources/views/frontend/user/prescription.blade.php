@@ -283,6 +283,7 @@ if ($prescription_refill->status == 'pending'){
             <p class="txt text-center">No Prescription found!</p>
           </div>
         </div>
+       @endif
         <div class="order">
           <div class="order-head">
             <p class="txt">Existing MisterPharmacist Patients: Enter Your Prescription(s) Details For A Refill Request</p>
@@ -354,7 +355,7 @@ if ($prescription_refill->status == 'pending'){
 
           </div>
         </div>
-       @endif 
+       <!-- end added prescription --> 
 
         @if($prescriptions_old->isNotEmpty())
 

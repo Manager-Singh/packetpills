@@ -208,6 +208,7 @@ return [
 
         // Application Service Providers...
         Collective\Html\HtmlServiceProvider::class,
+        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
     ],
 
     /*

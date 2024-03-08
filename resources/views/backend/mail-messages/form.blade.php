@@ -39,8 +39,9 @@
                 {{ Form::label('status', trans('validation.attributes.backend.access.mail-messages.status'), ['class' => 'col-md-2 from-control-label required']) }}
                 <div class="col-md-10">
                     <div class="checkbox d-flex align-items-center">
-                        <label class="switch switch-label switch-pill switch-primary mr-2" for="role-1"><input class="switch-input" type="checkbox" name="status" id="role-1" value="1" 
-                        {{ ( !isset($mailMessage) || ( isset($mailMessage) && $mailMessage->status === 1)) ? "checked" : "" }}><span class="switch-slider" data-checked="on" data-unchecked="off"></span></label>
+                        <label class="switch switch-label switch-pill switch-primary mr-2" for="role-1">
+                            <input class="switch-input" type="checkbox" name="status" id="role-1" value="1" 
+                        {{  ( isset($mailMessage) && $mailMessage->status == 1) ? "checked" : "" }}><span class="switch-slider" data-checked="on" data-unchecked="off"></span></label>
                     </div>
                 </div>
                 <!--col-->

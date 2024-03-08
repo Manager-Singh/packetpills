@@ -225,7 +225,7 @@ if (! function_exists('authUserShortName')) {
             if(auth()->check()){
                 $user = auth()->user();
                 if(!empty($user->first_name) && !empty($user->last_name)){
-                    return substr($user->first_name, 0, 1).''.substr($user->first_name, 0, 1);
+                    return substr(ucfirst($user->first_name), 0, 1).''.substr(ucfirst($user->last_name), 0, 1);
                 }elseif(!empty($user->first_name) && empty($user->last_name)){
                     return substr($user->first_name, 0, 2);
                 }else{

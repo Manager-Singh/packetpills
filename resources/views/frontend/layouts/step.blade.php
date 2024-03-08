@@ -99,8 +99,9 @@
     <link rel='stylesheet' href='//common.olemiss.edu/_js/sweet-alert/sweet-alert.css'></link> 
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" /> 
     <link rel='stylesheet' href='//cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    @notifyCss
   </head>
-  <body>
+  <body id="app">
       
            
         @include('includes.partials.read-only')
@@ -145,7 +146,10 @@
         <script src="{{asset('plugins/parsley/parsley.js')}}"></script>
         <script src="//common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+        @notifyJs
+        @include('notify::messages')
         <script>
+
  
 
  window.onload = function () {
@@ -183,8 +187,12 @@
         
       });   
 
+    
+
     });
     </script> 
-        @include('includes.partials.ga')
+    @include('includes.partials.ga')
+   
+      
     </body>
 </html>
