@@ -278,13 +278,40 @@ main.main-div {
                         
                       @foreach ($prescription->prescription_iteams as $iteam)
                       <div class="col-md-3">
-                        <div class="image-lightbox"
+                          <div class="image-lightbox"
                             id="lightbox-image">
                             <div class="image-lightbox-wrapper">
-                                   <img class="img-responsive" src="{{ asset($iteam->prescription_upload) }}"  alt="">
-                                
+                              <a href="#" data-toggle="modal" data-target="#imageModal{{ $iteam->prescripiton_id }}-{{ $iteam->page_no }}">
+                            
+                              @if(Str::lower(pathinfo($iteam->prescription_upload, PATHINFO_EXTENSION)) === 'pdf')
+                                <img class="img-responsive" src="{{ asset('img/pdf.png') }}" alt="{{ $iteam->page_no }}" />
+                              @else
+                                <img class="img-responsive" src="{{ asset($iteam->prescription_upload) }}" alt="{{ $iteam->page_no }}" />
+                              @endif
+                                   <!-- <img class="img-responsive" src="{{ asset($iteam->prescription_upload) }}"  alt=""> -->
+                              </a>    
                             </div>
+                          </div>
+
+                          <div class="modal fade" id="imageModal{{ $iteam->prescripiton_id }}-{{ $iteam->page_no }}" tabindex="-1" role="dialog" aria-labelledby="imageModal{{ $iteam->prescripiton_id }}-{{ $iteam->page_no }}Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModal{{ $iteam->prescripiton_id }}-{{ $iteam->page_no }}Label">Prescription page No.{{ $iteam->page_no }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                        <div class="modal-body text-center">
+                            @if(Str::lower(pathinfo($iteam->prescription_upload, PATHINFO_EXTENSION)) === 'pdf')
+                                <iframe src="{{ asset($iteam->prescription_upload) }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                            @else
+                                <img src="{{ asset($iteam->prescription_upload) }}" alt="{{ $iteam->page_no }}" class="img-fluid">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
                         </div>
                       @endforeach
                       

@@ -105,9 +105,20 @@
 
         reader.onload = function (e) {
           console.log($(input).parent());
-          
-          $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
+
+          var fileExtension = input.files[0].name.split('.').pop().toLowerCase();
+          if (fileExtension === 'pdf') {
+            //$('#output').attr('data', e.target.result);
+            $(input).parent().find('#output').attr('src', "{{ asset('img/pdf.png') }}").width(150).height(200);
+
           $(input).parent().find('.upload-after').addClass("d-block");
+
+          }else{
+            $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
+            $(input).parent().find('.upload-after').addClass("d-block");
+          }
+          
+          
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -126,7 +137,7 @@
         // For demonstration purposes, setTimeout is used to simulate a delay (replace with your actual form submission logic)
         setTimeout(function() {
           // Hide the loader after the form is submitted
-        //  $(".loader-container").hide();
+          $(".loader-container").hide();
         }, 2000); // 2000 milliseconds (2 seconds) is an example, adjust as needed
       });
     });

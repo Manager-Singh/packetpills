@@ -213,7 +213,7 @@ class DashboardController extends Controller
         
         if($request->input('isrefill') == 'yes'){
             if(!Prescription::where('user_id',$user->id)->where('status','approved')->exists()){
-                Session::flash('flash_warning', __('Sorry! You do not have any approved prescription(s). <br> A pharmacy team member will contact you with follow up questions soon or you can upload your existing prescription(s) for refill.'));
+                Session::flash('flash_warning', __('You do not have any prescriptions posted in your account.<br>You can request a refill for past prescriptions.<br>A pharmacy team member will follow up with you once your request is made.<br>Thank you!'));
             }else{
                 Session::forget('flash_warning');
             }

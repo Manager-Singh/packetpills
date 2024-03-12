@@ -256,7 +256,7 @@ if (! function_exists('sendMessage')) {
            if($data!==null){
             $body .= "\n".$data;
            }
-           $body .= "\n\n"."MisterPharmacist"."\n"." Online Pharmacy.";
+           $body .= "\n\n"."MisterPharmacist"."\n"."Online Pharmacy. "."\n"."DO NOT REPLY to this automated text. Our text only message system is 416-593-4000";
         }
        
         

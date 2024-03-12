@@ -25,7 +25,7 @@
     all:unset;
 }
 .message-alert {
-    margin: 4rem;
+    margin: 3rem !important;
     text-align: center;
     font-size: 16px;
 }
