@@ -1398,9 +1398,11 @@ class UserRepository extends BaseRepository
                     // die;
                     if($type=='order'){
                    // $data =  $status." & Your Order no is ".$order->order_number;
-                        sendMessage($mobile,'mail','patient_order_status',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','patient_order_status',$data,$user->id,'Order Patient');
+                        if( $status == 'delivered' ){
+                            sendMessage($mobile,'mail','patient_order_status',$data);
+                            if(isset($user->email)){
+                                sendMail('mail','patient_order_status',$data,$user->id,'Order Patient');
+                            } 
                         }
                     }else{
                         $data =  $status." & Your Order no is ".$order->order_number;

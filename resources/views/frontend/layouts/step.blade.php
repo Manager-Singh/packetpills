@@ -176,6 +176,13 @@
         $('.sidebar').toggle();
         
       });
+      $('main, row.menu').click(function(){
+        if ($('.dashboard .user-ins').hasClass("close")) {
+          $('.dashboard .user-ins').removeClass("close");
+          $('.sidebar').toggle();
+        } 
+        
+      });
 
       $('button.user-ins').click(function(){
         if ($('.dashboard .user-ins').hasClass("close")) {

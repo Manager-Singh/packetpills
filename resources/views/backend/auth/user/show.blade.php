@@ -71,25 +71,24 @@
                                 href="#medications" role="tab" aria-controls="medications" aria-expanded="true"><i
                                     class="fas fa fa-ambulance"></i> @lang('Medications')</a>
                         </li>
-                         <li class="nav-item">
+                         <li class="nav-item position-relative">
                             <a class="nav-link {{ $tab == 'orders' ? 'active' : '' }}" data-toggle="tab"
                                 href="#orders" role="tab" aria-controls="orders" aria-expanded="true"><i
-                                    class="fas fa-shopping-cart"></i> @lang('Orders')</a>
+                                    class="fas fa-shopping-cart"></i> @lang('Orders') <span class="badge badge-warning navbar-badge">{{countPendingActivity('orders',$user->id,'pending')}}</span></a>
                         </li>
                          <li class="nav-item">
                             <a class="nav-link {{ $tab == 'transfer' ? 'active' : '' }}" data-toggle="tab"
                                 href="#transfer-request" role="tab" aria-controls="orders" aria-expanded="true"><i
                                     class="fas fa-exchange-alt"></i> @lang('Transfer Request')</a>
                         </li>
-                         <li class="nav-item">
+                         <li class="nav-item position-relative">
                             <a class="nav-link {{ $tab == 'prescriptionrefill' ? 'active' : '' }}" data-toggle="tab"
                                 href="#prescription-refill" role="tab" aria-controls="orders" aria-expanded="true"><i
-                                    class="fas fa-refresh"></i> Prescription Refill</a>
+                                    class="fas fa-refresh"></i> Prescription Refill <span class="badge badge-warning navbar-badge">{{countPendingActivity('prescription_refill',$user->id,'pending')}}</span></a>
                         </li>
-                         <li class="nav-item">
+                         <li class="nav-item position-relative">
                             <a class="nav-link {{ $tab == 'existingprescriptionrefill' ? 'active' : '' }}" data-toggle="tab"
-                                href="#existing-prescription-refill" role="tab" aria-controls="orders" aria-expanded="true"><i
-                                    class="fas fa-refresh"></i> Existing Prescription Refill</a>
+                                href="#existing-prescription-refill" role="tab" aria-controls="orders" aria-expanded="true"><i class="fas fa-refresh"></i> Existing Prescription Refill <span class="badge badge-warning navbar-badge">{{countPendingActivity('existing_prescription_refill',$user->id,'active')}}</span></a>
                         </li>
 
                     </ul>

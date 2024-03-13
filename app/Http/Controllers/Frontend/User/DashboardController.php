@@ -583,7 +583,7 @@ class DashboardController extends Controller
         $output = $this->userRepository->createMedicationOrder($data);
       
         if($output){
-            return redirect()->back()->withFlashSuccess(__('Order Created Successfully'));
+            return redirect()->route('frontend.user.orders')->withFlashSuccess(__('Order Created Successfully'));
         }else{
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }

@@ -38,7 +38,7 @@
               <div class="d-flex">
 
                 <a class="next button" href="{{route('frontend.user.dashboard')}}">Cancel</a>
-                <button type="submit"class="next button submit" onclick="" >Continue</button>
+                <button type="submit"class="next button submit" onclick="" >Save/Continue</button>
 
               </div>
               <div class="text-center">

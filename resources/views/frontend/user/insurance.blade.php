@@ -47,14 +47,20 @@
                 <label class="col-md-12" for="myfile">Primary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
+                  @if(!$primary_insurance && !isset($primary_insurance->front_img))
                   <input type="file" id="myFile" name="front_img" class="primary-insurance-input" onchange="readURL(this);">
-                    <label for="myfile">
+                  @endif  
+                  <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(front) </label>
                       <div class="upload-after"  {{($primary_insurance && isset($primary_insurance->front_img)) ? 'style=display:block;' : ''}}>
                         @if($primary_insurance && isset($primary_insurance->front_img))
-                        <img id="output" src="{{asset($primary_insurance->front_img)}}" width="100%" />
-                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                          @if(Str::lower(pathinfo($primary_insurance->front_img, PATHINFO_EXTENSION)) === 'pdf')
+                              <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                          @else
+                              <img id="output" src="{{asset($primary_insurance->front_img)}}" width="100%" />
+                          @endif
+                              <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -65,13 +71,19 @@
                 </div>
                 <div class="col-md-6">
                   <div class="upload" >
+                  @if(!$primary_insurance && !isset($primary_insurance->back_img))
                   <input type="file" id="myFile"  name="back_img" class="primary-insurance-input" onchange="readURL(this);">
-                    <label  for="myfile">
+                  @endif  
+                  <label  for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(back) </label>
                       <div class="upload-after" {{($primary_insurance && isset($primary_insurance->back_img)) ? 'style=display:block;' : ''}} >
                       @if($primary_insurance && isset($primary_insurance->back_img))
-                        <img id="output" src="{{asset($primary_insurance->back_img)}}" width="100%" />
+                          @if(Str::lower(pathinfo($primary_insurance->back_img, PATHINFO_EXTENSION)) === 'pdf')
+                              <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                          @else
+                            <img id="output" src="{{asset($primary_insurance->back_img)}}" width="100%" />
+                          @endif
                         <button type="button" class="btn-sm"  onclick="removeInsurance({{$primary_insurance->id}},'back')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
@@ -85,14 +97,21 @@
                 <label class="col-md-12" for="myfile">Secondary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload" >
+                  @if(!$secondary_insurance && !isset($secondary_insurance->front_img))
                     <input type="file" id="myFile" name="secondary_front_img" onchange="readURL(this);">
+                  @endif 
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(front) </label>
                       <div class="upload-after" {{($secondary_insurance && isset($secondary_insurance->front_img)) ? 'style=display:block;' : ''}} >
                       @if($secondary_insurance && isset($secondary_insurance->front_img))
-                        <img id="output" src="{{asset($secondary_insurance->front_img)}}" width="100%" /><button type="button" class="btn-sm"  onclick="removeInsurance({{$secondary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        @if(Str::lower(pathinfo($secondary_insurance->front_img, PATHINFO_EXTENSION)) === 'pdf')
+                            <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
                         @else
+                            <img id="output" src="{{asset($secondary_insurance->front_img)}}" width="100%" />
+                        @endif
+                        <button type="button" class="btn-sm"  onclick="removeInsurance({{$secondary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      @else
                         <img id="output" src="#" width="100%" />
                         <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @endif	
@@ -101,13 +120,19 @@
                 </div>
                 <div class="col-md-6">
                   <div class="upload">
+                  @if(!$secondary_insurance && !isset($secondary_insurance->back_img))
                     <input type="file" id="myFile" name="secondary_back_img" onchange="readURL(this);">
+                  @endif 
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(back) </label>
                       <div class="upload-after" {{($secondary_insurance && isset($secondary_insurance->back_img)) ? 'style=display:block;' : ''}} >
                       @if($secondary_insurance && isset($secondary_insurance->back_img))
-                        <img id="output" src="{{asset($secondary_insurance->back_img)}}" width="100%" />
+                        @if(Str::lower(pathinfo($secondary_insurance->back_img, PATHINFO_EXTENSION)) === 'pdf')
+                          <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                        @else
+                          <img id="output" src="{{asset($secondary_insurance->back_img)}}" width="100%" />
+                        @endif
                         <button type="button" class="btn-sm" onclick="removeInsurance({{$secondary_insurance->id}},'back')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
@@ -121,13 +146,19 @@
                 <label class="col-md-12" for="myfile">Tertiary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
+                  @if(!$tertiary_insurance && !isset($tertiary_insurance->front_img))
                     <input type="file" id="myFile" name="tertiary_front_img" onchange="readURL(this);">
+                  @endif  
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(front) </label>
                       <div class="upload-after" {{($tertiary_insurance && isset($tertiary_insurance->front_img)) ? 'style=display:block;' : ''}} >
                       @if($tertiary_insurance && isset($tertiary_insurance->front_img))
-                        <img id="output" src="{{asset($tertiary_insurance->front_img)}}" width="100%" />
+                        @if(Str::lower(pathinfo($tertiary_insurance->front_img, PATHINFO_EXTENSION)) === 'pdf')
+                          <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                        @else
+                          <img id="output" src="{{asset($tertiary_insurance->front_img)}}" width="100%" />
+                        @endif
                         <button type="button" class="btn-sm"  onclick="removeInsurance({{$tertiary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
@@ -138,13 +169,19 @@
                 </div>
                 <div class="col-md-6">
                   <div class="upload">
+                  @if(!$tertiary_insurance && !isset($tertiary_insurance->back_img))
                     <input type="file" id="myFile" name="tertiary_back_img" onchange="readURL(this);">
+                  @endif  
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(back) </label>
                       <div class="upload-after" {{($tertiary_insurance && isset($tertiary_insurance->back_img)) ? 'style=display:block;' : ''}} >
                       @if($tertiary_insurance && isset($tertiary_insurance->back_img))
-                        <img id="output" src="{{asset($tertiary_insurance->back_img)}}" width="100%" />
+                        @if(Str::lower(pathinfo($tertiary_insurance->back_img, PATHINFO_EXTENSION)) === 'pdf')
+                          <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                        @else
+                          <img id="output" src="{{asset($tertiary_insurance->back_img)}}" width="100%" />
+                        @endif
                         <button type="button" class="btn-sm"  onclick="removeInsurance({{$tertiary_insurance->id}},'back')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
@@ -158,13 +195,19 @@
                 <label class="col-md-12" for="myfile">Quaternary Insurance</label>
                 <div class="col-md-6">
                   <div class="upload">
+                  @if(!$quaternary_insurance && !isset($quaternary_insurance->front_img))
                   <input type="file" id="myFile" name="quaternary_front_img" onchange="readURL(this);">
-                    <label for="myfile">
+                  @endif  
+                  <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(front) </label>
                       <div class="upload-after" {{($quaternary_insurance && isset($quaternary_insurance->front_img)) ? 'style=display:block;' : ''}} >
                       @if($quaternary_insurance && isset($quaternary_insurance->front_img))
-                        <img id="output" src="{{asset($quaternary_insurance->front_img)}}" width="100%" />
+                        @if(Str::lower(pathinfo($quaternary_insurance->front_img, PATHINFO_EXTENSION)) === 'pdf')
+                          <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                        @else
+                          <img id="output" src="{{asset($quaternary_insurance->front_img)}}" width="100%" />
+                         @endif
                         <button type="button" class="btn-sm" onclick="removeInsurance({{$quaternary_insurance->id}},'front')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
@@ -176,13 +219,19 @@
                 </div>
                 <div class="col-md-6">
                   <div class="upload">
+                  @if(!$quaternary_insurance && !isset($quaternary_insurance->back_img))
                     <input type="file" id="myFile" name="quaternary_back_img" onchange="readURL(this);">
+                  @endif
                     <label for="myfile">
                       <i class="fa fa-camera" aria-hidden="true"></i>
                       <br>Upload <br>(back) </label>
                       <div class="upload-after"  {{($quaternary_insurance && isset($quaternary_insurance->back_img)) ? 'style=display:block;' : ''}}>
                       @if($quaternary_insurance && isset($quaternary_insurance->back_img))
-                        <img id="output" src="{{asset($quaternary_insurance->back_img)}}" width="100%" />
+                        @if(Str::lower(pathinfo($quaternary_insurance->back_img, PATHINFO_EXTENSION)) === 'pdf')
+                          <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                        @else
+                          <img id="output" src="{{asset($quaternary_insurance->back_img)}}" width="100%" />
+                        @endif
                         <button type="button" class="btn-sm"  onclick="removeInsurance({{$quaternary_insurance->id}},'back')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         @else
                         <img id="output" src="#" width="100%" />
@@ -314,9 +363,20 @@
         var reader = new FileReader();
         
         reader.onload = function (e) {
+          var fileExtension = input.files[0].name.split('.').pop().toLowerCase();
+          if (fileExtension === 'pdf') {
+            //$('#output').attr('data', e.target.result);
+            $(input).parent().find('#output').attr('src', "{{ asset('img/pdf.png') }}").width(150).height(200);
+
+            $(input).parent().find('.upload-after').addClass("d-block");
+
+          }else{
+            $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
+            $(input).parent().find('.upload-after').addClass("d-block");
+
+          }
          
-          $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
-          $(input).parent().find('.upload-after').addClass("d-block");
+          
         };
 
         reader.readAsDataURL(input.files[0]);

@@ -258,6 +258,13 @@ class UserController extends Controller
      */
     public function show(ManageUserRequest $request, User $user)
     {
+        if (!$request->has('tab')) {
+            // If 'tab' parameter is not present, remove 'tab' from session
+            $request->session()->forget('tab');
+        } else {
+            $request->session()->put('tab', $request->input('tab'));
+        }
+        
         // print_r($user->id);
         // die;
         $auto_messages = AutoMessage::get()->pluck('message','id');

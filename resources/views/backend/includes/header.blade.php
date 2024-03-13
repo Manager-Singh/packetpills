@@ -34,8 +34,8 @@
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item d-md-down-none navbar-toggler aside-menu-toggler d-md-down-none nav-link notification-wrapper" type="button" data-toggle="aside-menu-lg-show">
             <!-- <a class="nav-link" href="#"> -->
-                <i class="fas fa-bell"></i>
-                <span class="badge badge-danger navbar-badge">15</span>
+                <!-- <i class="fas fa-bell"></i>
+                <span class="badge badge-danger navbar-badge">15</span> -->
             <!-- </a> -->
         </li>
         <!-- <li class="nav-item d-md-down-none">

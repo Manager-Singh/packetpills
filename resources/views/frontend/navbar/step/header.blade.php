@@ -89,7 +89,7 @@
          <div class="col-md-6">
              <button class="user-ins short-name" title="View Account">{{authUserShortName()}}  </button>
              <p class="info">Viewing as</p>
-             <p class="user-name"> {{(auth()->check()) ? auth()->user()->full_name: 'Alexandre'}} <i class="fa fa-sort-desc" aria-hidden="true"></i></p>
+             <p class="user-name"> {{(auth()->check()) ? auth()->user()->full_name: 'Alexandre'}} <!--<i class="fa fa-sort-desc" aria-hidden="true"></i>--></p>
          
              <small style="float: left;    font-size: 9px;padding: 0 5px 0;">My Account</small>
        </div>

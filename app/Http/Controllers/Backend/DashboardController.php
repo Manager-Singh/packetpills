@@ -43,6 +43,7 @@ class DashboardController extends Controller
             'orderDataset'=>$this->getDataSets('App\Models\Order','count',$cyear),
             'orderRevenueDataset'=>$this->getDataSets('App\Models\Order','revenue',$cyear),
             'transferRequestDataset'=>$this->getDataSets('App\Models\TransferRequest','count',$cyear),
+            'prescriptionRefill'=>$this->getDataSets('App\Models\PrescriptionRefill','count',$cyear),
 
         ]);
     }

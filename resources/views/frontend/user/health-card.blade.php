@@ -47,9 +47,15 @@
                               <label for="myfile"><i class="fa fa-camera" aria-hidden="true"></i> <br>Health Card <br>(front)</label>
                               <div class="upload-after" {{($healthCard && isset($healthCard->front_img)) ? 'style=display:block;' : ''}} >
                               @if($healthCard && isset($healthCard->front_img))
-                            <img id="output" src="{{asset($healthCard->front_img)}}" width="100%" />
-                            <button type="button" class="btn-sm delete" onclick="removeInsurance({{$healthCard->id}},'front_img')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                            @else
+
+                              @if(Str::lower(pathinfo($healthCard->front_img, PATHINFO_EXTENSION)) === 'pdf')
+                                  <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                              @else
+                                  <img id="output" src="{{asset($healthCard->front_img)}}" width="100%" />
+                              @endif
+                              <button type="button" class="btn-sm delete" onclick="removeInsurance({{$healthCard->id}},'front_img')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+
+                             @else
                             <img id="output" src="#" width="100%" />
                             <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             @endif	
@@ -66,9 +72,13 @@
                               <label for="myfile"><i class="fa fa-camera" aria-hidden="true"></i> <br>Health Card <br>(back)</label>
                               <div class="upload-after" {{($healthCard && isset($healthCard->back_img)) ? 'style=display:block;' : ''}} >
                               @if($healthCard && isset($healthCard->back_img))
-                            <img id="output" src="{{asset($healthCard->back_img)}}" width="100%" />
-                            <button type="button" class="btn-sm delete" onclick="removeInsurance({{$healthCard->id}},'back_img')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                            @else
+                                @if(Str::lower(pathinfo($healthCard->back_img, PATHINFO_EXTENSION)) === 'pdf')
+                                    <img id="output" src="{{ asset('img/pdf.png') }}" alt="" />
+                                @else
+                                  <img id="output" src="{{asset($healthCard->back_img)}}" width="100%" />
+                                @endif
+                                <button type="button" class="btn-sm delete" onclick="removeInsurance({{$healthCard->id}},'back_img')" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                              @else
                             <img id="output" src="#" width="100%" />
                             <button type="button" class="btn-sm" id="delete" title="Delete file"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             @endif	
@@ -151,9 +161,19 @@
         
         reader.onload = function (e) {
           //console.log($(input).parent());
+          var fileExtension = input.files[0].name.split('.').pop().toLowerCase();
+          if (fileExtension === 'pdf') {
+            //$('#output').attr('data', e.target.result);
+            $(input).parent().find('#output').attr('src', "{{ asset('img/pdf.png') }}").width(150).height(200);
+
+            $(input).parent().find('.upload-after').addClass("d-block");
+
+          }else{
+
+            $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
+            $(input).parent().find('.upload-after').addClass("d-block");
+          }
           
-          $(input).parent().find('#output').attr('src', e.target.result).width(150).height(200);
-          $(input).parent().find('.upload-after').addClass("d-block");
         };
 
         reader.readAsDataURL(input.files[0]);

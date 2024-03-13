@@ -47,7 +47,13 @@ class OrdersTableController extends Controller
                 return $orders->created_at->toDateString();
             })
             ->addColumn('actions', function ($orders) {
-                return $orders->action_buttons;
+                //return $orders->action_buttons;
+                return '<div class="btn-group action-btn">
+                    
+                <a href="'.route('admin.auth.user.show', [$orders->user, 'tab' => 'orders']).'" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.edit').'" class="btn btn-success btn-sm">
+                    <i class="fas fa-eye"></i>
+                </a> 
+                </div>';
             })
             ->make(true);
     }

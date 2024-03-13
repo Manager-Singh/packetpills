@@ -132,6 +132,15 @@
                 <li class="divider"></li>
                 <li class="nav-item">
                     <a class="nav-link {{
+                        active_class(Route::is('admin/prescription/refill'))
+                    }}" href="{{ route('admin.prescription.refill.index') }}">
+                        <i class="nav-icon fas fa-prescription"></i>
+                        @lang('Refill Prescription')
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link {{
                         active_class(Route::is('admin/enterpriseconnects'))
                     }}" href="{{ route('admin.enterpriseconnects.index') }}">
                         <i class="nav-icon fas fa-file"></i>

@@ -16,6 +16,8 @@ use App\Models\Setting;
 use App\Models\PrescriptionRefill;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7\Request;
+use App\Models\PrescriptionOld;
+use App\Models\Order;
 //use PHPMailer\PHPMailer\Exception;
 
 /**
@@ -568,6 +570,27 @@ if (! function_exists('getGoogleApiTextSearchPaginate')) {
             }
             
         return false;
+    }
+}
+
+
+if (! function_exists('countPendingActivity')) {
+    /**
+     * @return bool
+     */
+    function countPendingActivity($type,$user_id,$status='pending')
+    {
+        
+        if( $type == 'prescription_refill'){
+            return PrescriptionRefill::where('user_id',$user_id)->where('status', $status)->count();
+        }elseif($type == 'existing_prescription_refill'){
+            return PrescriptionOld::where('user_id',$user_id)->where('status', $status)->count();
+        }elseif($type == 'orders'){
+            return Order::where('user_id',$user_id)->where('order_status', $status)->count();
+        }
+
+        
+        
     }
 }
 
