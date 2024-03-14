@@ -10,7 +10,7 @@
                             <a role="button" data-toggle="collapse" data-parent="#prescriptionRefill-{{ $prescriptionRefill->id }}"
                                 href="#order-collapse-{{ $prescriptionRefill->id }}" aria-expanded="true"
                                 aria-controls="order-collapse-{{ $prescriptionRefill->id }}">
-                                {{ $prescriptionRefill->transfer_number }} Created At
+                                {{ isset($prescriptionRefill->prescription->prescription_number) ? $prescriptionRefill->prescription->prescription_number : '' }} Created At
                                 {{ $prescriptionRefill->created_at }}
                                 <div class="status-wrapper-{{ $prescriptionRefill->id }}" style="display: inline;">
                                     @if ($prescriptionRefill->status == 'pending')
