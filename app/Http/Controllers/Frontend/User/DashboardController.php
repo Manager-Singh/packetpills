@@ -25,6 +25,7 @@ use App\Models\UserOtp;
 use Twilio\Rest\Client;
 use App\Models\PrescriptionOld;
 use Validator;
+use App\Models\MedicationItem;
 
 /**
  * Class DashboardController.
@@ -196,7 +197,23 @@ class DashboardController extends Controller
     public function profileCompleted(){
         return view('frontend.auth.steps.profile-completed');
     }
+    public function prescripitonRefillAjax(Request $request){
 
+       
+        // Render the Blade view to HTML
+        $data['prescription'] = Prescription::where('id',$request->prescription_id)->first();
+        
+        $html = view('frontend.user.prescription-refill',$data)->render();
+
+        // Encode the HTML into JSON format
+        $jsonResponse = [
+        'html' => $html
+        ];
+
+        // Return the JSON response
+        return response()->json($jsonResponse);
+        
+    }
 
     public function userPrescripiton(Request $request)
     {
@@ -236,16 +253,30 @@ class DashboardController extends Controller
             return redirect()->back()->withFlashInfo(__('Something went wrong'));
         }
     }
-    public function userPrescripitonRefill($id){
+    public function userPrescripitonRefill(Request $request){
 
-        $prescription = Prescription::find($id);
-        
+        if(!$request->has('prescription_id') || !$request->has('medication_ids')){
+            return redirect()->back()->withFlashInfo(__('Something went wrong'));
+        }
+        $prescription = Prescription::find($request->input('prescription_id'));
+        $count = 0;
         $user = Auth::user();
-        $prescriptionRefill = new PrescriptionRefill();
-        $prescriptionRefill->prescription_id =  $id;
-        $prescriptionRefill->user_id =  $user->id;
-        $prescriptionRefill->status =  'pending';
-        $medications = isset($prescription->medications) ? $prescription->medications : '';
+        $medication_ids = $request->input('medication_ids');
+        if($medication_ids){
+            foreach($medication_ids as $medication_id){
+                $prescriptionRefill = new PrescriptionRefill();
+                $prescriptionRefill->prescription_id =  $request->input('prescription_id');
+                $prescriptionRefill->user_id =  $user->id;
+                $prescriptionRefill->medication_id =  $medication_id;
+                $prescriptionRefill->status =  'pending';
+                $prescriptionRefill->save();
+                $count++;
+            }
+
+        }
+
+        
+        $medications = MedicationItem::whereIn('id',$medication_ids)->get();
         $patient_details = array(
             'name' =>$user->full_name,
             'dob' =>$user->date_of_birth,
@@ -257,7 +288,7 @@ class DashboardController extends Controller
         $email_data = array('template'=>'refill-email','data'=>array('medications'=>$medications,'patient'=>$patient_details));
         
         //dd($email_data['data']);
-        if($prescriptionRefill->save()){
+        if($count>0){
             
             if(isset($user->parent_id) && !empty($user->parent_id)){ 
                 $parient_name = $user->full_name;

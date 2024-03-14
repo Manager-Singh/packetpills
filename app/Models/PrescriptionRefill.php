@@ -2,7 +2,7 @@
 namespace App\Models;
 use App\Models\Prescription;
 use App\Models\Auth\User;
-
+use App\Models\MedicationItem;
 class PrescriptionRefill extends BaseModel
 {
    
@@ -14,6 +14,11 @@ class PrescriptionRefill extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function medication()
+    {
+        return $this->belongsTo(MedicationItem::class, 'medication_id');
     }
     
     public function getActionButtonsAttribute()

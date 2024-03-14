@@ -25,6 +25,14 @@
                                     @elseif($prescriptionRefill->status == 'We need to contact doctor')
                                     <span class="badge badge-warning"
                                             style="right: 29px; position: absolute;">{{ ucfirst($prescriptionRefill->status) }}</span>
+                                    @elseif($prescriptionRefill->status == 'processing')
+                                    <span class="badge badge-warning"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($prescriptionRefill->status) }}</span>
+                                    
+                                    @elseif($prescriptionRefill->status == 'declined')
+                                    <span class="badge badge-warning"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($prescriptionRefill->status) }}</span>
+                                    
                                     @endif
                                 </div>
                             </a>
@@ -40,11 +48,12 @@
                             <p>Patient Name: {{ $prescriptionRefill->user->first_name }} {{ $prescriptionRefill->user->last_name }}</p>
                             <p>Patient Email: {{ $prescriptionRefill->user->email }}</p>
                             <p>Medication: 
-                                @if(isset($prescriptionRefill->prescription->medications))
+                                <!-- @if(isset($prescriptionRefill->prescription->medications))
                                     @foreach($prescriptionRefill->prescription->medications as $medication)
                                        {{$medication->drug_name }}  ,
                                     @endforeach
-                                @endif
+                                @endif -->
+                                {{$prescriptionRefill->medication->drug_name }}
 
                             </p>
 

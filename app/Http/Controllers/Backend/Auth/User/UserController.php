@@ -243,13 +243,6 @@ class UserController extends Controller
         return $datat;
     }
 
-    
-
-
-    
-
-    
-
     /**
      * @param \App\Http\Requests\Backend\Auth\User\ManageUserRequest $request
      * @param \App\Models\Auth\User $user

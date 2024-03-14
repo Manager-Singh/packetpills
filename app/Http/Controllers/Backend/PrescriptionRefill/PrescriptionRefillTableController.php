@@ -37,12 +37,13 @@ class PrescriptionRefillTableController extends Controller
             })
             ->addColumn('medication', function ($prescriptions) {
                 $medica =[];
-                if(isset($prescriptions->prescription->medications)){
-                    foreach($prescriptions->prescription->medications as $medication){
-                      $medica[] = $medication->drug_name;
-                    }
-                }
-                return implode(', ',$medica);
+                // if(isset($prescriptions->prescription->medications)){
+                //     foreach($prescriptions->prescription->medications as $medication){
+                //       $medica[] = $medication->drug_name;
+                //     }
+                // }
+                // return implode(', ',$medica);
+                return $prescriptions->medication->drug_name;
             })
             ->addColumn('created_at', function ($prescriptions) {
                 return $prescriptions->created_at->toDateString();

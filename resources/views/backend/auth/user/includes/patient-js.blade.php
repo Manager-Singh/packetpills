@@ -417,7 +417,15 @@
                                         var msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+refill_status_text+'</span>';
                                     }else if(refill_status == 'approved'){
                                         var msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+refill_status_text+'</span>';
+                                    }else if(refill_status == 'We need to contact doctor'){
+                                        var msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+refill_status_text+'</span>';
+                                    }else if(refill_status == 'processing'){
+                                        var msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+refill_status_text+'</span>';
+                                    }else if(refill_status == 'declined'){
+                                        var msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+refill_status_text+'</span>';
                                     }
+
+                                    //declined
                                     $('.status-wrapper-'+nprescription_id).html(msg);
                                    $("#overlay").fadeOut(300);
                                 } else {

@@ -66,6 +66,191 @@ div#accordionExample {
     width: 100%;
     height: 200px;
 }
+
+.medication-section .btn:hover {
+    background-color: #fff;
+    color: #638e3c;
+    border-color: #638e3c;
+}
+.medication-section .btn {
+    background-color: #8ac03d;
+    border-color: #638e3c;
+}
+.medication-se .custom-control.custom-checkbox {
+    text-align: center;
+    padding: 15px 0px;
+    box-shadow: 1px 1px 1px 1px #8ac03d;
+    border-radius: 6px;
+}
+.medication-section .order-btn {
+    border-radius: 25px;
+    margin: 30px 0 12px 0;
+    padding: 9px 42px;
+    font-size: 22px;
+    border: 1px solid;
+}
+.card__input {
+  position: absolute;
+  display: block;
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+}
+.card__input:checked ~ .card__body {
+  --shadow: 0 0 0 0px var(--card-shadow);
+}
+.card__input:checked ~ .card__body .card__body-cover-checkbox {
+  --check-bg: var(--background-checkbox);
+  --check-border: #fff;
+  --check-scale: 1;
+  --check-opacity: 1;
+}
+.card__input:checked ~ .card__body .card__body-cover-checkbox--svg {
+  --stroke-color: #fff;
+  --stroke-dashoffset: 0;
+}
+.card__input:checked ~ .card__body .card__body-cover:after {
+  --opacity-bg: 0;
+}
+.card__input:checked ~ .card__body .card__body-cover-image {
+  --filter-bg: grayscale(0);
+}
+.card__input:disabled ~ .card__body {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.card__input:disabled ~ .card__body:active {
+  --scale: 1;
+}
+.card__body {
+  display: grid;
+  grid-auto-rows: calc(var(--card-height) - var(--header-height)) auto;
+  background: var(--background);
+  /* height: var(--card-height);
+  width: var(--card-width); */
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: var(--shadow, 0 4px 4px 0 rgba(0, 0, 0, 0.02));
+  transition: transform var(--transition), box-shadow var(--transition);
+  transform: scale(var(--scale, 1)) translateZ(0);
+  text-align: center;
+    align-items: center;
+}
+.card__body:active {
+  --scale: 0.96;
+}
+.card__body-cover {
+  --c-border: var(--card-radius) var(--card-radius) 0 0;
+  --c-width: 100%;
+  --c-height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.card__body-cover:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--c-width);
+  height: var(--c-height);
+  border-radius: var(--c-border);
+  background: linear-gradient(to bottom right, var(--background-image));
+  mix-blend-mode: var(--blend-mode);
+  opacity: var(--opacity-bg, 1);
+  transition: opacity var(--transition) linear;
+}
+.card__body-cover-image {
+  width: var(--c-width);
+  height: var(--c-height);
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: var(--c-border);
+  align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.card__body-cover-checkbox {
+  background: var(--check-bg, var(--background-checkbox));
+  border: 2px solid var(--check-border, #fff);
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  opacity: var(--check-opacity, 0);
+  transition: transform var(--transition), opacity calc(var(--transition) * 1.2) linear;
+  transform: scale(var(--check-scale, 0));
+}
+.card__body-cover-checkbox--svg {
+  width: 13px;
+  height: 11px;
+  display: inline-block;
+  vertical-align: top;
+  fill: none;
+  margin: 6px 0 0 2px;
+  stroke: var(--stroke-color, #fff);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: var(--stroke-dashoffset, 16px);
+  transition: stroke-dashoffset 0.4s ease var(--transition);
+}
+.card {
+    --background: #fff;
+    --background-checkbox: #8ac03d;
+    --background-image: #fff, rgba(0, 107, 175, 0.2);
+    --text-color: #666;
+    --text-headline: #000;
+    --card-shadow: #8ac03d;
+    --card-height: 190px;
+    --card-width: 190px;
+    --card-radius: 12px;
+    --header-height: 47px;
+    --blend-mode: overlay;
+    --transition: 0.15s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.card:nth-child(odd) .card__body-cover-image {
+  --x-y1: 100% 90%;
+  --x-y2: 67% 83%;
+  --x-y3: 33% 90%;
+  --x-y4: 0% 85%;
+}
+.card:nth-child(even) .card__body-cover-image {
+  --x-y1: 100% 85%;
+  --x-y2: 73% 93%;
+  --x-y3: 25% 85%;
+  --x-y4: 0% 90%;
+}
+
+.medication-se input, .medication-se select {
+    width: unset;
+    height: unset;
+    border-radius: unset;
+    border: unset;
+    padding: 12px;
+    visibility: hidden;
+}
+
+.medication-section label.card {
+    padding: 3px !important;
+    border-radius: 16px;
+}
+.details-main {
+    float: left;
+    text-align: left;
+}
 </style>
 @endpush
 @section('content')
@@ -264,9 +449,11 @@ $prescription_refills = getPrescriptionRefill($prescription->id);
                     <td> Medication</td>
                     <td class="text-right"> @if(isset($prescription_refill->prescription->medications))
                                     @foreach($prescription_refill->prescription->medications as $medication)
-                                       {{$medication->drug_name }}  ,
+                                       <!-- {{$medication->drug_name }}  , -->
                                     @endforeach
-                                @endif</td>
+                                @endif
+                                {{$prescription_refill->medication->drug_name }} 
+                              </td>
                   </tr>
 
 @php
@@ -278,6 +465,10 @@ if ($prescription_refill->status == 'pending'){
   $status_class = "badge-success";
 }elseif($prescription_refill->status == 'We need to contact doctor'){
   $status_class = "badge-warning";
+}elseif($prescription_refill->status == 'processing'){
+  $status_class = "badge-warning";
+}elseif($prescription_refill->status == 'declined'){
+  $status_class = "badge-danger";
 }else{
   $status_class = "";
 }
@@ -484,6 +675,36 @@ if ($prescription_old->status == 'pending'){
   </div>
   <div class="col-md-1"></div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="ask-for-refill" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ask for a refill</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body medication-section">
+       <div class="col-md-12">
+       <p class="txt-b mb-0">Medications</p>
+      <small>Choose medications to Refill</small>
+       </div>
+       <div class="col-md-12">
+       <form id="address-form" method='post' action="{{route('frontend.user.prescription.refill')}}" enctype='multipart/form-data'>
+        
+
+        </form>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @push('after-scripts')
@@ -558,6 +779,8 @@ function add_prescription_field(){
   $('.askForRefill').change(function(){
     if($(this).is(":checked")) {
 
+      //$('#ask-for-refill').modal('show');
+      //return false;
       _this = $(this);
 
       // console.log('sd jkl');
@@ -571,11 +794,41 @@ function add_prescription_field(){
           closeOnConfirm: false
         },
     function(){
+
+        // console.log(_this.attr('id'));
+        var id = _this.attr('id');
       swal.close();
       $(".loader-container").show();
-      // console.log(_this.attr('id'));
-      var id = _this.attr('id');
-      window.location.href= "{{ route('frontend.user.prescription.refill', ['id' => '__id__']) }}".replace('__id__', id);
+
+      $.ajax({
+        url: "{{ route('frontend.user.prescription.refill.ajax') }}",
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            prescription_id: id
+        },
+        dataType: 'json', // Specify that you expect a JSON response
+        success: function(response) {
+          $(".loader-container").hide();
+            // Assuming there's a div with id 'form-container' where you want to render the form
+            $('#ask-for-refill').modal({backdrop: 'static', keyboard: false,show:true});
+            if(response.html){
+              $('#address-form').html(response.html); // Assuming the JSON response contains the HTML in 'html' attribute
+            }else{
+              $('#address-form').html('');
+            }
+        },
+        error: function(xhr) {
+          $('#ask-for-refill').modal('hide');
+            // Handle error
+            console.log(xhr.responseText);
+            $('#address-form').html('');
+        }
+      });
+
+
+    
+     // window.location.href= "{{ route('frontend.user.prescription.refill', ['id' => '__id__']) }}".replace('__id__', id);
     });
 
     }

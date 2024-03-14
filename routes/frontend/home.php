@@ -33,7 +33,8 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::group(['middleware' => ['checkSteps']], function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::get('prescription', [DashboardController::class, 'userPrescripiton'])->name('prescription');
-            Route::get('prescription/refill/{id}', [DashboardController::class, 'userPrescripitonRefill'])->name('prescription.refill');
+            Route::post('prescription/refill-ajax', [DashboardController::class, 'prescripitonRefillAjax'])->name('prescription.refill.ajax');
+            Route::post('prescription/refill', [DashboardController::class, 'userPrescripitonRefill'])->name('prescription.refill');
             Route::get('prescription/delete/{id}', [DashboardController::class, 'userPrescripitonDelete'])->name('prescription.delete');
             Route::get('prescription/{prescription_number}', [DashboardController::class, 'singleUserPrescripiton'])->name('prescription.single');
             Route::get('medications', [DashboardController::class, 'medications'])->name('medications');

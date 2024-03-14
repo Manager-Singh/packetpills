@@ -45,4 +45,10 @@ class MedicationItem extends BaseModel
     protected $appends = [
         'display_status',
     ];
+
+    public function getDisplayStatusAttribute($value)
+{
+    // Define your logic here to generate the display status
+}
+
 }
