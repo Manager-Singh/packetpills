@@ -43,7 +43,7 @@ class PrescriptionRefillTableController extends Controller
                 //     }
                 // }
                 // return implode(', ',$medica);
-                return $prescriptions->medication->drug_name;
+                return isset($prescriptions->medication->drug_name) ? $prescriptions->medication->drug_name : '';
             })
             ->addColumn('created_at', function ($prescriptions) {
                 return $prescriptions->created_at->toDateString();

@@ -55,7 +55,7 @@
                             <h4 class="text-center">Medication Details</h4>
                             @foreach($order->order_items as $order_item)
                             <div class="order-medication-details">
-                            <p>Drug Name : {{ $order_item->medication->drug_name }}</p>
+                            <p>Drug Name : {{ isset($order_item->medication->drug_name) ? $order_item->medication->drug_name : '' }}</p>
                             <p>Price : ${{ $order_item->price }}</p>
                             <p>Doctor Name : {{ $order_item->medication->prescribing_doctor }}</p>
                             </div>

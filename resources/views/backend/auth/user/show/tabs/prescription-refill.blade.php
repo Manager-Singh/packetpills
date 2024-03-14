@@ -53,7 +53,7 @@
                                        {{$medication->drug_name }}  ,
                                     @endforeach
                                 @endif -->
-                                {{$prescriptionRefill->medication->drug_name }}
+                                {{isset($prescriptionRefill->medication->drug_name) ? $prescriptionRefill->medication->drug_name : '' }}
 
                             </p>
 

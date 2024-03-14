@@ -452,7 +452,7 @@ $prescription_refills = getPrescriptionRefill($prescription->id);
                                        <!-- {{$medication->drug_name }}  , -->
                                     @endforeach
                                 @endif
-                                {{$prescription_refill->medication->drug_name }} 
+                                {{isset($prescription_refill->medication->drug_name) ? $prescription_refill->medication->drug_name : ''}} 
                               </td>
                   </tr>
 
