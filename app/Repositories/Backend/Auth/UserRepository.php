@@ -1509,5 +1509,17 @@ class UserRepository extends BaseRepository
         });
     }
 
+    public function prescriptionMedicationDeleted($data){
+        $id = $data['id'];
+        if($medication = MedicationItem::find($id)){
+            $medication->status = 'cancelled';
+            $medication->save();
+            return 1;
+        }else{
+            return 0;
+        }
+        //$prescriptionRefill = PrescriptionRefill::find($id)->delete();
+    }
+
     
 }

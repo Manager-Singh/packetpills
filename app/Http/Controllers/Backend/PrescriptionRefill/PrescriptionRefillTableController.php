@@ -29,8 +29,8 @@ class PrescriptionRefillTableController extends Controller
      */
     public function __invoke(ManagePrescriptionsRequest $request)
     {
-        
-        return Datatables::of($this->repository->getForDataTable())
+        $status = $request->input('status', '');
+        return Datatables::of($this->repository->getForDataTable($status))
             ->escapeColumns(['name'])
             ->addColumn('prescription_number', function ($prescriptions) {
                 return isset($prescriptions->prescription->prescription_number) ? $prescriptions->prescription->prescription_number : '--';
@@ -47,6 +47,9 @@ class PrescriptionRefillTableController extends Controller
             })
             ->addColumn('created_at', function ($prescriptions) {
                 return $prescriptions->created_at->toDateString();
+            })
+            ->addColumn('status', function ($prescriptions) {
+                return ucfirst($prescriptions->status);
             })
             ->addColumn('actions', function ($prescriptions) {
                 return '<div class="btn-group action-btn">

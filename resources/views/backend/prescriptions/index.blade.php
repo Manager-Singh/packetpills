@@ -6,6 +6,14 @@
 @include('backend.prescriptions.includes.breadcrumb-links')
 @endsection
 
+@php 
+if(isset($_GET['status'])){
+    $status = '?status='.$_GET['status'];
+}else{
+    $status = '';
+}
+@endphp
+
 @section('content')
 <div class="card">
     <div class="card-body">
@@ -22,12 +30,13 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="table-responsive">
-                    <table id="prescriptions-table" class="table" data-ajax_url="{{ route("admin.prescriptions.get") }}">
+                    <table id="prescriptions-table" class="table" data-ajax_url="{{ route("admin.prescriptions.get") }}{{$status}}">
                         <thead>
                             <tr>
                                 <th>{{ trans('labels.backend.access.prescriptions.table.prescription_id') }}</th>
                                 <th>Prescription Number</th>
                                 <th>{{ trans('labels.backend.access.prescriptions.table.createdat') }}</th>
+                                <th>Status</th>
                                 <th>{{ trans('labels.general.actions') }}</th>
                             </tr>
                         </thead>

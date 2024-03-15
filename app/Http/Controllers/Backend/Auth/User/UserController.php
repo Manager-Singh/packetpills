@@ -172,18 +172,14 @@ class UserController extends Controller
     public function edit_paymentmethod(Request $request)
     {
         $pfile = 'files_'.$request->payment_method_id;
-
-        // print_r($request->file($pfile));
-        // die;
-       $this->userRepository->edit_paymentmethod($request->except(['_token', '_method','files']),$request->file($pfile));
+        $this->userRepository->edit_paymentmethod($request->except(['_token', '_method','files']),$request->file($pfile));
 
         return redirect()->back()->with('tab','paymentmethod')->withFlashSuccess(__('Payment Method Successfully Updated.'));
     }
     public function create_medication(Request $request)
     {
        $this->userRepository->create_medication($request->except(['_token', '_method']));
-
-        return redirect()->back()->with('tab','overview')->withFlashSuccess(__('Medication Successfully Created.'));
+       return redirect()->back()->with('tab','medications')->withFlashSuccess(__('Medication Successfully Created.'));
     }
     public function createMedicationOrder(Request $request)
     {
@@ -253,7 +249,10 @@ class UserController extends Controller
     {
         if (!$request->has('tab')) {
             // If 'tab' parameter is not present, remove 'tab' from session
-            $request->session()->forget('tab');
+            if (!session()->has('tab')) {
+                $request->session()->forget('tab');
+            }
+            
         } else {
             $request->session()->put('tab', $request->input('tab'));
         }
@@ -263,11 +262,13 @@ class UserController extends Controller
         $auto_messages = AutoMessage::get()->pluck('message','id');
         $drugs = Drug::get()->pluck('brand_name','id');
         $province = Province::get()->pluck('name','slug');
-        $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->orderBy('created_at','desc')->get();
-        $aaprescriptions = Prescription::where('user_id',$user->id)->orderBy('created_at','desc')->get();
-        $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->orderBy('created_at','desc')->get();
+        $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with(['medications'=> function ($query) {
+            $query->where('status', '!=', 'cancelled');
+        }])->whereHas('medications')->where('status','!=','cancelled')->orderBy('created_at','desc')->get();
+        $aaprescriptions = Prescription::where('user_id',$user->id)->where('status','!=','cancelled')->orderBy('created_at','desc')->get();
+        $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->where('order_status','!=','cancelled')->orderBy('created_at','desc')->get();
         $transferRequests = TransferRequest::where('user_id',$user->id)->orderBy('created_at','desc')->get();
-        $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->where('status','!=','cancelled')->orderBy('created_at','desc')->get();
         $existingPrescriptions = PrescriptionOld::where('user_id',$user->id)->orderBy('created_at','desc')->get();
         //  print_r('<pre>');
         //  print_r($orders);
@@ -293,11 +294,13 @@ class UserController extends Controller
         $auto_messages = AutoMessage::get()->pluck('message','id');
         $drugs = Drug::get()->pluck('brand_name','id');
         $province = Province::get()->pluck('name','slug');
-        $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with('medications')->has('medications')->orderBy('created_at','desc')->get();
-        $aaprescriptions = Prescription::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $prescriptions = Prescription::where('user_id',$user->id)->where('status','approved')->with(['medications'=> function ($query) {
+            $query->where('status', '!=', 'cancelled');
+        }])->has('medications')->where('status','!=','cancelled')->orderBy('created_at','desc')->get();
+        $aaprescriptions = Prescription::where('user_id',$user->id)->where('status','!=','cancelled')->orderBy('created_at','desc')->get();
         $orders = Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->orderBy('created_at','desc')->get();
         $transferRequests = TransferRequest::where('user_id',$user->id)->orderBy('created_at','desc')->get();
-        $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('status','!=','cancelled')->where('user_id',$user->id)->orderBy('created_at','desc')->get();
         $existingPrescriptions = PrescriptionOld::where('user_id',$user->id)->orderBy('created_at','desc')->get();
         //  print_r('<pre>');
         //  print_r($orders);
@@ -434,6 +437,12 @@ class UserController extends Controller
     public function prescriptionRefillStatusUpdate(Request $request)
     {
        $data = $this->userRepository->prescriptionRefillStatusUpdate($request->except(['_token', '_method','files']));
+        return $data;
+    }
+
+    public function prescriptionMedicationDeleted(Request $request)
+    {
+        $data = $this->userRepository->prescriptionMedicationDeleted($request->except(['_token', '_method']));
         return $data;
     }
 

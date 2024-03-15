@@ -41,16 +41,23 @@ class PrescriptionsRepository extends BaseRepository
     /**
      * @return mixed
      */
-    public function getForDataTable()
+    public function getForDataTable($status=null)
     {
-       return $this->query()
+       //dd($status);
+        $query = $this->query()
             ->has('user')
             ->select([
                 'prescriptions.id',
                 'prescriptions.prescription_number',
                 'prescriptions.user_id',
                 'prescriptions.created_at',
-            ])->with('user')->orderBy('created_at', 'desc');
+                'prescriptions.status',
+            ])->with('user');
+
+        if($status === 'cancelled'){
+            $query->where('status', 'cancelled');
+        }
+        return $query->orderBy('created_at', 'desc');
     }
 
     /**

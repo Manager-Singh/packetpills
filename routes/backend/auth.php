@@ -53,6 +53,7 @@ Route::group([
         Route::post('user/order/update/status', [UserController::class, 'orderStatusUpdate'])->name('user.order.update.status');
         Route::post('user/transfer/update/status', [UserController::class, 'transferStatusUpdate'])->name('user.transfer.update.status');
         Route::post('user/prescription/refill/update/status', [UserController::class, 'prescriptionRefillStatusUpdate'])->name('user.prescription.refill.status');
+        Route::post('user/prescription/refill/deleted', [UserController::class, 'prescriptionMedicationDeleted'])->name('user.prescription.refill.deleted');
         
         Route::group(['prefix' => 'user/{user}/employee'], function () {
             // User

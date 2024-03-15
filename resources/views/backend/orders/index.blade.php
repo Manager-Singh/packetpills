@@ -5,7 +5,13 @@
 @section('breadcrumb-links')
 @include('backend.orders.includes.breadcrumb-links')
 @endsection
-
+@php 
+if(isset($_GET['status'])){
+    $status = '?status='.$_GET['status'];
+}else{
+    $status = '';
+}
+@endphp
 @section('content')
 <div class="card">
     <div class="card-body">
@@ -22,7 +28,7 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="table-responsive">
-                    <table id="orders-table" class="table" data-ajax_url="{{ route("admin.orders.get") }}">
+                    <table id="orders-table" class="table" data-ajax_url="{{ route("admin.orders.get") }}{{$status}}">
                         <thead>
                             <tr>
                                 <th>Order Number</th>

@@ -267,6 +267,32 @@
                             dataType: 'JSON',
                             success: function(data) {
                                 if (data != 0) {
+                                    if (order_status == 'pending'){
+                                        msg = '<span class="badge badge-warning"  style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'cancelled'){
+                                        msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'approved'){
+                                        msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'We need to contact doctor'){
+                                        msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'processing'){
+                                        msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'declined'){
+                                        msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'ready_to_pick'){
+                                        msg = '<span class="badge badge-warning" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'picked_up'){
+                                        msg = '<span class="badge badge-warning" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'in_transit'){
+                                        msg = '<span class="badge badge-warning" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(order_status == 'delivered'){
+                                        msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }
+
+                                    //declined
+                                    $('.status-wrapper-'+data).html(msg);
+
+
                                    $("#overlay").fadeOut(300);
                                 } else {
                                     console.log('Problem with save data');
@@ -517,5 +543,49 @@
 
 
 });
+
+    
+    function medicationDeleted(id) {
+        var memdication_id = id;
+        console.log(memdication_id); 
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Do you want to proceed with this?',
+            theme: 'material', // 'material', 'bootstrap'
+            buttons: {
+                confirm: function() {
+                    
+                    var ajaxurl = "{{ route('admin.auth.user.prescription.refill.deleted') }}";
+                    $("#overlay").fadeIn(300);
+                    $.ajax({
+                        url: ajaxurl,
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id: memdication_id,
+                        },
+                        dataType: 'JSON',
+                        success: function(data) {
+                            if (data != 0) {
+                                $("#medi-"+memdication_id).fadeOut(300);
+                                $("#overlay").fadeOut(300);
+                            } else {
+                                console.log('Problem with save data');
+                            }
+                            // location.reload();
+                        //  window.location.href = window.location.href+"#prescription-refill";
+                            $("#medi-"+memdication_id).fadeOut(300);
+                            $("#overlay").fadeOut(300);
+                        }
+                    });
+
+                },
+                cancel: function() {
+
+                }
+            }
+        });
+
+    }
     </script>
 @endsection

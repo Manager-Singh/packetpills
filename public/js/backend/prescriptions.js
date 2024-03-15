@@ -23,6 +23,7 @@
                         { data: 'prescription_id', name: 'prescription_id' },
                         { data: 'prescription_number', name: 'prescription_number' },
                         { data: 'created_at', name: 'created_at' },
+                        { data: 'status', name: 'status' },
                         { data: 'actions', name: 'actions', searchable: false, sortable: false }
                     ],
                     order: [[3, "asc"]],

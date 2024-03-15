@@ -42,16 +42,20 @@ class PrescriptionRefillRepository extends BaseRepository
     /**
      * @return mixed
      */
-    public function getForDataTable()
+    public function getForDataTable($status)
     {
        
        
-        return $this->query()
+        $query = $this->query()
             ->has('user')
-            ->with(['prescription','user'])
-            ->orderBy('created_at','desc');
+            ->whereHas('medication')
+            ->with(['prescription','user']);
+            
 
-           
+            if($status === 'cancelled'){
+                $query->where('status', 'cancelled');
+            }
+            return $query->orderBy('created_at', 'desc');
     }
 
 

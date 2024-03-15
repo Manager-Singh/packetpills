@@ -5,7 +5,13 @@
 @section('breadcrumb-links')
 @include('backend.prescription-refill.includes.breadcrumb-links')
 @endsection
-
+@php 
+if(isset($_GET['status'])){
+    $status = '?status='.$_GET['status'];
+}else{
+    $status = '';
+}
+@endphp
 @section('content')
 <div class="card">
     <div class="card-body">
@@ -22,12 +28,13 @@
         <div class="row mt-4">
             <div class="col">
                 <div class="table-responsive">
-                    <table id="prescriptions-table" class="table" data-ajax_url="{{ route("admin.prescription.refill.get") }}">
+                    <table id="prescriptions-table" class="table" data-ajax_url="{{ route("admin.prescription.refill.get") }}{{$status}}">
                         <thead>
                             <tr>
                                 <th>Prescription Number</th>
                                 <th>Medication</th>
                                 <th>{{ trans('labels.backend.access.prescriptions.table.createdat') }}</th>
+                                <th>Status</th>
                                 <th>{{ trans('labels.general.actions') }}</th>
                             </tr>
                         </thead>

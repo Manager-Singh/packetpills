@@ -4,7 +4,8 @@
             <a class="btn dropdown-toggle" href="#" role="button" id="breadcrumb-dropdown-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Orders</a>
 
             <div class="dropdown-menu" aria-labelledby="breadcrumb-dropdown-1">
-                <a class="dropdown-item" href="{{ route('admin.orders.index') }}">Active Orders</a>
+                <a class="dropdown-item" href="{{ route('admin.orders.index') }}">All Orders</a>
+                <a class="dropdown-item" href="{{ route('admin.orders.index') }}?status=cancelled">Order Cancel</a>
             </div>
         </div><!--dropdown-->
 

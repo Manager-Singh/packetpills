@@ -141,7 +141,7 @@ div#accordionExample {
                         @if(isset($order) && isset($order->order_items))
                             @foreach($order->order_items as $item)
                                 <p><strong>{{isset($item->medication->drug_name) ? $item->medication->drug_name : ''}}</strong></p>
-                                <p class="left">${{$item->medication->price}}</p>
+                                <p class="left">${{ isset($item->medication->price) ? $item->medication->price : '' }}</p>
                             @endforeach 
                         @else
 

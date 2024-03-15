@@ -22,37 +22,39 @@
                             <h4 class="text-center">Medications Details</h4>
                             <form action="{{ route('admin.auth.user.create.medication.order') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="prescription_id"
-                                                    value="{{ $prescription->id }}">
-                                                <input type="hidden" name="user_id" value="{{ $user->id }}">
-                            @foreach ($prescription->medications as $medication)
-                                <div class="row medication-seprator">
-                                    <div class="col-md-1 from-control-label">
-                                        <input type="checkbox" id="medication-iteam-{{ $medication->id }}"
-                                            class="box-size custom-checkbox medication-iteam-{{ $medication->id }}"
-                                            value="{{ $medication->id }}" name="medication[]">
-                                    </div>
-                                    <label class="col-md-11" for="medication-iteam-{{ $medication->id }}">
-                                        <div class="row">
-                                            <div class="col-md-2 from-control-label">Prescribing Doctor</div>
-                                            <div class="col-md-10">
-                                                {{ $medication->prescribing_doctor }}
-                                            </div>
-                                            <div class="col-md-2 from-control-label">Drug Name</div>
-                                            <div class="col-md-10">
-                                                {{ $medication->drug_name }}
-                                            </div>
-                                            <div class="col-md-2 from-control-label">Price</div>
-                                            <div class="col-md-10">
-                                                ($) {{ $medication->price }} 
-                                            </div>
+                            <input type="hidden" name="prescription_id" value="{{ $prescription->id }}">
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                @foreach ($prescription->medications as $medication)
+                                    <div class="row medication-seprator" id="medi-{{$medication->id}}">
+                                        <div class="col-md-1 from-control-label">
+                                            <input type="checkbox" id="medication-iteam-{{ $medication->id }}"
+                                                class="box-size custom-checkbox medication-iteam-{{ $medication->id }}"
+                                                value="{{ $medication->id }}" name="medication[]">
                                         </div>
-                                    </label>
-                                    <!--col-->
-                                </div>
-                            @endforeach
+                                        <label class="col-md-10" for="medication-iteam-{{ $medication->id }}">
+                                            <div class="row">
+                                                <div class="col-md-2 from-control-label">Prescribing Doctor</div>
+                                                <div class="col-md-10">
+                                                    {{ $medication->prescribing_doctor }}
+                                                </div>
+                                                <div class="col-md-2 from-control-label">Drug Name</div>
+                                                <div class="col-md-10">
+                                                    {{ $medication->drug_name }}
+                                                </div>
+                                                <div class="col-md-2 from-control-label">Price</div>
+                                                <div class="col-md-10">
+                                                    ($) {{ $medication->price }} 
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <div class="col-md-1">
+                                            <i class="nav-icon fas fa-trash text-danger" style="font-size:20px" onclick="medicationDeleted('{{ $medication->id }}')"></i>
+                                        </div>
+                                        <!--col-->
+                                    </div>
+                                @endforeach
 
-                           <button class="btn btn-success">Create Order</button>
+                           <button class="btn btn-success mt-3">Create Order</button>
                            <form>
                         </div>
                     </div>

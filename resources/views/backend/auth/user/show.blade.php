@@ -9,6 +9,7 @@
 
 @section('content')
     @php
+    
         if (session()->has('tab')) {
             $tab = session()->get('tab');
         } else {

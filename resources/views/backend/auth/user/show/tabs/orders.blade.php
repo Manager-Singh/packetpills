@@ -14,9 +14,7 @@
                                 {{ $order->created_at }}
 
                                 <div class="status-wrapper-{{ $order->id }}" style="display: inline;">
-                                    
-                                        <span class="badge badge-warning"
-                                            style="right: 29px; position: absolute;">{{ ucfirst($order->order_status) }}</span>
+                                    <span class="badge badge-warning" style="right: 29px; position: absolute;">{{ ucfirst($order->order_status) }}</span>
                                     
                                 </div>
                             </a>
@@ -57,7 +55,7 @@
                             <div class="order-medication-details">
                             <p>Drug Name : {{ isset($order_item->medication->drug_name) ? $order_item->medication->drug_name : '' }}</p>
                             <p>Price : ${{ $order_item->price }}</p>
-                            <p>Doctor Name : {{ $order_item->medication->prescribing_doctor }}</p>
+                            <p>Doctor Name : {{ isset($order_item->medication->prescribing_doctor) ? $order_item->medication->prescribing_doctor : '--' }}</p>
                             </div>
                             
                             @endforeach

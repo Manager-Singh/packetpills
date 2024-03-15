@@ -29,7 +29,8 @@ class OrdersTableController extends Controller
      */
     public function __invoke(ManageOrdersRequest $request)
     {
-        return Datatables::of($this->repository->getForDataTable())
+        $status = $request->input('status', '');
+        return Datatables::of($this->repository->getForDataTable($status))
             ->escapeColumns(['name'])
             ->addColumn('order_number', function ($orders) {
                 return $orders->order_number;
@@ -38,10 +39,10 @@ class OrdersTableController extends Controller
                 return $orders->total_amount;
             })
             ->addColumn('order_status', function ($orders) {
-                return $orders->order_status;
+                return ucfirst($orders->order_status);
             })
             ->addColumn('payment_status', function ($orders) {
-                return $orders->payment_status;
+                return ucfirst($orders->payment_status);
             })
             ->addColumn('created_at', function ($orders) {
                 return $orders->created_at->toDateString();

@@ -41,9 +41,9 @@ class OrdersRepository extends BaseRepository
     /**
      * @return mixed
      */
-    public function getForDataTable()
+    public function getForDataTable($status)
     {
-       return $this->query()->has('user')->select([
+        $query = $this->query()->has('user')->select([
                 'orders.id',
                 'orders.order_number',
                 'orders.total_amount',
@@ -51,7 +51,12 @@ class OrdersRepository extends BaseRepository
                 'orders.payment_status',
                 'orders.user_id',
                 'orders.created_at',
-            ])->with('user')->orderBy('created_at', 'desc');
+            ])->with('user');
+
+            if($status === 'cancelled'){
+                $query->where('order_status', 'cancelled');
+            }
+            return $query->orderBy('created_at', 'desc');
     }
 
    

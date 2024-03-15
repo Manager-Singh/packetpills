@@ -29,8 +29,8 @@ class PrescriptionsTableController extends Controller
      */
     public function __invoke(ManagePrescriptionsRequest $request)
     {
-        
-        return Datatables::of($this->repository->getForDataTable())
+        $status = $request->input('status', '');
+        return Datatables::of($this->repository->getForDataTable($status))
             ->escapeColumns(['name'])
             ->addColumn('prescription_id', function ($prescriptions) {
                 return $prescriptions->id;
@@ -40,6 +40,9 @@ class PrescriptionsTableController extends Controller
             })
             ->addColumn('created_at', function ($prescriptions) {
                 return $prescriptions->created_at->toDateString();
+            })
+            ->addColumn('status', function ($prescriptions) {
+                return ucfirst($prescriptions->status);
             })
             ->addColumn('actions', function ($prescriptions) {
                 return $prescriptions->action_buttons;

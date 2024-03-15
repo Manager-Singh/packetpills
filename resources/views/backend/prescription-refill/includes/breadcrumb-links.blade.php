@@ -4,8 +4,11 @@
             <a class="btn dropdown-toggle" href="#" role="button" id="breadcrumb-dropdown-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ trans('labels.backend.access.prescriptions.all') }}</a>
 
             <div class="dropdown-menu" aria-labelledby="breadcrumb-dropdown-1">
-                <a class="dropdown-item" href="{{ route('admin.prescription.refill.index') }}">@lang('menus.backend.access.prescriptions.active')</a>
+                <a class="dropdown-item" href="{{ route('admin.prescription.refill.index') }}">@lang('Prescriptions')</a>
+                <a class="dropdown-item" href="{{ route('admin.prescription.refill.index') }}?status=cancelled">Cancel Refill</a>
+            
             </div>
+            
         </div><!--dropdown-->
 
         <!--<a class="btn" href="#">Static Link</a>-->
