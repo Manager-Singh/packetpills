@@ -251,6 +251,11 @@ div#accordionExample {
     float: left;
     text-align: left;
 }
+.order .head-existing-prescription p {
+    font-size: 22px;
+    font-weight: 900;
+    color: #000;
+}
 </style>
 @endpush
 @section('content')
@@ -504,7 +509,7 @@ if ($prescription_refill->status == 'pending'){
         </div>
        @endif
         <div class="order">
-          <div class="order-head">
+          <div class="order-head head-existing-prescription">
             <p class="txt">Existing MisterPharmacist Patients: Enter Your Prescription(s) Details For A Refill Request</p>
           </div>
           <div class="order-body existing-pres">
@@ -580,7 +585,7 @@ if ($prescription_refill->status == 'pending'){
 
         
         <div class="order">
-        <div class="order-head">
+        <div class="order-head head-existing-prescription">
           <p class="txt">Existing prescriptions refill requests</p>
           </div>
           <div class="order-body table-responsive">
@@ -738,7 +743,7 @@ function add_prescription_field(){
   html +='<div class="row child-idv" bis_skin_checked="1">'+
               '<div class="col-sm-4 nopadding" bis_skin_checked="1">'+
               '  <div class="form-group" bis_skin_checked="1">'+
-                  '<input type="text" class="form-control" name="prescription_number[]" value="" placeholder="Rx# 20231003-0000000001" required="">'+
+                  '<input type="text" class="form-control" name="prescription_number[]" value="" placeholder="Rx#" required="">'+
                 '</div>'+
               '</div>'+
               '<div class="col-sm-4 nopadding" bis_skin_checked="1">'+

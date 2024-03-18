@@ -41,7 +41,14 @@
                                     </div>
                                     <div class="col-md-6">
                                     <p>Image: </p>
+                                    @if(isset($existingPrescription->image) && !empty($existingPrescription->image))
                                     <img  width="400" height="250" src="{{asset($existingPrescription->image)}}" />
+                                    
+                                    @else
+
+                                    <strong>No Image Uploaded.</strong>
+                                    
+                                    @endif
                                    
                                 
                                 </div>

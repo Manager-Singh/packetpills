@@ -4,7 +4,7 @@
             <a class="btn dropdown-toggle" href="#" role="button" id="breadcrumb-dropdown-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ trans('labels.backend.access.enterpriseconnects.all') }}</a>
 
             <div class="dropdown-menu" aria-labelledby="breadcrumb-dropdown-1">
-                <a class="dropdown-item" href="{{ route('admin.enterpriseconnects.index') }}">@lang('menus.backend.access.enterpriseconnects.active')</a>
+                <a class="dropdown-item" href="{{ route('admin.enterpriseconnects.index') }}">@lang('Enterprise Connect Active')</a>
                 <!-- <a class="dropdown-item" href="{{ route('admin.prescriptions.create') }}">@lang('menus.backend.access.enterpriseconnects.create')</a> -->
             </div>
         </div><!--dropdown-->

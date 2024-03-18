@@ -6,7 +6,7 @@
             <div class="dropdown-menu" aria-labelledby="breadcrumb-dropdown-1">
                 <a class="dropdown-item" href="{{ route('admin.prescriptions.index') }}">@lang('menus.backend.access.prescriptions.active')</a>
                 <a class="dropdown-item" href="{{ route('admin.prescriptions.create') }}">@lang('menus.backend.access.prescriptions.create')</a>
-                <a class="dropdown-item" href="{{ route('admin.prescriptions.index') }}?status=cancelled">Cancel Prescription</a>
+                <a class="dropdown-item" href="{{ route('admin.prescriptions.index') }}?status=cancelled">Cancelled Prescription</a>
 
             </div>
         </div><!--dropdown-->

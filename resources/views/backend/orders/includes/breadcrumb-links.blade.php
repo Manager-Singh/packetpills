@@ -5,7 +5,7 @@
 
             <div class="dropdown-menu" aria-labelledby="breadcrumb-dropdown-1">
                 <a class="dropdown-item" href="{{ route('admin.orders.index') }}">All Orders</a>
-                <a class="dropdown-item" href="{{ route('admin.orders.index') }}?status=cancelled">Order Cancel</a>
+                <a class="dropdown-item" href="{{ route('admin.orders.index') }}?status=cancelled">Cancelled Order</a>
             </div>
         </div><!--dropdown-->
 

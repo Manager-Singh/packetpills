@@ -5,7 +5,7 @@
 
             <div class="dropdown-menu" aria-labelledby="breadcrumb-dropdown-1">
                 <a class="dropdown-item" href="{{ route('admin.prescription.refill.index') }}">@lang('Prescriptions')</a>
-                <a class="dropdown-item" href="{{ route('admin.prescription.refill.index') }}?status=cancelled">Cancel Refill</a>
+                <a class="dropdown-item" href="{{ route('admin.prescription.refill.index') }}?status=cancelled">Cancelled Refill</a>
             
             </div>
             

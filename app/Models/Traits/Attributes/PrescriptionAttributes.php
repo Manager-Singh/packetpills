@@ -12,7 +12,7 @@ trait PrescriptionAttributes
         //dd($this->user);
         return '<div class="btn-group action-btn">
                     
-                <a href="'.route('admin.auth.user.show', $this->user).'" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.edit').'" class="btn btn-success btn-sm">
+                <a href="'.route('admin.auth.user.show', $this->user).'?tab=overview" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.edit').'" class="btn btn-success btn-sm">
                     <i class="fas fa-eye"></i>
                 </a> 
                 </div>';

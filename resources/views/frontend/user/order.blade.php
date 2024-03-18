@@ -56,7 +56,7 @@ body main.main-div {
                                     <p class="txt">Created On: {{$order->created_at->format('F d, Y ')}}</p>
                                 </div>
                                 <div class="col-md-4 text-right">  
-                                    <span class="btn-success"> {{ str_replace('_', ' ', $order->order_status)}} </span>
+                                    <span class="btn-success"> {{ ucfirst(str_replace('_', ' ', $order->order_status))}} </span>
                                 </div>
                             </div>
                         </div>

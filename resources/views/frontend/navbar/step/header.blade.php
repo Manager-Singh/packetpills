@@ -129,7 +129,7 @@
             <ul>
                 <li><a href="{{route('frontend.user.dashboard')}}" class="{{ (Route::currentRouteName() == 'frontend.user.dashboard') ? 'active' : '' }}"><i class="fa fa-home" aria-hidden="true"></i> @lang('Frontend/dashboard.header.home')</a></li>
                 <!-- <li><a href="{{route('frontend.user.medications')}}" class="{{ (Route::currentRouteName() == 'frontend.user.medications') ? 'active' : '' }}" ><i class="fa fa-medkit" aria-hidden="true"></i> @lang('Frontend/dashboard.header.medication')</a></li> -->
-                <li><a href="{{route('frontend.user.prescription')}}" class="{{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}"> <i class="fi fi-br-file-prescription"></i> @lang('Frontend/dashboard.header.prescription') </a></li>
+                <li><a href="{{route('frontend.user.prescription')}}" class="{{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}"> <i class="fi fi-br-file-prescription"></i> @lang('Frontend/dashboard.header.prescription')(s)</a></li>
                 <li><a href="{{route('frontend.user.orders')}}" class="{{ (Route::currentRouteName() == 'frontend.user.orders') ? 'active' : '' }}"><i class="fi fi-br-shopping-cart-add"></i> @lang('Frontend/dashboard.header.orders')</a></li>
             </ul>
 

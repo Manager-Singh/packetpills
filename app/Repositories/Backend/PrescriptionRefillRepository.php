@@ -54,6 +54,8 @@ class PrescriptionRefillRepository extends BaseRepository
 
             if($status === 'cancelled'){
                 $query->where('status', 'cancelled');
+            }else{
+                $query->where('status', '!=', 'cancelled'); 
             }
             return $query->orderBy('created_at', 'desc');
     }

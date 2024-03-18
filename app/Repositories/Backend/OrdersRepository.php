@@ -55,6 +55,8 @@ class OrdersRepository extends BaseRepository
 
             if($status === 'cancelled'){
                 $query->where('order_status', 'cancelled');
+            }else{
+                $query->where('order_status', '!=', 'cancelled');
             }
             return $query->orderBy('created_at', 'desc');
     }
