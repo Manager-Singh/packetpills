@@ -863,11 +863,12 @@ class UserRepository extends BaseRepository
 
     public function insuranceDelete(array $data){
          $insurance = Insurance::find($data['id']);
-         if(File::exists($insurance->back_img)) {
-            File::delete($insurance->back_img);
+         $public_path = public_path('/');
+         if(File::exists($public_path.$insurance->back_img)) {
+            File::delete($public_path.$insurance->back_img);
         }
-        if(File::exists($insurance->front_img)) {
-            File::delete($insurance->front_img);
+        if(File::exists($public_path.$insurance->front_img)) {
+            File::delete($public_path.$insurance->front_img);
         }
         if($insurance->forceDelete()){
             return true;
@@ -877,13 +878,14 @@ class UserRepository extends BaseRepository
 
     public function healthCardDelete(array $data){
         $healthCard = HealthCard::find($data['id']);
-        if(File::exists($healthCard->back_img) && $data['type'] == 'back_img') {
-           File::delete($healthCard->back_img);
+        $public_path = public_path('/');
+        if(File::exists($public_path.$healthCard->back_img) && $data['type'] == 'back_img') {
+           File::delete($public_path.$healthCard->back_img);
            $healthCard->back_img = null;
 
        }
-       if(File::exists($healthCard->front_img) && $data['type'] == 'front_img') {
-           File::delete($healthCard->front_img);
+       if(File::exists($public_path.$healthCard->front_img) && $data['type'] == 'front_img') {
+           File::delete($public_path.$healthCard->front_img);
            $healthCard->front_img = null;
        }
        

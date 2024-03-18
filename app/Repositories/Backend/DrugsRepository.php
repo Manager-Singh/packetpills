@@ -240,11 +240,12 @@ class DrugsRepository extends BaseRepository
     {
         DB::transaction(function () use ($drug) {
             $d_images = DrugImages::where('drug_id',$drug->id)->get();
+            $public_path = public_path('/');
             foreach($d_images as $d_image){
                 if ($d_image->forceDelete()) {
                
-                    if(File::exists($d_image->image)) {
-                        File::delete($d_image->image);
+                    if(File::exists($public_path.$d_image->image)) {
+                        File::delete($public_path.$d_image->image);
                     } 
                 }
             }
@@ -280,12 +281,12 @@ class DrugsRepository extends BaseRepository
     {
 
         $d_image = DrugImages::where('id',$id)->first();
-        
+        $public_path = public_path('/');
 
         if ($d_image->forceDelete()) {
            
-            if(File::exists($d_image->image)) {
-                File::delete($d_image->image);
+            if(File::exists($public_path.$d_image->image)) {
+                File::delete($public_path.$d_image->image);
             }
             return $id;
         }

@@ -213,24 +213,24 @@ class UserRepository extends BaseRepository
         return DB::transaction(function () use ($data,$user_id,$payment_method_id,$files) {
             PaymentMethod::where('user_id',$user_id)->update(array('default' => 'no'));
             $payment_method = PaymentMethod::where('id',$payment_method_id)->first();
-
+            $public_path = public_path('/');
             $creditCardImages = [];
             if(isset($files)){
 
                 if(count($files)>0){
                     if(count($files)==1){
                         $front_img = $payment_method->front_img;
-                        if(File::exists($front_img)) {
-                            File::delete($front_img);
+                        if(File::exists($public_path.$front_img)) {
+                            File::delete($public_path.$front_img);
                         }
                     }else{
                         $front_img = $payment_method->front_img;
-                        if(File::exists($front_img)) {
-                            File::delete($front_img);
+                        if(File::exists($public_path.$front_img)) {
+                            File::delete($public_path.$front_img);
                         }
                         $back_img = $payment_method->back_img;
-                        if(File::exists($back_img)) {
-                            File::delete($back_img);
+                        if(File::exists($public_path.$back_img)) {
+                            File::delete($public_path.$back_img);
                         }
 
                     }
@@ -498,6 +498,7 @@ class UserRepository extends BaseRepository
         $type = $data['type'];
         return DB::transaction(function () use ($user_id,$type,$files) {
             $insurance = Insurance::where('user_id',$user_id)->where('type',$type)->first();
+            $public_path = public_path('/');
 
             $insuranceImages = [];
             if(isset($files)){
@@ -505,17 +506,17 @@ class UserRepository extends BaseRepository
                     if($insurance){
                     if(count($files)==1){
                         $front_img = $insurance->front_img;
-                        if(File::exists($front_img)) {
-                            File::delete($front_img);
+                        if(File::exists($public_path.$front_img)) {
+                            File::delete($public_path.$front_img);
                         }
                     }else{
                         $front_img = $insurance->front_img;
-                        if(File::exists($front_img)) {
-                            File::delete($front_img);
+                        if(File::exists($public_path.$front_img)) {
+                            File::delete($public_path.$front_img);
                         }
                         $back_img = $insurance->back_img;
-                        if(File::exists($back_img)) {
-                            File::delete($back_img);
+                        if(File::exists($public_path.$back_img)) {
+                            File::delete($public_path.$back_img);
                         }
 
                     }
