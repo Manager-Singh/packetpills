@@ -7,10 +7,20 @@
                 <tr>
                     <th>@lang('labels.backend.access.users.tabs.content.overview.avatar')</th>
                     @if($user->avatar_type=='upload')
-                    <td><img src="{{asset('/') . $user->avatar_location }}" class="user-profile-image" width="150"/></td>
-
+                    <td>
+                    @if(isset($user->avatar_location) && !empty($user->avatar_location) && file_exists(public_path($user->avatar_location)))
+                    <img src="{{asset('/') . $user->avatar_location }}" class="user-profile-image" width="150"/></td>
                     @else
-                    <td><img src="{{ $user->picture }}" class="user-profile-image" /></td>
+                        NO Image
+                    @endif 
+                    @else
+                    <td>
+                    @if(isset($user->picture) && !empty($user->picture) && file_exists($user->picture))
+                        <img src="{{ $user->picture }}" class="user-profile-image" />
+                    @else
+                    {{ substr(ucfirst($user->full_name), 0, 1) }}
+                    @endif    
+                    </td>
 
                     @endif
                 </tr>
