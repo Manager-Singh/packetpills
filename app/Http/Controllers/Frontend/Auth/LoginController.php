@@ -243,7 +243,7 @@ class LoginController extends Controller
                            sendMail('mail',null,$data1,$isexist->id,'Verify OTP');
                         }
                         //$this->sendSms($request,$otp);
-                        return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$otp_unverified->otp]);
+                        return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>'8888']);
                     }else{
                         return json_encode(['error' => 1, 'message' => 'Something went wrong']);
                     }
@@ -279,7 +279,7 @@ class LoginController extends Controller
             $userotp->otp = $otp;
             if($userotp->save()){
                 
-                return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$userotp->otp]);
+                return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>'9999']);
             }else{
                 return json_encode(['error' => 1, 'message' => 'Something went wrong']);
 

@@ -694,7 +694,7 @@ class DashboardController extends Controller
                         $createOtp->save();
                     }
 
-                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>$createOtp->otp]);
+                    return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>'666']);
                     
                 }
 
