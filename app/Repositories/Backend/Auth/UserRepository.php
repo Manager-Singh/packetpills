@@ -1432,6 +1432,7 @@ class UserRepository extends BaseRepository
         return DB::transaction(function () use ($data) {
             $id = $data['id'];
             $status = $data['status'];
+            
             $transferRequest = TransferRequest::find($id);
             if($transferRequest){
                 $transferRequest->status = $status;
@@ -1450,13 +1451,13 @@ class UserRepository extends BaseRepository
                 }
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
-                   
-                    //$data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
+                   if($status != 'pending' && $status != 'processing'){
+                        //$data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
                         sendMessage($mobile,'mail','patient_transfer_status',$data);
                         if(isset($user->email)){
-                            sendMail('mail','patient_transfer_status',$data,$user->id,'Transfer');
+                            sendMail('mail','patient_transfer_status',$data,$user->id,'Transfer Request '.ucfirst($status));
                         }
-                   
+                   }
                 }
             
                 return $id;
@@ -1492,11 +1493,12 @@ class UserRepository extends BaseRepository
                 }
                 if($user->mobile_no && $user->dialing_code){
                     $mobile = $user->dialing_code.$user->mobile_no;
-                   
+                    if($status != 'pending' && $status != 'processing'){
                         sendMessage($mobile,'mail','prescription_refill_status',$data);
                         if(isset($user->email)){
-                            sendMail('mail','prescription_refill_status',$data,$user->id,'Prescription Refill');
+                            sendMail('mail','prescription_refill_status',$data,$user->id,'Prescription Refill '.ucfirst($status));
                         }
+                    }
                    
                 }
             

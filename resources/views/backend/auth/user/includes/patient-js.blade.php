@@ -390,7 +390,25 @@
                             dataType: 'JSON',
                             success: function(data) {
                                 if (data != 0) {
-                                   $("#overlay").fadeOut(300);
+                                   
+
+                                   if (transfer_status == 'pending'){
+                                        var msg = '<span class="badge badge-warning"  style="right: 29px; position: absolute;">'+transfer_status_text+'</span>';
+                                    }else if(transfer_status == 'cancelled'){
+                                        var msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+transfer_status_text+'</span>';
+                                    }else if(transfer_status == 'approved'){
+                                        var msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+transfer_status_text+'</span>';
+                                    }else if(transfer_status == 'We need to contact doctor'){
+                                        var msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+transfer_status_text+'</span>';
+                                    }else if(transfer_status == 'processing'){
+                                        var msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+transfer_status_text+'</span>';
+                                    }else if(transfer_status == 'declined'){
+                                        var msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+transfer_status_text+'</span>';
+                                    }
+
+                                    //declined
+                                    $('.status-wrapper-'+ntransfer_id).html(msg);
+                                    $("#overlay").fadeOut(300);
                                 } else {
                                     console.log('Problem with save data');
                                 }

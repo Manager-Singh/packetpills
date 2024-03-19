@@ -253,8 +253,10 @@ if (! function_exists('sendMessage')) {
             
             if(!$message){
                 return true;
+            }else{
+                $body = (isset($message->sms_message)) ? $message->sms_message : 'Welcome';
             }
-           $body = (isset($message->message)) ? $message->message : 'Welcome';
+           
            if($data!==null){
             $body .= "\n".$data;
            }
@@ -297,10 +299,9 @@ if (! function_exists('sendMail')) {
          }else{
             $message = MailMessage::where('message_for',$message_for)->where('status',1)->first();
            
-            // if(!$message){
-            //     return true;
-            // }
-            if($message){
+            if(!$message){
+                return true;
+            }else{
                 $body = $message->message;
             }
             

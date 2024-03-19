@@ -20,6 +20,7 @@
                     },
                     columns: [
                         { data: 'message', name: 'message' },
+                        { data: 'sms_message', name: 'sms_message' },
                         { data: 'message_for', name: 'message_for' },
                         { data: 'status', name: 'status' },
                         { data: 'created_at', name: 'created_at' },

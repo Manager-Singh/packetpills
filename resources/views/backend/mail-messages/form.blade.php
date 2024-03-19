@@ -15,10 +15,18 @@
     <div class="row mt-4 mb-4">
         <div class="col">
             <div class="form-group row">
-                {{ Form::label('messsage', trans('validation.attributes.backend.access.mail-messages.message'), ['class' => 'col-md-2 from-control-label required']) }}
+                {{ Form::label('messsage', trans('Email Message'), ['class' => 'col-md-2 from-control-label required']) }}
 
                 <div class="col-md-10">
-                    {{ Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.mail-messages.message'), 'required' => 'required']) }}
+                    {{ Form::textarea('message', null, ['class' => 'form-control', 'placeholder' => trans('Email Message'), 'required' => 'required']) }}
+                </div>
+                <!--col-->
+            </div>
+            <div class="form-group row">
+                {{ Form::label('sms_message', trans('SMS Message'), ['class' => 'col-md-2 from-control-label required']) }}
+
+                <div class="col-md-10">
+                    {{ Form::textarea('sms_message', null, ['class' => 'form-control', 'placeholder' => trans('SMS Message'), 'required' => 'required']) }}
                 </div>
                 <!--col-->
             </div>

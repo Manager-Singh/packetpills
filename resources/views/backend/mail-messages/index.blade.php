@@ -25,7 +25,8 @@
                     <table id="mail-messages-table" class="table" data-ajax_url="{{ route('admin.mailMessages.get') }}">
                         <thead>
                             <tr>
-                                <th>{{ trans('labels.backend.access.mail-messages.table.message') }}</th>
+                            <th>{{ trans('Email Message') }}</th>
+                                <th>{{ trans('SMS Message') }}</th>
                                 <th>{{ trans('labels.backend.access.mail-messages.table.message_for') }}</th>
                                 <th>{{ trans('labels.backend.access.enterpriseconnects.table.status') }}</th>
                                 <th>{{ trans('labels.backend.access.enterpriseconnects.table.createdat') }}</th>

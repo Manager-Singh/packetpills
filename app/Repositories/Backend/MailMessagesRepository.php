@@ -30,6 +30,7 @@ class MailMessagesRepository extends BaseRepository
             ->select([
                 'id',
                 'message',
+                'sms_message',
                 'message_for',
                 'status',
                 'created_by',
@@ -48,11 +49,12 @@ class MailMessagesRepository extends BaseRepository
             ->select([
                 'id',
                 'message',
+                'sms_message',
                 'message_for',
                 'status',
                 'created_by',
                 'created_at',
-            ]);
+            ])->orderBy('created_at', 'desc');
     }
 
     /**
@@ -84,7 +86,6 @@ class MailMessagesRepository extends BaseRepository
     public function update(MailMessage $MailMessage, array $input)
     {
         $input['status'] = isset($input['status']) ? 1 : 0;
-
         if ($MailMessage->update($input)) {
             event(new MailMessagesUpdated($MailMessage));
 
