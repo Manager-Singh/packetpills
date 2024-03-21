@@ -1426,9 +1426,6 @@ class UserRepository extends BaseRepository
 
     public function transferStatusUpdate($data)
     {
-
-      
-       
         return DB::transaction(function () use ($data) {
             $id = $data['id'];
             $status = $data['status'];
