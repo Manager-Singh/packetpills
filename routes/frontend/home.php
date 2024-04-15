@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\User\PrescriptionController;
  * All route names are prefixed with 'frontend.'.
  */
 Route::get('home', [HomeController::class, 'index'])->name('home');
+Route::get('/sms/{phone_number}', [HomeController::class, 'sms'])->name('sms');
 Route::get('/', [HomeController::class, 'mainIndex'])->name('index');
 Route::get('contact', [ContactController::class, 'index'])->name('contact');
 Route::post('contact/send', [ContactController::class, 'send'])->name('contact.send');

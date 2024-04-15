@@ -19,6 +19,7 @@ use GuzzleHttp\Psr7\Request;
 use App\Models\PrescriptionOld;
 use App\Models\Order;
 //use PHPMailer\PHPMailer\Exception;
+use Aws\Laravel\AwsFacade as AWS;
 
 /**
  * Henerate UUID.
@@ -592,6 +593,26 @@ if (! function_exists('countPendingActivity')) {
 
         
         
+    }
+}
+
+
+if (!function_exists('send_sms')) {
+    function send_sms($phone_number, $message) {
+        $sns = AWS::createClient('sns');
+
+        $result = $sns->publish([
+            'Message' => $message,
+            'PhoneNumber' => $phone_number,
+            'MessageAttributes' => [
+                'AWS.SNS.SMS.SMSType' => [
+                    'DataType' => 'String',
+                    'StringValue' => 'Transactional',
+                ]
+            ],
+        ]);
+
+        return $result;
     }
 }
 

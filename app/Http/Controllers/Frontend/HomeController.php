@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use AWS;
+
 /**
  * Class HomeController.
  */
@@ -29,4 +32,22 @@ class HomeController extends Controller
       }  
         return view('frontend.main-index');
     }
+    protected function sms($phone_number){
+        $sms = AWS::createClient('sns');
+
+        $nsms = $sms->publish([
+            'Message' => 'Hello, This is just a test Message',
+            'PhoneNumber' => $phone_number,
+            'MessageAttributes' => [
+                'AWS.SNS.SMS.SMSType'  => [
+                    'DataType'    => 'String',
+                    'StringValue' => 'Transactional',
+                 ]
+           ],
+        ]);
+
+        print_r($nsms);
+    }
+    
+
 }
