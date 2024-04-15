@@ -110,13 +110,13 @@
                         <textarea class="form-control"  name="self_described" id="self-described" rows="2">{{$auth->self_described}}</textarea>
                     </div>
 
-                    @if(Auth::check() && empty(Auth::user()->parent_id))
+                    <!-- @if(Auth::check() && empty(Auth::user()->parent_id))
                     <div class="col-md-12">
                         <label for="lname">Email Address:</label>
                         <input type="email" name="email" value="{{$auth->email}}" placeholder="" required />
-                        <!-- <p class="info">To send updates about your order.</p> -->
+                        
                     </div>
-                    @endif
+                    @endif -->
                 </div>
                 <button type="submit" class="next button">Next</button>
             </form>

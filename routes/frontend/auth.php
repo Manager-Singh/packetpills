@@ -43,6 +43,8 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
     });
     Route::post('account/send-otp', [LoginController::class, 'send_otp'])->name('send.otp');
     Route::post('account/verify-otp', [LoginController::class, 'verify_otp'])->name('verify.otp');
+    Route::post('account/email-send-otp', [LoginController::class, 'email_send_otp'])->name('email.send.otp');
+    Route::post('account/email-verify-otp', [LoginController::class, 'email_verify_otp'])->name('email.verify.otp');
     // These routes require no user to be logged in
     Route::group(['middleware' => 'guest'], function () {
         // Authentication Routes

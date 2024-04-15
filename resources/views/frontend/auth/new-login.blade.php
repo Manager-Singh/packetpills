@@ -147,20 +147,23 @@
 
                         <div class="custom-input">
 
-                            <label class="label-mandatory">@lang('validation.attributes.frontend.mobileno')</label>
+                        <!-- <label class="label-mandatory">@lang('validation.attributes.frontend.mobileno')</label> -->
+                            <label class="label-mandatory">Email</label>
 
                             <div class="tel phone-prefix">
                                 <div class="tel-prefix txt-c">
-                                    <p class="color-dark font-semibold mb-0">+1</p>
+                                    <!-- <p class="color-dark font-semibold mb-0">+1</p> -->
+                                    <p class="color-dark font-semibold mb-0">Email</p>
                                 </div>
                                 <div class="tel-input">
-                                    <input autocomplete="off" maxlength="10" type="tel"
+                                    <!-- <input autocomplete="off" maxlength="10" type="tel"
                                         oninput="javascript: if (this.value.length &gt; this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                         onkeypress="return (event.charCode &gt;= 48 &amp;&amp; event.charCode &lt;= 57) || event.charCode == 13"
                                         size="16" pattern="\d*" keyname="landing.fields.phone"
                                         class="full-width home-input ng-untouched ng-pristine ng-invalid @error('mobile_no') is-invalid @enderror"
                                         id="phoneField" placeholder="@lang('validation.attributes.frontend.mobileno')"
-                                        required="" name="mobile_no">
+                                        required="" name="mobile_no"> -->
+                                        <input type="email" class="full-width home-input ng-untouched ng-pristine ng-invalid @error('email') is-invalid @enderror" id="phoneField" placeholder="Enter Registered Email" required="" name="email">
                                         <!-- @error('mobile_no')
                                             <span class="invalid-feedback mobile-error" role="alert">
                                                 <strong>{{ $message }}</strong>

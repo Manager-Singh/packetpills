@@ -59,6 +59,63 @@
 
                                                 <div class="form-inline">
                                                     <div class="form-inline__form">
+                                                        <label class="hide-label" for="email">Email</label>
+                                                        <div class="tel">
+                                                            <div class="tel-prefix txt-c" aria-label="Country code +1">
+                                                            <b>Email</b>
+                                                            </div>
+                                                            <div class="tel-input">
+                                                                <input type="email" id="email" class="home-input full-width font-semibold ng-untouched ng-pristine ng-invalid" id="phone-number" placeholder="Enter valid email" aria-required="true" required="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-inline">
+                                                    <div class="form-inline__form">
+                                                    <div class="row">
+                                                        <div class="col otp-box hide" style="display:none;">
+                                                            <div class="form-group mt-4">
+                                                               
+                                                                {{ html()->text('otp')->class('form-control w-100')->placeholder(__('validation.attributes.frontend.otp'))->attribute('id','otp')->attribute('maxlength', 6)->attribute('minlength', 6)->required() }}
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                        
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="margin-t-l">
+                                                    <span id="error-msg" class="p-2 float-left"></span>
+                                                    <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset request-otp">{{ __('labels.frontend.auth.get_started') }}</button>
+                                                    <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset register-submit" style="display:none">{{ __('labels.frontend.auth.otp_verfied') }} & {{ __('labels.frontend.auth.next') }}</button>
+                                                    <a href="{{route('frontend.index')}}" ><button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset mt-2">Start Again</button></a>
+                                                </div>
+
+
+                                                <div aria-live="assertive" role="alert" aria-atomic="true"
+                                                    aria-label="This field is required.">
+
+                                                </div>
+
+                                                <div aria-live="assertive" role="alert" aria-atomic="true"
+                                                    aria-label="false">
+                                                    <div class="form-group__msg margin-t-s txt-c" style="display: none;">
+                                                        <span class="color-error xsmall txt-c font-semibold"
+                                                            style="display: none;">This field is required.</span>
+                                                        <span class="color-error xsmall txt-c font-semibold"></span>
+
+                                                    </div>
+                                                </div>
+                                            </form> 
+                                            <!-- <form novalidate="" action="{{route('frontend.auth.login.post')}}" method="POST" class="ng-untouched ng-pristine ng-valid">
+                                                
+
+                                                <div class="form-inline">
+                                                    <div class="form-inline__form">
                                                         <label class="hide-label"
                                                             for="phone-number">Phone</label>
                                                         <div class="tel">
@@ -88,13 +145,12 @@
                                                     <div class="row">
                                                         <div class="col otp-box hide" style="display:none;">
                                                             <div class="form-group mt-4">
-                                                                <!-- {{ html()->label(__('validation.attributes.frontend.otp'))->for('otp') }} -->
-
+                                                               
                                                                 {{ html()->text('otp')->class('form-control w-100')->placeholder(__('validation.attributes.frontend.otp'))->attribute('id','otp')->attribute('maxlength', 6)->attribute('minlength', 6)->required() }}
                                                                 
-                                                            </div><!--form-group-->
-                                                        </div><!--col-->
-                                                    </div><!--row-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                         
                                                     </div>
 
@@ -123,7 +179,7 @@
 
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </form> -->
                                             @endif
                                             </div>
                                         </div>
@@ -164,44 +220,116 @@
 @push('after-scripts')
 <script>
     $(function() {
+
+
+        $('.request-otp').click(function(e) {
+            e.preventDefault();
+            $("#error-msg").text('');
+            var email = $('#email').val();
+
+            
+            //   console.log(phone);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('frontend.auth.email.send.otp') }}", 
+                data: {_token:"{{ csrf_token() }}",email:email},
+                success: function(response) {
+                response = JSON.parse(response);
+                        console.log(response.otp);
+                        if (response.error == 0 ) {
+                        if(response.status == 'exist'){
+                            location.href = response.route;
+                        }
+                        $('.otp-box').show(); 
+                        $('.genrated-otp').text(response.otp); 
+                        $('.request-otp').hide(); 
+                        $('.register-submit').show(); 
+                        
+                        }else{
+                        $("#error-msg").text(response.message);
+                        }
+                    
+                                                    
+                    }
+            });
+        });  
         
-                $('.request-otp').click(function(e) {
+       /** $('.request-otp').click(function(e) {
+            e.preventDefault();
+            $("#error-msg").text('');
+            // Get the phone number and OTP
+            var phone = $('#phone-number').val();
+            var dialing_code = $('#dialing-code').val();
+
+            //   var otp = $('#otp').val();
+            if(phone.length < 10){
+                $("#error-msg").text('Phone number should be a 10 digit.');
+            }
+            //   console.log(phone);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('frontend.auth.send.otp') }}", 
+                data: {_token:"{{ csrf_token() }}",mobile_no:phone,dialing_code:dialing_code},
+                success: function(response) {
+                response = JSON.parse(response);
+                        console.log(response.otp);
+                        if (response.error == 0 ) {
+                        if(response.status == 'exist'){
+                            location.href = response.route;
+                        }
+                        $('.otp-box').show(); 
+                        $('.genrated-otp').text(response.otp); 
+                        $('.request-otp').hide(); 
+                        $('.register-submit').show(); 
+                        
+                        }else{
+                        $("#error-msg").text(response.message);
+                        }
+                    
+                                                    
+                    }
+            });
+        }); **/
+
+
+        $('.register-submit').click(function(e) {
                   e.preventDefault();
-                  $("#error-msg").text('');
+  
                   // Get the phone number and OTP
-                  var phone = $('#phone-number').val();
-                  var dialing_code = $('#dialing-code').val();
-                  
-                //   var otp = $('#otp').val();
-                    if(phone.length < 10){
-                        $("#error-msg").text('Phone number should be a 10 digit.');
+                  var email = $('#email').val();
+                  var otp = $('#otp').val();
+                  $("#error-msg").text('');
+                    if(otp.length < 6){
+                        $("#error-msg").text('Otp should be a 6 digit.');
                     }
                 //   console.log(phone);
                     $.ajax({
                       type: 'POST',
-                      url: "{{ route('frontend.auth.send.otp') }}", 
-                      data: {_token:"{{ csrf_token() }}",mobile_no:phone,dialing_code:dialing_code},
+                      url: "{{ route('frontend.auth.email.verify.otp') }}", 
+                      data: {_token:"{{ csrf_token() }}",email:email,otp:otp},
                       success: function(response) {
+                        console.log(response);
+                        console.log(response.link);
                         response = JSON.parse(response);
-                              console.log(response.otp);
-                              if (response.error == 0 ) {
-                                if(response.status == 'exist'){
-                                    location.href = response.route;
-                                }
-                                $('.otp-box').show(); 
-                                $('.genrated-otp').text(response.otp); 
-                                $('.request-otp').hide(); 
-                                $('.register-submit').show(); 
-                                
+                              console.log(response);
+                              if (response.profile_step == 0) {
+                                location.href = "{{route('frontend.auth.service.selection')}}";
                               }else{
                                 $("#error-msg").text(response.message);
                               }
-                            
+                             // window.location.reload();
+                              $('.otp-box').show(); 
+                              
+                              $('.genrated-otp').text(response.otp); 
+                              $('.request-otp').hide(); 
+                              $('.register-submit').show(); 
                                                          
                           }
                       });
                 });
-                $('.register-submit').click(function(e) {
+
+
+            /*    $('.register-submit').click(function(e) {
                   e.preventDefault();
   
                   // Get the phone number and OTP
@@ -235,7 +363,7 @@
                                                          
                           }
                       });
-                });
+                });*/
         
 
 

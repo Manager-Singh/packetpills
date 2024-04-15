@@ -1014,14 +1014,18 @@ class UserRepository extends BaseRepository
                     
                 }
 
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                   //$data1 =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
-                        sendMessage($mobile,'mail','patient_order_created',$data1);
-                        if(isset($user->email)){
-                            sendMail('mail','patient_order_created',$data1,$user->id,'Patient Order');
-                        }
+                if(isset($user->email)){
+                    sendMail('mail','patient_order_created',$data1,$user->id,'Patient Order');
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //    //$data1 =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
+                //         sendMessage($mobile,'mail','patient_order_created',$data1);
+                //         if(isset($user->email)){
+                //             sendMail('mail','patient_order_created',$data1,$user->id,'Patient Order');
+                //         }
+                // }
 
 
                 return 1;

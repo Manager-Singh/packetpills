@@ -731,18 +731,20 @@ class UserRepository extends BaseRepository
                         
                     }
 
-                    if($user->mobile_no && $user->dialing_code){
-                        $mobile = $user->dialing_code.$user->mobile_no;
-                        // print_r($mobile);
-                        // die;
-                        
-                            sendMessage($mobile,'mail','patient_medication_created',$data);
-                            if(isset($user->email)){
-                                sendMail('mail','patient_medication_created',$data,$user->id,'Patient Medication');
-                            }
-                         
-    
+                    if(isset($user->email)){
+                        sendMail('mail','patient_medication_created',$data,$user->id,'Patient Medication');
                     }
+
+                    // if($user->mobile_no && $user->dialing_code){
+                    //     $mobile = $user->dialing_code.$user->mobile_no;
+                    //     // print_r($mobile);
+                    //     // die;
+                        
+                    //         sendMessage($mobile,'mail','patient_medication_created',$data);
+                    //         if(isset($user->email)){
+                    //             sendMail('mail','patient_medication_created',$data,$user->id,'Patient Medication');
+                    //         }
+                    // }
                 }
                 return true;
          
@@ -1339,22 +1341,30 @@ class UserRepository extends BaseRepository
                         $data =  "Your Prescription no is ".$prescription->prescription_number;
                         
                     }
-                    if($user->mobile_no && $user->dialing_code){
-                        $mobile = $user->dialing_code.$user->mobile_no;
-                       // $data =  "Your Prescription no is ".$prescription->prescription_number;
-                        if($prescription->status=='cancelled'){ 
-                            sendMessage($mobile,'mail','patient_prescription_cancelled',$data);
-                            if(isset($user->email)){
-                                sendMail('mail','patient_prescription_cancelled',$data,$user->id,$email_subject);
-                            }
-                         }else{
-                            sendMessage($mobile,'mail','patient_prescription_approved',$data);
-                            if(isset($user->email)){
-                                sendMail('mail','patient_prescription_approved',$data,$user->id,$email_subject);
-                            }
-                         }
-    
+                    if(isset($user->email)){
+                        if( $prescription->status == 'cancelled' ){ 
+                            sendMail('mail','patient_prescription_cancelled',$data,$user->id,$email_subject);
+                        }else{
+                            sendMail('mail','patient_prescription_approved',$data,$user->id,$email_subject);
+                        }
                     }
+
+                    // if($user->mobile_no && $user->dialing_code){
+                    //     $mobile = $user->dialing_code.$user->mobile_no;
+                    //    // $data =  "Your Prescription no is ".$prescription->prescription_number;
+                    //     if($prescription->status=='cancelled'){ 
+                    //         sendMessage($mobile,'mail','patient_prescription_cancelled',$data);
+                    //         if(isset($user->email)){
+                    //             sendMail('mail','patient_prescription_cancelled',$data,$user->id,$email_subject);
+                    //         }
+                    //      }else{
+                    //         sendMessage($mobile,'mail','patient_prescription_approved',$data);
+                    //         if(isset($user->email)){
+                    //             sendMail('mail','patient_prescription_approved',$data,$user->id,$email_subject);
+                    //         }
+                    //      }
+    
+                    // }
                
                     return $id;
                 }
@@ -1392,27 +1402,34 @@ class UserRepository extends BaseRepository
                }else{
                     $data =  $status." & Your Order no is ".$order->order_number;
                 }
-
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                    // print_r($mobile);
-                    // die;
+                if(isset($user->email)){
                     if($type=='order'){
-                   // $data =  $status." & Your Order no is ".$order->order_number;
                         if( $status == 'delivered' ){
-                            sendMessage($mobile,'mail','patient_order_status',$data);
-                            if(isset($user->email)){
-                                sendMail('mail','patient_order_status',$data,$user->id,'Order Patient');
-                            } 
+                            sendMail('mail','patient_order_status',$data,$user->id,'Order Patient');
                         }
                     }else{
                         $data =  $status." & Your Order no is ".$order->order_number;
-                        sendMessage($mobile,'mail','patient_payment_status',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','patient_payment_status',$data,$user->id,'Payment Patient');
-                        }
+                        sendMail('mail','patient_payment_status',$data,$user->id,'Payment Patient');
                     }
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //     if($type=='order'){
+                //         if( $status == 'delivered' ){
+                //             sendMessage($mobile,'mail','patient_order_status',$data);
+                //             if(isset($user->email)){
+                //                 sendMail('mail','patient_order_status',$data,$user->id,'Order Patient');
+                //             } 
+                //         }
+                //     }else{
+                //         $data =  $status." & Your Order no is ".$order->order_number;
+                //         sendMessage($mobile,'mail','patient_payment_status',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','patient_payment_status',$data,$user->id,'Payment Patient');
+                //         }
+                //     }
+                // }
             
                 return $id;
             

@@ -150,7 +150,7 @@
 
                                 
 
-                                <div class="row align-items-center">
+                                <!-- <div class="row align-items-center">
                                     <div class="col-md-12">
                                         <label for="mobile_no">Mobile</label>
                                     </div>
@@ -175,32 +175,31 @@
                                 <div class="row">
                                     <div class="col otp-box hide" style="display:none;">
                                         <div class="form-group mt-4">
-                                            <!-- {{ html()->label(__('validation.attributes.frontend.otp'))->for('otp') }} -->
-
+                                            
                                             {{ html()->text('otp')->class('form-control w-100')->placeholder(__('validation.attributes.frontend.otp'))->attribute('id','otp')->attribute('maxlength', 6)->attribute('minlength', 6)->required() }}
                                             
-                                        </div><!--form-group-->
-                                    </div><!--col-->
-                                </div><!--row-->
+                                        </div>
+                                    </div>
+                                </div> -->
                             @else
-                                <div class="col-md-12">
+                                <!-- <div class="col-md-12">
                                     <label for="mobile_no">Mobile</label>
                                     <input type="text" id="mobile_no" name="mobile_no" value="+{{$auth->dialing_code}}{{$auth->mobile_no}}" readonly required>
-                                </div>
+                                </div> -->
                             @endif
                             @endif
                             </div>
 
-                            @if(!isset($auth->mobile_no) && empty($auth->mobile_no) && empty($auth->parent_id))
-                                <!-- <input type="submit" class="next button" value="Verify Otp" /> -->
+                            <!-- @if(!isset($auth->mobile_no) && empty($auth->mobile_no) && empty($auth->parent_id))
+                                
 
                                 <span id="error-msg" class="p-2 float-left"></span>
                                 <button type="button" class="next button lineheight-reset request-otp">Send OTP</button>
                                 <button type="button" class="next button lineheight-reset register-submit" style="display:none">{{ __('labels.frontend.auth.otp_verfied') }}</button>
                             @else
                                 <input type="submit" class="next button bb" value="Next" />
-                            @endif
-                            
+                            @endif -->
+                            <input type="submit" class="next button bb" value="Next" />
                             <p class="info-bold">3 Hours delivery for emergency medicines.</p>
                           
 

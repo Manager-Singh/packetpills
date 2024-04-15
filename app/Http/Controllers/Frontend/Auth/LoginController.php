@@ -153,14 +153,20 @@ class LoginController extends Controller
     {
         $request->validate([
                     // $this->username() => 'required|string',
-                    'mobile_no' => 'required|regex:/[0-9]{10}/|digits:10',
+                    'email' => 'required|email', // Adding email validation
+                   // 'mobile_no' => 'required|regex:/[0-9]{10}/|digits:10',
                     'password' => PasswordRules::login(),
                     'g-recaptcha-response' => ['required_if:captcha_status,true', 'captcha'],
                 ], [
                     'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
                 ]);
+        if($request->input('email')){
+            $credentials = $request->only('email', 'password');
+        }else{
+            $credentials = $request->only('mobile_no', 'password');
+        }
             
-        $credentials = $request->only('mobile_no', 'password');
+        
         //dd($credentials);
         if (Auth::attempt($credentials)) {
 
@@ -299,6 +305,79 @@ class LoginController extends Controller
     }
     }
 
+    public function email_send_otp(Request $request)
+    {
+       
+        $isexist = User::where('email',$request->email)->first();
+        $otp = generateOTP();
+        try{
+        
+            if($isexist){
+                $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','verified')->first();
+                if($otp_verified){
+                    return json_encode(['error' => 0,'status'=>'exist', 'message' => 'User Already Exist','route'=>'/account/login']);
+                }else{
+                    $otp_unverified = UserOtp::where('user_id',$isexist->id)->where('status','unverified')->first();
+                    if(!$otp_unverified){
+                        $otp_unverified = new UserOtp();
+                    }
+                
+                    $otp_unverified->user_id = $isexist->id;
+                    $otp_unverified->otp = $otp;
+                        if($otp_unverified->save()){
+                            if(isset($isexist->email)){
+                                $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
+                            sendMail('mail','patient_email_otp_registration',$data1,$isexist->id,'Verify OTP');
+                            }
+                            //$this->sendSms($request,$otp);
+                            return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>'8888']);
+                        }else{
+                            return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+                        }
+                    
+                
+
+                }
+
+
+            }else{
+                
+                $user = new User();
+                $user->password = Hash::make($request->input('email'));
+                $user->email = $request->input('email');
+                $user->dialing_code = '';
+                $user->avatar_type = 'storage';
+                $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
+            
+                if($user->save()){
+                    if(isset($isexist->email)){
+                        $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
+                        sendMail('mail',null,$data1,$isexist->id,'Verify OTP');
+                    }
+
+                    $user->attachRole(3);
+                    $permissions = $user->roles->first()->permissions->pluck('id');
+                    $user->permissions()->sync($permissions);
+                    $userotp = new UserOtp();
+                    $userotp->user_id = $user->id;
+                    $userotp->otp = $otp;
+                    if($userotp->save()){
+                        
+                        return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>'9999']);
+                    }else{
+                        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+
+                    }
+                }
+                return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+            }
+        }catch(Exception $e){
+            //dd($e);
+           // return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+          return json_encode(['error' => 1, 'message' => $e->getMessage()]);
+        }
+    }
+
     public function sendSms($request,$otp,$dialing_code='1'){
         $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
@@ -320,6 +399,36 @@ class LoginController extends Controller
 
         $user = User::where('mobile_no',$request->mobile_no)->first();
         if($user ){
+            $user_otp = UserOtp::where('user_id',$user->id)->where('otp',$request->otp)->first();
+            if($user_otp){
+                $user_otp->status = 'verified';
+                if($user_otp->save()){
+                    $user->confirmation_code=md5(rand(9,12));
+                    $user->confirmed=1;
+                    $user->save();
+                    Auth::loginUsingId($user_otp->user_id);
+                    // return redirect()->route('frontend.index');
+                    if($user->mobile_no && $user->dialing_code){
+                        $mobile = $user->dialing_code.$user->mobile_no;
+                        sendMessage($mobile,'mail','patient_account_created',$data=null);
+                    }
+                    return json_encode(['error' => 0, 'message' => 'Login Successfully','profile_step'=>$user->profile_step]);
+                }
+            }else{
+                return json_encode(['error' => 1, 'message' => 'Otp not match']);
+            }
+        }
+        // $user->password = Hash::make($request->mobile_no);
+        // $user->mobile_no = $request->mobile_no;
+        return json_encode(['error' => 1, 'message' => 'Something went wrong']);
+
+    }
+
+    public function email_verify_otp(Request $request)
+    {
+
+        $user = User::where('email',$request->input('email'))->first();
+        if($user){
             $user_otp = UserOtp::where('user_id',$user->id)->where('otp',$request->otp)->first();
             if($user_otp){
                 $user_otp->status = 'verified';
