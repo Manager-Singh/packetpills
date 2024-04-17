@@ -189,16 +189,19 @@ class UserRepository extends BaseRepository
                     $data =  "";
                     
                 }
-
-
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                    sendMessage($mobile,'mail','payment_method_created',$data);
-                    if(isset($user->email)){
-                        sendMail('mail','payment_method_created',$data,$user_id,'Payment Add');
-                    }
-
+                
+                if(isset($user->email)){
+                    sendMail('mail','payment_method_created',$data,$user_id,'Payment Add');
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //     sendMessage($mobile,'mail','payment_method_created',$data);
+                //     if(isset($user->email)){
+                //         sendMail('mail','payment_method_created',$data,$user_id,'Payment Add');
+                //     }
+
+                // }
                 return true;
             }
             
@@ -329,17 +332,20 @@ class UserRepository extends BaseRepository
                     $data =  "";
                     
                 }
-
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                    // print_r($mobile);
-                    // die;
-                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
-                    sendMessage($mobile,'mail','address_created',$data);
-                    if(isset($user->email)){
-                        sendMail('mail','address_created',$data,$user_id,'Address');
-                    }
+                if(isset($user->email)){
+                    sendMail('mail','address_created',$data,$user_id,'Address');
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //     // print_r($mobile);
+                //     // die;
+                //     //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                //     sendMessage($mobile,'mail','address_created',$data);
+                //     if(isset($user->email)){
+                //         sendMail('mail','address_created',$data,$user_id,'Address');
+                //     }
+                // }
                 return true;
             }
             
@@ -461,24 +467,33 @@ class UserRepository extends BaseRepository
                     
                 }
 
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                    // print_r($mobile);
-                    // die;
-                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                if(isset($user->email)){
                     if($hc=1){
-                        sendMessage($mobile,'mail','healthcard_updated',$data);
-                        if(isset($user->email)){
                             sendMail('mail','healthcard_updated',$data,$user_id,'Health Card');
-                        }
                     }else{
-                        sendMessage($mobile,'mail','healthcard_created',$data);
-                        if(isset($user->email)){
                             sendMail('mail','healthcard_created',$data,$user_id,'Health Card');
-                        }
                     }
-                    
+
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //     // print_r($mobile);
+                //     // die;
+                //     //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                //     if($hc=1){
+                //         sendMessage($mobile,'mail','healthcard_updated',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','healthcard_updated',$data,$user_id,'Health Card');
+                //         }
+                //     }else{
+                //         sendMessage($mobile,'mail','healthcard_created',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','healthcard_created',$data,$user_id,'Health Card');
+                //         }
+                //     }
+                    
+                // }
                 return true;
             }
            
@@ -560,23 +575,31 @@ class UserRepository extends BaseRepository
                     
                 }
 
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                    // print_r($mobile);
-                    // die;
-                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                if(isset($user->email)){
                     if($insu=1){
-                        sendMessage($mobile,'mail','insurance_updated',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','insurance_updated',$data,$user_id,'Prescription Number');
-                        }
+                        sendMail('mail','insurance_updated',$data,$user_id,'Insurance Created/Updated');
                     }else{
-                        sendMessage($mobile,'mail','insurance_created',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','insurance_created',$data,$user_id,'Prescription Number');
-                        }
+                        sendMail('mail','insurance_created',$data,$user_id,'Insurance Created/Updated' );
                     }
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //     // print_r($mobile);
+                //     // die;
+                //     //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                //     if($insu=1){
+                //         sendMessage($mobile,'mail','insurance_updated',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','insurance_updated',$data,$user_id,'Prescription Number');
+                //         }
+                //     }else{
+                //         sendMessage($mobile,'mail','insurance_created',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','insurance_created',$data,$user_id,'Prescription Number');
+                //         }
+                //     }
+                // }
                 return true;
             }
            
@@ -619,26 +642,31 @@ class UserRepository extends BaseRepository
                     $data =  null;
                     
                 }
-
-
-
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                    // print_r($mobile);
-                    // die;
-                    //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                if(isset($user->email)){
                     if($Hi=1){
-                        sendMessage($mobile,'mail','healthinformation_updated',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','healthinformation_updated',$data,$user_id,'Health Information');
-                        }
+                        sendMail('mail','healthinformation_updated',$data,$user_id,'Health Information');
                     }else{
-                        sendMessage($mobile,'mail','healthinformation_created',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','healthinformation_created',$data,$user_id,'Health Information');
-                        }
+                        sendMail('mail','healthinformation_created',$data,$user_id,'Health Information');
                     }
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //     // print_r($mobile);
+                //     // die;
+                //     //$data =  "Your Prescription no is ".$prescription->prescription_number;
+                //     if($Hi=1){
+                //         sendMessage($mobile,'mail','healthinformation_updated',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','healthinformation_updated',$data,$user_id,'Health Information');
+                //         }
+                //     }else{
+                //         sendMessage($mobile,'mail','healthinformation_created',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','healthinformation_created',$data,$user_id,'Health Information');
+                //         }
+                //     }
+                // }
                 return true;
             }
            
@@ -783,16 +811,20 @@ class UserRepository extends BaseRepository
                     $data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;   
                 }
 
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                    // print_r($mobile);
-                    // die;
-                    //$data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
-                        sendMessage($mobile,'mail','patient_order_created',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','patient_order_created',$data,$user->id,'Patient Order');
-                        }
+                if(isset($user->email)){
+                    sendMail('mail','patient_order_created',$data,$user->id,'Patient Order');
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //     // print_r($mobile);
+                //     // die;
+                //     //$data =  "Your Order no is ".$order->order_number.'. and Total amount is $'.$order->total_amount;
+                //         sendMessage($mobile,'mail','patient_order_created',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','patient_order_created',$data,$user->id,'Patient Order');
+                //         }
+                // }
                 
                 return 1;
             }
@@ -1463,16 +1495,21 @@ class UserRepository extends BaseRepository
                }else{
                     $data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
                 }
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                   if($status != 'pending' && $status != 'processing'){
-                        //$data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
-                        sendMessage($mobile,'mail','patient_transfer_status',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','patient_transfer_status',$data,$user->id,'Transfer Request '.ucfirst($status));
-                        }
-                   }
+
+                if($status != 'pending' && $status != 'processing' && isset($user->email)){
+                   sendMail('mail','patient_transfer_status',$data,$user->id,'Transfer Request '.ucfirst($status));
                 }
+
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //    if($status != 'pending' && $status != 'processing'){
+                //         //$data =  $status."  & Your transfer number is ".$transferRequest->transfer_number;
+                //         sendMessage($mobile,'mail','patient_transfer_status',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','patient_transfer_status',$data,$user->id,'Transfer Request '.ucfirst($status));
+                //         }
+                //    }
+                // }
             
                 return $id;
             
@@ -1502,19 +1539,23 @@ class UserRepository extends BaseRepository
                 if(isset($user->parent_id) && !empty($user->parent_id)){ 
                     $data =  $status.' & status changed to '.$user->full_name;
                     $user = User::where('id',$user->parent_id)->first(); 
-               }else{
+                }else{
                     $data =  $status;
                 }
-                if($user->mobile_no && $user->dialing_code){
-                    $mobile = $user->dialing_code.$user->mobile_no;
-                    if($status != 'pending' && $status != 'processing'){
-                        sendMessage($mobile,'mail','prescription_refill_status',$data);
-                        if(isset($user->email)){
-                            sendMail('mail','prescription_refill_status',$data,$user->id,'Prescription Refill '.ucfirst($status));
-                        }
-                    }
-                   
+                if($status != 'pending' && $status != 'processing' && isset($user->email)){
+                    sendMail('mail','prescription_refill_status',$data,$user->id,'Prescription Refill '.ucfirst($status));
                 }
+                
+                // if($user->mobile_no && $user->dialing_code){
+                //     $mobile = $user->dialing_code.$user->mobile_no;
+                //     if($status != 'pending' && $status != 'processing'){
+                //         sendMessage($mobile,'mail','prescription_refill_status',$data);
+                //         if(isset($user->email)){
+                //             sendMail('mail','prescription_refill_status',$data,$user->id,'Prescription Refill '.ucfirst($status));
+                //         }
+                //     }
+                   
+                // }
             
                 return $id;
             
