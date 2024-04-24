@@ -246,4 +246,132 @@
     @else
         <p>Prescriptions not added!</p>
     @endif
+    
+
+    @if (count($cprescriptions) > 0)
+    <h4 class="text-center" style="margin-top: 8rem;">Cancelled Prescriptions</h4>
+    
+        <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+            @foreach ($cprescriptions as $key => $prescription)
+                <div class="panel">
+                    <div class="panel-heading" role="tab" id="heading-{{ $prescription->id }}">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                href="#collapse-{{ $prescription->id }}" aria-expanded="true"
+                                aria-controls="collapse-{{ $prescription->id }}">
+                                {{ $prescription->prescription_number }} Created At
+                                {{ $prescription->created_at }}
+                                <div class="status-wrapper-{{ $prescription->id }}" style="display: inline;">
+                                    @if ($prescription->status == 'pending')
+                                        <span class="badge badge-warning"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($prescription->status) }}</span>
+                                    @elseif($prescription->status == 'cancelled')
+                                        <span class="badge badge-danger"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($prescription->status) }}</span>
+                                    @elseif($prescription->status == 'approved')
+                                        <span class="badge badge-success"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($prescription->status) }}</span>
+                                    @endif
+                                </div>
+                            </a>
+
+                        </h4>
+                    </div>
+                    <div id="collapse-{{ $prescription->id }}" class="panel-collapse collapse in" role="tabpanel"
+                        aria-labelledby="heading-{{ $prescription->id }}">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                               
+                                    @if ($prescription->status == 'pending')
+                                        @php
+                                            $approve = 'block';
+                                            $cancel = 'block';
+                                            $ap = 92;
+                                            $cp =29;
+                                        @endphp
+                                       
+                                    @elseif($prescription->status == 'approved')
+                                        @php
+                                            $approve = 'none';
+                                            $cancel = 'block';
+                                            $ap = 29;
+                                            $cp =29;
+                                        @endphp
+                                      
+                                    @elseif($prescription->status == 'cancelled')
+                                        @php
+                                            $approve = 'block';
+                                            $cancel = 'none';
+                                            $ap = 29;
+                                            $cp =29;
+                                        @endphp
+                                    
+                                    @endif
+
+                                     <!-- <span class="badge badge-success approve-{{ $prescription->id }}"
+                                            style="right: {{$ap}}px; position: absolute; padding: 9px;cursor: pointer; display:{{$approve}}"
+                                            onclick="change_status('{{ $prescription->id }}','Approve')">Approve</span>
+                                        <span class="badge badge-danger cancel-{{ $prescription->id }}"
+                                            style="right: {{$cp}}px; position: absolute; padding: 9px;cursor: pointer; display:{{$cancel}}"
+                                            onclick="change_status('{{ $prescription->id }}','Cancel')">Cancel</span> -->
+
+                                </div>
+                            </div>
+                            @if (count($prescription->prescription_iteams) > 0)
+                                <h5 class="prescription-heading">Prescription Images</h5>
+                                <div class="gallery-wrapper">
+                                    @foreach ($prescription->prescription_iteams as $iteam => $prescription_iteam)
+                                        <div class="image-wrapper">
+                                            <a
+                                                href="#lightbox-image-{{ $prescription_iteam->prescripiton_id }}-{{ $prescription_iteam->page_no }}">
+                                                    @if(Str::lower(pathinfo($prescription_iteam->prescription_upload, PATHINFO_EXTENSION)) === 'pdf')
+                                                        <img src="{{ asset('img/pdf.png') }}" alt="{{ $prescription_iteam->page_no }}" />
+                                                    @else
+                                                        <img src="{{ asset($prescription_iteam->prescription_upload) }}" alt="{{ $prescription_iteam->page_no }}" />
+                                                    @endif
+                                                    
+                                                <div class="image-title">Prescription page No.
+                                                    {{ $prescription_iteam->page_no }}
+                                                </div>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="gallery-lightboxes">
+                                    @foreach ($prescription->prescription_iteams as $iteam => $prescription_iteam_for_modal)
+                                        <div class="image-lightbox"
+                                            id="lightbox-image-{{ $prescription_iteam_for_modal->prescripiton_id }}-{{ $prescription_iteam_for_modal->page_no }}">
+                                            <div class="image-lightbox-wrapper">
+                                                <a href="#" class="close"></a>
+                                                <!-- <a href="#lightbox-image-{{ $prescription_iteam_for_modal->page_no + 1 }}" class="arrow-left"></a>
+                                                    <a href="#lightbox-image-{{ $prescription_iteam_for_modal->page_no - 1 }}" class="arrow-right"></a> -->
+                                                
+
+                                                @if(Str::lower(pathinfo($prescription_iteam_for_modal->prescription_upload, PATHINFO_EXTENSION)) === 'pdf')
+                                                    <iframe src="{{ asset($prescription_iteam_for_modal->prescription_upload) }}" style="width: 100%; height: 390px; margin-top:10px" frameborder="0"></iframe>
+                                                @else
+                                                    <img src="{{ asset($prescription_iteam_for_modal->prescription_upload) }}"  class="img-fluid">
+                                                @endif
+                                                <div class="image-title">Prescription page No.
+                                                    {{ $prescription_iteam_for_modal->page_no }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <p>Prescription images not added!</p>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end of panel -->
+            @endforeach
+
+
+        </div>
+   
+    @endif
 </div>

@@ -17821,11 +17821,15 @@ a.text-dark:focus {
 
 .breadcrumb-menu .btn-group {
   vertical-align: top;
+  border: 1px solid #4dbd74;
+  padding: 3px 20px;
+  border-radius: 4px;
+  background-color: #4dbd74;
 }
 
 .breadcrumb-menu .btn {
   padding: 0 0.75rem;
-  color: #73818f;
+  color: #000;
   vertical-align: top;
   border: 0;
 }

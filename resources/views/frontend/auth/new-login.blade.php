@@ -73,6 +73,11 @@
             float: right;
             font-size: 18px;
         }
+        
+        .checkbox input, .radio input {
+            opacity: unset; 
+            width: 18%;
+        }
     </style>
 @endpush
 

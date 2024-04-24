@@ -270,6 +270,8 @@ class UserController extends Controller
         $transferRequests = TransferRequest::where('user_id',$user->id)->orderBy('created_at','desc')->get();
         $prescriptionRefills = PrescriptionRefill::with(['prescription','user'])->where('user_id',$user->id)->where('status','!=','cancelled')->orderBy('created_at','desc')->get();
         $existingPrescriptions = PrescriptionOld::where('user_id',$user->id)->orderBy('created_at','desc')->get();
+        $cprescriptions = Prescription::where('user_id',$user->id)->where('status','=','cancelled')->orderBy('created_at','desc')->get();
+        
         //  print_r('<pre>');
         //  print_r($orders);
         //   die;
@@ -284,6 +286,7 @@ class UserController extends Controller
                 'transferRequests'=>$transferRequests,
                 'prescriptionRefills'=>$prescriptionRefills,
                 'existingPrescriptions'=>$existingPrescriptions,
+                'cprescriptions'=>$cprescriptions,
             ])
             ->withUser($user);
     }
@@ -305,6 +308,8 @@ class UserController extends Controller
         //  print_r('<pre>');
         //  print_r($orders);
         //   die;
+        $cprescriptions = Prescription::where('user_id',$user->id)->where('status','=','cancelled')->orderBy('created_at','desc')->get();
+
         return view('backend.auth.employee.show')
             ->with([
                 'provinces'=>$province,
@@ -316,6 +321,7 @@ class UserController extends Controller
                 'transferRequests'=>$transferRequests,
                 'prescriptionRefills'=>$prescriptionRefills,
                 'existingPrescriptions'=>$existingPrescriptions,
+                'cprescriptions'=>$cprescriptions,
             ])
             ->withUser($user);
     }
