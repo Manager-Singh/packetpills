@@ -308,10 +308,12 @@ class LoginController extends Controller
     public function email_send_otp(Request $request)
     {
        
+        
         $isexist = User::where('email',$request->email)->first();
         $otp = generateOTP();
         try{
         
+            
             if($isexist){
                 $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','verified')->first();
                 if($otp_verified){
@@ -341,7 +343,6 @@ class LoginController extends Controller
 
 
             }else{
-                
                 $user = new User();
                 $user->password = Hash::make($request->input('email'));
                 $user->email = $request->input('email');
@@ -349,10 +350,11 @@ class LoginController extends Controller
                 $user->avatar_type = 'storage';
                 $user->avatar_location = 'avatars/ydHfdoOuza7nvwvtez1S6xzDhWDGyKJgpDDQN3nw.png';
             
+               
                 if($user->save()){
-                    if(isset($isexist->email)){
+                    if(isset($user->email)){
                         $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
-                        sendMail('mail',null,$data1,$isexist->id,'Verify OTP');
+                        sendMail('mail','without-msg',$data1,$user->id,'Verify OTP');
                     }
 
                     $user->attachRole(3);
