@@ -56,6 +56,7 @@
               header.re-header.show.arrow-header{
                 margin-top: 6rem;
                 position: relative;
+                background-color: transparent;
               }
 
 
@@ -109,7 +110,7 @@
        @include('frontend.navbar.step.header')
       @else
       @include('frontend.navbar.header')
-      <header class="re-header show arrow-header">
+      <header class="re-header show arrow-header arrow-new-header">
         <a href="{{url()->previous()}}">
           <img class="header-icon" src="{{asset('step/assets/images/arrow.png')}}" />
         </a>
