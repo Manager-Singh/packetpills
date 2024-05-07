@@ -150,7 +150,7 @@
 
                                 
 
-                                <!-- <div class="row align-items-center">
+                                <div class="row align-items-center">
                                     <div class="col-md-12">
                                         <label for="mobile_no">Mobile</label>
                                     </div>
@@ -169,10 +169,10 @@
                                             class="home-input full-width font-semibold ng-untouched ng-pristine ng-invalid"
                                             id="phone-number"
                                             placeholder="10 digit phone number" aria-required="true"
-                                            required="">
+                                            required="" name="mobile_no">
                                     </div>
                                 </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col otp-box hide" style="display:none;">
                                         <div class="form-group mt-4">
                                             
@@ -182,10 +182,10 @@
                                     </div>
                                 </div> -->
                             @else
-                                <!-- <div class="col-md-12">
+                                <div class="col-md-12">
                                     <label for="mobile_no">Mobile</label>
                                     <input type="text" id="mobile_no" name="mobile_no" value="+{{$auth->dialing_code}}{{$auth->mobile_no}}" readonly required>
-                                </div> -->
+                                </div>
                             @endif
                             @endif
                             </div>

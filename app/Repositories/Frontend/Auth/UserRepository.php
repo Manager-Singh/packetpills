@@ -112,6 +112,12 @@ class UserRepository extends BaseRepository
         if(isset($input['self_described'])){
             $user->self_described = $input['self_described'];
         }
+        if(isset($input['dialing_code'])){
+            $user->dialing_code = $input['dialing_code'];
+        }
+        if(isset($input['mobile_no'])){
+            $user->mobile_no = $input['mobile_no'];
+        }
 
         
         // Upload profile image if necessary

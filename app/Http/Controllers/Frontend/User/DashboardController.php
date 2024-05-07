@@ -112,10 +112,10 @@ class DashboardController extends Controller
 
     }
     public function personal_save(Request $request){
-
-       $output = $this->userRepository->update(
+       
+        $output = $this->userRepository->update(
             Auth::user(),
-            ['pronouns'=>$request->pronouns, 'custom_pronouns'=>$request->custom_pronouns, 'first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'profile_step'=>1],
+            ['dialing_code'=>$request->dialing_code,'mobile_no'=>$request->mobile_no,'pronouns'=>$request->pronouns, 'custom_pronouns'=>$request->custom_pronouns, 'first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'date_of_birth'=>$request->date.'-'.$request->month.'-'.$request->year,'profile_step'=>1],
             $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
