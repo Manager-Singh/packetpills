@@ -302,7 +302,7 @@ class DashboardController extends Controller
             $mobile = $user->dialing_code.$user->mobile_no;
             //sendMessage($mobile,'mail','prescription_refill_created',$data_u);
             if(isset($user->email)){
-             //   sendMail('mail','prescription_refill_created',$data_u,$user->id,'Prescription Refill');
+                sendMail('mail','prescription_refill_created',$data_u,$user->id,'Prescription Refill');
             }
 
             //send messages to admin
@@ -633,9 +633,15 @@ class DashboardController extends Controller
     }
 
     public function transferRequestDelete(Request $request){
-        
+        $admin = User::whereHas('roles', function ($subQuery) { 
+            $subQuery->where('name', 'Administrator');
+        })->first();
         $output = TransferRequest::find($request->id);
+        $user =  User::find($output->user_id);
+        $data1= 'Transfer request '.$output->transfer_number.' cancelled by '.$user->full_name;
+        sendMail('admin',null,$data1,$admin->id,'Transfer Request Cancelled By Patient',null,null);
         $output->status = 'cancelled';
+
         if($output->save()){
             return redirect()->back()->withFlashSuccess(__('Transfer Request Cancelled Successfully'));
         }else{

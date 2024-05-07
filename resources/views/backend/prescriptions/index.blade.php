@@ -15,6 +15,20 @@ if(isset($_GET['status'])){
 @endphp
 
 @section('content')
+<style>
+    span.approved {
+    background-color: #28a745;
+    padding: 3px 9px;
+    border-radius: 3px;
+    color: #fff;
+}
+    span.cancelled {
+    background-color: #dc3545;
+    padding: 3px 9px;
+    border-radius: 3px;
+    color: #fff;
+}
+</style>
 <div class="card">
     <div class="card-body">
         <div class="row">

@@ -42,7 +42,7 @@ class PrescriptionsTableController extends Controller
                 return $prescriptions->created_at->toDateString();
             })
             ->addColumn('status', function ($prescriptions) {
-                return ucfirst($prescriptions->status);
+                return '<span class="'.$prescriptions->status.'">'.ucfirst($prescriptions->status).'</span>';
             })
             ->addColumn('actions', function ($prescriptions) {
                 return $prescriptions->action_buttons;

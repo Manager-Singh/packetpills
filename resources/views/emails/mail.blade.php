@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <p>Hello, {{ $name }}</p>
+    <p>Hello {{ $name }},</p>
     <p>{{ $body }}.</p>
     <p></p>
     <p></p>

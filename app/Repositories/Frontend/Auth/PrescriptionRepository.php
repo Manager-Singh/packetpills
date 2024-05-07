@@ -161,7 +161,13 @@ class PrescriptionRepository extends BaseRepository
                         
                     }
                     
+                $admin = User::whereHas('roles', function ($subQuery) { 
+                    $subQuery->where('name', 'Administrator');
+                })->first();
+
                 if(isset($user->email)){
+                    $data1= 'New prescription uploaded by '.$user->full_name.' . Prescription no is '.$prescription->prescription_number;
+                    sendMail('admin',null,$data1,$admin->id,'Prescription Created',null,null);
                     sendMail('mail','patient_prescription_created',$data,$user->id,'Prescription Created');
                 }
 

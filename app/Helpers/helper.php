@@ -301,7 +301,7 @@ if (! function_exists('sendMail')) {
             $message = MailMessage::where('message_for',$message_for)->where('status',1)->first();
            
             if(!$message){
-                if( $message_for = 'without-msg'){
+                if( $message_for == 'without-msg'){
                     $body = $data;
                 }else{
                     return true;

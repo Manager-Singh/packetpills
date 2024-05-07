@@ -453,9 +453,8 @@ class UserRepository extends BaseRepository
             $healthcard_msg_key =   'healthcard_updated';
         }else{
             $healthCard = new HealthCard;
-            $healthcard_msg_key =   'insurance_created';
+            $healthcard_msg_key =   'healthcard_created';
         }
-        
         $healthCard->user_id = auth()->user()->id;
         $healthCard->card_number = (isset($data['health_card_number'])) ? $data['health_card_number'] : '' ;
         if($front_img){
@@ -507,7 +506,7 @@ class UserRepository extends BaseRepository
                 $mobile = $user->dialing_code.$user->mobile_no;
                // sendMessage($mobile,'mail',$healthcard_msg_key,null);
                 if(isset($user->email)){
-                   // sendMail('mail',$healthcard_msg_key,null,$user->id,'Health Card');
+                    sendMail('mail',$healthcard_msg_key,null,$user->id,'Health Card');
                 }
 
                 //send messages to admin
@@ -581,7 +580,7 @@ class UserRepository extends BaseRepository
             $mobile = $user->dialing_code.$user->mobile_no;
             //sendMessage($mobile,'mail','insurance_created',null);
             if(isset($user->email)){
-              //  sendMail('mail','insurance_created',null,$user->id,'Insurance');
+                sendMail('mail','insurance_created',null,$user->id,'Insurance');
             }
 
             //send messages to admin
@@ -682,7 +681,7 @@ class UserRepository extends BaseRepository
              $mobile = $user->dialing_code.$user->mobile_no;
             // sendMessage($mobile,'mail','address_created',null);
              if(isset($user->email)){
-                // sendMail('mail','address_created',null,$user->id,'Address');
+                 sendMail('mail','address_created',null,$user->id,'Address');
              }
  
              //send messages to admin
@@ -746,7 +745,7 @@ class UserRepository extends BaseRepository
             $mobile = $user->dialing_code.$user->mobile_no;
            // sendMessage($mobile,'mail','payment_method_created',null);
             if(isset($user->email)){
-              //  sendMail('mail','payment_method_created',null,$user->id,'Payment Method');
+                sendMail('mail','payment_method_created',null,$user->id,'Payment Method');
             }
 
             //send messages to admin
@@ -771,8 +770,10 @@ class UserRepository extends BaseRepository
       public function createHealthInformation(array $data){
         
         if(isset($data['health_information_id'])){
+            $health_information_key = 'healthinformation_updated';
             $healthInformation = HealthInformation::find($data['health_information_id']);
         }else{
+            $health_information_key = 'healthinformation_created';
             $healthInformation = new HealthInformation;
         }
         
@@ -780,7 +781,6 @@ class UserRepository extends BaseRepository
         $healthInformation->allergies = $data['allergie'];
         if($data['allergie'] == 1){
             $healthInformation->allergies_medications = $data['allergies_medications'];
-
         }else{
             $healthInformation->allergies_medications = null;
 
@@ -806,7 +806,7 @@ class UserRepository extends BaseRepository
             $mobile = $user->dialing_code.$user->mobile_no;
            // sendMessage($mobile,'mail','healthinformation_created',null);
             if(isset($user->email)){
-             //   sendMail('mail','healthinformation_created',null,$user->id,'Healthinformation');
+                sendMail('mail',$health_information_key,null,$user->id,'Healthinformation');
             }
 
             //send messages to admin
