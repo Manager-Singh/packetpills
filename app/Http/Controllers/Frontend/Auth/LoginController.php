@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Session;
-
+use App\Rules\ReCaptcha;
+use GuzzleHttp\Client as Gclient; 
 /**
  * Class LoginController.
  */
@@ -150,15 +151,18 @@ class LoginController extends Controller
 
 
     public function login(Request $request)
+    
     {
         $request->validate([
                     // $this->username() => 'required|string',
                     'email' => 'required|email', // Adding email validation
                    // 'mobile_no' => 'required|regex:/[0-9]{10}/|digits:10',
                     'password' => PasswordRules::login(),
-                    'g-recaptcha-response' => ['required_if:captcha_status,true', 'captcha'],
+                    'g-recaptcha-response' => 'required|captcha',
+                    //'g-recaptcha-response' => ['required_if:captcha_status,true', 'captcha'],
                 ], [
-                    'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
+                    'g-recaptcha-response' => 'It is required', 
+                   // 'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
                 ]);
         if($request->input('email')){
             $credentials = $request->only('email', 'password');
@@ -307,8 +311,41 @@ class LoginController extends Controller
 
     public function email_send_otp(Request $request)
     {
-       
+      
+       // dd($request->all());
+        // Create the validator
+        $validator = \Validator::make($request->all(), [
+            'g-recaptcha-response' => 'required',
+            'email' => 'required',
+        ], [
+            'g-recaptcha-response.required' => 'ReCAPTCHA verification is required',
+            'email.required' => 'Email is required',
+        ]);
         
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            if(isset($errors['g-recaptcha-response'][0])){
+                $error = $errors['g-recaptcha-response'][0];
+            }else{
+                $error = 'This field is required.';
+            }
+            return json_encode(['error' => 1,'message' => $error]);
+
+        }
+    if ($request->input('g-recaptcha-response')) {
+        $client = new Gclient();
+        $response = $client->post("https://www.google.com/recaptcha/api/siteverify", [
+            'form_params' => [
+                'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+                'response' => $request->input('g-recaptcha-response')
+            ]
+        ]);
+        $body = json_decode($response->getBody(), true);
+        if(!$body["success"]){
+            return json_encode(['error' => 1,'message' => 'The reCAPTCHA field is required']);
+        }
+    }
         $isexist = User::where('email',$request->email)->first();
         $otp = generateOTP();
         try{

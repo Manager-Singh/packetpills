@@ -10,7 +10,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "albertcht/invisible-recaptcha": "^1.9",
         "altek/accountant": "^1.2",
         "altek/eventually": "^1.0",
         "arcanedev/log-viewer": "^5.0",
@@ -31,6 +30,7 @@
         "phpmailer/phpmailer": "^6.9",
         "spatie/laravel-html": "^2.22",
         "spatie/laravel-permission": "^3.0",
+        "timehunter/laravel-google-recaptcha-v2": "~1.0.0",
         "torann/geoip": "^1.0",
         "twilio/sdk": "^7.9",
         "yajra/laravel-datatables-oracle": "^9.10"

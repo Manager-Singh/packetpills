@@ -82,6 +82,7 @@
 @endpush
 
 @section('content')
+
               <!-- <header  class="nav-header__secondary bg-white nav-header__secondary--shadow top-reset">
                 <div >
                   <div  class="landing-wrapper">
@@ -254,6 +255,9 @@
                 <!--col-->
             </div>
             <!--row-->
+            <!-- <div id="form_id_1">
+
+            </div> -->
 
             <div class="row">
                 <div class="col">
@@ -268,7 +272,7 @@
 
             @if(config('access.captcha.login'))
             <div class="row">
-                <div class="col">
+                <div class="col ggg-recaptcha-response">
                     @captcha
                     {{ html()->hidden('captcha_status', 'true') }}
                 </div>
@@ -291,7 +295,7 @@
 @endsection
 
 @push('after-scripts')
-
+<!-- {!!  GoogleReCaptchaV2::render('form_id_1') !!} -->
 <script>
   // Add a click event listener to elements with the class "LikePost"
   $('.LikePost').on('click', function() {

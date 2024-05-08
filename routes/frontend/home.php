@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\User\AccountController;
 use App\Http\Controllers\Frontend\User\DashboardController;
 use App\Http\Controllers\Frontend\User\ProfileController;
 use App\Http\Controllers\Frontend\User\PrescriptionController;
+use App\Http\Controllers\Frontend\ReCaptchaController;
 
 /*
  * Frontend Controllers
@@ -22,7 +23,8 @@ Route::post('enterprise/connect/send', [ConnectController::class, 'store'])->nam
 Route::get('drug/search', [DashboardController::class, 'drugSearch'])->name('drug.search');
 Route::get('drug/{slug}', [DashboardController::class, 'drugSingleDetails'])->name('drug.single');
 Route::post('drug/get-search', [DashboardController::class, 'drugAjaxSearch'])->name('drug.ajax.search');
-
+Route::get('/index', 'ReCaptchaController@index');
+Route::post('/verify', 'ReCaptchaController@verify');
 /*
  * These frontend controllers require the user to be logged in
  * All route names are prefixed with 'frontend.'

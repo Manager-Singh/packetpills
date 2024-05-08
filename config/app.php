@@ -209,6 +209,7 @@ return [
         // Application Service Providers...
         Collective\Html\HtmlServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+        TimeHunter\LaravelGoogleReCaptchaV2\Providers\GoogleReCaptchaV2ServiceProvider::class,
     ],
 
     /*
@@ -262,5 +263,6 @@ return [
         // Third Party Aliases
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'GoogleReCaptchaV2'=> TimeHunter\LaravelGoogleReCaptchaV2\Facades\GoogleReCaptchaV2::class,
     ],
 ];

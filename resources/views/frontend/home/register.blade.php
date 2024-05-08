@@ -86,6 +86,7 @@
                                                     </div>
 
                                                 </div>
+                                                <div id="regs_form"></div>
 
 
                                                 <div class="margin-t-l">
@@ -218,6 +219,8 @@
 
 
 @push('after-scripts')
+
+{!!  GoogleReCaptchaV2::render('regs_form') !!}
 <script>
     $(function() {
 
@@ -226,24 +229,25 @@
             e.preventDefault();
             $("#error-msg").text('');
             var email = $('#email').val();
+            var captchaResponse = grecaptcha.getResponse();
 
             
             //   console.log(phone);
             $.ajax({
                 type: 'POST',
                 url: "{{ route('frontend.auth.email.send.otp') }}", 
-                data: {_token:"{{ csrf_token() }}",email:email},
+                data: {_token:"{{ csrf_token() }}",email:email,'g-recaptcha-response': captchaResponse},
                 success: function(response) {
                 response = JSON.parse(response);
                         console.log(response.otp);
                         if (response.error == 0 ) {
-                        if(response.status == 'exist'){
-                            location.href = response.route;
-                        }
-                        $('.otp-box').show(); 
-                        $('.genrated-otp').text(response.otp); 
-                        $('.request-otp').hide(); 
-                        $('.register-submit').show(); 
+                            if(response.status == 'exist'){
+                                location.href = response.route;
+                            }
+                            $('.otp-box').show(); 
+                            $('.genrated-otp').text(response.otp); 
+                            $('.request-otp').hide(); 
+                            $('.register-submit').show(); 
                         
                         }else{
                         $("#error-msg").text(response.message);
