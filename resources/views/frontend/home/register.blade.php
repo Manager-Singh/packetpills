@@ -1,4 +1,9 @@
-
+<style>
+span#error-msg {
+    color: red;
+    font-weight: 600;
+}
+</style>
 <div class="hero hero--desktop hero--exp-2"
     style="background-size: auto 125%;background-position: center center;background-size: contain;padding: 0;min-height: 100vh;background-repeat: no-repeat; background-image: url({{asset('website/assets/images/TransparentCircle.png')}});">
 

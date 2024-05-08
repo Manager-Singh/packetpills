@@ -78,6 +78,10 @@
             opacity: unset; 
             width: 18%;
         }
+        span#error-msg {
+            color: red;
+            font-weight: 600;
+        }
     </style>
 @endpush
 
