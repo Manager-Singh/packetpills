@@ -46,7 +46,7 @@ return [
     | Google reCAPTCHA host name, https://www.google.com/recaptcha/admin
     |
     */
-    'host_name' => 'https://account.misterpharmacist.com/',
+    'host_name' => env('GOOGLE_RECAPTCHA_HOST_NAME'),
     /*
     |--------------------------------------------------------------------------
     | Secret Key
@@ -55,7 +55,7 @@ return [
     | Google reCAPTCHA credentials, https://www.google.com/recaptcha/admin
     |
     */
-    'secret_key' => '6Lc5ZdUpAAAAADPsqUuwWshC7g_Mq9IQdjTb4F3F',
+    'secret_key' => env('GOOGLE_RECAPTCHA_SECRET'),
     /*
     |--------------------------------------------------------------------------
     | Site Key
@@ -64,7 +64,7 @@ return [
     | Google reCAPTCHA credentials, https://www.google.com/recaptcha/admin
     |
     */
-    'site_key' => '6Lc5ZdUpAAAAADbUouJDt5YHpa_S288ULDtTkrv9',
+    'site_key' => env('GOOGLE_RECAPTCHA_KEY'),
 
     /*
     |--------------------------------------------------------------------------
