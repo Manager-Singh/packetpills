@@ -158,10 +158,10 @@ class LoginController extends Controller
                     'email' => 'required|email', // Adding email validation
                    // 'mobile_no' => 'required|regex:/[0-9]{10}/|digits:10',
                     'password' => PasswordRules::login(),
-                    'g-recaptcha-response' => 'required|captcha',
+                   // 'g-recaptcha-response' => 'required|captcha',
                     //'g-recaptcha-response' => ['required_if:captcha_status,true', 'captcha'],
                 ], [
-                    'g-recaptcha-response' => 'It is required', 
+                 //   'g-recaptcha-response' => 'It is required', 
                    // 'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
                 ]);
         if($request->input('email')){
