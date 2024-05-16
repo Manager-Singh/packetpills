@@ -81,7 +81,7 @@ span#error-msg {
                                                     <div class="row">
                                                         <div class="col otp-box hide" style="display:none;">
                                                             <div class="form-group mt-4">
-                                                               <small>Your verification code has been sent to your email. Please enter it below to register your account.</small>
+                                                               <small><b>Your verification code has been sent to your email. Please enter it below to register your account.</b></small>
                                                                 {{ html()->text('otp')->class('form-control w-100')->placeholder(__(' Enter Two-Factor Code'))->attribute('id','otp')->attribute('maxlength', 6)->attribute('minlength', 6)->required() }}
                                                                 
                                                             </div>
