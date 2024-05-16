@@ -81,8 +81,8 @@ span#error-msg {
                                                     <div class="row">
                                                         <div class="col otp-box hide" style="display:none;">
                                                             <div class="form-group mt-4">
-                                                               
-                                                                {{ html()->text('otp')->class('form-control w-100')->placeholder(__('validation.attributes.frontend.otp'))->attribute('id','otp')->attribute('maxlength', 6)->attribute('minlength', 6)->required() }}
+                                                               <small>Your verification code has been sent to your email. Please enter it below to register your account.</small>
+                                                                {{ html()->text('otp')->class('form-control w-100')->placeholder(__(' Enter Two-Factor Code'))->attribute('id','otp')->attribute('maxlength', 6)->attribute('minlength', 6)->required() }}
                                                                 
                                                             </div>
                                                         </div>
@@ -97,7 +97,7 @@ span#error-msg {
                                                 <div class="margin-t-l">
                                                     <span id="error-msg" class="p-2 float-left"></span>
                                                     <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset request-otp">{{ __('labels.frontend.auth.get_started') }}</button>
-                                                    <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset register-submit" style="display:none">{{ __('labels.frontend.auth.otp_verfied') }} & {{ __('labels.frontend.auth.next') }}</button>
+                                                    <button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset register-submit" style="display:none">{{ __('Verify Two Factor Code') }} & {{ __('labels.frontend.auth.next') }}</button>
                                                     <a href="{{route('frontend.index')}}" ><button type="button" class="btn btn--full btn--brand txt-defaultcase lineheight-reset mt-2">Start Again</button></a>
                                                 </div>
 

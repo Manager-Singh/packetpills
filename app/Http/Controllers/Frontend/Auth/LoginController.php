@@ -365,8 +365,8 @@ class LoginController extends Controller
                     $otp_unverified->otp = $otp;
                         if($otp_unverified->save()){
                             if(isset($isexist->email)){
-                                $data1 =  $otp.' is the OTP to register to your Mister Pharmacist account. DO NOT disclose it to anyone.';
-                            sendMail('mail','patient_email_otp_registration',$data1,$isexist->id,'Verify OTP');
+                                $data1 =  ': '.$otp.' DO NOT disclose it to anyone';
+                            sendMail('mail','patient_email_otp_registration',$data1,$isexist->id,'Two Factor Authentication Code');
                             }
                             //$this->sendSms($request,$otp);
                             return json_encode(['error' => 0, 'message' => 'Otp Send Successfully','otp'=>'8888']);

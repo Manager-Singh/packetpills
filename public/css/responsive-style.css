@@ -156,6 +156,10 @@ button.navbar-toggler {
          top: 20vh;
          right: -1vh;
      }
+
+     main .registration-home {
+        background: #fff !important;
+    }
 	
 }
 
@@ -181,6 +185,9 @@ button.navbar-toggler {
 }
 .landing-wrapper {
     padding-top: 10rem;
+}
+main .registration-home {
+    background: #fff !important;
 }
 }
 
