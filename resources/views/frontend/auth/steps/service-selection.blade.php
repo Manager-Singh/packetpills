@@ -50,6 +50,17 @@ button.btn.btn-secondary {
     color: #000;
     text-decoration: unset;
 }
+.bnner-mg-pres {
+    text-align: center;
+}
+.bnner-mg-pres img {
+    width: 68%;
+    margin-bottom: 20px;
+}
+
+.service-se .card-body {
+    height: 300px;
+}
 
 </style>
 @endpush
@@ -68,7 +79,7 @@ button.btn.btn-secondary {
 
 				    </div>
 				    <div class="col-md-12 mt-3">
-                        <div class="row">
+                        <div class="row service-se">
                         <div class="col-md-4">
 
               <div class="card blue border-light text-left p-1 mb-4">
@@ -135,7 +146,10 @@ button.btn.btn-secondary {
 </div>
 </div>
 </div>
-                <div class=" text-center p-1 more-btn-o">
+<div class="row">
+    <div class="col-md-12 bnner-mg-pres"><img src="{{asset('img/banner-prescription.jpg')}}"/></div>
+</div>                
+<div class=" text-center p-1 more-btn-o">
                     
                     
                     <a href="javascript:void(0)" data-toggle="modal" data-target="#pharmaModal">More options</a>

@@ -33,6 +33,7 @@ use App\Models\OrderItem;
 use File;
 use Ramsey\Uuid\Uuid;
 use App\Models\PrescriptionRefill;
+use App\Models\PrescriptionOld;
 
 
 
@@ -1577,6 +1578,33 @@ class UserRepository extends BaseRepository
             return 0;
         }
         //$prescriptionRefill = PrescriptionRefill::find($id)->delete();
+    }
+
+
+
+    public function existingRefillStatusUpdate($data)
+    {
+        
+        return DB::transaction(function () use ($data) {
+            $id = $data['id'];
+            $status = $data['status'];
+            $prescriptionRefill = PrescriptionOld::find($id);
+            if($prescriptionRefill){
+                $prescriptionRefill->status = $status;
+            }else{
+                $prescriptionRefill->status = $prescriptionRefill->status;
+            }
+            if ($prescriptionRefill->save()) {
+
+               
+                return $id;
+            
+            }
+        
+            return 0;
+            
+           // throw new GeneralException(__('Problem With Prescription Status Update.'));
+        });
     }
 
     

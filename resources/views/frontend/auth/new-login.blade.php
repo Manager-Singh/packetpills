@@ -30,17 +30,21 @@
             background-color: #8ac03d; 
         }
         .google-signup-btn a.btn.btn-sm.btn-outline-info.m-1 {
-            padding: 5px 25px;
-            border-color: #638e3c;
-            color: #8ac03d;
-            transition: 0.5s;
-            font-size: 13px;
-        }
+    padding: 5px 25px;
+    border-color: #000;
+    color: #fff;
+    transition: 0.5s;
+    background-color: #000;
+    font-size: 20px;
+    border-radius: 10px;
+}.google-signup-btn a.btn.btn-sm.btn-outline-info.m-1 i {
+    color: #4285f4;
+}
         
         .google-signup-btn a.btn.btn-sm.btn-outline-info.m-1:hover {
-            color: #fff;
-            background-color: #8ac03d;
-            border-color: #638e3c;
+            color: #4285f4;
+            background-color: #fff;
+            border-color: #000;
         }
         .login-pg button.btn a, .login-pg a {
             text-decoration: unset;

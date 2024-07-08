@@ -5901,14 +5901,18 @@ a .go-dashboard-btn {
 }
 
 .row.login-with a {
-  border: 2px solid #638e3c !important;
-  font-size: 14px;
-  color: #8ac03d !important;
+  border: 2px solid #000 !important;
+  color: #fff !important;
   left: 14px;
+  font-size: 22px;
+  background-color: #000;
+  border-radius: 12px;
+}.row.login-with a i {
+  color: #4285f4;
 }
 .registration-home .row.login-with a:hover {
-  background-color: #8ac03d;
-  color: #fff !important;
+  background-color: #fff;
+  color: #4285f4 !important;
 }
 .main-div li.nav-item {
   padding-top: 0;
