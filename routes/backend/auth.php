@@ -54,6 +54,7 @@ Route::group([
         Route::post('user/transfer/update/status', [UserController::class, 'transferStatusUpdate'])->name('user.transfer.update.status');
         Route::post('user/prescription/refill/update/status', [UserController::class, 'prescriptionRefillStatusUpdate'])->name('user.prescription.refill.status');
         Route::post('user/prescription/refill/deleted', [UserController::class, 'prescriptionMedicationDeleted'])->name('user.prescription.refill.deleted');
+        Route::post('user/existing/refill/update/status', [UserController::class, 'existingRefillStatusUpdate'])->name('user.existing.refill.update.status');
         
         Route::group(['prefix' => 'user/{user}/employee'], function () {
             // User
