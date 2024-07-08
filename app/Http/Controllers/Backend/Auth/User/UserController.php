@@ -452,6 +452,12 @@ class UserController extends Controller
         return $data;
     }
 
+    public function existingRefillStatusUpdate(Request $request)
+    {
+       $data = $this->userRepository->existingRefillStatusUpdate($request->except(['_token', '_method','files']));
+        return $data;
+    }
+
 
 
         

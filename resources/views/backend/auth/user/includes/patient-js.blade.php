@@ -310,6 +310,81 @@
 
             });
 
+            $('.existingRefillStatus').change(function() {
+                var existingRefill_id = this.id;
+                existingRefill_id = existingRefill_id.split('-');
+                var nexistingRefill_id = existingRefill_id[1];
+                var status = $(this).val();
+                var status_text = $(this).find("option:selected").text();
+                console.log($(this).val());
+                console.log(nexistingRefill_id); 
+                $.confirm({
+                title: 'Confirm!',
+                content: 'Do you want to proceed with this?',
+                theme: 'material', // 'material', 'bootstrap'
+                buttons: {
+                    confirm: function() {
+
+
+
+                        var ajaxurl = "{{ route('admin.auth.user.existing.refill.update.status') }}";
+                        $("#overlay").fadeIn(300);
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: nexistingRefill_id,
+                                status: status_text,
+                                type:"order"
+                            },
+                            dataType: 'JSON',
+                            success: function(data) {
+                                if (data != 0) {
+                                    if (status_text == 'pending'){
+                                        msg = '<span class="badge badge-warning"  style="right: 29px; position: absolute;">'+order_status_text+'</span>';
+                                    }else if(status_text == 'cancelled'){
+                                        msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }else if(status_text == 'approved'){
+                                        msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }else if(status_text == 'We need to contact doctor'){
+                                        msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }else if(status_text == 'processing'){
+                                        msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }else if(status_text == 'declined'){
+                                        msg = '<span class="badge badge-danger" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }else if(status_text == 'ready_to_pick'){
+                                        msg = '<span class="badge badge-warning" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }else if(status_text == 'picked_up'){
+                                        msg = '<span class="badge badge-warning" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }else if(status_text == 'In Progress'){
+                                        msg = '<span class="badge badge-warning" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }else if(status_text == 'delivered'){
+                                        msg = '<span class="badge badge-success" style="right: 29px; position: absolute;">'+status_text+'</span>';
+                                    }
+                                    
+                                    window.location.reload();
+                                    //declined
+                                    $('.status-wrapper-'+data).html(msg);
+
+
+                                $("#overlay").fadeOut(300);
+                                } else {
+                                    console.log('Problem with save data');
+                                }
+                                $("#overlay").fadeOut(300);
+                            }
+                        });
+
+                    },
+                    cancel: function() {
+
+                    }
+                }
+            });
+
+            });
+
             $('.paymentStatus').change(function() {
                 var payment_id = this.id;
                 payment_id = payment_id.split('-');

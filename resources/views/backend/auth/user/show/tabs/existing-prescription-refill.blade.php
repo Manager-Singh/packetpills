@@ -37,7 +37,13 @@
                                     <div class="col-md-6">
                             <p>Prescription Number: {{ $existingPrescription->prescription_number }}</p>
                             <p>Medication Name: {{ $existingPrescription->medication_name }} </p>
-
+                            @php
+                                $existing_refill_status_array = [
+                                'active'=>'Active',
+                                'In Progress'=>'In Progress',
+                                ];
+                            @endphp
+                            <p>Status: {{ Form::select('existing_refill_status', $existing_refill_status_array, $existingPrescription->status, ['class' => 'form-control existingRefillStatus box-size','id' => 'existingRefillStatus-'.$existingPrescription->id, 'data-placeholder' => 'Existing Refill Status']) }}</p>
                                     </div>
                                     <div class="col-md-6">
                                     <p>Image: </p>
