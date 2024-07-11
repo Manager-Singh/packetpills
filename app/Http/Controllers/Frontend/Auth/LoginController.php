@@ -20,6 +20,7 @@ use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Session;
 use App\Rules\ReCaptcha;
 use GuzzleHttp\Client as Gclient; 
+use App\Models\Prescription;
 /**
  * Class LoginController.
  */
@@ -209,6 +210,12 @@ class LoginController extends Controller
             }
             if($user->profile_step==0){
                 return redirect()->route('frontend.auth.service.selection');
+                // if(Prescription::where('user_id',$user->id)->exists()){
+                //     return redirect()->route('frontend.auth.service.selection');
+                // }else{
+                //     return redirect()->route('frontend.user.prescription.upload');
+                // }
+                
             }
 
             return redirect()->intended($this->redirectPath());

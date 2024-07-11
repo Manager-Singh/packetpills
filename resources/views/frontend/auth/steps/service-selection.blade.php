@@ -61,6 +61,30 @@ button.btn.btn-secondary {
 .service-se .card-body {
     height: 300px;
 }
+/* .prescription-upload-se .card {
+    box-shadow: rgba(0, 0, 0, 0.35) 0 0 15px;
+    border: 1px solid #9ae2ff;
+    animation-name: blinking;
+    animation-duration: 1s;
+    animation-iteration-count: 100;
+} */
+
+.prescription-upload-se .card  {
+  
+  background: rgba(25, 118, 210, 0.4);
+  animation: blink 1s ease-in-out infinite none;
+}
+.prescription-upload-se .card-body {
+    background: #638e3c;
+}
+@keyframes blink {
+  0% {
+    box-shadow: 0 0 0 0 rgb(99 142 60);
+  }
+  100% {
+    box-shadow: 0 0 0 6px rgb(99 142 60 / 30%);
+  }
+}
 
 </style>
 @endpush
@@ -104,12 +128,13 @@ button.btn.btn-secondary {
                   </a>
                 </div>
 </div>
-<div class="col-md-4">
+<div class="col-md-4 prescription-upload-se">
                  <div class="card red border-light text-left p-1 mb-4">
                  @if(Auth::check() && Auth::user()->is_profile_status == "completed")
                  <a href="{{route('frontend.user.prescription.upload')}}">
                 @else
-                <a href="{{route('frontend.user.dashboard')}}">
+                <a href="{{route('frontend.user.prescription.upload')}}">
+                <!-- <a href="{{route('frontend.user.dashboard')}}"> -->
                 @endif
                     
                   <div class="card-body">
@@ -147,7 +172,7 @@ button.btn.btn-secondary {
 </div>
 </div>
 <div class="row">
-    <div class="col-md-12 bnner-mg-pres"><img src="{{asset('img/banner-prescription.jpg')}}"/></div>
+    <div class="col-md-12 bnner-mg-pres"><a href="{{route('frontend.user.prescription.upload')}}"><img src="{{asset('img/banner-prescription.jpg')}}"/></a></div>
 </div>                
 <div class=" text-center p-1 more-btn-o">
                     
