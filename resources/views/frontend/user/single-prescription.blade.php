@@ -212,7 +212,10 @@ main.main-div {
     border-radius: unset;
     border: unset;
     padding: 12px;
-    visibility: hidden;
+    /* visibility: hidden; */
+    z-index: 10;
+    right: 3px;
+    border-radius: 50%;
 }
 
 .medication-section label.card {

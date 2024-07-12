@@ -240,7 +240,10 @@ div#accordionExample {
     border-radius: unset;
     border: unset;
     padding: 12px;
-    visibility: hidden;
+    /* visibility: hidden; */
+    z-index: 10;
+    right: 3px;
+    border-radius: 50%;
 }
 
 .medication-section label.card {
@@ -695,7 +698,7 @@ if ($prescription_old->status == 'pending'){
       <div class="modal-body medication-section">
        <div class="col-md-12">
        <p class="txt-b mb-0">Medications</p>
-      <small>Choose medications to Refill</small>
+      <b class="text-red" style="color: red;">Choose medications to Refill</b>
        </div>
        <div class="col-md-12">
        <form id="address-form" method='post' action="{{route('frontend.user.prescription.refill')}}" enctype='multipart/form-data'>
