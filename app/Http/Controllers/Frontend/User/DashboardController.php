@@ -336,7 +336,7 @@ class DashboardController extends Controller
     public function orders()
     {
         $user = Auth::user();
-        $data['orders']= Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->get();
+        $data['orders']= Order::where('user_id',$user->id)->with(['prescription','order_items','order_items.medication','order_items.medication.prescription'])->has('order_items')->orderBy('created_at','desc')->get();
         $data['user']=$user;
         return view('frontend.user.order',$data); 
     }

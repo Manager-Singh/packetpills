@@ -67,7 +67,7 @@ class ForgotPasswordController extends Controller
 
                 if($type == 'email'){
                     if(isset($user->email) && !empty($user->email)){
-                        if(sendMail('mail','forgot_reset_otp',$otp,$user->id,'Forgot Reset')){
+                        if(sendMail('mail','forgot_reset_otp',$otp,$user->id,'Password Reset')){
                             $mailsend = true;
                         }
                     }

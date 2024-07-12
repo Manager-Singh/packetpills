@@ -6,7 +6,7 @@
 				    <div class="col-md-6">
               <div class="user-info">
                 <img class="user-img" src="{{asset('step/assets/images/user.png')}}">
-                <p class="txt">Add your prescription here.</p>
+                <p class="txt">Add your prescription.</p>
                 <p class="txt">You can upload 1 to 8 prescription images. </p>
               </div> 
 

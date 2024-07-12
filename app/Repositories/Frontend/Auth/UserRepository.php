@@ -931,6 +931,7 @@ class UserRepository extends BaseRepository
         //$response = getGoogleApiTextSearch11($search);
         $response = getGoogleApiTextSearchPaginate($search,$next_pageToken);
         
+       // dd($response);
         $pageToken = isset($response->next_page_token) ? $response->next_page_token : null;
         //$html ='<ul class="ajax-ul" style="display:block;">';
         $html ='';
