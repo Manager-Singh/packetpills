@@ -5902,15 +5902,20 @@ a .go-dashboard-btn {
 
 .row.login-with a {
   border: 2px solid #000 !important;
-  color: #fff !important;
+  color: #3180F4 !important;
   left: 14px;
   font-size: 22px;
   background-color: #000;
   border-radius: 12px;
-}.row.login-with a i {
-  color: #4285f4;
 }
-.registration-home .row.login-with a:hover {
+.row.login-with a i {
+  color: #fff;
+}
+.row.login-with a:hover i {
+  color: #3180F4;
+}
+.registration-home 
+.row.login-with a:hover {
   background-color: #fff;
   color: #4285f4 !important;
 }

@@ -32,13 +32,17 @@
         .google-signup-btn a.btn.btn-sm.btn-outline-info.m-1 {
     padding: 5px 25px;
     border-color: #000;
-    color: #fff;
+    color: #3180F4;
     transition: 0.5s;
     background-color: #000;
     font-size: 20px;
     border-radius: 10px;
-}.google-signup-btn a.btn.btn-sm.btn-outline-info.m-1 i {
-    color: #4285f4;
+}
+.google-signup-btn a.btn.btn-sm.btn-outline-info.m-1 i {
+    color: #fff;
+}
+.google-signup-btn a.btn.btn-sm.btn-outline-info.m-1:hover i{
+    color: #3180F4;
 }
         
         .google-signup-btn a.btn.btn-sm.btn-outline-info.m-1:hover {
