@@ -322,8 +322,8 @@ span#error-msg {
                         response = JSON.parse(response);
                               console.log(response);
                               if (response.profile_step == 0) {
-                                //location.href = "{{route('frontend.auth.service.selection')}}";
-                                location.href = "{{route('frontend.user.prescription.upload')}}";
+                                location.href = "{{route('frontend.auth.service.selection')}}";
+                               // location.href = "{{route('frontend.user.prescription.upload')}}";
                                 
                               }else{
                                 $("#error-msg").text(response.message);

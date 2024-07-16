@@ -97,7 +97,7 @@ class UserRepository extends BaseRepository
             }
         
            $result =  $dataTableQuery->active($status);
-        //    dd($result);
+           //dd($result->toSql());
         // active() is a scope on the UserScope trait
         return $result;
     }

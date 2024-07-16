@@ -302,7 +302,8 @@ if (! function_exists('sendMail')) {
            
             if(!$message){
                 if( $message_for == 'without-msg'){
-                    $body = $data;
+                    //$body = $data;
+                    $body = '';
                 }else{
                     return true;
                 }

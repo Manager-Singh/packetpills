@@ -31,10 +31,10 @@
         }
         .google-signup-btn a.btn.btn-sm.btn-outline-info.m-1 {
     padding: 5px 25px;
-    border-color: #000;
-    color: #3180F4;
+    border-color: #1a73e8;
+    color: #fff;
     transition: 0.5s;
-    background-color: #000;
+    background-color: #1a73e8;
     font-size: 20px;
     border-radius: 10px;
 }

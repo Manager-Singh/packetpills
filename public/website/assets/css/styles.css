@@ -5901,11 +5901,11 @@ a .go-dashboard-btn {
 }
 
 .row.login-with a {
-  border: 2px solid #000 !important;
-  color: #3180F4 !important;
+  border: 2px solid #1a73e8 !important;
+  color: #fff !important;
   left: 14px;
   font-size: 22px;
-  background-color: #000;
+  background-color: #1a73e8;
   border-radius: 12px;
 }
 .row.login-with a i {
