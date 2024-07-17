@@ -349,9 +349,14 @@ class LoginController extends Controller
             ]
         ]);
         $body = json_decode($response->getBody(), true);
+        
         if(!$body["success"]){
-            return json_encode(['error' => 1,'message' => 'The reCAPTCHA field is required']);
+            if(isset($body['error-codes']) && isset($body['error-codes'][0])){
+                return json_encode(['error' => 1,'message' => $body['error-codes'][0]]);
+            }
         }
+
+
     }
         $isexist = User::where('email',$request->email)->first();
         $otp = generateOTP();
