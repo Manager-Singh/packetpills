@@ -39,13 +39,21 @@
                         { data: 'confirmed', name: 'confirmed' },
                         { data: 'roles', name: 'roles', sortable: false },
                         { data: 'created_at', name: 'created_at' },
-                        { data: 'updated_at', name: 'updated_at' },
+                        { data: 'status', name: 'status' },
                         { data: 'actions', name: 'actions', searchable: false, sortable: false }
                     ],
                     order: [[0, "asc"]],
                     searchDelay: 500,
                     "createdRow": function (row, data, dataIndex) {
+                        
+
                         FTX.Utils.dtAnchorToForm(row);
+
+                        if (data.status == 'Incomplete') {
+                            $(row).addClass('status-inactive table-info');
+                        } else{
+                            $(row).addClass('status-active');
+                        }
                     }
                 })
             }

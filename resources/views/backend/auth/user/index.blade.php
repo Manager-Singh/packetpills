@@ -31,7 +31,7 @@
                                 <th>@lang('labels.backend.access.users.table.confirmed')</th>
                                 <th>@lang('labels.backend.access.users.table.roles')</th>
                                 <th>@lang('labels.backend.access.users.table.created')</th>
-                                <th>@lang('labels.backend.access.users.table.last_updated')</th>
+                                <th>Profile Status</th>
                                 <th>@lang('labels.general.actions')</th>
                             </tr>
                         </thead>

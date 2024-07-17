@@ -359,6 +359,10 @@ class LoginController extends Controller
         
             
             if($isexist){
+                if($isexist->is_profile_status == 'pending'){
+                    return json_encode(['error' => 0,'profile_status'=>'pending', 'message' => 'User Already Exist','route'=>'/account/login']);
+                }
+
                 $otp_verified = UserOtp::where('user_id',$isexist->id)->where('status','verified')->first();
                 if($otp_verified){
                     return json_encode(['error' => 0,'status'=>'exist', 'message' => 'User Already Exist','route'=>'/account/login']);

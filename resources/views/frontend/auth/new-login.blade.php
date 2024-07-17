@@ -126,6 +126,16 @@
     <div class="row">
               <div class="col-md-12">
                 @include('includes.partials.messages')
+                @if(isset($_GET['email']) && $_GET['email'] == 1)
+                    <div class="alert-main">
+                        <div class="alert alert-warning" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            <div class="message-alert"> Your profile is incomplete. Please use the 'Forgot Password' option to reset your password and complete your profile.</div>
+                        </div>
+                    </div>
+                @endif
               </div>
             </div>
         <section class="txt-c">

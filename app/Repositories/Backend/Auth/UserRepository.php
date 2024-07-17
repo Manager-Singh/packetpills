@@ -70,6 +70,7 @@ class UserRepository extends BaseRepository
                 'users.status',
                 'users.confirmed',
                 'users.created_at',
+                'users.is_profile_status',
                 'users.updated_at',
                 'users.deleted_at',
             ]);

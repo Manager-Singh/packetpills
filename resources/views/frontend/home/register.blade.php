@@ -3,6 +3,10 @@ span#error-msg {
     color: red;
     font-weight: 600;
 }
+div#regs_form {
+    text-align: -webkit-center;
+    margin-top: 12px;
+}
 </style>
 <div class="hero hero--desktop hero--exp-2"
     style="background-size: auto 125%;background-position: center center;background-size: contain;padding: 0;min-height: 100vh;background-repeat: no-repeat; background-image: url({{asset('website/assets/images/TransparentCircle.png')}});">
@@ -244,9 +248,10 @@ span#error-msg {
                 data: {_token:"{{ csrf_token() }}",email:email,'g-recaptcha-response': captchaResponse},
                 success: function(response) {
                 response = JSON.parse(response);
-                        console.log(response.otp);
                         if (response.error == 0 ) {
-                            if(response.status == 'exist'){
+                            if(response.profile_status == 'pending'){
+                                location.href = response.route+'?email=1';
+                            }else if(response.status == 'exist'){
                                 location.href = response.route;
                             }
                             $('.otp-box').show(); 
@@ -255,7 +260,8 @@ span#error-msg {
                             $('.register-submit').show(); 
                         
                         }else{
-                        $("#error-msg").text(response.message);
+                            grecaptcha.reset();
+                            $("#error-msg").text(response.message);
                         }
                     
                                                     

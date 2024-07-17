@@ -46,7 +46,7 @@ class UserTableController extends Controller
             $type   =   'users';
             $uid    =   $request->uid;
         }
-        return Datatables::make($this->repository->getForDataTable($request->get('status'), $request->get('trashed'),$type,$uid))
+        $allData = Datatables::make($this->repository->getForDataTable($request->get('status'), $request->get('trashed'),$type,$uid))
             ->escapeColumns(['first_name', 'email'])
             ->editColumn('confirmed', function ($user) {
                 return $user->confirmed_label;
@@ -57,9 +57,18 @@ class UserTableController extends Controller
             ->addColumn('created_at', function ($user) {
                 return Carbon::parse($user->created_at)->toDateString();
             })
-            ->addColumn('updated_at', function ($user) {
-                return Carbon::parse($user->updated_at)->toDateString();
+            ->addColumn('status', function ($user) {
+                $profile_status = ucfirst($user->is_profile_status);
+                if($profile_status == 'Pending'){
+                    return 'Incomplete';
+                }else{
+                    return $profile_status;
+                }
+                
             })
+            // ->addColumn('updated_at', function ($user) {
+            //     return Carbon::parse($user->updated_at)->toDateString();
+            // })
             ->addColumn('actions', function ($user) {
                 if(Route::currentRouteName() == 'admin.auth.user.employee.get'){
                     return $user->employee_buttons;
@@ -69,5 +78,6 @@ class UserTableController extends Controller
                 
             })
             ->make(true);
+        return $allData;
     }
 }
