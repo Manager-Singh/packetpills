@@ -126,7 +126,7 @@ nav.step-menu ul li a:hover, .login-in-out a:hover{
                   <a  class="nav-link" href="https://misterpharmacist.com">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="https://misterpharmacist.com/minor-ailment/">Minor Ailment</a>
+                  <a class="nav-link" href="https://misterpharmacist.com/minorailments/">Minor Ailment</a>
                 </li>
                 <li class="nav-item">
                   <a  class="nav-link" href="https://misterpharmacist.com/blog/">Blog</a>

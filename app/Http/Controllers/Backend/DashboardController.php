@@ -8,6 +8,7 @@ use App\Models\Auth\Role;
 use Illuminate\Http\Request;
 use App\Models\Drug;
 use App\Models\Prescription;
+use App\Models\PrescriptionRefill;
 use App\Models\MedicationItem;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -37,13 +38,21 @@ class DashboardController extends Controller
         }else{
             $cyear = 'all';
         }
+        $user['count']= User::whereHas('roles', function ($query) {
+            $query->where('name', 'User');
+        })->where('parent_id','=',null)->count();
+
+        $prescription_refill['count'] = PrescriptionRefill::has('user')->count();
+        $prescription['count'] = Prescription::has('user')->count();
+        $order['count'] = Order::has('user')->count();
+        
         return view('backend.dashboard')->with([
-            'userDataset'=>$this->getDataSets('App\Models\Auth\User','count',$cyear),
-            'prescriptionDataset'=>$this->getDataSets('App\Models\Prescription','count',$cyear),
-            'orderDataset'=>$this->getDataSets('App\Models\Order','count',$cyear),
+            'userDataset'=>$user,
+            'prescriptionDataset'=>$prescription,
+            'orderDataset'=>$order,
             'orderRevenueDataset'=>$this->getDataSets('App\Models\Order','revenue',$cyear),
             'transferRequestDataset'=>$this->getDataSets('App\Models\TransferRequest','count',$cyear),
-            'prescriptionRefill'=>$this->getDataSets('App\Models\PrescriptionRefill','count',$cyear),
+            'prescriptionRefill'=>$prescription_refill,
 
         ]);
     }
