@@ -43,7 +43,7 @@
                                 ];
                                 $payment_status_array = [
                                 'pending'=>'Pending',
-                                'approved'=>'Approved'
+                                'approved'=>'Paid'
                                 ];
                             @endphp
                             <p>Order Status: {{ Form::select('order_status', $order_status_array, $order->order_status, ['class' => 'form-control orderStatus box-size','id' => 'orderStatus-'.$order->id, 'data-placeholder' => trans('Order Status')]) }}</p>

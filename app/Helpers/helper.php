@@ -18,6 +18,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7\Request;
 use App\Models\PrescriptionOld;
 use App\Models\Order;
+use App\Models\OrderItem;
 //use PHPMailer\PHPMailer\Exception;
 use Aws\Laravel\AwsFacade as AWS;
 
@@ -595,6 +596,13 @@ if (! function_exists('countPendingActivity')) {
             return PrescriptionOld::where('user_id',$user_id)->where('status', $status)->count();
         }elseif($type == 'orders'){
             return Order::where('user_id',$user_id)->where('order_status', $status)->count();
+        }elseif($type == 'medications'){
+            //$medication_item = MedicationItem::orWhereDoesntHave('orders')->where('user_id',$user_id)->where('status','=','active')->count();
+            $medication_item = MedicationItem::doesntHave('order_item')
+            ->where('user_id', $user_id)
+            ->where('status', 'active')
+            ->count();
+            return $medication_item;
         }
 
         
@@ -619,6 +627,18 @@ if (!function_exists('send_sms')) {
         ]);
 
         return $result;
+    }
+}
+
+if (!function_exists('medicationOrderStatus')) {
+    function medicationOrderStatus($medication_id) {
+        
+        if(OrderItem::where('medication_id',$medication_id)->exists()){
+            return '<span class="badge badge-warning" style="font-size: 12px;">Ordered</span>';
+            
+        }else{
+            return '';
+        }
     }
 }
 

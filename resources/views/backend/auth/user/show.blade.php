@@ -67,10 +67,10 @@
                                 href="#paymentmethod" role="tab" aria-controls="paymentmethod" aria-expanded="true"><i
                                     class="fas fa-credit-card"></i> @lang('Payment Method')</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item position-relative">
                             <a class="nav-link {{ $tab == 'medications' ? 'active' : '' }}" data-toggle="tab"
                                 href="#medications" role="tab" aria-controls="medications" aria-expanded="true"><i
-                                    class="fas fa fa-ambulance"></i> @lang('Medications')</a>
+                                    class="fas fa fa-ambulance"></i> @lang('Medications') <span class="badge badge-warning navbar-badge">{{countPendingActivity('medications',$user->id,'active')}}</span> </a>
                         </li>
                          <li class="nav-item position-relative">
                             <a class="nav-link {{ $tab == 'orders' ? 'active' : '' }}" data-toggle="tab"

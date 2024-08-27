@@ -31,7 +31,7 @@
                                                 class="box-size custom-checkbox medication-iteam-{{ $medication->id }}"
                                                 value="{{ $medication->id }}" name="medication[]">
                                         </div>
-                                        <label class="col-md-10" for="medication-iteam-{{ $medication->id }}">
+                                        <label class="col-md-8" for="medication-iteam-{{ $medication->id }}">
                                             <div class="row">
                                                 <div class="col-md-2 from-control-label">Prescribing Doctor</div>
                                                 <div class="col-md-10">
@@ -47,6 +47,10 @@
                                                 </div>
                                             </div>
                                         </label>
+                                        <div class="col-md-2">
+                                        {!! medicationOrderStatus($medication->id) !!}
+                                           
+                                        </div>  
                                         <div class="col-md-1">
                                             <i class="nav-icon fas fa-trash text-danger" style="font-size:20px" onclick="medicationDeleted('{{ $medication->id }}')"></i>
                                         </div>

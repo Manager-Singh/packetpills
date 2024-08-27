@@ -26,5 +26,14 @@ trait MedicationItemRelationships
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function orders(){
+        return $this->hasMany('App\Models\Order', 'user_id', 'user_id')
+        ->whereColumn('prescription_id', 'prescription_id');
+    }
+
+    public function order_item(){
+        return $this->hasMany('App\Models\OrderItem', 'medication_id');
+    }
     
 }
