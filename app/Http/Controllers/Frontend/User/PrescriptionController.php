@@ -45,6 +45,22 @@ class PrescriptionController extends Controller
     public function save(SavePrescriptionRequest $request)
     {
         $data = collect($request->all())->toArray();
+        $images = $data['prescription_upload'];
+        
+        if($images){
+            foreach($images as $key => $image){
+                $allowedExtensions = ['jpg', 'jpeg', 'png']; // List of allowed file extensions
+                $extension = strtolower($image->getClientOriginalExtension());
+                if (!in_array($extension, $allowedExtensions)) {
+                    // Return an error if the extension is not allowed
+                    return redirect()->back()->withFlashInfo(__( 'Invalid file extension. Allowed extensions are: jpg, jpeg, png.'));
+                }
+
+            }
+
+        }
+
+        
         $output = $this->prescriptionRepository->create($data); 
         
         // E-mail address was updated, user has to reconfirm

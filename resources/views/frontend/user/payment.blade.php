@@ -42,9 +42,18 @@ button.save.button {
                   </div>
 
                 </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="cvc">CVC</label>
+                    <input type="text" id="cvc" data-parsley-maxlength="4" maxlength="4"  name="cvc" value="" placeholder="CVC" >
+                  </div>
+                  <div class="form-group col-md-6 mt-0">
+                    <label for="postal-code">Postal Code</label>
+                    <input type="text" id="postal-code"   name="postal_code" value="" placeholder="Enter Postal Code" >
+                  </div>
+                </div>
 
-                <label for="cvc">CVC</label>
-                <input type="text" id="cvc" data-parsley-maxlength="4" maxlength="4"  name="cvc" value="" placeholder="CVC" >
+                
 
                 <div class="row mt-3 payment-card">
                 <label class="col-md-12" for="myfile">Payment Card</label>

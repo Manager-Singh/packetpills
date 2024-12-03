@@ -710,6 +710,7 @@ class UserRepository extends BaseRepository
           $card->card_number = $data['card_number'];
           $card->expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
           $card->cvc = $data['cvc'];
+          $card->postal_code = $data['postal_code'];
           
         $uuid = Uuid::uuid4()->toString();
         $front_img = (isset($data['front_img'])) ? $data['front_img'] : '' ;

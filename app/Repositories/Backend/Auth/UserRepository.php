@@ -173,6 +173,7 @@ class UserRepository extends BaseRepository
             $expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
             $payment_method->expiry_date = $expiry_date;
             $payment_method->cvc = $data['cvc'];
+            $payment_method->postal_code = $data['postal_code'];
             if(isset($creditCardImages[0])){
                 $payment_method->front_img = $creditCardImages[0];
             }
@@ -259,6 +260,7 @@ class UserRepository extends BaseRepository
             $expiry_date = $data['expiry_month'].'/'.$data['expiry_year'];
             $payment_method->expiry_date = $expiry_date;
             $payment_method->cvc = $data['cvc'];
+            $payment_method->postal_code = $data['postal_code'];
             if(isset($creditCardImages[0])){
                 $payment_method->front_img = $creditCardImages[0];
             }

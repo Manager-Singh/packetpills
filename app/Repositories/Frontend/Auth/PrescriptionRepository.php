@@ -17,7 +17,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-
+use Maestroerror\HeicToJpg;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PrescriptionOld;
@@ -140,10 +140,19 @@ class PrescriptionRepository extends BaseRepository
                 foreach($images as $key => $image){
                     $uuid = Uuid::uuid4()->toString();
                     $image  = $image; 
-                    $fileName   = $uuid . '.' . $image->getClientOriginalExtension();
+                    $originalExtension = $image->getClientOriginalExtension();
+                    $fileName = $uuid . '.' . ($originalExtension === 'heic' ? 'jpg' : $originalExtension);
+                    //$fileName   = $uuid . '.' . $image->getClientOriginalExtension();
                     $destinationPath = public_path('img/frontend/prescription');
+
+                   
+                        // Move other image formats as-is
                     $image->move($destinationPath, $fileName);
-                    $url = 'img/frontend/prescription/'.$fileName;  
+                    $url = 'img/frontend/prescription/' . $fileName;
+
+                  
+                    //$image->move($destinationPath, $fileName);
+                    //$url = 'img/frontend/prescription/'.$fileName;  
 
                     $prescription_iteams = new PrescriptionIteam;
                     $prescription_iteams->page_no = $key +1;
@@ -153,13 +162,13 @@ class PrescriptionRepository extends BaseRepository
                 }
 
                    
-                    if(isset($user->parent_id) && !empty($user->parent_id)){ 
-                        $data =  "Your Prescription no is ".$prescription->prescription_number.' to '.$user->full_name;
-                        $user = User::where('id',$user->parent_id)->first(); 
-                   }else{
-                        $data =  "Your Prescription no is ".$prescription->prescription_number;
+                if(isset($user->parent_id) && !empty($user->parent_id)){ 
+                    $data =  "Your Prescription no is ".$prescription->prescription_number.' to '.$user->full_name;
+                    $user = User::where('id',$user->parent_id)->first(); 
+                }else{
+                    $data =  "Your Prescription no is ".$prescription->prescription_number;
                         
-                    }
+                }
                     
                 $admin = User::whereHas('roles', function ($subQuery) { 
                     $subQuery->where('name', 'Administrator');

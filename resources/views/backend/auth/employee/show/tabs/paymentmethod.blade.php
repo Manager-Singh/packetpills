@@ -104,6 +104,23 @@
                         <!--col-->
                     </div>
                     <div class="form-group row">
+                        {{ Form::label('Postal code', trans('Postal Code'), [
+                            'class' => 'col-md-2 from-control-label
+                                                                                                                                                                                                                                                required',
+                        ]) }}
+                        <div class="col-md-10">
+                            <div class="input-group ">
+                                {{ Form::text('postal_code', null, [
+                                    'class' => 'form-control',
+                                    'placeholder' => trans('Postal Code'),
+                                    'required' => 'required',
+                                ]) }}
+
+                            </div>
+                        </div>
+                        <!--col-->
+                    </div>
+                    <div class="form-group row">
                         {{ Form::label('creditcard_images', trans('Credit card Images'), ['class' => 'col-md-2 from-control-label required']) }}
                         <div class="col-md-10">
                             <div class="files-wrapper creditcard-wrapper">

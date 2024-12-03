@@ -104,6 +104,23 @@
                         <!--col-->
                     </div>
                     <div class="form-group row">
+                        {{ Form::label('Postal code', trans('Postal Code'), [
+                            'class' => 'col-md-2 from-control-label
+                                                                                                                                                                                                                                                required',
+                        ]) }}
+                        <div class="col-md-10">
+                            <div class="input-group ">
+                                {{ Form::text('postal_code', null, [
+                                    'class' => 'form-control',
+                                    'placeholder' => trans('Postal Code'),
+                                    'required' => 'required',
+                                ]) }}
+
+                            </div>
+                        </div>
+                        <!--col-->
+                    </div>
+                    <div class="form-group row">
                         {{ Form::label('creditcard_images', trans('Credit card Images'), ['class' => 'col-md-2 from-control-label required']) }}
                         <div class="col-md-10">
                             <div class="files-wrapper creditcard-wrapper">
@@ -254,6 +271,23 @@
                                         <!--col-->
                                     </div>
                                     <div class="form-group row">
+                                        {{ Form::label('Postal Code', trans('Postal Code'), [
+                                            'class' => 'col-md-3 from-control-label
+                                                                                                                                                                                                                                                                                                                                                                required',
+                                        ]) }}
+                                        <div class="col-md-9">
+                                            <div class="input-group ">
+                                                {{ Form::text('postal_code', $pmethod->postal_code, [
+                                                    'class' => 'form-control',
+                                                    'placeholder' => trans('Postal Code'),
+                                                    'required' => 'required',
+                                                ]) }}
+
+                                            </div>
+                                        </div>
+                                        <!--col-->
+                                    </div>
+                                    <div class="form-group row">
                                         {{ Form::label('creditcard_images', trans('Credit card Images'), ['class' => 'col-md-3 from-control-label required']) }}
                                         <div class="col-md-9">
                                             <div class="files-wrapper creditcard-wrapper-{{ $pmethod->id }}">
@@ -305,6 +339,7 @@
                     <span><strong>Card Holder Name:</strong> {{ $pmethod->cardholder_name }}</span>
                     <span><strong>Expiry Date:</strong> {{ $pmethod->expiry_date }}</span>
                     <span><strong>CVC:</strong> {{ $pmethod->cvc }}</span>
+                    <span><strong>Postal Code: </strong>  {{ $pmethod->postal_code }}</span>
                     <span><strong>Front Image:</strong> <img class="card-img-credit"
                             src="{{ asset('/') . $pmethod->front_img }}" alt="Bologna" height=300 width=400></span>
                     <span><strong>Back Image:</strong><img class="card-img-credit"
