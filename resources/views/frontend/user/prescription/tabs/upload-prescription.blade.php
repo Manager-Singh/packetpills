@@ -35,6 +35,10 @@
                   <button class="btn btn-success btn-sm" type="button" id="add" title='Add new file'/><i class="fa fa-plus" aria-hidden="true"></i> <br>Add Page</button>
                 </div>
               </div>
+              <div class="col-md-12">
+                <span>Note: Only upload: jpg, jpeg, png, pdf.</span>
+
+              </div>
               <div class="d-flex">
 
                 <a class="next button" href="{{route('frontend.user.dashboard')}}">Cancel</a>
