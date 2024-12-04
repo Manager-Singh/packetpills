@@ -466,7 +466,7 @@ class DashboardController extends Controller
         
         $data = collect($request->all())->toArray();
        
-        if (empty($request->card_number) || empty($request->expiry_month) || empty($request->expiry_year) || empty($request->cvc)) {
+        if (empty($request->card_number) || empty($request->expiry_month) || empty($request->expiry_year) || empty($request->cvc) || empty($request->postal_code)) {
             return redirect()->back()->withFlashInfo(__('Card fields are required.'));
         }
         
