@@ -624,11 +624,31 @@ if ($prescription_old->status == 'pending'){
                   <th scope="row">{{ $loop->iteration }}</th>
                   <td>{{$prescription_old->prescription_number}}</td>
                   <td>
-                    @if(isset($prescription_old->image) && !empty($prescription_old->image))
+                    {{-- @if(isset($prescription_old->image) && !empty($prescription_old->image))
                       <img  width="100" height="100" src="{{asset($prescription_old->image)}}" />
                     @else
                       No Image
+                    @endif --}}
+                    @php
+                    $fileExtension =
+                        pathinfo($prescription_old->image, PATHINFO_EXTENSION) ??
+                        '';
+                @endphp
+                @if (isset($prescription_old->image) && !empty($prescription_old->image))
+                    @if (strtolower($fileExtension) === 'pdf')
+                        <img width="100" height="100"
+                            src="{{ asset('img/pdf.png') }}" alt="PDF File" />
+                        <br>
+                        <a href="{{ asset($prescription_old->image) }}"
+                            target="_blank">View PDF</a>
+                    @else
+                        <img width="100" height="100"
+                            src="{{ asset($prescription_old->image) }}"
+                            alt="Uploaded Image" />
                     @endif
+                @else
+                    <strong>No Image Uploaded.</strong>
+                @endif
                     
                   </td>
                   <td>{{$prescription_old->medication_name}}</td>

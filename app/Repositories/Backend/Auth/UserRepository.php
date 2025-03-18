@@ -740,9 +740,11 @@ class UserRepository extends BaseRepository
             
           $t = 0;
                 foreach($data['drug'] as $key => $drug){
+                    
                     $medicationItem = new MedicationItem;
                     $medicationItem->drug_name = $drug;
-                    $medicationItem->price = $data['price'][$key];
+                    // $medicationItem->price = $data['price'][$key];
+                    $medicationItem->price = preg_replace('/[^\d.]/', '', $data['price'][$key]);
                     $medicationItem->prescribing_doctor = $data['prescribing_doctor'];
                     $medicationItem->prescription_id = $data['prescription_id'];
                     $medicationItem->user_id = $data['user_id'];

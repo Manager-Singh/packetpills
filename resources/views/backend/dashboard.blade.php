@@ -118,7 +118,25 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-info">
+                    <div class="card-body pb-0">
+                        <div class="btn-group float-right">
+                            <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cog"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{{ route('admin.prescription.existing.refill.index') }}">Action</a>
+                            </div>
+                        </div>
+                        <div class="text-value">{{$existingPrescriptionRefill['count']}}</div>
+                        <div>Total  Existing Prescription Refill</div>
+                    </div>
+                    <div class="chart-wrapper mt-3" style="height: 70px;">
+                        <canvas id="card-chart3" class="chart" height="70"></canvas>
+                    </div>
+                </div>
+            </div>
           </div>
           </div>
      

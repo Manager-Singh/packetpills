@@ -4,6 +4,9 @@ namespace App\Models;
 
 use App\Models\Traits\Attributes\PrescriptionOldAttributes;
 use App\Models\Traits\ModelAttributes;
+use App\Models\Prescription;
+use App\Models\Auth\User;
+use App\Models\MedicationItem;
 use App\Models\Traits\Relationships\PrescriptionOldRelationships;
 
 class PrescriptionOld extends BaseModel 
@@ -25,4 +28,19 @@ class PrescriptionOld extends BaseModel
     protected $attributes = [];
 
     protected $with = [];
+    // public function prescription()
+    // {
+    //     return $this->belongsTo(Prescription::class, 'prescription_id');
+    // }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // public function medication()
+    // {
+    //     return $this->belongsTo(MedicationItem::class, 'medication_id');
+    // }
+    
 }

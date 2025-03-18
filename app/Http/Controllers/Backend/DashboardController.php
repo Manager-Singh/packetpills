@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Drug;
 use App\Models\Prescription;
 use App\Models\PrescriptionRefill;
+use App\Models\PrescriptionOld;
 use App\Models\MedicationItem;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -43,6 +44,7 @@ class DashboardController extends Controller
         })->where('parent_id','=',null)->count();
 
         $prescription_refill['count'] = PrescriptionRefill::has('user')->count();
+        $existing_prescription_refill['count'] = PrescriptionOld::has('user')->count();
         $prescription['count'] = Prescription::has('user')->count();
         $order['count'] = Order::has('user')->count();
         
@@ -53,6 +55,7 @@ class DashboardController extends Controller
             'orderRevenueDataset'=>$this->getDataSets('App\Models\Order','revenue',$cyear),
             'transferRequestDataset'=>$this->getDataSets('App\Models\TransferRequest','count',$cyear),
             'prescriptionRefill'=>$prescription_refill,
+            'existingPrescriptionRefill'=>$existing_prescription_refill,
 
         ]);
     }

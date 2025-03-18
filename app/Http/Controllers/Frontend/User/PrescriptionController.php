@@ -49,7 +49,7 @@ class PrescriptionController extends Controller
         
         if($images){
             foreach($images as $key => $image){
-                $allowedExtensions = ['jpg', 'jpeg', 'png']; // List of allowed file extensions
+                $allowedExtensions = ['jpg', 'jpeg', 'png' ,'pdf']; // List of allowed file extensions
                 $extension = strtolower($image->getClientOriginalExtension());
                 if (!in_array($extension, $allowedExtensions)) {
                     // Return an error if the extension is not allowed

@@ -187,6 +187,7 @@
                                                 <input type="hidden" name="prescription_id"
                                                     value="{{ $prescription->id }}">
                                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                                  <label style="color:red;">* Please dont include currency symbol with price</label>
                                                 <div class="row">
                                                     <div class="col-sm-12 nopadding">
                                                         <div class="form-group">
@@ -200,6 +201,7 @@
                                                     <div class="col-sm-3 nopadding">
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" name="drug[]" value="" placeholder="Drug Name" required>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 nopadding">
@@ -209,6 +211,7 @@
                                                                 name="price[]" value=""
                                                                 placeholder="Drug Price" required min="1"
                                                                 tep="1">
+
                                                                  <div class="input-group-btn">
                                                                     <button class="btn btn-success" type="button"
                                                                         onclick="education_fields('{{ $prescription->id }}')">
@@ -217,6 +220,7 @@
                                                                     </button>
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                    
@@ -226,6 +230,7 @@
 
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Submit</button>
+
                                             </form>
                                         </div>
 
