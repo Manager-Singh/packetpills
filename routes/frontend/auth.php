@@ -40,6 +40,8 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::post('account/create-password/save', [DashboardController::class, 'createPassword_save'])->name('step.create.password.save');
         Route::get('account/profile-completed', [DashboardController::class, 'profileCompleted'])->name('step.profile.completed');
         Route::post('account/personal/update', [DashboardController::class, 'personal_update'])->name('step.personal.update');
+        Route::get('account/referral', [DashboardController::class, 'accountReferral'])->name('step.referral.completed');
+        Route::post('account/referral/update', [DashboardController::class, 'accountReferralUpdate'])->name('step.referral.update');
     });
     Route::post('account/send-otp', [LoginController::class, 'send_otp'])->name('send.otp');
     Route::post('account/verify-otp', [LoginController::class, 'verify_otp'])->name('verify.otp');

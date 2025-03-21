@@ -16,9 +16,14 @@ use App\Models\OrderItem;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Setting;
+use App\Models\UserReferal;
 use App\Http\Responses\RedirectResponse;
 use File;
 use Ramsey\Uuid\Uuid;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\View;
+use App\Exports\ReferralExport;
+use Maatwebsite\Excel\Facades\Excel;
 /**
  * Class DashboardController.
  */
@@ -27,6 +32,10 @@ class DashboardController extends Controller
     /**
      * @return \Illuminate\View\View
      */
+    public function __construct()
+    {
+        View::share('js', ['referrals']);
+    }
     public function index()
     {
         if (! auth()->user()->isAdmin()) {
@@ -47,6 +56,9 @@ class DashboardController extends Controller
         $existing_prescription_refill['count'] = PrescriptionOld::has('user')->count();
         $prescription['count'] = Prescription::has('user')->count();
         $order['count'] = Order::has('user')->count();
+        $totlanewreferrs['count'] = UserReferal::where('status','new')->count();
+
+        
         
         return view('backend.dashboard')->with([
             'userDataset'=>$user,
@@ -56,9 +68,11 @@ class DashboardController extends Controller
             'transferRequestDataset'=>$this->getDataSets('App\Models\TransferRequest','count',$cyear),
             'prescriptionRefill'=>$prescription_refill,
             'existingPrescriptionRefill'=>$existing_prescription_refill,
+            'totlanewreferrs'=>$totlanewreferrs,
 
         ]);
     }
+    
     public function getDataSets($model,$type='count',$cyear)
     {   
         if($cyear=='current'){
@@ -186,4 +200,68 @@ class DashboardController extends Controller
         return view('backend.setting.add',$data);
 
     }
+    public function referrals(Request $request){
+
+
+        $data['user_referal'] = UserReferal::get();
+        return view('backend.referal.list',$data);
+
+    }
+    public function getReferrals(Request $request){
+
+        $query = UserReferal::query()
+        ->with(['user']);
+    
+        $mquery = $query->orderBy('created_at', 'desc');
+        return Datatables::of($mquery)
+        ->escapeColumns(['id'])
+        ->addColumn('name', function ($UserReferal) {
+            return $UserReferal->user->first_name.' '.$UserReferal->user->last_name;
+        })
+        ->addColumn('source', function ($UserReferal) {
+            return $UserReferal->from_you_found;
+        })
+        ->addColumn('details', function ($UserReferal) {
+            if($UserReferal->from_you_found=='refer-by-user'){
+                $data = '<div class="reffer-detail">';
+                $data .= '<p><strong>Refrred By: '.$UserReferal->refred_by.'</strong></p>';
+                $data .= '<p><strong>Name: </strong>'.$UserReferal->name.'</p>';
+                $data .= '<p><strong>Email: </strong>'.$UserReferal->email.'</p>';
+                $data .= '<p><strong>Contact Number: </strong>'.$UserReferal->contact_number.'</p>';
+                $data .= '</div>';
+
+                return $data;
+            }
+            if($UserReferal->from_you_found=='other'){
+                return  '<p>'.$UserReferal->other_message.'</p>';
+            }
+            return '<p>I hear on <strong>'.$UserReferal->from_you_found.'</strong></p>';
+        })
+        ->addColumn('status', function ($UserReferal) {
+            if($UserReferal->status=='new'){
+                return ' <span class="badge badge-success">'.ucfirst($UserReferal->status).'</span>';
+            }
+            return ' <span class="badge badge-info">'.ucfirst($UserReferal->status).'</span>';
+        })
+        ->addColumn('created_at', function ($UserReferal) {
+            return $UserReferal->created_at->toDateString();
+        })
+        ->make(true);
+
+    }
+    public function export($type = 'new')
+    {
+        return DB::transaction(function () use ($type) {
+            $fileName = $type === 'all' ? 'all_referrals.csv' : 'new_referrals.csv';
+    
+            // Generate CSV export
+            $export = Excel::download(new ReferralExport($type), $fileName);
+    
+            // If exporting only 'new' referrals, update their status to 'old'
+            UserReferal::where('status', 'new')->update(['status' => 'old']);
+    
+            return $export;
+        });
+    }
+    
 }

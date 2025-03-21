@@ -27,4 +27,5 @@ class User extends BaseUser
         'pronouns_text',
     ];
 
+    protected $guarded = []; 
 }

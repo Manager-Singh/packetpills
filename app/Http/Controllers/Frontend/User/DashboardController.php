@@ -22,6 +22,7 @@ use App\Models\PrescriptionRefill;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\UserOtp;
+use App\Models\UserReferal;
 use Twilio\Rest\Client;
 use App\Models\PrescriptionOld;
 use Validator;
@@ -63,7 +64,7 @@ class DashboardController extends Controller
 
     public function serviceSelection(){
         //return '<h2>You are logedin successfully!</h2>';
-        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
             return redirect()->route('frontend.user.dashboard');
         }
         return view('frontend.auth.steps.service-selection');
@@ -76,17 +77,101 @@ class DashboardController extends Controller
         return view('frontend.auth.steps.prescription');
     }
     public function telehealth(){
-        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
             return redirect()->route('frontend.user.dashboard');
         }
         return view('frontend.auth.steps.telehealth');
     }
     public function personal(){
-        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
             return redirect()->route('frontend.user.dashboard');
         }
         
         return view('frontend.auth.steps.personal');
+    }
+
+    public function accountReferral(){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
+            return redirect()->route('frontend.user.dashboard');
+        }
+        
+        return view('frontend.auth.steps.referral');
+    }
+
+    public function accountReferralUpdate(Request $request)
+    {
+
+        // print_r('<pre>');
+        // print_r($request->all());
+        // print_r('</pre>');
+        // die;
+        try {
+            // Get authenticated user
+            $user = Auth::user();
+    
+            // Check if the user has already updated referral data
+            if ($user->is_referred_updated == 'yes') {
+                return redirect()
+                    ->back()
+                    ->with('error', 'You have already updated your referral information.');
+            }
+    
+            // Validate the request
+            $validatedData = $request->validate([
+                'from_you_found' => 'required|string|in:instagram,twitter,facebook,email,other,refer-by-user',
+                'other_message' => 'nullable|string|required_if:from_you_found,other',
+                'name' => 'nullable|string|required_if:from_you_found,refer-by-user',
+                'refred_by' => 'nullable|string|required_if:from_you_found,refer-by-user',
+                'email' => 'nullable|email|required_if:from_you_found,refer-by-user',
+                'contact_number' => 'nullable|string|required_if:from_you_found,refer-by-user',
+            ], [
+                'from_you_found.required' => 'Please select where you found us.',
+                'from_you_found.in' => 'Invalid selection for where you found us.',
+                'other_message.required_if' => 'Please enter a message if you selected "Other".',
+                'name.required_if' => 'Please enter a name if referred by a user.',
+                'refred_by.required_if' => 'Please Select referred by.',
+                'email.required_if' => 'Please enter an email if referred by a user.',
+                'email.email' => 'Please enter a valid email address.',
+                'contact_number.required_if' => 'Please enter a contact number if referred by a user.',
+            ]);
+    
+            // Check if the provided email exists in the users table
+            $refrealUserId = null;
+            if ($request->from_you_found === 'refer-by-user' && $request->email) {
+                $refUser = User::where('email', $request->email)->first();
+                $refrealUserId = $refUser ? $refUser->id : null;
+            }
+    
+            // Create or update referral record
+            UserReferal::updateOrCreate(
+                ['user_id' => $user->id], // Search condition
+                [
+                    'from_you_found' => $request->from_you_found,
+                    'other_message' => $request->from_you_found === 'other' ? $request->other_message : null,
+                    'name' => $request->from_you_found === 'refer-by-user' ? $request->name : null,
+                    'refred_by' => $request->from_you_found === 'refer-by-user' ? $request->refred_by : null,
+                    'email' => $request->from_you_found === 'refer-by-user' ? $request->email : null,
+                    'contact_number' => $request->from_you_found === 'refer-by-user' ? $request->contact_number : null,
+                    'refreal_user_id' => $refrealUserId, // Assign the found user ID or null
+                ]
+            );
+    
+            // Update the authenticated user to mark referral as updated
+            User::where('id', $user->id)->update(['is_referred_updated' => 'yes']);
+            return redirect()
+                ->route('frontend.user.dashboard') // Change this to the correct route
+                ->with('success', 'Referral information updated successfully.');
+    
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()
+                ->back()
+                ->withErrors($e->errors())
+                ->withInput();
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->with('error', 'Something went wrong. Please try again later.');
+        }
     }
 
     public function personal_update(Request $request){
@@ -127,7 +212,7 @@ class DashboardController extends Controller
 
     }
     public function almostdone(){
-        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
             return redirect()->route('frontend.user.dashboard');
         }
 
@@ -168,7 +253,7 @@ class DashboardController extends Controller
 
     }
     public function createPassword(){
-        if(Auth::check() && Auth::user()->is_profile_status == "completed"){
+        if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
             return redirect()->route('frontend.user.dashboard');
         }
         
@@ -195,6 +280,11 @@ class DashboardController extends Controller
 
 
     public function profileCompleted(){
+        
+        if(Auth::check() && Auth::user()->is_referred_updated =='no'){
+            return redirect()->route('frontend.auth.step.referral.completed');
+        }
+
         return view('frontend.auth.steps.profile-completed');
     }
     public function prescripitonRefillAjax(Request $request){

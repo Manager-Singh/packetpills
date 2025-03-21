@@ -29,6 +29,9 @@ class CheckSteps
         if(auth()->user()->profile_step == 2){
             return redirect()->route('frontend.auth.step.create.password');
         }
+        if(auth()->user()->is_profile_status == "completed" && auth()->user()->is_referred_updated =='no'){
+            return redirect()->route('frontend.auth.step.referral.completed');
+        }
 
        
         return $next($request);

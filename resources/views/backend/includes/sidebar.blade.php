@@ -185,6 +185,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{
+                        active_class(Route::is('admin/referrals'))
+                    }}" href="{{ route('admin.referrals') }}">
+                        <i class="nav-icon fas fa-handshake"></i>
+                        Referrals
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{
                         active_class(Route::is('admin/provinces'))
                     }}" href="{{ route('admin.provinces.index') }}">
                         <i class="nav-icon fas fa-globe"></i>

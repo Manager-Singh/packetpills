@@ -13,14 +13,20 @@
                                 {{ $existingPrescription->prescription_number }} Created At
                                 {{ $existingPrescription->created_at }}
                                 <div class="status-wrapper-{{ $existingPrescription->id }}" style="display: inline;">
-                                    @if ($existingPrescription->status == 'pending')
+                                    @if ($existingPrescription->status == 'Declined')
                                         <span class="badge badge-warning"
                                             style="right: 29px; position: absolute;">{{ ucfirst($existingPrescription->status) }}</span>
-                                    @elseif($existingPrescription->status == 'cancelled')
-                                        <span class="badge badge-danger"
+                                    @elseif($existingPrescription->status == 'In Progress')
+                                        <span class="badge badge-info"
                                             style="right: 29px; position: absolute;">{{ ucfirst($existingPrescription->status) }}</span>
-                                    @elseif($existingPrescription->status == 'approved')
+                                    @elseif($existingPrescription->status == 'Approved')
                                         <span class="badge badge-success"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($existingPrescription->status) }}</span>
+                                    @elseif($existingPrescription->status == 'active')
+                                        <span class="badge badge-success"
+                                            style="right: 29px; position: absolute;">{{ ucfirst($existingPrescription->status) }}</span>
+                                    @else
+                                        <span class="badge badge-info"
                                             style="right: 29px; position: absolute;">{{ ucfirst($existingPrescription->status) }}</span>
                                     @endif
                                 </div>
@@ -41,6 +47,11 @@
                                 $existing_refill_status_array = [
                                 'active'=>'Active',
                                 'In Progress'=>'In Progress',
+                                'Declined'=>'Declined',
+                                'Approved'=>'Approved',
+                                'Complete'=>'Complete',
+                                'Request sent to doctor for refill authorization'=>'Request sent to doctor for refill authorization',
+                                'Payment Pending'=>'Payment Pending',
                                 ];
                             @endphp
                             <p>Status: {{ Form::select('existing_refill_status', $existing_refill_status_array, $existingPrescription->status, ['class' => 'form-control existingRefillStatus box-size','id' => 'existingRefillStatus-'.$existingPrescription->id, 'data-placeholder' => 'Existing Refill Status']) }}</p>

@@ -26,6 +26,7 @@
         "laravel/passport": "^9.2",
         "laravel/socialite": "^4.1",
         "laravelcollective/html": "^6.1",
+        "maatwebsite/excel": "^3.1",
         "maestroerror/php-heic-to-jpg": "^1.0",
         "mckenziearts/laravel-notify": "^1.1",
         "phpmailer/phpmailer": "^6.9",

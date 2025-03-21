@@ -14,3 +14,6 @@ Route::patch('profile/update', 'DashboardController@updateProfile')
 
 Route::get('setting', 'DashboardController@setting')->name('setting');
 Route::post('setting/add', 'DashboardController@setting')->name('setting.store');
+Route::get('referrals', 'DashboardController@referrals')->name('referrals');
+Route::post('referrals', 'DashboardController@getReferrals')->name('referrals.get');
+Route::get('/export/{type?}', 'DashboardController@export')->name('referrals.export');
