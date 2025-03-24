@@ -134,7 +134,7 @@ textarea#other-message {
 }
 div#refer-area input, div#refer-area  select {
     margin-bottom: 10px;
-    padding: 15px;
+    padding: 8px 15px;
     font-size: 18px;
 }
 
@@ -156,8 +156,12 @@ h2.where-title {
 
                         
                             <div class="row referl-form">
-                                <h2 class="where-title">How Did You Find us</h2>
+                                <h2 class="where-title">How Did You Find us?</h2>
                             <div class="col-md-6 ">
+                                
+                                    <input type="radio" id="referby" name="from_you_found" value="refer-by-user" class="radio-btn" onclick="show_fields('refer-area')" required>
+                                    <label for="referby" class="radio-label"></label>                                    
+                                    <label for="referby" class="label"><b>Personal Refer</b>  <i class="fa fa-info-circle" aria-hidden="true"></i></label>   
 
                                      <input type="radio" id="insta" name="from_you_found" value="instagram" class="radio-btn" onclick="show_fields('no-area')" required>
                                      <label for="insta" class="radio-label"></label>                       
@@ -165,17 +169,14 @@ h2.where-title {
                                     
                                     <input type="radio" id="twitter" name="from_you_found" value="twitter" class="radio-btn" onclick="show_fields('no-area')" required>                       
                                     <label for="twitter" class="radio-label"></label>
-                                    <label for="fname" class="label">Twitter</label>
+                                    <label for="twitter" class="label">Twitter</label>
 
                                     <input type="radio" id="tiktok" name="from_you_found" value="Tiktok" class="radio-btn" onclick="show_fields('no-area')" required>                       
                                     <label for="tiktok" class="radio-label"></label>
-                                    <label for="fname" class="label">Tiktok</label>
+                                    <label for="tiktok" class="label">Tiktok</label>
                                     
-                                    <input type="radio" id="other" name="from_you_found" value="other" class="radio-btn" onclick="show_fields('other-area')" required>
-                                    <label for="other" class="radio-label"></label>                                   
-                                    <label for="other" class="label">Other</label>
-                                            
-                                            
+                                                                         
+                                        
 
                                     
                             </div>
@@ -183,30 +184,30 @@ h2.where-title {
 
                                      <input type="radio" id="facebook" name="from_you_found" value="facebook" class="radio-btn" onclick="show_fields('no-area')" required>
                                     <label for="facebook" class="radio-label"></label>                                  
-                                    <label for="fname" class="label">Facebook</label>
+                                    <label for="facebook" class="label">Facebook</label>
                                     
                                     <input type="radio" id="email" name="from_you_found" value="Google/Search Engine" class="radio-btn" onclick="show_fields('no-area')"  required>
                                     <label for="email" class="radio-label"></label>                                    
-                                    <label for="fname" class="label">Google/Search Engine</label>
+                                    <label for="email" class="label">Google/Search Engine</label>
                                     
                                     <input type="radio" id="linkedin" name="from_you_found" value="Linkedin" class="radio-btn" onclick="show_fields('no-area')"  required>
                                     <label for="linkedin" class="radio-label"></label>                                    
-                                    <label for="fname" class="label">Linkedin</label>
+                                    <label for="linkedin" class="label">Linkedin</label>
 
-                                    <input type="radio" id="referby" name="from_you_found" value="refer-by-user" class="radio-btn" onclick="show_fields('refer-area')" required>
-                                    <label for="referby" class="radio-label"></label>                                    
-                                    <label for="fname" class="label">Referred by:</label>                                    
+                                    <input type="radio" id="other" name="from_you_found" value="other" class="radio-btn" onclick="show_fields('other-area')" required>
+                                    <label for="other" class="radio-label"></label>                                   
+                                    <label for="other" class="label">Other</label>                               
                                     
                                     
                             </div>
                             
                             <div class="col-md-12 ">
                             <div id="other-area" style="display:none"> 
-                                                <textarea id="other-message" name="other_message" placeholder="Other Message"></textarea>
+                                                <textarea id="other-message" name="other_message" placeholder="Other Platforms"></textarea>
                                             </div>                     
                                     
                             <div id="refer-area" style="display:none">
-                            <p class="info-bold">Referred by user.</p>
+                            <p class="info-bold">Personal Refer by user.</p>
     
                             <label for="referral_source">Referral Source:</label>
                             <select id="referral_source" name="refred_by" required>
