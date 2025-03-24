@@ -122,17 +122,18 @@ class DashboardController extends Controller
                 'other_message' => 'nullable|string|required_if:from_you_found,other',
                 'name' => 'nullable|string|required_if:from_you_found,refer-by-user',
                 'refred_by' => 'nullable|string|required_if:from_you_found,refer-by-user',
-                'email' => 'nullable|email|required_if:from_you_found,refer-by-user',
-                'contact_number' => 'nullable|string|required_if:from_you_found,refer-by-user',
+                'email' => 'nullable|email',
+                // 'email' => 'nullable|email|required_if:from_you_found,refer-by-user',
+                // 'contact_number' => 'nullable|string|required_if:from_you_found,refer-by-user',
             ], [
                 'from_you_found.required' => 'Please select where you found us.',
                 'from_you_found.in' => 'Invalid selection for where you found us.',
                 'other_message.required_if' => 'Please enter a message if you selected "Other".',
                 'name.required_if' => 'Please enter a name if referred by a user.',
                 'refred_by.required_if' => 'Please Select referred by.',
-                'email.required_if' => 'Please enter an email if referred by a user.',
+                // 'email.required_if' => 'Please enter an email if referred by a user.',
                 'email.email' => 'Please enter a valid email address.',
-                'contact_number.required_if' => 'Please enter a contact number if referred by a user.',
+                // 'contact_number.required_if' => 'Please enter a contact number if referred by a user.',
             ]);
     
             // Check if the provided email exists in the users table
