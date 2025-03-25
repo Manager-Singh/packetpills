@@ -141,12 +141,61 @@ div#refer-area input, div#refer-area  select {
 h2.where-title {
     margin-bottom: 35px;
 }
+.service-selection-btn-skip {
+    position: absolute;
+    right: 0;
+    z-index: 5;
+    background: #39828b !important;
+    border-color: #27677c !important;
+}
 </style>
 @endpush
 @section('content')
 
 <div class="container mt-3 mb-5 pt-2 personal-main">
+@if($user_ref)
+<p class="text-center">You already Submitted the Reffrel Data</p>
+
+<div class="refer-data">
+    
+    @if($user_ref->from_you_found=='refer-by-user')
+    <p>
+        <span>Where you find us:</span> <span class="result">Personal Refer</span>
+    </p>
+    
+    <p>
+        <span>Refred By:</span> <span class="result">{{$user_ref->refred_by}}</span>
+    </p>
+    <p>
+        <span>Name:</span> <span class="result">{{$user_ref->name}}</span>
+    </p>
+    <p>
+        <span>Email:</span> <span class="result">{{$user_ref->email}}</span>
+    </p>
+    <p>
+        <span>Contact No.:</span> <span class="result">{{$user_ref->contact_number}}</span>
+    </p>
+    @elseif($user_ref->from_you_found=='Other')
+    <p>
+        <span>Where you find us:</span> <span class="result">Other Platform</span>
+    </p>
+    <p class="other">{{$user_ref->other_message}}</p>
+    @else
+    <p>
+        <span>Where you find us:</span> <span class="result">{{$user_ref->from_you_found}}</span>
+    </p>
+    @endif
+  
+    
+</div>
+
+@else
 <a class="btn btn-primary btn-sm service-selection-btn" href="{{route('frontend.auth.service.selection')}}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Service Selection</a>
+<br>
+<br>
+
+
+<a class="btn btn-primary btn-sm service-selection-btn-skip" href="{{route('frontend.auth.skip.referral')}}">Skip This Step <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                 <form name="myForm" class="row" enctype="multipart/form-data" id="personal-step" action="{{route('frontend.auth.step.referral.update')}}" method="post">
                             @csrf
 				    
@@ -163,11 +212,11 @@ h2.where-title {
                                     <label for="referby" class="radio-label"></label>                                    
                                     <label for="referby" class="label"><b>Personal Refer</b>  <i class="fa fa-info-circle" aria-hidden="true"></i></label>   
 
-                                     <input type="radio" id="insta" name="from_you_found" value="instagram" class="radio-btn" onclick="show_fields('no-area')" required>
+                                     <input type="radio" id="insta" name="from_you_found" value="Instagram" class="radio-btn" onclick="show_fields('no-area')" required>
                                      <label for="insta" class="radio-label"></label>                       
                                     <label for="insta" class="label">Instagram</label>
                                     
-                                    <input type="radio" id="twitter" name="from_you_found" value="twitter" class="radio-btn" onclick="show_fields('no-area')" required>                       
+                                    <input type="radio" id="twitter" name="from_you_found" value="Twitter" class="radio-btn" onclick="show_fields('no-area')" required>                       
                                     <label for="twitter" class="radio-label"></label>
                                     <label for="twitter" class="label">Twitter</label>
 
@@ -182,7 +231,7 @@ h2.where-title {
                             </div>
                             <div class="col-md-6 ">
 
-                                     <input type="radio" id="facebook" name="from_you_found" value="facebook" class="radio-btn" onclick="show_fields('no-area')" required>
+                                     <input type="radio" id="facebook" name="from_you_found" value="Facebook" class="radio-btn" onclick="show_fields('no-area')" required>
                                     <label for="facebook" class="radio-label"></label>                                  
                                     <label for="facebook" class="label">Facebook</label>
                                     
@@ -194,7 +243,7 @@ h2.where-title {
                                     <label for="linkedin" class="radio-label"></label>                                    
                                     <label for="linkedin" class="label">Linkedin</label>
 
-                                    <input type="radio" id="other" name="from_you_found" value="other" class="radio-btn" onclick="show_fields('other-area')" required>
+                                    <input type="radio" id="other" name="from_you_found" value="Other" class="radio-btn" onclick="show_fields('other-area')" required>
                                     <label for="other" class="radio-label"></label>                                   
                                     <label for="other" class="label">Other</label>                               
                                     
@@ -233,6 +282,7 @@ h2.where-title {
 
 </form>
 			
+@endif
 		</div>
 @endsection
 

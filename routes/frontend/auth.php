@@ -42,6 +42,12 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::post('account/personal/update', [DashboardController::class, 'personal_update'])->name('step.personal.update');
         Route::get('account/referral', [DashboardController::class, 'accountReferral'])->name('step.referral.completed');
         Route::post('account/referral/update', [DashboardController::class, 'accountReferralUpdate'])->name('step.referral.update');
+        Route::get('account/skip-referral', [DashboardController::class, 'skip_referral'])->name('skip.referral');
+        Route::get('account/referral/skiped', [DashboardController::class, 'accountReferralskiped'])->name('step.referral.skiped');
+
+        
+
+
     });
     Route::post('account/send-otp', [LoginController::class, 'send_otp'])->name('send.otp');
     Route::post('account/verify-otp', [LoginController::class, 'verify_otp'])->name('verify.otp');

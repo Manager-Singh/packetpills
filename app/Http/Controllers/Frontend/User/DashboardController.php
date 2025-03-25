@@ -94,8 +94,8 @@ class DashboardController extends Controller
         if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
             return redirect()->route('frontend.user.dashboard');
         }
-        
-        return view('frontend.auth.steps.referral');
+        $user_refs = UserReferal::with('user')->where('user_id',Auth::user()->id)->first(); 
+        return view('frontend.auth.steps.referral')->with(['user_ref'=>$user_refs]);
     }
 
     public function accountReferralUpdate(Request $request)
@@ -110,11 +110,11 @@ class DashboardController extends Controller
             $user = Auth::user();
     
             // Check if the user has already updated referral data
-            if ($user->is_referred_updated == 'yes') {
-                return redirect()
-                    ->back()
-                    ->with('error', 'You have already updated your referral information.');
-            }
+            // if ($user->is_referred_updated == 'yes') {
+            //     return redirect()
+            //         ->back()
+            //         ->with('error', 'You have already updated your referral information.');
+            // }
     
             // Validate the request
             $validatedData = $request->validate([
@@ -931,6 +931,29 @@ class DashboardController extends Controller
         return redirect()->back()->withFlashInfo(__('Something went wrong'));
 
 
+    }
+
+    
+
+    public function skip_referral(Request $request)
+    {
+        // print_r($request->all());
+        // Get authenticated user
+        $user = Auth::user();
+        // Update the authenticated user to mark referral as updated
+        User::where('id', $user->id)->update(['is_referred_updated' => 'yes']);
+        if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
+            return redirect()->route('frontend.user.dashboard');
+        }
+        return redirect()->back();
+    }
+
+    public function accountReferralskiped(){
+        // if(Auth::check() && Auth::user()->is_profile_status == "completed" && Auth::user()->is_referred_updated =='yes'){
+        //     return redirect()->route('frontend.user.dashboard');
+        // }
+        $user_refs = UserReferal::with('user')->where('user_id',Auth::user()->id)->first(); 
+        return view('frontend.auth.steps.referral')->with(['user_ref'=>$user_refs]);
     }
     
 }

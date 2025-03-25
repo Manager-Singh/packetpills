@@ -32,6 +32,10 @@
                  <a href="{{route('frontend.user.prescription')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.user.prescription') ? 'active' : '' }}">
                      <i class="fi fi-br-file-prescription "></i><span class="mx-3">Prescriptions</span>
                  </a>
+                 <a href="{{route('frontend.auth.step.referral.skiped')}}" class="list-group-item list-group-item-action py-2 {{ (Route::currentRouteName() == 'frontend.auth.step.referral.skiped') ? 'active' : '' }}">
+                     <i class="fa fa-users "></i><span class="mx-3">Referrals</span>
+                 </a>
+                 
                  
                 @if(getAllChildUsers())
                 
